@@ -2,29 +2,93 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
+use App\Filters\User\UserFilter;
+use App\Models\Familias\Familia;
+use App\Models\Familias\Parentesco;
+use App\Models\Users\UserAdress;
+use App\Models\Users\UserDataExtend;
+use App\Notifications\MyResetPassword;
+use App\Traits\User\UserAttributes;
+use App\Traits\User\UserImport;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Traits\HasRoles;
+//use App\Notifications\MyResetPassword;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable;
+    use SoftDeletes, Notifiable;
+    use HasRoles;
+    use UserImport, UserAttributes;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    protected $guard_name = 'web';
+    protected $table = 'users';
+
     protected $fillable = [
-        'name', 'email', 'password',
+        'id',
+        'username', 'email', 'password',
+        'nombre','ap_paterno','ap_materno',
+        'admin','alumno','foraneo','exalumno','credito',
+        'curp','emails','celulares','telefonos',
+        'fecha_nacimiento','genero',
+        'root','filename','filename_png','filename_thumb',
+        'empresa_id','iduser_ps','status_user','ip','host',
+        'logged','logged_at','logout_at',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    protected $hidden = ['password', 'remember_token',];
+    protected $casts = ['admin'=>'boolean','alumno'=>'boolean','foraneo'=>'boolean','exalumno'=>'boolean','credito'=>'boolean',];
+
+    public function permissions() {
+        return $this->belongsToMany(Permission::class);
+    }
+
+    public function roles(){
+        return $this->belongsToMany(Role::class);
+    }
+
+    public function user_adress(){
+        return $this->hasOne(UserAdress::class);
+    }
+
+    public function user_data_extend(){
+        return $this->hasOne(UserDataExtend::class);
+    }
+
+
+    public function isAdmin(){
+        return $this->admin;
+    }
+
+
+    public function isForaneo(){
+        return $this->foraneo;
+    }
+
+    public function IsEmptyPhoto(){
+        return $this->filename == '' ? true : false;
+    }
+
+    public function IsFemale(){
+        return $this->genero == 0 ? true : false;
+    }
+
+    public function scopeMyID(){
+        return $this->id;
+    }
+
+    public function scopeRole(){
+        return $this->roles()->first();
+    }
+
+    public function sendPasswordResetNotification($token){
+        $this->notify(new MyResetPassword($token));
+    }
+
 }
+
