@@ -29,4 +29,16 @@ class ForgotPasswordController extends Controller
     {
         $this->middleware('guest');
     }
+
+    protected function sendResetLinkResponse(Request $request)
+    {
+        return view ('auth.passwords.confirm_email',
+            [
+                'email' => $request['email'],
+            ]
+        );
+
+    }
+
+
 }

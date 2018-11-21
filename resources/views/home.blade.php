@@ -1,23 +1,26 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!
+<body>
+    <div class="wrapper">
+        @include('partials/left-sidebar')
+        <div class="content-page">
+            <div class="content">
+                @include('partials/topbar')
+                <div class="container-fluid">
+                    @yield('container')
                 </div>
+                <!-- container -->
             </div>
         </div>
+            <!-- content -->
+        @include('partials/footer')
     </div>
-</div>
+
+@include('partials.full_modal')
+@include('partials/script_footer')
+
+</body>
+
 @endsection
