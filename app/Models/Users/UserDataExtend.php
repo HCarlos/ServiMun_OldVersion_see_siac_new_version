@@ -15,7 +15,6 @@ class UserDataExtend extends Model
 
     protected $fillable = [
         'id','user_id',
-        'dias_credito','limite_credito','saldo_a_favor','saldo_en_contra',
         'lugar_nacimiento','ocupacion','profesion','lugar_trabajo',
     ];
 

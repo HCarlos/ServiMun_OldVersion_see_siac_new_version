@@ -63,7 +63,6 @@ class RolesAndPermissionsSeeder extends Seeder
         $user->password = bcrypt('secret');
         $user->genero = 1;
         $user->admin = true;
-        $user->iduser_ps  = 1;
         $user->empresa_id = $idemp;
         $user->ip = $ip;
         $user->host = $host;
@@ -81,7 +80,6 @@ class RolesAndPermissionsSeeder extends Seeder
         $user->email = 'sysop@example.com';
         $user->password = bcrypt('sysop');
         $user->admin = false;
-        $user->iduser_ps  = 2;
         $user->empresa_id = $idemp;
         $user->ip = $ip;
         $user->host = $host;

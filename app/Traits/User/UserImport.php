@@ -20,7 +20,7 @@ trait UserImport
         string $username, string $nombre, string $ap_paterno, string $ap_materno, string $email, string $password,
         string $calle='', string $num_ext='', string $num_int='', string $colonia='', string $localidad='',
         string $cp='', string $curp='', string $lugar_nacimiento='', string $fecha_nacimiento, int $genero=0,
-        string $emails, string $celulares, string $telefonos, int $iduser_ps, int $empresa_id, string $ocupacion='',
+        string $emails, string $celulares, string $telefonos, int $empresa_id, string $ocupacion='',
         string $roles
     ){
         $result = false;
@@ -47,7 +47,7 @@ trait UserImport
                 $username, $nombre, $ap_paterno, $ap_materno, $email, $password, $curp,
                 $calle, $num_ext, $num_int, $colonia, $localidad, $cp,
                 $lugar_nacimiento, $fecha_nacimiento, $genero, $emails, $celulares, $telefonos,
-                $iduser_ps, $empresa_id, $ocupacion, $roles
+                $empresa_id, $ocupacion, $roles
             )
             {
                 $user = static::create([
@@ -63,7 +63,6 @@ trait UserImport
                     'emails' => $emails,
                     'celulares' => $celulares,
                     'telefonos' => $telefonos,
-                    'iduser_ps' => $iduser_ps,
                     'empresa_id' => $empresa_id,
                 ]);
                 $user->user_adress()->create([

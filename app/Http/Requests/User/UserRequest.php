@@ -39,8 +39,8 @@ class UserRequest extends FormRequest
             'email' => ['required','email','unique:users,email,'.$this->id],
             'nombre' => ['required','min:1'],
             'ap_paterno' => ['required','min:1'],
-            'curp' => ['required','min:18','max:18'],
-            'fecha_nacimiento' => ['required','date'],
+//            'curp' => ['required','min:18','max:18'],
+//            'fecha_nacimiento' => ['required','date'],
         ];
     }
 
@@ -53,16 +53,17 @@ class UserRequest extends FormRequest
             'email.required' => 'El :attribute es obligatorio',
             'email.unique' => 'El :attribute ya existe',
 
-            'nombre.min' => 'El :attribute requiere por lo menos de 1 caracter',
-            'ap_paterno.min' => 'El :attribute requiere por lo menos de 1 caracter',
-            'ap_paterno.required' => 'Se requiere el :attribute',
             'nombre.required' => 'Se requiere el :attribute',
+            'nombre.min' => 'El :attribute requiere por lo menos de 1 caracter',
+            'ap_paterno.required' => 'Se requiere el :attribute',
+            'ap_paterno.min' => 'El :attribute requiere por lo menos de 1 caracter',
 
-            'curp.min' => 'Para la :attribute se requieren 18 caracteres',
-            'curp.max' => 'Para la :attribute se requieren 18 caracteres',
-            'curp.required' => 'Se requiere la :attribute',
+//            'curp.min' => 'Para la :attribute se requieren 18 caracteres',
+//            'curp.max' => 'Para la :attribute se requieren 18 caracteres',
+//            'curp.required' => 'Se requiere la :attribute',
+//
+//            'fecha_nacimiento.required' => 'Se requiere la :attribute',
 
-            'fecha_nacimiento.required' => 'Se requiere la :attribute',
         ];
     }
 
@@ -73,8 +74,8 @@ class UserRequest extends FormRequest
             'email' => 'Email',
             'nombre' => 'Nombre',
             'ap_paterno' => 'Apellido Paterno',
-            'curp' => 'CURP',
-            'fecha_nacimiento' => 'Fecha de Nacimiento',
+//            'curp' => 'CURP',
+//            'fecha_nacimiento' => 'Fecha de Nacimiento',
         ];
     }
 
@@ -97,7 +98,6 @@ class UserRequest extends FormRequest
             'telefonos'        => $this->telefonos,
             'fecha_nacimiento' => $this->fecha_nacimiento,
             'genero'           => $this->genero,
-            'iduser_ps'        => $this->iduser_ps,
         ];
 
         $User_Adress = [

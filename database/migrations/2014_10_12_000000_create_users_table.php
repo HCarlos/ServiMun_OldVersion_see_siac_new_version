@@ -32,18 +32,13 @@ class CreateUsersTable extends Migration
             $table->string('filename',50)->nullable();
             $table->string('filename_png',50)->nullable();
             $table->string('filename_thumb',50)->nullable();
-            $table->unsignedInteger('iduser_ps')->nullable();
             $table->boolean('admin')->default(false);
             $table->boolean('alumno')->default(false);
-            $table->boolean('foraneo')->default(false);
-            $table->boolean('exalumno')->default(false);
-            $table->boolean('credito')->default(false);
             $table->string('session_id')->nullable();
             $table->unsignedSmallInteger('status_user')->default(1)->nullable();
             $table->unsignedSmallInteger('empresa_id')->default(0)->nullable();
             $table->string('ip',150)->default('')->nullable();
             $table->string('host',150)->default('')->nullable();
-            $table->index('iduser_ps');
             $table->index('empresa_id');
             $table->boolean('logged')->default(false)->index();
             $table->timestamp('logged_at')->nullable()->index();
@@ -76,10 +71,6 @@ class CreateUsersTable extends Migration
 
         Schema::create($tableNames['user_extend'], function (Blueprint $table) use ($tableNames) {
             $table->increments('id');
-            $table->unsignedInteger('dias_credito')->default(0)->nullable();
-            $table->decimal('limite_credito',10,2)->default(0.00)->nullable();
-            $table->decimal('saldo_a_favor',10,2)->default(0.00)->nullable();
-            $table->decimal('saldo_en_contra',10,2)->default(0.00)->nullable();
             $table->string('ocupacion',250)->default('')->nullable();
             $table->string('profesion',250)->default('')->nullable();
             $table->string('lugar_trabajo',250)->default('')->nullable();

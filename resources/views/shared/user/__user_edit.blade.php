@@ -106,13 +106,6 @@
 </div>
 
 <div class="form-group row mb-3">
-    <label for = "iduser_ps" class="col-md-3 col-form-label">Id PS</label>
-    <div class="col-md-9">
-        <input type="text" name="iduser_ps" id="iduser_ps" value="{{ old('iduser_ps',$items->iduser_ps) }}" class="form-control" />
-    </div>
-</div>
-
-<div class="form-group row mb-3">
     <label for = "celular" class="col-md-3 col-form-label">Roles</label>
     <div class="col-md-9">
         @foreach($items->roles as $role)

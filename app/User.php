@@ -33,16 +33,16 @@ class User extends Authenticatable implements MustVerifyEmail
         'id',
         'username', 'email', 'password',
         'nombre','ap_paterno','ap_materno',
-        'admin','alumno','foraneo','exalumno','credito',
+        'admin','alumno',
         'curp','emails','celulares','telefonos',
         'fecha_nacimiento','genero',
         'root','filename','filename_png','filename_thumb',
-        'empresa_id','iduser_ps','status_user','ip','host',
+        'empresa_id','status_user','ip','host',
         'logged','logged_at','logout_at',
     ];
 
     protected $hidden = ['password', 'remember_token',];
-    protected $casts = ['admin'=>'boolean','alumno'=>'boolean','foraneo'=>'boolean','exalumno'=>'boolean','credito'=>'boolean',];
+    protected $casts = ['admin'=>'boolean','alumno'=>'boolean',];
 
     public function scopeFilterBy($query, $filters){
         return (new UserFilter())->applyTo($query, $filters);
@@ -69,10 +69,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->admin;
     }
 
-
-    public function isForaneo(){
-        return $this->foraneo;
-    }
 
     public function IsEmptyPhoto(){
         return $this->filename == '' ? true : false;
