@@ -26,7 +26,7 @@
             @slot('title_card','Subir Archivo')
             @slot('body_card')
 
-                <div class="card card-platsource">
+                <div class="card card-atemun">
                     <div class="card-body">
                         <form method="post" action="{{ action('Storage\StorageExternalFilesController@subirArchivoBase') }}" accept-charset="UTF-8" enctype="multipart/form-data">
                             @csrf
@@ -34,7 +34,7 @@
                                 <label for="categ_file" class=" control-label {{$errors->has('categ_file')?'text-danger':''}}">Categoría de Archivo</label>
                                 <select class="form-control select2 {{$errors->has('categ_file')?' text-danger is-invalid border-danger':''}}" data-toggle="select2" name="categ_file" id="categ_file" size="1">
                                     <option value="">Formatos XLSX</option>
-                                    @foreach(config('platsource.archivos') as $item => $value)
+                                    @foreach(config('atemun.archivos') as $item => $value)
                                         <option value="{{$value}}">{{ $item  }}</option>
                                     @endforeach
                                 </select>

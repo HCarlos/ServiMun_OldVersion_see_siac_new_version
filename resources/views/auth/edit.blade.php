@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-platsource">
+                <div class="panel panel-atemun">
                     <div class="panel-heading">Perfil | {{$user->username}}</div>
 
                     <div class="panel-body">

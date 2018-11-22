@@ -44,6 +44,10 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $hidden = ['password', 'remember_token',];
     protected $casts = ['admin'=>'boolean','alumno'=>'boolean','foraneo'=>'boolean','exalumno'=>'boolean','credito'=>'boolean',];
 
+    public function scopeFilterBy($query, $filters){
+        return (new UserFilter())->applyTo($query, $filters);
+    }
+
     public function permissions() {
         return $this->belongsToMany(Permission::class);
     }

@@ -172,7 +172,7 @@ class UserDataController extends Controller
         $user = User::withTrashed()->findOrFail($id);
         if (isset($user)) {
             if (!$user->trashed()) {
-                $user->delete();
+                $user->forceDelete();
             } else {
                 $user->forceDelete();
             }

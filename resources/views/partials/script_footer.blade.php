@@ -7,7 +7,7 @@
 <script src="{{asset('js/bootbox.min.js')}}"></script>
 @yield("scripts")
 <script src="{{mix('js/base.js')}}"></script>
-<script src="{{mix('js/platsource.js')}}"></script>
+<script src="{{mix('js/atemun.js')}}"></script>
 
 @yield("script_extra")
 @yield("script_extra_modal")

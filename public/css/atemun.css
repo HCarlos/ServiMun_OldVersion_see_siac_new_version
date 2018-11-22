@@ -106,14 +106,14 @@ ul.role-list-hrz li a {
 	color: seagreen !important;
 }
 
-.bg-coral-platsource-bib{
+.bg-coral-atemun-bib{
 	background-color: coral !important;
 	color: ghostwhite !important;
 	font-weight: bold !important;
 	padding: 0.3em !important;
 }
 
-.bg-seagreen-platsource-bib{
+.bg-seagreen-atemun-bib{
 	background-color: seagreen !important;
 	color: ghostwhite !important;
 	font-weight: bold !important;
@@ -177,12 +177,12 @@ ul.role-list-hrz li a {
 	bottom:1em;
 }
 
-.navbar-platsource{
+.navbar-atemun{
 	background-color: darkslategray !important;
 	height: 40px !important;
 }
 
-.menu-principal-platsource{
+.menu-principal-atemun{
 	height: 40px !important;
 	padding-top: 0px !important;
 	color: whitesmoke !important;
@@ -195,13 +195,13 @@ ul.role-list-hrz li a {
 	/*font-weight: bolder !important;*/
 }
 
-.separator-platsource-2em{
+.separator-atemun-2em{
 	display:inline-block !important;
 	height: 2em !important;
 	width: 100% !important;
 }
 
-.links-platsource > a {
+.links-atemun > a {
 	color: whitesmoke !important;
 	font-size: 12px !important;
 	font-weight: 600 !important;
@@ -210,12 +210,12 @@ ul.role-list-hrz li a {
 	text-transform: uppercase !important;
 }
 
-.ancho-busqueda-platsource{
+.ancho-busqueda-atemun{
 	width: 460px !important;
 	margin-top: 1em !important;
 }
 
-.paginas-platsource{
+.paginas-atemun{
 	background-color: lightcoral !important;
 	color: white;
 }
@@ -228,7 +228,7 @@ ul.role-list-hrz li a {
 	color: #7b3f25;
 }
 
-.title-app-platsource{
+.title-app-atemun{
 	color: whitesmoke !important;
 	font-weight: 600 !important;
 	letter-spacing: .1em !important;
@@ -236,48 +236,48 @@ ul.role-list-hrz li a {
 	text-transform: uppercase !important;
 }
 
-.bar-menu-app-platsource{
+.bar-menu-app-atemun{
 	/*background-color: #31708f !important;*/
 	color: whitesmoke !important;
 }
-.border-white-platsource{
+.border-white-atemun{
 	border: whitesmoke solid 2px !important;
 	border-radius:50% !important;
 }
 
-.panel-platsource {
+.panel-atemun {
 	border-color: darkslategray !important;
 }
-.panel-platsource > .panel-heading {
+.panel-atemun > .panel-heading {
 	color: whitesmoke !important;
 	background-color: darkslategray !important;
 	border-color: darkslategray !important;
 	font-weight: bolder;
 }
-.panel-platsource > .panel-heading + .panel-collapse .panel-body {
+.panel-atemun > .panel-heading + .panel-collapse .panel-body {
 	border-top-color: darkslategray !important;
 }
-.panel-platsource > .panel-footer + .panel-collapse .panel-body {
+.panel-atemun > .panel-footer + .panel-collapse .panel-body {
 	border-bottom-color: darkslategray !important;
 }
 
-.card-platsource {
+.card-atemun {
 	border-color: darkslategray !important;
 }
-.card-platsource > .card-header {
+.card-atemun > .card-header {
 	color: whitesmoke !important;
 	background-color: darkslategray !important;
 	border-color: darkslategray !important;
 	font-weight: bolder;
 }
-.card-platsource > .card-body {
+.card-atemun > .card-body {
 	border-top-color: darkslategray !important;
 }
 
-.card-platsource > .card-boy > form > label {
+.card-atemun > .card-boy > form > label {
 	color: darkslategray !important;
 }
-.init-platsource{
+.init-atemun{
 	color: whitesmoke !important;
 	font-size: 12px !important;
 	font-weight: 600 !important;

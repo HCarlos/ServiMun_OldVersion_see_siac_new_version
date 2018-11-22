@@ -150,6 +150,7 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         ),
         'J' => 
         array (
+            'JakubOnderka\\PhpConsoleHighlighter\\' => 35,
             'JakubOnderka\\PhpConsoleColor\\' => 29,
         ),
         'I' => 
@@ -373,6 +374,10 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         array (
             0 => __DIR__ . '/..' . '/laravel/tinker/src',
         ),
+        'JakubOnderka\\PhpConsoleHighlighter\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jakub-onderka/php-console-highlighter/src',
+        ),
         'JakubOnderka\\PhpConsoleColor\\' => 
         array (
             0 => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src',
@@ -543,13 +548,6 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
                 0 => __DIR__ . '/..' . '/mockery/mockery/library',
             ),
         ),
-        'J' => 
-        array (
-            'JakubOnderka\\PhpConsoleHighlighter' => 
-            array (
-                0 => __DIR__ . '/..' . '/jakub-onderka/php-console-highlighter/src',
-            ),
-        ),
         'D' => 
         array (
             'Doctrine\\DBAL\\' => 
@@ -564,19 +562,27 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
     );
 
     public static $classMap = array (
+        'App\\Classes\\FiltersRules' => __DIR__ . '/../..' . '/app/Classes/FiltersRules.php',
         'App\\Classes\\MessageAlertClass' => __DIR__ . '/../..' . '/app/Classes/MessageAlertClass.php',
         'App\\Classes\\ValidatorPassword' => __DIR__ . '/../..' . '/app/Classes/ValidatorPassword.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Filters\\Common\\QueryFilter' => __DIR__ . '/../..' . '/app/Filters/Common/QueryFilter.php',
+        'App\\Filters\\User\\UserFilter' => __DIR__ . '/../..' . '/app/Filters/User/UserFilter.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\Auth\\VerificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerificationController.php',
+        'App\\Http\\Controllers\\Catalogos\\User\\PermissionController' => __DIR__ . '/../..' . '/app/Http/Controllers/Catalogos/User/PermissionController.php',
+        'App\\Http\\Controllers\\Catalogos\\User\\RoleController' => __DIR__ . '/../..' . '/app/Http/Controllers/Catalogos/User/RoleController.php',
         'App\\Http\\Controllers\\Catalogos\\User\\UserDataController' => __DIR__ . '/../..' . '/app/Http/Controllers/Catalogos/User/UserDataController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\External\\User\\ListUserXLSXController' => __DIR__ . '/../..' . '/app/Http/Controllers/External/User/ListUserXLSXController.php',
         'App\\Http\\Controllers\\Funciones\\FuncionesController' => __DIR__ . '/../..' . '/app/Http/Controllers/Funciones/FuncionesController.php',
+        'App\\Http\\Controllers\\Funciones\\LoadTemplateExcel' => __DIR__ . '/../..' . '/app/Http/Controllers/Funciones/LoadTemplateExcel.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
+        'App\\Http\\Controllers\\Storage\\StorageExternalFilesController' => __DIR__ . '/../..' . '/app/Http/Controllers/Storage/StorageExternalFilesController.php',
         'App\\Http\\Controllers\\Storage\\StorageProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/Storage/StorageProfileController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
@@ -586,6 +592,8 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Http\\Requests\\User\\UserRequest' => __DIR__ . '/../..' . '/app/Http/Requests/User/UserRequest.php',
+        'App\\Http\\Requests\\User\\UserUpdatePasswordRequest' => __DIR__ . '/../..' . '/app/Http/Requests/User/UserUpdatePasswordRequest.php',
         'App\\Models\\Users\\UserAdress' => __DIR__ . '/../..' . '/app/Models/Users/UserAdress.php',
         'App\\Models\\Users\\UserDataExtend' => __DIR__ . '/../..' . '/app/Models/Users/UserDataExtend.php',
         'App\\Notifications\\MyResetPassword' => __DIR__ . '/../..' . '/app/Notifications/MyResetPassword.php',
@@ -595,6 +603,7 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
+        'App\\Providers\\ValidatorServiceProvider' => __DIR__ . '/../..' . '/app/Providers/ValidatorServiceProvider.php',
         'App\\Role' => __DIR__ . '/../..' . '/app/Role.php',
         'App\\Traits\\User\\UserAttributes' => __DIR__ . '/../..' . '/app/Traits/User/UserAttributes.php',
         'App\\Traits\\User\\UserImport' => __DIR__ . '/../..' . '/app/Traits/User/UserImport.php',
@@ -2685,7 +2694,7 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         'Intervention\\Image\\Size' => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image/Size.php',
         'JakubOnderka\\PhpConsoleColor\\ConsoleColor' => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src/ConsoleColor.php',
         'JakubOnderka\\PhpConsoleColor\\InvalidStyleException' => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src/InvalidStyleException.php',
-        'JakubOnderka\\PhpConsoleHighlighter\\Highlighter' => __DIR__ . '/..' . '/jakub-onderka/php-console-highlighter/src/JakubOnderka/PhpConsoleHighlighter/Highlighter.php',
+        'JakubOnderka\\PhpConsoleHighlighter\\Highlighter' => __DIR__ . '/..' . '/jakub-onderka/php-console-highlighter/src/Highlighter.php',
         'JsonSerializable' => __DIR__ . '/..' . '/nesbot/carbon/src/JsonSerializable.php',
         'Laravel\\Tinker\\ClassAliasAutoloader' => __DIR__ . '/..' . '/laravel/tinker/src/ClassAliasAutoloader.php',
         'Laravel\\Tinker\\Console\\TinkerCommand' => __DIR__ . '/..' . '/laravel/tinker/src/Console/TinkerCommand.php',

@@ -59,11 +59,35 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('list-users/', 'Catalogos\User\UserDataController@showListUser')->name('listUsers');
 
 
+    // ROLES
+    Route::get('asignaRole/{Id}','Catalogos\User\RoleController@index')->name('asignaRole');
+    Route::get('assignRoleToUser/{Id}/{nameRoles}','Catalogos\User\RoleController@asignar')->name('assignRoleToUser');
+    Route::get('unAssignRoleToUser/{Id}/{nameRoles}','Catalogos\User\RoleController@desasignar')->name('unAssignRoleToUser');
+    // PERMISSIONS
+    Route::get('asignaPermission/{Id}','Catalogos\User\PermissionController@index')->name('asignaPermission');
+    Route::get('assignPermissionToUser/{Id}/{namePermissions}','Catalogos\User\PermissionController@asignar')->name('assignPermissionToUser');
+    Route::get('unAssignPermissionToUser/{Id}/{namePermissions}','Catalogos\User\PermissionController@desasignar')->name('unAssignPermissionToUser');
+
+    // EXTERNAL FILES
+    Route::get('archivosConfig','Storage\StorageExternalFilesController@archivos_config')->name('archivosConfig');
+    Route::post('subirArchivoBase/', 'Storage\StorageExternalFilesController@subirArchivoBase')->name('subirArchivoBase/');
+    Route::get('quitarArchivoBase/{driver}/{archivo}', 'Storage\StorageExternalFilesController@quitarArchivoBase')->name('quitarArchivoBase/');
+//
+    Route::post('showFileListUserExcel1A','External\User\ListUserXLSXController@getListUserXLSX')->name('showFileListUserExcel1A');
+//    Route::post('showFileListNivelExcel','External\Nivel\ListNivelXLSXController@getListNivelXLSX')->name('showFileListNivelExcel');
+//    Route::post('showFileListParentescoExcel','External\Parentesco\ListParentescoXLSXController@getListParentescoXLSX')->name('showFileListParentescoExcel');
+//    Route::post('showFileListFamiliaExcel','External\Familia\ListFamiliaXLSXController@getListFamiliaXLSX')->name('showFileListFamiliaExcel');
+//    Route::post('showFileListRegFisExcel','External\Registros_Fiscales\ListaRegFisXLSXController@getListRegFisXLSX')->name('showFileListRegFisExcel');
+    Route::post('getUserByRoleToXLSX','External\User\ListUserXLSXController@getUserByRoleToXLSX')->name('getUserByRoleToXLSX');
+
+    // END FILES EXTERNAL
+
+
 
 });
 
 Route::get('enviar', ['as' => 'enviar', function () {
-    $data = ['link' => 'http://platsource.mx'];
+    $data = ['link' => 'http://atemun.mx'];
     Mail::send('emails.notificacion', $data, function ($message) {
         $message->from('manager@logydes.com.mx', 'Logydes.com.mx');
         $message->to('logydes@gmail.com')->subject('Notificación');
