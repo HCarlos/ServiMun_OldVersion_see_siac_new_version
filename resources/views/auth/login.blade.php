@@ -10,11 +10,10 @@
                 <div class="card-body">
                     @include('shared.code.__logo_guest')
                     <!-- title-->
-                    <h4 class="mt-0">Ingresar</h4>
-                    <p class="text-muted mb-4">Escribe tus datos de acceso.</p>
-
+                    <h4 class="mt-4">Ingresar</h4>
+                    <p class="text-muted mb-3">Escribe tus datos de acceso.</p>
                     <!-- form -->
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('login') }}" class="mt-0">
                         @csrf
                         <div class="form-group">
                             <label for="username" class="{{$errors->has('username')?'text-danger':''}}">Username</label>
@@ -26,7 +25,7 @@
                             @endif
                         </div>
                         <div class="form-group">
-                            <a href="{{ route('password.request') }}" class="text-muted float-right"><small>Olvidaste tu password</small></a>
+                            <a href="{{ route('password.request') }}" class="text-info float-right"><small>Olvidaste tu password</small></a>
                             <label for="password" class="{{$errors->has('password')?'text-danger':''}}">Password</label>
                             <input class="form-control {{$errors->has('password')?'has-error form-error':''}}" type="password" required="" id="password" name="password" placeholder="Password">
                             @if ($errors->has('password'))

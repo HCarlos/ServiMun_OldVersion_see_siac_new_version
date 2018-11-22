@@ -4,9 +4,9 @@
     <div class="slimscroll-menu">
 
         <!-- LOGO -->
-        <a href="/" class="logo text-center">
+        <a href="/" class="logo text-left">
             <span class="logo-lg">
-                <img src="{{asset('images/logo.png')}}" alt="" >
+                <img src="{{asset('images/logo-interior.png')}}" alt="" >
             </span>
             <span class="logo-sm">
                 <img src="{{asset('images/logo_sm.png')}}" >

@@ -22,7 +22,10 @@
     <style>
         html, body {
             background-color: #fff;
-            color: #636b6f;
+            background: url('{{asset("images/bg-auth.jpg")}}') no-repeat center;
+            background-size: cover;
+            min-height: 100vh;
+            color: #fff;
             font-family: 'Raleway', sans-serif;
             font-weight: 100;
             height: 100vh;
@@ -45,8 +48,9 @@
 
         .top-right {
             position: absolute;
-            right: 10px;
-            top: 18px;
+            width: 98%;
+            text-align: right;
+            background: transparent;
         }
 
         .content {
@@ -59,19 +63,28 @@
         .subtitle {
             font-size: 42px;
         }
-
-        .links > a {
-            color: #636b6f;
+        lu, li{
+            list-style: none;
+            background-size: cover !important;
+            background-color: transparent !important;
+        }
+        .links a {
+            color: #fff !important;
             padding: 0 25px;
             font-size: 12px;
             font-weight: 600;
             letter-spacing: .1rem;
-            text-decoration: none;
+            text-decoration: none !important;;
+            list-style:none !important;
             text-transform: uppercase;
+            background-size: cover;
         }
-
         .m-b-md {
             margin-bottom: 30px;
+        }
+        .navbar, .navbar-nav{
+            background-size: cover !important;
+            background-color: transparent !important;
         }
     </style>
 
@@ -81,7 +94,8 @@
 <div class="flex-center position-ref full-height">
 
     @if (Route::has('login'))
-        <div class="top-right links">
+            <ul class="navbar navbar-nav">
+        <li class="links top-right ">
             @auth
                 @role('alumno')
                 {{--<a href="/home_alumno">Realizar búsqueda</a>--}}
@@ -92,12 +106,13 @@
                     <a href="{{ route('login') }}">Iniciar sesión</a>
                     {{--<a href="{{ route('register') }}">Regístrate</a>--}}
                 @endauth
-        </div>
+        </li>
+            </ul>
     @endif
 
-    <div class="content" style="margin-top: 0em;">
+    <div class="content" style="margin-top: -15em;">
         <span class="text-cafe  font-effect-3d-float font_Tangerine_700">
-            <img src="{{ asset('images/web/plataforma-gestion-0-logo.png') }}" alt="{{ config('app.name', 'Laravel') }}" />
+            <img src="{{ asset('images/web/plataforma-gestion-0-logo.jpg') }}" alt="{{ config('app.name', 'Laravel') }}" />
         </span>
         {{--<h2 class="text-inverse text-center font_Roboto_Condensed_400" style="margin-top: -2em; ">Plataforma de Control Escolar</h2>--}}
         {{--<h3 class="text-inverse text-center font_Open_Sans_Condensed_expanded_300" style="margin-top: -1em;">SOFTWARE</h3>--}}
