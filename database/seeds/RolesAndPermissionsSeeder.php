@@ -92,9 +92,15 @@ class RolesAndPermissionsSeeder extends Seeder
         $F->validImage($user,'profile','profile/');
 
 
-        Role::create(['name'=>'ADMINISTRADOR','description'=>'Administrador','guard_name'=>'web'])->permissions()->attach($P7);
-        Role::create(['name'=>'CAPTURISTA','description'=>'Capturista','guard_name'=>'web'])->permissions()->attach($P7);
+        Role::create(['name'=>'JEFE','description'=>'Jefe','guard_name'=>'web'])->permissions()->attach($P7);
+        Role::create(['name'=>'SUBJEFE','description'=>'Subjefe','guard_name'=>'web'])->permissions()->attach($P7);
+        Role::create(['name'=>'REPORTES','description'=>'Reportes','guard_name'=>'web'])->permissions()->attach($P7);
+        Role::create(['name'=>'CAPTURISTA_A','description'=>'Capturista_A','guard_name'=>'web'])->permissions()->attach($P7);
+        Role::create(['name'=>'CAPTURISTA_B','description'=>'Capturista_B','guard_name'=>'web'])->permissions()->attach($P7);
+        Role::create(['name'=>'CAPTURISTA_C','description'=>'Capturista_C','guard_name'=>'web'])->permissions()->attach($P7);
         Role::create(['name'=>'ENLACE','description'=>'Enlace','guard_name'=>'web'])->permissions()->attach($P7);
+        Role::create(['name'=>'CIUDADANO','description'=>'Ciudadano','guard_name'=>'web'])->permissions()->attach($P7);
+        Role::create(['name'=>'DELEGADO','description'=>'Delegado','guard_name'=>'web'])->permissions()->attach($P7);
 
     }
 

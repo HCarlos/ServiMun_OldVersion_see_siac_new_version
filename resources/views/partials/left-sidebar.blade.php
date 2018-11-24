@@ -26,21 +26,21 @@
                     <span class="menu-arrow"></span>
                 </a>
 
-                {{--<ul class="side-nav-second-level" aria-expanded="false">--}}
-                    {{--<li>--}}
-                        {{--<a href="{{route('listNiveles')}}">--}}
-                            {{--<i class="fas fa-school"></i>--}}
-                            {{--<span class="badge badge-light float-right">{{\App\Models\Catalogos\Nivel::count()}}</span>--}}
-                            {{--<span>Niveles</span>--}}
-                        {{--</a>--}}
-                    {{--</li>--}}
-                    {{--<li>--}}
-                        {{--<a href="{{route('listParentescos')}}">--}}
-                            {{--<i class="mdi mdi-account-multiple-outline"></i>--}}
-                            {{--<span class="badge badge-light float-right">{{\App\Models\Familias\Parentesco::count()}}</span>--}}
-                            {{--<span>Parentescos</span>--}}
-                        {{--</a>--}}
-                    {{--</li>--}}
+                <ul class="side-nav-second-level" aria-expanded="false">
+                    <li>
+                        <a href="{{route('listCategorias')}}">
+                            <i class="fas fa-user-tag"></i>
+                            <span class="badge badge-light float-right">{{\App\Models\Users\Categoria::count()}}</span>
+                            <span>Categorias Usuario</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('listDependencias')}}">
+                            <i class="mdi mdi-account-multiple-outline"></i>
+                            <span class="badge badge-light float-right">{{\App\Models\Catalogos\Dependencia::count()}}</span>
+                            <span>Dependencias</span>
+                        </a>
+                    </li>
                     {{--<li>--}}
                         {{--<a href="{{route('listFamilias')}}">--}}
                             {{--<i class="mdi mdi-account-group"></i>--}}
@@ -94,7 +94,7 @@
                             {{--<span>Tutores</span>--}}
                         {{--</a>--}}
                     {{--</li>--}}
-                {{--</ul>--}}
+                </ul>
 
             </li>
 

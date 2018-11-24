@@ -34,6 +34,7 @@ class CreateUsersTable extends Migration
             $table->string('filename_thumb',50)->nullable();
             $table->boolean('admin')->default(false);
             $table->boolean('alumno')->default(false);
+            $table->boolean('delegado')->default(false);
             $table->string('session_id')->nullable();
             $table->unsignedSmallInteger('status_user')->default(1)->nullable();
             $table->unsignedSmallInteger('empresa_id')->default(0)->nullable();
@@ -84,6 +85,14 @@ class CreateUsersTable extends Migration
                 ->onDelete('cascade');
         });
 
+        Schema::create($tableNames['categorias'], function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('categoria',150)->default('')->nullable();
+            $table->softDeletes();
+            $table->timestamps();
+        });
+
+
     }
 
     /**
@@ -94,6 +103,7 @@ class CreateUsersTable extends Migration
     public function down()
     {
         $tableNames = config('atemun.table_names.users');
+        Schema::dropIfExists($tableNames['categorias']);
         Schema::dropIfExists($tableNames['user_adress']);
         Schema::dropIfExists($tableNames['user_extend']);
         Schema::dropIfExists($tableNames['users']);

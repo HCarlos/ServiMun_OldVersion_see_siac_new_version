@@ -33,7 +33,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'id',
         'username', 'email', 'password',
         'nombre','ap_paterno','ap_materno',
-        'admin','alumno',
+        'admin','alumno','delegado',
         'curp','emails','celulares','telefonos',
         'fecha_nacimiento','genero',
         'root','filename','filename_png','filename_thumb',
@@ -42,7 +42,7 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     protected $hidden = ['password', 'remember_token',];
-    protected $casts = ['admin'=>'boolean','alumno'=>'boolean',];
+    protected $casts = ['admin'=>'boolean','alumno'=>'boolean','delegado'=>'boolean',];
 
     public function scopeFilterBy($query, $filters){
         return (new UserFilter())->applyTo($query, $filters);
@@ -64,11 +64,13 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(UserDataExtend::class);
     }
 
-
     public function isAdmin(){
         return $this->admin;
     }
 
+    public function isDelegado(){
+        return $this->delegado;
+    }
 
     public function IsEmptyPhoto(){
         return $this->filename == '' ? true : false;

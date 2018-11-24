@@ -58,6 +58,22 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('quitarFotoProfile/', 'Storage\StorageProfileController@quitarArchivoProfile')->name('quitarArchivoProfile/');
     Route::get('list-users/', 'Catalogos\User\UserDataController@showListUser')->name('listUsers');
 
+    // Catálogo de Categorías
+    Route::get('listCategorias/', 'Catalogos\User\CategoriaController@index')->name('listCategorias');
+    Route::get('editCategoria/{Id}', 'Catalogos\User\CategoriaController@editCategoria')->name('editCategoria');
+    Route::put('updateCategoria', 'Catalogos\User\CategoriaController@updateCategoria')->name('updateCategoria');
+    Route::get('newCategoria', 'Catalogos\User\CategoriaController@newCategoria')->name('newCategoria');
+    Route::post('createCategoria', 'Catalogos\User\CategoriaController@createCategoria')->name('createCategoria');
+    Route::get('removeCategoria/{id}', 'Catalogos\User\CategoriaController@removeCategoria')->name('removeCategoria');
+
+    // Catálogo de Dependencias
+    Route::get('listDependencias/', 'Catalogos\Dependencia\DependenciaController@index')->name('listDependencias');
+    Route::get('editDependencia/{Id}', 'Catalogos\Dependencia\DependenciaController@editDependencia')->name('editDependencia');
+    Route::put('updateDependencia', 'Catalogos\Dependencia\DependenciaController@updateDependencia')->name('updateDependencia');
+    Route::get('newDependencia', 'Catalogos\Dependencia\DependenciaController@newDependencia')->name('newDependencia');
+    Route::post('createDependencia', 'Catalogos\Dependencia\DependenciaController@createDependencia')->name('createDependencia');
+    Route::get('removeDependencia/{id}', 'Catalogos\Dependencia\DependenciaController@removeDependencia')->name('removeDependencia');
+
 
     // ROLES
     Route::get('asignaRole/{Id}','Catalogos\User\RoleController@index')->name('asignaRole');

@@ -1,0 +1,99 @@
+<?php
+
+namespace App\Http\Requests\Dependencia;
+
+use App\Models\Catalogos\Dependencia;
+use Illuminate\Foundation\Http\FormRequest;
+use App\Classes\MessageAlertClass;
+use Illuminate\Database\QueryException;
+
+class DependenciaRequest extends FormRequest
+{
+
+
+    protected $redirectRoute = 'editDependencia';
+
+    public function authorize()
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            'dependencia' => ['required','min:2','unique:dependencias,dependencia,'.$this->id],
+            'abreviatura' => ['required','min:2','max:5','unique:dependencias,abreviatura,'.$this->id],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'dependencia.required' => 'La :attribute requiere por lo menos de 2 caracteres',
+            'dependencia.unique' => 'La :attribute ya existe',
+            'abreviatura.required' => 'La :attribute requiere por lo menos de 2 caracteres',
+            'abreviatura.unique' => 'La :attribute ya existe',
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'dependencia' => 'Dependencia',
+            'abreviatura' => 'Abreviatura',
+        ];
+    }
+
+    public function manage()
+    {
+
+        $Item = [
+            'dependencia' => strtoupper($this->dependencia),
+            'abreviatura' => strtoupper($this->abreviatura),
+            'class_css' => $this->class_css,
+            'visible_internet' => $this->visible_internet==1?true:false,
+            'is_areas' => $this->is_areas==1?true:false,
+            'jefe_id' => $this->jefe_id,
+            'user_id' => 1,
+        ];
+
+        try {
+
+            if ($this->id == 0) {
+                $item = Dependencia::create($Item);
+//                $jefe = User::find($this->jefe_id);
+//                $item->Jefe()->create($jefe);
+
+            } else {
+                $item = Dependencia::find($this->id);
+                $item->update($Item);
+            }
+        }catch (QueryException $e){
+            $Msg = new MessageAlertClass();
+//            dd($Msg->Message($e));
+            return $Msg->Message($e);
+        }
+//        dd($item);
+        return $item;
+    }
+
+    protected function getRedirectUrl()
+    {
+        $url = $this->redirector->getUrlGenerator();
+        if ($this->id > 0){
+            return $url->route($this->redirectRoute,['Id'=>$this->id]);
+        }else{
+            return $url->route('newDependencia');
+        }
+    }
+    
+    
+    
+    
+    
+}

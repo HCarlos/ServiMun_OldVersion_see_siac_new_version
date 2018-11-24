@@ -206,91 +206,89 @@ class UserDataController extends Controller
     }
 
 // ***************** MUESTRA EL LISTADO DE ALUMNOS ++++++++++++++++++++ //
-    protected function lstAlumnos(Request $request)
-    {
-        $filters = new FiltersRules();
-
-        $items = User::query()
-            ->filterBy($filters->filterRulesBecasAlumno($request, "ALUMNO"))
-            ->orderByDesc('id')
-            ->paginate();
-        $items->fragment('table');
-        $user = Auth::User();
-
-        return view('catalogos.user.user_list',
-            [
-                'items' => $items,
-                'titulo_catalogo' => "Catálogo de Alumnos",
-                'user' => $user,
-                'tableName' => 'Alumnos',
-                'role_user' => 'ALUMNO',
-                'showEdit' => 'editUser',
-                'removeItem' => 'removeUser',
-                'showEditBecas' => 'showEditBecas',
-                'newWindow' => true,
-                'showProcess1' => 'getUserByRoleToXLSX',
-                'searchAluBeca' => 'lstAlumnos',
-            ]
-        );
-    }
+//    protected function lstAlumnos(Request $request)
+//    {
+//        $filters = new FiltersRules();
+//
+//        $items = User::query()
+//            ->filterBy($filters->filterRulesBecasAlumno($request, "ALUMNO"))
+//            ->orderByDesc('id')
+//            ->paginate();
+//        $items->fragment('table');
+//        $user = Auth::User();
+//
+//        return view('catalogos.user.user_list',
+//            [
+//                'items' => $items,
+//                'titulo_catalogo' => "Catálogo de Alumnos",
+//                'user' => $user,
+//                'tableName' => 'Alumnos',
+//                'role_user' => 'ALUMNO',
+//                'showEdit' => 'editUser',
+//                'removeItem' => 'removeUser',
+//                'showEditBecas' => 'showEditBecas',
+//                'newWindow' => true,
+//                'showProcess1' => 'getUserByRoleToXLSX',
+//                'searchAluBeca' => 'lstAlumnos',
+//            ]
+//        );
+//    }
 
 // ***************** MUESTRA EL LISTADO DE PROFESOR ++++++++++++++++++++ //
-    protected function lstProfesores(Request $request)
-    {
-        $filters = new FiltersRules();
-
-        $items = User::query()
-            ->filterBy($filters->filterRulesBecasAlumno($request, "PROFESOR"))
-            ->orderByDesc('id')
-            ->paginate();
-        $items->fragment('table');
-        $user = Auth::User();
-
-        return view('catalogos.user.user_list',
-            [
-                'items' => $items,
-                'titulo_catalogo' => "Catálogo de Profesores",
-                'user' => $user,
-                'tableName' => 'Profesores',
-                'role_user' => 'PROFESOR',
-                'showEdit' => 'editUser',
-                'removeItem' => 'removeUser',
-                'newWindow' => true,
-                'showProcess1' => 'getUserByRoleToXLSX',
-                'searchEmptyTool' => 'lstProfesores',
-            ]
-        );
-    }
+//    protected function lstProfesores(Request $request)
+//    {
+//        $filters = new FiltersRules();
+//
+//        $items = User::query()
+//            ->filterBy($filters->filterRulesBecasAlumno($request, "PROFESOR"))
+//            ->orderByDesc('id')
+//            ->paginate();
+//        $items->fragment('table');
+//        $user = Auth::User();
+//
+//        return view('catalogos.user.user_list',
+//            [
+//                'items' => $items,
+//                'titulo_catalogo' => "Catálogo de Profesores",
+//                'user' => $user,
+//                'tableName' => 'Profesores',
+//                'role_user' => 'PROFESOR',
+//                'showEdit' => 'editUser',
+//                'removeItem' => 'removeUser',
+//                'newWindow' => true,
+//                'showProcess1' => 'getUserByRoleToXLSX',
+//                'searchEmptyTool' => 'lstProfesores',
+//            ]
+//        );
+//    }
 
 // ***************** MUESTRA EL LISTADO DE TUTORES ++++++++++++++++++++ //
-    protected function lstTutores(Request $request)
-    {
-//        $data = $request->all();
-//        dd($data);
-        $filters = new FiltersRules();
-
-        $items = User::query()
-            ->filterBy($filters->filterRulesBecasAlumno($request, "TUTOR"))
-            ->orderByDesc('id')
-            ->paginate();
-        $items->fragment('table');
-        $user = Auth::User();
-
-        return view('catalogos.user.user_list',
-            [
-                'items' => $items,
-                'titulo_catalogo' => "Catálogo de Tutores",
-                'user' => $user,
-                'tableName' => 'Tutores',
-                'role_user' => 'TUTOR',
-                'showEdit' => 'editUser',
-                'removeItem' => 'removeUser',
-                'newWindow' => true,
-                'showProcess1' => 'getUserByRoleToXLSX',
-                'searchEmptyTool' => 'lstTutores',
-            ]
-        );
-    }
+//    protected function lstTutores(Request $request)
+//    {
+//        $filters = new FiltersRules();
+//
+//        $items = User::query()
+//            ->filterBy($filters->filterRulesBecasAlumno($request, "TUTOR"))
+//            ->orderByDesc('id')
+//            ->paginate();
+//        $items->fragment('table');
+//        $user = Auth::User();
+//
+//        return view('catalogos.user.user_list',
+//            [
+//                'items' => $items,
+//                'titulo_catalogo' => "Catálogo de Tutores",
+//                'user' => $user,
+//                'tableName' => 'Tutores',
+//                'role_user' => 'TUTOR',
+//                'showEdit' => 'editUser',
+//                'removeItem' => 'removeUser',
+//                'newWindow' => true,
+//                'showProcess1' => 'getUserByRoleToXLSX',
+//                'searchEmptyTool' => 'lstTutores',
+//            ]
+//        );
+//    }
 
 
 
