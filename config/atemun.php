@@ -66,7 +66,7 @@ return [
             'denuncia_servicio'    => 'denuncia_servicio',
             'denuncia_ciudadano'   => 'denuncia_ciudadano',
             'denuncia_user'        => 'denuncia_user',
-            'estatu_dependencia'   => 'estatu_dependencia',
+            'dependencia_estatu'   => 'dependencia_estatu',
         ],
         'domicilios' => [
             'users'             => 'users',

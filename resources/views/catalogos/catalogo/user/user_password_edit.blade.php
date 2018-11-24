@@ -7,7 +7,7 @@
     @slot('titulo_header','Cambiar mi password')
     @slot('contenido')
         <div class="col-md-4">
-            @include('shared.user.__user_photo_header')
+            @include('shared.catalogo.user.__user_photo_header')
         </div> <!-- end col-->
 
         <div class="col-md-8">
@@ -20,7 +20,7 @@
                     <form method="POST" action="{{ route('changePasswordUser/') }}">
                         @csrf
                         {{method_field('PUT')}}
-                        @include('shared.user.__user_password_edit')
+                        @include('shared.catalogo.user.__user_password_edit')
                         <div class="form-group row mb-3">
                             <div class="col-md-4"></div>
                             <div class="col-md-8">

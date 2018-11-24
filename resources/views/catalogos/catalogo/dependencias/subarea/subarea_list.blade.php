@@ -8,7 +8,7 @@
     @endslot
     @slot('body_catalogo')
         <div class="col-md-12">
-            @include('shared.user.__user_list')
+            @include('shared.catalogo.dependencias.subarea.__subarea_list')
         </div>
     @endslot
 @endcatalogo

@@ -25,7 +25,7 @@ class CategoriaController extends Controller
         $items->appends($filters)->fragment('table');
         $user = Auth::User();
 
-        return view('catalogos.user.categorias.categoria_list',
+        return view('catalogos.catalogo.user.categorias.categoria_list',
             [
                 'items' => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
@@ -46,7 +46,7 @@ class CategoriaController extends Controller
     protected function editCategoria($Id)
     {
         $item = Categoria::find($Id);
-        return view('catalogos.user.categorias.categoria_edit',
+        return view('catalogos.catalogo.user.categorias.categoria_edit',
             [
                 'user' => Auth::user(),
                 'items' => $item,
@@ -69,7 +69,7 @@ class CategoriaController extends Controller
 
     protected function newCategoria()
     {
-        return view('catalogos.user.categorias.categoria_new',
+        return view('catalogos.catalogo.user.categorias.categoria_new',
             [
                 'editItemTitle' => 'Nuevo',
                 'postNew' => 'createCategoria',

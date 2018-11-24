@@ -3,22 +3,16 @@
 @section('container')
 
 @home
-    @slot('titulo_header','Perfil')
+    @slot('titulo_header','Nuev(@)')
     @slot('contenido')
-        <div class="col-md-4">
-            @include('shared.user.__user_photo_header')
-        </div> <!-- end col-->
-
         <div class="col-md-8">
-            <!-- Chart-->
             @card
-                @slot('title_card',$user->FullName)
+                @slot('title_card','')
                 @slot('body_card')
                     @include('shared.code.__errors')
-                    <form method="POST" action="{{ route('EditUser') }}">
+                    <form method="POST" action="{{ route('createDependencia') }}">
                         @csrf
-                        {{method_field('PUT')}}
-                        @include('shared.user.__user_edit')
+                        @include('shared.catalogo.dependencias.dependencia.__dependencia_new')
                         <div class="form-group mt-4">
                             <button type="submit" class="btn btn-primary float-right">Guardar</button>
                         </div>

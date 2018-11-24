@@ -6,7 +6,7 @@
     @slot('titulo_header','Ver mi perfil')
     @slot('contenido')
         <div class="col-md-4">
-            @include('shared.user.__user_photo_header')
+            @include('shared.catalogo.user.__user_photo_header')
         </div> <!-- end col-->
 
         <div class="col-md-8">
@@ -16,7 +16,7 @@
                 @slot('body_card')
                     @include('shared.code.__errors')
                     <form method="POST" action="#">
-                        @include('shared.user.__user_solo_lectura')
+                        @include('shared.catalogo.user.__user_solo_lectura')
                     </form>
                 @endslot
             @endcard

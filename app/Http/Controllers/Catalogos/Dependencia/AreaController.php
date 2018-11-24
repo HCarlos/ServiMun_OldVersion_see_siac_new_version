@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Catalogos\Dependencia;
 
-use App\Http\Requests\Dependencia\DependenciaRequest;
+use App\Http\Requests\Dependencia\AreaRequest;
+use App\Models\Catalogos\Area;
 use App\Models\Catalogos\Dependencia;
 use App\User;
 use Illuminate\Http\Request;
@@ -10,101 +11,106 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 
-class DependenciaController extends Controller
+class AreaController extends Controller
 {
-    protected $tableName = "dependencias";
+    protected $tableName = "Áreas";
 
 // ***************** MUESTRA EL LISTADO DE USUARIOS ++++++++++++++++++++ //
     protected function index(Request $request)
     {
         ini_set('max_execution_time', 300);
         $filters = $request->all(['search']);
-        $items = Dependencia::query()
+        $items = Area::query()
             ->filterBy($filters)
             ->orderByDesc('id')
             ->paginate();
-//        dd($items);
         $items->appends($filters)->fragment('table');
         $user = Auth::User();
 
-//        dd($items);
-
-        return view('catalogos.catalogo.dependencias.dependencia.dependencia_list',
+        return view('catalogos.catalogo.dependencias.area.area_list',
             [
                 'items' => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
                 'user' => $user,
-                'searchInList' => 'listDependencias',
+                'searchInList' => 'listAreas',
                 'newWindow' => true,
                 'tableName' => $this->tableName,
-                'showEdit' => 'editDependencia',
-//                'putEdit' => 'updateDependencia',
-                'newItem' => 'newDependencia',
-                'removeItem' => 'removeDependencia',
+                'showEdit' => 'editArea',
+//                'putEdit' => 'updateArea',
+                'newItem' => 'newArea',
+                'removeItem' => 'removeArea',
 //                'showProcess1' => 'showFileListUserExcel1A',
             ]
         );
     }
 
 // ***************** EDITA LOS DATOS  ++++++++++++++++++++ //
-    protected function editDependencia($Id)
+    protected function editArea($Id)
     {
-        $item = Dependencia::find($Id);
+        $item = Area::find($Id);
         $Jefes = User::all()->sortBy(function($item) {
             return $item->ap_paterno.' '.$item->ap_materno.' '.$item->nombre;
         });
+        $Dependencias = Dependencia::select('id','dependencia')
+            ->orderBy('dependencia')
+            ->get();
 
-        return view('catalogos.catalogo.dependencias.dependencia.dependencia_edit',
+        return view('catalogos.catalogo.dependencias.area.area_edit',
             [
                 'user' => Auth::user(),
                 'jefes' => $Jefes,
+                'dependencia' => $Dependencias,
                 'items' => $item,
                 'editItemTitle' => isset($item->dependencia) ? $item->dependencia : 'Nuevo',
-                'putEdit' => 'updateDependencia',
+                'putEdit' => 'updateArea',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
             ]
         );
     }
 
 // ***************** GUARDA LOS CAMBIOS ++++++++++++++++++++ //
-    protected function updateDependencia(DependenciaRequest $request)
+    protected function updateArea(AreaRequest $request)
     {
         $item = $request->manage();
         if (!isset($item)) {
             abort(404);
         }
-        return $this->editDependencia($item->id);
+        return $this->editArea($item->id);
     }
 
-    protected function newDependencia()
+    protected function newArea()
     {
         $Jefes = User::all()->sortBy(function($item) {
             return $item->ap_paterno.' '.$item->ap_materno.' '.$item->nombre;
         });
-        return view('catalogos.catalogo.dependencias.dependencia.dependencia_new',
+        $Dependencias = Dependencia::select('id','dependencia')
+            ->orderBy('dependencia')
+            ->get();
+        return view('catalogos.catalogo.dependencias.area.area_new',
             [
                 'editItemTitle' => 'Nuevo',
                 'jefes' => $Jefes,
-                'postNew' => 'createDependencia',
+                'dependencia' => $Dependencias,
+                'postNew' => 'createArea',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
             ]
         );
     }
 
     // ***************** CREAR NUEVO ++++++++++++++++++++ //
-    protected function createDependencia(DependenciaRequest $request)
+    protected function createArea(AreaRequest $request)
     {
         $item = $request->manage();
         if (!isset($item)) {
             abort(404);
         }
-        return $this->editDependencia($item->id);
+        return $this->editArea($item->id);
     }
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //
-    protected function removeDependencia($id = 0)
+    protected function removeArea($id = 0)
     {
-        $item = Dependencia::withTrashed()->findOrFail($id);
+        $item = Area::withTrashed()->findOrFail($id);
         if (isset($item)) {
             if (!$item->trashed()) {
                 $item->forceDelete();
@@ -116,5 +122,7 @@ class DependenciaController extends Controller
             return Response::json(['mensaje' => 'Se ha producido un error.', 'data' => 'Error', 'status' => '200'], 200);
         }
     }
+
+
 
 }

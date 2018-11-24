@@ -2,6 +2,7 @@
 
 namespace App\Models\Catalogos;
 
+use App\Filters\Catalogo\EstatuFilter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -16,8 +17,12 @@ class Estatu extends Model
         'id', 'estatus',
     ];
 
+    public function scopeFilterBy($query, $filters){
+        return (new EstatuFilter())->applyTo($query, $filters);
+    }
+
     public function dependencias(){
-        return $this->belongsToMany(Dependencia::class,'dependencias','dependencia_id');
+        return $this->belongsToMany(Dependencia::class);
     }
 
     public static function findOrImport($estatus){

@@ -32,7 +32,7 @@ class UserDataController extends Controller
         $user = Auth::User();
         $roles = Role::all();
 
-        return view('catalogos.user.user_list',
+        return view('catalogos.catalogo.user.user_list',
             [
                 'items' => $items,
                 'roles' => $roles,
@@ -55,7 +55,7 @@ class UserDataController extends Controller
     protected function showEditUserData()
     {
         $user = Auth::user();
-        return view('catalogos.user.user_profile_solo_lectura',
+        return view('catalogos.catalogo.user.user_profile_solo_lectura',
             [
                 'user' => $user,
                 'items' => $user,
@@ -67,7 +67,7 @@ class UserDataController extends Controller
 // ***************** MANDA A LLAMAR LA PANTALLA PARA NUEVO USUARIO ++++++++++++++++++++ //
     protected function newUser()
     {
-        return view('catalogos.user.user_profile_new',
+        return view('catalogos.catalogo.user.user_profile_new',
             [
                 'titulo_catalogo' => 'Nuevo',
                 'postNew' => 'createUser',
@@ -79,7 +79,7 @@ class UserDataController extends Controller
     protected function showEditUser($Id)
     {
         $user = User::find($Id);
-        return view('catalogos.user.user_profile_edit',
+        return view('catalogos.catalogo.user.user_profile_edit',
             [
                 'user' => $user,
                 'items' => $user,
@@ -103,7 +103,7 @@ class UserDataController extends Controller
         if (!isset($user)) {
             abort(404);
         }
-        return view('catalogos.user.user_profile_edit',
+        return view('catalogos.catalogo.user.user_profile_edit',
             [
                 'user' => $user,
                 'items' => $user,
@@ -120,7 +120,7 @@ class UserDataController extends Controller
         if (!isset($user)) {
             abort(404);
         }
-        return view('catalogos.user.user_profile_edit',
+        return view('catalogos.catalogo.user.user_profile_edit',
             [
                 'user' => $user,
                 'items' => $user,
@@ -135,7 +135,7 @@ class UserDataController extends Controller
     {
         $user = Auth::user();
         $titulo_catalogo = "";
-        return view('catalogos.user.user_photo_update', [
+        return view('catalogos.catalogo.user.user_photo_update', [
                 "user" => $user,
                 "titulo_catalogo" => $titulo_catalogo,
             ]
@@ -147,7 +147,7 @@ class UserDataController extends Controller
     {
         $user = Auth::user();
         $titulo_catalogo = "";
-        return view('catalogos.user.user_password_edit', [
+        return view('catalogos.catalogo.user.user_password_edit', [
                 "user" => $user,
                 "titulo_catalogo" => $titulo_catalogo,
             ]
@@ -159,7 +159,7 @@ class UserDataController extends Controller
     {
         $request->updateUserPassword();
         $titulo_catalogo = "";
-        return view('catalogos.user.user_password_edit', [
+        return view('catalogos.catalogo.user.user_password_edit', [
             "user" => Auth::user(),
             "msg" => 'Password cambiado con éxito!',
             "titulo_catalogo" => $titulo_catalogo,
@@ -186,7 +186,7 @@ class UserDataController extends Controller
     protected function showEditBecas($Id)
     {
         $user = User::find($Id);
-        return view('catalogos.user.user_becas_edit',
+        return view('catalogos.catalogo.user.user_becas_edit',
             [
                 'items' => $user,
             ]
@@ -217,7 +217,7 @@ class UserDataController extends Controller
 //        $items->fragment('table');
 //        $user = Auth::User();
 //
-//        return view('catalogos.user.user_list',
+//        return view('catalogos.catalogo.user.user_list',
 //            [
 //                'items' => $items,
 //                'titulo_catalogo' => "Catálogo de Alumnos",
@@ -246,7 +246,7 @@ class UserDataController extends Controller
 //        $items->fragment('table');
 //        $user = Auth::User();
 //
-//        return view('catalogos.user.user_list',
+//        return view('catalogos.catalogo.user.user_list',
 //            [
 //                'items' => $items,
 //                'titulo_catalogo' => "Catálogo de Profesores",
@@ -274,7 +274,7 @@ class UserDataController extends Controller
 //        $items->fragment('table');
 //        $user = Auth::User();
 //
-//        return view('catalogos.user.user_list',
+//        return view('catalogos.catalogo.user.user_list',
 //            [
 //                'items' => $items,
 //                'titulo_catalogo' => "Catálogo de Tutores",

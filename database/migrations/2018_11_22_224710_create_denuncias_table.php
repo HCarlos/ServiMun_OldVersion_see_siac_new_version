@@ -204,6 +204,7 @@ class CreateDenunciasTable extends Migration
             $table->unsignedInteger('user_id')->default(0)->index();
             $table->softDeletes();
             $table->timestamps();
+            $table->unique(['denuncia_id', 'user_id']);
 
             $table->foreign('denuncia_id')
                 ->references('id')
@@ -222,6 +223,7 @@ class CreateDenunciasTable extends Migration
             $table->unsignedInteger('prioridad_id')->default(0)->index();
             $table->softDeletes();
             $table->timestamps();
+            $table->unique(['denuncia_id', 'prioridad_id']);
 
             $table->foreign('denuncia_id')
                 ->references('id')
@@ -241,6 +243,7 @@ class CreateDenunciasTable extends Migration
             $table->unsignedInteger('origen_id')->default(0)->index();
             $table->softDeletes();
             $table->timestamps();
+            $table->unique(['denuncia_id', 'origen_id']);
 
             $table->foreign('denuncia_id')
                 ->references('id')
@@ -260,6 +263,7 @@ class CreateDenunciasTable extends Migration
             $table->unsignedInteger('dependencia_id')->default(0)->index();
             $table->softDeletes();
             $table->timestamps();
+            $table->unique(['denuncia_id', 'dependencia_id']);
 
             $table->foreign('denuncia_id')
                 ->references('id')
@@ -279,6 +283,7 @@ class CreateDenunciasTable extends Migration
             $table->unsignedInteger('ubicacion_id')->default(0)->index();
             $table->softDeletes();
             $table->timestamps();
+            $table->unique(['denuncia_id', 'ubicacion_id']);
 
             $table->foreign('denuncia_id')
                 ->references('id')
@@ -297,6 +302,7 @@ class CreateDenunciasTable extends Migration
             $table->unsignedInteger('servicio_id')->default(0)->index();
             $table->softDeletes();
             $table->timestamps();
+            $table->unique(['denuncia_id', 'servicio_id']);
 
             $table->foreign('denuncia_id')
                 ->references('id')
@@ -316,6 +322,7 @@ class CreateDenunciasTable extends Migration
             $table->unsignedInteger('ciudadano_id')->default(0)->index();
             $table->softDeletes();
             $table->timestamps();
+            $table->unique(['denuncia_id', 'ciudadano_id']);
 
             $table->foreign('denuncia_id')
                 ->references('id')
@@ -335,6 +342,7 @@ class CreateDenunciasTable extends Migration
             $table->unsignedInteger('user_id')->default(0)->index();
             $table->softDeletes();
             $table->timestamps();
+            $table->unique(['denuncia_id', 'user_id']);
 
             $table->foreign('denuncia_id')
                 ->references('id')
@@ -348,12 +356,13 @@ class CreateDenunciasTable extends Migration
 
         });
 
-        Schema::create($tableNames['estatu_dependencia'], function (Blueprint $table) use ($tableNames){
+        Schema::create($tableNames['dependencia_estatu'], function (Blueprint $table) use ($tableNames){
             $table->increments('id');
             $table->unsignedInteger('estatu_id')->default(0)->index();
             $table->unsignedInteger('dependencia_id')->default(0)->index();
             $table->softDeletes();
             $table->timestamps();
+            $table->unique(['estatu_id', 'dependencia_id']);
 
             $table->foreign('estatu_id')
                 ->references('id')
@@ -386,7 +395,7 @@ class CreateDenunciasTable extends Migration
         Schema::dropIfExists($tableNames['denuncia_dependencia']);
         Schema::dropIfExists($tableNames['denuncia_origen']);
         Schema::dropIfExists($tableNames['denuncia_prioridad']);
-        Schema::dropIfExists($tableNames['estatu_dependencia']);
+        Schema::dropIfExists($tableNames['dependencia_estatu']);
         Schema::dropIfExists($tableNames['user_subarea']);
         Schema::dropIfExists($tableNames['subarea_user']);
 

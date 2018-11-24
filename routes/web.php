@@ -74,6 +74,33 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('createDependencia', 'Catalogos\Dependencia\DependenciaController@createDependencia')->name('createDependencia');
     Route::get('removeDependencia/{id}', 'Catalogos\Dependencia\DependenciaController@removeDependencia')->name('removeDependencia');
 
+    // Catálogo de Areas
+    Route::get('listAreas/', 'Catalogos\Dependencia\AreaController@index')->name('listAreas');
+    Route::get('editArea/{Id}', 'Catalogos\Dependencia\AreaController@editArea')->name('editArea');
+    Route::put('updateArea', 'Catalogos\Dependencia\AreaController@updateArea')->name('updateArea');
+    Route::get('newArea', 'Catalogos\Dependencia\AreaController@newArea')->name('newArea');
+    Route::post('createArea', 'Catalogos\Dependencia\AreaController@createArea')->name('createArea');
+    Route::get('removeArea/{id}', 'Catalogos\Dependencia\AreaController@removeArea')->name('removeArea');
+
+    // Catálogo de Subareas
+    Route::get('listSubareas/', 'Catalogos\Dependencia\SubareaController@index')->name('listSubareas');
+    Route::get('editSubarea/{Id}', 'Catalogos\Dependencia\SubareaController@editSubarea')->name('editSubarea');
+    Route::put('updateSubarea', 'Catalogos\Dependencia\SubareaController@updateSubarea')->name('updateSubarea');
+    Route::get('newSubarea', 'Catalogos\Dependencia\SubareaController@newSubarea')->name('newSubarea');
+    Route::post('createSubarea', 'Catalogos\Dependencia\SubareaController@createSubarea')->name('createSubarea');
+    Route::get('removeSubarea/{id}', 'Catalogos\Dependencia\SubareaController@removeSubarea')->name('removeSubarea');
+
+    // Catálogo de Estatus
+    Route::get('listEstatus/', 'Catalogos\EstatuController@index')->name('listEstatus');
+    Route::get('editEstatu/{Id}', 'Catalogos\EstatuController@editItem')->name('editEstatu');
+    Route::put('updateEstatu', 'Catalogos\EstatuController@updateItem')->name('updateEstatu');
+    Route::get('newEstatu', 'Catalogos\EstatuController@newItem')->name('newEstatu');
+    Route::post('createEstatu', 'Catalogos\EstatuController@createItem')->name('createEstatu');
+    Route::get('removeEstatu/{id}', 'Catalogos\EstatuController@removeItem')->name('removeEstatu');
+    Route::get('addDepEstatu/{Id}/{IdDep}', 'Catalogos\EstatuController@addDepEstatu')->name('addDepEstatu');
+    Route::get('removeDepEstatu/{Id}/{IdDep}', 'Catalogos\EstatuController@removeDepEstatu')->name('removeDepEstatu');
+
+
 
     // ROLES
     Route::get('asignaRole/{Id}','Catalogos\User\RoleController@index')->name('asignaRole');

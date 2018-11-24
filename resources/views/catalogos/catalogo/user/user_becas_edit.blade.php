@@ -9,6 +9,6 @@
         {{ $items->Fullname }}
     @endslot
     @slot('body_full_modal')
-        @include('shared.user.__user_becas_edit')
+        @include('shared.catalogo.user.__user_becas_edit')
     @endslot
 @endformFullModal

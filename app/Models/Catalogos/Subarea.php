@@ -2,6 +2,8 @@
 
 namespace App\Models\Catalogos;
 
+use App\Filters\Catalogo\Dependencia\SubareaFilter;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -16,13 +18,25 @@ class Subarea extends Model
         'id', 'subarea','area_id','jefe_id',
     ];
 
-    public function Area() {
-        return $this->hasMany(Area::class,'area_id');
+    public function scopeFilterBy($query, $filters){
+        return (new SubareaFilter())->applyTo($query, $filters);
     }
 
-    public function Jefe() {
-        return $this->hasMany(User::class,'jefe_id');
+    public function area() {
+        return $this->hasOne(Area::class,'id','area_id');
     }
+
+    public function jefe() {
+        return $this->hasOne(User::class,'id','jefe_id');
+    }
+
+//    public function jefe() {
+//        return $this->belongsTo(User::class,'jefe_id','id');
+//    }
+//
+//    public function dependencia() {
+//        return $this->hasOne(Dependencia::class,'id','dependencia_id');
+//    }
 
     public static function findOrImport($subarea,$area_id,$jefe_id){
         $obj = static::where('subarea', $subarea)->first();

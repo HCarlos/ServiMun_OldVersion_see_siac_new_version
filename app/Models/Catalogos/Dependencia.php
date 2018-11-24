@@ -29,7 +29,7 @@ class Dependencia extends Model
     }
 
     public function estatus(){
-        return $this->belongsToMany(Estatu::class,'estatus','estatu_id');
+        return $this->belongsToMany(Estatu::class);
     }
 
     public function isVisibleInternet(){

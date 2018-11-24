@@ -3,18 +3,16 @@
 @section('container')
 
 @home
-    @slot('titulo_header','Editando el registro '. $items->id)
+    @slot('titulo_header','Nuev(@)')
     @slot('contenido')
         <div class="col-md-8">
-            <!-- Chart-->
             @card
                 @slot('title_card','')
                 @slot('body_card')
                     @include('shared.code.__errors')
-                    <form method="POST" action="{{ route('updateDependencia') }}">
+                    <form method="POST" action="{{ route('createEstatu') }}">
                         @csrf
-                        {{method_field('PUT')}}
-                        @include('shared.dependencias.dependencia.__dependencia_edit')
+                        @include('shared.catalogo.estatu.__estatu_new')
                         <div class="form-group mt-4">
                             <button type="submit" class="btn btn-primary float-right">Guardar</button>
                         </div>

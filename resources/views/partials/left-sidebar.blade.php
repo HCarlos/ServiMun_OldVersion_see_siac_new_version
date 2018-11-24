@@ -41,59 +41,29 @@
                             <span>Dependencias</span>
                         </a>
                     </li>
-                    {{--<li>--}}
-                        {{--<a href="{{route('listFamilias')}}">--}}
-                            {{--<i class="mdi mdi-account-group"></i>--}}
-                            {{--<span class="badge badge-light float-right">{{\App\Models\Familias\Familia::count()}}</span>--}}
-                            {{--<span>Familias</span>--}}
-                        {{--</a>--}}
-                    {{--</li>--}}
-                    {{--<li>--}}
-                        {{--<a href="{{route('listRegFis')}}">--}}
-                            {{--<i class="fas fa-money-check-alt"></i>--}}
-                            {{--<span class="badge badge-light float-right">{{\App\Models\Catalogos\Registro_Fiscal::count()}}</span>--}}
-                            {{--<span>Reg. Fiscales</span>--}}
-                        {{--</a>--}}
-                    {{--</li>--}}
-                    {{--<li>--}}
-                        {{--<a href="{{route('lstAlumnos')}}">--}}
-                            {{--<i class="fas fa-user-graduate"></i>--}}
-                            {{--<span class="badge badge-light float-right">--}}
-                                {{--{{--}}
-                                    {{--\App\User::whereHas('roles',function($q){--}}
-                                    {{--return $q->where('name','ALUMNO');--}}
-                                    {{--})->count()--}}
-                                 {{--}}--}}
-                            {{--</span>--}}
-                            {{--<span>Alumnos</span>--}}
-                        {{--</a>--}}
-                    {{--</li>--}}
-                    {{--<li>--}}
-                        {{--<a href="{{route('lstProfesores')}}">--}}
-                            {{--<i class="fas fa-chalkboard-teacher"></i>--}}
-                            {{--<span class="badge badge-light float-right">--}}
-                                {{--{{--}}
-                                    {{--\App\User::whereHas('roles',function($q){--}}
-                                    {{--return $q->where('name','PROFESOR');--}}
-                                    {{--})->count()--}}
-                                 {{--}}--}}
-                            {{--</span>--}}
-                            {{--<span>Profesores</span>--}}
-                        {{--</a>--}}
-                    {{--</li>--}}
-                    {{--<li>--}}
-                        {{--<a href="{{route('lstTutores')}}">--}}
-                            {{--<i class="fas fa-user-tie"></i>--}}
-                            {{--<span class="badge badge-light float-right">--}}
-                                {{--{{--}}
-                                    {{--\App\User::whereHas('roles',function($q){--}}
-                                    {{--return $q->where('name','TUTOR');--}}
-                                    {{--})->count()--}}
-                                 {{--}}--}}
-                            {{--</span>--}}
-                            {{--<span>Tutores</span>--}}
-                        {{--</a>--}}
-                    {{--</li>--}}
+                    <li>
+                        <a href="{{route('listAreas')}}">
+                            <i class="mdi mdi-account-group"></i>
+                            <span class="badge badge-light float-right">{{\App\Models\Catalogos\Area::count()}}</span>
+                            <span>Áreas</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{route('listSubareas')}}">
+                            <i class="fas fa-money-check-alt"></i>
+                            <span class="badge badge-light float-right">{{\App\Models\Catalogos\Subarea::count()}}</span>
+                            <span>Subareas</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('listEstatus')}}">
+                            <i class="fas fa-money-check-alt"></i>
+                            <span class="badge badge-light float-right">{{\App\Models\Catalogos\Estatu::count()}}</span>
+                            <span>Status</span>
+                        </a>
+                    </li>
+
                 </ul>
 
             </li>

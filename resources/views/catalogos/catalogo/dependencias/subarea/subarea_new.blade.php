@@ -10,9 +10,9 @@
                 @slot('title_card','')
                 @slot('body_card')
                     @include('shared.code.__errors')
-                    <form method="POST" action="{{ route('createCategoria') }}">
+                    <form method="POST" action="{{ route('createSubarea') }}">
                         @csrf
-                        @include('shared.user.categoria.__categoria_new')
+                        @include('shared.catalogo.dependencias.subarea.__subarea_new')
                         <div class="form-group mt-4">
                             <button type="submit" class="btn btn-primary float-right">Guardar</button>
                         </div>
