@@ -5,7 +5,7 @@
         <input type="text" name="subarea" id="subarea" value="{{ old('subarea') }}" class="form-control" />
     </div>
 
-    <label for = "area_id" class="col-md-3 col-form-label">Dependencia</label>
+    <label for = "area_id" class="col-md-3 col-form-label">Área</label>
     <div class="col-md-9">
         <select class="area_id form-control select2" data-toggle="select2"  name="area_id" id="area_id" size="1">
             @foreach($area as $t)

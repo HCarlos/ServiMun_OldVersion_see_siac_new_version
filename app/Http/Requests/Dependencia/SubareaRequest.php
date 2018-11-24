@@ -26,7 +26,7 @@ class SubareaRequest extends FormRequest
     public function rules()
     {
         return [
-            'subarea' => ['required','min:2','unique:subareas,subarea,'.$this->id],
+            'subarea' => ['required','min:2'],
         ];
     }
 
@@ -34,7 +34,6 @@ class SubareaRequest extends FormRequest
     {
         return [
             'subarea.required' => 'La :attribute requiere por lo menos de 2 caracteres',
-            'subarea.unique' => 'La :attribute ya existe',
         ];
     }
 
