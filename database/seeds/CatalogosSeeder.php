@@ -183,13 +183,56 @@ class CatalogosSeeder extends Seeder
 
         Subarea::findOrImport("general",1,1);
 
-        Estatu::findOrImport("en proceso");
+        Estatu::findOrImport( 'En Proceso', '0',1);
+        Estatu::findOrImport( 'Gestión / Trámite Interno', '0',1);
+        Estatu::findOrImport( 'No Procede', '0',1);
+        Estatu::findOrImport( 'Turnado a Dependencia Externa', '0',1);
+        Estatu::findOrImport( 'Supervisado', '4|5|21',1);
+        Estatu::findOrImport( 'Resuelto', '0',1);
+        Estatu::findOrImport( 'Orden de Trabajo', '0',1);
+        Estatu::findOrImport( 'Recibido', '0',1);
+        Estatu::findOrImport( 'Análisis de Proyecto', '4|5|21',1);
+        Estatu::findOrImport( 'Ampliaciones', '4|5|21',1);
 
-        Medida::findOrImport("pza");
+        Medida::findOrImport( 'Pza',1);
+        Medida::findOrImport( 'Mts',1);
+        Medida::findOrImport( 'Viaje',1);
+        Medida::findOrImport( 'M2',1);
+        Medida::findOrImport( 'ML',1);
+        Medida::findOrImport( 'Paq',1);
+        Medida::findOrImport( 'Pares',1);
+        Medida::findOrImport( 'Servicio',1);
+        Medida::findOrImport( 'CALLES ',1);
+        Medida::findOrImport( 'PARQUE',1);
+        Medida::findOrImport( 'PAQUETES',1);
 
-        Origen::findOrImport("atención directa");
+        Origen::findOrImport( 'Atención Directa');
+        Origen::findOrImport( 'Centro en tu Comunidad');
+        Origen::findOrImport( 'Telereportaje');
+        Origen::findOrImport( 'Página Web');
+        Origen::findOrImport( 'TV');
+        Origen::findOrImport( 'Prensa');
+        Origen::findOrImport( 'E-Mail');
+        Origen::findOrImport( 'Teléfono');
+        Origen::findOrImport( 'Audiencia');
+        Origen::findOrImport( 'Facebook');
+        Origen::findOrImport( 'GOB DEL EDO');
+        Origen::findOrImport( 'ESCRITO');
+        Origen::findOrImport( 'Twitter');
+        Origen::findOrImport( 'PRESIDENCIA');
+        Origen::findOrImport( 'AUDIENCIA DE RADIO');
+        Origen::findOrImport( 'SECRETARIA DE AYUNTAMIENTO');
+        Origen::findOrImport( 'PANORAMA SIN RESERVAS');
+        Origen::findOrImport( 'JORNADA INTEGRAL');
+        Origen::findOrImport( 'SEDESOL');
+        Origen::findOrImport( 'COORDINACIÓN DE DELEGADOS');
+        Origen::findOrImport( 'Gira de Trabajo');
 
-        Prioridad::findOrImport("urgente",0,"");
+        Prioridad::findOrImport( 'Urgente',FALSE, 'colorPrioridadUrgente');
+        Prioridad::findOrImport( 'Ordinario',TRUE, 'colorPrioridadSubjetivo');
+        Prioridad::findOrImport( 'Prioritario pero no urgente',FALSE, 'colorPrioridadNOUrgente');
+        Prioridad::findOrImport( 'Programable',FALSE, 'colorPrioridadProgramable');
+        Prioridad::findOrImport( 'Requiere detalles',FALSE, 'colorPrioridadReqDet');
 
         Servicio::findOrImport('computador',1,1,1);
 

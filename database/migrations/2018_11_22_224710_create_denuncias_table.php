@@ -26,7 +26,7 @@ class CreateDenunciasTable extends Migration
         Schema::create($tableNames['prioridades'], function (Blueprint $table) {
             $table->increments('id');
             $table->string('prioridad',50)->default('')->nullable();
-            $table->unsignedSmallInteger('predeterminado')->default(0)->nullable();
+            $table->boolean('predeterminado')->default(true)->nullable();
             $table->string('class_css',50)->default('')->nullable();
             $table->softDeletes();
             $table->timestamps();
@@ -57,6 +57,7 @@ class CreateDenunciasTable extends Migration
             $table->unsignedInteger('user_id')->default(0)->index();
             $table->softDeletes();
             $table->timestamps();
+            $table->unique(['dependencia', 'jefe_id']);
             $table->foreign('jefe_id')
                 ->references('id')
                 ->on($tableNames['users'])
@@ -70,6 +71,7 @@ class CreateDenunciasTable extends Migration
             $table->unsignedInteger('jefe_id')->default(1)->index();
             $table->softDeletes();
             $table->timestamps();
+            $table->unique(['area', 'dependencia_id']);
             $table->foreign('dependencia_id')
                 ->references('id')
                 ->on($tableNames['dependencias'])
@@ -87,6 +89,7 @@ class CreateDenunciasTable extends Migration
             $table->unsignedInteger('jefe_id')->default(1)->index();
             $table->softDeletes();
             $table->timestamps();
+            $table->unique(['subarea', 'area_id']);
             $table->foreign('area_id')
                 ->references('id')
                 ->on($tableNames['areas'])
@@ -101,15 +104,18 @@ class CreateDenunciasTable extends Migration
         Schema::create($tableNames['servicios'], function (Blueprint $table) use ($tableNames) {
             $table->increments('id');
             $table->string('servicio',250)->default('GENERAL')->nullable();
-            $table->unsignedSmallInteger('habilitado')->default(1)->nullable();
+            $table->boolean('habilitado')->default(true)->nullable();
             $table->unsignedInteger('medida_id')->default(1);
             $table->unsignedInteger('subarea_id')->default(1);
             $table->softDeletes();
             $table->timestamps();
+            $table->unique(['servicio', 'subarea_id']);
+
             $table->foreign('medida_id')
                 ->references('id')
                 ->on($tableNames['medidas'])
                 ->onDelete('cascade');
+
             $table->foreign('subarea_id')
                 ->references('id')
                 ->on($tableNames['subareas'])

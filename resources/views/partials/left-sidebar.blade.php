@@ -63,6 +63,36 @@
                             <span>Status</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{route('listMedidas')}}">
+                            <i class="fas fa-money-check-alt"></i>
+                            <span class="badge badge-light float-right">{{\App\Models\Catalogos\Medida::count()}}</span>
+                            <span>Medidas</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('listOrigenes')}}">
+                            <i class="fas fa-money-check-alt"></i>
+                            <span class="badge badge-light float-right">{{\App\Models\Catalogos\Origen::count()}}</span>
+                            <span>Origenes</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{route('listPrioridades')}}">
+                            <i class="fas fa-money-check-alt"></i>
+                            <span class="badge badge-light float-right">{{\App\Models\Catalogos\Prioridad::count()}}</span>
+                            <span>Prioridades</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{route('listServicios')}}">
+                            <i class="fas fa-money-check-alt"></i>
+                            <span class="badge badge-light float-right">{{\App\Models\Catalogos\Servicio::count()}}</span>
+                            <span>Servicios</span>
+                        </a>
+                    </li>
 
                 </ul>
 

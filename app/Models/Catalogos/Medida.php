@@ -2,6 +2,7 @@
 
 namespace App\Models\Catalogos;
 
+use App\Filters\Catalogo\MedidaFilter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -15,6 +16,10 @@ class Medida extends Model
     protected $fillable = [
         'id', 'medida',
     ];
+
+    public function scopeFilterBy($query, $filters){
+        return ( new MedidaFilter())->applyTo($query, $filters);
+    }
 
     public static function findOrImport($medida){
         $obj = static::where('medida', $medida)->first();

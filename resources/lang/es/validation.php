@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Validation Language Lines
@@ -42,6 +41,18 @@ return [
     'exists'               => ':attribute es inválido.',
     'file'                 => 'El campo :attribute debe ser un archivo.',
     'filled'               => 'El campo :attribute es obligatorio.',
+    'gt'                   => [
+        'numeric' => 'El campo :attribute debe ser mayor que :value.',
+        'file'    => 'El campo :attribute debe tener más de :value kilobytes.',
+        'string'  => 'El campo :attribute debe tener más de :value caracteres.',
+        'array'   => 'El campo :attribute debe tener más de :value elementos.',
+    ],
+    'gte'                  => [
+        'numeric' => 'El campo :attribute debe ser como mínimo :value.',
+        'file'    => 'El campo :attribute debe tener como mínimo :value kilobytes.',
+        'string'  => 'El campo :attribute debe tener como mínimo :value caracteres.',
+        'array'   => 'El campo :attribute debe tener como mínimo :value elementos.',
+    ],
     'image'                => ':attribute debe ser una imagen.',
     'in'                   => ':attribute es inválido.',
     'in_array'             => 'El campo :attribute no existe en :other.',
@@ -50,6 +61,18 @@ return [
     'ipv4'                 => ':attribute debe ser un dirección IPv4 válida',
     'ipv6'                 => ':attribute debe ser un dirección IPv6 válida.',
     'json'                 => 'El campo :attribute debe tener una cadena JSON válida.',
+    'lt'                   => [
+        'numeric' => 'El campo :attribute debe ser menor que :value.',
+        'file'    => 'El campo :attribute debe tener menos de :value kilobytes.',
+        'string'  => 'El campo :attribute debe tener menos de :value caracteres.',
+        'array'   => 'El campo :attribute debe tener menos de :value elementos.',
+    ],
+    'lte'                  => [
+        'numeric' => 'El campo :attribute debe ser como máximo :value.',
+        'file'    => 'El campo :attribute debe tener como máximo :value kilobytes.',
+        'string'  => 'El campo :attribute debe tener como máximo :value caracteres.',
+        'array'   => 'El campo :attribute debe tener como máximo :value elementos.',
+    ],
     'max'                  => [
         'numeric' => ':attribute no debe ser mayor a :max.',
         'file'    => ':attribute no debe ser mayor que :max kilobytes.',
@@ -65,6 +88,7 @@ return [
         'array'   => ':attribute debe tener al menos :min elementos.',
     ],
     'not_in'               => ':attribute es inválido.',
+    'not_regex'            => 'El formato del campo :attribute no es válido.',
     'numeric'              => ':attribute debe ser numérico.',
     'present'              => 'El campo :attribute debe estar presente.',
     'regex'                => 'El formato de :attribute es inválido.',
@@ -84,9 +108,10 @@ return [
     ],
     'string'               => 'El campo :attribute debe ser una cadena de caracteres.',
     'timezone'             => 'El :attribute debe ser una zona válida.',
-    'unique'               => ':attribute ya ha sido registrado.',
+    'unique'               => 'El campo :attribute ya ha sido registrado.',
     'uploaded'             => 'Subir :attribute ha fallado.',
     'url'                  => 'El formato :attribute es inválido.',
+    'uuid'                 => 'El campo :attribute debe ser un UUID válido.',
 
     /*
     |--------------------------------------------------------------------------
@@ -99,11 +124,11 @@ return [
     |
     */
 
-    'custom'               => [
+    'custom' => [
         'password' => [
             'min' => 'La :attribute debe contener más de :min caracteres',
         ],
-        'email' => [
+        'email'    => [
             'unique' => 'El :attribute ya ha sido registrado.',
         ],
     ],
@@ -119,37 +144,36 @@ return [
     |
     */
 
-    'attributes'           => [
-        'name'                  => 'nombre',
-        'username'              => 'usuario',
-        'email'                 => 'correo electrónico',
-        'first_name'            => 'nombre',
-        'last_name'             => 'apellido',
-        'password'              => 'contraseña',
-        'password_confirmation' => 'confirmación de la contraseña',
-        'city'                  => 'ciudad',
-        'country'               => 'país',
-        'address'               => 'dirección',
-        'phone'                 => 'teléfono',
-        'mobile'                => 'móvil',
-        'age'                   => 'edad',
-        'sex'                   => 'sexo',
-        'gender'                => 'género',
-        'year'                  => 'año',
-        'month'                 => 'mes',
-        'day'                   => 'día',
-        'hour'                  => 'hora',
-        'minute'                => 'minuto',
-        'second'                => 'segundo',
-        'title'                 => 'título',
-        'content'               => 'contenido',
-        'body'                  => 'contenido',
-        'description'           => 'descripción',
-        'excerpt'               => 'extracto',
+    'attributes' => [
+        'name'                  => 'Nombre',
+        'username'              => 'Usuario',
+        'email'                 => 'Correo Electrónico',
+        'first_name'            => 'Nombre',
+        'last_name'             => 'Apellido',
+        'password'              => 'Contraseña',
+        'password_confirmation' => 'Confirmación de la contraseña',
+        'city'                  => 'Ciudad',
+        'country'               => 'País',
+        'address'               => 'Dirección',
+        'phone'                 => 'Teléfono',
+        'mobile'                => 'Móvil',
+        'age'                   => 'Edad',
+        'sex'                   => 'Sexo',
+        'gender'                => 'Género',
+        'year'                  => 'Año',
+        'month'                 => 'Mes',
+        'day'                   => 'Día',
+        'hour'                  => 'Hora',
+        'minute'                => 'Minuto',
+        'second'                => 'Segundo',
+        'title'                 => 'Título',
+        'content'               => 'Contenido',
+        'body'                  => 'Contenido',
+        'description'           => 'Descripción',
+        'excerpt'               => 'Extracto',
         'date'                  => 'fecha',
         'time'                  => 'hora',
-        'subject'               => 'asunto',
-        'message'               => 'mensaje',
+        'subject'               => 'Asunto',
+        'message'               => 'Mensaje',
     ],
-
 ];

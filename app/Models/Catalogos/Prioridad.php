@@ -2,6 +2,7 @@
 
 namespace App\Models\Catalogos;
 
+use App\Filters\Catalogo\PrioridadFilter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -17,6 +18,10 @@ class Prioridad extends Model
     ];
 
     protected $casts = ['predeterminado'=>'boolean',];
+
+    public function scopeFilterBy($query, $filters){
+        return (new PrioridadFilter())->applyTo($query, $filters);
+    }
 
     public function isDefault(){
         return $this->predeterminado;

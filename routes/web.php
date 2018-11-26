@@ -100,6 +100,37 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('addDepEstatu/{Id}/{IdDep}', 'Catalogos\EstatuController@addDepEstatu')->name('addDepEstatu');
     Route::get('removeDepEstatu/{Id}/{IdDep}', 'Catalogos\EstatuController@removeDepEstatu')->name('removeDepEstatu');
 
+    // Catálogo de Medidas
+    Route::get('listMedidas/', 'Catalogos\MedidaController@index')->name('listMedidas');
+    Route::get('editMedida/{Id}', 'Catalogos\MedidaController@editItem')->name('editMedida');
+    Route::put('updateMedida', 'Catalogos\MedidaController@updateItem')->name('updateMedida');
+    Route::get('newMedida', 'Catalogos\MedidaController@newItem')->name('newMedida');
+    Route::post('createMedida', 'Catalogos\MedidaController@createItem')->name('createMedida');
+    Route::get('removeMedida/{id}', 'Catalogos\MedidaController@removeItem')->name('removeMedida');
+
+    // Catálogo de Origenes
+    Route::get('listOrigenes/', 'Catalogos\OrigenController@index')->name('listOrigenes');
+    Route::get('editOrigen/{Id}', 'Catalogos\OrigenController@editItem')->name('editOrigen');
+    Route::put('updateOrigen', 'Catalogos\OrigenController@updateItem')->name('updateOrigen');
+    Route::get('newOrigen', 'Catalogos\OrigenController@newItem')->name('newOrigen');
+    Route::post('createOrigen', 'Catalogos\OrigenController@createItem')->name('createOrigen');
+    Route::get('removeOrigen/{id}', 'Catalogos\OrigenController@removeItem')->name('removeOrigen');
+
+    // Catálogo de Prioridades
+    Route::get('listPrioridades/', 'Catalogos\PrioridadController@index')->name('listPrioridades');
+    Route::get('editPrioridad/{Id}', 'Catalogos\PrioridadController@editItem')->name('editPrioridad');
+    Route::put('updatePrioridad', 'Catalogos\PrioridadController@updateItem')->name('updatePrioridad');
+    Route::get('newPrioridad', 'Catalogos\PrioridadController@newItem')->name('newPrioridad');
+    Route::post('createPrioridad', 'Catalogos\PrioridadController@createItem')->name('createPrioridad');
+    Route::get('removePrioridad/{id}', 'Catalogos\PrioridadController@removeItem')->name('removePrioridad');
+
+    // Catálogo de Servicios
+    Route::get('listServicios/', 'Catalogos\ServicioController@index')->name('listServicios');
+    Route::get('editServicio/{Id}', 'Catalogos\ServicioController@editItem')->name('editServicio');
+    Route::put('updateServicio', 'Catalogos\ServicioController@updateItem')->name('updateServicio');
+    Route::get('newServicio', 'Catalogos\ServicioController@newItem')->name('newServicio');
+    Route::post('createServicio', 'Catalogos\ServicioController@createItem')->name('createServicio');
+    Route::get('removeServicio/{id}', 'Catalogos\ServicioController@removeItem')->name('removeServicio');
 
 
     // ROLES

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Models\Catalogos\Estatu;
+use App\Observers\Catalogos\Estatu\PostUpdating;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Classes\MessageAlertClass;
 use Illuminate\Database\QueryException;
@@ -62,6 +63,7 @@ class StatuRequest extends FormRequest
             } else {
                 $item = Estatu::find($this->id);
                 $item->update($Item);
+                $observer = PostUpdating::updating($item);
             }
         }catch (QueryException $e){
             $Msg = new MessageAlertClass();
