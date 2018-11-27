@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Models\Catalogos\Estatu;
 use App\Observers\Catalogos\Estatu\PostUpdating;
+use App\Rules\Uppercase;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Classes\MessageAlertClass;
 use Illuminate\Database\QueryException;
@@ -27,7 +28,7 @@ class StatuRequest extends FormRequest
     public function rules()
     {
         return [
-            'estatus' => ['required','min:3','unique:estatus,estatus,'.$this->id],
+            'estatus' => ['required','min:3',new Uppercase,'unique:estatus,estatus,'.$this->id],
         ];
     }
 

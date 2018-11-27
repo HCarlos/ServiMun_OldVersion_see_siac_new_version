@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Dependencia;
 
 use App\Models\Catalogos\Dependencia;
+use App\Rules\Uppercase;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Classes\MessageAlertClass;
 use Illuminate\Database\QueryException;
@@ -26,8 +27,8 @@ class DependenciaRequest extends FormRequest
     public function rules()
     {
         return [
-            'dependencia' => ['required','min:2','unique:dependencias,dependencia,'.$this->id],
-            'abreviatura' => ['required','min:2','max:5','unique:dependencias,abreviatura,'.$this->id],
+            'dependencia' => ['required','min:2',new Uppercase,'unique:dependencias,dependencia,'.$this->id],
+            'abreviatura' => ['required','min:2',new Uppercase,'max:5','unique:dependencias,abreviatura,'.$this->id],
         ];
     }
 

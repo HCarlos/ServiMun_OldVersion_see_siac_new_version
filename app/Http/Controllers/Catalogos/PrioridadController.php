@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Catalogos\Prioridad;
 use App\Http\Requests\PrioridadRequest;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Auth;
 
@@ -65,7 +66,7 @@ class PrioridadController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return $this->editItem($item->id);
+        return Redirect::to('editPrioridad/'.$item->id);
     }
 
     protected function newItem()
@@ -86,7 +87,7 @@ class PrioridadController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return $this->editItem($item->id);
+        return Redirect::to('editPrioridad/'.$item->id);
     }
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //

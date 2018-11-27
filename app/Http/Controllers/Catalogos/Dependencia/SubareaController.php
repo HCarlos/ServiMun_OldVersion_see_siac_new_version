@@ -9,6 +9,7 @@ use App\Models\Catalogos\Subarea;
 use App\Models\Catalogos\Area;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
 
 class SubareaController extends Controller
@@ -75,7 +76,7 @@ class SubareaController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return $this->editSubarea($item->id);
+        return Redirect::to('editSubarea/'.$item->id);
     }
 
     protected function newSubarea()
@@ -104,7 +105,7 @@ class SubareaController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return $this->editSubarea($item->id);
+        return Redirect::to('editSubarea/'.$item->id);
     }
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Models\Catalogos\Servicio;
+use App\Rules\Uppercase;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Classes\MessageAlertClass;
 use Illuminate\Database\QueryException;
@@ -26,7 +27,7 @@ class ServicioRequest extends FormRequest
     public function rules()
     {
         return [
-            'servicio' => ['required','min:2','unique:servicios,servicio,'.$this->id],
+            'servicio' => ['required','min:2',new Uppercase,'unique:servicios,servicio,'.$this->id],
         ];
     }
 

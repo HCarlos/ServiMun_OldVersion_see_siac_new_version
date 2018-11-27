@@ -2,6 +2,7 @@
 
 namespace App\Models\Catalogos\Domicilios;
 
+use App\Filters\Catalogo\Domicilio\TipocomunidadFilter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -16,6 +17,10 @@ class Tipocomunidad extends Model
     protected $fillable = [
         'id', 'tipocomunidad',
     ];
+
+    public function scopeFilterBy($query,$filters){
+        return (new TipocomunidadFilter())->applyTo($query, $filters);
+    }
 
     public static function findOrImport($tipocomunidad){
         $obj = static::where('tipocomunidad', $tipocomunidad)->first();

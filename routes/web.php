@@ -11,6 +11,7 @@
 |
 */
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
@@ -131,6 +132,94 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('newServicio', 'Catalogos\ServicioController@newItem')->name('newServicio');
     Route::post('createServicio', 'Catalogos\ServicioController@createItem')->name('createServicio');
     Route::get('removeServicio/{id}', 'Catalogos\ServicioController@removeItem')->name('removeServicio');
+
+    // Catálogo de Afiliaciones
+    Route::get('listAfiliaciones/', 'Catalogos\AfiliacionController@index')->name('listAfiliaciones');
+    Route::get('editAfiliacion/{Id}', 'Catalogos\AfiliacionController@editItem')->name('editAfiliacion');
+    Route::put('updateAfiliacion', 'Catalogos\AfiliacionController@updateItem')->name('updateAfiliacion');
+    Route::get('newAfiliacion', 'Catalogos\AfiliacionController@newItem')->name('newAfiliacion');
+    Route::post('createAfiliacion', 'Catalogos\AfiliacionController@createItem')->name('createAfiliacion');
+    Route::get('removeAfiliacion/{id}', 'Catalogos\AfiliacionController@removeItem')->name('removeAfiliacion');
+
+    // Catálogo de Asentamientos
+    Route::get('listAsentamientos/', 'Catalogos\Domicilio\AsentamientoController@index')->name('listAsentamientos');
+    Route::get('editAsentamiento/{Id}', 'Catalogos\Domicilio\AsentamientoController@editItem')->name('editAsentamiento');
+    Route::put('updateAsentamiento', 'Catalogos\Domicilio\AsentamientoController@updateItem')->name('updateAsentamiento');
+    Route::get('newAsentamiento', 'Catalogos\Domicilio\AsentamientoController@newItem')->name('newAsentamiento');
+    Route::post('createAsentamiento', 'Catalogos\Domicilio\AsentamientoController@createItem')->name('createAsentamiento');
+    Route::get('removeAsentamiento/{id}', 'Catalogos\Domicilio\AsentamientoController@removeItem')->name('removeAsentamiento');
+
+    // Catálogo de Calles
+    Route::get('listCalles/', 'Catalogos\Domicilio\CalleController@index')->name('listCalles');
+    Route::get('editCalle/{Id}', 'Catalogos\Domicilio\CalleController@editItem')->name('editCalle');
+    Route::put('updateCalle', 'Catalogos\Domicilio\CalleController@updateItem')->name('updateCalle');
+    Route::get('newCalle', 'Catalogos\Domicilio\CalleController@newItem')->name('newCalle');
+    Route::post('createCalle', 'Catalogos\Domicilio\CalleController@createItem')->name('createCalle');
+    Route::get('removeCalle/{id}', 'Catalogos\Domicilio\CalleController@removeItem')->name('removeCalle');
+
+    // Catálogo de Ciudades
+    Route::get('listCiudades/', 'Catalogos\Domicilio\CiudadController@index')->name('listCiudades');
+    Route::get('editCiudad/{Id}', 'Catalogos\Domicilio\CiudadController@editItem')->name('editCiudad');
+    Route::put('updateCiudad', 'Catalogos\Domicilio\CiudadController@updateItem')->name('updateCiudad');
+    Route::get('newCiudad', 'Catalogos\Domicilio\CiudadController@newItem')->name('newCiudad');
+    Route::post('createCiudad', 'Catalogos\Domicilio\CiudadController@createItem')->name('createCiudad');
+    Route::get('removeCiudad/{id}', 'Catalogos\Domicilio\CiudadController@removeItem')->name('removeCiudad');
+
+    // Catálogo de Localidades
+    Route::get('listLocalidades/', 'Catalogos\Domicilio\LocalidadController@index')->name('listLocalidades');
+    Route::get('editLocalidad/{Id}', 'Catalogos\Domicilio\LocalidadController@editItem')->name('editLocalidad');
+    Route::put('updateLocalidad', 'Catalogos\Domicilio\LocalidadController@updateItem')->name('updateLocalidad');
+    Route::get('newLocalidad', 'Catalogos\Domicilio\LocalidadController@newItem')->name('newLocalidad');
+    Route::post('createLocalidad', 'Catalogos\Domicilio\LocalidadController@createItem')->name('createLocalidad');
+    Route::get('removeLocalidad/{id}', 'Catalogos\Domicilio\LocalidadController@removeItem')->name('removeLocalidad');
+
+    // Catálogo de Municipios
+    Route::get('listMunicipios/', 'Catalogos\Domicilio\MunicipioController@index')->name('listMunicipios');
+    Route::get('editMunicipio/{Id}', 'Catalogos\Domicilio\MunicipioController@editItem')->name('editMunicipio');
+    Route::put('updateMunicipio', 'Catalogos\Domicilio\MunicipioController@updateItem')->name('updateMunicipio');
+    Route::get('newMunicipio', 'Catalogos\Domicilio\MunicipioController@newItem')->name('newMunicipio');
+    Route::post('createMunicipio', 'Catalogos\Domicilio\MunicipioController@createItem')->name('createMunicipio');
+    Route::get('removeMunicipio/{id}', 'Catalogos\Domicilio\MunicipioController@removeItem')->name('removeMunicipio');
+
+    // Catálogo de Estados
+    Route::get('listEstados/', 'Catalogos\Domicilio\EstadoController@index')->name('listEstados');
+    Route::get('editEstado/{Id}', 'Catalogos\Domicilio\EstadoController@editItem')->name('editEstado');
+    Route::put('updateEstado', 'Catalogos\Domicilio\EstadoController@updateItem')->name('updateEstado');
+    Route::get('newEstado', 'Catalogos\Domicilio\EstadoController@newItem')->name('newEstado');
+    Route::post('createEstado', 'Catalogos\Domicilio\EstadoController@createItem')->name('createEstado');
+    Route::get('removeEstado/{id}', 'Catalogos\Domicilio\EstadoController@removeItem')->name('removeEstado');
+
+    // Catálogo de Codigopostales
+    Route::get('listCodigopostales/', 'Catalogos\Domicilio\CodigopostalController@index')->name('listCodigopostales');
+    Route::get('editCodigopostal/{Id}', 'Catalogos\Domicilio\CodigopostalController@editItem')->name('editCodigopostal');
+    Route::put('updateCodigopostal', 'Catalogos\Domicilio\CodigopostalController@updateItem')->name('updateCodigopostal');
+    Route::get('newCodigopostal', 'Catalogos\Domicilio\CodigopostalController@newItem')->name('newCodigopostal');
+    Route::post('createCodigopostal', 'Catalogos\Domicilio\CodigopostalController@createItem')->name('createCodigopostal');
+    Route::get('removeCodigopostal/{id}', 'Catalogos\Domicilio\CodigopostalController@removeItem')->name('removeCodigopostal');
+
+    // Catálogo de Tipoasentamientos
+    Route::get('listTipoasentamientos/', 'Catalogos\Domicilio\TipoasentamientoController@index')->name('listTipoasentamientos');
+    Route::get('editTipoasentamiento/{Id}', 'Catalogos\Domicilio\TipoasentamientoController@editItem')->name('editTipoasentamiento');
+    Route::put('updateTipoasentamiento', 'Catalogos\Domicilio\TipoasentamientoController@updateItem')->name('updateTipoasentamiento');
+    Route::get('newTipoasentamiento', 'Catalogos\Domicilio\TipoasentamientoController@newItem')->name('newTipoasentamiento');
+    Route::post('createTipoasentamiento', 'Catalogos\Domicilio\TipoasentamientoController@createItem')->name('createTipoasentamiento');
+    Route::get('removeTipoasentamiento/{id}', 'Catalogos\Domicilio\TipoasentamientoController@removeItem')->name('removeTipoasentamiento');
+
+    // Catálogo de Tipocomunidades
+    Route::get('listTipocomunidades/', 'Catalogos\Domicilio\TipocomunidadController@index')->name('listTipocomunidades');
+    Route::get('editTipocomunidad/{Id}', 'Catalogos\Domicilio\TipocomunidadController@editItem')->name('editTipocomunidad');
+    Route::put('updateTipocomunidad', 'Catalogos\Domicilio\TipocomunidadController@updateItem')->name('updateTipocomunidad');
+    Route::get('newTipocomunidad', 'Catalogos\Domicilio\TipocomunidadController@newItem')->name('newTipocomunidad');
+    Route::post('createTipocomunidad', 'Catalogos\Domicilio\TipocomunidadController@createItem')->name('createTipocomunidad');
+    Route::get('removeTipocomunidad/{id}', 'Catalogos\Domicilio\TipocomunidadController@removeItem')->name('removeTipocomunidad');
+
+
+
+
+
+
+
+
 
 
     // ROLES

@@ -2,6 +2,7 @@
 
 namespace App\Models\Catalogos\Domicilios;
 
+use App\Filters\Catalogo\Domicilio\AsentamientoFilter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -16,6 +17,10 @@ class Asentamiento extends Model
     protected $fillable = [
         'id', 'asentamiento',
     ];
+
+    public function scopeFilterBy($query, $filters){
+        return (new AsentamientoFilter())->applyTo($query, $filters);
+    }
 
     public static function findOrImport($asentamiento){
         $obj = static::where('asentamiento', $asentamiento)->first();

@@ -2,6 +2,7 @@
 
 namespace App\Models\Catalogos\Domicilios;
 
+use App\Filters\Catalogo\Domicilio\CalleFilter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -16,6 +17,11 @@ class Calle extends Model
     protected $fillable = [
         'id', 'calle',
     ];
+
+    public function scopeFilterBy($query, $filters)
+    {
+        return (new CalleFilter())->applyTo($query, $filters);
+    }
 
     public static function findOrImport($calle){
         $obj = static::where('calle', $calle)->first();

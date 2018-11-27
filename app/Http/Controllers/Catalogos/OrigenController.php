@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Catalogos\Origen;
 use App\Http\Requests\OrigenRequest;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Auth;
 
@@ -66,7 +67,7 @@ class OrigenController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return $this->editItem($item->id);
+        return Redirect::to('editOrigen/'.$item->id);
     }
 
     protected function newItem()
@@ -87,7 +88,7 @@ class OrigenController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return $this->editItem($item->id);
+        return Redirect::to('editOrigen/'.$item->id);
     }
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //

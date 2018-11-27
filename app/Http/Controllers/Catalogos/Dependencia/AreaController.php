@@ -9,6 +9,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
 
 class AreaController extends Controller
@@ -75,7 +76,7 @@ class AreaController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return $this->editArea($item->id);
+        return Redirect::to('editArea/'.$item->id);
     }
 
     protected function newArea()
@@ -104,7 +105,7 @@ class AreaController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return $this->editArea($item->id);
+        return Redirect::to('editArea/'.$item->id);
     }
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //

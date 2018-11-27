@@ -6,6 +6,7 @@ use App\Http\Requests\StatuRequest;
 use App\Models\Catalogos\Dependencia;
 use App\Models\Catalogos\Estatu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -69,7 +70,7 @@ class EstatuController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return $this->editItem($item->id);
+        return Redirect::to('editEstatu/'.$item->id);
     }
 
     protected function newItem()
@@ -94,7 +95,7 @@ class EstatuController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return $this->editItem($item->id);
+        return Redirect::to('editEstatu/'.$item->id);
     }
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //

@@ -2,6 +2,7 @@
 
 namespace App\Models\Catalogos\Domicilios;
 
+use App\Filters\Catalogo\Domicilio\MunicipioFilter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -16,6 +17,10 @@ class Municipio extends Model
     protected $fillable = [
         'id', 'municipio',
     ];
+
+    public function scopeFilterBy($query, $filters){
+        return (new MunicipioFilter())->applyTo($query, $filters);
+    }
 
     public static function findOrImport($municipio){
         $obj = static::where('municipio', $municipio)->first();

@@ -1,8 +1,8 @@
 <?php
 
+use App\Models\Catalogos\Afiliacion;
 use App\Models\Catalogos\Area;
 use App\Models\Catalogos\Dependencia;
-use App\Models\Catalogos\Domicilios\Afiliacion;
 use App\Models\Catalogos\Domicilios\Asentamiento;
 use App\Models\Catalogos\Domicilios\Calle;
 use App\Models\Catalogos\Domicilios\Ciudad;
@@ -248,9 +248,11 @@ class CatalogosSeeder extends Seeder
 
         Municipio::findOrImport('centro');
 
-        Estado::findOrImport('tabasco');
+        Estado::findOrImport('TABASCO');
+        Estado::findOrImport('QUINTANA ROO');
+        Estado::findOrImport('YUCATAN');
 
-        Pais::findOrImport('méxico');
+        Pais::findOrImport('MÉXICO');
 
         Codigopostal::findOrImport('86000','86100');
 

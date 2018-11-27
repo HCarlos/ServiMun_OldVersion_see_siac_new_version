@@ -94,6 +94,86 @@
                         </a>
                     </li>
 
+                    <li>
+                        <a href="{{route('listAfiliaciones')}}">
+                            <i class="fas fa-money-check-alt"></i>
+                            <span class="badge badge-light float-right">{{\App\Models\Catalogos\Afiliacion::count()}}</span>
+                            <span>Afiliaciones</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{route('listAsentamientos')}}">
+                            <i class="fas fa-money-check-alt"></i>
+                            <span class="badge badge-light float-right">{{\App\Models\Catalogos\Domicilios\Asentamiento::count()}}</span>
+                            <span>Asentamientos</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{route('listCalles')}}">
+                            <i class="fas fa-money-check-alt"></i>
+                            <span class="badge badge-light float-right">{{\App\Models\Catalogos\Domicilios\Calle::count()}}</span>
+                            <span>Calles</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{route('listCiudades')}}">
+                            <i class="fas fa-money-check-alt"></i>
+                            <span class="badge badge-light float-right">{{\App\Models\Catalogos\Domicilios\Ciudad::count()}}</span>
+                            <span>Ciudad</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{route('listLocalidades')}}">
+                            <i class="fas fa-money-check-alt"></i>
+                            <span class="badge badge-light float-right">{{\App\Models\Catalogos\Domicilios\Localidad::count()}}</span>
+                            <span>Localidades</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{route('listMunicipios')}}">
+                            <i class="fas fa-money-check-alt"></i>
+                            <span class="badge badge-light float-right">{{\App\Models\Catalogos\Domicilios\Municipio::count()}}</span>
+                            <span>Municipios</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{route('listEstados')}}">
+                            <i class="fas fa-money-check-alt"></i>
+                            <span class="badge badge-light float-right">{{\App\Models\Catalogos\Domicilios\Estado::count()}}</span>
+                            <span>Estados</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{route('listCodigopostales')}}">
+                            <i class="fas fa-money-check-alt"></i>
+                            <span class="badge badge-light float-right">{{\App\Models\Catalogos\Domicilios\Codigopostal::count()}}</span>
+                            <span>Códigos Postales</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{route('listTipoasentamientos')}}">
+                            <i class="fas fa-money-check-alt"></i>
+                            <span class="badge badge-light float-right">{{\App\Models\Catalogos\Domicilios\Tipoasentamiento::count()}}</span>
+                            <span>Tipo Asentamientos</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{route('listTipocomunidades')}}">
+                            <i class="fas fa-money-check-alt"></i>
+                            <span class="badge badge-light float-right">{{\App\Models\Catalogos\Domicilios\Tipocomunidad::count()}}</span>
+                            <span>Tipo Comunidades</span>
+                        </a>
+                    </li>
+
                 </ul>
 
             </li>

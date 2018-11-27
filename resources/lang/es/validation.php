@@ -11,7 +11,7 @@ return [
     | as the size rules. Feel free to tweak each of these messages.
     |
     */
-
+    'uppercase'            => 'El campo (:attribute) se requiere valores en mayúscula.',
     'accepted'             => ':attribute debe ser aceptado.',
     'active_url'           => ':attribute no es una URL válida.',
     'after'                => ':attribute debe ser una fecha posterior a :date.',

@@ -24,6 +24,12 @@ class ServicioFilter extends QueryFilter
         $search = strtoupper($search);
         return $query->where(function ($query) use ($search) {
             $query->whereRaw("UPPER(servicio) like ?", "%{$search}%")
+                ->orWhereHas('medidas', function ($q) use ($search) {
+                    $q->whereRaw("UPPER(medida) like ?", "%{$search}%");
+                })
+                ->orWhereHas('subareas', function ($q) use ($search) {
+                    $q->whereRaw("UPPER(subarea) like ?", "%{$search}%");
+                })
                 ->orWhere('id', 'like', "%{$search}%");
         });
     }

@@ -2,6 +2,7 @@
 
 namespace App\Models\Catalogos\Domicilios;
 
+use App\Filters\Catalogo\Domicilio\TipoasentamientoFilter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -16,6 +17,10 @@ class Tipoasentamiento extends Model
     protected $fillable = [
         'id', 'tipoasentamiento',
     ];
+
+    public function scopeFilterBy($query, $filters){
+        return (new TipoasentamientoFilter())->applyTo($query, $filters);
+    }
 
     public static function findOrImport($tipoasentamiento){
         $obj = static::where('tipoasentamiento', $tipoasentamiento)->first();

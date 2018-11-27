@@ -8,6 +8,7 @@ use App\Models\Catalogos\Servicio;
 use App\Models\Catalogos\Subarea;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Auth;
 
@@ -71,7 +72,7 @@ class ServicioController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return $this->editItem($item->id);
+        return Redirect::to('editServicio/'.$item->id);
     }
 
     protected function newItem()
@@ -96,7 +97,7 @@ class ServicioController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return $this->editItem($item->id);
+        return Redirect::to('editServicio/'.$item->id);
     }
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Models\Catalogos\Prioridad;
+use App\Rules\Uppercase;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Classes\MessageAlertClass;
 use Illuminate\Database\QueryException;
@@ -26,7 +27,7 @@ class PrioridadRequest extends FormRequest
     public function rules()
     {
         return [
-            'prioridad' => ['required','min:2','unique:prioridades,prioridad,'.$this->id],
+            'prioridad' => ['required','min:2',new Uppercase,'unique:prioridades,prioridad,'.$this->id],
         ];
     }
 

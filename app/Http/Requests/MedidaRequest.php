@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Models\Catalogos\Medida;
+use App\Rules\Uppercase;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Classes\MessageAlertClass;
 use Illuminate\Database\QueryException;
@@ -26,7 +27,7 @@ class MedidaRequest extends FormRequest
     public function rules()
     {
         return [
-            'medida' => ['required','min:2','unique:medidas,medida,'.$this->id],
+            'medida' => ['required','min:2',new Uppercase,'unique:medidas,medida,'.$this->id],
         ];
     }
 

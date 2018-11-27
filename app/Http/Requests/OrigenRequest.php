@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Models\Catalogos\Origen;
+use App\Rules\Uppercase;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Classes\MessageAlertClass;
 use Illuminate\Database\QueryException;
@@ -26,7 +27,7 @@ class OrigenRequest extends FormRequest
     public function rules()
     {
         return [
-            'origen' => ['required','min:2','unique:origenes,origen,'.$this->id],
+            'origen' => ['required','min:2',new Uppercase,'unique:origenes,origen,'.$this->id],
         ];
     }
 

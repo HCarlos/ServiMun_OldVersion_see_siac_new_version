@@ -2,6 +2,7 @@
 
 namespace App\Models\Catalogos\Domicilios;
 
+use App\Filters\Catalogo\Domicilio\EstadoFilter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -16,6 +17,10 @@ class Estado extends Model
     protected $fillable = [
         'id', 'estado',
     ];
+
+    public function scopeFilterBy($query, $filters){
+        return (new EstadoFilter())->applyTo($query, $filters);
+    }
 
     public static function findOrImport($estado){
         $obj = static::where('estado', $estado)->first();

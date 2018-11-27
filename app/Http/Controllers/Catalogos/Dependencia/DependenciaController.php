@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
 
 class DependenciaController extends Controller
@@ -73,7 +74,7 @@ class DependenciaController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return $this->editDependencia($item->id);
+        return Redirect::to('editDependencia/'.$item->id);
     }
 
     protected function newDependencia()
@@ -98,7 +99,7 @@ class DependenciaController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return $this->editDependencia($item->id);
+        return Redirect::to('editDependencia/'.$item->id);
     }
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //

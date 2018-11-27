@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Dependencia;
 
+use App\Rules\Uppercase;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Models\Catalogos\Area;
 use App\Classes\MessageAlertClass;
@@ -25,7 +26,7 @@ class AreaRequest extends FormRequest
     public function rules()
     {
         return [
-            'area' => ['required','min:2','unique:areas,area,'.$this->id],
+            'area' => ['required','min:2',new Uppercase,'unique:areas,area,'.$this->id],
         ];
     }
 
