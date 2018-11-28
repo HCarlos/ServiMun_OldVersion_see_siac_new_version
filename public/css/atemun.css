@@ -488,3 +488,12 @@ ul.role-list-hrz li a {
 .primary-text-color    { color: #212121; }
 .secondary-text-color  { color: #757575; }
 .divider-color         { border-color: #BDBDBD; }
+
+
+#colonia, #comunidad, #calle, #asentamiento, #tipoasentamiento, #tipocomunidad, #localidad,
+#afiliacion, #area, #subarea, #dependencia, #medida, #origen, #prioridad, #servicio, #ubicacon,
+#ciudad, #estado, #municipio, #estatus, #codigo, #cp, #search
+{text-transform: uppercase;  background: lightgoldenrodyellow}
+
+
+

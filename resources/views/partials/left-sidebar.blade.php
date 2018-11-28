@@ -174,6 +174,23 @@
                         </a>
                     </li>
 
+                    <li>
+                        <a href="{{route('listComunidades')}}">
+                            <i class="fas fa-money-check-alt"></i>
+                            <span class="badge badge-light float-right">{{\App\Models\Catalogos\Domicilios\Comunidad::count()}}</span>
+                            <span>Comunidades</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{route('listColonias')}}">
+                            <i class="fas fa-money-check-alt"></i>
+                            <span class="badge badge-light float-right">{{\App\Models\Catalogos\Domicilios\Colonia::count()}}</span>
+                            <span>Colonias</span>
+                        </a>
+                    </li>
+
+
                 </ul>
 
             </li>

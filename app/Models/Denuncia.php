@@ -25,11 +25,11 @@ class Denuncia extends Model
     ];
 
     public function prioridad(){
-        return $this->hasOne(Prioridad::class,'prioridad_id');
+        return $this->hasOne(Prioridad::class,'id','prioridad_id');
     }
 
     public function origen(){
-        return $this->hasOne(Origen::class,'origen_id');
+        return $this->hasOne(Origen::class,'id','origen_id');
     }
 
     public function prioridades(){

@@ -1,112 +1,113 @@
 <?php
 
-namespace App\Http\Controllers\Catalogos\Dependencia;
+namespace App\Http\Controllers\Catalogos\Domicilio;
 
-use App\Http\Requests\Dependencia\DependenciaRequest;
-use App\Models\Catalogos\Dependencia;
-use App\User;
+use App\Http\Requests\Domicilio\ComunidadRequest;
+use App\Models\Catalogos\Domicilios\Comunidad;
+use App\Models\Catalogos\Domicilios\Tipocomunidad;
+use App\Traits\Catalogos\Domicilio\Comunidad\ComunidadTrait;
+use App\Traits\Common\CommonTrait;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
 
-class DependenciaController extends Controller
+class ComunidadController extends Controller
 {
+    use ComunidadTrait, CommonTrait;
 
-    protected $tableName = "dependencias";
+    protected $tableName = "comunidades";
 
 // ***************** MUESTRA EL LISTADO DE USUARIOS ++++++++++++++++++++ //
     protected function index(Request $request)
     {
         ini_set('max_execution_time', 300);
         $filters = $request->all(['search']);
-        $items = Dependencia::query()
+        $items = Comunidad::query()
             ->filterBy($filters)
             ->orderByDesc('id')
             ->paginate();
-//        dd($items);
         $items->appends($filters)->fragment('table');
         $user = Auth::User();
 
-//        dd($items);
-
-        return view('catalogos.catalogo.dependencias.dependencia.dependencia_list',
+        return view('catalogos.catalogo.domicilio.comunidad.comunidad_list',
             [
                 'items' => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
                 'user' => $user,
-                'searchInList' => 'listDependencias',
+                'searchInList' => 'listComunidades',
                 'newWindow' => true,
                 'tableName' => $this->tableName,
-                'showEdit' => 'editDependencia',
-//                'putEdit' => 'updateDependencia',
-                'newItem' => 'newDependencia',
-                'removeItem' => 'removeDependencia',
+                'showEdit' => 'editComunidad',
+//                'putEdit' => 'updateComunidad',
+                'newItem' => 'newComunidad',
+                'removeItem' => 'removeComunidad',
 //                'showProcess1' => 'showFileListUserExcel1A',
             ]
         );
     }
 
 // ***************** EDITA LOS DATOS  ++++++++++++++++++++ //
-    protected function editDependencia($Id)
+    protected function editItem($Id)
     {
-        $item = Dependencia::find($Id);
-        $Jefes = User::all()->sortBy(function($item) {
-            return $item->ap_paterno.' '.$item->ap_materno.' '.$item->nombre;
-        });
+        $item = Comunidad::find($Id);
+        $Delegados = $this->getUserFromRoles('DELEGADO');
+        $Tipocomunidades = Tipocomunidad::all(['id','tipocomunidad'])->sortBy('tipocomunidad');
 
-        return view('catalogos.catalogo.dependencias.dependencia.dependencia_edit',
+        return view('catalogos.catalogo.domicilio.comunidad.comunidad_edit',
             [
                 'user' => Auth::user(),
-                'jefes' => $Jefes,
+                'delegados' => $Delegados,
+                'tipocomunidades' => $Tipocomunidades,
                 'items' => $item,
-                'editItemTitle' => isset($item->dependencia) ? $item->dependencia : 'Nuevo',
-                'putEdit' => 'updateDependencia',
+                'editItemTitle' => isset($item->comunidad) ? $item->comunidad : 'Nuevo',
+                'putEdit' => 'updateComunidad',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
             ]
         );
     }
 
 // ***************** GUARDA LOS CAMBIOS ++++++++++++++++++++ //
-    protected function updateDependencia(DependenciaRequest $request)
+    protected function updateItem(ComunidadRequest $request)
     {
         $item = $request->manage();
-        if (!isset($item)) {
+        if (!isset($item->id)) {
             abort(404);
         }
-        return Redirect::to('editDependencia/'.$item->id);
+        return Redirect::to('editComunidad/'.$item->id);
     }
 
-    protected function newDependencia()
+    protected function newItem()
     {
-        $Jefes = User::all()->sortBy(function($item) {
-            return $item->ap_paterno.' '.$item->ap_materno.' '.$item->nombre;
-        });
-        return view('catalogos.catalogo.dependencias.dependencia.dependencia_new',
+        $Delegados = $this->getUserFromRoles('DELEGADO');
+        $Tipocomunidades = Tipocomunidad::all(['id','tipocomunidad'])->sortBy('tipocomunidad');
+        //dd($Delegados);
+        return view('catalogos.catalogo.domicilio.comunidad.comunidad_new',
             [
                 'editItemTitle' => 'Nuevo',
-                'jefes' => $Jefes,
-                'postNew' => 'createDependencia',
+                'delegados' => $Delegados,
+                'tipocomunidades' => $Tipocomunidades,
+                'postNew' => 'createComunidad',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
             ]
         );
     }
 
     // ***************** CREAR NUEVO ++++++++++++++++++++ //
-    protected function createDependencia(DependenciaRequest $request)
+    protected function createItem(ComunidadRequest $request)
     {
         $item = $request->manage();
-        if (!isset($item)) {
+        if (!isset($item->id)) {
             abort(404);
         }
-        return Redirect::to('editDependencia/'.$item->id);
+        return Redirect::to('editComunidad/'.$item->id);
     }
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //
-    protected function removeDependencia($id = 0)
+    protected function removeItem($id = 0)
     {
-        $item = Dependencia::withTrashed()->findOrFail($id);
+        $item = Comunidad::withTrashed()->findOrFail($id);
         if (isset($item)) {
             if (!$item->trashed()) {
                 $item->forceDelete();
@@ -118,5 +119,7 @@ class DependenciaController extends Controller
             return Response::json(['mensaje' => 'Se ha producido un error.', 'data' => 'Error', 'status' => '200'], 200);
         }
     }
+
+
 
 }

@@ -1,13 +1,6 @@
 
 $(document).ready(function() {
 
-    // var enforceModalFocusFn = $.fn.modal.Constructor.prototype.enforceFocus;
-    // $.fn.modal.Constructor.prototype.enforceFocus = function() {};
-    // $confModal.on('hidden', function() {
-    //     $.fn.modal.Constructor.prototype.enforceFocus = enforceModalFocusFn;
-    // });
-    // $confModal.modal({ backdrop : false });
-
     $.ajaxSetup({
         headers: {
             'X-CSRF-Token': $("meta[name='csrf-token']").attr("content")
@@ -207,11 +200,10 @@ $(document).ready(function() {
         });
     }
 
-    // if ( $('#descripcion_pedido') ) {
-    //     $('#descripcion_pedido').val( $('#paquete_id').find(':selected').text() );
-    //     $('#paquete_id').on('change',function(event){
-    //         $('#descripcion_pedido').val( $('#paquete_id').find(':selected').text() );
-    //     });
-    // }
+    $("#colonia, #comunidad, #calle, #asentamiento, #tipoasentamiento, #tipocomunidad, #localidad," +
+        "#afiliacion, #area, #subarea, #dependencia, #medida, #origen, #prioridad, #servicio, #ubicacon," +
+        "#ciudad, #estado, #municipio, #estatus, #codigo, #cp, #search").keyup(function(){
+        $(this).val($(this).val().toUpperCase());
+    });
 
 });

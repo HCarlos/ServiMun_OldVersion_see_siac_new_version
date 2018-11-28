@@ -213,7 +213,21 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('createTipocomunidad', 'Catalogos\Domicilio\TipocomunidadController@createItem')->name('createTipocomunidad');
     Route::get('removeTipocomunidad/{id}', 'Catalogos\Domicilio\TipocomunidadController@removeItem')->name('removeTipocomunidad');
 
+    // Catálogo de Comunidades
+    Route::get('listComunidades/', 'Catalogos\Domicilio\ComunidadController@index')->name('listComunidades');
+    Route::get('editComunidad/{Id}', 'Catalogos\Domicilio\ComunidadController@editItem')->name('editComunidad');
+    Route::put('updateComunidad', 'Catalogos\Domicilio\ComunidadController@updateItem')->name('updateComunidad');
+    Route::get('newComunidad', 'Catalogos\Domicilio\ComunidadController@newItem')->name('newComunidad');
+    Route::post('createComunidad', 'Catalogos\Domicilio\ComunidadController@createItem')->name('createComunidad');
+    Route::get('removeComunidad/{id}', 'Catalogos\Domicilio\ComunidadController@removeItem')->name('removeComunidad');
 
+    // Catálogo de Colonias
+    Route::get('listColonias/', 'Catalogos\Domicilio\ColoniaController@index')->name('listColonias');
+    Route::get('editColonia/{Id}', 'Catalogos\Domicilio\ColoniaController@editItem')->name('editColonia');
+    Route::put('updateColonia', 'Catalogos\Domicilio\ColoniaController@updateItem')->name('updateColonia');
+    Route::get('newColonia', 'Catalogos\Domicilio\ColoniaController@newItem')->name('newColonia');
+    Route::post('createColonia', 'Catalogos\Domicilio\ColoniaController@createItem')->name('createColonia');
+    Route::get('removeColonia/{id}', 'Catalogos\Domicilio\ColoniaController@removeItem')->name('removeColonia');
 
 
 

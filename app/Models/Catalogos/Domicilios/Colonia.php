@@ -2,6 +2,7 @@
 
 namespace App\Models\Catalogos\Domicilios;
 
+use App\Filters\Catalogo\Domicilio\ColoniaFilter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -14,19 +15,23 @@ class Colonia extends Model
     protected $table = 'colonias';
 
     protected $fillable = [
-        'id', 'colonia', 'cp','altitud','latitud','longitud','codigospostal_id','comunidad_id','tipocomunidad_id',
+        'id', 'colonia', 'cp','altitud','latitud','longitud','codigopostal_id','comunidad_id','tipocomunidad_id',
     ];
 
-    public function CodigoPostal() {
-        return $this->hasOne(Codigopostal::class,'codigospostal_id');
+    public function scopeFilterBy($query, $filters){
+        return (new ColoniaFilter())->applyTo($query,$filters);
     }
 
-    public function Comunidad() {
-        return $this->hasOne(Comunidad::class,'comunidad_id');
+    public function codigoPostal() {
+        return $this->hasOne(Codigopostal::class,'id','codigopostal_id');
     }
 
-    public function TipoComunidad() {
-        return $this->hasOne(Tipocomunidad::class,'tipocomunidad_id');
+    public function comunidad() {
+        return $this->hasOne(Comunidad::class,'id','comunidad_id');
+    }
+
+    public function tipoComunidad() {
+        return $this->hasOne(Tipocomunidad::class,'id','tipocomunidad_id');
     }
 
     public static function findOrImport($colonia,$cp,$altitud,$latitud,$longitud,$codigospostal_id,$comunidad_id,$tipocomunidad_id){
@@ -38,7 +43,7 @@ class Colonia extends Model
                 'altitud' => $altitud,
                 'latitud' => $latitud,
                 'longitud' => $longitud,
-                'codigospostal_id' => $codigospostal_id,
+                'codigopostal_id' => $codigospostal_id,
                 'comunidad_id' => $comunidad_id,
                 'tipocomunidad_id' => $tipocomunidad_id,
             ]);

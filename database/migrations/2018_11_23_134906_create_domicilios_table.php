@@ -18,63 +18,63 @@ class CreateDomiciliosTable extends Migration
 
         Schema::create($tableNames['afiliaciones'], function (Blueprint $table) {
             $table->increments('id');
-            $table->string('afiliacion',100)->default('')->nullable();
+            $table->string('afiliacion',100)->default('')->nullable()->unique();
             $table->softDeletes();
             $table->timestamps();
         });
 
         Schema::create($tableNames['calles'], function (Blueprint $table) {
             $table->increments('id');
-            $table->string('calle',150)->default('')->nullable();
+            $table->string('calle',150)->default('')->nullable()->unique();
             $table->softDeletes();
             $table->timestamps();
         });
 
         Schema::create($tableNames['ciudades'], function (Blueprint $table) {
             $table->increments('id');
-            $table->string('ciudad',150)->default('')->nullable();
+            $table->string('ciudad',150)->default('')->nullable()->unique();
             $table->softDeletes();
             $table->timestamps();
         });
 
         Schema::create($tableNames['estados'], function (Blueprint $table) {
             $table->increments('id');
-            $table->string('estado',50)->default('')->nullable();
+            $table->string('estado',50)->default('')->nullable()->unique();
             $table->softDeletes();
             $table->timestamps();
         });
 
         Schema::create($tableNames['localidades'], function (Blueprint $table) {
             $table->increments('id');
-            $table->string('localidad',250)->default('')->nullable();
+            $table->string('localidad',250)->default('')->nullable()->unique();
             $table->softDeletes();
             $table->timestamps();
         });
 
         Schema::create($tableNames['municipios'], function (Blueprint $table) {
             $table->increments('id');
-            $table->string('municipio',100)->default('')->nullable();
+            $table->string('municipio',100)->default('')->nullable()->unique();
             $table->softDeletes();
             $table->timestamps();
         });
 
         Schema::create($tableNames['paises'], function (Blueprint $table) {
             $table->increments('id');
-            $table->string('pais',50)->default('')->nullable();
+            $table->string('pais',50)->default('')->nullable()->unique();
             $table->softDeletes();
             $table->timestamps();
         });
 
         Schema::create($tableNames['tipocomunidades'], function (Blueprint $table) {
             $table->increments('id');
-            $table->string('tipocomunidad',250)->default('')->nullable();
+            $table->string('tipocomunidad',250)->default('')->nullable()->unique();
             $table->softDeletes();
             $table->timestamps();
         });
 
         Schema::create($tableNames['tipoasentamientos'], function (Blueprint $table) {
             $table->increments('id');
-            $table->string('tipoasentamiento',250)->default('')->nullable();
+            $table->string('tipoasentamiento',250)->default('')->nullable()->unique();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -85,26 +85,30 @@ class CreateDomiciliosTable extends Migration
             $table->string('cp',6)->default('')->nullable();
             $table->softDeletes();
             $table->timestamps();
+            $table->unique(['codigo', 'cp']);
         });
 
         Schema::create($tableNames['asentamientos'], function (Blueprint $table) {
             $table->increments('id');
-            $table->string('asentamiento',250)->default('')->nullable();
+            $table->string('asentamiento',250)->default('')->nullable()->unique();
             $table->softDeletes();
             $table->timestamps();
         });
 
         Schema::create($tableNames['comunidades'], function (Blueprint $table) use ($tableNames) {
             $table->increments('id');
-            $table->string('comunidad',250)->default('')->nullable();
-            $table->unsignedInteger('user_id')->default(0)->index();
+            $table->string('comunidad',250)->default('')->nullable()->unique();
+            $table->unsignedInteger('delegado_id')->default(0)->index();
             $table->unsignedInteger('tipocomunidad_id')->default(0)->index();
             $table->softDeletes();
             $table->timestamps();
-            $table->foreign('user_id')
+            $table->unique(['delegado_id', 'tipocomunidad_id']);
+
+            $table->foreign('delegado_id')
                 ->references('id')
                 ->on($tableNames['users'])
                 ->onDelete('cascade');
+
             $table->foreign('tipocomunidad_id')
                 ->references('id')
                 ->on($tableNames['tipocomunidades'])
@@ -114,17 +118,17 @@ class CreateDomiciliosTable extends Migration
 
         Schema::create($tableNames['colonias'], function (Blueprint $table) use ($tableNames){
             $table->increments('id');
-            $table->string('colonia',250)->default('')->nullable();
+            $table->string('colonia',250)->default('')->nullable()->unique();
             $table->string('cp',6)->default('')->nullable();
             $table->float('altitud',4,10)->default(0)->nullable();
             $table->float('latitud',4,10)->default(0)->nullable();
             $table->float('longitud',4,10)->default(0)->nullable();
-            $table->unsignedInteger('codigospostal_id')->default(0)->index();
+            $table->unsignedInteger('codigopostal_id')->default(0)->index();
             $table->unsignedInteger('comunidad_id')->default(0)->index();
             $table->unsignedInteger('tipocomunidad_id')->default(0)->index();
             $table->softDeletes();
             $table->timestamps();
-            $table->foreign('codigospostal_id')
+            $table->foreign('codigopostal_id')
                 ->references('id')
                 ->on($tableNames['codigospostales'])
                 ->onDelete('cascade');
