@@ -64,7 +64,7 @@ return [
             'denuncia_dependencia' => 'denuncia_dependencia',
             'denuncia_ubicacion'   => 'denuncia_ubicacion',
             'denuncia_servicio'    => 'denuncia_servicio',
-            'denuncia_ciudadano'   => 'denuncia_ciudadano',
+            'ciudadano_denuncia'   => 'ciudadano_denuncia',
             'denuncia_user'        => 'denuncia_user',
             'dependencia_estatu'   => 'dependencia_estatu',
         ],
@@ -86,6 +86,16 @@ return [
             'colonias'          => 'colonias',
 
             'sepomex'           => 'sepomex',
+
+            'calle_ubicacion'        => 'calle_ubicacion',
+            'colonia_ubicacion'      => 'colonia_ubicacion',
+            'localidad_ubicacion'    => 'localidad_ubicacion',
+            'ciudad_ubicacion'       => 'ciudad_ubicacion',
+            'municipio_ubicacion'    => 'municipio_ubicacion',
+            'estado_ubicacion'       => 'estado_ubicacion',
+            'codigopostal_ubicacion' => 'codigopostal_ubicacion',
+
+            'ubicaciones'            => 'ubicaciones',
 
         ],
     ],

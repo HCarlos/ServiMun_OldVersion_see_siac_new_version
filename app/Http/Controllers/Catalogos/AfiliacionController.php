@@ -28,6 +28,8 @@ class AfiliacionController extends Controller
         $items->appends($filters)->fragment('table');
         $user = Auth::User();
 
+
+
         return view('catalogos.catalogo.afiliacion.afiliacion_list',
             [
                 'items' => $items,
