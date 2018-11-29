@@ -21,11 +21,6 @@ class ColoniaRequest extends FormRequest
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {
         return [
@@ -33,8 +28,6 @@ class ColoniaRequest extends FormRequest
             'latitud'         => ['present'],
             'longitud'        => ['present'],
             'altitud'         => ['present'],
-//            'latitud'         => ['required','regex:/^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?)$/'],
-//            'longitud'        => ['required','regex:/^[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$/'],
             'codigopostal_id' => ['required'],
             'comunidad_id'    => ['required'],
         ];
@@ -67,7 +60,6 @@ class ColoniaRequest extends FormRequest
             }
         }catch (QueryException $e){
             $Msg = new MessageAlertClass();
-//            dd($Msg);
             return $Msg->Message($e);
         }
         return $item;

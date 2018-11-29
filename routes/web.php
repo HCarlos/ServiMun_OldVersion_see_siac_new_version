@@ -229,6 +229,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('createColonia', 'Catalogos\Domicilio\ColoniaController@createItem')->name('createColonia');
     Route::get('removeColonia/{id}', 'Catalogos\Domicilio\ColoniaController@removeItem')->name('removeColonia');
 
+    // Catálogo de Ubicaciones
+    Route::get('listUbicaciones/', 'Catalogos\Domicilio\UbicacionController@index')->name('listUbicaciones');
+    Route::get('editUbicacion/{Id}', 'Catalogos\Domicilio\UbicacionController@editItem')->name('editUbicacion');
+    Route::put('updateUbicacion', 'Catalogos\Domicilio\UbicacionController@updateItem')->name('updateUbicacion');
+    Route::get('newUbicacion', 'Catalogos\Domicilio\UbicacionController@newItem')->name('newUbicacion');
+    Route::post('createUbicacion', 'Catalogos\Domicilio\UbicacionController@createItem')->name('createUbicacion');
+    Route::get('removeUbicacion/{id}', 'Catalogos\Domicilio\UbicacionController@removeItem')->name('removeUbicacion');
 
 
 

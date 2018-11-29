@@ -2,6 +2,7 @@
 
 namespace App\Models\Catalogos\Domicilios;
 
+use App\Filters\Catalogo\Domicilio\UbicacionFilter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -14,9 +15,20 @@ class Ubicacion extends Model
     protected $table = 'ubicaciones';
 
     protected $fillable = [
-        'id', 'calle','num_ext','num_int','colonia', 'localidad','municipio','estado','pais', 'cp','latitud','longitud',
+        'id', 'calle','num_ext','num_int','colonia', 'localidad','ciudad','municipio','estado','pais', 'cp',
+        'latitud','longitud','searchtext',
         'calle_id', 'colonia_id','localidad_id','ciudad_id', 'municipio_id','estado_id', 'codigopostal_id',
     ];
+
+    public function scopeFilterBy($query,$filerts){
+        return (new UbicacionFilter())->applyTo($query, $filerts);
+    }
+
+    public function scopeSearch($query, $search){
+        if (!$search || $search == "" || $search == null) return $query;
+        return $query->whereRaw("searchtext @@ to_tsquery('spanish', ?)", [$search])
+            ->orderByRaw("ts_rank(searchtext, to_tsquery('spanish', ?)) DESC", [$search]);
+    }
 
     public function calle() {
         return $this->hasOne(Calle::class,'id','calle_id');
@@ -65,14 +77,6 @@ class Ubicacion extends Model
     }
     public function codigospostales(){
         return $this->belongsToMany(Codigopostal::class,'codigopostal_ubicacion','ubicacion_id','codigopostal_id');
-    }
-
-    public function scopeSearch($query, $search){
-        if (!$search) {
-            return $query;
-        }
-        return $query->whereRaw("searchtext @@ to_tsquery('spanish', ?)", [$search])
-            ->orderByRaw("ts_rank(searchtext, to_tsquery('spanish', ?)) DESC", [$search]);
     }
 
 }

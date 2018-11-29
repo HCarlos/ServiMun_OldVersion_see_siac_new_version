@@ -190,6 +190,13 @@
                         </a>
                     </li>
 
+                    <li>
+                        <a href="{{route('listUbicaciones')}}">
+                            <i class="fas fa-money-check-alt"></i>
+                            <span class="badge badge-light float-right">{{\App\Models\Catalogos\Domicilios\Ubicacion::count()}}</span>
+                            <span>Ubicaciones</span>
+                        </a>
+                    </li>
 
                 </ul>
 

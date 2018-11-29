@@ -12,7 +12,6 @@ $(document).ready(function() {
         var nCols = $(".dataTable").find("tbody > tr:first td").length;
         var aCol = [];
 
-        for (i = 0; i < nCols - 1; i++) {aCol[i] = {};}
         aCol[nCols - 1] = {"sorting": false};
         if (aCol.length > 0 ){
             $(".dataTable").DataTable({
@@ -202,7 +201,7 @@ $(document).ready(function() {
 
     $("#colonia, #comunidad, #calle, #asentamiento, #tipoasentamiento, #tipocomunidad, #localidad," +
         "#afiliacion, #area, #subarea, #dependencia, #medida, #origen, #prioridad, #servicio, #ubicacon," +
-        "#ciudad, #estado, #municipio, #estatus, #codigo, #cp, #search").keyup(function(){
+        "#ciudad, #estado, #municipio, #estatus, #codigo, #cp, #search, #num_ext, #num_int").keyup(function(){
         $(this).val($(this).val().toUpperCase());
     });
 
