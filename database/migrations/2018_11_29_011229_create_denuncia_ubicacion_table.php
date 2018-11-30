@@ -25,8 +25,8 @@ class CreateDenunciaUbicacionTable extends Migration
             $table->string('colonia',150)->default('')->nullable();
             $table->string('localidad',150)->default('')->nullable();
             $table->string('ciudad',100)->default('')->nullable();
-            $table->string('municipio',25)->default('')->nullable();
-            $table->string('estado',25)->default('TABASCO')->nullable();
+            $table->string('municipio',50)->default('')->nullable();
+            $table->string('estado',50)->default('TABASCO')->nullable();
             $table->string('pais',25)->default('MÉXICO')->nullable();
             $table->string('cp',10)->default('')->nullable();
             $table->float('latitud',4,10)->default(0)->nullable();

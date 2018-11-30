@@ -57,8 +57,8 @@ class CreateUsersTable extends Migration
             $table->string('num_int',100)->default('')->nullable();
             $table->string('colonia',150)->default('')->nullable();
             $table->string('localidad',150)->default('')->nullable();
-            $table->string('municipio',25)->default('')->nullable();
-            $table->string('estado',25)->default('TABASCO')->nullable();
+            $table->string('municipio',50)->default('')->nullable();
+            $table->string('estado',50)->default('TABASCO')->nullable();
             $table->string('pais',25)->default('MÉXICO')->nullable();
             $table->string('cp',10)->default('')->nullable();
             $table->unsignedInteger('user_id');

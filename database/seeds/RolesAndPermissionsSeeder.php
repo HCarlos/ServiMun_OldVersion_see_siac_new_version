@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Funciones\FuncionesController;
 use App\Models\Catalogos\Afiliacion;
+use App\Models\Catalogos\Domicilios\Codigopostal;
+use App\Models\Catalogos\Domicilios\Comunidad;
 use App\User;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
@@ -102,16 +104,6 @@ class RolesAndPermissionsSeeder extends Seeder
         Role::create(['name'=>'ENLACE','description'=>'Enlace','guard_name'=>'web'])->permissions()->attach($P7);
         Role::create(['name'=>'CIUDADANO','description'=>'Ciudadano','guard_name'=>'web'])->permissions()->attach($P7);
         Role::create(['name'=>'DELEGADO','description'=>'Delegado','guard_name'=>'web'])->permissions()->attach($P7);
-
-
-        factory(User::class, 50)->create()->each(function ($user) use ($P7){
-            $user->roles()->attach(12);
-            $user->permissions()->attach($P7);
-            $user->user_adress()->create();
-            $user->user_data_extend()->create();
-        });
-
-        factory(Afiliacion::class, 10)->create();
 
     }
 

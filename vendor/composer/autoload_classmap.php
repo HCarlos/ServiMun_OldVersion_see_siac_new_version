@@ -6,7 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'App\\Catalogos\\Domicilio\\Ubicacion' => $baseDir . '/app/Catalogos/Domicilio/Ubicacion.php',
     'App\\Classes\\FiltersRules' => $baseDir . '/app/Classes/FiltersRules.php',
     'App\\Classes\\MessageAlertClass' => $baseDir . '/app/Classes/MessageAlertClass.php',
     'App\\Classes\\ValidatorPassword' => $baseDir . '/app/Classes/ValidatorPassword.php',
@@ -145,6 +144,7 @@ return array(
     'App\\Providers\\RouteServiceProvider' => $baseDir . '/app/Providers/RouteServiceProvider.php',
     'App\\Providers\\ValidatorServiceProvider' => $baseDir . '/app/Providers/ValidatorServiceProvider.php',
     'App\\Role' => $baseDir . '/app/Role.php',
+    'App\\Rules\\UbicacionUnica' => $baseDir . '/app/Rules/UbicacionUnica.php',
     'App\\Rules\\Uppercase' => $baseDir . '/app/Rules/Uppercase.php',
     'App\\Traits\\Catalogos\\Domicilio\\Comunidad\\ComunidadTrait' => $baseDir . '/app/Traits/Catalogos/Domicilio/Comunidad/ComunidadTrait.php',
     'App\\Traits\\Common\\CommonTrait' => $baseDir . '/app/Traits/Common/CommonTrait.php',
@@ -1044,6 +1044,7 @@ return array(
     'Egulias\\EmailValidator\\Warning\\QuotedString' => $vendorDir . '/egulias/email-validator/EmailValidator/Warning/QuotedString.php',
     'Egulias\\EmailValidator\\Warning\\TLD' => $vendorDir . '/egulias/email-validator/EmailValidator/Warning/TLD.php',
     'Egulias\\EmailValidator\\Warning\\Warning' => $vendorDir . '/egulias/email-validator/EmailValidator/Warning/Warning.php',
+    'EjemplosSeeder' => $baseDir . '/database/seeds/EjemplosSeeder.php',
     'FPDF' => $vendorDir . '/setasign/fpdf/fpdf.php',
     'Faker\\Calculator\\Iban' => $vendorDir . '/fzaninotto/faker/src/Faker/Calculator/Iban.php',
     'Faker\\Calculator\\Inn' => $vendorDir . '/fzaninotto/faker/src/Faker/Calculator/Inn.php',

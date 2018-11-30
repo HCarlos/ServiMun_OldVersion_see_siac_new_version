@@ -22,18 +22,11 @@
             <li class="side-nav-item">
                 <a href="javascript: void(0);" class="side-nav-link">
                     <i class="dripicons-browser"></i>
-                    <span> Catálogos </span>
+                    <span> Estructura </span>
                     <span class="menu-arrow"></span>
                 </a>
 
                 <ul class="side-nav-second-level" aria-expanded="false">
-                    <li>
-                        <a href="{{route('listCategorias')}}">
-                            <i class="fas fa-user-tag"></i>
-                            <span class="badge badge-light float-right">{{\App\Models\Users\Categoria::count()}}</span>
-                            <span>Categorias Usuario</span>
-                        </a>
-                    </li>
                     <li>
                         <a href="{{route('listDependencias')}}">
                             <i class="mdi mdi-account-multiple-outline"></i>
@@ -103,12 +96,32 @@
                     </li>
 
                     <li>
+                        <a href="{{route('listTipoasentamientos')}}">
+                            <i class="fas fa-money-check-alt"></i>
+                            <span class="badge badge-light float-right">{{\App\Models\Catalogos\Domicilios\Tipoasentamiento::count()}}</span>
+                            <span>Tipo Asentamientos</span>
+                        </a>
+                    </li>
+
+                    <li>
                         <a href="{{route('listAsentamientos')}}">
                             <i class="fas fa-money-check-alt"></i>
                             <span class="badge badge-light float-right">{{\App\Models\Catalogos\Domicilios\Asentamiento::count()}}</span>
                             <span>Asentamientos</span>
                         </a>
                     </li>
+
+
+                </ul>
+
+            </li>
+            <li class="side-nav-item">
+                <a href="javascript: void(0);" class="side-nav-link">
+                    <i class="fa fa-folder"></i>
+                    <span> Domicilios </span>
+                    <span class="menu-arrow"></span>
+                </a>
+                <ul class="side-nav-second-level" aria-expanded="false">
 
                     <li>
                         <a href="{{route('listCalles')}}">
@@ -159,14 +172,6 @@
                     </li>
 
                     <li>
-                        <a href="{{route('listTipoasentamientos')}}">
-                            <i class="fas fa-money-check-alt"></i>
-                            <span class="badge badge-light float-right">{{\App\Models\Catalogos\Domicilios\Tipoasentamiento::count()}}</span>
-                            <span>Tipo Asentamientos</span>
-                        </a>
-                    </li>
-
-                    <li>
                         <a href="{{route('listTipocomunidades')}}">
                             <i class="fas fa-money-check-alt"></i>
                             <span class="badge badge-light float-right">{{\App\Models\Catalogos\Domicilios\Tipocomunidad::count()}}</span>
@@ -199,9 +204,7 @@
                     </li>
 
                 </ul>
-
             </li>
-
             <li class="side-nav-item">
                 <a href="javascript: void(0);" class="side-nav-link">
                     <i class="fas fa-cog"></i>
@@ -210,6 +213,14 @@
                 </a>
 
                 <ul class="side-nav-second-level" aria-expanded="false">
+                    <li>
+                        <a href="{{route('listCategorias')}}">
+                            <i class="fas fa-user-tag"></i>
+                            <span class="badge badge-light float-right">{{\App\Models\Users\Categoria::count()}}</span>
+                            <span>Categorias Usuario</span>
+                        </a>
+                    </li>
+
                     <li>
                         <a href="{{route('listUsers')}}">
                             <i class="fas fa-users"></i>

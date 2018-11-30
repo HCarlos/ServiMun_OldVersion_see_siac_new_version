@@ -8,11 +8,13 @@ use App\Models\Catalogos\Domicilios\Colonia;
 use App\Models\Catalogos\Domicilios\Estado;
 use App\Models\Catalogos\Domicilios\Localidad;
 use App\Models\Catalogos\Domicilios\Municipio;
+use App\Rules\UbicacionUnica;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Models\Catalogos\Domicilios\Codigopostal;
 use App\Models\Catalogos\Domicilios\Ubicacion;
 use App\Classes\MessageAlertClass;
 use Illuminate\Database\QueryException;
+use Illuminate\Validation\Rule;
 
 class UbicacionRequest extends FormRequest
 {
@@ -40,8 +42,26 @@ class UbicacionRequest extends FormRequest
             'codigopostal_id' => ['required'],
             'latitud'         => ['present'],
             'longitud'        => ['present'],
-        ];
+//            'longitud'        => [new UbicacionUnica($this)],
+            'longitud'              => [
+                                    Rule::unique('ubicaciones')
+                                        ->where('calle_id', $this->calle_id)
+                                        ->where('colonia_id', $this->colonia_id)
+                                        ->where('localidad_id', $this->localidad_id)
+                                        ->where('ciudad_id', $this->ciudad_id)
+                                        ->where('municipio_id', $this->municipio_id)
+                                        ->where('estado_id', $this->estado_id),
+                                 ]
+
+            ];
+
     }
+
+    public function message()
+    {
+        return trans('validation.longitud');
+    }
+
 
     public function manage()
     {

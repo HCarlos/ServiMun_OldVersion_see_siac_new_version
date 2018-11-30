@@ -594,7 +594,6 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
     );
 
     public static $classMap = array (
-        'App\\Catalogos\\Domicilio\\Ubicacion' => __DIR__ . '/../..' . '/app/Catalogos/Domicilio/Ubicacion.php',
         'App\\Classes\\FiltersRules' => __DIR__ . '/../..' . '/app/Classes/FiltersRules.php',
         'App\\Classes\\MessageAlertClass' => __DIR__ . '/../..' . '/app/Classes/MessageAlertClass.php',
         'App\\Classes\\ValidatorPassword' => __DIR__ . '/../..' . '/app/Classes/ValidatorPassword.php',
@@ -733,6 +732,7 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\Providers\\ValidatorServiceProvider' => __DIR__ . '/../..' . '/app/Providers/ValidatorServiceProvider.php',
         'App\\Role' => __DIR__ . '/../..' . '/app/Role.php',
+        'App\\Rules\\UbicacionUnica' => __DIR__ . '/../..' . '/app/Rules/UbicacionUnica.php',
         'App\\Rules\\Uppercase' => __DIR__ . '/../..' . '/app/Rules/Uppercase.php',
         'App\\Traits\\Catalogos\\Domicilio\\Comunidad\\ComunidadTrait' => __DIR__ . '/../..' . '/app/Traits/Catalogos/Domicilio/Comunidad/ComunidadTrait.php',
         'App\\Traits\\Common\\CommonTrait' => __DIR__ . '/../..' . '/app/Traits/Common/CommonTrait.php',
@@ -1632,6 +1632,7 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         'Egulias\\EmailValidator\\Warning\\QuotedString' => __DIR__ . '/..' . '/egulias/email-validator/EmailValidator/Warning/QuotedString.php',
         'Egulias\\EmailValidator\\Warning\\TLD' => __DIR__ . '/..' . '/egulias/email-validator/EmailValidator/Warning/TLD.php',
         'Egulias\\EmailValidator\\Warning\\Warning' => __DIR__ . '/..' . '/egulias/email-validator/EmailValidator/Warning/Warning.php',
+        'EjemplosSeeder' => __DIR__ . '/../..' . '/database/seeds/EjemplosSeeder.php',
         'FPDF' => __DIR__ . '/..' . '/setasign/fpdf/fpdf.php',
         'Faker\\Calculator\\Iban' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Calculator/Iban.php',
         'Faker\\Calculator\\Inn' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Calculator/Inn.php',

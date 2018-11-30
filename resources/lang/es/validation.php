@@ -11,6 +11,7 @@ return [
     | as the size rules. Feel free to tweak each of these messages.
     |
     */
+    'longitud'             => 'El campo :attribute ya existe ó esta Ubicación ya fue dada de alta.',
     'uppercase'            => 'El campo :attribute requiere valores en mayúscula.',
     'accepted'             => ':attribute debe ser aceptado.',
     'active_url'           => ':attribute no es una URL válida.',
@@ -212,5 +213,8 @@ return [
         'servicio'              => 'Servicio',
         'jefe'                  => 'Jefe',
         'feje_id'               => 'Jefe',
+        'altitud'               => 'Altitud',
+        'latitud'               => 'Latitud',
+        'longitud'              => 'Longitud',
     ],
 ];
