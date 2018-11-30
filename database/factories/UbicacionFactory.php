@@ -28,7 +28,7 @@ $factory->define(Ubicacion::class, function (Faker $faker) {
     $CPs         = Codigopostal::find($IdCPs);
     return [
         'calle' => strtoupper($Calle->calle),
-        'num_ext' => strtoupper($faker->sentence),
+        'num_ext' => str_random(10),
         'colonia' => strtoupper($Colonia->colonia),
         'localidad' => strtoupper($Localidad->localidad),
         'ciudad' => strtoupper($Ciudad->ciudad),

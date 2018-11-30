@@ -31,13 +31,13 @@ class CreateDenunciaUbicacionTable extends Migration
             $table->string('cp',10)->default('')->nullable();
             $table->float('latitud',4,10)->default(0)->nullable();
             $table->float('longitud',4,10)->default(0)->nullable();
-            $table->unsignedInteger('calle_id')->default(0)->nullable();
-            $table->unsignedInteger('colonia_id')->default(0)->nullable();
-            $table->unsignedInteger('localidad_id')->default(0)->nullable();
-            $table->unsignedInteger('ciudad_id')->default(0)->nullable();
-            $table->unsignedInteger('municipio_id')->default(0)->nullable();
-            $table->unsignedInteger('estado_id')->default(0)->nullable();
-            $table->unsignedInteger('codigopostal_id')->default(0)->nullable();
+            $table->unsignedInteger('calle_id')->default(0)->nullable()->index();
+            $table->unsignedInteger('colonia_id')->default(0)->nullable()->index();
+            $table->unsignedInteger('localidad_id')->default(0)->nullable()->index();
+            $table->unsignedInteger('ciudad_id')->default(0)->nullable()->index();
+            $table->unsignedInteger('municipio_id')->default(0)->nullable()->index();
+            $table->unsignedInteger('estado_id')->default(0)->nullable()->index();
+            $table->unsignedInteger('codigopostal_id')->default(0)->nullable()->index();
             $table->unique(['calle_id', 'colonia_id','localidad_id','ciudad_id', 'municipio_id','estado_id', 'codigopostal_id']);
             $table->softDeletes();
             $table->timestamps();
@@ -239,15 +239,28 @@ class CreateDenunciaUbicacionTable extends Migration
             $table->date('fecha_oficio_dependencia')->nullable();
             $table->date('fecha_limite')->nullable();
             $table->date('fecha_ejecucion')->nullable();
+            $table->string('calle',250)->default('')->nullable();
+            $table->string('num_ext',100)->default('')->nullable();
+            $table->string('num_int',100)->default('')->nullable();
+            $table->string('colonia',150)->default('')->nullable();
+            $table->string('localidad',150)->default('')->nullable();
+            $table->string('ciudad',100)->default('')->nullable();
+            $table->string('municipio',50)->default('')->nullable();
+            $table->string('estado',50)->default('TABASCO')->nullable();
+            $table->string('pais',25)->default('MÉXICO')->nullable();
+            $table->string('cp',10)->default('')->nullable();
+            $table->float('latitud',4,10)->default(0)->nullable();
+            $table->float('longitud',4,10)->default(0)->nullable();
             $table->unsignedSmallInteger('status_denuncia')->default(1)->nullable();
-            $table->unsignedInteger('prioridad_id')->default(0);
-            $table->unsignedInteger('origen_id')->default(0);
-            $table->unsignedInteger('dependecia_id')->default(0);
-            $table->unsignedInteger('ubicacion_id')->default(0);
-            $table->unsignedInteger('servicio_id')->default(0);
-            $table->unsignedInteger('ciudadano_id')->default(0);
-            $table->unsignedInteger('user_id')->default(0);
+            $table->unsignedInteger('prioridad_id')->default(0)->nullable()->unique();
+            $table->unsignedInteger('origen_id')->default(0)->nullable()->unique();
+            $table->unsignedInteger('dependecia_id')->default(0)->nullable()->unique();
+            $table->unsignedInteger('ubicacion_id')->default(0)->nullable()->unique();
+            $table->unsignedInteger('servicio_id')->default(0)->nullable()->unique();
+            $table->unsignedInteger('ciudadano_id')->default(0)->nullable()->unique();
             $table->unsignedSmallInteger('empresa_id')->default(0)->nullable()->index();
+            $table->unsignedInteger('creadopor_id')->default(0)->nullable()->unique();
+            $table->unsignedInteger('modificadopor_id')->default(0)->nullable()->unique();
             $table->string('ip',150)->default('')->nullable();
             $table->string('host',150)->default('')->nullable();
             $table->softDeletes();
@@ -283,7 +296,12 @@ class CreateDenunciaUbicacionTable extends Migration
                 ->on($tableNamesCatalogos['users'])
                 ->onDelete('cascade');
 
-            $table->foreign('user_id')
+            $table->foreign('creadopor_id')
+                ->references('id')
+                ->on($tableNamesCatalogos['users'])
+                ->onDelete('cascade');
+
+            $table->foreign('modificadopor_id')
                 ->references('id')
                 ->on($tableNamesCatalogos['users'])
                 ->onDelete('cascade');
@@ -412,24 +430,47 @@ class CreateDenunciaUbicacionTable extends Migration
 
         });
 
-        Schema::create($tableNamesCatalogos['denuncia_user'], function (Blueprint $table) use ($tableNamesCatalogos){
+        Schema::create($tableNamesCatalogos['creadopor_denuncia'], function (Blueprint $table) use ($tableNamesCatalogos){
             $table->increments('id');
             $table->unsignedInteger('denuncia_id')->default(0)->index();
-            $table->unsignedInteger('user_id')->default(0)->index();
+            $table->unsignedInteger('creadopor_id')->default(0)->index();
             $table->softDeletes();
             $table->timestamps();
-            $table->unique(['denuncia_id', 'user_id']);
 
             $table->foreign('denuncia_id')
                 ->references('id')
                 ->on($tableNamesCatalogos['denuncias'])
                 ->onDelete('cascade');
 
-            $table->foreign('user_id')
+            $table->foreign('creadopor_id')
                 ->references('id')
                 ->on($tableNamesCatalogos['users'])
                 ->onDelete('cascade');
+        });
 
+        Schema::create($tableNamesCatalogos['denuncia_modificadopor'], function (Blueprint $table) use ($tableNamesCatalogos){
+            $table->increments('id');
+            $table->unsignedInteger('denuncia_id')->default(0)->index();
+            $table->unsignedInteger('modificadopor_id')->default(0)->index();
+            $table->text('descripcion')->default("")->nullable();
+            $table->string('referencia',250)->default("")->nullable();
+            $table->string('oficio_envio',50)->default("")->nullable();
+            $table->date('fecha_oficio_dependencia')->nullable();
+            $table->date('fecha_limite')->nullable();
+            $table->date('fecha_ejecucion')->nullable();
+            $table->unsignedSmallInteger('status_denuncia')->default(1)->nullable();
+            $table->softDeletes();
+            $table->timestamps();
+
+            $table->foreign('denuncia_id')
+                ->references('id')
+                ->on($tableNamesCatalogos['denuncias'])
+                ->onDelete('cascade');
+
+            $table->foreign('modificadopor_id')
+                ->references('id')
+                ->on($tableNamesCatalogos['users'])
+                ->onDelete('cascade');
         });
 
         Schema::create($tableNamesCatalogos['dependencia_estatu'], function (Blueprint $table) use ($tableNamesCatalogos){
@@ -474,6 +515,11 @@ class CreateDenunciaUbicacionTable extends Migration
                 ->onDelete('cascade');
         });
 
+        DB::statement("ALTER DATABASE dbatemun set default_text_search_config = 'spanish'");
+        DB::statement("ALTER TABLE denuncias ADD COLUMN searchtextdenuncia TSVECTOR");
+        DB::statement("UPDATE denuncias SET searchtextdenuncia = to_tsvector('spanish', coalesce(trim(descripcion),'') || ' ' || coalesce(trim(referencia),'') || ' ' || coalesce(trim(calle),'') || ' ' || coalesce(trim(colonia),'') || ' ' || coalesce(trim(localidad),'') || ' ' || coalesce(trim(ciudad),'') || ' ' || coalesce(trim(municipio),'') || ' ' || coalesce(trim(estado),'') )");
+        DB::statement("CREATE INDEX searchtextdenuncia_gin ON denuncias USING GIN(searchtextdenuncia)");
+        DB::statement("CREATE TRIGGER ts_searchtext BEFORE INSERT OR UPDATE ON denuncias FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger('searchtextdenuncia', 'pg_catalog.spanish', 'descripcion', 'referencia', 'calle', 'colonia', 'localidad', 'ciudad', 'municipio', 'estado')");
 
 
     }
@@ -497,6 +543,15 @@ class CreateDenunciaUbicacionTable extends Migration
         Schema::dropIfExists($tableNamesCatalogos['denuncia_ubicacion']);
 
         Schema::dropIfExists($tableNamesCatalogos['respuestas']);
+
+        Schema::dropIfExists($tableNamesCatalogos['creadopor_denuncia']);
+        Schema::dropIfExists($tableNamesCatalogos['denuncia_modificadopor']);
+
+        DB::statement("DROP TRIGGER IF EXISTS tsvector_update_trigger ON denuncias");
+        DB::statement("DROP INDEX IF EXISTS searchtextdenuncia_gin");
+        DB::statement("DROP TRIGGER IF EXISTS ts_searchtext ON denuncias");
+        DB::statement("ALTER TABLE denuncias DROP COLUMN IF EXISTS searchtextdenuncia");
+
         Schema::dropIfExists($tableNamesCatalogos['denuncias']);
 
         Schema::dropIfExists($tableNamesDomicilios['calle_ubicacion']);

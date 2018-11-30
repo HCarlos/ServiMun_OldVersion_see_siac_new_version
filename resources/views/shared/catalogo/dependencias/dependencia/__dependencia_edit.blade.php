@@ -33,6 +33,22 @@
     </div>
 </div>
 
+<div class="form-group row mb-3">
+    <label for = "dependencia_id" class="col-md-3 col-form-label">Dependencias</label>
+    <div class="col-md-9">
+        <ul class="list-group">
+            @foreach($items->estatus as $t)
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ $t->estatus}}
+                    {{--@if($items->hasEstatus('XXXz|RECIBIDO'))--}}
+                        {{--Ok!--}}
+                    {{--@endif--}}
+                </li>
+            @endforeach
+        </ul>
+    </div>
+</div>
+
 <input type="hidden" name="id" value="{{$items->id}}" >
 
 <hr>

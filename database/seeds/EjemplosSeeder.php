@@ -16,11 +16,7 @@ use Illuminate\Database\Seeder;
 
 class EjemplosSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
+
     public function run()
     {
         factory(User::class, 150)->create()->each(function ($user) {
@@ -60,7 +56,17 @@ class EjemplosSeeder extends Seeder
         factory(Codigopostal::class, 50)->create();
         factory(Comunidad::class, 50)->create();
         factory(Colonia::class,100)->create();
-        factory(Ubicacion::class,250)->create();
+        factory(Ubicacion::class,250)->create()->each(function ($Item){
+            $Item->calles()->attach($Item->calle_id);
+            $Item->colonias()->attach($Item->colonia_id);
+            $Item->localidades()->attach($Item->localidad_id);
+            $Item->ciudades()->attach($Item->ciudad_id);
+            $Item->municipios()->attach($Item->municipio_id);
+            $Item->estados()->attach($Item->estado_id);
+            $Item->codigospostales()->attach($Item->codigopostal_id);
+        });
 
     }
+
+
 }
