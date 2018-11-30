@@ -534,7 +534,6 @@ class CreateDenunciaUbicacionTable extends Migration
         $tableNamesDomicilios = config('atemun.table_names.domicilios');
         $tableNamesCatalogos = config('atemun.table_names.catalogos');
 
-        Schema::dropIfExists($tableNamesCatalogos['denuncia_user']);
         Schema::dropIfExists($tableNamesCatalogos['ciudadano_denuncia']);
         Schema::dropIfExists($tableNamesCatalogos['denuncia_servicio']);
         Schema::dropIfExists($tableNamesCatalogos['denuncia_dependencia']);
