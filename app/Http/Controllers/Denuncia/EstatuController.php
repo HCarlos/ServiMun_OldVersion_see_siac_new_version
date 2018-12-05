@@ -1,44 +1,44 @@
 <?php
 
-namespace App\Http\Controllers\Catalogos;
+namespace App\Http\Controllers\Denuncia;
 
-use App\Models\Catalogos\Medida;
+use App\Http\Requests\Denuncia\StatuRequest;
+use App\Models\Catalogos\Dependencia;
+use App\Models\Catalogos\Estatu;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\MedidaRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
-class MedidaController extends Controller
+class EstatuController extends Controller
 {
-
-    protected $tableName = "Medidas";
+    protected $tableName = "Status";
 
 // ***************** MUESTRA EL LISTADO DE USUARIOS ++++++++++++++++++++ //
     protected function index(Request $request)
     {
         ini_set('max_execution_time', 300);
         $filters = $request->all(['search']);
-        $items = Medida::query()
+        $items = Estatu::query()
             ->filterBy($filters)
             ->orderByDesc('id')
             ->paginate();
         $items->appends($filters)->fragment('table');
         $user = Auth::User();
 
-        return view('catalogos.catalogo.medida.medida_list',
+        return view('catalogos.catalogo.estatu.estatu_list',
             [
                 'items' => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
                 'user' => $user,
-                'searchInList' => 'listMedidas',
+                'searchInList' => 'listEstatus',
                 'newWindow' => true,
                 'tableName' => $this->tableName,
-                'showEdit' => 'editMedida',
-//                'putEdit' => 'updateMedida',
-                'newItem' => 'newMedida',
-                'removeItem' => 'removeMedida',
+                'showEdit' => 'editEstatu',
+//                'putEdit' => 'updateEstatu',
+                'newItem' => 'newEstatu',
+                'removeItem' => 'removeEstatu',
 //                'showProcess1' => 'showFileListUserExcel1A',
             ]
         );
@@ -47,53 +47,61 @@ class MedidaController extends Controller
 // ***************** EDITA LOS DATOS  ++++++++++++++++++++ //
     protected function editItem($Id)
     {
-        $item = Medida::find($Id);
-        return view('catalogos.catalogo.medida.medida_edit',
+        $Dependencias = Dependencia::select('id','dependencia')
+            ->orderBy('dependencia')
+            ->get();
+        $item = Estatu::find($Id);
+        return view('catalogos.catalogo.estatu.estatu_edit',
             [
                 'user' => Auth::user(),
                 'items' => $item,
                 'editItemTitle' => isset($item->categoria) ? $item->categoria : 'Nuevo',
-                'putEdit' => 'updateMedida',
+                'putEdit' => 'updateEstatu',
+                'dependencia' => $Dependencias,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
             ]
         );
     }
 
 // ***************** GUARDA LOS CAMBIOS ++++++++++++++++++++ //
-    protected function updateItem(MedidaRequest $request)
+    protected function updateItem(StatuRequest $request)
     {
         $item = $request->manage();
         if (!isset($item)) {
             abort(404);
         }
-        return Redirect::to('editMedida/'.$item->id);
+        return Redirect::to('editEstatu/'.$item->id);
     }
 
     protected function newItem()
     {
-        return view('catalogos.catalogo.medida.medida_new',
+        $Dependencias = Dependencia::select('id','dependencia')
+            ->orderBy('dependencia')
+            ->get();
+        return view('catalogos.catalogo.estatu.estatu_new',
             [
+                'dependencia' => $Dependencias,
                 'editItemTitle' => 'Nuevo',
-                'postNew' => 'createMedida',
+                'postNew' => 'createEstatu',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
             ]
         );
     }
 
     // ***************** CREAR NUEVO ++++++++++++++++++++ //
-    protected function createItem(MedidaRequest $request)
+    protected function createItem(StatuRequest $request)
     {
         $item = $request->manage();
         if (!isset($item)) {
             abort(404);
         }
-        return Redirect::to('editMedida/'.$item->id);
+        return Redirect::to('editEstatu/'.$item->id);
     }
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //
     protected function removeItem($id = 0)
     {
-        $item = Medida::withTrashed()->findOrFail($id);
+        $item = Estatu::withTrashed()->findOrFail($id);
         if (isset($item)) {
             if (!$item->trashed()) {
                 $item->forceDelete();
@@ -106,6 +114,18 @@ class MedidaController extends Controller
         }
     }
 
+    protected function addDepEstatu($Id,$IdDep)
+    {
+        $Estatu = Estatu::find($Id);
+        $Estatu->dependencias()->attach($IdDep);
+        return Response::json(['mensaje' => 'OK'], 200);
+    }
 
+    protected function removeDepEstatu($Id,$IdDep)
+    {
+        $Estatu = Estatu::find($Id);
+        $Estatu->dependencias()->detach($IdDep);
+        return Response::json(['mensaje' => 'OK'], 200);
+    }
 
 }

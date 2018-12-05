@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Catalogos;
+namespace App\Http\Controllers\Denuncia;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Catalogos\Origen;
-use App\Http\Requests\OrigenRequest;
+use App\Http\Requests\Denuncia\OrigenRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Auth;

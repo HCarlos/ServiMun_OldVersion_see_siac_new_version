@@ -1,44 +1,44 @@
 <?php
 
-namespace App\Http\Controllers\Catalogos;
+namespace App\Http\Controllers\Denuncia;
 
-use App\Http\Requests\StatuRequest;
-use App\Models\Catalogos\Dependencia;
-use App\Models\Catalogos\Estatu;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\Catalogos\Prioridad;
+use App\Http\Requests\Denuncia\PrioridadRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
-class EstatuController extends Controller
+class PrioridadController extends Controller
 {
-    protected $tableName = "Status";
+
+    protected $tableName = "Prioridades";
 
 // ***************** MUESTRA EL LISTADO DE USUARIOS ++++++++++++++++++++ //
     protected function index(Request $request)
     {
         ini_set('max_execution_time', 300);
         $filters = $request->all(['search']);
-        $items = Estatu::query()
+        $items = Prioridad::query()
             ->filterBy($filters)
             ->orderByDesc('id')
             ->paginate();
         $items->appends($filters)->fragment('table');
         $user = Auth::User();
 
-        return view('catalogos.catalogo.estatu.estatu_list',
+        return view('catalogos.catalogo.prioridad.prioridad_list',
             [
                 'items' => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
                 'user' => $user,
-                'searchInList' => 'listEstatus',
+                'searchInList' => 'listPrioridades',
                 'newWindow' => true,
                 'tableName' => $this->tableName,
-                'showEdit' => 'editEstatu',
-//                'putEdit' => 'updateEstatu',
-                'newItem' => 'newEstatu',
-                'removeItem' => 'removeEstatu',
+                'showEdit' => 'editPrioridad',
+//                'putEdit' => 'updatePrioridad',
+                'newItem' => 'newPrioridad',
+                'removeItem' => 'removePrioridad',
 //                'showProcess1' => 'showFileListUserExcel1A',
             ]
         );
@@ -47,61 +47,53 @@ class EstatuController extends Controller
 // ***************** EDITA LOS DATOS  ++++++++++++++++++++ //
     protected function editItem($Id)
     {
-        $Dependencias = Dependencia::select('id','dependencia')
-            ->orderBy('dependencia')
-            ->get();
-        $item = Estatu::find($Id);
-        return view('catalogos.catalogo.estatu.estatu_edit',
+        $item = Prioridad::find($Id);
+        return view('catalogos.catalogo.prioridad.prioridad_edit',
             [
                 'user' => Auth::user(),
                 'items' => $item,
                 'editItemTitle' => isset($item->categoria) ? $item->categoria : 'Nuevo',
-                'putEdit' => 'updateEstatu',
-                'dependencia' => $Dependencias,
+                'putEdit' => 'updatePrioridad',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
             ]
         );
     }
 
 // ***************** GUARDA LOS CAMBIOS ++++++++++++++++++++ //
-    protected function updateItem(StatuRequest $request)
+    protected function updateItem(PrioridadRequest $request)
     {
         $item = $request->manage();
         if (!isset($item)) {
             abort(404);
         }
-        return Redirect::to('editEstatu/'.$item->id);
+        return Redirect::to('editPrioridad/'.$item->id);
     }
 
     protected function newItem()
     {
-        $Dependencias = Dependencia::select('id','dependencia')
-            ->orderBy('dependencia')
-            ->get();
-        return view('catalogos.catalogo.estatu.estatu_new',
+        return view('catalogos.catalogo.prioridad.prioridad_new',
             [
-                'dependencia' => $Dependencias,
                 'editItemTitle' => 'Nuevo',
-                'postNew' => 'createEstatu',
+                'postNew' => 'createPrioridad',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
             ]
         );
     }
 
     // ***************** CREAR NUEVO ++++++++++++++++++++ //
-    protected function createItem(StatuRequest $request)
+    protected function createItem(PrioridadRequest $request)
     {
         $item = $request->manage();
         if (!isset($item)) {
             abort(404);
         }
-        return Redirect::to('editEstatu/'.$item->id);
+        return Redirect::to('editPrioridad/'.$item->id);
     }
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //
     protected function removeItem($id = 0)
     {
-        $item = Estatu::withTrashed()->findOrFail($id);
+        $item = Prioridad::withTrashed()->findOrFail($id);
         if (isset($item)) {
             if (!$item->trashed()) {
                 $item->forceDelete();
@@ -114,18 +106,5 @@ class EstatuController extends Controller
         }
     }
 
-    protected function addDepEstatu($Id,$IdDep)
-    {
-        $Estatu = Estatu::find($Id);
-        $Estatu->dependencias()->attach($IdDep);
-        return Response::json(['mensaje' => 'OK'], 200);
-    }
-
-    protected function removeDepEstatu($Id,$IdDep)
-    {
-        $Estatu = Estatu::find($Id);
-        $Estatu->dependencias()->detach($IdDep);
-        return Response::json(['mensaje' => 'OK'], 200);
-    }
 
 }

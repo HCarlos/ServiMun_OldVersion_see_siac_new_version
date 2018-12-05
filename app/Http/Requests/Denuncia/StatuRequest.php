@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Denuncia;
 
-use App\Models\Catalogos\Prioridad;
+use App\Models\Catalogos\Estatu;
+use App\Observers\Catalogos\Estatu\PostUpdating;
 use App\Rules\Uppercase;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Classes\MessageAlertClass;
 use Illuminate\Database\QueryException;
 
-class PrioridadRequest extends FormRequest
+class StatuRequest extends FormRequest
 {
 
 
-    protected $redirectRoute = 'editPrioridad';
+    protected $redirectRoute = 'editEstatu';
 
     public function authorize()
     {
@@ -27,22 +28,22 @@ class PrioridadRequest extends FormRequest
     public function rules()
     {
         return [
-            'prioridad' => ['required','min:2',new Uppercase,'unique:prioridades,prioridad,'.$this->id],
+            'estatus' => ['required','min:3',new Uppercase,'unique:estatus,estatus,'.$this->id],
         ];
     }
 
     public function messages()
     {
         return [
-            'prioridad.required' => 'La :attribute requiere por lo menos de 2 caracteres',
-            'prioridad.unique' => 'La :attribute ya existe',
+            'estatus.required' => 'El :attribute requiere por lo menos de 3 caracter',
+            'estatus.unique' => 'El :attribute ya existe',
         ];
     }
 
     public function attributes()
     {
         return [
-            'prioridad' => 'Prioridad',
+            'estatus' => 'Estatus',
         ];
     }
 
@@ -50,21 +51,20 @@ class PrioridadRequest extends FormRequest
     {
 
         $Item = [
-            'prioridad' => strtoupper($this->prioridad),
-            'class_css' => $this->class_css,
-            'predeterminado' => $this->predeterminado==1?true:false,
+            'estatus' => strtoupper($this->estatus),
         ];
 
         try {
-            if ($this->predeterminado==1) {
-                $items = Prioridad::where("predeterminado",true);
-                $items->update(["predeterminado" => false]);
-            }
+
             if ($this->id == 0) {
-                $item = Prioridad::create($Item);
+                $item = Estatu::create($Item);
+                if ($this->dependencia_id > 0){
+                    $item->dependencias()->attach($this->dependencia_id);
+                }
             } else {
-                $item = Prioridad::find($this->id);
+                $item = Estatu::find($this->id);
                 $item->update($Item);
+                $observer = PostUpdating::updating($item);
             }
         }catch (QueryException $e){
             $Msg = new MessageAlertClass();
@@ -79,11 +79,9 @@ class PrioridadRequest extends FormRequest
         if ($this->id > 0){
             return $url->route($this->redirectRoute,['Id'=>$this->id]);
         }else{
-            return $url->route('newPrioridad');
+            return $url->route('newEstatu');
         }
     }
-
-
 
 
 }

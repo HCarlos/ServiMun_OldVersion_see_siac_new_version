@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Filters\Denuncia\DenunciaFilter;
 use App\Models\Catalogos\Origen;
 use App\Models\Catalogos\Prioridad;
 use App\Models\Catalogos\Servicio;
@@ -18,10 +19,13 @@ class Denuncia extends Model
     protected $table = 'denuncias';
 
     protected $fillable = [
-        'id', 'fecha_ingreso','cantidad','descripcion','referencia',
-        'oficio_envio','fecha_oficio_dependencia','fecha_limite','fecha_ejecucion',
+        'id','cantidad',
+        'fecha_ingreso','oficio_envio','fecha_oficio_dependencia','fecha_limite','fecha_ejecucion',
+        'descripcion','referencia',
+        'calle','num_ext','num_int','colonia', 'localidad','ciudad','municipio','estado','pais', 'cp',
+        'latitud','longitud',
         'prioridad_id','origen_id','dependecia_id','ubicacion_id','servicio_id',
-        'ciudadano_id','user_id','status_denuncia','empresa_id','ip','host',
+        'ciudadano_id','creadopor_id','modificadopor_id',
         'searchtextdenuncia',
     ];
 
@@ -29,6 +33,10 @@ class Denuncia extends Model
         if (!$search || $search == "" || $search == null) return $query;
         return $query->whereRaw("searchtextdenuncia @@ to_tsquery('spanish', ?)", [$search])
             ->orderByRaw("ts_rank(searchtextdenuncia, to_tsquery('spanish', ?)) DESC", [$search]);
+    }
+
+    public function scopeFilterBy($query, $filters){
+        return (new DenunciaFilter())->applyTo($query, $filters);
     }
 
     public function prioridad(){

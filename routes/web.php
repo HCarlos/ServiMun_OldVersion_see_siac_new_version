@@ -92,54 +92,54 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('removeSubarea/{id}', 'Catalogos\Dependencia\SubareaController@removeSubarea')->name('removeSubarea');
 
     // Catálogo de Estatus
-    Route::get('listEstatus/', 'Catalogos\EstatuController@index')->name('listEstatus');
-    Route::get('editEstatu/{Id}', 'Catalogos\EstatuController@editItem')->name('editEstatu');
-    Route::put('updateEstatu', 'Catalogos\EstatuController@updateItem')->name('updateEstatu');
-    Route::get('newEstatu', 'Catalogos\EstatuController@newItem')->name('newEstatu');
-    Route::post('createEstatu', 'Catalogos\EstatuController@createItem')->name('createEstatu');
-    Route::get('removeEstatu/{id}', 'Catalogos\EstatuController@removeItem')->name('removeEstatu');
-    Route::get('addDepEstatu/{Id}/{IdDep}', 'Catalogos\EstatuController@addDepEstatu')->name('addDepEstatu');
-    Route::get('removeDepEstatu/{Id}/{IdDep}', 'Catalogos\EstatuController@removeDepEstatu')->name('removeDepEstatu');
+    Route::get('listEstatus/', 'Denuncia\EstatuController@index')->name('listEstatus');
+    Route::get('editEstatu/{Id}', 'Denuncia\EstatuController@editItem')->name('editEstatu');
+    Route::put('updateEstatu', 'Denuncia\EstatuController@updateItem')->name('updateEstatu');
+    Route::get('newEstatu', 'Denuncia\EstatuController@newItem')->name('newEstatu');
+    Route::post('createEstatu', 'Denuncia\EstatuController@createItem')->name('createEstatu');
+    Route::get('removeEstatu/{id}', 'Denuncia\EstatuController@removeItem')->name('removeEstatu');
+    Route::get('addDepEstatu/{Id}/{IdDep}', 'Denuncia\EstatuController@addDepEstatu')->name('addDepEstatu');
+    Route::get('removeDepEstatu/{Id}/{IdDep}', 'Denuncia\EstatuController@removeDepEstatu')->name('removeDepEstatu');
 
     // Catálogo de Medidas
-    Route::get('listMedidas/', 'Catalogos\MedidaController@index')->name('listMedidas');
-    Route::get('editMedida/{Id}', 'Catalogos\MedidaController@editItem')->name('editMedida');
-    Route::put('updateMedida', 'Catalogos\MedidaController@updateItem')->name('updateMedida');
-    Route::get('newMedida', 'Catalogos\MedidaController@newItem')->name('newMedida');
-    Route::post('createMedida', 'Catalogos\MedidaController@createItem')->name('createMedida');
-    Route::get('removeMedida/{id}', 'Catalogos\MedidaController@removeItem')->name('removeMedida');
+    Route::get('listMedidas/', 'Denuncia\MedidaController@index')->name('listMedidas');
+    Route::get('editMedida/{Id}', 'Denuncia\MedidaController@editItem')->name('editMedida');
+    Route::put('updateMedida', 'Denuncia\MedidaController@updateItem')->name('updateMedida');
+    Route::get('newMedida', 'Denuncia\MedidaController@newItem')->name('newMedida');
+    Route::post('createMedida', 'Denuncia\MedidaController@createItem')->name('createMedida');
+    Route::get('removeMedida/{id}', 'Denuncia\MedidaController@removeItem')->name('removeMedida');
 
     // Catálogo de Origenes
-    Route::get('listOrigenes/', 'Catalogos\OrigenController@index')->name('listOrigenes');
-    Route::get('editOrigen/{Id}', 'Catalogos\OrigenController@editItem')->name('editOrigen');
-    Route::put('updateOrigen', 'Catalogos\OrigenController@updateItem')->name('updateOrigen');
-    Route::get('newOrigen', 'Catalogos\OrigenController@newItem')->name('newOrigen');
-    Route::post('createOrigen', 'Catalogos\OrigenController@createItem')->name('createOrigen');
-    Route::get('removeOrigen/{id}', 'Catalogos\OrigenController@removeItem')->name('removeOrigen');
+    Route::get('listOrigenes/', 'Denuncia\OrigenController@index')->name('listOrigenes');
+    Route::get('editOrigen/{Id}', 'Denuncia\OrigenController@editItem')->name('editOrigen');
+    Route::put('updateOrigen', 'Denuncia\OrigenController@updateItem')->name('updateOrigen');
+    Route::get('newOrigen', 'Denuncia\OrigenController@newItem')->name('newOrigen');
+    Route::post('createOrigen', 'Denuncia\OrigenController@createItem')->name('createOrigen');
+    Route::get('removeOrigen/{id}', 'Denuncia\OrigenController@removeItem')->name('removeOrigen');
 
     // Catálogo de Prioridades
-    Route::get('listPrioridades/', 'Catalogos\PrioridadController@index')->name('listPrioridades');
-    Route::get('editPrioridad/{Id}', 'Catalogos\PrioridadController@editItem')->name('editPrioridad');
-    Route::put('updatePrioridad', 'Catalogos\PrioridadController@updateItem')->name('updatePrioridad');
-    Route::get('newPrioridad', 'Catalogos\PrioridadController@newItem')->name('newPrioridad');
-    Route::post('createPrioridad', 'Catalogos\PrioridadController@createItem')->name('createPrioridad');
-    Route::get('removePrioridad/{id}', 'Catalogos\PrioridadController@removeItem')->name('removePrioridad');
+    Route::get('listPrioridades/', 'Denuncia\PrioridadController@index')->name('listPrioridades');
+    Route::get('editPrioridad/{Id}', 'Denuncia\PrioridadController@editItem')->name('editPrioridad');
+    Route::put('updatePrioridad', 'Denuncia\PrioridadController@updateItem')->name('updatePrioridad');
+    Route::get('newPrioridad', 'Denuncia\PrioridadController@newItem')->name('newPrioridad');
+    Route::post('createPrioridad', 'Denuncia\PrioridadController@createItem')->name('createPrioridad');
+    Route::get('removePrioridad/{id}', 'Denuncia\PrioridadController@removeItem')->name('removePrioridad');
 
     // Catálogo de Servicios
-    Route::get('listServicios/', 'Catalogos\ServicioController@index')->name('listServicios');
-    Route::get('editServicio/{Id}', 'Catalogos\ServicioController@editItem')->name('editServicio');
-    Route::put('updateServicio', 'Catalogos\ServicioController@updateItem')->name('updateServicio');
-    Route::get('newServicio', 'Catalogos\ServicioController@newItem')->name('newServicio');
-    Route::post('createServicio', 'Catalogos\ServicioController@createItem')->name('createServicio');
-    Route::get('removeServicio/{id}', 'Catalogos\ServicioController@removeItem')->name('removeServicio');
+    Route::get('listServicios/', 'Denuncia\ServicioController@index')->name('listServicios');
+    Route::get('editServicio/{Id}', 'Denuncia\ServicioController@editItem')->name('editServicio');
+    Route::put('updateServicio', 'Denuncia\ServicioController@updateItem')->name('updateServicio');
+    Route::get('newServicio', 'Denuncia\ServicioController@newItem')->name('newServicio');
+    Route::post('createServicio', 'Denuncia\ServicioController@createItem')->name('createServicio');
+    Route::get('removeServicio/{id}', 'Denuncia\ServicioController@removeItem')->name('removeServicio');
 
     // Catálogo de Afiliaciones
-    Route::get('listAfiliaciones/', 'Catalogos\AfiliacionController@index')->name('listAfiliaciones');
-    Route::get('editAfiliacion/{Id}', 'Catalogos\AfiliacionController@editItem')->name('editAfiliacion');
-    Route::put('updateAfiliacion', 'Catalogos\AfiliacionController@updateItem')->name('updateAfiliacion');
-    Route::get('newAfiliacion', 'Catalogos\AfiliacionController@newItem')->name('newAfiliacion');
-    Route::post('createAfiliacion', 'Catalogos\AfiliacionController@createItem')->name('createAfiliacion');
-    Route::get('removeAfiliacion/{id}', 'Catalogos\AfiliacionController@removeItem')->name('removeAfiliacion');
+    Route::get('listAfiliaciones/', 'Denuncia\AfiliacionController@index')->name('listAfiliaciones');
+    Route::get('editAfiliacion/{Id}', 'Denuncia\AfiliacionController@editItem')->name('editAfiliacion');
+    Route::put('updateAfiliacion', 'Denuncia\AfiliacionController@updateItem')->name('updateAfiliacion');
+    Route::get('newAfiliacion', 'Denuncia\AfiliacionController@newItem')->name('newAfiliacion');
+    Route::post('createAfiliacion', 'Denuncia\AfiliacionController@createItem')->name('createAfiliacion');
+    Route::get('removeAfiliacion/{id}', 'Denuncia\AfiliacionController@removeItem')->name('removeAfiliacion');
 
     // Catálogo de Asentamientos
     Route::get('listAsentamientos/', 'Catalogos\Domicilio\AsentamientoController@index')->name('listAsentamientos');
@@ -237,7 +237,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('createUbicacion', 'Catalogos\Domicilio\UbicacionController@createItem')->name('createUbicacion');
     Route::get('removeUbicacion/{id}', 'Catalogos\Domicilio\UbicacionController@removeItem')->name('removeUbicacion');
 
-
+    // Catálogo de Denuncias
+    Route::get('listDenuncias/', 'Denuncia\DenunciaController@index')->name('listDenuncias');
+    Route::get('editDenuncia/{Id}', 'Denuncia\DenunciaController@editItem')->name('editDenuncia');
+    Route::put('updateDenuncia', 'Denuncia\DenunciaController@updateItem')->name('updateDenuncia');
+    Route::get('newDenuncia', 'Denuncia\DenunciaController@newItem')->name('newDenuncia');
+    Route::post('createDenuncia', 'Denuncia\DenunciaController@createItem')->name('createDenuncia');
+    Route::get('removeDenuncia/{id}', 'Denuncia\DenunciaController@removeItem')->name('removeDenuncia');
 
 
 

@@ -3,7 +3,8 @@
 @section('container')
 
 @home
-    @slot('titulo_header','Nuev(@)')
+    @slot('titulo_catalogo',$titulo_catalogo)
+    @slot('titulo_header','Nueva')
     @slot('contenido')
         <div class="col-md-8">
             @card

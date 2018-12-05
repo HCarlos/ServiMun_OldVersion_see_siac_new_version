@@ -3,6 +3,7 @@
 @section('container')
 
 @home
+    @slot('titulo_catalogo',$titulo_catalogo)
     @slot('titulo_header','Ver mi perfil')
     @slot('contenido')
         <div class="col-md-4">

@@ -1,19 +1,18 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Denuncia;
 
-use App\Models\Catalogos\Estatu;
-use App\Observers\Catalogos\Estatu\PostUpdating;
+use App\Models\Catalogos\Afiliacion;
 use App\Rules\Uppercase;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Classes\MessageAlertClass;
 use Illuminate\Database\QueryException;
 
-class StatuRequest extends FormRequest
+class AfiliacionRequest extends FormRequest
 {
 
 
-    protected $redirectRoute = 'editEstatu';
+    protected $redirectRoute = 'editAfiliacion';
 
     public function authorize()
     {
@@ -28,22 +27,22 @@ class StatuRequest extends FormRequest
     public function rules()
     {
         return [
-            'estatus' => ['required','min:3',new Uppercase,'unique:estatus,estatus,'.$this->id],
+            'afiliacion' => ['required','min:2',new Uppercase,'unique:afiliaciones,afiliacion,'.$this->id],
         ];
     }
 
     public function messages()
     {
         return [
-            'estatus.required' => 'El :attribute requiere por lo menos de 3 caracter',
-            'estatus.unique' => 'El :attribute ya existe',
+            'afiliacion.required' => 'La :attribute requiere por lo menos de 2 caracteres',
+            'afiliacion.unique' => 'La :attribute ya existe',
         ];
     }
 
     public function attributes()
     {
         return [
-            'estatus' => 'Estatus',
+            'afiliacion' => 'Afiliacion',
         ];
     }
 
@@ -51,20 +50,19 @@ class StatuRequest extends FormRequest
     {
 
         $Item = [
-            'estatus' => strtoupper($this->estatus),
+            'afiliacion' => strtoupper($this->afiliacion),
         ];
 
         try {
-
+            if ($this->predeterminado==1) {
+                $items = Afiliacion::where("predeterminado",true);
+                $items->update(["predeterminado" => false]);
+            }
             if ($this->id == 0) {
-                $item = Estatu::create($Item);
-                if ($this->dependencia_id > 0){
-                    $item->dependencias()->attach($this->dependencia_id);
-                }
+                $item = Afiliacion::create($Item);
             } else {
-                $item = Estatu::find($this->id);
+                $item = Afiliacion::find($this->id);
                 $item->update($Item);
-                $observer = PostUpdating::updating($item);
             }
         }catch (QueryException $e){
             $Msg = new MessageAlertClass();
@@ -79,9 +77,11 @@ class StatuRequest extends FormRequest
         if ($this->id > 0){
             return $url->route($this->redirectRoute,['Id'=>$this->id]);
         }else{
-            return $url->route('newEstatu');
+            return $url->route('newAfiliacion');
         }
     }
+
+
 
 
 }

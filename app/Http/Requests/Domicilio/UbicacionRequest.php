@@ -42,7 +42,6 @@ class UbicacionRequest extends FormRequest
             'codigopostal_id' => ['required'],
             'latitud'         => ['present'],
             'longitud'        => ['present'],
-//            'longitud'        => [new UbicacionUnica($this)],
             'longitud'              => [
                                     Rule::unique('ubicaciones')
                                         ->where('calle_id', $this->calle_id)
@@ -56,12 +55,6 @@ class UbicacionRequest extends FormRequest
             ];
 
     }
-
-    public function message()
-    {
-        return trans('validation.longitud');
-    }
-
 
     public function manage()
     {
@@ -78,7 +71,7 @@ class UbicacionRequest extends FormRequest
             $Item = [
                 'calle' => strtoupper($Calle->calle),
                 'num_ext' => strtoupper($this->num_ext),
-                'num_int' => strtoupper($this->int),
+                'num_int' => strtoupper($this->num_int),
                 'colonia' => strtoupper($Colonia->colonia),
                 'localidad' => strtoupper($Localidad->localidad),
                 'ciudad' => strtoupper($Ciudad->ciudad),

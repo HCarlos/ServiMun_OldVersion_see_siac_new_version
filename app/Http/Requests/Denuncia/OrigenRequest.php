@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Denuncia;
 
-use App\Models\Catalogos\Afiliacion;
+use App\Models\Catalogos\Origen;
 use App\Rules\Uppercase;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Classes\MessageAlertClass;
 use Illuminate\Database\QueryException;
 
-class AfiliacionRequest extends FormRequest
+class OrigenRequest extends FormRequest
 {
 
 
-    protected $redirectRoute = 'editAfiliacion';
+    protected $redirectRoute = 'editOrigen';
 
     public function authorize()
     {
@@ -27,22 +27,22 @@ class AfiliacionRequest extends FormRequest
     public function rules()
     {
         return [
-            'afiliacion' => ['required','min:2',new Uppercase,'unique:afiliaciones,afiliacion,'.$this->id],
+            'origen' => ['required','min:2',new Uppercase,'unique:origenes,origen,'.$this->id],
         ];
     }
 
     public function messages()
     {
         return [
-            'afiliacion.required' => 'La :attribute requiere por lo menos de 2 caracteres',
-            'afiliacion.unique' => 'La :attribute ya existe',
+            'origen.required' => 'El :attribute requiere por lo menos de 2 caracter',
+            'origen.unique' => 'El :attribute ya existe',
         ];
     }
 
     public function attributes()
     {
         return [
-            'afiliacion' => 'Afiliacion',
+            'origen' => 'Origen',
         ];
     }
 
@@ -50,18 +50,15 @@ class AfiliacionRequest extends FormRequest
     {
 
         $Item = [
-            'afiliacion' => strtoupper($this->afiliacion),
+            'origen' => strtoupper($this->origen),
         ];
 
         try {
-            if ($this->predeterminado==1) {
-                $items = Afiliacion::where("predeterminado",true);
-                $items->update(["predeterminado" => false]);
-            }
+
             if ($this->id == 0) {
-                $item = Afiliacion::create($Item);
+                $item = Origen::create($Item);
             } else {
-                $item = Afiliacion::find($this->id);
+                $item = Origen::find($this->id);
                 $item->update($Item);
             }
         }catch (QueryException $e){
@@ -77,11 +74,10 @@ class AfiliacionRequest extends FormRequest
         if ($this->id > 0){
             return $url->route($this->redirectRoute,['Id'=>$this->id]);
         }else{
-            return $url->route('newAfiliacion');
+            return $url->route('newOrigen');
         }
-    }
-
-
-
-
+    }    
+    
+    
+    
 }

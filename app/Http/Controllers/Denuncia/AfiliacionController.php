@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Catalogos;
+namespace App\Http\Controllers\Denuncia;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Catalogos\Afiliacion;
-use App\Http\Requests\AfiliacionRequest;
+use App\Http\Requests\Denuncia\AfiliacionRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Auth;

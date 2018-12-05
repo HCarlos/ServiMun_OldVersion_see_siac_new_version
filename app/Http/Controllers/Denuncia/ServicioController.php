@@ -1,44 +1,46 @@
 <?php
 
-namespace App\Http\Controllers\Catalogos;
+namespace App\Http\Controllers\Denuncia;
 
+use App\Http\Requests\Denuncia\ServicioRequest;
+use App\Models\Catalogos\Medida;
+use App\Models\Catalogos\Servicio;
+use App\Models\Catalogos\Subarea;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Catalogos\Prioridad;
-use App\Http\Requests\PrioridadRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Auth;
 
-class PrioridadController extends Controller
+class ServicioController extends Controller
 {
 
-    protected $tableName = "Prioridades";
+    protected $tableName = "Servicios";
 
 // ***************** MUESTRA EL LISTADO DE USUARIOS ++++++++++++++++++++ //
     protected function index(Request $request)
     {
         ini_set('max_execution_time', 300);
         $filters = $request->all(['search']);
-        $items = Prioridad::query()
+        $items = Servicio::query()
             ->filterBy($filters)
             ->orderByDesc('id')
             ->paginate();
         $items->appends($filters)->fragment('table');
         $user = Auth::User();
 
-        return view('catalogos.catalogo.prioridad.prioridad_list',
+        return view('catalogos.catalogo.servicio.servicio_list',
             [
                 'items' => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
                 'user' => $user,
-                'searchInList' => 'listPrioridades',
+                'searchInList' => 'listServicios',
                 'newWindow' => true,
                 'tableName' => $this->tableName,
-                'showEdit' => 'editPrioridad',
-//                'putEdit' => 'updatePrioridad',
-                'newItem' => 'newPrioridad',
-                'removeItem' => 'removePrioridad',
+                'showEdit' => 'editServicio',
+//                'putEdit' => 'updateServicio',
+                'newItem' => 'newServicio',
+                'removeItem' => 'removeServicio',
 //                'showProcess1' => 'showFileListUserExcel1A',
             ]
         );
@@ -47,53 +49,61 @@ class PrioridadController extends Controller
 // ***************** EDITA LOS DATOS  ++++++++++++++++++++ //
     protected function editItem($Id)
     {
-        $item = Prioridad::find($Id);
-        return view('catalogos.catalogo.prioridad.prioridad_edit',
+        $item = Servicio::find($Id);
+        $medidas = Medida::all(['id','medida'])->sortBy('medida');
+        $subareas = Subarea::all(['id','subarea'])->sortBy('subarea');
+        return view('catalogos.catalogo.servicio.servicio_edit',
             [
                 'user' => Auth::user(),
                 'items' => $item,
+                'medidas' => $medidas,
+                'subareas' => $subareas,
                 'editItemTitle' => isset($item->categoria) ? $item->categoria : 'Nuevo',
-                'putEdit' => 'updatePrioridad',
+                'putEdit' => 'updateServicio',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
             ]
         );
     }
 
 // ***************** GUARDA LOS CAMBIOS ++++++++++++++++++++ //
-    protected function updateItem(PrioridadRequest $request)
+    protected function updateItem(ServicioRequest $request)
     {
         $item = $request->manage();
         if (!isset($item)) {
             abort(404);
         }
-        return Redirect::to('editPrioridad/'.$item->id);
+        return Redirect::to('editServicio/'.$item->id);
     }
 
     protected function newItem()
     {
-        return view('catalogos.catalogo.prioridad.prioridad_new',
+        $medidas = Medida::all(['id','medida'])->sortBy('medida');
+        $subareas = Subarea::all(['id','subarea'])->sortBy('subarea');
+        return view('catalogos.catalogo.servicio.servicio_new',
             [
                 'editItemTitle' => 'Nuevo',
-                'postNew' => 'createPrioridad',
+                'postNew' => 'createServicio',
+                'medidas' => $medidas,
+                'subareas' => $subareas,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
             ]
         );
     }
 
     // ***************** CREAR NUEVO ++++++++++++++++++++ //
-    protected function createItem(PrioridadRequest $request)
+    protected function createItem(ServicioRequest $request)
     {
         $item = $request->manage();
         if (!isset($item)) {
             abort(404);
         }
-        return Redirect::to('editPrioridad/'.$item->id);
+        return Redirect::to('editServicio/'.$item->id);
     }
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //
     protected function removeItem($id = 0)
     {
-        $item = Prioridad::withTrashed()->findOrFail($id);
+        $item = Servicio::withTrashed()->findOrFail($id);
         if (isset($item)) {
             if (!$item->trashed()) {
                 $item->forceDelete();
@@ -105,6 +115,8 @@ class PrioridadController extends Controller
             return Response::json(['mensaje' => 'Se ha producido un error.', 'data' => 'Error', 'status' => '200'], 200);
         }
     }
-
-
+    
+    
+    
+    
 }

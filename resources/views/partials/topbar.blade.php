@@ -75,14 +75,9 @@
         </li>
 
     </ul>
-    {{--<button class="button-menu-mobile open-left disable-btn">--}}
-        {{--<i class="mdi mdi-menu"></i> hola mundo--}}
-    {{--</button>--}}
-    <div class="app-search">
-        <div class="input-group">
-        <div style="text-align: center;  vertical-align: center; font-size: 19px; font-weight: bold; padding-top: 0.5em;">{{isset($titulo_catalogo)?$titulo_catalogo:''}}</div>
-        </div>
-    </div>
+    @include('shared.search.__search_word_in_list')
+    @include('shared.search.__search_alumno_baca_list')
+    @include('shared.search.__search_empty_tool_list')
 </div>
 @endguest
 

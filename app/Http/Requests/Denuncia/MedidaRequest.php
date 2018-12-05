@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Denuncia;
 
-use App\Models\Catalogos\Servicio;
+use App\Models\Catalogos\Medida;
 use App\Rules\Uppercase;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Classes\MessageAlertClass;
 use Illuminate\Database\QueryException;
 
-class ServicioRequest extends FormRequest
+class MedidaRequest extends FormRequest
 {
 
 
-    protected $redirectRoute = 'editServicio';
+    protected $redirectRoute = 'editMedida';
 
     public function authorize()
     {
@@ -27,22 +27,22 @@ class ServicioRequest extends FormRequest
     public function rules()
     {
         return [
-            'servicio' => ['required','min:2',new Uppercase,'unique:servicios,servicio,'.$this->id],
+            'medida' => ['required','min:2',new Uppercase,'unique:medidas,medida,'.$this->id],
         ];
     }
 
     public function messages()
     {
         return [
-            'servicio.required' => 'La :attribute requiere por lo menos de 2 caracteres',
-            'servicio.unique' => 'La :attribute ya existe',
+            'medida.required' => 'El :attribute requiere por lo menos de 2 caracter',
+            'medida.unique' => 'El :attribute ya existe',
         ];
     }
 
     public function attributes()
     {
         return [
-            'servicio' => 'Servicio',
+            'medida' => 'Medida',
         ];
     }
 
@@ -50,18 +50,15 @@ class ServicioRequest extends FormRequest
     {
 
         $Item = [
-            'servicio' => strtoupper($this->servicio),
-            'class_css' => $this->class_css,
-            'habilitado' => $this->habilitado==1?true:false,
-            'medida_id' => $this->medida_id,
-            'subarea_id' => $this->subarea_id,
+            'medida' => strtoupper($this->medida),
         ];
 
         try {
+
             if ($this->id == 0) {
-                $item = Servicio::create($Item);
+                $item = Medida::create($Item);
             } else {
-                $item = Servicio::find($this->id);
+                $item = Medida::find($this->id);
                 $item->update($Item);
             }
         }catch (QueryException $e){
@@ -77,10 +74,11 @@ class ServicioRequest extends FormRequest
         if ($this->id > 0){
             return $url->route($this->redirectRoute,['Id'=>$this->id]);
         }else{
-            return $url->route('newServicio');
+            return $url->route('newMedida');
         }
     }
     
     
-
+    
+    
 }

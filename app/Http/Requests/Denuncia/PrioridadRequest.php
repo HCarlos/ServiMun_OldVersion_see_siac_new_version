@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Denuncia;
 
-use App\Models\Catalogos\Origen;
+use App\Models\Catalogos\Prioridad;
 use App\Rules\Uppercase;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Classes\MessageAlertClass;
 use Illuminate\Database\QueryException;
 
-class OrigenRequest extends FormRequest
+class PrioridadRequest extends FormRequest
 {
 
 
-    protected $redirectRoute = 'editOrigen';
+    protected $redirectRoute = 'editPrioridad';
 
     public function authorize()
     {
@@ -27,22 +27,22 @@ class OrigenRequest extends FormRequest
     public function rules()
     {
         return [
-            'origen' => ['required','min:2',new Uppercase,'unique:origenes,origen,'.$this->id],
+            'prioridad' => ['required','min:2',new Uppercase,'unique:prioridades,prioridad,'.$this->id],
         ];
     }
 
     public function messages()
     {
         return [
-            'origen.required' => 'El :attribute requiere por lo menos de 2 caracter',
-            'origen.unique' => 'El :attribute ya existe',
+            'prioridad.required' => 'La :attribute requiere por lo menos de 2 caracteres',
+            'prioridad.unique' => 'La :attribute ya existe',
         ];
     }
 
     public function attributes()
     {
         return [
-            'origen' => 'Origen',
+            'prioridad' => 'Prioridad',
         ];
     }
 
@@ -50,15 +50,20 @@ class OrigenRequest extends FormRequest
     {
 
         $Item = [
-            'origen' => strtoupper($this->origen),
+            'prioridad' => strtoupper($this->prioridad),
+            'class_css' => $this->class_css,
+            'predeterminado' => $this->predeterminado==1?true:false,
         ];
 
         try {
-
+            if ($this->predeterminado==1) {
+                $items = Prioridad::where("predeterminado",true);
+                $items->update(["predeterminado" => false]);
+            }
             if ($this->id == 0) {
-                $item = Origen::create($Item);
+                $item = Prioridad::create($Item);
             } else {
-                $item = Origen::find($this->id);
+                $item = Prioridad::find($this->id);
                 $item->update($Item);
             }
         }catch (QueryException $e){
@@ -74,10 +79,11 @@ class OrigenRequest extends FormRequest
         if ($this->id > 0){
             return $url->route($this->redirectRoute,['Id'=>$this->id]);
         }else{
-            return $url->route('newOrigen');
+            return $url->route('newPrioridad');
         }
-    }    
-    
-    
-    
+    }
+
+
+
+
 }

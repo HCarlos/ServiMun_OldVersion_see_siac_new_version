@@ -232,7 +232,7 @@ class CreateDenunciaUbicacionTable extends Migration
         Schema::create($tableNamesCatalogos['denuncias'], function (Blueprint $table) use ($tableNamesCatalogos) {
             $table->increments('id');
             $table->dateTime('fecha_ingreso')->nullable();
-            $table->decimal('cantidad',10,4)->default(0)->nullable();
+            $table->decimal('cantidad',10,4)->default(1)->nullable();
             $table->text('descripcion')->default("")->nullable();
             $table->string('referencia',250)->default("")->nullable();
             $table->string('oficio_envio',50)->default("")->nullable();
