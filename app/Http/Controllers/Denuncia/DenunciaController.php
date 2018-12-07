@@ -35,7 +35,7 @@ class DenunciaController extends Controller
         $items->appends($filters)->fragment('table');
         $user = Auth::User();
 
-        return view('denuncias.denuncia.denuncia_list',
+        return view('denuncia.denuncia.denuncia_list',
             [
                 'items' => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
@@ -64,7 +64,7 @@ class DenunciaController extends Controller
         $Estadps         = Estado::all()->sortBy('estado');
         $Codigospostales = Codigopostal::all()->sortBy('cp');
 
-        return view('catalogos.catalogo.domicilio.denuncia.denuncia_edit',
+        return view('denuncia.denuncia.denuncia_edit',
             [
                 'user' => Auth::user(),
                 'calles'          => $Calles,
@@ -101,7 +101,7 @@ class DenunciaController extends Controller
         $Municipios      = Municipio::all()->sortBy('municipio');
         $Estadps         = Estado::all()->sortBy('estado');
         $Codigospostales = Codigopostal::all()->sortBy('cp');
-        return view('catalogos.catalogo.domicilio.denuncia.denuncia_new',
+        return view('denuncia.denuncia.denuncia_new',
             [
                 'editItemTitle'   => 'Nuevo',
                 'calles'          => $Calles,

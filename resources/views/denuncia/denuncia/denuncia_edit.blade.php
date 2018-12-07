@@ -4,21 +4,22 @@
 
 @home
     @slot('titulo_catalogo',$titulo_catalogo)
-    @slot('titulo_header','Nuevo')
+    @slot('titulo_header','Folio: '. $items->id)
     @slot('contenido')
-        <div class="col-md-8">
             @card
                 @slot('title_card','')
                 @slot('body_card')
                     @include('shared.code.__errors')
-                    <form method="POST" action="{{ route('createOrigen') }}">
+                    <form method="POST" action="{{ route('updateDenuncia') }}">
                         @csrf
-                        @include('shared.catalogo.origen.__origen_new')
-                        @include('shared.ui_kit.__button_form_normal')
+                        {{method_field('PUT')}}
+                        @include('shared.denuncia.denuncia.__denuncia_edit')
+                        @buttonsFormDenuncia
+                            @slot('msgLeft',' ')
+                        @endbuttonsFormDenuncia
                     </form>
                 @endslot
             @endcard
-        </div>
     @endslot
 @endhome
 

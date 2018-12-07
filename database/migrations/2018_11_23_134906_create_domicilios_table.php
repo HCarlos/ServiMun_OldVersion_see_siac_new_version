@@ -145,7 +145,7 @@ class CreateDomiciliosTable extends Migration
 
         Schema::create($tableNames['sepomex'], function (Blueprint $table) use ($tableNames){
             $table->increments('id');
-            $table->string('zona',6)->default('')->nullable();
+            $table->string('zona',16)->default('')->nullable();
             $table->unsignedInteger('asentamiento_id')->default(0)->index();
             $table->unsignedInteger('tipoasentamiento_id')->default(0)->index();
             $table->unsignedInteger('codigospostal_id')->default(0)->index();

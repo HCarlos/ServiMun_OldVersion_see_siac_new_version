@@ -22,33 +22,33 @@ class EjemplosSeeder extends Seeder
         factory(User::class, 150)->create()->each(function ($user) {
             $idrole = rand(3, Role::all()->count());
 
-            $IdCalle     = rand(1, Calle::all()->count());
-            $IdColonia   = rand(1, Colonia::all()->count());
-            $IdLocalidad = rand(1, Localidad::all()->count());
-            $IdMunicipio = rand(1, Municipio::all()->count());
-            $IdEstado    = rand(1, Estado::all()->count());
-            $IdCPs       = rand(1, Codigopostal::all()->count());
-
-            $Calle       = Calle::find($IdCalle);
-            $Colonia     = Colonia::find($IdColonia);
-            $Localidad   = Localidad::find($IdLocalidad);
-            $Municipio   = Municipio::find($IdMunicipio);
-            $Estado      = Estado::find($IdEstado);
-            $CPs         = Codigopostal::find($IdCPs);
+//            $IdCalle     = rand(1, Calle::all()->count());
+//            $IdColonia   = rand(1, Colonia::all()->count());
+//            $IdLocalidad = rand(1, Localidad::all()->count());
+//            $IdMunicipio = rand(1, Municipio::all()->count());
+//            $IdEstado    = rand(1, Estado::all()->count());
+//            $IdCPs       = rand(1, Codigopostal::all()->count());
+//
+//            $Calle       = Calle::find($IdCalle);
+//            $Colonia     = Colonia::find($IdColonia);
+//            $Localidad   = Localidad::find($IdLocalidad);
+//            $Municipio   = Municipio::find($IdMunicipio);
+//            $Estado      = Estado::find($IdEstado);
+//            $CPs         = Codigopostal::find($IdCPs);
 
             $user->roles()->attach($idrole);
             $user->permissions()->attach(7);
-            $user->user_adress()->create(
-                [
-                    'calle' => strtoupper($Calle->calle),
-                    'num_ext' => str_random(10),
-                    'colonia' => strtoupper($Colonia->colonia),
-                    'localidad' => strtoupper($Localidad->localidad),
-                    'municipio' => strtoupper($Municipio->municipio),
-                    'estado' => strtoupper($Estado->estado),
-                    'cp' => $CPs->cp,
-                ]
-            );
+////            $user->user_adress()->create(
+////                [
+////                    'calle' => strtoupper($Calle->calle),
+////                    'num_ext' => str_random(10),
+////                    'colonia' => strtoupper($Colonia->colonia),
+////                    'localidad' => strtoupper($Localidad->localidad),
+////                    'municipio' => strtoupper($Municipio->municipio),
+////                    'estado' => strtoupper($Estado->estado),
+////                    'cp' => $CPs->cp,
+////                ]
+//            );
             $user->user_data_extend()->create();
         });
 

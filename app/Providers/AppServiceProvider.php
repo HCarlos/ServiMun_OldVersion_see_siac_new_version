@@ -21,6 +21,8 @@ class AppServiceProvider extends ServiceProvider
         Blade::component('componentes._form_full_modal','formFullModal');
         Blade::component('componentes._asignaciones','asignaciones');
         Blade::component('componentes._details','details');
+        
+        Blade::component('componentes.tools._buttonsFormDenuncia','buttonsFormDenuncia');
 
 
     }

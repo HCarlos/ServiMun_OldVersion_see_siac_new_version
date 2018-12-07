@@ -35,18 +35,23 @@ class Colonia extends Model
     }
 
     public static function findOrImport($colonia,$cp,$altitud,$latitud,$longitud,$codigospostal_id,$comunidad_id,$tipocomunidad_id){
-        $obj = static::where('colonia', $colonia)->first();
+        $obj = static::where('colonia', $colonia)
+            ->first();
         if (!$obj) {
-            $obj = static::create([
-                'colonia' => strtoupper($colonia),
-                'cp' => strtoupper($cp),
-                'altitud' => $altitud,
-                'latitud' => $latitud,
-                'longitud' => $longitud,
-                'codigopostal_id' => $codigospostal_id,
-                'comunidad_id' => $comunidad_id,
-                'tipocomunidad_id' => $tipocomunidad_id,
-            ]);
+            if ( Codigopostal::all()->contains( $codigospostal_id) ){
+                $obj = static::create([
+                    'colonia' => strtoupper($colonia),
+                    'cp' => strtoupper($cp),
+                    'altitud' => $altitud,
+                    'latitud' => $latitud,
+                    'longitud' => $longitud,
+                    'codigopostal_id' => $codigospostal_id,
+                    'comunidad_id' => $comunidad_id,
+                    'tipocomunidad_id' => $tipocomunidad_id,
+                ]);
+
+
+            }
         }
         return $obj;
     }

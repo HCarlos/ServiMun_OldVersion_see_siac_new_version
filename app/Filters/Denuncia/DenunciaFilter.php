@@ -26,30 +26,14 @@ class DenunciaFilter extends QueryFilter
         $search = strtoupper($search);
         return $query->where(function ($query) use ($search) {
             $query
-                ->orWhereHas('descripcion', function ($q) use ($search) {
-                    $q->whereRaw("UPPER(descripcion) like ?", "%{$search}%");
-                })
-                ->orWhereHas('referencia', function ($q) use ($search) {
-                    $q->whereRaw("UPPER(referencia) like ?", "%{$search}%");
-                })
-                ->orWhereHas('calle', function ($q) use ($search) {
-                    $q->whereRaw("UPPER(calle) like ?", "%{$search}%");
-                })
-                ->orWhereHas('colonia', function ($q) use ($search) {
-                    $q->whereRaw("UPPER(colonia) like ?", "%{$search}%");
-                })
-                ->orWhereHas('localidad', function ($q) use ($search) {
-                    $q->whereRaw("UPPER(localidad) like ?", "%{$search}%");
-                })
-                ->orWhereHas('ciudad', function ($q) use ($search) {
-                    $q->whereRaw("UPPER(ciudad) like ?", "%{$search}%");
-                })
-                ->orWhereHas('municipio', function ($q) use ($search) {
-                    $q->whereRaw("UPPER(municipio) like ?", "%{$search}%");
-                })
-                ->orWhereHas('estado', function ($q) use ($search) {
-                    $q->whereRaw("UPPER(municipio) like ?", "%{$search}%");
-                })
+                ->orWhereRaw("UPPER(descripcion) like ?", "%{$search}%")
+                ->orWhereRaw("UPPER(referencia) like ?", "%{$search}%")
+                ->orWhereRaw("UPPER(calle) like ?", "%{$search}%")
+                ->orWhereRaw("UPPER(colonia) like ?", "%{$search}%")
+                ->orWhereRaw("UPPER(localidad) like ?", "%{$search}%")
+                ->orWhereRaw("UPPER(ciudad) like ?", "%{$search}%")
+                ->orWhereRaw("UPPER(municipio) like ?", "%{$search}%")
+                ->orWhereRaw("UPPER(estado) like ?", "%{$search}%")
                 ->orWhere('id', 'like', "%{$search}%");
         });
 

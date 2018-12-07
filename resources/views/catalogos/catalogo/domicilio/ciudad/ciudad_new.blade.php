@@ -14,9 +14,7 @@
                     <form method="POST" action="{{ route('createCiudad') }}">
                         @csrf
                         @include('shared.catalogo.domicilio.ciudad.__ciudad_new')
-                        <div class="form-group mt-4">
-                            <button type="submit" class="btn btn-primary float-right">Guardar</button>
-                        </div>
+                        @include('shared.ui_kit.__button_form_normal')
                     </form>
                 @endslot
             @endcard

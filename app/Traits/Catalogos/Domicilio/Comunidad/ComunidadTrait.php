@@ -17,7 +17,6 @@ trait ComunidadTrait
     public static function findOrImport($comunidad,$user_id,$tipocomunidad_id){
         $obj = static::where('comunidad', $comunidad)
             ->where('delegado_id', $user_id)
-            ->where('tipocomunidad_id', $tipocomunidad_id)
             ->first();
         if (!$obj) {
             $obj = static::create([

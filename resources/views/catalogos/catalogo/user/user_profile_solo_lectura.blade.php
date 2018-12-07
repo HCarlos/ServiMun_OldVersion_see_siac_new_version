@@ -18,6 +18,7 @@
                     @include('shared.code.__errors')
                     <form method="POST" action="#">
                         @include('shared.catalogo.user.__user_solo_lectura')
+                        @include('shared.ui_kit.__button_form_normal')
                     </form>
                 @endslot
             @endcard

@@ -16,9 +16,7 @@
                         @csrf
                         {{method_field('PUT')}}
                         @include('shared.catalogo.medida.__medida_edit')
-                        <div class="form-group mt-4">
-                            <button type="submit" class="btn btn-primary float-right">Guardar</button>
-                        </div>
+                        @include('shared.ui_kit.__button_form_normal')
                     </form>
                 @endslot
             @endcard
