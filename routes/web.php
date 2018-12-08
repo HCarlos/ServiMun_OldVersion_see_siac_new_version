@@ -244,6 +244,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('newDenuncia', 'Denuncia\DenunciaController@newItem')->name('newDenuncia');
     Route::post('createDenuncia', 'Denuncia\DenunciaController@createItem')->name('createDenuncia');
     Route::get('removeDenuncia/{id}', 'Denuncia\DenunciaController@removeItem')->name('removeDenuncia');
+    Route::get('searchAdress/', 'Denuncia\DenunciaController@searchAdress')->name('searchAdress');
+    Route::get('getUbi/{IdUbi}', 'Denuncia\DenunciaController@getUbi')->name('getUbi');
 
 
 

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Denuncia;
 
+use App\Http\Controllers\Funciones\FuncionesController;
+use App\Models\Catalogos\Domicilios\Ubicacion;
 use App\Models\Denuncia;
 use Illuminate\Http\Request;
 use App\Models\Catalogos\Domicilios\Calle;
@@ -47,6 +49,7 @@ class DenunciaController extends Controller
 //                'putEdit' => 'updateDenuncia',
                 'newItem' => 'newDenuncia',
                 'removeItem' => 'removeDenuncia',
+                'searchAdressDenuncia' => 'listDenuncias',
 //                'showProcess1' => 'showFileListUserExcel1A',
             ]
         );
@@ -141,11 +144,43 @@ class DenunciaController extends Controller
         } else {
             return Response::json(['mensaje' => 'Se ha producido un error.', 'data' => 'Error', 'status' => '200'], 200);
         }
-    }    
-    
-    
-    
-    
-    
-    
+    }
+
+
+
+// ***************** MAUTOCOMPLETE DE UBICACIONES ++++++++++++++++++++ //
+    protected function searchAdress(Request $request)
+    {
+        ini_set('max_execution_time', 300);
+        $filters =$request->input('search');
+        $F           = new FuncionesController();
+        $tsString    = $F->string_to_tsQuery( strtoupper($filters),' & ');
+        $items = Ubicacion::query()
+            ->search($tsString)
+            ->orderByDesc('id')
+            ->get();
+        $data=array();
+
+        foreach ($items as $item) {
+            $data[]=array('value'=>$item->calle.' '.$item->colonia.' '.$item->localidad,' '.$item->ciudad,'id'=>$item->id);
+        }
+        if(count($data))
+            return $data;
+        else
+            return ['value'=>'No se encontraron resultados','id'=>0];
+
+    }
+
+// ***************** MAUTOCOMPLETE DE UBICACIONES ++++++++++++++++++++ //
+    protected function getUbi($IdUbi=0)
+    {
+        $items = Ubicacion::find($IdUbi);
+        return Response::json(['mensaje' => 'OK', 'data' => json_decode($items), 'status' => '200'], 200);
+
+    }
+
+
+
+
+
 }

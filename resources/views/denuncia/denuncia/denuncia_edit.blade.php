@@ -2,7 +2,7 @@
 
 @section('container')
 
-@home
+@denunciaContainer
     @slot('titulo_catalogo',$titulo_catalogo)
     @slot('titulo_header','Folio: '. $items->id)
     @slot('contenido')
@@ -21,6 +21,6 @@
                 @endslot
             @endcard
     @endslot
-@endhome
+@enddenunciaContainer
 
 @endsection
