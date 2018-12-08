@@ -11,7 +11,7 @@
                 @slot('title_card','')
                 @slot('body_card')
                     @include('shared.code.__errors')
-                    <form method="POST" action="{{ route('createUbicacion') }}">
+                    <form method="POST" action="{{ route('createUbicacion') }}" id="frmUbicacion">
                         @csrf
                         @include('shared.catalogo.domicilio.ubicacion.__ubicacion_new')
                         @include('shared.ui_kit.__button_form_normal')

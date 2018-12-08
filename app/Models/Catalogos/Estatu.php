@@ -26,10 +26,10 @@ class Estatu extends Model
     }
 
     public static function findOrImport($estatus){
-        $obj = static::where('estatus', $estatus)->first();
+        $obj = static::where('estatus', trim($estatus))->first();
         if (!$obj) {
             $obj = static::create([
-                'estatus' => strtoupper($estatus),
+                'estatus' => strtoupper(trim($estatus)),
             ]);
         }
         return $obj;

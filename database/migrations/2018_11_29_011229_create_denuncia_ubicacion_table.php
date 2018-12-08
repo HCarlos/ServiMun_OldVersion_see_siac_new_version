@@ -38,7 +38,7 @@ class CreateDenunciaUbicacionTable extends Migration
             $table->unsignedInteger('municipio_id')->default(0)->nullable()->index();
             $table->unsignedInteger('estado_id')->default(0)->nullable()->index();
             $table->unsignedInteger('codigopostal_id')->default(0)->nullable()->index();
-            $table->unique(['calle_id', 'colonia_id','localidad_id','ciudad_id', 'municipio_id','estado_id', 'codigopostal_id']);
+//            $table->unique(['calle_id', 'colonia_id','localidad_id', 'codigopostal_id']);
             $table->softDeletes();
             $table->timestamps();
 

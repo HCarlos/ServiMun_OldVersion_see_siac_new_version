@@ -23,7 +23,7 @@ class Codigopostal extends Model
     }
 
     public static function findOrImport($codigo,$cp){
-        $obj = static::where('codigo', $codigo)->first();
+        $obj = static::where('codigo', trim($codigo))->first();
         if (!$obj) {
             $obj = static::create([
                 'codigo' => strtoupper($codigo),

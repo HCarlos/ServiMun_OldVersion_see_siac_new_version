@@ -39,10 +39,10 @@ class Subarea extends Model
 //    }
 
     public static function findOrImport($subarea,$area_id,$jefe_id){
-        $obj = static::where('subarea', $subarea)->first();
+        $obj = static::where('subarea', trim($subarea))->first();
         if (!$obj) {
             $obj = static::create([
-                'subarea' => strtoupper($subarea),
+                'subarea' => strtoupper(trim($subarea)),
                 'area_id' => $area_id,
                 'jefe_id' => $jefe_id,
             ]);

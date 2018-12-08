@@ -12,7 +12,7 @@
                 @slot('title_card','')
                 @slot('body_card')
                     @include('shared.code.__errors')
-                    <form method="POST" action="{{ route('updateComunidad') }}">
+                    <form method="POST" action="{{ route('updateComunidad') }}" id="frmComunidad">
                         @csrf
                         {{method_field('PUT')}}
                         @include('shared.catalogo.domicilio.comunidad.__comunidad_edit')

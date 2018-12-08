@@ -59,10 +59,7 @@ class UbicacionController extends Controller
         $item            = Ubicacion::find($Id);
         $Calles          = Calle::all()->sortBy('calle');
         $Colonias        = Colonia::all()->sortBy('colonia');
-        $Localidades     = Localidad::all()->sortBy('localidad');
-        $Ciudades        = Ciudad::all()->sortBy('ciudad');
-        $Municipios      = Municipio::all()->sortBy('municipio');
-        $Estadps         = Estado::all()->sortBy('estado');
+        $Localidades     = Comunidad::all()->sortBy('comunidad');
         $Codigospostales = Codigopostal::all()->sortBy('cp');
 
         return view('catalogos.catalogo.domicilio.ubicacion.ubicacion_edit',
@@ -71,9 +68,6 @@ class UbicacionController extends Controller
                 'calles'          => $Calles,
                 'colonias'        => $Colonias,
                 'localidades'     => $Localidades,
-                'ciudades'        => $Ciudades,
-                'municipios'      => $Municipios,
-                'estados'         => $Estadps,
                 'codigospostales' => $Codigospostales,
                 'items'           => $item,
                 'editItemTitle'   => isset($item->ubicacion) ? $item->ubicacion : 'Nuevo',
@@ -97,10 +91,7 @@ class UbicacionController extends Controller
     {
         $Calles          = Calle::all()->sortBy('calle');
         $Colonias        = Colonia::all()->sortBy('colonia');
-        $Localidades     = Localidad::all()->sortBy('localidad');
-        $Ciudades        = Ciudad::all()->sortBy('ciudad');
-        $Municipios      = Municipio::all()->sortBy('municipio');
-        $Estadps         = Estado::all()->sortBy('estado');
+        $Localidades     = Comunidad::all()->sortBy('comunidad');
         $Codigospostales = Codigopostal::all()->sortBy('cp');
         return view('catalogos.catalogo.domicilio.ubicacion.ubicacion_new',
             [
@@ -108,9 +99,6 @@ class UbicacionController extends Controller
                 'calles'          => $Calles,
                 'colonias'        => $Colonias,
                 'localidades'     => $Localidades,
-                'ciudades'        => $Ciudades,
-                'municipios'      => $Municipios,
-                'estados'         => $Estadps,
                 'codigospostales' => $Codigospostales,
                 'postNew'         => 'createUbicacion',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),

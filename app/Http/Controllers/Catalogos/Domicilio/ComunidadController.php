@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Catalogos\Domicilio;
 
 use App\Http\Requests\Domicilio\ComunidadRequest;
+use App\Models\Catalogos\Domicilios\Ciudad;
 use App\Models\Catalogos\Domicilios\Comunidad;
+use App\Models\Catalogos\Domicilios\Estado;
+use App\Models\Catalogos\Domicilios\Municipio;
 use App\Models\Catalogos\Domicilios\Tipocomunidad;
 use App\Traits\Catalogos\Domicilio\Comunidad\ComunidadTrait;
 use App\Traits\Common\CommonTrait;
@@ -52,6 +55,14 @@ class ComunidadController extends Controller
     protected function editItem($Id)
     {
         $item = Comunidad::find($Id);
+        $Ciudades       = Ciudad::all()->sortBy('ciudad');
+        $Municipios     = Municipio::all()->sortBy('municipio');
+        $Estados        = Estado::all()->sortBy('estado');
+
+        $Ciudad_Id      = Ciudad::all()->where('ciudad',env('CIUDAD_DEFAULT'))->first();
+        $Municipio_Id   = Municipio::all()->where('municipio',env('MUNICIPIO_DEFAULT'))->first();
+        $Estado_Id      = Estado::all()->where('estado',env('ESTADO_DEFAULT'))->first();
+
         $Delegados = $this->getUserFromRoles('DELEGADO');
         $Tipocomunidades = Tipocomunidad::all(['id','tipocomunidad'])->sortBy('tipocomunidad');
 
@@ -60,6 +71,12 @@ class ComunidadController extends Controller
                 'user' => Auth::user(),
                 'delegados' => $Delegados,
                 'tipocomunidades' => $Tipocomunidades,
+                'ciudades' => $Ciudades,
+                'municipios' => $Municipios,
+                'estados' => $Estados,
+                'ciudad_id' => $Ciudad_Id->id,
+                'municipio_id' => $Municipio_Id->id,
+                'estado_id' => $Estado_Id->id,
                 'items' => $item,
                 'editItemTitle' => isset($item->comunidad) ? $item->comunidad : 'Nuevo',
                 'putEdit' => 'updateComunidad',
@@ -80,6 +97,14 @@ class ComunidadController extends Controller
 
     protected function newItem()
     {
+        $Ciudades       = Ciudad::all()->sortBy('ciudad');
+        $Municipios     = Municipio::all()->sortBy('municipio');
+        $Estados        = Estado::all()->sortBy('estado');
+
+        $Ciudad_Id      = Ciudad::all()->where('ciudad',env('CIUDAD_DEFAULT'))->first();
+        $Municipio_Id   = Municipio::all()->where('municipio',env('MUNICIPIO_DEFAULT'))->first();
+        $Estado_Id      = Estado::all()->where('estado',env('ESTADO_DEFAULT'))->first();
+
         $Delegados = $this->getUserFromRoles('DELEGADO');
         $Tipocomunidades = Tipocomunidad::all(['id','tipocomunidad'])->sortBy('tipocomunidad');
         //dd($Delegados);
@@ -88,6 +113,12 @@ class ComunidadController extends Controller
                 'editItemTitle' => 'Nuevo',
                 'delegados' => $Delegados,
                 'tipocomunidades' => $Tipocomunidades,
+                'ciudades' => $Ciudades,
+                'municipios' => $Municipios,
+                'estados' => $Estados,
+                'ciudad_id' => $Ciudad_Id->id,
+                'municipio_id' => $Municipio_Id->id,
+                'estado_id' => $Estado_Id->id,
                 'postNew' => 'createComunidad',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
             ]

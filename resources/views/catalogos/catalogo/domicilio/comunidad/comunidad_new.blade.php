@@ -11,7 +11,7 @@
                 @slot('title_card','')
                 @slot('body_card')
                     @include('shared.code.__errors')
-                    <form method="POST" action="{{ route('createComunidad') }}">
+                    <form method="POST" action="{{ route('createComunidad') }}" id="frmComunidad">
                         @csrf
                         @include('shared.catalogo.domicilio.comunidad.__comunidad_new')
                         @include('shared.ui_kit.__button_form_normal')

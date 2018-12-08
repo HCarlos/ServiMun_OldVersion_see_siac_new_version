@@ -23,10 +23,10 @@ class Municipio extends Model
     }
 
     public static function findOrImport($municipio){
-        $obj = static::where('municipio', $municipio)->first();
+        $obj = static::where('municipio', trim($municipio))->first();
         if (!$obj) {
             $obj = static::create([
-                'municipio' => strtoupper($municipio),
+                'municipio' => strtoupper(trim($municipio)),
             ]);
         }
         return $obj;

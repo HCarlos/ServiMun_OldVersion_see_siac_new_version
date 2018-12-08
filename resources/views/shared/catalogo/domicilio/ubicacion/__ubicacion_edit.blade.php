@@ -28,39 +28,28 @@
     <div class="col-md-9">
         <select class="localidad_id form-control "   name="localidad_id" id="localidad_id" size="1">
             @foreach($localidades as $t)
-                <option value="{{$t->id}}" @if($t->id == $items->localidad_id) selected @endif>{{ $t->localidad }}</option>
+                <option value="{{$t->id}}" @if($t->id == $items->localidad_id) selected @endif>{{ $t->comunidad }}</option>
             @endforeach
         </select>
     </div>
-    <label for = "ciudad_id" class="col-md-3 col-form-label">Ciudad</label>
+
+    <label for = "ciudad" class="col-md-3 col-form-label">Ciudad</label>
     <div class="col-md-9">
-        <select class="ciudad_id form-control "  name="ciudad_id" id="ciudad_id" size="1">
-            @foreach($ciudades as $t)
-                <option value="{{$t->id}}" @if($t->id == $items->ciudad_id) selected @endif>{{ $t->ciudad }}</option>
-            @endforeach
-        </select>
+        <input type="text" name="ciudad" id="ciudad" value="{{ $items->ciudad }}" class="form-control" disabled />
     </div>
-    <label for = "municipio_id" class="col-md-3 col-form-label">Municipio</label>
+    <label for = "municipio" class="col-md-3 col-form-label">Municipio</label>
     <div class="col-md-9">
-        <select class="municipio_id form-control " name="municipio_id" id="municipio_id" size="1">
-            @foreach($municipios as $t)
-                <option value="{{$t->id}}" @if($t->id == $items->municipio_id) selected @endif>{{ $t->municipio }}</option>
-            @endforeach
-        </select>
+        <input type="text" name="municipio" id="municipio" value="{{ $items->municipio }}" class="form-control" disabled />
     </div>
-    <label for = "estado_id" class="col-md-3 col-form-label">Estado</label>
+    <label for = "estado" class="col-md-3 col-form-label">Estado</label>
     <div class="col-md-9">
-        <select class="estado_id form-control " name="estado_id" id="estado_id" size="1">
-            @foreach($estados as $t)
-                <option value="{{$t->id}}" @if($t->id == $items->estado_id) selected @endif>{{ $t->estado }}</option>
-            @endforeach
-        </select>
+        <input type="text" name="estado" id="estado" value="{{ $items->estado }}" class="form-control" disabled />
     </div>
     <label for = "codigopostal_id" class="col-md-3 col-form-label">CP</label>
     <div class="col-md-9">
         <select class="codigopostal_id form-control " name="codigopostal_id" id="codigopostal_id" size="1">
             @foreach($codigospostales as $t)
-                <option value="{{$t->id}}" @if($t->id == $items->codigopostal_id) selected @endif>{{ $t->cp }}</option>
+                <option value="{{$t->id}}" @if($t->id == $items->codigopostal_id) selected @endif>{{ $t->codigo }}</option>
             @endforeach
         </select>
     </div>
@@ -75,5 +64,8 @@
 </div>
 
 <input type="hidden" name="id" value="{{$items->id}}" >
+<input type="hidden" name="cd_id" id="cd_id" value="0" >
+<input type="hidden" name="mun_id" id="mun_id" value="0" >
+<input type="hidden" name="edo_id" id="edo_id" value="0" >
 
 <hr>

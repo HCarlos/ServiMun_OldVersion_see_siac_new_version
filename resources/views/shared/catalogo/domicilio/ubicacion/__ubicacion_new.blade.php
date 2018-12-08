@@ -28,31 +28,7 @@
     <div class="col-md-9">
         <select class="localidad_id form-control " name="localidad_id" id="localidad_id" size="1">
             @foreach($localidades as $t)
-                <option value="{{$t->id}}" {{ old('localidad_id') == $t->id ? ' selected ':''}}>{{ $t->localidad }}</option>
-            @endforeach
-        </select>
-    </div>
-    <label for = "ciudad_id" class="col-md-3 col-form-label">Ciudad</label>
-    <div class="col-md-9">
-        <select class="ciudad_id form-control " name="ciudad_id" id="ciudad_id" size="1">
-            @foreach($ciudades as $t)
-                <option value="{{$t->id}}" {{ old('ciudad_id') == $t->id ? ' selected ':''}}>{{ $t->ciudad }}</option>
-            @endforeach
-        </select>
-    </div>
-    <label for = "municipio_id" class="col-md-3 col-form-label">Municipio</label>
-    <div class="col-md-9">
-        <select class="municipio_id form-control " name="municipio_id" id="municipio_id" size="1">
-            @foreach($municipios as $t)
-                <option value="{{$t->id}}" {{ old('municipio_id') == $t->id ? ' selected ':''}}>{{ $t->municipio }}</option>
-            @endforeach
-        </select>
-    </div>
-    <label for = "estado_id" class="col-md-3 col-form-label">Estado</label>
-    <div class="col-md-9">
-        <select class="estado_id form-control " name="estado_id" id="estado_id" size="1">
-            @foreach($estados as $t)
-                <option value="{{$t->id}}" {{ old('estado_id') == $t->id ? ' selected ':''}}>{{ $t->estado }}</option>
+                <option value="{{$t->id}}" {{ old('localidad_id') == $t->id ? ' selected ':''}}>{{ $t->comunidad }}</option>
             @endforeach
         </select>
     </div>
@@ -74,4 +50,6 @@
     </div>
 </div>
 <input type="hidden" name="id" value="0" >
+<input type="hidden" name="comun_id" id="comun_id" value="0" >
+
 <hr>

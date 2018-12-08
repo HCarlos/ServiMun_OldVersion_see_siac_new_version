@@ -23,10 +23,10 @@ class Afiliacion extends Model
     }
 
     public static function findOrImport($afiliacion){
-        $obj = static::where('afiliacion', $afiliacion)->first();
+        $obj = static::where('afiliacion', trim($afiliacion))->first();
         if (!$obj) {
             $obj = static::create([
-                'afiliacion' => strtoupper($afiliacion),
+                'afiliacion' => strtoupper(trim($afiliacion)),
             ]);
         }
         return $obj;

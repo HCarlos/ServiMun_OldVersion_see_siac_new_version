@@ -18,7 +18,7 @@ class Comunidad extends Model
     protected $table = 'comunidades';
 
     protected $fillable = [
-        'id', 'comunidad','delegado_id','tipocomunidad_id',
+        'id', 'comunidad','delegado_id','tipocomunidad_id','ciudad_id','municipio_id','estado_id'
     ];
 
     public function scopeFilterBy($query, $filters){
@@ -31,6 +31,18 @@ class Comunidad extends Model
 
     public function tipoComunidad() {
         return $this->hasOne(Tipocomunidad::class,'id','tipocomunidad_id');
+    }
+
+    public function ciudad() {
+        return $this->hasOne(Ciudad::class,'id','ciudad_id');
+    }
+
+    public function municipio() {
+        return $this->hasOne(Municipio::class,'id','municipio_id');
+    }
+
+    public function estado() {
+        return $this->hasOne(Estado::class,'id','estado_id');
     }
 
 

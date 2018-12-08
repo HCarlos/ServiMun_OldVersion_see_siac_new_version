@@ -32,10 +32,10 @@ class Area extends Model
     }
 
     public static function findOrImport($area,$dependencia_id,$jefe_id){
-        $obj = static::where('area', $area)->first();
+        $obj = static::where('area', trim($area))->first();
         if (!$obj) {
             $obj = static::create([
-                'area' => strtoupper($area),
+                'area' => strtoupper(trim($area)),
                 'dependencia_id' => $dependencia_id,
                 'jefe_id' => $jefe_id,
             ]);

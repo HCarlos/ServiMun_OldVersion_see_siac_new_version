@@ -5,6 +5,7 @@ namespace App\Http\Requests\Domicilio;
 use App\Models\Catalogos\Domicilios\Calle;
 use App\Models\Catalogos\Domicilios\Ciudad;
 use App\Models\Catalogos\Domicilios\Colonia;
+use App\Models\Catalogos\Domicilios\Comunidad;
 use App\Models\Catalogos\Domicilios\Estado;
 use App\Models\Catalogos\Domicilios\Localidad;
 use App\Models\Catalogos\Domicilios\Municipio;
@@ -36,21 +37,15 @@ class UbicacionRequest extends FormRequest
             'calle_id'        => ['required'],
             'colonia_id'      => ['required'],
             'localidad_id'    => ['required'],
-            'ciudad_id'       => ['required'],
-            'municipio_id'    => ['required'],
-            'estado_id'       => ['required'],
             'codigopostal_id' => ['required'],
             'latitud'         => ['present'],
             'longitud'        => ['present'],
-            'longitud'              => [
-                                    Rule::unique('ubicaciones')
-                                        ->where('calle_id', $this->calle_id)
-                                        ->where('colonia_id', $this->colonia_id)
-                                        ->where('localidad_id', $this->localidad_id)
-                                        ->where('ciudad_id', $this->ciudad_id)
-                                        ->where('municipio_id', $this->municipio_id)
-                                        ->where('estado_id', $this->estado_id),
-                                 ]
+//            'longitud'              => [
+//                                    Rule::unique('ubicaciones')
+//                                        ->where('calle_id', $this->calle_id)
+//                                        ->where('colonia_id', $this->colonia_id)
+//                                        ->where('localidad_id', $this->localidad_id)
+//                                 ]
 
             ];
 
@@ -63,10 +58,7 @@ class UbicacionRequest extends FormRequest
 
             $Calle   = Calle::findOrFail($this->calle_id);
             $Colonia = Colonia::findOrFail($this->colonia_id);
-            $Localidad = Localidad::findOrFail($this->localidad_id);
-            $Ciudad = Ciudad::findOrFail($this->ciudad_id);
-            $Municipio = Municipio::findOrFail($this->municipio_id);
-            $Estado = Estado::findOrFail($this->estado_id);
+            $Localidad = Comunidad::findOrFail($this->localidad_id);
             $CPs = Codigopostal::findOrFail($this->codigopostal_id);
             $Item = [
                 'calle' => strtoupper($Calle->calle),
@@ -74,18 +66,18 @@ class UbicacionRequest extends FormRequest
                 'num_int' => strtoupper($this->num_int),
                 'colonia' => strtoupper($Colonia->colonia),
                 'localidad' => strtoupper($Localidad->localidad),
-                'ciudad' => strtoupper($Ciudad->ciudad),
-                'municipio' => strtoupper($Municipio->municipio),
-                'estado' => strtoupper($Estado->estado),
+                'ciudad' => strtoupper($Localidad->ciudad->ciudad),
+                'municipio' => strtoupper($Localidad->municipio->municipio),
+                'estado' => strtoupper($Localidad->estado->estado),
                 'cp' => strtoupper($CPs->cp),
                 'latitud' => $this->latitud,
                 'longitud' => $this->longitud,
                 'calle_id' => $this->calle_id,
                 'colonia_id' => $this->colonia_id,
                 'localidad_id' => $this->localidad_id,
-                'ciudad_id' => $this->ciudad_id,
-                'municipio_id' => $this->municipio_id,
-                'estado_id' => $this->estado_id,
+                'ciudad_id' => $Localidad->ciudad_id,
+                'municipio_id' => $Localidad->municipio_id,
+                'estado_id' => $Localidad->estado_id,
                 'codigopostal_id' => $this->codigopostal_id,
 
             ];
@@ -110,9 +102,9 @@ class UbicacionRequest extends FormRequest
         $Item->calles()->attach($this->calle_id);
         $Item->colonias()->attach($this->colonia_id);
         $Item->localidades()->attach($this->localidad_id);
-        $Item->ciudades()->attach($this->ciudad_id);
-        $Item->municipios()->attach($this->municipio_id);
-        $Item->estados()->attach($this->estado_id);
+        $Item->ciudades()->attach($Item->ciudad_id);
+        $Item->municipios()->attach($Item->municipio_id);
+        $Item->estados()->attach($Item->estado_id);
         $Item->codigospostales()->attach($this->codigopostal_id);
         return $Item;
     }

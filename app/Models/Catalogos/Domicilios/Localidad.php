@@ -23,10 +23,10 @@ class Localidad extends Model
     }
 
     public static function findOrImport($localidad){
-        $obj = static::where('localidad', $localidad)->first();
+        $obj = static::where('localidad', trim($localidad))->first();
         if (!$obj && $localidad !== "") {
             $obj = static::create([
-                'localidad' => strtoupper($localidad),
+                'localidad' => strtoupper(trim($localidad)),
             ]);
         }
         return $obj;

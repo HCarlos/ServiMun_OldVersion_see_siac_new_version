@@ -23,10 +23,10 @@ class Ciudad extends Model
     }
 
     public static function findOrImport($ciudad){
-        $obj = static::where('ciudad', $ciudad)->first();
+        $obj = static::where('ciudad', trim($ciudad))->first();
         if (!$obj) {
             $obj = static::create([
-                'ciudad' => strtoupper($ciudad),
+                'ciudad' => strtoupper(trim($ciudad)),
             ]);
         }
         return $obj;

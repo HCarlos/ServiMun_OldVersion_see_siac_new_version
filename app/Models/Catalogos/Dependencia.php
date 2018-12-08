@@ -43,11 +43,11 @@ class Dependencia extends Model
     }
 
     public static function findOrImport($dependencia,$abreviatura,$class_css,$visible_internet,$is_areas,$jefe_id,$user_id){
-        $obj = static::where('dependencia', $dependencia)->first();
+        $obj = static::where('dependencia', trim($dependencia))->first();
         if (!$obj) {
             $obj = static::create([
-                'dependencia' => strtoupper($dependencia),
-                'abreviatura' => strtoupper($abreviatura),
+                'dependencia' => strtoupper(trim($dependencia)),
+                'abreviatura' => strtoupper(trim($abreviatura)),
                 'class_css' => $class_css,
                 'visible_internet' => $visible_internet,
                 'is_areas' => $is_areas,

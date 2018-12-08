@@ -22,10 +22,10 @@ class Medida extends Model
     }
 
     public static function findOrImport($medida){
-        $obj = static::where('medida', $medida)->first();
+        $obj = static::where('medida', trim($medida))->first();
         if (!$obj) {
             $obj = static::create([
-                'medida' => strtoupper($medida),
+                'medida' => strtoupper(trim($medida)),
             ]);
         }
         return $obj;

@@ -22,10 +22,10 @@ class Origen extends Model
     }
 
     public static function findOrImport($origen){
-        $obj = static::where('origen', $origen)->first();
+        $obj = static::where('origen', trim($origen))->first();
         if (!$obj) {
             $obj = static::create([
-                'origen' => strtoupper($origen),
+                'origen' => strtoupper(trim($origen)),
             ]);
         }
         return $obj;

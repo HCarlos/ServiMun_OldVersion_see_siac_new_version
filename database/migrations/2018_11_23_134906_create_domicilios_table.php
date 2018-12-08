@@ -99,6 +99,9 @@ class CreateDomiciliosTable extends Migration
         Schema::create($tableNames['comunidades'], function (Blueprint $table) use ($tableNames) {
             $table->increments('id');
             $table->string('comunidad',250)->default('')->nullable()->unique();
+            $table->unsignedInteger('ciudad_id')->default(0)->index();
+            $table->unsignedInteger('municipio_id')->default(0)->index();
+            $table->unsignedInteger('estado_id')->default(0)->index();
             $table->unsignedInteger('delegado_id')->default(0)->index();
             $table->unsignedInteger('tipocomunidad_id')->default(0)->index();
             $table->softDeletes();
@@ -114,6 +117,22 @@ class CreateDomiciliosTable extends Migration
                 ->references('id')
                 ->on($tableNames['tipocomunidades'])
                 ->onDelete('cascade');
+
+            $table->foreign('ciudad_id')
+                ->references('id')
+                ->on($tableNames['ciudades'])
+                ->onDelete('cascade');
+
+            $table->foreign('municipio_id')
+                ->references('id')
+                ->on($tableNames['municipios'])
+                ->onDelete('cascade');
+
+            $table->foreign('estado_id')
+                ->references('id')
+                ->on($tableNames['estados'])
+                ->onDelete('cascade');
+
         });
 
 

@@ -23,10 +23,10 @@ class Estado extends Model
     }
 
     public static function findOrImport($estado){
-        $obj = static::where('estado', $estado)->first();
+        $obj = static::where('estado', trim($estado))->first();
         if (!$obj) {
             $obj = static::create([
-                'estado' => strtoupper($estado),
+                'estado' => strtoupper(trim($estado)),
             ]);
         }
         return $obj;

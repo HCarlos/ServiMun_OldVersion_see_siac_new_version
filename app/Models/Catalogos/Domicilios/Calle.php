@@ -24,10 +24,10 @@ class Calle extends Model
     }
 
     public static function findOrImport($calle){
-        $obj = static::where('calle', $calle)->first();
+        $obj = static::where('calle', trim($calle))->first();
         if (!$obj) {
             $obj = static::create([
-                'calle' => strtoupper($calle),
+                'calle' => strtoupper(trim($calle)),
             ]);
         }
         return $obj;

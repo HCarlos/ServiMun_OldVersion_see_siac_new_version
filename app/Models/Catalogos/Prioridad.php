@@ -28,10 +28,10 @@ class Prioridad extends Model
     }
 
     public static function findOrImport($prioridad,$predeterminado,$class_css){
-        $obj = static::where('prioridad', $prioridad)->first();
+        $obj = static::where('prioridad', trim($prioridad))->first();
         if (!$obj) {
             $obj = static::create([
-                'prioridad' => strtoupper($prioridad),
+                'prioridad' => strtoupper(trim($prioridad)),
                 'predeterminado' => $predeterminado,
                 'class_css' => $class_css,
             ]);

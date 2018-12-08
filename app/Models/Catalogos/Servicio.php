@@ -36,10 +36,10 @@ class Servicio extends Model
     }
 
     public static function findOrImport($servicio,$habilitado,$medida_id,$subarea_id){
-        $obj = static::where('servicio', $servicio)->first();
+        $obj = static::where('servicio', trim($servicio))->first();
         if (!$obj) {
             $obj = static::create([
-                'servicio' => strtoupper($servicio),
+                'servicio' => strtoupper(trim($servicio)),
                 'habilitado' => $habilitado,
                 'medida_id' => $medida_id,
                 'subarea_id' => $subarea_id,

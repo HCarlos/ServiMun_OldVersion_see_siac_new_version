@@ -35,11 +35,15 @@ class ComunidadRequest extends FormRequest
     
     public function manage()
     {
+//        dd($this->edo_id);
 
         $Item = [
             'comunidad' => strtoupper($this->comunidad),
             'tipocomunidad_id' => $this->tipocomunidad_id,
             'delegado_id' => $this->delegado_id,
+            'ciudad_id' => $this->cd_id,
+            'municipio_id' => $this->mun_id,
+            'estado_id' => $this->edo_id,
         ];
 
         try {
