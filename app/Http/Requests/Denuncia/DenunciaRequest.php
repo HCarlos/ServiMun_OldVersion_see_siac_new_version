@@ -61,7 +61,7 @@ class DenunciaRequest extends FormRequest
                 'num_ext'                  => strtoupper($this->num_ext),
                 'num_int'                  => strtoupper($this->num_int),
                 'colonia'                  => strtoupper($Ubicacion->colonia),
-                'localidad'                => strtoupper($Ubicacion->localidad),
+                'comunidad'                => strtoupper($Ubicacion->comunidad),
                 'ciudad'                   => strtoupper($Ubicacion->ciudad),
                 'municipio'                => strtoupper($Ubicacion->municipio),
                 'estado'                   => strtoupper($Ubicacion->estado),

@@ -57,7 +57,12 @@
             <div class="form-group row mb-1">
                 <label for = "search_autocomplete" class="col-md-3 col-form-label">Buscar</label>
                 <div class="col-md-9">
-                    {!! Form::text('search_autocomplete', null, array('placeholder' => 'Buscar ubicación','class' => 'form-control','id'=>'search_autocomplete')) !!}
+                    <div class="input-group">
+                        {!! Form::text('search_autocomplete', null, array('placeholder' => 'Buscar ubicación...','class' => 'form-control','id'=>'search_autocomplete')) !!}
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-icon btn-info"> <i class="mdi mdi-magnify"></i> </button>
+                        </span>
+                    </div>
                 </div>
             </div>
             <div class="form-group row mb-1">
@@ -73,9 +78,9 @@
                 </div>
             </div>
             <div class="form-group row mb-1">
-                <label for = "localidad" class="col-md-3 col-form-label">Comunidad</label>
+                <label for = "comunidad" class="col-md-3 col-form-label">Comunidad</label>
                 <div class="col-md-9">
-                    <input type="text" name="localidad" id="localidad" value="{{ old('localidad') }}" class="form-control" disabled/>
+                    <input type="text" name="comunidad" id="comunidad" value="{{ old('comunidad') }}" class="form-control" disabled/>
                 </div>
             </div>
             <div class="form-group row mb-1">

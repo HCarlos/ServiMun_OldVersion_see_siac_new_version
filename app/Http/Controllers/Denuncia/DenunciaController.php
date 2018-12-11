@@ -61,7 +61,7 @@ class DenunciaController extends Controller
         $item            = Denuncia::find($Id);
         $Calles          = Calle::all()->sortBy('calle');
         $Colonias        = Colonia::all()->sortBy('colonia');
-        $Localidades     = Localidad::all()->sortBy('localidad');
+        $Localidades     = Localidad::all()->sortBy('comunidad');
         $Ciudades        = Ciudad::all()->sortBy('ciudad');
         $Municipios      = Municipio::all()->sortBy('municipio');
         $Estadps         = Estado::all()->sortBy('estado');
@@ -72,7 +72,7 @@ class DenunciaController extends Controller
                 'user' => Auth::user(),
                 'calles'          => $Calles,
                 'colonias'        => $Colonias,
-                'localidades'     => $Localidades,
+                'comunidades'     => $Localidades,
                 'ciudades'        => $Ciudades,
                 'municipios'      => $Municipios,
                 'estados'         => $Estadps,
@@ -99,7 +99,7 @@ class DenunciaController extends Controller
     {
         $Calles          = Calle::all()->sortBy('calle');
         $Colonias        = Colonia::all()->sortBy('colonia');
-        $Localidades     = Localidad::all()->sortBy('localidad');
+        $Localidades     = Localidad::all()->sortBy('comunidad');
         $Ciudades        = Ciudad::all()->sortBy('ciudad');
         $Municipios      = Municipio::all()->sortBy('municipio');
         $Estadps         = Estado::all()->sortBy('estado');
@@ -109,7 +109,7 @@ class DenunciaController extends Controller
                 'editItemTitle'   => 'Nuevo',
                 'calles'          => $Calles,
                 'colonias'        => $Colonias,
-                'localidades'     => $Localidades,
+                'comunidades'     => $Localidades,
                 'ciudades'        => $Ciudades,
                 'municipios'      => $Municipios,
                 'estados'         => $Estadps,
@@ -157,12 +157,12 @@ class DenunciaController extends Controller
         $tsString    = $F->string_to_tsQuery( strtoupper($filters),' & ');
         $items = Ubicacion::query()
             ->search($tsString)
-            ->orderByDesc('id')
+            ->orderBy('id')
             ->get();
         $data=array();
 
         foreach ($items as $item) {
-            $data[]=array('value'=>$item->calle.' '.$item->colonia.' '.$item->localidad,' '.$item->ciudad,'id'=>$item->id);
+            $data[]=array('value'=>$item->id.' '.$item->calle.' '.$item->colonia.' '.$item->comunidad,' '.$item->ciudad,'id'=>$item->id);
         }
         if(count($data))
             return $data;

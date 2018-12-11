@@ -2,6 +2,15 @@
 
 All notable changes to `laravel-permission` will be documented in this file
 
+## 2.28.2 - 2018-12-10
+- Use config settings for cache reset in migration stub
+
+## 2.28.1 - 2018-12-07
+- Remove use of Cache facade, for Lumen compatibility
+
+## 2.28.0 - 2018-11-30
+- Rename `getCacheKey` method in HasPermissions trait to `getPermissionCacheKey` for clearer specificity. 
+
 ## 2.27.0 - 2018-11-21
 - Add ability to specify a cache driver for roles/permissions caching
 

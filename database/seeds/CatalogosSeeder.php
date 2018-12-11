@@ -8652,10 +8652,10 @@ class CatalogosSeeder extends Seeder
         Sepomex::findOrImport('Rural',386,1,102,1,1,23);
         Sepomex::findOrImport('Rural',387,10,103,1,1,23);
 
-        factory(Ubicacion::class, 250)->create()->each(function ($Ubi) {
+        factory(Ubicacion::class, 250000)->create()->each(function ($Ubi) {
             $Ubi->calles()->attach($Ubi->calle_id);
             $Ubi->colonias()->attach($Ubi->colonia_id);
-            $Ubi->localidades()->attach($Ubi->localidad_id);
+            $Ubi->comunidades()->attach($Ubi->comunidad_id);
             $Ubi->ciudades()->attach($Ubi->ciudad_id);
             $Ubi->municipios()->attach($Ubi->municipio_id);
             $Ubi->estados()->attach($Ubi->estado_id);

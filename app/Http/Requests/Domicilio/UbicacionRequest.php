@@ -36,7 +36,7 @@ class UbicacionRequest extends FormRequest
             'calle_id'        => ['required'],
             'calle_id'        => ['required'],
             'colonia_id'      => ['required'],
-            'localidad_id'    => ['required'],
+            'comunidad_id'    => ['required'],
             'codigopostal_id' => ['required'],
             'latitud'         => ['present'],
             'longitud'        => ['present'],
@@ -44,7 +44,7 @@ class UbicacionRequest extends FormRequest
 //                                    Rule::unique('ubicaciones')
 //                                        ->where('calle_id', $this->calle_id)
 //                                        ->where('colonia_id', $this->colonia_id)
-//                                        ->where('localidad_id', $this->localidad_id)
+//                                        ->where('comunidad_id', $this->comunidad_id)
 //                                 ]
 
             ];
@@ -58,14 +58,14 @@ class UbicacionRequest extends FormRequest
 
             $Calle   = Calle::findOrFail($this->calle_id);
             $Colonia = Colonia::findOrFail($this->colonia_id);
-            $Localidad = Comunidad::findOrFail($this->localidad_id);
+            $Localidad = Comunidad::findOrFail($this->comunidad_id);
             $CPs = Codigopostal::findOrFail($this->codigopostal_id);
             $Item = [
                 'calle' => strtoupper($Calle->calle),
                 'num_ext' => strtoupper($this->num_ext),
                 'num_int' => strtoupper($this->num_int),
                 'colonia' => strtoupper($Colonia->colonia),
-                'localidad' => strtoupper($Localidad->localidad),
+                'comunidad' => strtoupper($Localidad->comunidad),
                 'ciudad' => strtoupper($Localidad->ciudad->ciudad),
                 'municipio' => strtoupper($Localidad->municipio->municipio),
                 'estado' => strtoupper($Localidad->estado->estado),
@@ -74,7 +74,7 @@ class UbicacionRequest extends FormRequest
                 'longitud' => $this->longitud,
                 'calle_id' => $this->calle_id,
                 'colonia_id' => $this->colonia_id,
-                'localidad_id' => $this->localidad_id,
+                'comunidad_id' => $this->comunidad_id,
                 'ciudad_id' => $Localidad->ciudad_id,
                 'municipio_id' => $Localidad->municipio_id,
                 'estado_id' => $Localidad->estado_id,
@@ -101,7 +101,7 @@ class UbicacionRequest extends FormRequest
     public function attaches($Item){
         $Item->calles()->attach($this->calle_id);
         $Item->colonias()->attach($this->colonia_id);
-        $Item->localidades()->attach($this->localidad_id);
+        $Item->comunidades()->attach($this->comunidad_id);
         $Item->ciudades()->attach($Item->ciudad_id);
         $Item->municipios()->attach($Item->municipio_id);
         $Item->estados()->attach($Item->estado_id);
@@ -112,7 +112,7 @@ class UbicacionRequest extends FormRequest
     public function detaches($Item){
         $Item->calles()->detach($Item->calle_id);
         $Item->colonias()->detach($Item->colonia_id);
-        $Item->localidades()->detach($Item->localidad_id);
+        $Item->comunidades()->detach($Item->comunidad_id);
         $Item->ciudades()->detach($Item->ciudad_id);
         $Item->municipios()->detach($Item->municipio_id);
         $Item->estados()->detach($Item->estado_id);

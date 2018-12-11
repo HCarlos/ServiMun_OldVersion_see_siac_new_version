@@ -23,7 +23,7 @@ class CreateDenunciaUbicacionTable extends Migration
             $table->string('num_ext',100)->default('')->nullable();
             $table->string('num_int',100)->default('')->nullable();
             $table->string('colonia',150)->default('')->nullable();
-            $table->string('localidad',150)->default('')->nullable();
+            $table->string('comunidad',150)->default('')->nullable();
             $table->string('ciudad',100)->default('')->nullable();
             $table->string('municipio',50)->default('')->nullable();
             $table->string('estado',50)->default('TABASCO')->nullable();
@@ -33,12 +33,12 @@ class CreateDenunciaUbicacionTable extends Migration
             $table->float('longitud',4,10)->default(0)->nullable();
             $table->unsignedInteger('calle_id')->default(0)->nullable()->index();
             $table->unsignedInteger('colonia_id')->default(0)->nullable()->index();
-            $table->unsignedInteger('localidad_id')->default(0)->nullable()->index();
+            $table->unsignedInteger('comunidad_id')->default(0)->nullable()->index();
             $table->unsignedInteger('ciudad_id')->default(0)->nullable()->index();
             $table->unsignedInteger('municipio_id')->default(0)->nullable()->index();
             $table->unsignedInteger('estado_id')->default(0)->nullable()->index();
             $table->unsignedInteger('codigopostal_id')->default(0)->nullable()->index();
-//            $table->unique(['calle_id', 'colonia_id','localidad_id', 'codigopostal_id']);
+//            $table->unique(['calle_id', 'colonia_id','comunidad_id', 'codigopostal_id']);
             $table->softDeletes();
             $table->timestamps();
 
@@ -52,9 +52,9 @@ class CreateDenunciaUbicacionTable extends Migration
                 ->on($tableNamesDomicilios['colonias'])
                 ->onDelete('cascade');
 
-            $table->foreign('localidad_id')
+            $table->foreign('comunidad_id')
                 ->references('id')
-                ->on($tableNamesDomicilios['localidades'])
+                ->on($tableNamesDomicilios['comunidades'])
                 ->onDelete('cascade');
 
             $table->foreign('ciudad_id')
@@ -122,17 +122,17 @@ class CreateDenunciaUbicacionTable extends Migration
         });
 
 
-        Schema::create($tableNamesDomicilios['localidad_ubicacion'], function (Blueprint $table) use ($tableNamesDomicilios){
+        Schema::create($tableNamesDomicilios['comunidad_ubicacion'], function (Blueprint $table) use ($tableNamesDomicilios){
             $table->increments('id');
-            $table->unsignedInteger('localidad_id')->default(0)->index();
+            $table->unsignedInteger('comunidad_id')->default(0)->index();
             $table->unsignedInteger('ubicacion_id')->default(0)->index();
             $table->softDeletes();
             $table->timestamps();
-            $table->unique(['localidad_id', 'ubicacion_id']);
+            $table->unique(['comunidad_id', 'ubicacion_id']);
 
-            $table->foreign('localidad_id')
+            $table->foreign('comunidad_id')
                 ->references('id')
-                ->on($tableNamesDomicilios['localidades'])
+                ->on($tableNamesDomicilios['comunidades'])
                 ->onDelete('cascade');
 
             $table->foreign('ubicacion_id')
@@ -224,9 +224,9 @@ class CreateDenunciaUbicacionTable extends Migration
 
         DB::statement("ALTER DATABASE dbatemun set default_text_search_config = 'spanish'");
         DB::statement("ALTER TABLE ubicaciones ADD COLUMN searchtext TSVECTOR");
-        DB::statement("UPDATE ubicaciones SET searchtext = to_tsvector('spanish', coalesce(trim(calle),'') || ' ' || coalesce(trim(colonia),'') || ' ' || coalesce(trim(localidad),'') || ' ' || coalesce(trim(ciudad),'') || ' ' || coalesce(trim(municipio),'') || ' ' || coalesce(trim(estado),'') )");
+        DB::statement("UPDATE ubicaciones SET searchtext = to_tsvector('spanish', coalesce(trim(calle),'') || ' ' || coalesce(trim(colonia),'') || ' ' || coalesce(trim(comunidad),'') || ' ' || coalesce(trim(ciudad),'') || ' ' || coalesce(trim(municipio),'') || ' ' || coalesce(trim(estado),'') )");
         DB::statement("CREATE INDEX searchtext_gin ON ubicaciones USING GIN(searchtext)");
-        DB::statement("CREATE TRIGGER ts_searchtext BEFORE INSERT OR UPDATE ON ubicaciones FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger('searchtext', 'pg_catalog.spanish', 'calle', 'colonia', 'localidad', 'ciudad', 'municipio', 'estado')");
+        DB::statement("CREATE TRIGGER ts_searchtext BEFORE INSERT OR UPDATE ON ubicaciones FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger('searchtext', 'pg_catalog.spanish', 'calle', 'colonia', 'comunidad', 'ciudad', 'municipio', 'estado')");
 
 
         Schema::create($tableNamesCatalogos['denuncias'], function (Blueprint $table) use ($tableNamesCatalogos) {
@@ -243,7 +243,7 @@ class CreateDenunciaUbicacionTable extends Migration
             $table->string('num_ext',100)->default('')->nullable();
             $table->string('num_int',100)->default('')->nullable();
             $table->string('colonia',150)->default('')->nullable();
-            $table->string('localidad',150)->default('')->nullable();
+            $table->string('comunidad',150)->default('')->nullable();
             $table->string('ciudad',100)->default('')->nullable();
             $table->string('municipio',50)->default('')->nullable();
             $table->string('estado',50)->default('TABASCO')->nullable();
@@ -517,9 +517,9 @@ class CreateDenunciaUbicacionTable extends Migration
 
         DB::statement("ALTER DATABASE dbatemun set default_text_search_config = 'spanish'");
         DB::statement("ALTER TABLE denuncias ADD COLUMN searchtextdenuncia TSVECTOR");
-        DB::statement("UPDATE denuncias SET searchtextdenuncia = to_tsvector('spanish', coalesce(trim(descripcion),'') || ' ' || coalesce(trim(referencia),'') || ' ' || coalesce(trim(calle),'') || ' ' || coalesce(trim(colonia),'') || ' ' || coalesce(trim(localidad),'') || ' ' || coalesce(trim(ciudad),'') || ' ' || coalesce(trim(municipio),'') || ' ' || coalesce(trim(estado),'') )");
+        DB::statement("UPDATE denuncias SET searchtextdenuncia = to_tsvector('spanish', coalesce(trim(descripcion),'') || ' ' || coalesce(trim(referencia),'') || ' ' || coalesce(trim(calle),'') || ' ' || coalesce(trim(colonia),'') || ' ' || coalesce(trim(comunidad),'') || ' ' || coalesce(trim(ciudad),'') || ' ' || coalesce(trim(municipio),'') || ' ' || coalesce(trim(estado),'') )");
         DB::statement("CREATE INDEX searchtextdenuncia_gin ON denuncias USING GIN(searchtextdenuncia)");
-        DB::statement("CREATE TRIGGER ts_searchtext BEFORE INSERT OR UPDATE ON denuncias FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger('searchtextdenuncia', 'pg_catalog.spanish', 'descripcion', 'referencia', 'calle', 'colonia', 'localidad', 'ciudad', 'municipio', 'estado')");
+        DB::statement("CREATE TRIGGER ts_searchtext BEFORE INSERT OR UPDATE ON denuncias FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger('searchtextdenuncia', 'pg_catalog.spanish', 'descripcion', 'referencia', 'calle', 'colonia', 'comunidad', 'ciudad', 'municipio', 'estado')");
 
 
     }
@@ -555,7 +555,7 @@ class CreateDenunciaUbicacionTable extends Migration
 
         Schema::dropIfExists($tableNamesDomicilios['calle_ubicacion']);
         Schema::dropIfExists($tableNamesDomicilios['colonia_ubicacion']);
-        Schema::dropIfExists($tableNamesDomicilios['localidad_ubicacion']);
+        Schema::dropIfExists($tableNamesDomicilios['comunidad_ubicacion']);
         Schema::dropIfExists($tableNamesDomicilios['ciudad_ubicacion']);
         Schema::dropIfExists($tableNamesDomicilios['municipio_ubicacion']);
         Schema::dropIfExists($tableNamesDomicilios['estado_ubicacion']);

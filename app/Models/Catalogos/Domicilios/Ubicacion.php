@@ -15,9 +15,9 @@ class Ubicacion extends Model
     protected $table = 'ubicaciones';
 
     protected $fillable = [
-        'id', 'calle','num_ext','num_int','colonia', 'localidad','ciudad','municipio','estado','pais', 'cp',
+        'id', 'calle','num_ext','num_int','colonia', 'comunidad','ciudad','municipio','estado','pais', 'cp',
         'latitud','longitud','searchtext',
-        'calle_id', 'colonia_id','localidad_id','ciudad_id', 'municipio_id','estado_id', 'codigopostal_id',
+        'calle_id', 'colonia_id','comunidad_id','ciudad_id', 'municipio_id','estado_id', 'codigopostal_id',
     ];
 
     public function scopeFilterBy($query,$filerts){
@@ -27,7 +27,7 @@ class Ubicacion extends Model
     public function scopeSearch($query, $search){
         if (!$search || $search == "" || $search == null) return $query;
         return $query->whereRaw("searchtext @@ to_tsquery('spanish', ?)", [$search])
-            ->orderByRaw("ts_rank(searchtext, to_tsquery('spanish', ?)) DESC", [$search]);
+            ->orderByRaw("ts_rank(searchtext, to_tsquery('spanish', ?)) ASC", [$search]);
     }
 
     public function calle() {
@@ -44,11 +44,11 @@ class Ubicacion extends Model
         return $this->belongsToMany(Colonia::class,'colonia_ubicacion','ubicacion_id','colonia_id');
     }
 
-    public function localidad() {
-        return $this->hasOne(Localidad::class,'id','localidad_id');
+    public function comunidad() {
+        return $this->hasOne(Localidad::class,'id','comunidad_id');
     }
-    public function localidades(){
-        return $this->belongsToMany(Localidad::class,'localidad_ubicacion','ubicacion_id','localidad_id');
+    public function comunidades(){
+        return $this->belongsToMany(Comunidad::class,'comunidad_ubicacion','ubicacion_id','comunidad_id');
     }
 
     public function ciudad() {

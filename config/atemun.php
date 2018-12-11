@@ -90,7 +90,7 @@ return [
 
             'calle_ubicacion'        => 'calle_ubicacion',
             'colonia_ubicacion'      => 'colonia_ubicacion',
-            'localidad_ubicacion'    => 'localidad_ubicacion',
+            'comunidad_ubicacion'    => 'comunidad_ubicacion',
             'ciudad_ubicacion'       => 'ciudad_ubicacion',
             'municipio_ubicacion'    => 'municipio_ubicacion',
             'estado_ubicacion'       => 'estado_ubicacion',

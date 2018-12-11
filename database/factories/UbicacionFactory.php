@@ -14,26 +14,26 @@ $factory->define(Ubicacion::class, function (Faker $faker) {
 
     $Calle       = Calle::find($IdCalle);
     $Colonia     = Colonia::find($IdColonia);
-    $Localidad   = Comunidad::find($Colonia->comunidad_id);
+    $Comunidad   = Comunidad::find($Colonia->comunidad_id);
     $CPs         = Codigopostal::find($Colonia->codigopostal_id);
 
     return [
         'calle' => strtoupper($Calle->calle),
         'num_ext' => str_random(10),
         'colonia' => strtoupper($Colonia->colonia),
-        'localidad' => strtoupper($Localidad->comunidad),
-        'ciudad' => strtoupper($Localidad->ciudad->ciudad),
-        'municipio' => strtoupper($Localidad->municipio->municipio),
-        'estado' => strtoupper($Localidad->estado->estado),
+        'comunidad' => strtoupper($Comunidad->comunidad),
+        'ciudad' => strtoupper($Comunidad->ciudad->ciudad),
+        'municipio' => strtoupper($Comunidad->municipio->municipio),
+        'estado' => strtoupper($Comunidad->estado->estado),
         'cp' => $CPs->cp,
         'latitud' => $faker->latitude,
         'longitud' => $faker->longitude,
         'calle_id' => $IdCalle,
         'colonia_id' => $IdColonia,
-        'localidad_id' => $Localidad->id,
-        'ciudad_id' => $Localidad->ciudad_id,
-        'municipio_id' => $Localidad->municipio_id,
-        'estado_id' => $Localidad->estado_id,
+        'comunidad_id' => $Comunidad->id,
+        'ciudad_id' => $Comunidad->ciudad_id,
+        'municipio_id' => $Comunidad->municipio_id,
+        'estado_id' => $Comunidad->estado_id,
         'codigopostal_id' => $CPs->id,
     ];
 
