@@ -40,7 +40,7 @@
                         $("#ubicacion_id").val(data.data.id);
                         $("#calle").val(data.data.calle);
                         $("#colonia").val(data.data.colonia);
-                        $("#comunidad").val(data.data.caomunidad);
+                        $("#comunidad").val(data.data.comunidad);
                         $("#ciudad").val(data.data.ciudad);
                         $("#municipio").val(data.data.municipio);
                         $("#estado").val(data.data.estado);
@@ -62,7 +62,6 @@
                     $("#municipio").val("");
                     $("#estado").val("");
                     $("#cp").val("");
-
                 }
 
             });
