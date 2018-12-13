@@ -98,6 +98,10 @@ return [
 
             'ubicaciones'            => 'ubicaciones',
 
+            'colonia_comunidad'      => 'colonia_comunidad',
+            'codigopostal_colonia'   => 'codigopostal_colonia',
+            'colonia_tipocomunidad'  => 'colonia_tipocomunidad',
+
         ],
     ],
 

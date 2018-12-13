@@ -31,9 +31,9 @@ trait ComunidadTrait
                 'comunidad'        => strtoupper(trim($comunidad)),
                 'delegado_id'      => $user_id,
                 'tipocomunidad_id' => $tipocomunidad_id,
-                'ciudad_id'        => $Ciudad->id,
-                'municipio_id'     => $Municipio->id,
-                'estado_id'        => $Estado->id,
+                'ciudad_id'        => $Ciudad->id ?? 1,
+                'municipio_id'     => $Municipio->id ?? 1,
+                'estado_id'        => $Estado->id ?? 1,
             ]);
         }
         return $obj;

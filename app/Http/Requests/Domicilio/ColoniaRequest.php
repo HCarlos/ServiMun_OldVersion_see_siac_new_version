@@ -4,6 +4,7 @@ namespace App\Http\Requests\Domicilio;
 
 use App\Models\Catalogos\Domicilios\Codigopostal;
 use App\Models\Catalogos\Domicilios\Comunidad;
+use App\Models\Catalogos\Domicilios\Ubicacion;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Models\Catalogos\Domicilios\Colonia;
 use App\Rules\Uppercase;
@@ -56,8 +57,12 @@ class ColoniaRequest extends FormRequest
                 $item = Colonia::create($Item);
             } else {
                 $item = Colonia::find($this->id);
+                Ubicacion::detachesColonia($this->id);
+                $this->detaches($item);
                 $item->update($Item);
             }
+            $this->attaches($item);
+            Ubicacion::attachesColonia($this->id);
         }catch (QueryException $e){
             $Msg = new MessageAlertClass();
             return $Msg->Message($e);
@@ -73,6 +78,21 @@ class ColoniaRequest extends FormRequest
         }else{
             return $url->route('newColonia');
         }
+    }
+
+
+    public function attaches($Item){
+        $Item->codigospostales()->attach($this->codigopostal_id);
+        $Item->comunidades()->attach($this->comunidad_id);
+        $Item->tipocomunidades()->attach($Item->tipocomunidad_id);
+        return $Item;
+    }
+
+    public function detaches($Item){
+        $Item->codigospostales()->detach($Item->codigopostal_id);
+        $Item->comunidades()->detach($Item->comunidad_id);
+        $Item->tipocomunidades()->detach($Item->tipocomunidad_id);
+        return $Item;
     }
 
 

@@ -25,13 +25,22 @@ class Colonia extends Model
     public function codigoPostal() {
         return $this->hasOne(Codigopostal::class,'id','codigopostal_id');
     }
+    public function codigospostales(){
+        return $this->belongsToMany(Codigopostal::class,'codigopostal_colonia','colonia_id','codigopostal_id');
+    }
 
     public function comunidad() {
         return $this->hasOne(Comunidad::class,'id','comunidad_id');
     }
+    public function comunidades(){
+        return $this->belongsToMany(Comunidad::class,'colonia_comunidad','colonia_id','comunidad_id');
+    }
 
     public function tipoComunidad() {
         return $this->hasOne(Tipocomunidad::class,'id','tipocomunidad_id');
+    }
+    public function tipocomunidades(){
+        return $this->belongsToMany(Tipocomunidad::class,'colonia_tipocomunidad','colonia_id','tipocomunidad_id');
     }
 
     public static function findOrImport($colonia,$cp,$altitud,$latitud,$longitud,$codigospostal_id,$comunidad_id,$tipocomunidad_id){

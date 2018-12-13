@@ -489,11 +489,23 @@ ul.role-list-hrz li a {
 .secondary-text-color  { color: #757575; }
 .divider-color         { border-color: #BDBDBD; }
 
+input[disabled] {
+    background-color: lightgray !important;
+}
+input[readonly] {
+    background-color: lightgray !important;
+}
 
 #colonia, #comunidad, #calle, #asentamiento, #tipoasentamiento, #tipocomunidad, #localidad,
 #afiliacion, #area, #subarea, #dependencia, #medida, #origen, #prioridad, #servicio, #ubicacon,
-#ciudad, #estado, #municipio, #estatus, #codigo, #cp, #search_autocomplete
-{text-transform: uppercase;  background: lightgoldenrodyellow}
+#ciudad, #estado, #municipio, #estatus, #codigo, #cp
+{text-transform: uppercase; background: lightgoldenrodyellow;}
 
+#search_autocomplete{
+    text-transform: uppercase;
+    background: lightyellow;
+    color:black;
+    font-size: large;
+}
 
 

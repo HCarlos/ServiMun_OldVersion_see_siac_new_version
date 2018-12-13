@@ -60,7 +60,7 @@
                     <div class="input-group">
                         {!! Form::text('search_autocomplete', null, array('placeholder' => 'Buscar ubicación...','class' => 'form-control','id'=>'search_autocomplete')) !!}
                         <span class="input-group-append">
-                            <button type="button" class="btn btn-icon btn-info"> <i class="mdi mdi-magnify"></i> </button>
+                            <a href="{{route("newUbicacion")}}" target="_blank" class="btn btn-icon btn-info"> <i class="mdi mdi-plus"></i></a>
                         </span>
                     </div>
                 </div>

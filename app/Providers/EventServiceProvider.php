@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Listeners\User\LogLastLogin;
 use App\Listeners\User\LogLastLogout;
+use App\Models\Catalogos\Domicilios\Colonia;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -36,6 +37,9 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot();
 
-        //
+        Event::listen('Colonia.updating *', function ($Item) {
+            log($Item);
+        });
+
     }
 }

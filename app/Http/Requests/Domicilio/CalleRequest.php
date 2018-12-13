@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Domicilio;
 
 use App\Models\Catalogos\Domicilios\Calle;
+use App\Models\Catalogos\Domicilios\Ubicacion;
 use App\Rules\Uppercase;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Classes\MessageAlertClass;
@@ -60,7 +61,9 @@ class CalleRequest extends FormRequest
                 $item = Calle::create($Item);
             } else {
                 $item = Calle::find($this->id);
+                Ubicacion::detachesCalle($this->id);
                 $item->update($Item);
+                Ubicacion::attachesCalle($this->id);
             }
         }catch (QueryException $e){
             $Msg = new MessageAlertClass();

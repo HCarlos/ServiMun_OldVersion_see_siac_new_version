@@ -31,8 +31,8 @@ class UbicacionFilter extends QueryFilter
                 ->orWhereHas('colonia', function ($q) use ($search) {
                     $q->whereRaw("UPPER(colonia) like ?", "%{$search}%");
                 })
-                ->orWhereHas('localidad', function ($q) use ($search) {
-                    $q->whereRaw("UPPER(localidad) like ?", "%{$search}%");
+                ->orWhereHas('comunidad', function ($q) use ($search) {
+                    $q->whereRaw("UPPER(comunidad) like ?", "%{$search}%");
                 })
                 ->orWhereHas('ciudad', function ($q) use ($search) {
                     $q->whereRaw("UPPER(ciudad) like ?", "%{$search}%");

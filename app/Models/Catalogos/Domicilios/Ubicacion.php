@@ -1,8 +1,12 @@
 <?php
+/**
+ * Copyright (c) 2018. Realizado por Carlos Hidalgo
+ */
 
 namespace App\Models\Catalogos\Domicilios;
 
 use App\Filters\Catalogo\Domicilio\UbicacionFilter;
+use App\Traits\Catalogos\Domicilio\Ubicacion\UbicacionTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -10,6 +14,7 @@ class Ubicacion extends Model
 {
 
     use SoftDeletes;
+    use UbicacionTrait;
 
     protected $guard_name = 'web';
     protected $table = 'ubicaciones';

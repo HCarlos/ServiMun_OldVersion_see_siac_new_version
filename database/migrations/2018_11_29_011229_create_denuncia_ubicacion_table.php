@@ -522,6 +522,74 @@ class CreateDenunciaUbicacionTable extends Migration
         DB::statement("CREATE TRIGGER ts_searchtext BEFORE INSERT OR UPDATE ON denuncias FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger('searchtextdenuncia', 'pg_catalog.spanish', 'descripcion', 'referencia', 'calle', 'colonia', 'comunidad', 'ciudad', 'municipio', 'estado')");
 
 
+
+
+        Schema::create($tableNamesDomicilios['colonia_comunidad'], function (Blueprint $table) use ($tableNamesCatalogos, $tableNamesDomicilios){
+            $table->increments('id');
+            $table->unsignedInteger('colonia_id')->default(0)->index();
+            $table->unsignedInteger('comunidad_id')->default(0)->index();
+            $table->softDeletes();
+            $table->timestamps();
+            $table->unique(['colonia_id', 'comunidad_id']);
+
+            $table->foreign('colonia_id')
+                ->references('id')
+                ->on($tableNamesDomicilios['colonias'])
+                ->onDelete('cascade');
+
+            $table->foreign('comunidad_id')
+                ->references('id')
+                ->on($tableNamesDomicilios['comunidades'])
+                ->onDelete('cascade');
+        });
+
+
+
+
+
+        Schema::create($tableNamesDomicilios['codigopostal_colonia'], function (Blueprint $table) use ($tableNamesCatalogos, $tableNamesDomicilios){
+            $table->increments('id');
+            $table->unsignedInteger('colonia_id')->default(0)->index();
+            $table->unsignedInteger('codigopostal_id')->default(0)->index();
+            $table->softDeletes();
+            $table->timestamps();
+            $table->unique(['colonia_id', 'codigopostal_id']);
+
+            $table->foreign('colonia_id')
+                ->references('id')
+                ->on($tableNamesDomicilios['colonias'])
+                ->onDelete('cascade');
+
+            $table->foreign('codigopostal_id')
+                ->references('id')
+                ->on($tableNamesDomicilios['codigospostales'])
+                ->onDelete('cascade');
+        });
+
+
+
+
+        Schema::create($tableNamesDomicilios['colonia_tipocomunidad'], function (Blueprint $table) use ($tableNamesCatalogos, $tableNamesDomicilios){
+            $table->increments('id');
+            $table->unsignedInteger('colonia_id')->default(0)->index();
+            $table->unsignedInteger('tipocomunidad_id')->default(0)->index();
+            $table->softDeletes();
+            $table->timestamps();
+            $table->unique(['colonia_id', 'tipocomunidad_id']);
+
+            $table->foreign('colonia_id')
+                ->references('id')
+                ->on($tableNamesDomicilios['colonias'])
+                ->onDelete('cascade');
+
+            $table->foreign('tipocomunidad_id')
+                ->references('id')
+                ->on($tableNamesDomicilios['tipocomunidades'])
+                ->onDelete('cascade');
+        });
+
+
+
     }
 
     /**
@@ -560,6 +628,10 @@ class CreateDenunciaUbicacionTable extends Migration
         Schema::dropIfExists($tableNamesDomicilios['municipio_ubicacion']);
         Schema::dropIfExists($tableNamesDomicilios['estado_ubicacion']);
         Schema::dropIfExists($tableNamesDomicilios['codigopostal_ubicacion']);
+
+        Schema::dropIfExists($tableNamesDomicilios['colonia_comunidad']);
+        Schema::dropIfExists($tableNamesDomicilios['codigopostal_colonia']);
+        Schema::dropIfExists($tableNamesDomicilios['colonia_tipocomunidad']);
 
         DB::statement("DROP TRIGGER IF EXISTS tsvector_update_trigger ON ubicaciones");
         DB::statement("DROP INDEX IF EXISTS searchtext_gin");

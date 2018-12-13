@@ -22,7 +22,7 @@ class UbicacionController extends Controller
 {
 
 
-    protected $tableName = "ubicaiones";
+    protected $tableName = "ubicaciones";
 
 // ***************** MUESTRA EL LISTADO DE USUARIOS ++++++++++++++++++++ //
     protected function index(Request $request)
@@ -57,17 +57,18 @@ class UbicacionController extends Controller
     protected function editItem($Id)
     {
         $item            = Ubicacion::find($Id);
-        $Calles          = Calle::all()->sortBy('calle');
-        $Colonias        = Colonia::all()->sortBy('colonia');
-        $Localidades     = Comunidad::all()->sortBy('comunidad');
-        $Codigospostales = Codigopostal::all()->sortBy('cp');
+//        dd($item);
+        $Calles          = Calle::all()->sortBy('calle')->pluck('calle','id');
+        $Colonias        = Colonia::all()->sortBy('colonia')->pluck('colonia','id');
+        $Comunidades     = Comunidad::all()->sortBy('comunidad')->pluck('comunidad','id');
+        $Codigospostales = Codigopostal::all()->sortBy('cp')->pluck('cp','id');
 
         return view('catalogos.catalogo.domicilio.ubicacion.ubicacion_edit',
             [
                 'user' => Auth::user(),
                 'calles'          => $Calles,
                 'colonias'        => $Colonias,
-                'localidades'     => $Localidades,
+                'comunidades'     => $Comunidades,
                 'codigospostales' => $Codigospostales,
                 'items'           => $item,
                 'editItemTitle'   => isset($item->ubicacion) ? $item->ubicacion : 'Nuevo',
@@ -91,14 +92,14 @@ class UbicacionController extends Controller
     {
         $Calles          = Calle::all()->sortBy('calle');
         $Colonias        = Colonia::all()->sortBy('colonia');
-        $Localidades     = Comunidad::all()->sortBy('comunidad');
+        $Comunidades     = Comunidad::all()->sortBy('comunidad');
         $Codigospostales = Codigopostal::all()->sortBy('cp');
         return view('catalogos.catalogo.domicilio.ubicacion.ubicacion_new',
             [
                 'editItemTitle'   => 'Nuevo',
                 'calles'          => $Calles,
                 'colonias'        => $Colonias,
-                'localidades'     => $Localidades,
+                'comunidades'     => $Comunidades,
                 'codigospostales' => $Codigospostales,
                 'postNew'         => 'createUbicacion',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
