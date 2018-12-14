@@ -36,17 +36,6 @@ class UbicacionRequest extends FormRequest
             'calle_id'        => ['required'],
             'calle_id'        => ['required'],
             'colonia_id'      => ['required'],
-//            'comunidad_id'    => ['required'],
-//            'codigopostal_id' => ['required'],
-//            'latitud'         => ['present'],
-//            'longitud'        => ['present'],
-//            'longitud'              => [
-//                                    Rule::unique('ubicaciones')
-//                                        ->where('calle_id', $this->calle_id)
-//                                        ->where('colonia_id', $this->colonia_id)
-//                                        ->where('comunidad_id', $this->comunidad_id)
-//                                 ]
-
             ];
 
     }

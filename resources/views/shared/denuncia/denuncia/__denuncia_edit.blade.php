@@ -1,79 +1,137 @@
+<div class="row">
+    <div class="col-md-6 ">
+        <div class="grid-container">
+            <div class="form-row mb-1">
+                <label for = "fecha_ingreso" class="col-md-2 col-form-label">Fecha </label>
+                <div class="col-md-4">
+                    {{ Form::datetime('fecha_ingreso', $items->fecha_ingreso, ['id'=>'fecha_ingreso','class'=>'form-control','readonly'=>'readonly']) }}
+                </div>
+                <label for = "fecha_oficio_dependencia" class="col-md-2 col-form-label">F. Oficio </label>
+                <div class="col-md-4">
+                    {{ Form::date('fecha_oficio_dependencia', $items->fecha_oficio_dependencia, ['id'=>'fecha_oficio_dependencia','class'=>'form-control']) }}
+                </div>
+            </div>
+            <div class="form-row mb-1">
+                <label for = "fecha_limite" class="col-md-2 col-form-label">F. Límite </label>
+                <div class="col-md-4">
+                    {{ Form::date('fecha_limite', $items->fecha_limite, ['id'=>'fecha_limite','class'=>'form-control','readonly'=>'readonly']) }}
+                </div>
+                <label for = "fecha_ejecucion" class="col-md-2 col-form-label">F. Ejec. </label>
+                <div class="col-md-4">
+                    {{ Form::date('fecha_ejecucion', $items->fecha_ejecucion, ['id'=>'fecha_ejecucion','class'=>'form-control','readonly'=>'readonly']) }}
+                </div>
+            </div>
+            <div class="form-row mb-1">
+                <label for = "oficio_envio" class="col-md-2 col-form-label">Oficio E. </label>
+                <div class="col-md-10">
+                    <input type="text" name="oficio_envio" id="oficio_envio" value="{{ old('oficio_envio',$items->oficio_envio) }}" class="form-control" />
+                </div>
+            </div>
+            <div class="form-row mb-1">
+                <label for = "descripcion" class="col-md-2 col-form-label">Denuncia</label>
+                <div class="col-md-10">
+                    <textarea name="descripcion" id="descripcion" class="form-control">{{ old('descripcion',$items->descripcion) }}</textarea>
+                </div>
+            </div>
+            <div class="form-row mb-1">
+                <label for = "referencia" class="col-md-2 col-form-label">Referencia</label>
+                <div class="col-md-10">
+                    <textarea name="referencia" id="referencia" class="form-control">{{ old('referencia',$items->referencia) }}</textarea>
+                </div>
+            </div>
+            <div class="form-group row mb-1">
+                <label for = "latitud" class="col-md-2 col-form-label">Lat.</label>
+                <div class="col-md-4">
+                    <input type="text" name="latitud" id="latitud" value="{{ old('latitud',$items->latitud) }}" class="form-control" />
+                </div>
+                <label for = "longitud" class="col-md-2 col-form-label">Long.</label>
+                <div class="col-md-4">
+                    <input type="text" name="longitud" id="longitud" value="{{ old('longitud',$items->longitud) }}" class="form-control" />
+                </div>
+            </div>
 
-<div class="form-group row mb-3">
-    <label for = "calle_id" class="col-md-3 col-form-label">Calle</label>
-    <div class="col-md-9">
-        <select class="calle_id form-control select2" data-toggle="select2"  name="calle_id" id="calle_id" size="1">
-            @foreach($calles as $t)
-                <option value="{{$t->id}}" @if($t->id == $items->calle_id) selected @endif>{{ $t->calle }}</option>
-            @endforeach
-        </select>
+        </div>
     </div>
-    <label for = "num_ext" class="col-md-3 col-form-label">Núm. Exterior</label>
-    <div class="col-md-9">
-        <input type="text" name="num_ext" id="num_ext" value="{{ old('num_ext',$items->num_ext) }}" class="form-control" />
-    </div>
-    <label for = "num_int" class="col-md-3 col-form-label">Núm. Interior</label>
-    <div class="col-md-9">
-        <input type="text" name="num_int" id="num_int" value="{{ old('num_int',$items->num_int) }}" class="form-control" />
-    </div>
-    <label for = "colonia_id" class="col-md-3 col-form-label">Colonia</label>
-    <div class="col-md-9">
-        <select class="colonia_id form-control "  name="colonia_id" id="colonia_id" size="1">
-            @foreach($colonias as $t)
-                <option value="{{$t->id}}" @if($t->id == $items->colonia_id) selected @endif>{{ $t->colonia }}</option>
-            @endforeach
-        </select>
-    </div>
-    <label for = "localidad_id" class="col-md-3 col-form-label">Localidad</label>
-    <div class="col-md-9">
-        <select class="localidad_id form-control "   name="localidad_id" id="localidad_id" size="1">
-            @foreach($localidades as $t)
-                <option value="{{$t->id}}" @if($t->id == $items->localidad_id) selected @endif>{{ $t->localidad }}</option>
-            @endforeach
-        </select>
-    </div>
-    <label for = "ciudad_id" class="col-md-3 col-form-label">Ciudad</label>
-    <div class="col-md-9">
-        <select class="ciudad_id form-control "  name="ciudad_id" id="ciudad_id" size="1">
-            @foreach($ciudades as $t)
-                <option value="{{$t->id}}" @if($t->id == $items->ciudad_id) selected @endif>{{ $t->ciudad }}</option>
-            @endforeach
-        </select>
-    </div>
-    <label for = "municipio_id" class="col-md-3 col-form-label">Municipio</label>
-    <div class="col-md-9">
-        <select class="municipio_id form-control " name="municipio_id" id="municipio_id" size="1">
-            @foreach($municipios as $t)
-                <option value="{{$t->id}}" @if($t->id == $items->municipio_id) selected @endif>{{ $t->municipio }}</option>
-            @endforeach
-        </select>
-    </div>
-    <label for = "estado_id" class="col-md-3 col-form-label">Estado</label>
-    <div class="col-md-9">
-        <select class="estado_id form-control " name="estado_id" id="estado_id" size="1">
-            @foreach($estados as $t)
-                <option value="{{$t->id}}" @if($t->id == $items->estado_id) selected @endif>{{ $t->estado }}</option>
-            @endforeach
-        </select>
-    </div>
-    <label for = "codigopostal_id" class="col-md-3 col-form-label">CP</label>
-    <div class="col-md-9">
-        <select class="codigopostal_id form-control " name="codigopostal_id" id="codigopostal_id" size="1">
-            @foreach($codigospostales as $t)
-                <option value="{{$t->id}}" @if($t->id == $items->codigopostal_id) selected @endif>{{ $t->cp }}</option>
-            @endforeach
-        </select>
-    </div>
-    <label for = "latitud" class="col-md-3 col-form-label">Latitud</label>
-    <div class="col-md-9">
-        <input type="text" name="latitud" id="latitud" value="{{ old('latitud',$items->latitud) }}" class="form-control" pattern="^-?\d{1,3}\.\d+"/>
-    </div>
-    <label for = "longitud" class="col-md-3 col-form-label">Longitud</label>
-    <div class="col-md-9">
-        <input type="text" name="longitud" id="longitud" value="{{ old('longitud',$items->longitud) }}" class="form-control" pattern="^-?\d{1,3}\.\d+$"/>
+    <div class="col-md-6 ">
+        <div class="grid-container">
+            <div class="form-group row mb-1">
+                <label for = "search_autocomplete" class="col-md-3 col-form-label">Buscar</label>
+                <div class="col-md-9">
+                    <div class="input-group">
+                        {!! Form::text('search_autocomplete', null, array('placeholder' => 'Buscar ubicación...','class' => 'form-control','id'=>'search_autocomplete')) !!}
+                        <span class="input-group-append">
+                            <a href="{{route("newUbicacion")}}" target="_blank" class="btn btn-icon btn-info"> <i class="mdi mdi-plus"></i></a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row mb-1">
+                <label for = "ubicacion" class="col-md-3 col-form-label">Ubicacion</label>
+                <div class="col-md-9">
+                    <div class="input-group">
+                        <input type="text" name="ubicacion" id="ubicacion" value="{{ old('ubicacion',$items->fullUbication) }}" class="form-control" disabled/>
+                        <span class="input-group-addon bootstrap-touchspin-postfix input-group-append">
+                            <small class="input-group-text " id="ubicacion_id_span">{{ $items->ubicacion_id }}</small>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row mb-1">
+                <label for = "prioridad_id" class="col-md-3 col-form-label">Prioridad</label>
+                <div class="col-md-3">
+                    <select id="prioridad_id" name="prioridad_id" class="form-control" size="1">
+                        @foreach($prioridades as $t)
+                            <option value="{{$t->id}}" {{ $t->id == $items->prioridad_id ? 'selected': '' }} >{{ $t->prioridad }} </option>
+                        @endforeach
+                    </select>
+                </div>
+                <label for = "origen_id" class="col-md-2 col-form-label">Origen</label>
+                <div class="col-md-4">
+                    <select id="origen_id" name="origen_id" class="form-control"size="1">
+                        @foreach($origenes as $t)
+                            <option value="{{$t->id}}" {{ $t->id == $items->origen_id ? 'selected': '' }} >{{ $t->origen }} </option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row mb-1">
+                <label for = "dependencia_id" class="col-md-3 col-form-label">Dependencia</label>
+                <div class="col-md-9">
+                    {{ Form::select('dependencia_id',$dependencias,$items->dependencia_id,['id'=>'dependencia_id','class'=>'form-control, select2','data-toggle'=>'select2']) }}
+                </div>
+            </div>
+            <div class="form-group row mb-1">
+                <label for = "servicio_id" class="col-md-3 col-form-label">Servicio</label>
+                <div class="col-md-9">
+                    {{ Form::select('servicio_id',$servicios,$items->dependencia_id,['id'=>'servicio_id','class'=>'form-control, select2','data-toggle'=>'select2']) }}
+                </div>
+            </div>
+            <div class="form-group row mb-1">
+                <label for = "ciudadano_id" class="col-md-3 col-form-label">Ciudadano</label>
+                <div class="col-md-9">
+                    <select id="ciudadano_id" name="ciudadano_id" class="form-control select2" data-toggle="select2" size="1">
+                        @foreach($ciudadanos as $t)
+                            <option value="{{$t->id}}" {{ $t->id == $items->ciudadano_id ? 'selected': '' }}  >{{$t->fullname}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row mb-1">
+                <label for = "estatus_id" class="col-md-3 col-form-label">Estatus</label>
+                <div class="col-md-5">
+                    <select id="estatus_id" name="estatus_id" class="form-control" size="1">
+                        @foreach($estatus as $t)
+                            <option value="{{$t->id}}" {{ $t->id == $items->estatus_id  ? 'selected': '' }} >{{ $t->estatus }} </option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
 <input type="hidden" name="id" value="{{$items->id}}" >
-
+<input type="hidden" name="ubicacion_id" id="ubicacion_id" value="{{$items->ubicacion_id}}" >
+<input type="hidden" name="creadopor_id" id="creadopor_id" value="{{$items->creadopor_id}}" >
+<input type="hidden" name="modificadopor_id" id="modificadopor_id" value="{{$user->id}}" >
 <hr>

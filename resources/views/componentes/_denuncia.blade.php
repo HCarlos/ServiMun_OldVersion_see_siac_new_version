@@ -38,13 +38,8 @@
                     var Id = ui.item['id'];
                     $.get( "/getUbi/"+Id, function( data ) {
                         $("#ubicacion_id").val(data.data.id);
-                        $("#calle").val(data.data.calle);
-                        $("#colonia").val(data.data.colonia);
-                        $("#comunidad").val(data.data.comunidad);
-                        $("#ciudad").val(data.data.ciudad);
-                        $("#municipio").val(data.data.municipio);
-                        $("#estado").val(data.data.estado);
-                        $("#cp").val(data.data.cp);
+                        $("#ubicacion_id_span").html(data.data.id);
+                        $("#ubicacion").val(data.data.calle+' '+data.data.colonia+' '+data.data.comunidad+' '+data.data.ciudad+' '+data.data.municipio+' '+data.data.estado+' '+data.data.cp);
                         $("#search_autocomplete").val("");
                     }, "json" );
                 });
@@ -55,13 +50,8 @@
 
                 function clearObjects() {
                     $("#ubicacion_id").val(0);
-                    $("#calle").val("");
-                    $("#colonia").val("");
-                    $("#comunidad").val("");
-                    $("#ciudad").val("");
-                    $("#municipio").val("");
-                    $("#estado").val("");
-                    $("#cp").val("");
+                    $("#ubicacion").val("");
+                    $("#ubicacion_id_span").html(0);
                 }
 
             });

@@ -10,6 +10,7 @@
                 @slot('title_card','')
                 @slot('body_card')
                     @include('shared.code.__errors')
+                    @include('shared.search.__search_denuncia_adress_list')
                     <form method="POST" action="{{ route('updateDenuncia') }}">
                         @csrf
                         {{method_field('PUT')}}

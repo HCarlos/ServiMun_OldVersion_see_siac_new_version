@@ -4,9 +4,11 @@ namespace App\Http\Requests\Denuncia;
 
 use App\Models\Catalogos\Domicilios\Ubicacion;
 use App\Models\Denuncia;
+use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Classes\MessageAlertClass;
 use Illuminate\Database\QueryException;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
 
 class DenunciaRequest extends FormRequest
 {
@@ -30,25 +32,24 @@ class DenunciaRequest extends FormRequest
             'fecha_ejecucion'  => ['required','date'],
             'prioridad_id'     => ['required'],
             'origen_id'        => ['required'],
-            'dependecia_id'    => ['required'],
-            'ubicacion_id'     => ['required'],
+            'dependencia_id'   => ['required'],
             'servicio_id'      => ['required'],
             'ciudadano_id'     => ['required'],
-            'creadopor_id'     => ['required'],
-            'modificadopor_id' => ['required'],
+            'ubicacion_id'     => ['required','numeric','min:1'],
+            'estatus_id'       => ['required'],
         ];
     }
 
 
     public function manage()
     {
-
+        //dd($this->all());
         try {
 
             $Ubicacion = Ubicacion::findOrFail($this->ubicacion_id);
 
             $Item = [
-                'fecha_ingreso'            => $this->fecha_ingreso,
+                'fecha_ingreso'            => Carbon::now(),
                 'oficio_envio'             => strtoupper($this->oficio_envio),
                 'fecha_oficio_dependencia' => $this->fecha_oficio_dependencia,
                 'fecha_limite'             => $this->fecha_limite,
@@ -58,25 +59,27 @@ class DenunciaRequest extends FormRequest
                 'referencia'               => strtoupper($this->referencia),
 
                 'calle'                    => strtoupper($Ubicacion->calle),
-                'num_ext'                  => strtoupper($this->num_ext),
-                'num_int'                  => strtoupper($this->num_int),
+                'num_ext'                  => strtoupper($Ubicacion->num_ext),
+                'num_int'                  => strtoupper($Ubicacion->num_int),
                 'colonia'                  => strtoupper($Ubicacion->colonia),
                 'comunidad'                => strtoupper($Ubicacion->comunidad),
                 'ciudad'                   => strtoupper($Ubicacion->ciudad),
                 'municipio'                => strtoupper($Ubicacion->municipio),
                 'estado'                   => strtoupper($Ubicacion->estado),
                 'cp'                       => strtoupper($Ubicacion->cp),
+
                 'latitud'                  => $this->latitud,
                 'longitud'                 => $this->longitud,
 
                 'prioridad_id'             => $this->prioridad_id,
                 'origen_id'                => $this->origen_id,
-                'dependecia_id'            => $this->dependecia_id,
+                'dependencia_id'           => $this->dependencia_id,
                 'ubicacion_id'             => $this->ubicacion_id,
                 'servicio_id'              => $this->servicio_id,
+                'estatus_id'               => $this->estatus_id,
                 'ciudadano_id'             => $this->ciudadano_id,
                 'creadopor_id'             => $this->creadopor_id,
-                'modificado_id'            => $this->modificado_id,
+                'modificadopor_id'         => $this->modificadopor_id,
 
             ];
 
@@ -94,6 +97,7 @@ class DenunciaRequest extends FormRequest
             return $Msg->Message($e);
         }
         return $item;
+
     }
 
     public function attaches($Item){
@@ -102,6 +106,7 @@ class DenunciaRequest extends FormRequest
         $Item->dependencias()->attach($this->dependencia_id);
         $Item->ubicaciones()->attach($this->ubicacion_id);
         $Item->servicios()->attach($this->servicio_id);
+        $Item->estatus()->attach($this->estatus_id);
         $Item->ciudadanos()->attach($this->ciudadano_id);
         $Item->creadospor()->attach($this->creadopor_id);
         $Item->modificadospor()->attach($this->modificadopor_id);
@@ -114,6 +119,7 @@ class DenunciaRequest extends FormRequest
         $Item->dependencias()->detach($this->dependencia_id);
         $Item->ubicaciones()->detach($this->ubicacion_id);
         $Item->servicios()->detach($this->servicio_id);
+        $Item->estatus()->detach($this->estatus_id);
         $Item->ciudadanos()->detach($this->ciudadano_id);
         $Item->creadospor()->detach($this->creadopor_id);
         $Item->modificadospor()->detach($this->modificadopor_id);

@@ -17,6 +17,12 @@ class Origen extends Model
         'id', 'origen',
     ];
 
+    protected $casts = ['predeterminado'=>'boolean',];
+
+    public function isDefault(){
+        return $this->predeterminado;
+    }
+
     public function scopeFilterBy($query, $filters){
         return (new OrigenFilter())->applyTo($query, $filters);
     }

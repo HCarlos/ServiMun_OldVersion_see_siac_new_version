@@ -252,15 +252,16 @@ class CreateDenunciaUbicacionTable extends Migration
             $table->float('latitud',4,10)->default(0)->nullable();
             $table->float('longitud',4,10)->default(0)->nullable();
             $table->unsignedSmallInteger('status_denuncia')->default(1)->nullable();
-            $table->unsignedInteger('prioridad_id')->default(0)->nullable()->unique();
-            $table->unsignedInteger('origen_id')->default(0)->nullable()->unique();
-            $table->unsignedInteger('dependecia_id')->default(0)->nullable()->unique();
-            $table->unsignedInteger('ubicacion_id')->default(0)->nullable()->unique();
-            $table->unsignedInteger('servicio_id')->default(0)->nullable()->unique();
-            $table->unsignedInteger('ciudadano_id')->default(0)->nullable()->unique();
+            $table->unsignedInteger('prioridad_id')->default(0)->nullable()->index();
+            $table->unsignedInteger('origen_id')->default(0)->nullable()->index();
+            $table->unsignedInteger('dependencia_id')->default(0)->nullable()->index();
+            $table->unsignedInteger('ubicacion_id')->default(0)->nullable()->index();
+            $table->unsignedInteger('servicio_id')->default(0)->nullable()->index();
+            $table->unsignedInteger('estatus_id')->default(0)->nullable()->index();
+            $table->unsignedInteger('ciudadano_id')->default(0)->nullable()->index();
             $table->unsignedSmallInteger('empresa_id')->default(0)->nullable()->index();
-            $table->unsignedInteger('creadopor_id')->default(0)->nullable()->unique();
-            $table->unsignedInteger('modificadopor_id')->default(0)->nullable()->unique();
+            $table->unsignedInteger('creadopor_id')->default(0)->nullable()->index();
+            $table->unsignedInteger('modificadopor_id')->default(0)->unsigned()->nullable()->index();
             $table->string('ip',150)->default('')->nullable();
             $table->string('host',150)->default('')->nullable();
             $table->softDeletes();
@@ -276,7 +277,7 @@ class CreateDenunciaUbicacionTable extends Migration
                 ->on($tableNamesCatalogos['origenes'])
                 ->onDelete('cascade');
 
-            $table->foreign('dependecia_id')
+            $table->foreign('dependencia_id')
                 ->references('id')
                 ->on($tableNamesCatalogos['dependencias'])
                 ->onDelete('cascade');
@@ -289,6 +290,11 @@ class CreateDenunciaUbicacionTable extends Migration
             $table->foreign('servicio_id')
                 ->references('id')
                 ->on($tableNamesCatalogos['servicios'])
+                ->onDelete('cascade');
+
+            $table->foreign('estatus_id')
+                ->references('id')
+                ->on($tableNamesCatalogos['estatus'])
                 ->onDelete('cascade');
 
             $table->foreign('ciudadano_id')
@@ -406,6 +412,26 @@ class CreateDenunciaUbicacionTable extends Migration
             $table->foreign('servicio_id')
                 ->references('id')
                 ->on($tableNamesCatalogos['servicios'])
+                ->onDelete('cascade');
+
+        });
+
+        Schema::create($tableNamesCatalogos['denuncia_estatu'], function (Blueprint $table) use ($tableNamesCatalogos){
+            $table->increments('id');
+            $table->unsignedInteger('denuncia_id')->default(0)->index();
+            $table->unsignedInteger('estatus_id')->default(0)->index();
+            $table->softDeletes();
+            $table->timestamps();
+            $table->unique(['denuncia_id', 'estatus_id']);
+
+            $table->foreign('denuncia_id')
+                ->references('id')
+                ->on($tableNamesCatalogos['denuncias'])
+                ->onDelete('cascade');
+
+            $table->foreign('estatus_id')
+                ->references('id')
+                ->on($tableNamesCatalogos['estatus'])
                 ->onDelete('cascade');
 
         });
@@ -604,6 +630,7 @@ class CreateDenunciaUbicacionTable extends Migration
 
         Schema::dropIfExists($tableNamesCatalogos['ciudadano_denuncia']);
         Schema::dropIfExists($tableNamesCatalogos['denuncia_servicio']);
+        Schema::dropIfExists($tableNamesCatalogos['denuncia_estatu']);
         Schema::dropIfExists($tableNamesCatalogos['denuncia_dependencia']);
         Schema::dropIfExists($tableNamesCatalogos['denuncia_origen']);
         Schema::dropIfExists($tableNamesCatalogos['denuncia_prioridad']);

@@ -30,13 +30,13 @@
             <div class="form-row mb-1">
                 <label for = "descripcion" class="col-md-2 col-form-label">Denuncia </label>
                 <div class="col-md-10">
-                    <textarea name="descripcion" id="descripcion" value="{{ old('descripcion') }}" class="form-control"></textarea>
+                    <textarea name="descripcion" id="descripcion" class="form-control">{{ old('descripcion') }}</textarea>
                 </div>
             </div>
             <div class="form-row mb-1">
                 <label for = "referencia" class="col-md-2 col-form-label">Referencia </label>
                 <div class="col-md-10">
-                    <textarea name="referencia" id="referencia" value="{{ old('referencia') }}" class="form-control"></textarea>
+                    <textarea name="referencia" id="referencia" class="form-control">{{ old('referencia') }}</textarea>
                 </div>
             </div>
             <div class="form-group row mb-1">
@@ -66,45 +66,64 @@
                 </div>
             </div>
             <div class="form-group row mb-1">
-                <label for = "calle" class="col-md-3 col-form-label">Calle</label>
+                <label for = "ubicacion" class="col-md-3 col-form-label">Ubicacion</label>
                 <div class="col-md-9">
-                    <input type="text" name="calle" id="calle" value="{{ old('calle') }}" class="form-control" disabled/>
+                    <div class="input-group">
+                        <input type="text" name="ubicacion" id="ubicacion" value="{{ old('ubicacion') }}" class="form-control" disabled/>
+                        <span class="input-group-addon bootstrap-touchspin-postfix input-group-append">
+                            <small class="input-group-text " id="ubicacion_id_span">0</small>
+                        </span>
+                    </div>
                 </div>
             </div>
             <div class="form-group row mb-1">
-                <label for = "colonia" class="col-md-3 col-form-label">Colonia</label>
-                <div class="col-md-9">
-                    <input type="text" name="colonia" id="colonia" value="{{ old('colonia') }}" class="form-control" disabled/>
+                <label for = "prioridad_id" class="col-md-3 col-form-label">Prioridad</label>
+                <div class="col-md-3">
+                    <select id="prioridad_id" name="prioridad_id" class="form-control" size="1">
+                        @foreach($prioridades as $t)
+                            <option value="{{$t->id}}" {{ $t->isDefault() ? 'selected': '' }} >{{ $t->prioridad }} </option>
+                        @endforeach
+                    </select>
+                </div>
+                <label for = "origen_id" class="col-md-2 col-form-label">Origen</label>
+                <div class="col-md-4">
+                    <select id="origen_id" name="origen_id" class="form-control"size="1">
+                        @foreach($origenes as $t)
+                            <option value="{{$t->id}}" {{ $t->isDefault() ? 'selected': '' }} >{{ $t->origen }} </option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
             <div class="form-group row mb-1">
-                <label for = "comunidad" class="col-md-3 col-form-label">Comunidad</label>
+                <label for = "dependencia_id" class="col-md-3 col-form-label">Dependencia</label>
                 <div class="col-md-9">
-                    <input type="text" name="comunidad" id="comunidad" value="{{ old('comunidad') }}" class="form-control" disabled/>
+                    {{ Form::select('dependencia_id',$dependencias,null,['id'=>'dependencia_id','class'=>'form-control, select2','data-toggle'=>'select2']) }}
                 </div>
             </div>
             <div class="form-group row mb-1">
-                <label for = "ciudad" class="col-md-3 col-form-label">Ciudad</label>
+                <label for = "servicio_id" class="col-md-3 col-form-label">Servicio</label>
                 <div class="col-md-9">
-                    <input type="text" name="ciudad" id="ciudad" value="{{ old('ciudad') }}" class="form-control" disabled/>
+                    {{ Form::select('servicio_id',$servicios,null,['id'=>'servicio_id','class'=>'form-control, select2','data-toggle'=>'select2']) }}
                 </div>
             </div>
             <div class="form-group row mb-1">
-                <label for = "municipio" class="col-md-3 col-form-label">Municipio</label>
+                <label for = "ciudadano_id" class="col-md-3 col-form-label">Ciudadano</label>
                 <div class="col-md-9">
-                    <input type="text" name="municipio" id="municipio" value="{{ old('municipio') }}" class="form-control" disabled/>
+                    <select id="ciudadano_id" name="ciudadano_id" class="form-control select2" data-toggle="select2" size="1">
+                        @foreach($ciudadanos as $t)
+                            <option value="{{$t->id}}" >{{$t->fullname}}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
             <div class="form-group row mb-1">
-                <label for = "estado" class="col-md-3 col-form-label">Estado</label>
-                <div class="col-md-9">
-                    <input type="text" name="estado" id="estado" value="{{ old('estado') }}" class="form-control" disabled/>
-                </div>
-            </div>
-            <div class="form-group row mb-1">
-                <label for = "cp" class="col-md-3 col-form-label">CP</label>
-                <div class="col-md-9">
-                    <input type="text" name="cp" id="cp" value="{{ old('cp') }}" class="form-control" disabled/>
+                <label for = "estatus_id" class="col-md-3 col-form-label">Estatus</label>
+                <div class="col-md-5">
+                    <select id="estatus_id" name="estatus_id" class="form-control" size="1">
+                        @foreach($estatus as $t)
+                            <option value="{{$t->id}}" {{ $t->isDefault() ? 'selected': '' }} >{{ $t->estatus }} </option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
         </div>
@@ -113,4 +132,6 @@
 
 <input type="hidden" name="id" value="0" >
 <input type="hidden" name="ubicacion_id" id="ubicacion_id" value="0" >
+<input type="hidden" name="creadopor_id" id="creadopor_id" value="{{$user->id}}" >
+<input type="hidden" name="modificadopor_id" id="modificadopor_id" value="1" >
 <hr>

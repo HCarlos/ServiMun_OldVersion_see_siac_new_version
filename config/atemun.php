@@ -64,6 +64,7 @@ return [
             'denuncia_dependencia'   => 'denuncia_dependencia',
             'denuncia_ubicacion'     => 'denuncia_ubicacion',
             'denuncia_servicio'      => 'denuncia_servicio',
+            'denuncia_estatu'        => 'denuncia_estatu',
             'ciudadano_denuncia'     => 'ciudadano_denuncia',
             'creadopor_denuncia'     => 'creadopor_denuncia',
             'denuncia_modificadopor' => 'denuncia_modificadopor',

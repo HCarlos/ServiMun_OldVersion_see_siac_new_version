@@ -14,8 +14,14 @@ class Estatu extends Model
     protected $table = 'estatus';
 
     protected $fillable = [
-        'id', 'estatus',
+        'id', 'estatus','predeterminado',
     ];
+
+    public function isDefault(){
+        return $this->predeterminado;
+    }
+
+    protected $casts = ['predeterminado'=>'boolean',];
 
     public function scopeFilterBy($query, $filters){
         return (new EstatuFilter())->applyTo($query, $filters);

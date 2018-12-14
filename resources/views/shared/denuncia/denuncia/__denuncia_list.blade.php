@@ -2,9 +2,9 @@
     <thead>
     <tr role="row">
         <th class="sorting_asc" aria-sort="ascending" aria-label="Name: activate to sort column descending">ID</th>
-        <th class="sorting" >Folio</th>
-        <th class="sorting">Ciudadano</th>
+        <th class="sorting" >Ciudadano</th>
         <th class="sorting">Fecha</th>
+        <th class="sorting">Estatus</th>
         <th class="sorting ">Estatus</th>
         <th></th>
     </tr>
@@ -15,8 +15,9 @@
         <tr>
             <td class="table-user">{{$item->id}}</td>
             <td>{{$item->ciudadano->FullName}}</td>
-            <td>{{($item->Fecha)}}</td>
-            <td>{{($item->Estatus)}}</td>
+            <td>{{($item->fecha_ingreso)}}</td>
+            <td>{{($item->Estatu->estatus)}}</td>
+            <td>{{$item->fullUbication}}</td>
             <td class="table-action">
                 <div class="button-list">
                     @include('shared.ui_kit.__edit_item')

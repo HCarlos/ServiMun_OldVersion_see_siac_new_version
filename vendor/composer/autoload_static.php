@@ -785,6 +785,7 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         'App\\Traits\\Catalogos\\Domicilio\\Comunidad\\ComunidadTrait' => __DIR__ . '/../..' . '/app/Traits/Catalogos/Domicilio/Comunidad/ComunidadTrait.php',
         'App\\Traits\\Catalogos\\Domicilio\\Ubicacion\\UbicacionTrait' => __DIR__ . '/../..' . '/app/Traits/Catalogos/Domicilio/Ubicacion/UbicacionTrait.php',
         'App\\Traits\\Common\\CommonTrait' => __DIR__ . '/../..' . '/app/Traits/Common/CommonTrait.php',
+        'App\\Traits\\Denuncia\\DenunciaTrait' => __DIR__ . '/../..' . '/app/Traits/Denuncia/DenunciaTrait.php',
         'App\\Traits\\User\\UserAttributes' => __DIR__ . '/../..' . '/app/Traits/User/UserAttributes.php',
         'App\\Traits\\User\\UserImport' => __DIR__ . '/../..' . '/app/Traits/User/UserImport.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',

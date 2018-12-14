@@ -20,6 +20,7 @@ class CreateDomiciliosTable extends Migration
         Schema::create($tableNames['afiliaciones'], function (Blueprint $table) {
             $table->increments('id');
             $table->string('afiliacion',100)->default('')->nullable()->unique();
+            $table->boolean('predeterminado')->default(false)->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -27,6 +28,7 @@ class CreateDomiciliosTable extends Migration
         Schema::create($tableNames['calles'], function (Blueprint $table) {
             $table->increments('id');
             $table->string('calle',150)->default('')->nullable()->unique();
+            $table->boolean('predeterminado')->default(false)->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -34,6 +36,7 @@ class CreateDomiciliosTable extends Migration
         Schema::create($tableNames['ciudades'], function (Blueprint $table) {
             $table->increments('id');
             $table->string('ciudad',150)->default('')->nullable()->unique();
+            $table->boolean('predeterminado')->default(false)->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -41,6 +44,7 @@ class CreateDomiciliosTable extends Migration
         Schema::create($tableNames['estados'], function (Blueprint $table) {
             $table->increments('id');
             $table->string('estado',50)->default('')->nullable()->unique();
+            $table->boolean('predeterminado')->default(false)->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -48,6 +52,7 @@ class CreateDomiciliosTable extends Migration
         Schema::create($tableNames['localidades'], function (Blueprint $table) {
             $table->increments('id');
             $table->string('localidad',250)->default('')->nullable()->unique();
+            $table->boolean('predeterminado')->default(false)->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -55,6 +60,7 @@ class CreateDomiciliosTable extends Migration
         Schema::create($tableNames['municipios'], function (Blueprint $table) {
             $table->increments('id');
             $table->string('municipio',100)->default('')->nullable()->unique();
+            $table->boolean('predeterminado')->default(false)->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -62,6 +68,7 @@ class CreateDomiciliosTable extends Migration
         Schema::create($tableNames['paises'], function (Blueprint $table) {
             $table->increments('id');
             $table->string('pais',50)->default('')->nullable()->unique();
+            $table->boolean('predeterminado')->default(false)->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -69,6 +76,7 @@ class CreateDomiciliosTable extends Migration
         Schema::create($tableNames['tipocomunidades'], function (Blueprint $table) {
             $table->increments('id');
             $table->string('tipocomunidad',250)->default('')->nullable()->unique();
+            $table->boolean('predeterminado')->default(false)->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -76,6 +84,7 @@ class CreateDomiciliosTable extends Migration
         Schema::create($tableNames['tipoasentamientos'], function (Blueprint $table) {
             $table->increments('id');
             $table->string('tipoasentamiento',250)->default('')->nullable()->unique();
+            $table->boolean('predeterminado')->default(false)->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -84,6 +93,7 @@ class CreateDomiciliosTable extends Migration
             $table->increments('id');
             $table->string('codigo',6)->default('')->nullable();
             $table->string('cp',6)->default('')->nullable();
+            $table->boolean('predeterminado')->default(false)->nullable();
             $table->softDeletes();
             $table->timestamps();
             $table->unique(['codigo', 'cp']);
@@ -92,6 +102,7 @@ class CreateDomiciliosTable extends Migration
         Schema::create($tableNames['asentamientos'], function (Blueprint $table) {
             $table->increments('id');
             $table->string('asentamiento',250)->default('')->nullable()->unique();
+            $table->boolean('predeterminado')->default(false)->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

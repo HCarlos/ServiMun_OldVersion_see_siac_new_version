@@ -3,10 +3,13 @@
 namespace App\Models;
 
 use App\Filters\Denuncia\DenunciaFilter;
+use App\Models\Catalogos\Dependencia;
+use App\Models\Catalogos\Domicilios\Ubicacion;
+use App\Models\Catalogos\Estatu;
 use App\Models\Catalogos\Origen;
 use App\Models\Catalogos\Prioridad;
 use App\Models\Catalogos\Servicio;
-use App\Models\Catalogos\Ubicacion;
+use App\Traits\Denuncia\DenunciaTrait;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -14,6 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Denuncia extends Model
 {
     use SoftDeletes;
+    use DenunciaTrait;
 
     protected $guard_name = 'web';
     protected $table = 'denuncias';
@@ -24,7 +28,7 @@ class Denuncia extends Model
         'descripcion','referencia',
         'calle','num_ext','num_int','colonia', 'comunidad','ciudad','municipio','estado','pais', 'cp',
         'latitud','longitud',
-        'prioridad_id','origen_id','dependecia_id','ubicacion_id','servicio_id',
+        'prioridad_id','origen_id','dependencia_id','ubicacion_id','servicio_id','estatus_id',
         'ciudadano_id','creadopor_id','modificadopor_id',
         'searchtextdenuncia',
     ];
@@ -72,6 +76,13 @@ class Denuncia extends Model
     }
     public function servicios(){
         return $this->belongsToMany(Servicio::class,'denuncia_servicio','denuncia_id','servicio_id');
+    }
+
+    public function estatu(){
+        return $this->hasOne(Estatu::class,'id','estatus_id');
+    }
+    public function estatus(){
+        return $this->belongsToMany(Estatu::class,'denuncia_estatu','denuncia_id','estatus_id');
     }
 
     public function ciudadano(){

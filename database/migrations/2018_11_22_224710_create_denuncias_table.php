@@ -20,6 +20,7 @@ class CreateDenunciasTable extends Migration
         Schema::create($tableNames['medidas'], function (Blueprint $table) {
             $table->increments('id');
             $table->string('medida',50)->default('')->nullable();
+            $table->boolean('predeterminado')->default(false)->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -27,7 +28,7 @@ class CreateDenunciasTable extends Migration
         Schema::create($tableNames['prioridades'], function (Blueprint $table) {
             $table->increments('id');
             $table->string('prioridad',50)->default('')->nullable();
-            $table->boolean('predeterminado')->default(true)->nullable();
+            $table->boolean('predeterminado')->default(false)->nullable();
             $table->string('class_css',50)->default('')->nullable();
             $table->softDeletes();
             $table->timestamps();
@@ -36,6 +37,7 @@ class CreateDenunciasTable extends Migration
         Schema::create($tableNames['estatus'], function (Blueprint $table) {
             $table->increments('id');
             $table->string('estatus',50)->default('')->nullable();
+            $table->boolean('predeterminado')->default(false)->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -43,6 +45,7 @@ class CreateDenunciasTable extends Migration
         Schema::create($tableNames['origenes'], function (Blueprint $table) {
             $table->increments('id');
             $table->string('origen',100)->default('')->nullable();
+            $table->boolean('predeterminado')->default(false)->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

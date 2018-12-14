@@ -30,9 +30,14 @@ class Dependencia extends Model
         return $this->hasOne(User::class,'id','jefe_id');
     }
 
+    public function estatu(){
+        return $this->hasOne(Estatu::class,'id','jefe_id');
+    }
+
     public function estatus(){
         return $this->belongsToMany(Estatu::class);
     }
+
 
     public function isVisibleInternet(){
         return $this->visible_internet;

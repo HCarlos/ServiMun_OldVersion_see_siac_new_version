@@ -153,6 +153,7 @@ return array(
     'App\\Traits\\Catalogos\\Domicilio\\Comunidad\\ComunidadTrait' => $baseDir . '/app/Traits/Catalogos/Domicilio/Comunidad/ComunidadTrait.php',
     'App\\Traits\\Catalogos\\Domicilio\\Ubicacion\\UbicacionTrait' => $baseDir . '/app/Traits/Catalogos/Domicilio/Ubicacion/UbicacionTrait.php',
     'App\\Traits\\Common\\CommonTrait' => $baseDir . '/app/Traits/Common/CommonTrait.php',
+    'App\\Traits\\Denuncia\\DenunciaTrait' => $baseDir . '/app/Traits/Denuncia/DenunciaTrait.php',
     'App\\Traits\\User\\UserAttributes' => $baseDir . '/app/Traits/User/UserAttributes.php',
     'App\\Traits\\User\\UserImport' => $baseDir . '/app/Traits/User/UserImport.php',
     'App\\User' => $baseDir . '/app/User.php',

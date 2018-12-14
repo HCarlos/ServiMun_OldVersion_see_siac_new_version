@@ -3,18 +3,17 @@
 namespace App\Http\Controllers\Denuncia;
 
 use App\Http\Controllers\Funciones\FuncionesController;
+use App\Models\Catalogos\Dependencia;
 use App\Models\Catalogos\Domicilios\Ubicacion;
+use App\Models\Catalogos\Estatu;
+use App\Models\Catalogos\Origen;
+use App\Models\Catalogos\Prioridad;
+use App\Models\Catalogos\Servicio;
 use App\Models\Denuncia;
+use App\User;
 use Illuminate\Http\Request;
-use App\Models\Catalogos\Domicilios\Calle;
-use App\Models\Catalogos\Domicilios\Ciudad;
-use App\Models\Catalogos\Domicilios\Colonia;
-use App\Models\Catalogos\Domicilios\Estado;
-use App\Models\Catalogos\Domicilios\Localidad;
-use App\Models\Catalogos\Domicilios\Municipio;
 use App\Http\Controllers\Controller;
-use App\Models\Catalogos\Domicilios\Codigopostal;
-use App\Http\Requests\Domicilio\DenunciaRequest;
+use App\Http\Requests\Denuncia\DenunciaRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
@@ -58,25 +57,25 @@ class DenunciaController extends Controller
 // ***************** EDITA LOS DATOS  ++++++++++++++++++++ //
     protected function editItem($Id)
     {
-        $item            = Denuncia::find($Id);
-        $Calles          = Calle::all()->sortBy('calle');
-        $Colonias        = Colonia::all()->sortBy('colonia');
-        $Localidades     = Localidad::all()->sortBy('comunidad');
-        $Ciudades        = Ciudad::all()->sortBy('ciudad');
-        $Municipios      = Municipio::all()->sortBy('municipio');
-        $Estadps         = Estado::all()->sortBy('estado');
-        $Codigospostales = Codigopostal::all()->sortBy('cp');
+        $item         = Denuncia::find($Id);
+        $Prioridades  = Prioridad::all()->sortBy('prioridad');
+        $Origenes     = Origen::all()->sortBy('origen');
+        $Dependencias = Dependencia::all()->sortBy('dependencia')->pluck('dependencia','id');
+        $Servicios    = Servicio::all()->sortBy('servicio')->pluck('servicio','id');
+        $Ciudadanos   = User::all()->sortBy(function ($q){
+            return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
+        });
+        $Estatus      = Estatu::all()->sortBy('estatus');
 
         return view('denuncia.denuncia.denuncia_edit',
             [
-                'user' => Auth::user(),
-                'calles'          => $Calles,
-                'colonias'        => $Colonias,
-                'comunidades'     => $Localidades,
-                'ciudades'        => $Ciudades,
-                'municipios'      => $Municipios,
-                'estados'         => $Estadps,
-                'codigospostales' => $Codigospostales,
+                'user'            => Auth::user(),
+                'prioridades'     => $Prioridades,
+                'origenes'        => $Origenes,
+                'dependencias'    => $Dependencias,
+                'servicios'       => $Servicios,
+                'ciudadanos'      => $Ciudadanos,
+                'estatus'         => $Estatus,
                 'items'           => $item,
                 'editItemTitle'   => isset($item->denuncia) ? $item->denuncia : 'Nuevo',
                 'putEdit'         => 'updateDenuncia',
@@ -97,23 +96,25 @@ class DenunciaController extends Controller
 
     protected function newItem()
     {
-        $Calles          = Calle::all()->sortBy('calle');
-        $Colonias        = Colonia::all()->sortBy('colonia');
-        $Localidades     = Localidad::all()->sortBy('comunidad');
-        $Ciudades        = Ciudad::all()->sortBy('ciudad');
-        $Municipios      = Municipio::all()->sortBy('municipio');
-        $Estadps         = Estado::all()->sortBy('estado');
-        $Codigospostales = Codigopostal::all()->sortBy('cp');
+        $Prioridades  = Prioridad::all()->sortBy('prioridad');
+        $Origenes     = Origen::all()->sortBy('origen');
+        $Dependencias = Dependencia::all()->sortBy('dependencia')->pluck('dependencia','id');
+        $Servicios    = Servicio::all()->sortBy('servicio')->pluck('servicio','id');
+        $Ciudadanos   = User::all()->sortBy(function ($q){
+           return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
+        });
+        $Estatus      = Estatu::all()->sortBy('estatus');
+
         return view('denuncia.denuncia.denuncia_new',
             [
+                'user'            => Auth::user(),
                 'editItemTitle'   => 'Nuevo',
-                'calles'          => $Calles,
-                'colonias'        => $Colonias,
-                'comunidades'     => $Localidades,
-                'ciudades'        => $Ciudades,
-                'municipios'      => $Municipios,
-                'estados'         => $Estadps,
-                'codigospostales' => $Codigospostales,
+                'prioridades'     => $Prioridades,
+                'origenes'        => $Origenes,
+                'dependencias'    => $Dependencias,
+                'servicios'       => $Servicios,
+                'ciudadanos'      => $Ciudadanos,
+                'estatus'         => $Estatus,
                 'postNew'         => 'createDenuncia',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
             ]
@@ -124,6 +125,7 @@ class DenunciaController extends Controller
     protected function createItem(DenunciaRequest $request)
     {
         $item = $request->manage();
+//        dd($item);
         if (!isset($item->id)) {
             abort(404);
         }
