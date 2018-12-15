@@ -5,7 +5,7 @@
         <th class="sorting" >Ciudadano</th>
         <th class="sorting">Fecha</th>
         <th class="sorting">Estatus</th>
-        <th class="sorting ">Estatus</th>
+        <th class="sorting ">Ubicación</th>
         <th></th>
     </tr>
     </thead>
