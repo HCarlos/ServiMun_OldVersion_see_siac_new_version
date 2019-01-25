@@ -6,7 +6,7 @@
     </div>
 </div>
 
-<div class="row" data-plugin="dragula">
+<div class="row">
     {{$body_catalogo}}
 </div>
 

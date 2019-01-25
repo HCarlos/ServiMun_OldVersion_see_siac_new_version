@@ -9,4 +9,8 @@
             <i class="fas fa-file-excel text-white"></i>
         </a>
     @endisset
+    @isset($showModalSearchDenuncia)
+            <a href="{{route($showModalSearchDenuncia)}}" id="{{$showModalSearchDenuncia}}" class="btn btn-icon btn-light btnFullModal" data-toggle="modal" data-target="#modalFull"><i class="fas fa-user-plus"></i></a>
+    @endisset
+
 </div>

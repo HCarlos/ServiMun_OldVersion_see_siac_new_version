@@ -246,6 +246,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('removeDenuncia/{id}', 'Denuncia\DenunciaController@removeItem')->name('removeDenuncia');
     Route::get('searchAdress/', 'Denuncia\DenunciaController@searchAdress')->name('searchAdress');
     Route::get('getUbi/{IdUbi}', 'Denuncia\DenunciaController@getUbi')->name('getUbi');
+    Route::get('showModalSearchDenuncia/', 'Denuncia\DenunciaController@showModalSearchDenuncia')->name('showModalSearchDenuncia');
+    Route::put('findDataInDenuncia/', 'Denuncia\DenunciaController@findDataInDenuncia')->name('findDataInDenuncia');
 
 
 

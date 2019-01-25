@@ -10,6 +10,7 @@ namespace App\Filters\Denuncia;
 
 
 use App\Filters\Common\QueryFilter;
+use Carbon\Carbon;
 
 class DenunciaFilter extends QueryFilter
 {
@@ -18,6 +19,13 @@ class DenunciaFilter extends QueryFilter
     public function rules(): array{
         return [
             'search' => '',
+            'ciudadano' => '',
+            'id' => '',
+            'desde' => '',
+            'hasta' => '',
+            'dependencia_id' => '',
+            'servicio_id' => '',
+            'estatus_id' => '',
         ];
     }
 
@@ -44,9 +52,50 @@ class DenunciaFilter extends QueryFilter
 
     }
 
+    public function ciudadano($query, $search){
+        if (is_null($search) || empty ($search) || trim($search) == "") {return $query;}
+        $search = strtoupper($search);
+        return $query->orWhereHas('ciudadanos', function ($q) use ($search) {
+            return $q->whereRaw("CONCAT(ap_paterno,' ',ap_materno,' ',nombre) like ?", "%{$search}%");
+        });
+    }
 
+    public function id($query, $search){
+        if (is_null($search) || empty ($search) || trim($search) == "") {return $query;}
+        $search = strtoupper($search);
+        return $query->where('id', $search);
+    }
 
+    public function desde($query, $search){
+        if (is_null($search) || empty ($search) || trim($search) == "") {return $query;}
+        $date = Carbon::createFromFormat('Y-m-d', $search)->toDateString();
+        $date = $date.' 00:00:00';
+        return $query->whereDate('fecha_ingreso', '>=', $date);
+    }
 
+    public function hasta($query, $search){
+        if (is_null($search) || empty ($search) || trim($search) == "") {return $query;}
+        $date = Carbon::createFromFormat('Y-m-d', $search)->toDateString();
+        $date = $date.' 23:59:59';
+        return $query->whereDate('fecha_ingreso', '<=', $date);
+    }
 
+    public function dependencia_id($query, $search){
+        if (is_null($search) || empty ($search) || trim($search) == "0") {return $query;}
+        $search = strtoupper($search);
+        return $query->where('dependencia_id', $search);
+    }
+
+    public function servicio_id($query, $search){
+        if (is_null($search) || empty ($search) || trim($search) == "0") {return $query;}
+        $search = strtoupper($search);
+        return $query->where('servicio_id', $search);
+    }
+
+    public function estatus_id($query, $search){
+        if (is_null($search) || empty ($search) || trim($search) == "0") {return $query;}
+        $search = strtoupper($search);
+        return $query->where('estatus_id', $search);
+    }
 
 }

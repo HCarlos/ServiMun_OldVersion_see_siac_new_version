@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Denuncia;
 
+use App\Classes\FiltersRules;
 use App\Http\Controllers\Funciones\FuncionesController;
 use App\Models\Catalogos\Dependencia;
 use App\Models\Catalogos\Domicilios\Ubicacion;
@@ -49,7 +50,8 @@ class DenunciaController extends Controller
                 'newItem' => 'newDenuncia',
                 'removeItem' => 'removeDenuncia',
                 'searchAdressDenuncia' => 'listDenuncias',
-//                'showProcess1' => 'showFileListUserExcel1A',
+                'showModalSearchDenuncia' => 'showModalSearchDenuncia',
+                'findDataInDenuncia'=>'findDataInDenuncia',
             ]
         );
     }
@@ -181,6 +183,59 @@ class DenunciaController extends Controller
         return Response::json(['mensaje' => 'OK', 'data' => json_decode($items), 'status' => '200'], 200);
 
     }
+
+    protected function showModalSearchDenuncia(){
+        $Dependencias = Dependencia::all()->sortBy('dependencia')->pluck('dependencia','id');
+        $Servicios    = Servicio::all()->sortBy('servicio')->pluck('servicio','id');
+        $Estatus      = Estatu::all()->sortBy('estatus');
+
+        $user = Auth::user();
+        return view ('denuncia.search.denuncia_search_panel',
+            [
+                'findDataInDenuncia'=>'findDataInDenuncia',
+                'dependencias'    => $Dependencias,
+                'servicios'       => $Servicios,
+                'estatus'         => $Estatus,
+                'items' => $user,
+            ]
+        );
+    }
+
+
+ // ***************** MUESTRA EL MENU DE BUSQUEDA ++++++++++++++++++++ //
+    protected function findDataInDenuncia(Request $request)
+    {
+        $filters = new FiltersRules();
+
+        $items = Denuncia::query()
+            ->filterBy($filters->filterRulesDenuncia($request))
+            ->orderByDesc('id')
+            ->paginate();
+        $items->fragment('table');
+        $user = Auth::User();
+
+        //dd($items);
+
+        return view('denuncia.denuncia.denuncia_list',
+            [
+                'items' => $items,
+                'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'user' => $user,
+                'searchInListDenuncia' => 'listDenuncias',
+                'newWindow' => true,
+                'tableName' => $this->tableName,
+                'showEdit' => 'editDenuncia',
+                'newItem' => 'newDenuncia',
+                'removeItem' => 'removeDenuncia',
+                'searchAdressDenuncia' => 'listDenuncias',
+                'showModalSearchDenuncia' => 'showModalSearchDenuncia',
+                'findDataInDenuncia'=>'findDataInDenuncia',
+            ]
+        );
+
+    }
+
+
 
 
 

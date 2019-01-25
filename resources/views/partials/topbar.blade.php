@@ -76,7 +76,7 @@
 
     </ul>
     @include('shared.search.__search_word_in_list')
-    @include('shared.search.__search_denuncia_in_list')
+    {{--@include('shared.search.__search_denuncia_in_list')--}}
     @include('shared.search.__search_alumno_baca_list')
     @include('shared.search.__search_empty_tool_list')
 </div>

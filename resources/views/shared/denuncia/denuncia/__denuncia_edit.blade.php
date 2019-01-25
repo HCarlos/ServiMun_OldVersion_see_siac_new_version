@@ -87,7 +87,7 @@
                 </div>
                 <label for = "origen_id" class="col-md-2 col-form-label">Origen</label>
                 <div class="col-md-4">
-                    <select id="origen_id" name="origen_id" class="form-control"size="1">
+                    <select id="origen_id" name="origen_id" class="form-control" size="1">
                         @foreach($origenes as $t)
                             <option value="{{$t->id}}" {{ $t->id == $items->origen_id ? 'selected': '' }} >{{ $t->origen }} </option>
                         @endforeach
