@@ -4,6 +4,7 @@ namespace App\Http\Requests\Denuncia;
 
 use App\Models\Catalogos\Domicilios\Ubicacion;
 use App\Models\Denuncia;
+use App\Models\Denuncias\DenunciaEstatu;
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Classes\MessageAlertClass;
@@ -109,7 +110,8 @@ class DenunciaRequest extends FormRequest
         $Item->dependencias()->attach($this->dependencia_id);
         $Item->ubicaciones()->attach($this->ubicacion_id);
         $Item->servicios()->attach($this->servicio_id);
-        $Item->estatus()->attach($this->estatus_id);
+        DenunciaEstatu::where('denuncia_id',$this->id)->update(['ultimo'=>false]);
+        $Item->estatus()->attach($this->estatus_id,['ultimo'=>true]);
         $Item->ciudadanos()->attach($this->ciudadano_id);
         $Item->creadospor()->attach($this->creadopor_id);
         $Item->modificadospor()->attach($this->modificadopor_id);
@@ -123,6 +125,7 @@ class DenunciaRequest extends FormRequest
         $Item->ubicaciones()->detach($this->ubicacion_id);
         $Item->servicios()->detach($this->servicio_id);
         $Item->estatus()->detach($this->estatus_id);
+        DenunciaEstatu::where('denuncia_id',$this->id)->orderByDesc('id')->update(['ultimo'=>true]);
         $Item->ciudadanos()->detach($this->ciudadano_id);
         $Item->creadospor()->detach($this->creadopor_id);
         $Item->modificadospor()->detach($this->modificadopor_id);

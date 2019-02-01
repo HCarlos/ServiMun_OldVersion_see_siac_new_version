@@ -90,6 +90,7 @@ class DenunciaController extends Controller
     protected function updateItem(DenunciaRequest $request)
     {
         $item = $request->manage();
+        //dd($item);
         if (!isset($item->id)) {
             abort(405);
         }

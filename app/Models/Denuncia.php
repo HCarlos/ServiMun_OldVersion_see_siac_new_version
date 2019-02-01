@@ -82,7 +82,8 @@ class Denuncia extends Model
         return $this->hasOne(Estatu::class,'id','estatus_id');
     }
     public function estatus(){
-        return $this->belongsToMany(Estatu::class,'denuncia_estatu','denuncia_id','estatus_id');
+        return $this->belongsToMany(Estatu::class,'denuncia_estatu','denuncia_id','estatus_id')
+            ->withPivot('ultimo');
     }
 
     public function ciudadano(){

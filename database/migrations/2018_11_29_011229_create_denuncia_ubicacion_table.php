@@ -420,6 +420,7 @@ class CreateDenunciaUbicacionTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('denuncia_id')->default(0)->index();
             $table->unsignedInteger('estatus_id')->default(0)->index();
+            $table->boolean('ultimo')->default(false)->nullable();
             $table->softDeletes();
             $table->timestamps();
             $table->unique(['denuncia_id', 'estatus_id']);

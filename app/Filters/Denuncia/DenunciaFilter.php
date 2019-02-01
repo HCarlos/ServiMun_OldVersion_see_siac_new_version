@@ -32,12 +32,14 @@ class DenunciaFilter extends QueryFilter
     public function search($query, $search){
         if (is_null($search) || empty ($search) || trim($search) == "") {return $query;}
         $search = strtoupper($search);
+        //dd($search);
         return $query->where(function ($query) use ($search) {
                 $query->orWhereHas('ciudadanos', function ($q) use ($search) {
                     return $q->whereRaw("CONCAT(ap_paterno,' ',ap_materno,' ',nombre) like ?", "%{$search}%");
                 })
                 ->orWhereHas('estatus', function ($q) use ($search) {
-                    return $q->whereRaw("UPPER(estatus) like ?", "%{$search}%");
+                    return $q->whereRaw("UPPER(estatus) like ?", "%{$search}%")
+                        ->where('ultimo',true);
                 })
                 ->orWhereRaw("UPPER(descripcion) like ?", "%{$search}%")
                 ->orWhereRaw("UPPER(referencia) like ?", "%{$search}%")

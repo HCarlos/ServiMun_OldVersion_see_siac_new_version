@@ -2167,17 +2167,17 @@
     },
     {
         "name": "laravel/framework",
-        "version": "v5.7.22",
-        "version_normalized": "5.7.22.0",
+        "version": "v5.7.24",
+        "version_normalized": "5.7.24.0",
         "source": {
             "type": "git",
             "url": "https://github.com/laravel/framework.git",
-            "reference": "64a7749bd9e8df68addce1d01a54bcf606141f29"
+            "reference": "2ede55db4b8201ed0450fa7e7a4d7220aa29bc34"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/laravel/framework/zipball/64a7749bd9e8df68addce1d01a54bcf606141f29",
-            "reference": "64a7749bd9e8df68addce1d01a54bcf606141f29",
+            "url": "https://api.github.com/repos/laravel/framework/zipball/2ede55db4b8201ed0450fa7e7a4d7220aa29bc34",
+            "reference": "2ede55db4b8201ed0450fa7e7a4d7220aa29bc34",
             "shasum": ""
         },
         "require": {
@@ -2279,7 +2279,7 @@
             "symfony/dom-crawler": "Required to use most of the crawler integration testing tools (^4.1).",
             "symfony/psr-http-message-bridge": "Required to psr7 bridging features (^1.0)."
         },
-        "time": "2019-01-22T15:08:35+00:00",
+        "time": "2019-01-29T22:13:46+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2754,17 +2754,17 @@
     },
     {
         "name": "league/flysystem",
-        "version": "1.0.49",
-        "version_normalized": "1.0.49.0",
+        "version": "1.0.50",
+        "version_normalized": "1.0.50.0",
         "source": {
             "type": "git",
             "url": "https://github.com/thephpleague/flysystem.git",
-            "reference": "a63cc83d8a931b271be45148fa39ba7156782ffd"
+            "reference": "dab4e7624efa543a943be978008f439c333f2249"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/a63cc83d8a931b271be45148fa39ba7156782ffd",
-            "reference": "a63cc83d8a931b271be45148fa39ba7156782ffd",
+            "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/dab4e7624efa543a943be978008f439c333f2249",
+            "reference": "dab4e7624efa543a943be978008f439c333f2249",
             "shasum": ""
         },
         "require": {
@@ -2794,7 +2794,7 @@
             "spatie/flysystem-dropbox": "Allows you to use Dropbox storage",
             "srmklive/flysystem-dropbox-v2": "Allows you to use Dropbox storage for PHP 5 applications"
         },
-        "time": "2018-11-23T23:41:29+00:00",
+        "time": "2019-02-01T08:50:36+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2905,20 +2905,21 @@
     },
     {
         "name": "maatwebsite/excel",
-        "version": "3.1.5",
-        "version_normalized": "3.1.5.0",
+        "version": "3.1.6",
+        "version_normalized": "3.1.6.0",
         "source": {
             "type": "git",
             "url": "https://github.com/Maatwebsite/Laravel-Excel.git",
-            "reference": "bbf8f11dd1138ce82b0c9a4dbd467cb1d0ab44bf"
+            "reference": "d5e51dca5ed845c1ce605a7a1d9882d5b57e270d"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/Maatwebsite/Laravel-Excel/zipball/bbf8f11dd1138ce82b0c9a4dbd467cb1d0ab44bf",
-            "reference": "bbf8f11dd1138ce82b0c9a4dbd467cb1d0ab44bf",
+            "url": "https://api.github.com/repos/Maatwebsite/Laravel-Excel/zipball/d5e51dca5ed845c1ce605a7a1d9882d5b57e270d",
+            "reference": "d5e51dca5ed845c1ce605a7a1d9882d5b57e270d",
             "shasum": ""
         },
         "require": {
+            "ext-json": "*",
             "illuminate/support": "5.5.* || 5.6.* || 5.7.*",
             "php": "^7.0",
             "phpoffice/phpspreadsheet": "^1.4"
@@ -2930,7 +2931,7 @@
             "phpunit/phpunit": "^7.0",
             "predis/predis": "^1.1"
         },
-        "time": "2019-01-25T15:01:37+00:00",
+        "time": "2019-01-30T19:01:33+00:00",
         "type": "library",
         "extra": {
             "laravel": {
@@ -4551,17 +4552,17 @@
     },
     {
         "name": "phpseclib/phpseclib",
-        "version": "2.0.13",
-        "version_normalized": "2.0.13.0",
+        "version": "2.0.14",
+        "version_normalized": "2.0.14.0",
         "source": {
             "type": "git",
             "url": "https://github.com/phpseclib/phpseclib.git",
-            "reference": "42603ce3f42a27f7e14e54feab95db7b680ad473"
+            "reference": "8ebfcadbf30524aeb75b2c446bc2519d5b321478"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/42603ce3f42a27f7e14e54feab95db7b680ad473",
-            "reference": "42603ce3f42a27f7e14e54feab95db7b680ad473",
+            "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/8ebfcadbf30524aeb75b2c446bc2519d5b321478",
+            "reference": "8ebfcadbf30524aeb75b2c446bc2519d5b321478",
             "shasum": ""
         },
         "require": {
@@ -4579,7 +4580,7 @@
             "ext-mcrypt": "Install the Mcrypt extension in order to speed up a few other cryptographic operations.",
             "ext-openssl": "Install the OpenSSL extension in order to speed up a wide variety of cryptographic operations."
         },
-        "time": "2018-12-16T17:45:25+00:00",
+        "time": "2019-01-27T19:37:29+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -4972,17 +4973,17 @@
     },
     {
         "name": "phpunit/phpunit",
-        "version": "7.5.2",
-        "version_normalized": "7.5.2.0",
+        "version": "7.5.3",
+        "version_normalized": "7.5.3.0",
         "source": {
             "type": "git",
             "url": "https://github.com/sebastianbergmann/phpunit.git",
-            "reference": "7c89093bd00f7d5ddf0ab81dee04f801416b4944"
+            "reference": "2cb759721e53bc05f56487f628c6b9fbb6c18746"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/7c89093bd00f7d5ddf0ab81dee04f801416b4944",
-            "reference": "7c89093bd00f7d5ddf0ab81dee04f801416b4944",
+            "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/2cb759721e53bc05f56487f628c6b9fbb6c18746",
+            "reference": "2cb759721e53bc05f56487f628c6b9fbb6c18746",
             "shasum": ""
         },
         "require": {
@@ -5021,7 +5022,7 @@
             "ext-xdebug": "*",
             "phpunit/php-invoker": "^2.0"
         },
-        "time": "2019-01-15T08:19:08+00:00",
+        "time": "2019-02-01T05:24:07+00:00",
         "bin": [
             "phpunit"
         ],
@@ -5756,30 +5757,33 @@
     },
     {
         "name": "sebastian/environment",
-        "version": "4.0.1",
-        "version_normalized": "4.0.1.0",
+        "version": "4.1.0",
+        "version_normalized": "4.1.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/sebastianbergmann/environment.git",
-            "reference": "febd209a219cea7b56ad799b30ebbea34b71eb8f"
+            "reference": "6fda8ce1974b62b14935adc02a9ed38252eca656"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/febd209a219cea7b56ad799b30ebbea34b71eb8f",
-            "reference": "febd209a219cea7b56ad799b30ebbea34b71eb8f",
+            "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/6fda8ce1974b62b14935adc02a9ed38252eca656",
+            "reference": "6fda8ce1974b62b14935adc02a9ed38252eca656",
             "shasum": ""
         },
         "require": {
             "php": "^7.1"
         },
         "require-dev": {
-            "phpunit/phpunit": "^7.4"
+            "phpunit/phpunit": "^7.5"
         },
-        "time": "2018-11-25T09:31:21+00:00",
+        "suggest": {
+            "ext-posix": "*"
+        },
+        "time": "2019-02-01T05:27:49+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "4.0-dev"
+                "dev-master": "4.1-dev"
             }
         },
         "installation-source": "dist",
@@ -6211,17 +6215,17 @@
     },
     {
         "name": "spatie/laravel-permission",
-        "version": "2.29.0",
-        "version_normalized": "2.29.0.0",
+        "version": "2.30.0",
+        "version_normalized": "2.30.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/spatie/laravel-permission.git",
-            "reference": "7f308806ca051fca42685e4a97a282139a6a7982"
+            "reference": "60744813f22535415b8a716fb9252ba063ba056c"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/7f308806ca051fca42685e4a97a282139a6a7982",
-            "reference": "7f308806ca051fca42685e4a97a282139a6a7982",
+            "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/60744813f22535415b8a716fb9252ba063ba056c",
+            "reference": "60744813f22535415b8a716fb9252ba063ba056c",
             "shasum": ""
         },
         "require": {
@@ -6236,7 +6240,7 @@
             "phpunit/phpunit": "^5.7|6.2|^7.0",
             "predis/predis": "^1.1"
         },
-        "time": "2018-12-16T00:49:22+00:00",
+        "time": "2019-01-28T23:50:25+00:00",
         "type": "library",
         "extra": {
             "laravel": {
@@ -7492,30 +7496,31 @@
     },
     {
         "name": "vlucas/phpdotenv",
-        "version": "v2.5.2",
-        "version_normalized": "2.5.2.0",
+        "version": "v2.6.1",
+        "version_normalized": "2.6.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/vlucas/phpdotenv.git",
-            "reference": "cfd5dc225767ca154853752abc93aeec040fcf36"
+            "reference": "2a7dcf7e3e02dc5e701004e51a6f304b713107d5"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/cfd5dc225767ca154853752abc93aeec040fcf36",
-            "reference": "cfd5dc225767ca154853752abc93aeec040fcf36",
+            "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/2a7dcf7e3e02dc5e701004e51a6f304b713107d5",
+            "reference": "2a7dcf7e3e02dc5e701004e51a6f304b713107d5",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.3.9"
+            "php": ">=5.3.9",
+            "symfony/polyfill-ctype": "^1.9"
         },
         "require-dev": {
             "phpunit/phpunit": "^4.8.35 || ^5.0"
         },
-        "time": "2018-10-30T17:29:25+00:00",
+        "time": "2019-01-29T11:11:52+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "2.5-dev"
+                "dev-master": "2.6-dev"
             }
         },
         "installation-source": "dist",
@@ -7658,17 +7663,17 @@
     },
     {
         "name": "yajra/laravel-datatables-oracle",
-        "version": "v8.13.3",
-        "version_normalized": "8.13.3.0",
+        "version": "v8.13.4",
+        "version_normalized": "8.13.4.0",
         "source": {
             "type": "git",
             "url": "https://github.com/yajra/laravel-datatables.git",
-            "reference": "387512371d3688f3fe1bf75e3e9e53b3d1426736"
+            "reference": "8aedd88a02599d5d0a4a1a2bb5aac849397dd594"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/yajra/laravel-datatables/zipball/387512371d3688f3fe1bf75e3e9e53b3d1426736",
-            "reference": "387512371d3688f3fe1bf75e3e9e53b3d1426736",
+            "url": "https://api.github.com/repos/yajra/laravel-datatables/zipball/8aedd88a02599d5d0a4a1a2bb5aac849397dd594",
+            "reference": "8aedd88a02599d5d0a4a1a2bb5aac849397dd594",
             "shasum": ""
         },
         "require": {
@@ -7688,7 +7693,7 @@
             "yajra/laravel-datatables-fractal": "Plugin for server-side response using Fractal.",
             "yajra/laravel-datatables-html": "Plugin for server-side HTML builder of dataTables."
         },
-        "time": "2019-01-05T02:12:47+00:00",
+        "time": "2019-01-29T03:12:37+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
