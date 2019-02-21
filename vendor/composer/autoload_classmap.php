@@ -68,6 +68,7 @@ return array(
     'App\\Http\\Controllers\\Denuncia\\OrigenController' => $baseDir . '/app/Http/Controllers/Denuncia/OrigenController.php',
     'App\\Http\\Controllers\\Denuncia\\PrioridadController' => $baseDir . '/app/Http/Controllers/Denuncia/PrioridadController.php',
     'App\\Http\\Controllers\\Denuncia\\ServicioController' => $baseDir . '/app/Http/Controllers/Denuncia/ServicioController.php',
+    'App\\Http\\Controllers\\External\\Denuncia\\ListDenunciaXLSXController' => $baseDir . '/app/Http/Controllers/External/Denuncia/ListDenunciaXLSXController.php',
     'App\\Http\\Controllers\\External\\User\\ListUserXLSXController' => $baseDir . '/app/Http/Controllers/External/User/ListUserXLSXController.php',
     'App\\Http\\Controllers\\Funciones\\FuncionesController' => $baseDir . '/app/Http/Controllers/Funciones/FuncionesController.php',
     'App\\Http\\Controllers\\Funciones\\LoadTemplateExcel' => $baseDir . '/app/Http/Controllers/Funciones/LoadTemplateExcel.php',

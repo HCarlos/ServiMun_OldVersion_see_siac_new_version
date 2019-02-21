@@ -726,6 +726,7 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         'App\\Http\\Controllers\\Denuncia\\OrigenController' => __DIR__ . '/../..' . '/app/Http/Controllers/Denuncia/OrigenController.php',
         'App\\Http\\Controllers\\Denuncia\\PrioridadController' => __DIR__ . '/../..' . '/app/Http/Controllers/Denuncia/PrioridadController.php',
         'App\\Http\\Controllers\\Denuncia\\ServicioController' => __DIR__ . '/../..' . '/app/Http/Controllers/Denuncia/ServicioController.php',
+        'App\\Http\\Controllers\\External\\Denuncia\\ListDenunciaXLSXController' => __DIR__ . '/../..' . '/app/Http/Controllers/External/Denuncia/ListDenunciaXLSXController.php',
         'App\\Http\\Controllers\\External\\User\\ListUserXLSXController' => __DIR__ . '/../..' . '/app/Http/Controllers/External/User/ListUserXLSXController.php',
         'App\\Http\\Controllers\\Funciones\\FuncionesController' => __DIR__ . '/../..' . '/app/Http/Controllers/Funciones/FuncionesController.php',
         'App\\Http\\Controllers\\Funciones\\LoadTemplateExcel' => __DIR__ . '/../..' . '/app/Http/Controllers/Funciones/LoadTemplateExcel.php',
