@@ -46,6 +46,7 @@ class DenunciaController extends Controller
                 'newWindow' => true,
                 'tableName' => $this->tableName,
                 'showEdit' => 'editDenuncia',
+                'showProcess1' => 'showDataListDenunciaExcel1A',
 //                'putEdit' => 'updateDenuncia',
                 'newItem' => 'newDenuncia',
                 'removeItem' => 'removeDenuncia',

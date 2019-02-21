@@ -174,10 +174,12 @@ $(document).ready(function() {
                 });
                 var oSearch    = $("input[name='search']").length > 0 ? $("input[name='search']").val() : "";
                 var oRole_User = $("input[name='role_user']").length > 0 ? $("input[name='role_user']").val() : "";
+                var oItems     = $("input[name='items']").length > 0 ? $("input[name='items']").val() : "";
                 var PARAMS = {
                     search : oSearch,
                     roles  : arrRole,
                     role_user : oRole_User,
+                    items : oItems,
                     _token : token
                 };
                 var temp=document.createElement("form");

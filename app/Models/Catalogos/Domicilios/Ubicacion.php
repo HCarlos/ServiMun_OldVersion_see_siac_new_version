@@ -84,4 +84,9 @@ class Ubicacion extends Model
         return $this->belongsToMany(Codigopostal::class,'codigopostal_ubicacion','ubicacion_id','codigopostal_id');
     }
 
+    public function getUbicacionAttribute() {
+        return trim($this->calle).', '.trim($this->colonia).', '.trim($this->comunidad).', '.trim($this->ciudad).', '.trim($this->municipio);
+    }
+
+
 }

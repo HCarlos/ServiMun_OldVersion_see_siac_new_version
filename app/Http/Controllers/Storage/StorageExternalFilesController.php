@@ -60,6 +60,7 @@ class StorageExternalFilesController extends Controller
     public function archivos_config(){
         return view('catalogos.config.files',[
             "tableName" => "",
+            "titulo_catalogo" => "Configuración de Archivos",
             "archivos" => Storage::disk('externo')->allFiles(),
         ]);
     }

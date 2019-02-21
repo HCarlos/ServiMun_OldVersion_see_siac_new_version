@@ -22,11 +22,12 @@ return [
     // -----------------------------------------------------------
 
     'archivos'=>[
-        'fmt_lista_usuarios'           => 'fmt_lista_usuarios.xlsx',
-        'fmt_lista_niveles'            => 'fmt_lista_niveles.xlsx',
-        'fmt_lista_parentescos'        => 'fmt_lista_parentescos.xlsx',
-        'fmt_lista_familias'           => 'fmt_lista_familias.xlsx',
-        'fmt_lista_registros_fiscales' => 'fmt_lista_registros_fiscales.xlsx',
+        'fmt_lista_usuarios'            => 'fmt_lista_usuarios.xlsx',
+        'fmt_lista_denuncias'           => 'fmt_lista_denuncias.xlsx',
+//        'fmt_lista_niveles'            => 'fmt_lista_niveles.xlsx',
+//        'fmt_lista_parentescos'        => 'fmt_lista_parentescos.xlsx',
+//        'fmt_lista_familias'           => 'fmt_lista_familias.xlsx',
+//        'fmt_lista_registros_fiscales' => 'fmt_lista_registros_fiscales.xlsx',
     ],
 
     // -----------------------------------------------------------

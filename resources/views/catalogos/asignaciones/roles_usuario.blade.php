@@ -1,8 +1,8 @@
 @extends('home')
-
 @section('container')
-
     @asignaciones
+        @slot('titulo_catalogo', $titulo_catalogo)
+        @slot('titulo_header','')
         @slot('altoPanelIzq','asign-pnl-left')
         @slot('altoPanelCen','asign-pnl-center')
         @slot('altoPanelDer','asign-pnl-right')

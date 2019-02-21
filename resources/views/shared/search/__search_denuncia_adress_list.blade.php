@@ -9,5 +9,7 @@
             </div>
         </div>
     </div>
+    {!! Form::hidden('items', json_encode($items)) !!}
+    {{--<input type="hidden" id="items" name="items[]" value="{{ request('items',$items) }}" />--}}
 </form>
 @endisset

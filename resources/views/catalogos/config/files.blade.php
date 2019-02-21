@@ -3,7 +3,8 @@
 @section('container')
 
     @home
-    @slot('titulo_header','Archivos de Configuración')
+    @slot('titulo_catalogo','Archivos de Configuración')
+    @slot('titulo_header','')
     @slot('contenido')
         <div class="col-md-4">
             <p class="text-success">Listado de archivos base:</p>
