@@ -6,7 +6,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     </div>
     <div class="modal-body">
-        {{$body_full_modal}}
+        {{ $body_full_modal }}
     </div>
     <div class="modal-footer">
         <button type="submit" class="btn btn-primary float-left">

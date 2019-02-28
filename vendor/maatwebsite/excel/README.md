@@ -10,20 +10,6 @@
   Laravel Excel 3.1
 </h1>
 
-<p align="center">
-  
-  <a href="https://medium.com/maatwebsite/celebrating-5-years-of-laravel-excel-d0416eebca20">
-  <img alt="Laravel Excel - 10 Million Downloads" src="https://user-images.githubusercontent.com/7728097/52121137-db33f300-261e-11e9-98b4-18fa4d572b2e.jpg" />
-  </a>
-  </p>
-  
-<h3 align="center">
-  🎉 Celebrating 10 Million Downloads. Read more on <a href="https://medium.com/maatwebsite/celebrating-5-years-of-laravel-excel-d0416eebca20">our blog!</a> about 5 years of Laravel!
-</h3>
-
-<p></p>
-
-
 <h3 align="center">
   :muscle: :fire: :rocket:
 </h3>
@@ -208,7 +194,7 @@ Versions will be supported for a limited amount of time.
 |---- |----|----|----|
 | 2.1 | <=5.6 | <=7.0 | Unsupported since 15-5-2018 |
 | 3.0 | ^5.5 |  ^7.0 | Unsupported since 31-12-2018 |
-| 3.1 | ^5.5 |  ^7.0 | New features |
+| 3.1 | ^5.5 |  ^7.1 | New features |
 
 ## :mailbox_with_mail: License & Postcardware
 
@@ -217,8 +203,8 @@ Our software is open source and licensed under the MIT license.
 If you use the software in your production environment we would appreciate to receive a postcard of your hometown. Please send it to:
 
 **Maatwebsite**  
-Florijnruwe 111-2  
-6218 CA Maastricht  
-The Netherlands  
+Markt 2  
+6231 LS, Meerssen  
+The Netherlands 
 
 More about the license can be found at: [https://laravel-excel.maatwebsite.nl/3.1/getting-started/license.html](https://laravel-excel.maatwebsite.nl/3.1/getting-started/license.html)

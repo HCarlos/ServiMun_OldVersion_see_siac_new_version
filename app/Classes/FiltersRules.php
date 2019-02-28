@@ -46,7 +46,7 @@ class FiltersRules
             'servicio_id'    => $data['servicio_id'],
             'estatus_id'     => $data['estatus_id'],
         ];
-        dd($filters);
+        //dd($filters);
         return $filters;
     }
 

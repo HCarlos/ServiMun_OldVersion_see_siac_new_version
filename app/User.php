@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Filters\User\UserFilter;
+use App\Models\Denuncias\Respuesta;
 use App\Models\Familias\Familia;
 use App\Models\Familias\Parentesco;
 use App\Models\Users\UserAdress;
@@ -62,6 +63,10 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function user_data_extend(){
         return $this->hasOne(UserDataExtend::class);
+    }
+
+    public function respuestas(){
+        return $this->belongsToMany(Respuesta::class);
     }
 
     public function isAdmin(){

@@ -6,7 +6,7 @@
         </a>
     @endisset
     @isset($showProcess1)
-        <a href="{{ route($showProcess1)}} " @isset($newWindow) target="_blank" @endisset class="btn btn-icon btn-outline-success btn-rounded btnFilters" data-toggle="tooltip" data-placement="top" data-original-title="Exportar a XLSX">
+        <a href="{{ route($showProcess1)}} " @isset($newWindow) target="_blank" @endisset class="btn btn-icon btn-outline-success btn-rounded btnGetItems" data-toggle="tooltip" data-placement="top" data-original-title="Exportar a XLSX">
             <i class="fas fa-file-excel text-white"></i>
         </a>
     @endisset

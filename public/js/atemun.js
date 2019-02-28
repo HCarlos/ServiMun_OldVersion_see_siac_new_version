@@ -64,7 +64,7 @@ $(document).ready(function() {
             $("#modalFull .modal-content").empty();
             $("#modalFull .modal-content").html('<div class="fa-2x m-2"><i class="fa fa-cog fa-spin"></i> Cargado datos...</div>');
             $("#modalFull").modal('show');
-            var Url = event.currentTarget.id;
+            var Url = event.currentTarget.href;
             $(function () {
                 $.ajax({
                     method: "get",
@@ -174,12 +174,10 @@ $(document).ready(function() {
                 });
                 var oSearch    = $("input[name='search']").length > 0 ? $("input[name='search']").val() : "";
                 var oRole_User = $("input[name='role_user']").length > 0 ? $("input[name='role_user']").val() : "";
-                var oItems     = $("input[name='items']").length > 0 ? $("input[name='items']").val() : "";
                 var PARAMS = {
                     search : oSearch,
                     roles  : arrRole,
                     role_user : oRole_User,
-                    items : oItems,
                     _token : token
                 };
                 var temp=document.createElement("form");
@@ -200,6 +198,39 @@ $(document).ready(function() {
 
         });
     }
+
+    if ( $(".btnGetItems").length > 0  ){
+        $(".btnGetItems").on('click', function(event) {
+            event.preventDefault();
+            if ( $(".frmGetItems").length > 0  ){
+                var hRef = event.currentTarget.href;
+                var token = $("meta[name='csrf-token']").attr('content');
+                var oSearch    = $("input[name='search']").length > 0 ? $("input[name='search']").val() : "";
+                var oItems     = $("input[name='items']").length > 0 ? $("input[name='items']").val() : "";
+                var PARAMS = {
+                    search : oSearch,
+                    items : oItems,
+                    _token : token
+                };
+                var temp=document.createElement("form");
+                temp.action=hRef;
+                temp.method="POST";
+                temp.target="_blank";
+                temp.style.display="none";
+                for(var x in PARAMS) {
+                    var opt=document.createElement("textarea");
+                    opt.name=x;
+                    opt.value=PARAMS[x];
+                    temp.appendChild(opt);
+                }
+                document.body.appendChild(temp);
+                temp.submit();
+                return temp;
+            }
+        });
+
+    }
+
 
     $("#colonia, #comunidad, #calle, #asentamiento, #tipoasentamiento, #tipocomunidad, #localidad," +
         "#afiliacion, #area, #subarea, #dependencia, #medida, #origen, #prioridad, #servicio, #ubicacon," +

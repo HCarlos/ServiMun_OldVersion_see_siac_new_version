@@ -1,6 +1,9 @@
 <?php
+/**
+ * Copyright (c) 2019. Realizado por Carlos Hidalgo
+ */
 
-namespace App\Models;
+namespace App\Models\Denuncias;
 
 use App\Filters\Denuncia\DenunciaFilter;
 use App\Models\Catalogos\Dependencia;
@@ -106,6 +109,15 @@ class Denuncia extends Model
     public function modificadospor(){
         return $this->belongsToMany(User::class,'denuncia_modificadopor','denuncia_id','modificadopor_id');
     }
+
+    public function respuesta(){
+        return $this->hasOne(Respuesta::class,'id','respuesta_id');
+    }
+
+    public function respuestas(){
+        return $this->belongsToMany(Respuesta::class,'denuncia_respuesta','denuncia_id','respuesta_id');
+    }
+
 
 
 }

@@ -20,7 +20,7 @@
                 <li>
                     <a href="{{route('listDenuncias')}}">
                         <i class="mdi modal-dialog-popout"></i>
-                        <span class="badge badge-light float-right">{{\App\Models\Denuncia::count()}}</span>
+                        <span class="badge badge-light float-right">{{\App\Models\Denuncias\Denuncia::count()}}</span>
                         <span>Denuncias</span>
                     </a>
                 </li>

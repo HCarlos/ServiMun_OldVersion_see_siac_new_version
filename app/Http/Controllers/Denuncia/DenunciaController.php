@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Denuncia;
 
 use App\Classes\FiltersRules;
+use App\Classes\Items;
 use App\Http\Controllers\Funciones\FuncionesController;
 use App\Models\Catalogos\Dependencia;
 use App\Models\Catalogos\Domicilios\Ubicacion;
@@ -10,7 +11,7 @@ use App\Models\Catalogos\Estatu;
 use App\Models\Catalogos\Origen;
 use App\Models\Catalogos\Prioridad;
 use App\Models\Catalogos\Servicio;
-use App\Models\Denuncia;
+use App\Models\Denuncias\Denuncia;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -29,12 +30,22 @@ class DenunciaController extends Controller
     protected function index(Request $request)
     {
         ini_set('max_execution_time', 300);
-        $filters = $request->all(['search']);
+        $filters = $request->only(['search']);
+        //dd($filters);
         $items = Denuncia::query()
             ->filterBy($filters)
             ->orderByDesc('id')
             ->paginate();
         $items->appends($filters)->fragment('table');
+
+        $request->session()->put('items', $items);
+
+//        $sv = Items::getInstance();
+//        $sv->setItems($items);
+//
+//        //dd($sv->getItems());
+
+
         $user = Auth::User();
 
         return view('denuncia.denuncia.denuncia_list',
@@ -50,6 +61,7 @@ class DenunciaController extends Controller
 //                'putEdit' => 'updateDenuncia',
                 'newItem' => 'newDenuncia',
                 'removeItem' => 'removeDenuncia',
+                'respuestasDenunciaItem' => 'listRespuestas',
                 'searchAdressDenuncia' => 'listDenuncias',
                 'showModalSearchDenuncia' => 'showModalSearchDenuncia',
                 'findDataInDenuncia'=>'findDataInDenuncia',
@@ -216,7 +228,7 @@ class DenunciaController extends Controller
         $items->fragment('table');
         $user = Auth::User();
 
-        //dd($items);
+        $request->session()->put('items', $items);
 
         return view('denuncia.denuncia.denuncia_list',
             [
@@ -224,11 +236,13 @@ class DenunciaController extends Controller
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
                 'user' => $user,
                 'searchInListDenuncia' => 'listDenuncias',
+                'respuestasDenunciaItem' => 'listRespuestas',
                 'newWindow' => true,
                 'tableName' => $this->tableName,
                 'showEdit' => 'editDenuncia',
                 'newItem' => 'newDenuncia',
                 'removeItem' => 'removeDenuncia',
+                'showProcess1' => 'showDataListDenunciaExcel1A',
                 'searchAdressDenuncia' => 'listDenuncias',
                 'showModalSearchDenuncia' => 'showModalSearchDenuncia',
                 'findDataInDenuncia'=>'findDataInDenuncia',
@@ -236,7 +250,6 @@ class DenunciaController extends Controller
         );
 
     }
-
 
 
 

@@ -18,10 +18,11 @@
             <td>{{($item->fecha_ingreso)}}</td>
             <td>{{($item->Estatu->estatus)}}</td>
             <td>{{$item->fullUbication}}</td>
-            <td class="table-action">
+            <td class="table-action tbl100W">
                 <div class="button-list">
                     @include('shared.ui_kit.__edit_item')
                     @include('shared.ui_kit.__remove_item')
+                    @include('shared.ui_kit.__respuestas_list_item')
                 </div>
             </td>
         </tr>

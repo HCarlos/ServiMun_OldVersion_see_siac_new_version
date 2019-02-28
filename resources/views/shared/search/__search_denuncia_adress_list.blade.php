@@ -1,5 +1,5 @@
 @isset($searchAdressDenuncia)
-<form method="get" action="{{ route($searchAdressDenuncia) }}" class="form-inline frmSearchInList">
+<form method="get" action="{{ route($searchAdressDenuncia) }}" class="form-inline frmGetItems">
     <div class="app-search">
         <div class="input-group">
             <input type="search" name="search" id="search" value="{{ request('search') }}" class="form-control" placeholder="Buscar...">
@@ -9,7 +9,6 @@
             </div>
         </div>
     </div>
-    {!! Form::hidden('items', json_encode($items)) !!}
-    {{--<input type="hidden" id="items" name="items[]" value="{{ request('items',$items) }}" />--}}
+    {{--{!! Form::hidden('items', json_encode($items)) !!}--}}
 </form>
 @endisset

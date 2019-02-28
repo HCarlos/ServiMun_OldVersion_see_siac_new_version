@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\External\Denuncia;
 
+use App\Classes\Items;
 use App\Models\Catalogos\Dependencia;
 use App\Models\Catalogos\Domicilios\Ubicacion;
 use App\Models\Catalogos\Estatu;
 use App\Models\Catalogos\Origen;
 use App\Models\Catalogos\Prioridad;
 use App\Models\Catalogos\Servicio;
-use App\Models\Denuncia;
+use App\Models\Denuncias\Denuncia;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -19,9 +20,6 @@ use App\User;
 use Carbon\Carbon;
 use Exception;
 
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
@@ -33,22 +31,8 @@ class ListDenunciaXLSXController extends Controller
 
     public function getListDenunciaXLSX(Request $request){
         ini_set('max_execution_time', 900);
-        $data = $request->only(['search','items']);
-        $arr = json_decode($data['items'], true);
-        $Items = new Denuncia();
-        $Items = $Items::hydrate($arr['data']);
-
-//        $data = $request->all(['search','roles']);
-//        $data['search'] = $data['search']==null ? "" : $data['search'];
-//        $data['roles']  = $data['roles']==null ? [] : explode(",",$data['roles']);
-//        $filters = [
-//            'search' => $data['search'],
-//            'roles'  => $data['roles'],
-//        ];
-//        $Items = User::query()
-//            ->filterBy( $filters )
-//            ->orderBy(DB::RAW("CONCAT(ap_paterno,' ',ap_materno,' ',nombre)"),'ASC')
-//            ->get();
+//        $data = $request->only(['search','items']);
+        $Items = $request->session()->get('items');
 
         $C0 = 6;
         $C = $C0;

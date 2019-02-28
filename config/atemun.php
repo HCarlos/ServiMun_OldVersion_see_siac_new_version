@@ -70,6 +70,8 @@ return [
             'creadopor_denuncia'     => 'creadopor_denuncia',
             'denuncia_modificadopor' => 'denuncia_modificadopor',
             'dependencia_estatu'     => 'dependencia_estatu',
+            'denuncia_respuesta'     => 'denuncia_respuesta',
+            'respuesta_user'         => 'respuesta_user',
         ],
         'domicilios' => [
             'users'             => 'users',

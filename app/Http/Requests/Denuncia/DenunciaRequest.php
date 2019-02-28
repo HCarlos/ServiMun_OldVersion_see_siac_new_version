@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Denuncia;
 
 use App\Models\Catalogos\Domicilios\Ubicacion;
-use App\Models\Denuncia;
+use App\Models\Denuncias\Denuncia;
 use App\Models\Denuncias\DenunciaEstatu;
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
