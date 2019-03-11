@@ -11,12 +11,14 @@
         </a>
     @endisset
     @isset($showModalSearchDenuncia)
-        <a href="{{route($showModalSearchDenuncia)}}" id="{{$showModalSearchDenuncia}}" class="btn btn-icon btn-outline-purple btn-rounded  btnFullModal" data-toggle="modal" data-target="#modalFull" data-placement="top" title="Búsqueda avanzada" data-original-title="Búsqueda avanzada">
-            <i class="fas fa-search text-white"></i>
-        </a>
+        <span data-toggle="modal" data-target="#modalFull" >
+            <a href="{{route($showModalSearchDenuncia)}}" id="{{$showModalSearchDenuncia}}" class="btn btn-icon btn-outline-light btn-rounded  btnFullModal" data-toggle="tooltip" data-placement="top" title="" data-original-title="Búsqueda Avanzada">
+                <i class="fas fa-search"></i>
+            </a>
+        </span>
     @endisset
 
-        <a class="btn btn-icon btn-outline-success btn-rounded float-right" data-toggle="tooltip" data-placement="top" data-original-title="Actualizar" onclick="window.location.reload(true);">
+        <a href="" class="btn btn-icon btn-outline-info btn-rounded float-right" data-toggle="tooltip" data-placement="top" data-original-title="Actualizar" onclick="window.location.reload(true);">
             <i class="fas fa-sync-alt text-white"></i>
         </a>
 

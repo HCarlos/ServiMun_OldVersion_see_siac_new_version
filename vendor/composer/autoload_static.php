@@ -19,13 +19,15 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         '0b0974a5566a1077e4f2e111341112c1' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/functions/normalize_server.php',
         '1ca3bc274755662169f9629d5412a1da' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/functions/normalize_uploaded_files.php',
         '40360c0b9b437e69bcbb7f1349ce029e' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/functions/parse_cookie_header.php',
+        '25072dd6e2470089de65ae7bf11d3109' => __DIR__ . '/..' . '/symfony/polyfill-php72/bootstrap.php',
         'ddc0a4d7e61c0286f0f8593b1903e894' => __DIR__ . '/..' . '/clue/stream-filter/src/functions.php',
         '8cff32064859f4559445b89279f3199c' => __DIR__ . '/..' . '/php-http/message/src/filters.php',
-        '25072dd6e2470089de65ae7bf11d3109' => __DIR__ . '/..' . '/symfony/polyfill-php72/bootstrap.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
+        'def43f6c87e4f8dfd0c9e1b1bab14fe8' => __DIR__ . '/..' . '/symfony/polyfill-iconv/bootstrap.php',
+        'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
         '538ca81a9a966a6716601ecf48f4eaef' => __DIR__ . '/..' . '/opis/closure/functions.php',
         'a16312f9300fed4a097923eacb0ba814' => __DIR__ . '/..' . '/igorw/get-in/src/get_in.php',
@@ -129,6 +131,8 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         array (
             'Symfony\\Polyfill\\Php72\\' => 23,
             'Symfony\\Polyfill\\Mbstring\\' => 26,
+            'Symfony\\Polyfill\\Intl\\Idn\\' => 26,
+            'Symfony\\Polyfill\\Iconv\\' => 23,
             'Symfony\\Polyfill\\Ctype\\' => 23,
             'Symfony\\Contracts\\' => 18,
             'Symfony\\Component\\VarDumper\\' => 28,
@@ -303,6 +307,14 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
+        ),
+        'Symfony\\Polyfill\\Intl\\Idn\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-intl-idn',
+        ),
+        'Symfony\\Polyfill\\Iconv\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-iconv',
         ),
         'Symfony\\Polyfill\\Ctype\\' => 
         array (
@@ -723,6 +735,7 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         'App\\Http\\Controllers\\Denuncia\\AfiliacionController' => __DIR__ . '/../..' . '/app/Http/Controllers/Denuncia/AfiliacionController.php',
         'App\\Http\\Controllers\\Denuncia\\DenunciaController' => __DIR__ . '/../..' . '/app/Http/Controllers/Denuncia/DenunciaController.php',
         'App\\Http\\Controllers\\Denuncia\\EstatuController' => __DIR__ . '/../..' . '/app/Http/Controllers/Denuncia/EstatuController.php',
+        'App\\Http\\Controllers\\Denuncia\\Imagene\\ImageneController' => __DIR__ . '/../..' . '/app/Http/Controllers/Denuncia/Imagene/ImageneController.php',
         'App\\Http\\Controllers\\Denuncia\\MedidaController' => __DIR__ . '/../..' . '/app/Http/Controllers/Denuncia/MedidaController.php',
         'App\\Http\\Controllers\\Denuncia\\OrigenController' => __DIR__ . '/../..' . '/app/Http/Controllers/Denuncia/OrigenController.php',
         'App\\Http\\Controllers\\Denuncia\\PrioridadController' => __DIR__ . '/../..' . '/app/Http/Controllers/Denuncia/PrioridadController.php',
@@ -745,6 +758,7 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Http\\Requests\\Denuncia\\AfiliacionRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Denuncia/AfiliacionRequest.php',
         'App\\Http\\Requests\\Denuncia\\DenunciaRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Denuncia/DenunciaRequest.php',
+        'App\\Http\\Requests\\Denuncia\\Imagene\\ImageneRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Denuncia/Imagene/ImageneRequest.php',
         'App\\Http\\Requests\\Denuncia\\MedidaRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Denuncia/MedidaRequest.php',
         'App\\Http\\Requests\\Denuncia\\OrigenRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Denuncia/OrigenRequest.php',
         'App\\Http\\Requests\\Denuncia\\PrioridadRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Denuncia/PrioridadRequest.php',
@@ -796,6 +810,7 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         'App\\Models\\Catalogos\\Subarea' => __DIR__ . '/../..' . '/app/Models/Catalogos/Subarea.php',
         'App\\Models\\Denuncias\\Denuncia' => __DIR__ . '/../..' . '/app/Models/Denuncias/Denuncia.php',
         'App\\Models\\Denuncias\\DenunciaEstatu' => __DIR__ . '/../..' . '/app/Models/Denuncias/DenunciaEstatu.php',
+        'App\\Models\\Denuncias\\Imagene' => __DIR__ . '/../..' . '/app/Models/Denuncias/Imagene.php',
         'App\\Models\\Denuncias\\Respuesta' => __DIR__ . '/../..' . '/app/Models/Denuncias/Respuesta.php',
         'App\\Models\\Users\\Categoria' => __DIR__ . '/../..' . '/app/Models/Users/Categoria.php',
         'App\\Models\\Users\\UserAdress' => __DIR__ . '/../..' . '/app/Models/Users/UserAdress.php',
@@ -6152,6 +6167,8 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         'Symfony\\Contracts\\Translation\\TranslatorInterface' => __DIR__ . '/..' . '/symfony/contracts/Translation/TranslatorInterface.php',
         'Symfony\\Contracts\\Translation\\TranslatorTrait' => __DIR__ . '/..' . '/symfony/contracts/Translation/TranslatorTrait.php',
         'Symfony\\Polyfill\\Ctype\\Ctype' => __DIR__ . '/..' . '/symfony/polyfill-ctype/Ctype.php',
+        'Symfony\\Polyfill\\Iconv\\Iconv' => __DIR__ . '/..' . '/symfony/polyfill-iconv/Iconv.php',
+        'Symfony\\Polyfill\\Intl\\Idn\\Idn' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/Idn.php',
         'Symfony\\Polyfill\\Mbstring\\Mbstring' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/Mbstring.php',
         'Symfony\\Polyfill\\Php72\\Php72' => __DIR__ . '/..' . '/symfony/polyfill-php72/Php72.php',
         'TCPDF' => __DIR__ . '/..' . '/tecnickcom/tcpdf/tcpdf.php',

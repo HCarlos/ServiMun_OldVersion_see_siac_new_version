@@ -118,6 +118,14 @@ class Denuncia extends Model
         return $this->belongsToMany(Respuesta::class,'denuncia_respuesta','denuncia_id','respuesta_id');
     }
 
+    public function imagene(){
+        return $this->hasOne(Imagene::class,'id','imagene_id');
+    }
+
+    public function imagenes(){
+        return $this->belongsToMany(Imagene::class,'denuncia_imagene','denuncia_id','imagene_id');
+    }
+
 
 
 }

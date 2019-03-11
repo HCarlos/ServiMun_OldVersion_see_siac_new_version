@@ -18,4 +18,3 @@
     </div>
 </form>
 @include('shared.code.__ajax_form_full_modal_with_errors')
-

@@ -78,6 +78,12 @@ return [
             'visibility' => env('EXTERNO_VISIBILITY'),
         ],
 
+        'denuncia' => [
+            'driver' => env('DENUNCIA_DRIVER'),
+            'root' => public_path().env('DENUNCIA_ROOT'),
+            'url' => env('APP_URL').env('DENUNCIA_URL'),
+            'visibility' => env('DENUNCIA_VISIBILITY'),
+        ],
 
 
     ],

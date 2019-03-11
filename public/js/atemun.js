@@ -61,6 +61,17 @@ $(document).ready(function() {
     if ( $(".btnFullModal").length > 0  ){
         $(".btnFullModal").on("click", function (event) {
             event.preventDefault();
+            localStorage.Input="";
+
+            // Aplica para los Checkbox en dataTable
+            if ( $(".table") ){
+                $form = $(".table > tbody");
+                $form.find("input[name='file-select']:checked").each(function() {
+                    localStorage.Input += localStorage.Input === "" ? $(this).val() : ","+$(this).val();
+                });
+            }
+
+            // Nombre del Modal Form
             $("#modalFull .modal-content").empty();
             $("#modalFull .modal-content").html('<div class="fa-2x m-2"><i class="fa fa-cog fa-spin"></i> Cargado datos...</div>');
             $("#modalFull").modal('show');
@@ -72,15 +83,29 @@ $(document).ready(function() {
                 })
                 .done(function (response) {
                     $("#modalFull .modal-content").html(response);
+
+                    // Aplica para los Select2
                     $form = $("#modalFull .modal-content");
                     $form.find('.select2').each(function() {
                         $(this).select2({
                             dropdownParent: $('#modalFull')
                         });
                     });
+
+                    // Aplica para los Checkbox en dataTable
+                    if ( localStorage.Input!=="" ) {
+                        $("#var2").val(localStorage.Input);
+                    }
+
+                    // Cuando se ejecuta un cambio en el Checkbox
                     $('.custom-control-input').on("change",function(e){
                         $(this).val( $(this).is(':checked') );
                     });
+                    // Aplica para el Dropzone
+                    if ( $('.dropzone')){
+                        Dropzone.discover();
+                    }
+
                 });
             });
         });
@@ -230,6 +255,11 @@ $(document).ready(function() {
         });
 
     }
+
+    // Activa o desactiva los checkbox desde el encabezado de la tabla
+    $('#lblcheckbox').on("change",function(event){
+        $(".image-chk").prop( "checked", $(this).is(':checked') );
+    });
 
 
     $("#colonia, #comunidad, #calle, #asentamiento, #tipoasentamiento, #tipocomunidad, #localidad," +

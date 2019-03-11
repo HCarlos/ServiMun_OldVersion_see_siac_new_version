@@ -256,19 +256,20 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Catálogo de Respuestas
     Route::get('listRespuestas/{Id}', 'Denuncia\Respuesta\RespuestaController@index')->name('listRespuestas');
-//    Route::get('editRespuesta/{Id}', 'Denuncia\Respuesta\RespuestaController@editItem')->name('editRespuesta');
-//    Route::put('updateRespuesta', 'Denuncia\Respuesta\RespuestaController@updateItem')->name('updateRespuesta');
-//    Route::get('newRespuesta', 'Denuncia\Respuesta\RespuestaController@newItem')->name('newRespuesta');
-//    Route::post('createRespuesta', 'Denuncia\Respuesta\RespuestaController@createItem')->name('createRespuesta');
     Route::get('removeRespuesta/{id}', 'Denuncia\Respuesta\RespuestaController@removeItem')->name('removeRespuesta');
-//    Route::post('showDataListRespuestaExcel1A/','External\Denuncia\ListDenunciaXLSXController@getListDenunciaXLSX')->name('showDataListRespuestaExcel1A');
-
     Route::get('/showModalRespuestaNew/{denuncia_id}', 'Denuncia\Respuesta\RespuestaController@showModalRespuestaNew')->name('/showModalRespuestaNew');
     Route::get('showModalRespuestaEdit/{Id}', 'Denuncia\Respuesta\RespuestaController@showModalRespuestaEdit')->name('/showModalRespuestaEdit');
     Route::post('saveRespuestaDen/', 'Denuncia\Respuesta\RespuestaController@saveRespuestaDen')->name('saveRespuestaDen');
     Route::put('saveRespuestaDen/', 'Denuncia\Respuesta\RespuestaController@saveRespuestaDen')->name('saveRespuestaDen');
 
 
+    // Catálogo de Imagenes
+    Route::get('listImagenes/{Id}', 'Denuncia\Imagene\ImageneController@index')->name('listImagenes');
+    Route::get('removeImagene/{id}', 'Denuncia\Imagene\ImageneController@removeItem')->name('removeImagene');
+    Route::get('/showModalImageneNew/{denuncia_id}', 'Denuncia\Imagene\ImageneController@showModalImageneNew')->name('/showModalImageneNew');
+    Route::get('showModalImageneEdit/{Id}', 'Denuncia\Imagene\ImageneController@showModalImageneEdit')->name('/showModalImageneEdit');
+    Route::post('saveImageneDen/', 'Denuncia\Imagene\ImageneController@saveImageneDen')->name('saveImageneDen');
+    Route::put('saveImageneDen/', 'Denuncia\Imagene\ImageneController@saveImageneDen')->name('saveImageneDen');
 
 
     // ROLES

@@ -130,7 +130,7 @@ class FuncionesController extends Controller
         }
     }
 
-    public function fitImage($imagePath,$filename,$W,$H,$IsRounded)
+    public function fitImage($imagePath,$filename,$W,$H,$IsRounded,$profile_root="PROFILE_ROOT")
     {
         $image = Image::make($imagePath)
             ->fit($W,$H);
@@ -144,8 +144,17 @@ class FuncionesController extends Controller
             });
             $image->mask($mask, false);
         }
-        $image->save(public_path(env('PROFILE_ROOT')).'/'.$filename);
+        $image->save(public_path(env($profile_root)).'/'.$filename);
         return $image;
     }
+
+    public function deleteImageDropZone($image,$storage){
+        $e1 = Storage::disk($storage)->exists($image);
+        if ($e1) {
+            Storage::disk($storage)->delete($image);
+        }
+    }
+
+
 
 }

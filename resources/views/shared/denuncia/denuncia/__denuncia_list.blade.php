@@ -23,6 +23,7 @@
                     @include('shared.ui_kit.__edit_item')
                     @include('shared.ui_kit.__remove_item')
                     @include('shared.ui_kit.__respuestas_list_item')
+                    @include('shared.ui_kit.__imagenes_list_item')
                 </div>
             </td>
         </tr>

@@ -5,7 +5,6 @@ namespace App\Http\Requests\Denuncia\Respuesta;
 use App\Classes\MessageAlertClass;
 use App\Models\Denuncias\Denuncia;
 use App\Models\Denuncias\Respuesta;
-use App\Rules\Uppercase;
 use Carbon\Carbon;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Database\QueryException;

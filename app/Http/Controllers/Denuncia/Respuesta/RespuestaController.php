@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Denuncia\Respuesta;
 
 use App\Http\Requests\Denuncia\Respuesta\RespuestaRequest;
-use App\Models\Denuncias\Denuncia;
 use App\Http\Controllers\Controller;
 use App\Models\Denuncias\Respuesta;
 use App\User;

@@ -27,6 +27,7 @@ class AppServiceProvider extends ServiceProvider
         Blade::component('componentes.tools._buttonsFormDenuncia','buttonsFormDenuncia');
 
         Blade::component('componentes.form._form_modal','formModal');
+        Blade::component('componentes.form._form_dropzone','formDropZone');
 
     }
 

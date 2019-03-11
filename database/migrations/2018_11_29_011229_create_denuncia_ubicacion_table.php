@@ -323,17 +323,6 @@ class CreateDenunciaUbicacionTable extends Migration
             $table->unsignedInteger('denuncia__id')->default(0)->index();
             $table->softDeletes();
             $table->timestamps();
-//            $table->unique(['denuncia_id', 'user_id']);
-
-//            $table->foreign('denuncia_id')
-//                ->references('id')
-//                ->on($tableNamesCatalogos['denuncias'])
-//                ->onDelete('cascade');
-
-//            $table->foreign('user_id')
-//                ->references('id')
-//                ->on($tableNamesCatalogos['users'])
-//                ->onDelete('cascade');
         });
 
         Schema::create($tableNamesCatalogos['denuncia_prioridad'], function (Blueprint $table) use ($tableNamesCatalogos){

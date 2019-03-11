@@ -16,6 +16,7 @@ return [
     'images_type_validate' => 'jpg,jpeg,gif,png,JPG,JPEG,GIF,PNG',
     'images_type_extension' => ['jpg','jpeg','gif','png','JPG','JPEG','GIF','PNG'],
     'excel_type_extension' => ['xlsx','xls'],
+    'file_dropzone_mimetype' => 'image/jpg,image/jpeg,image/gif,image/png,image/JPG,image/JPEG,image/GIF,image/PNG',
 
     // -----------------------------------------------------------
     // Aqui se deben configurar los formatos a utilizar.
@@ -72,6 +73,9 @@ return [
             'dependencia_estatu'     => 'dependencia_estatu',
             'denuncia_respuesta'     => 'denuncia_respuesta',
             'respuesta_user'         => 'respuesta_user',
+            'imagenes'               => 'imagenes',
+            'denuncia_imagene'       => 'denuncia_imagene',
+            'imagene_user'           => 'imagene_user',
         ],
         'domicilios' => [
             'users'             => 'users',

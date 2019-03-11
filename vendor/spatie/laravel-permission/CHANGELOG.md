@@ -2,6 +2,17 @@
 
 All notable changes to `laravel-permission` will be documented in this file
 
+## 2.36.1 - 2019-03-05
+- reverts the changes made in 2.36.0 due to some reported breaks.
+
+## 2.36.0 - 2019-03-04
+- improve performance by reducing another iteration in processing query results and returning earlier
+
+## 2.35.0 - 2019-03-01
+- overhaul internal caching strategy for better performance and fix cache miss when permission names contained spaces
+- deprecated hasUncachedPermissionTo() (use hasPermissionTo() instead)
+- added getPermissionNames() method
+
 ## 2.34.0 - 2019-02-26
 - Add explicit pivotKeys to roles/permissions BelongsToMany relationships
 

@@ -1,4 +1,4 @@
-<div class="row bg-dark rounded ">
+<div class="row bg-dark-lighten rounded ">
     @if( $items->total() > 15 )
         <div class="col-md-6 mb-0" >
             @include('shared.ui_kit.__toolbar_respuesta')

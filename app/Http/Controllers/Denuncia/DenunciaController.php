@@ -62,6 +62,7 @@ class DenunciaController extends Controller
                 'newItem' => 'newDenuncia',
                 'removeItem' => 'removeDenuncia',
                 'respuestasDenunciaItem' => 'listRespuestas',
+                'imagenesDenunciaItem' => 'listImagenes',
                 'searchAdressDenuncia' => 'listDenuncias',
                 'showModalSearchDenuncia' => 'showModalSearchDenuncia',
                 'findDataInDenuncia'=>'findDataInDenuncia',
