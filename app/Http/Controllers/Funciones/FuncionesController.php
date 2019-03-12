@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Funciones;
 
+use App\Classes\MessageAlertClass;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
+use http\Exception\InvalidArgumentException;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Exception\NotWritableException;
 use Intervention\Image\Facades\Image;
 //use Intervention\Image\ImageManager;
 
@@ -130,21 +134,30 @@ class FuncionesController extends Controller
         }
     }
 
-    public function fitImage($imagePath,$filename,$W,$H,$IsRounded,$profile_root="PROFILE_ROOT")
+    public function fitImage($imagePath,$filename,$W,$H,$IsRounded,$disk="profile",$profile_root="PROFILE_ROOT")
     {
-        $image = Image::make($imagePath)
-            ->fit($W,$H);
-        if ($IsRounded){
-            $image->encode('png');
-            $width = $image->getWidth();
-            $height = $image->getHeight();
-            $mask = Image::canvas($width, $height);
-            $mask->circle($width, $width/2, $height/2, function ($draw) {
-                $draw->background('#fff');
-            });
-            $image->mask($mask, false);
+        try{
+            $image = Image::make($imagePath)
+                ->fit($W,$H);
+            if ($IsRounded){
+                $image->encode('png');
+                $width = $image->getWidth();
+                $height = $image->getHeight();
+                $mask = Image::canvas($width, $height);
+                $mask->circle($width, $width/2, $height/2, function ($draw) {
+                    $draw->background('#fff');
+                });
+                $image->mask($mask, false);
+                $filePath = public_path(env($profile_root)).'/'.$filename;
+                $image->save($filePath);
+                Storage::disk($disk)->put($filename, $image);
+                //$image->delete($filePath);
+            }else{
+                Storage::disk($disk)->put($filename, $image);
+            }
+        }catch (NotWritableException $e){
+            return "Error ";
         }
-        $image->save(public_path(env($profile_root)).'/'.$filename);
         return $image;
     }
 

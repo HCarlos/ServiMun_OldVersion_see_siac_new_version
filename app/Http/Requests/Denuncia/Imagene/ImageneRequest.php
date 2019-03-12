@@ -126,7 +126,7 @@ class ImageneRequest extends FormRequest
             'image_thumb'   => $thumbnail,
         ]);
         Storage::disk($this->disk)->put($fileName, File::get($file));
-        $this->F->fitImage( $file,$thumbnail,128,128,true,"DENUNCIA_ROOT" );
+        $this->F->fitImage( $file,$thumbnail,128,128,true,$this->disk,"DENUNCIA_ROOT" );
         return true;
     }
 
