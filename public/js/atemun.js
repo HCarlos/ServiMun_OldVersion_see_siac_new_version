@@ -261,6 +261,47 @@ $(document).ready(function() {
         $(".image-chk").prop( "checked", $(this).is(':checked') );
     });
 
+    if ( $(".removeItemSelects").length > 0  ){
+        $('.removeItemSelects').on('click', function(event) {
+            event.preventDefault();
+            localStorage.Input = "";
+            if ( $(".table") ){
+                $form = $(".table > tbody");
+                $form.find("input[name='file-select']:checked").each(function() {
+                    localStorage.Input += localStorage.Input === "" ? $(this).val() : ","+$(this).val();
+                });
+            }
+            var x = confirm("Desea eliminar los registros seleccionados?");
+
+            if (!x){
+                return false;
+            }
+            var aID = event.currentTarget.id.split('-');
+            if ( localStorage.Input === ""){
+                var Url = '/'+aID[0]+'/'+aID[1];
+            }else{
+                var Url = '/'+aID[0]+'/'+localStorage.Input;
+            }
+
+            $(function() {
+                $.ajax({
+                    method: "GET",
+                    url: Url
+                })
+                    .done(function( response ) {
+                        if (response.data == 'OK'){
+                            alert(response.mensaje);
+                            window.location.reload();
+                        }else{
+                            alert(response.mensaje);
+                        }
+                    })
+            });
+        });
+    }
+
+
+
 
     $("#colonia, #comunidad, #calle, #asentamiento, #tipoasentamiento, #tipocomunidad, #localidad," +
         "#afiliacion, #area, #subarea, #dependencia, #medida, #origen, #prioridad, #servicio, #ubicacon," +

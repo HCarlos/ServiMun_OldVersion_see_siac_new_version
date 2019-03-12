@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Denuncia\Imagene;
 
+use App\Classes\MessageAlertClass;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Denuncia\Imagene\ImageneRequest;
 use App\Models\Denuncias\Denuncia;
 use App\Models\Denuncias\Imagene;
 use App\User;
+use http\Exception\BadQueryStringException;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -57,26 +60,69 @@ class ImageneController extends Controller{
     }
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //
-    protected function removeItem($id = 0)
+    protected function removeItem($id)
     {
-        $item = Imagene::withTrashed()->findOrFail($id);
-        if (isset($item)) {
-            if (!$item->trashed()) {
-                $item->forceDelete();
-            } else {
-                $item->forceDelete();
-            }
-            $item->users()->detach($item->user__id);
-            $den = Denuncia::find($item->denuncia__id);
-            $den->imagenes()->detach($item->id);
+        $nItem = explode(',', $id);
+        if ( count($nItem) == 1) {
 
-            $this->F = new FuncionesController();
-            $this->F->deleteImageDropZone($item->image,$this->disk);
-            $this->F->deleteImageDropZone($item->image_thumb,$this->disk);
-            return Response::json(['mensaje' => 'Registro eliminado con éxito', 'data' => 'OK', 'status' => '200'], 200);
+            $item = Imagene::withTrashed()->findOrFail($id);
+
+            if ( isset($item) ) {
+                if (!$item->trashed()) {
+                    $item->forceDelete();
+                } else {
+                    $item->forceDelete();
+                }
+                $item->users()->detach($item->user__id);
+                $den = Denuncia::find($item->denuncia__id);
+                $den->imagenes()->detach($item->id);
+
+                $this->F = new FuncionesController();
+                $this->F->deleteImageDropZone($item->image, $this->disk);
+                $this->F->deleteImageDropZone($item->image_thumb, $this->disk);
+                return Response::json(['mensaje' => 'Registro eliminado con éxito', 'data' => 'OK', 'status' => '200'], 200);
+            } else {
+                return Response::json(['mensaje' => 'Se ha producido un error.', 'data' => 'Error', 'status' => '200'], 200);
+            }
+
         } else {
-            return Response::json(['mensaje' => 'Se ha producido un error.', 'data' => 'Error', 'status' => '200'], 200);
+            return $this->removeItems($nItem);
         }
+    }
+
+
+// ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //
+    protected function removeItems($arrIds)
+    {
+        $valRet = Response::json(['mensaje' => 'none', 'data' => 'OK', 'status' => '200'], 200);
+        foreach ($arrIds as $id){
+//            dd($id);
+            $item = Imagene::withTrashed()->findOrFail( $id );
+            if (isset($item)) {
+                try{
+                    if (!$item->trashed()) {
+                        $item->forceDelete();
+                    } else {
+                        $item->forceDelete();
+                    }
+                    $item->users()->detach($item->user__id);
+                    $den = Denuncia::find($item->denuncia__id);
+                    $den->imagenes()->detach($item->id);
+
+                    $this->F = new FuncionesController();
+                    $this->F->deleteImageDropZone($item->image,$this->disk);
+                    $this->F->deleteImageDropZone($item->image_thumb,$this->disk);
+                    $valRet =  Response::json(['mensaje' => 'Registro eliminado con éxito', 'data' => 'OK', 'status' => '200'], 200);
+
+                }catch (QueryException $e){
+                    $Msg = new MessageAlertClass();
+                    $Msg->Message($e);
+                }
+            } else {
+                $valRet =  Response::json(['mensaje' => 'Se ha producido un error.', 'data' => 'Error', 'status' => '200'], 200);
+            }
+        }
+        return $valRet;
     }
 
     protected function showModalImageneNew($denuncia_id){
@@ -121,6 +167,7 @@ class ImageneController extends Controller{
             return Response::json(['mensaje' => 'Hubo un error!', 'data' => $item, 'status' => '422','filename'=>'','Id'=>-1], 200);
         }
     }
+
 
 
 }

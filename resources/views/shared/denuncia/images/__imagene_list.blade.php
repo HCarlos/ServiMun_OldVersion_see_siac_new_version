@@ -52,7 +52,7 @@
                 <td class="table-action tbl100W">
                     <div class="button-list action-buttons">
                         @include('shared.ui_kit.__edit_item_modal')
-                        @include('shared.ui_kit.__remove_item')
+                        @include('shared.ui_kit.__remove_items_select')
                     </div>
                 </td>
             </tr>
