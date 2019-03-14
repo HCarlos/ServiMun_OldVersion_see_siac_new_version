@@ -40,8 +40,8 @@
                 </td>
                 <td>
                     <span class="action-buttons">
-                        <a href="{{asset("storage/denuncia/".$item->image)}}" target="_blank" >
-                            <img src="{{asset("storage/denuncia/".$item->image_thumb)}}" width="40" height="40">
+                        <a href="{{asset($item->PathImage)}}" target="_blank" >
+                            <img src="{{asset($item->PathImageThumb)}}" width="40" height="40" >
                         </a>
                     </span>
                     <span class="w-75 ellipsis-span"> {{$item->titulo}} </span>

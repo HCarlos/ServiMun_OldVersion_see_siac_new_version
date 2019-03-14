@@ -7,12 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Denuncia\Imagene\ImageneRequest;
 use App\Models\Denuncias\Denuncia;
 use App\Models\Denuncias\Imagene;
-use App\User;
-use http\Exception\BadQueryStringException;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
 use App\Http\Controllers\Funciones\FuncionesController;
 
@@ -24,7 +20,6 @@ class ImageneController extends Controller{
 //***************************************************************+++++++++++++++++++**
 
     protected $tableName = "imagenes";
-    protected $disk = 'denuncia';
     protected $F;
 
     // Obtiene el Listado de Imagenes
@@ -91,12 +86,11 @@ class ImageneController extends Controller{
     }
 
 
-// ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //
+// ***************** ELIMINA LOS REGISTROS SELECCIONADOS VIA AJAX ++++++++++++++++++++ //
     protected function removeItems($arrIds)
     {
         $valRet = Response::json(['mensaje' => 'none', 'data' => 'OK', 'status' => '200'], 200);
         foreach ($arrIds as $id){
-//            dd($id);
             $item = Imagene::withTrashed()->findOrFail( $id );
             if (isset($item)) {
                 try{

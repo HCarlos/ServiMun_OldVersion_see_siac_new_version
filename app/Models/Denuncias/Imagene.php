@@ -2,15 +2,19 @@
 
 namespace App\Models\Denuncias;
 
+use App\Traits\Denuncia\ImageneTrait;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 
 class Imagene extends Model{
     use SoftDeletes;
+    use ImageneTrait;
 
     protected $guard_name = 'web';
     protected $table = 'imagenes';
+    protected $disk = "denuncia";
 
     protected $fillable = [
         'id', 'fecha','root','image','image_thumb','titulo','descripcion','momento','denuncia__id','user__id'
@@ -31,5 +35,7 @@ class Imagene extends Model{
     public function denuncias(){
         return $this->belongsToMany(Denuncia::class,'denuncia_imagene','imagene_id','denuncia_id');
     }
+
+
 
 }

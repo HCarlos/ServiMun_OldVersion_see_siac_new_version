@@ -16,15 +16,7 @@
             <a class="nav-link dropdown-toggle nav-user arrow-none mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
                aria-expanded="false">
                 <span class="account-user-avatar">
-                    @if( Auth::user()->IsEmptyPhoto() )
-                        @if( Auth::user()->IsFemale() )
-                            <img src="{{ asset('images/web/empty_user_female.png')  }}" width="28" height="28" class="img-circle border border-white"/>
-                        @else
-                            <img src="{{ asset('images/web/empty_user_male.png')  }}" width="28" height="28" class="img-circle border border-white"/>
-                        @endif
-                    @else
-                        <img src="{{ asset(env('PROFILE_ROOT').'/'.Auth::user()->filename_thumb) }}?timestamp={{now()}}" width="40" height="40" class="mr-3 d-none d-sm-block avatar-sm rounded-circle " alt="{{Auth::user()->username}}"/>
-                    @endif
+                    <img src="{{ Auth::user()->PathImageThumbProfile }}?timestamp='{{ now() }}'" width="40" height="40" class="mr-3 d-none d-sm-block avatar-sm rounded-circle " alt="{{Auth::user()->username}}"/>
                 </span>
                 <span>
                     <span class="account-user-name">{{ Auth::user()->username }}</span>

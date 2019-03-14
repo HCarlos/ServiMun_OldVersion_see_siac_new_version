@@ -15,20 +15,18 @@ return [
 
     'images_type_validate' => 'jpg,jpeg,gif,png,JPG,JPEG,GIF,PNG',
     'images_type_extension' => ['jpg','jpeg','gif','png','JPG','JPEG','GIF','PNG'],
+    'videos_type_extension' => ['mp4','3gp'],
     'excel_type_extension' => ['xlsx','xls'],
-    'file_dropzone_mimetype' => 'image/jpg,image/jpeg,image/gif,image/png,image/JPG,image/JPEG,image/GIF,image/PNG',
+    'file_dropzone_mimetype' => 'image/jpg,image/jpeg,image/gif,image/png,image/JPG,image/JPEG,image/GIF,image/PNG,video/mp4,video/3gp',
 
     // -----------------------------------------------------------
     // Aqui se deben configurar los formatos a utilizar.
     // -----------------------------------------------------------
 
     'archivos'=>[
-        'fmt_lista_usuarios'            => 'fmt_lista_usuarios.xlsx',
-        'fmt_lista_denuncias'           => 'fmt_lista_denuncias.xlsx',
-//        'fmt_lista_niveles'            => 'fmt_lista_niveles.xlsx',
-//        'fmt_lista_parentescos'        => 'fmt_lista_parentescos.xlsx',
-//        'fmt_lista_familias'           => 'fmt_lista_familias.xlsx',
-//        'fmt_lista_registros_fiscales' => 'fmt_lista_registros_fiscales.xlsx',
+        'fmt_lista_usuarios'  => 'fmt_lista_usuarios.xlsx',
+        'fmt_lista_denuncias' => 'fmt_lista_denuncias.xlsx',
+        'icono_video'         => 'icon-video.png',
     ],
 
     // -----------------------------------------------------------
