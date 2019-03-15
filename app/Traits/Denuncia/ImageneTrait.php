@@ -30,10 +30,12 @@ trait ImageneTrait
 
    // Get Image Thumbnail
     public function getPathImageThumbAttribute(){
-        $fl  = explode('.',$this->image_thumb);
-        $dg  = $fl[count($fl)-1];
+        $fl   = explode('.',$this->image);
+        $dg   = $fl[count($fl)-1];
         $envi = config("atemun.videos_type_extension");
-        $rt  =in_array( $dg, $envi ) ? '/images/web/video-icon.png':'/images/web/file-not-found.png';
+        $rt   = in_array( $dg, $envi ) ? '/images/web/video-icon.png':'/images/web/file-not-found.png';
+
+
 
         $exists = Storage::disk($this->disk)->exists($this->image_thumb);
         $ret = $exists

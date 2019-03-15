@@ -203,6 +203,7 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         array (
             'Http\\Promise\\' => 13,
             'Http\\Message\\' => 13,
+            'Http\\Factory\\Guzzle\\' => 20,
             'Http\\Discovery\\' => 15,
             'Http\\Client\\Curl\\' => 17,
             'Http\\Client\\' => 12,
@@ -390,7 +391,8 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Container\\' => 
         array (
@@ -489,6 +491,10 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         array (
             0 => __DIR__ . '/..' . '/php-http/message/src',
             1 => __DIR__ . '/..' . '/php-http/message-factory/src',
+        ),
+        'Http\\Factory\\Guzzle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/http-interop/http-factory-guzzle/src',
         ),
         'Http\\Discovery\\' => 
         array (
@@ -832,6 +838,7 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         'App\\Traits\\Catalogos\\Domicilio\\Ubicacion\\UbicacionTrait' => __DIR__ . '/../..' . '/app/Traits/Catalogos/Domicilio/Ubicacion/UbicacionTrait.php',
         'App\\Traits\\Common\\CommonTrait' => __DIR__ . '/../..' . '/app/Traits/Common/CommonTrait.php',
         'App\\Traits\\Denuncia\\DenunciaTrait' => __DIR__ . '/../..' . '/app/Traits/Denuncia/DenunciaTrait.php',
+        'App\\Traits\\Denuncia\\ImageneTrait' => __DIR__ . '/../..' . '/app/Traits/Denuncia/ImageneTrait.php',
         'App\\Traits\\User\\UserAttributes' => __DIR__ . '/../..' . '/app/Traits/User/UserAttributes.php',
         'App\\Traits\\User\\UserImport' => __DIR__ . '/../..' . '/app/Traits/User/UserImport.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
@@ -2410,6 +2417,12 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         'Http\\Discovery\\Strategy\\PuliBetaStrategy' => __DIR__ . '/..' . '/php-http/discovery/src/Strategy/PuliBetaStrategy.php',
         'Http\\Discovery\\StreamFactoryDiscovery' => __DIR__ . '/..' . '/php-http/discovery/src/StreamFactoryDiscovery.php',
         'Http\\Discovery\\UriFactoryDiscovery' => __DIR__ . '/..' . '/php-http/discovery/src/UriFactoryDiscovery.php',
+        'Http\\Factory\\Guzzle\\RequestFactory' => __DIR__ . '/..' . '/http-interop/http-factory-guzzle/src/RequestFactory.php',
+        'Http\\Factory\\Guzzle\\ResponseFactory' => __DIR__ . '/..' . '/http-interop/http-factory-guzzle/src/ResponseFactory.php',
+        'Http\\Factory\\Guzzle\\ServerRequestFactory' => __DIR__ . '/..' . '/http-interop/http-factory-guzzle/src/ServerRequestFactory.php',
+        'Http\\Factory\\Guzzle\\StreamFactory' => __DIR__ . '/..' . '/http-interop/http-factory-guzzle/src/StreamFactory.php',
+        'Http\\Factory\\Guzzle\\UploadedFileFactory' => __DIR__ . '/..' . '/http-interop/http-factory-guzzle/src/UploadedFileFactory.php',
+        'Http\\Factory\\Guzzle\\UriFactory' => __DIR__ . '/..' . '/http-interop/http-factory-guzzle/src/UriFactory.php',
         'Http\\Message\\Authentication' => __DIR__ . '/..' . '/php-http/message/src/Authentication.php',
         'Http\\Message\\Authentication\\AutoBasicAuth' => __DIR__ . '/..' . '/php-http/message/src/Authentication/AutoBasicAuth.php',
         'Http\\Message\\Authentication\\BasicAuth' => __DIR__ . '/..' . '/php-http/message/src/Authentication/BasicAuth.php',
@@ -3833,6 +3846,7 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         'Monolog\\Utils' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Utils.php',
         'Nexmo\\Account\\Balance' => __DIR__ . '/..' . '/nexmo/client/src/Account/Balance.php',
         'Nexmo\\Account\\Client' => __DIR__ . '/..' . '/nexmo/client/src/Account/Client.php',
+        'Nexmo\\Account\\Config' => __DIR__ . '/..' . '/nexmo/client/src/Account/Config.php',
         'Nexmo\\Account\\PrefixPrice' => __DIR__ . '/..' . '/nexmo/client/src/Account/PrefixPrice.php',
         'Nexmo\\Account\\Price' => __DIR__ . '/..' . '/nexmo/client/src/Account/Price.php',
         'Nexmo\\Account\\Secret' => __DIR__ . '/..' . '/nexmo/client/src/Account/Secret.php',
@@ -5241,11 +5255,17 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         'Psr\\Container\\ContainerInterface' => __DIR__ . '/..' . '/psr/container/src/ContainerInterface.php',
         'Psr\\Container\\NotFoundExceptionInterface' => __DIR__ . '/..' . '/psr/container/src/NotFoundExceptionInterface.php',
         'Psr\\Http\\Message\\MessageInterface' => __DIR__ . '/..' . '/psr/http-message/src/MessageInterface.php',
+        'Psr\\Http\\Message\\RequestFactoryInterface' => __DIR__ . '/..' . '/psr/http-factory/src/RequestFactoryInterface.php',
         'Psr\\Http\\Message\\RequestInterface' => __DIR__ . '/..' . '/psr/http-message/src/RequestInterface.php',
+        'Psr\\Http\\Message\\ResponseFactoryInterface' => __DIR__ . '/..' . '/psr/http-factory/src/ResponseFactoryInterface.php',
         'Psr\\Http\\Message\\ResponseInterface' => __DIR__ . '/..' . '/psr/http-message/src/ResponseInterface.php',
+        'Psr\\Http\\Message\\ServerRequestFactoryInterface' => __DIR__ . '/..' . '/psr/http-factory/src/ServerRequestFactoryInterface.php',
         'Psr\\Http\\Message\\ServerRequestInterface' => __DIR__ . '/..' . '/psr/http-message/src/ServerRequestInterface.php',
+        'Psr\\Http\\Message\\StreamFactoryInterface' => __DIR__ . '/..' . '/psr/http-factory/src/StreamFactoryInterface.php',
         'Psr\\Http\\Message\\StreamInterface' => __DIR__ . '/..' . '/psr/http-message/src/StreamInterface.php',
+        'Psr\\Http\\Message\\UploadedFileFactoryInterface' => __DIR__ . '/..' . '/psr/http-factory/src/UploadedFileFactoryInterface.php',
         'Psr\\Http\\Message\\UploadedFileInterface' => __DIR__ . '/..' . '/psr/http-message/src/UploadedFileInterface.php',
+        'Psr\\Http\\Message\\UriFactoryInterface' => __DIR__ . '/..' . '/psr/http-factory/src/UriFactoryInterface.php',
         'Psr\\Http\\Message\\UriInterface' => __DIR__ . '/..' . '/psr/http-message/src/UriInterface.php',
         'Psr\\Log\\AbstractLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/AbstractLogger.php',
         'Psr\\Log\\InvalidArgumentException' => __DIR__ . '/..' . '/psr/log/Psr/Log/InvalidArgumentException.php',

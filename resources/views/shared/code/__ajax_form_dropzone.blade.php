@@ -5,13 +5,13 @@
 
             Dropzone.options.myAwesomeDropzone = {
                 paramName: "file",
-                maxFilesize: 32,
+                maxFilesize: 512,
                 maxFiles: 20,
-                dictFileSizeUnits: "kb",
+                dictFileSizeUnits: "mb",
                 dictRemoveFile: 'Quitar archivo',
                 dictFileTooBig: 'Archivo demasiado grande: 32MB',
                 timeout: 60000,
-                acceptedFiles: ".jpeg,.jpg,.png,.gif,.mp4,.3gp",
+                acceptedFiles: ".jpeg,.jpg,.png,.gif,.svg,.bmp,.mp4,.3gp,.bin",
                 parallelUploads: 20,
                 success: function (file, response) {
                     if (file.previewElement) {

@@ -13,11 +13,11 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'images_type_validate' => 'jpg,jpeg,gif,png,JPG,JPEG,GIF,PNG',
-    'images_type_extension' => ['jpg','jpeg','gif','png','JPG','JPEG','GIF','PNG'],
-    'videos_type_extension' => ['mp4','3gp'],
+    'images_type_validate' => 'jpg,jpeg,gif,png,svg,bmp,JPG,JPEG,GIF,PNG,SVG,BMP',
+    'images_type_extension' => ['jpg','jpeg','gif','png','svg','bmp','JPG','JPEG','GIF','PNG','SVG','BMP'],
+    'videos_type_extension' => ['mp4','3gp','bin'],
     'excel_type_extension' => ['xlsx','xls'],
-    'file_dropzone_mimetype' => 'image/jpg,image/jpeg,image/gif,image/png,image/JPG,image/JPEG,image/GIF,image/PNG,video/mp4,video/3gp',
+    'file_dropzone_mimetype' => 'image/jpg,image/jpeg,image/gif,image/png,image/JPG,image/JPEG,image/GIF,image/PNG,video/mp4,video/3gp,image/svg+xml',
 
     // -----------------------------------------------------------
     // Aqui se deben configurar los formatos a utilizar.
