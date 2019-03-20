@@ -66,6 +66,7 @@ class DenunciaController extends Controller
                 'searchAdressDenuncia' => 'listDenuncias',
                 'showModalSearchDenuncia' => 'showModalSearchDenuncia',
                 'findDataInDenuncia'=>'findDataInDenuncia',
+                'imprimirDenuncia'=> "imprimirDenuncia/",
             ]
         );
     }

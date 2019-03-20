@@ -29,6 +29,9 @@ return [
         'icono_video'         => 'icon-video.png',
     ],
 
+    // ARCHIVOS DE IMAGENES DEL SISTEMA
+    'logo_reportes_encabezado' => public_path().'/images/web/logo-0.png',
+
     // -----------------------------------------------------------
     // La mayor parte de los Tablas estan configuradas aquí,
     // es en este mismo sitio donde la debes mantener forerver

@@ -249,6 +249,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('showModalSearchDenuncia/', 'Denuncia\DenunciaController@showModalSearchDenuncia')->name('showModalSearchDenuncia');
     Route::put('findDataInDenuncia/', 'Denuncia\DenunciaController@findDataInDenuncia')->name('findDataInDenuncia');
     Route::post('showDataListDenunciaExcel1A/','External\Denuncia\ListDenunciaXLSXController@getListDenunciaXLSX')->name('showDataListDenunciaExcel1A');
+    Route::get('/imprimir_denuncia/{Id}', 'External\Denuncia\HojaDenunciaController@imprimirDenuncia')->name('imprimirDenuncia/');
 
 
     // Respuestas a las Denuncias

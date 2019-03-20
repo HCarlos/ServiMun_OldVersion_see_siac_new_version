@@ -181,7 +181,6 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         App\Providers\ValidatorServiceProvider::class,
         Elibyy\TCPDF\ServiceProvider::class,
-
     ],
 
     /*
