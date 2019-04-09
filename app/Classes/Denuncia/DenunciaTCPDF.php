@@ -20,10 +20,11 @@ namespace App\Classes\Denuncia;
 use TCPDF;
 use TCPDF_FONTS;
 
-define('FONT_ANDALEMONO', TCPDF_FONTS::addTTFfont(public_path().'/fonts/AndaleMono.ttf', 'TrueTypeUnicode', '', 32));
-define('FONT_ARIAL', TCPDF_FONTS::addTTFfont(public_path().'/fonts/arialn.ttf', 'TrueTypeUnicode', '', 32));
-define('FONT_AKODIA', TCPDF_FONTS::addTTFfont(public_path().'/fonts/Akodia.ttf', 'TrueTypeUnicode', '', 32));
-define('FONT_LATO', TCPDF_FONTS::addTTFfont(public_path().'/fonts/Lato/Lato.ttf', 'TrueTypeUnicode', '', 32));
+define('FONT_ANDALEMONO', TCPDF_FONTS::addTTFfont(public_path().'/fonts/AndaleMono.php', 'TrueTypeUnicode', '', 32));
+define('FONT_ARIALN', TCPDF_FONTS::addTTFfont(public_path().'/fonts/arialn.php', 'TrueTypeUnicode', '', 32));
+define('FONT_AKODIA', TCPDF_FONTS::addTTFfont(public_path().'/fonts/Akodia.php', 'TrueTypeUnicode', '', 32));
+define('FONT_LATO', TCPDF_FONTS::addTTFfont(public_path().'/fonts/Lato/Lato.php', 'TrueTypeUnicode', '', 32));
+define('FONT_FREEMONO', TCPDF_FONTS::addTTFfont(public_path().'/fonts/freemono.php', 'TrueTypeUnicode', '', 32));
 
 define('ATEMUN',config('atemun'));
 
@@ -34,17 +35,18 @@ class DenunciaTCPDF extends TCPDF{
     protected $timex       = "";
     protected $title       = "";
 
+
     public function Header() {
 
-        $this->setY(10);
-        $this->setX(10);
-        $this->SetTextColor(0,0,0);
-
+        $this->setY(5);
+        $this->setX(5);
+        $this->SetTextColor(64,64,64);
         $this->SetFillColor(212,212,212);
-        $this->SetFont(FONT_LATO,'I',16);
+
+        $this->SetFont(FONT_ARIALN,'I',16);
         $this->Image(ATEMUN['logo_reportes_encabezado'],5,5,80,20);
         $this->Cell(80,$this->alto,"","",0,"L");
-        $this->Cell(150,$this->alto,"COMERCIALIZADORA ARJÍ A.C.","",0,"L",true);
+        $this->Cell(150,$this->alto,env("NOMBRE_EMPRESA"),"",0,"L",true);
 
 //            $this->SetFont('Arial','',7);
 //            $this->SetFillColor(212,212,212);
