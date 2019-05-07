@@ -2,19 +2,16 @@
 
 namespace App\Http\Controllers\External\Denuncia;
 
-use App\Classes\Items;
 use App\Models\Catalogos\Dependencia;
 use App\Models\Catalogos\Domicilios\Ubicacion;
 use App\Models\Catalogos\Estatu;
 use App\Models\Catalogos\Origen;
 use App\Models\Catalogos\Prioridad;
 use App\Models\Catalogos\Servicio;
-use App\Models\Denuncias\Denuncia;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 
-use App\Classes\FiltersRules;
 use App\Http\Controllers\Funciones\LoadTemplateExcel;
 use App\User;
 use Carbon\Carbon;
@@ -46,7 +43,6 @@ class ListDenunciaXLSXController extends Controller
             $reader = IOFactory::createReader($extension);
             $spreadsheet = $reader->load($archivo);
             $sh = $spreadsheet->setActiveSheetIndex(0);
-
 
             $sh->setCellValue('K1', Carbon::now()->format('d-m-Y h:m:s'));
             foreach ($Items as $item){
