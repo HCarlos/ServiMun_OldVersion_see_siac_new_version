@@ -841,6 +841,7 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         'App\\Traits\\Common\\CommonTrait' => __DIR__ . '/../..' . '/app/Traits/Common/CommonTrait.php',
         'App\\Traits\\Denuncia\\DenunciaTrait' => __DIR__ . '/../..' . '/app/Traits/Denuncia/DenunciaTrait.php',
         'App\\Traits\\Denuncia\\ImageneTrait' => __DIR__ . '/../..' . '/app/Traits/Denuncia/ImageneTrait.php',
+        'App\\Traits\\TCPDF\\InitTrait' => __DIR__ . '/../..' . '/app/Traits/TCPDF/InitTrait.php',
         'App\\Traits\\User\\UserAttributes' => __DIR__ . '/../..' . '/app/Traits/User/UserAttributes.php',
         'App\\Traits\\User\\UserImport' => __DIR__ . '/../..' . '/app/Traits/User/UserImport.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',

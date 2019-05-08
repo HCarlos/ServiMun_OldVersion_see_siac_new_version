@@ -166,6 +166,7 @@ return array(
     'App\\Traits\\Common\\CommonTrait' => $baseDir . '/app/Traits/Common/CommonTrait.php',
     'App\\Traits\\Denuncia\\DenunciaTrait' => $baseDir . '/app/Traits/Denuncia/DenunciaTrait.php',
     'App\\Traits\\Denuncia\\ImageneTrait' => $baseDir . '/app/Traits/Denuncia/ImageneTrait.php',
+    'App\\Traits\\TCPDF\\InitTrait' => $baseDir . '/app/Traits/TCPDF/InitTrait.php',
     'App\\Traits\\User\\UserAttributes' => $baseDir . '/app/Traits/User/UserAttributes.php',
     'App\\Traits\\User\\UserImport' => $baseDir . '/app/Traits/User/UserImport.php',
     'App\\User' => $baseDir . '/app/User.php',

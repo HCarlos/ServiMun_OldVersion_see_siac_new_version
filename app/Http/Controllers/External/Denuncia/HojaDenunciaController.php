@@ -4,6 +4,7 @@ namespace App\Http\Controllers\External\Denuncia;
 
 use App\Classes\Denuncia\DenunciaTCPDF;
 use App\Http\Controllers\Controller;
+use App\Models\Denuncias\Denuncia;
 use Carbon\Carbon;
 
 class HojaDenunciaController extends Controller
@@ -11,78 +12,50 @@ class HojaDenunciaController extends Controller
 
 
     public function imprimirDenuncia($Id=0){
-        $this->timex       = Carbon::now()->format('d-m-Y H:i:s');
-        $this->folio       = 0;
-        $this->cliente_id  = 0;
-        $this->vendedor_id = 0;
-        $this->cliente     = "cliente";
-        $this->vendedor    = "vendedor";
-        $this->status      = "Estatus";
-        $this->metodo_pago = "Metodo de pago";
-        $this->referencia  = "referencia";
-        $this->tipo_venta  = "tipo venta";
-        $this->title       = "NOTA DE REMISIÓN";
+        $timex  = Carbon::now()->format('d-m-Y H:i:s');
+        $folio  = $Id;
+        $alto   = 6;
 
-//        $pdf = new DenunciaTCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         $pdf = new DenunciaTCPDF();
+        $pdf->folio = $folio;
+        $pdf->timex = $timex;
 
-//$pdf->AliasNbPages();
-        $pdf->SetAutoPageBreak(TRUE, 0.1);
-        $pdf->SetLeftMargin(5);
-
-
-// set document information
-        $pdf->SetCreator(PDF_CREATOR);
-        $pdf->SetAuthor('@DevCH');
-        $pdf->SetTitle('Denuncia');
-        $pdf->SetSubject('Ciudadana');
-        $pdf->SetKeywords('SIAC, SIACGOB, ATENCION CIUDADANA');
-
-//// set default header data
-        $pdf->setPrintHeader(true);
-        $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 005', PDF_HEADER_STRING);
-
-// set header and footer fonts
-        $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-        $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
-
-// set default monospaced font
-        $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
-
-// set auto page breaks
-        $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
-
-// set image scale factor
-        $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
-
-// set some language-dependent strings (optional)
-        if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
-            require_once(dirname(__FILE__).'/lang/eng.php');
-            $pdf->setLanguageArray($l);
-        }
-
+        $pdf->Init();
         $pdf->AddPage();
 
-// set cell padding
         $pdf->setCellPaddings(1, 1, 1, 1);
 
 
 // Linea 1
         $pdf->setX(5);
         $pdf->Ln(30);
-        $pdf->SetFont('courier','B',8);
-        $pdf->SetTextColor(255,255,255);
-        $pdf->SetFillColor(92,92,92);
-        $pdf->Cell(10,6,"LOTE",'LTRB',0,'C',true);
-        $pdf->Cell(12,6,"CANT.",'TRB',0,'R',true);
-        $pdf->Cell(30,6,"MEDIDA",'TRB',0,'C',true);
-        $pdf->Cell(98,6,"DESCRIPCIÓN",'TRB',0,'C',true);
-        $pdf->Cell(25,6,"P.V.",'TRB',0,'R',true);
-        $pdf->Cell(25,6,"IMPORTE",'TRB',1,'R',true);
-        $pdf->SetFont('courier','',6);
-        $pdf->SetTextColor(0,0,0);
+        $pdf->SetFont(FONT_ARIALN,'B',12);
+        $pdf->SetTextColor(64,64,64);
         $pdf->SetFillColor(255,255,255);
 
+        $den = Denuncia::find($Id);
+
+        //$pdf->Cell(10,$alto,"LOTE",'LTRB',0,'C',true);
+        $html = "<style> 
+                        b { font-family: arial, sans-serif; }
+                        p {text-align: justify;}
+                 </style>";
+        $html .= "<p>Estimado <b>{$den->ciudadano->FullName}</b> su preferencia. <br><br>";
+        $html .= "
+Ir a la navegación
+Ir a la búsqueda
+Ejemplo de Lorem ipsum
+
+Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final.
+
+Aunque no posee actualmente fuentes para justificar sus hipótesis, el profesor de filología clásica Richard McClintock asegura que su uso se remonta a los impresores de comienzos del siglo XVI.1​ Su uso en algunos editores de texto muy conocidos en la actualidad ha dado al texto lorem ipsum nueva popularidad.
+
+El texto en sí no tiene sentido, aunque no es completamente aleatorio, sino que deriva de un texto de Cicerón en lengua latina, a cuyas palabras se les han eliminado sílabas o letras. El significado del texto no tiene importancia, ya que solo es una demostración o prueba, pero se inspira en la obra de Cicerón De finibus bonorum et malorum (Sobre los límites del bien y del mal) que comienza con:
+
+    Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit2​
+
+A pesar de estar extraído de ese escrito, el texto usado habitualmente[cita requerida] es: </p>";
+        $pdf->WriteHTMLCell(200,$alto,$pdf->getX(),$pdf->getY(),$html,0,1);
         $pdf->Output();
 
     }
