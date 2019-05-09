@@ -20,6 +20,8 @@ namespace App\Classes\Denuncia;
 use App\Traits\TCPDF\InitTrait;
 use Carbon\Carbon;
 use TCPDF;
+use TCPDF_COLORS;
+use TCPDF_STATIC;
 
 class DenunciaTCPDF extends TCPDF{
 
@@ -31,15 +33,14 @@ class DenunciaTCPDF extends TCPDF{
     public $folio          = 0;
     protected $date        = null;
 
-
     public function Header() {
         $this->date = new Carbon( $this->timex );
-        $this->setY(5);
+        $this->setY(15);
         $this->setX(5);
         $this->SetTextColor(64,64,64);
         $this->SetFillColor(212,212,212);
 
-        $this->Image(ATEMUN['logo_reportes_encabezado'],0,5,70,20);
+        $this->Image(ATEMUN['logo_reportes_encabezado'],0,15,70,20);
 
         $this->Cell(60,$this->alto,"","R",0,"L");
         $this->Cell(2,$this->alto,"","",0,"L");
@@ -49,12 +50,12 @@ class DenunciaTCPDF extends TCPDF{
         $this->Cell(60,$this->alto,"","R",0,"L");
         $this->Cell(2,$this->alto,"","",0,"L");
         $this->SetFont(FONT_FREEMONO,'B',14);
-        $this->Cell(120,$this->alto,"REPORTE CIUDADANO","",1,"L");
+        $this->Cell(120,$this->alto,env('INFO_TWO'),"",1,"L");
 
         $this->Cell(60,$this->alto,"","R",0,"L");
         $this->Cell(2,$this->alto,"","",0,"L");
         $this->SetFont(FONT_ARIALN,'',9);
-        $this->Cell(85,$this->alto,env("LEMA_CAMPANA"),"",0,"L");
+        $this->Cell(85,$this->alto,"REPORTE CIUDADANO","",0,"L");
         $this->SetFont(FONT_FREEMONO,'B',10);
         $this->Cell(22,$this->alto,"FOLIO: ","",0,"L");
         $this->SetFont(FONT_DEJAVUSANSMONO,'B',10);
@@ -71,5 +72,7 @@ class DenunciaTCPDF extends TCPDF{
         $this->alto  = 6;
         $this->setX(10);
     }
+
+
 
 }

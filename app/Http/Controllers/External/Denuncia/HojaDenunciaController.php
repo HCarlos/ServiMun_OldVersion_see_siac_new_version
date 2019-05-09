@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Denuncias\Denuncia;
 use Carbon\Carbon;
 
+//define('ATEMUN',config('atemun.style'));
+
 class HojaDenunciaController extends Controller
 {
 
@@ -16,7 +18,7 @@ class HojaDenunciaController extends Controller
         $folio  = $Id;
         $alto   = 6;
 
-        $pdf = new DenunciaTCPDF();
+        $pdf = new DenunciaTCPDF('','mm',array(215.9, 139.7), true, 'UTF-8', false);
         $pdf->folio = $folio;
         $pdf->timex = $timex;
 
@@ -28,34 +30,32 @@ class HojaDenunciaController extends Controller
 
 // Linea 1
         $pdf->setX(5);
-        $pdf->Ln(30);
-        $pdf->SetFont(FONT_ARIALN,'B',12);
+        $pdf->Ln(40);
+        $pdf->SetLeftMargin(50);
+        $pdf->SetRightMargin(40);
+        $pdf->setFormDefaultProp([279,140]);
+        $pdf->SetFont(FONT_AEALARABIYA,'B',12);
         $pdf->SetTextColor(64,64,64);
         $pdf->SetFillColor(255,255,255);
 
         $den = Denuncia::find($Id);
 
         //$pdf->Cell(10,$alto,"LOTE",'LTRB',0,'C',true);
-        $html = "<style> 
-                        b { font-family: arial, sans-serif; }
-                        p {text-align: justify;}
-                 </style>";
-        $html .= "<p>Estimado <b>{$den->ciudadano->FullName}</b> su preferencia. <br><br>";
-        $html .= "
-Ir a la navegación
-Ir a la búsqueda
-Ejemplo de Lorem ipsum
+        $html = ATEMUN['style']['denuncia'];
+        $html .= "<p>Estimado <bAzul>{$den->ciudadano->FullName}</bAzul> (<bChocolate>{$den->ciudadano->id}</bChocolate>), su petición ha sido recibida y se iniciará el trámite pertinente. <br><br>";
+        $html .= "El <b>". env('NOMBRE_EMPRESA'). "</b> agradece su colaboración y le garantiza confidencialidad y una pronta respuesta.  <br><br>";
+        $html .= "Fue atendido por <bVerde>{$den->creadopor->FullName}</bVerde> (<bChocolate>{$den->creadopor->id}</bChocolate>). <br><br>";
+        $html .= "</p>";
+        $html .= "<span></span>";
+        $html .= "<pCentrado>";
+        $html .= env('INFO_TWO'). "<br>";
+        $html .= "<span></span>";
+        $html .= env('INFO_THREE'). "<br>";
+        $html .= "<span></span>";
+        $html .= "<a href='".env('INFO_FOUR')."'>".env('INFO_FOUR'). "</a>";
+        $html .= "</pCentrado>";
 
-Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final.
-
-Aunque no posee actualmente fuentes para justificar sus hipótesis, el profesor de filología clásica Richard McClintock asegura que su uso se remonta a los impresores de comienzos del siglo XVI.1​ Su uso en algunos editores de texto muy conocidos en la actualidad ha dado al texto lorem ipsum nueva popularidad.
-
-El texto en sí no tiene sentido, aunque no es completamente aleatorio, sino que deriva de un texto de Cicerón en lengua latina, a cuyas palabras se les han eliminado sílabas o letras. El significado del texto no tiene importancia, ya que solo es una demostración o prueba, pero se inspira en la obra de Cicerón De finibus bonorum et malorum (Sobre los límites del bien y del mal) que comienza con:
-
-    Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit2​
-
-A pesar de estar extraído de ese escrito, el texto usado habitualmente[cita requerida] es: </p>";
-        $pdf->WriteHTMLCell(200,$alto,$pdf->getX(),$pdf->getY(),$html,0,1);
+        $pdf->WriteHTMLCell(120,$alto,$pdf->getX(),$pdf->getY(),$html,0,1);
         $pdf->Output();
 
     }

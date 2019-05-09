@@ -114,4 +114,15 @@ return [
         ],
     ],
 
+    'style' => [
+        'denuncia' => "<style> 
+                            b { font-family: arial, sans-serif; }
+                            bAzul { font-family: arial, sans-serif; color:blue; }
+                            p {text-align: justify;}
+                            bVerde { font-family: arial, sans-serif; color:green; }
+                            bChocolate { font-family: arial, sans-serif; color:chocolate; }
+                            span { font-family: arial, sans-serif; text-align: center; }
+                       </style>",
+    ],
+
 ];
