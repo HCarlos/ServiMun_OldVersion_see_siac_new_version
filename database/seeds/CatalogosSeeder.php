@@ -7360,7 +7360,8 @@ class CatalogosSeeder extends Seeder
         Codigopostal::findOrImport('99000','99999');
 
         factory(User::class, 250)->create()->each(function ($user) {
-            $idrole = 12; //rand(3, Role::all()->count());
+//            $idrole = 12; //rand(3, Role::all()->count());
+            $idrole = rand(3, Role::all()->count());
             $user->roles()->attach($idrole);
             $user->permissions()->attach(7);
             $user->user_adress()->create();

@@ -16,6 +16,10 @@ trait UserAttributes
 
     protected $disk1 = 'profile';
 
+    public function isRole($role): bool{
+        return $this->hasRole($role);
+    }
+
     public function getRoleIdStrArrayAttribute(){
         return $this->roles()->allRelatedIds('id')->implode('|','id');
     }

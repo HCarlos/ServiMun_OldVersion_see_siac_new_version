@@ -6,6 +6,7 @@ use App\Classes\Denuncia\DenunciaTCPDF;
 use App\Http\Controllers\Controller;
 use App\Models\Denuncias\Denuncia;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 //define('ATEMUN',config('atemun.style'));
 
@@ -39,10 +40,9 @@ class HojaDenunciaController extends Controller
         $pdf->SetFillColor(255,255,255);
 
         $den = Denuncia::find($Id);
-
-        //$pdf->Cell(10,$alto,"LOTE",'LTRB',0,'C',true);
+        $roles = $den->ciudadano->RoleNameStrArray;
         $html = ATEMUN['style']['denuncia'];
-        $html .= "<p>Estimado <bAzul>{$den->ciudadano->FullName}</bAzul> (<bChocolate>{$den->ciudadano->id}</bChocolate>), su petición ha sido recibida y se iniciará el trámite pertinente. <br><br>";
+        $html .= "<p>Estimado <bAzul>{$den->ciudadano->FullName}</bAzul> (<bChocolate>{$den->ciudadano->id}</bChocolate>) ( <bOrange>$roles</bOrange> ), su petición ha sido recibida y se iniciará el trámite pertinente. <br><br>";
         $html .= "El <b>". env('NOMBRE_EMPRESA'). "</b> agradece su colaboración y le garantiza confidencialidad y una pronta respuesta.  <br><br>";
         $html .= "Fue atendido por <bVerde>{$den->creadopor->FullName}</bVerde> (<bChocolate>{$den->creadopor->id}</bChocolate>). <br><br>";
         $html .= "</p>";

@@ -1,4 +1,4 @@
-@extends('home')
+@extends(\Illuminate\Support\Facades\Auth::user()->isRoles('Administrator|SysOp') ? 'home' : 'home-ciudadano')
 
 @section('container')
 

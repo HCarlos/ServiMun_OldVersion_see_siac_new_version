@@ -11,6 +11,7 @@ namespace App\Filters\Denuncia;
 
 use App\Filters\Common\QueryFilter;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class DenunciaFilter extends QueryFilter
 {
@@ -26,6 +27,7 @@ class DenunciaFilter extends QueryFilter
             'dependencia_id' => '',
             'servicio_id' => '',
             'estatus_id' => '',
+            'ciudadano_id' => '',
         ];
     }
 
@@ -63,7 +65,7 @@ class DenunciaFilter extends QueryFilter
 
     public function id($query, $search){
         if (is_null($search) || empty ($search) || trim($search) == "") {return $query;}
-        $search = strtoupper($search);
+//        $search = strtoupper($search);
         return $query->where('id', $search);
     }
 
@@ -83,20 +85,25 @@ class DenunciaFilter extends QueryFilter
 
     public function dependencia_id($query, $search){
         if (is_null($search) || empty ($search) || trim($search) == "0") {return $query;}
-        $search = strtoupper($search);
+//        $search = strtoupper($search);
         return $query->where('dependencia_id', $search);
     }
 
     public function servicio_id($query, $search){
         if (is_null($search) || empty ($search) || trim($search) == "0") {return $query;}
-        $search = strtoupper($search);
+//        $search = strtoupper($search);
         return $query->where('servicio_id', $search);
     }
 
     public function estatus_id($query, $search){
         if (is_null($search) || empty ($search) || trim($search) == "0") {return $query;}
-        $search = strtoupper($search);
+//        $search = strtoupper($search);
         return $query->where('estatus_id', $search);
+    }
+
+    public function ciudadano_id($query, $search){
+        if (is_null($search) || empty ($search) || trim($search) == "0") {return $query;}
+        return $query->where('ciudadano_id', $search);
     }
 
 }

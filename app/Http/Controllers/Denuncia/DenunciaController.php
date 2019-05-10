@@ -30,8 +30,15 @@ class DenunciaController extends Controller
     protected function index(Request $request)
     {
         ini_set('max_execution_time', 300);
+//        $filters = [
+//                    'ciudadano_id'=>Auth::user()->id,
+//                     $request->only(['search'])
+//                    ];
+
         $filters = $request->only(['search']);
-        //dd($filters);
+        if (!Auth::user()->isRole('Administrator|SysOp')){
+            $filters['ciudadano_id']=Auth::user()->id;
+        }
         $items = Denuncia::query()
             ->filterBy($filters)
             ->orderByDesc('id')

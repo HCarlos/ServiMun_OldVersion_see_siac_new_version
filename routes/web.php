@@ -44,6 +44,7 @@ $this->post('password/reset', 'Auth\ResetPasswordController@reset')->name('passw
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/home-ciudadano', 'HomeController@index_ciudadano')->name('home_ciudadano');
 
 
     // USUARIOS
@@ -55,6 +56,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('newUser', 'Catalogos\User\UserDataController@newUser')->name('newUser');
     Route::post('createUser', 'Catalogos\User\UserDataController@createUser')->name('createUser');
     Route::get('removeUser/{id}', 'Catalogos\User\UserDataController@removeUser')->name('removeUser');
+
     Route::get('showEditProfilePassword/', 'Catalogos\User\UserDataController@showEditProfilePassword')->name('showEditProfilePassword/');
     Route::put('changePasswordUser/', 'Catalogos\User\UserDataController@changePasswordUser')->name('changePasswordUser/');
     Route::post('subirFotoProfile/', 'Storage\StorageProfileController@subirArchivoProfile')->name('subirArchivoProfile/');
@@ -253,6 +255,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('showDataListDenunciaExcel1A/','External\Denuncia\ListDenunciaXLSXController@getListDenunciaXLSX')->name('showDataListDenunciaExcel1A');
     Route::get('/imprimir_denuncia/{Id}', 'External\Denuncia\HojaDenunciaController@imprimirDenuncia')->name('imprimirDenuncia/');
 
+    Route::get('listDenunciasCiudadanas/', 'Denuncia\DenunciaCiudadanaController@index')->name('listDenunciasCiudadanas');
+
 
     // Respuestas a las Denuncias
 //    Route::get('respuestasDenuncia/{Id}', 'Denuncia\DenunciaController@respuestasDenuncia')->name('respuestasDenuncia');
@@ -265,6 +269,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('saveRespuestaDen/', 'Denuncia\Respuesta\RespuestaController@saveRespuestaDen')->name('saveRespuestaDen');
     Route::put('saveRespuestaDen/', 'Denuncia\Respuesta\RespuestaController@saveRespuestaDen')->name('saveRespuestaDen');
 
+    Route::get('listRespuestasCiudadanas/{Id}', 'Denuncia\Respuesta\RespuestaCiudadanaController@index')->name('listRespuestasCiudadanas');
+    Route::get('removeRespuesta/{id}', 'Denuncia\Respuesta\RespuestaCiudadanaController@removeItem')->name('removeRespuesta');
+    Route::get('/showModalRespuestaCiudadanaNew/{denuncia_id}', 'Denuncia\Respuesta\RespuestaCiudadanaController@showModalRespuestaCiudadanaNew')->name('/showModalRespuestaCiudadanaNew');
+    Route::get('showModalRespuestaCiudadanaEdit/{Id}', 'Denuncia\Respuesta\RespuestaCiudadanaController@showModalRespuestaCiudadanaEdit')->name('/showModalRespuestaCiudadanaEdit');
+    Route::post('saveRespuestaDen/', 'Denuncia\Respuesta\RespuestaCiudadanaController@saveRespuestaDen')->name('saveRespuestaDen');
+    Route::put('saveRespuestaDen/', 'Denuncia\Respuesta\RespuestaCiudadanaController@saveRespuestaDen')->name('saveRespuestaDen');
 
     // Catálogo de Imagenes
     Route::get('listImagenes/{Id}', 'Denuncia\Imagene\ImageneController@index')->name('listImagenes');

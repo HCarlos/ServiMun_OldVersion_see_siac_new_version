@@ -121,6 +121,7 @@ return [
                             p {text-align: justify;}
                             bVerde { font-family: arial, sans-serif; color:green; }
                             bChocolate { font-family: arial, sans-serif; color:chocolate; }
+                            bOrange { font-family: arial, sans-serif; color:orangered; }
                             span { font-family: arial, sans-serif; text-align: center; }
                        </style>",
     ],

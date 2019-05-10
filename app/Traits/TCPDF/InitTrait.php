@@ -114,7 +114,7 @@ trait InitTrait
         // define self-closing tags
         $selfclosingtags = array('area','base','basefont','br','hr','input','img','link','meta');
         // remove all unsupported tags (the line below lists all supported tags)
-        $propias = '<bAzul><bVerde><bChocolate><bNegro><pCentrado>';
+        $propias = '<bAzul><bVerde><bChocolate><bNegro><bOrange><pCentrado>';
         $html = strip_tags($html, '<marker/><a><b><blockquote><body><br><br/><dd><del><div><dl><dt><em><font><form><h1><h2><h3><h4><h5><h6><hr><hr/><i><img><input><label><li><ol><option><p><pre><s><select><small><span><strike><strong><sub><sup><table><tablehead><tcpdf><td><textarea><th><thead><tr><tt><u><ul>'.$propias);
         //replace some blank characters
         $html = preg_replace('/<pre/', '<xre', $html); // preserve pre tag

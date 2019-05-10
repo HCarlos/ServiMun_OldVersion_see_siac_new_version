@@ -68,7 +68,11 @@
 
     </ul>
     @include('shared.search.__search_word_in_list')
-    @include('shared.search.__search_denuncia_adress_list')
+
+    @if(Auth::user()->isRole('Administrator|SysOp'))
+        @include('shared.search.__search_denuncia_adress_list')
+    @endif
+
     @include('shared.search.__search_alumno_baca_list')
     @include('shared.search.__search_empty_tool_list')
 </div>

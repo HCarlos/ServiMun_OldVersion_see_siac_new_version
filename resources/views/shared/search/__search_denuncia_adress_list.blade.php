@@ -1,3 +1,4 @@
+
 @isset($searchAdressDenuncia)
 <form method="get" action="{{ route($searchAdressDenuncia) }}" class="form-inline frmGetItems">
     <div class="app-search">

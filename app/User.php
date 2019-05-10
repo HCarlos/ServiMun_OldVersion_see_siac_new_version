@@ -77,6 +77,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->delegado;
     }
 
+    public function isRole($role): bool{
+        return $this->hasRole($role);
+    }
+
     public function IsEmptyPhoto(){
         return $this->filename == '' ? true : false;
     }
