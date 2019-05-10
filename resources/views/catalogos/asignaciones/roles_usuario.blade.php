@@ -1,4 +1,4 @@
-@extends('home')
+@extends(Auth::user()->Home)
 @section('container')
     @asignaciones
         @slot('titulo_catalogo', $titulo_catalogo)

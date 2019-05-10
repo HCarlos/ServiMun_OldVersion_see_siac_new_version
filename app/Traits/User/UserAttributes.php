@@ -98,5 +98,18 @@ trait UserAttributes
         return $ret;
     }
 
+    public function getHomeAttribute($withSlash=false): string {
+
+        $slash = "/";
+        if (Auth::user()->isRole('Administrator|SysOp')){
+            $home = 'home';
+        }  elseif (Auth::user()->isRole('DELEGADO|CIUDADANO')) {
+            $home = 'home-ciudadano';
+        } else {
+            $home = 'home';
+        }
+        return $withSlash ? $slash . $home : $home;
+    }
+
 
 }

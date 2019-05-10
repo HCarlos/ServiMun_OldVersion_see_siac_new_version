@@ -1,4 +1,4 @@
-@extends('home')
+@extends(Auth::user()->Home)
 
 @section('container')
 

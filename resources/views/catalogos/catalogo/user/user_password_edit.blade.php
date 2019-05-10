@@ -1,5 +1,4 @@
-
-@extends(Auth::user()->isRole('Administrator|SysOp') ? 'home' : 'home-ciudadano')
+@extends(Auth::user()->Home)
 
 @section('container')
 

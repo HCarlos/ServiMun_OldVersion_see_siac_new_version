@@ -42,6 +42,7 @@ class ServicioController extends Controller
                 'newItem' => 'newServicio',
                 'removeItem' => 'removeServicio',
 //                'showProcess1' => 'showFileListUserExcel1A',
+                'exportModel' => 2,
             ]
         );
     }

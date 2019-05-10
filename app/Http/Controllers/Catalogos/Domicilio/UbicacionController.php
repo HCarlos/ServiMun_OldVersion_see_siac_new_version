@@ -48,7 +48,8 @@ class UbicacionController extends Controller
 //                'putEdit' => 'updateUbicacion',
                 'newItem' => 'newUbicacion',
                 'removeItem' => 'removeUbicacion',
-//                'showProcess1' => 'showFileListUserExcel1A',
+//                'showProcess1' => 'showFileListModelExcel1A',
+                'exportModel' => 1,
             ]
         );
     }
