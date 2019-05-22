@@ -40,6 +40,7 @@ class MunicipioController extends Controller
                 'newItem' => 'newMunicipio',
                 'removeItem' => 'removeMunicipio',
 //                'showProcess1' => 'showFileListUserExcel1A',
+                'exportModel' => 15,
             ]
         );
     }

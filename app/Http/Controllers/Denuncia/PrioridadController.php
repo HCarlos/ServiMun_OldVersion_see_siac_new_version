@@ -40,6 +40,7 @@ class PrioridadController extends Controller
                 'newItem' => 'newPrioridad',
                 'removeItem' => 'removePrioridad',
 //                'showProcess1' => 'showFileListUserExcel1A',
+                'exportModel' => 27,
             ]
         );
     }

@@ -41,6 +41,7 @@ class SubareaController extends Controller
                 'newItem' => 'newSubarea',
                 'removeItem' => 'removeSubarea',
 //                'showProcess1' => 'showFileListUserExcel1A',
+                'exportModel' => 5,
             ]
         );
     }

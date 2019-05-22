@@ -41,6 +41,7 @@ class TipocomunidadController extends Controller
                 'newItem' => 'newTipocomunidad',
                 'removeItem' => 'removeTipocomunidad',
 //                'showProcess1' => 'showFileListUserExcel1A',
+                'exportModel' => 17,
             ]
         );
     }

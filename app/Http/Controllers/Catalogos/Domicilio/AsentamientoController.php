@@ -41,6 +41,7 @@ class AsentamientoController extends Controller
                 'newItem' => 'newAsentamiento',
                 'removeItem' => 'removeAsentamiento',
 //                'showProcess1' => 'showFileListUserExcel1A',
+                'exportModel' => 7,
             ]
         );
     }

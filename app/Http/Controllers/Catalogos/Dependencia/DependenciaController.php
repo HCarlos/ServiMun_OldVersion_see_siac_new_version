@@ -44,6 +44,7 @@ class DependenciaController extends Controller
                 'newItem' => 'newDependencia',
                 'removeItem' => 'removeDependencia',
 //                'showProcess1' => 'showFileListUserExcel1A',
+                'exportModel' => 3,
             ]
         );
     }

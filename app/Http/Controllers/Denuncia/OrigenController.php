@@ -41,6 +41,7 @@ class OrigenController extends Controller
                 'newItem' => 'newOrigen',
                 'removeItem' => 'removeOrigen',
 //                'showProcess1' => 'showFileListUserExcel1A',
+                'exportModel' => 26,
             ]
         );
     }

@@ -41,6 +41,7 @@ class CodigopostalController extends Controller
                 'newItem' => 'newCodigopostal',
                 'removeItem' => 'removeCodigopostal',
 //                'showProcess1' => 'showFileListUserExcel1A',
+                'exportModel' => 10,
             ]
         );
     }

@@ -32,9 +32,6 @@ class ImageneRequest extends FormRequest
 
     public function rules()
     {
-//        return [
-//            'file' => "required|mimetypes:".config('atemun.file_dropzone_mimetype')."|max:10000",
-//        ];
         return [];
     }
 
@@ -51,7 +48,7 @@ class ImageneRequest extends FormRequest
                 'user__id'      => $this->user__id,
                 'denuncia__id'  => $this->denuncia__id,
             ];
-
+            dd($Item->momento);
             if ((int)$this->id == 0) {
                 $item = Imagene::create($Item);
             }

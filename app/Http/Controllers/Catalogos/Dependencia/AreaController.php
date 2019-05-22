@@ -41,6 +41,7 @@ class AreaController extends Controller
                 'newItem' => 'newArea',
                 'removeItem' => 'removeArea',
 //                'showProcess1' => 'showFileListUserExcel1A',
+                'exportModel' => 4,
             ]
         );
     }

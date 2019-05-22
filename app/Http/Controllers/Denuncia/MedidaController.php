@@ -40,6 +40,7 @@ class MedidaController extends Controller
                 'newItem' => 'newMedida',
                 'removeItem' => 'removeMedida',
 //                'showProcess1' => 'showFileListUserExcel1A',
+                'exportModel' => 25,
             ]
         );
     }

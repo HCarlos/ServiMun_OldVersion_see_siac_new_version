@@ -26,6 +26,7 @@ return [
     'archivos'=>[
         'fmt_lista_usuarios'  => 'fmt_lista_usuarios.xlsx',
         'fmt_lista_denuncias' => 'fmt_lista_denuncias.xlsx',
+        'fmt_lista_catalogos' => 'fmt_lista_catalogos.xlsx',
         'icono_video'         => 'icon-video.png',
     ],
 

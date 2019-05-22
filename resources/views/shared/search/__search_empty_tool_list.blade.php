@@ -1,5 +1,5 @@
 @isset($searchEmptyTool)
-<form method="get" action="{{ route($searchEmptyTool) }}" class="form-inline frmSearchInList">
+<form method="get" action="{{ route($searchEmptyTool) }}" class="form-inline frmSearchInList float-right">
     <div class="app-search">
         <div class="input-group">
             <input type="search" name="search" id="search" value="{{ request('search') }}" class="form-control" placeholder="Buscar...">

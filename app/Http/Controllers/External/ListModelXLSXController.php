@@ -3,8 +3,31 @@
 namespace App\Http\Controllers\External;
 
 use App\Http\Controllers\Funciones\LoadTemplateExcel;
+use App\Models\Catalogos\Afiliacion;
+use App\Models\Catalogos\Area;
+use App\Models\Catalogos\Dependencia;
+use App\Models\Catalogos\Domicilios\Asentamiento;
+use App\Models\Catalogos\Domicilios\Calle;
+use App\Models\Catalogos\Domicilios\Ciudad;
+use App\Models\Catalogos\Domicilios\Codigopostal;
+use App\Models\Catalogos\Domicilios\Colonia;
+use App\Models\Catalogos\Domicilios\Comunidad;
+use App\Models\Catalogos\Domicilios\Estado;
+use App\Models\Catalogos\Domicilios\Localidad;
+use App\Models\Catalogos\Domicilios\Municipio;
+use App\Models\Catalogos\Domicilios\Tipoasentamiento;
+use App\Models\Catalogos\Domicilios\Tipocomunidad;
 use App\Models\Catalogos\Domicilios\Ubicacion;
+use App\Models\Catalogos\Estatu;
+use App\Models\Catalogos\Medida;
+use App\Models\Catalogos\Origen;
+use App\Models\Catalogos\Prioridad;
 use App\Models\Catalogos\Servicio;
+use App\Models\Catalogos\Subarea;
+use App\Models\Denuncias\Denuncia;
+use App\Models\Denuncias\Imagene;
+use App\Models\Denuncias\Respuesta;
+use App\Models\Users\Categoria;
 use App\User;
 use Carbon\Carbon;
 use Exception;
@@ -28,13 +51,93 @@ class ListModelXLSXController extends Controller
             case 2:
                 $Model = Servicio::all();
                 break;
+            case 3:
+                $Model = Dependencia::all();
+                break;
+            case 4:
+                $Model = Area::all();
+                break;
+            case 5:
+                $Model = Subarea::all();
+                break;
+            case 6:
+                $Model = Subarea::all();
+                break;
+            case 7:
+                $Model = Asentamiento::all();
+                break;
+            case 8:
+                $Model = Calle::all();
+                break;
+            case 9:
+                $Model = Ciudad::all();
+                break;
+            case 10:
+                $Model = Codigopostal::all();
+                break;
+            case 11:
+                $Model = Colonia::all();
+                break;
+            case 12:
+                $Model = Comunidad::all();
+                break;
+            case 13:
+                $Model = Estado::all();
+                break;
+            case 14:
+                $Model = Localidad::all();
+                break;
+            case 15:
+                $Model = Municipio::all();
+                break;
+            case 16:
+                $Model = Tipoasentamiento::all();
+                break;
+            case 17:
+                $Model = Tipocomunidad::all();
+                break;
+            case 18:
+                $Model = Categoria::all();
+                break;
+            case 19:
+                $Model = User::all();
+                break;
+            case 20:
+                $Model = Imagene::all();
+                break;
+            case 21:
+                $Model = Respuesta::all();
+                break;
+            case 22:
+                $Model = Afiliacion::all();
+                break;
+            case 23:
+                $Model = Denuncia::all();
+                break;
+            case 24:
+                $Model = Estatu::all();
+                break;
+            case 25:
+                $Model = Medida::all();
+                break;
+            case 26:
+                $Model = Origen::all();
+                break;
+            case 27:
+                $Model = Prioridad::all();
+                break;
         }
 
         $C0 = 6;
         $C = $C0;
 
+        $nameTable = $Model->count() >0 ? ucwords($Model->first()->getTable()) : '(Vacio)';
+        $nameTable = "Catálogo de ".$nameTable;
+
+//        dd($nameTable);
+
         try {
-            $file_external = trim(config("atemun.archivos.fmt_lista_usuarios"));
+            $file_external = trim(config("atemun.archivos.fmt_lista_catalogos"));
             $arrFE = explode('.',$file_external);
             $extension = Str::ucfirst($arrFE[1]);
 
@@ -43,7 +146,8 @@ class ListModelXLSXController extends Controller
             $spreadsheet = $reader->load($archivo);
             $sh = $spreadsheet->setActiveSheetIndex(0);
 
-            $sh->setCellValue('K1', Carbon::now()->format('d-m-Y h:m:s'));
+            $sh->setCellValue('B3', $nameTable);
+            $sh->setCellValue('E3', Carbon::now()->format('d-m-Y h:m:s'));
 
             $attributes =$Model[0]->toArray();
             $row = 0;

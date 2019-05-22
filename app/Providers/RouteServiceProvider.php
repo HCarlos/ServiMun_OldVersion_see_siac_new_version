@@ -5,6 +5,9 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
+define('NUMINT','^[0-9]+$');
+define('STRVAL','^[a-zA-Z]+$');
+
 class RouteServiceProvider extends ServiceProvider
 {
     /**
@@ -23,8 +26,16 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Route::pattern('id', NUMINT);
+        Route::pattern('Id', NUMINT);
+        Route::pattern('IdUbi', NUMINT);
+        Route::pattern('denuncia_id', NUMINT);
+        Route::pattern('IdDep', NUMINT);
+        Route::pattern('model', NUMINT);
 
+        Route::pattern('nameRoles', STRVAL);
+        Route::pattern('namePermissions', STRVAL);
+        Route::pattern('archivo', STRVAL);
         parent::boot();
     }
 

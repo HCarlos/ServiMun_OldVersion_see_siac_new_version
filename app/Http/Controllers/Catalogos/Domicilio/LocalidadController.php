@@ -40,6 +40,7 @@ class LocalidadController extends Controller
                 'newItem' => 'newLocalidad',
                 'removeItem' => 'removeLocalidad',
 //                'showProcess1' => 'showFileListUserExcel1A',
+                'exportModel' => 14,
             ]
         );
     }

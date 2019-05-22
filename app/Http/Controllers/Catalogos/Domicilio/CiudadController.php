@@ -41,6 +41,7 @@ class CiudadController extends Controller
                 'newItem' => 'newCiudad',
                 'removeItem' => 'removeCiudad',
 //                'showProcess1' => 'showFileListUserExcel1A',
+                'exportModel' => 9,
             ]
         );
     }

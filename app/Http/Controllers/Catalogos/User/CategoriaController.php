@@ -39,6 +39,7 @@ class CategoriaController extends Controller
                 'newItem' => 'newCategoria',
                 'removeItem' => 'removeCategoria',
 //                'showProcess1' => 'showFileListUserExcel1A',
+                'exportModel' => 18,
             ]
         );
     }

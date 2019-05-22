@@ -47,6 +47,7 @@ class UserDataController extends Controller
                 'removeItem' => 'removeUser',
                 'showEditBecas' => 'showEditBecas',
                 'showProcess1' => 'showFileListUserExcel1A',
+                'exportModel' => 19,
             ]
         );
     }

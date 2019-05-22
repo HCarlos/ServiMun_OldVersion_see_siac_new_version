@@ -34,7 +34,7 @@ class RespuestaController extends Controller
         return view('denuncia.respuesta.respuesta_list',
             [
                 'items' => $items,
-                'titulo_catalogo' => "Respuesta de " . ucwords($this->tableName),
+                'titulo_catalogo' => ucwords($this->tableName).' de la denuncia: '.$Id,
                 'user' => $user,
                 'searchInListRespuesta' => 'listRespuestas',
                 'newWindow' => true,
@@ -45,6 +45,7 @@ class RespuestaController extends Controller
                 'denuncia_id' => $Id,
                 'removeItem' => 'removeRespuesta',
                 'findDataInRespuesta'=>'findDataInRespuesta',
+                'exportModel' => 21,
             ]
         );
 

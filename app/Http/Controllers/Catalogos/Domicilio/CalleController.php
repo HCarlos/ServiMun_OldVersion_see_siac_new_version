@@ -41,6 +41,7 @@ class CalleController extends Controller
                 'newItem' => 'newCalle',
                 'removeItem' => 'removeCalle',
 //                'showProcess1' => 'showFileListUserExcel1A',
+                'exportModel' => 8,
             ]
         );
     }

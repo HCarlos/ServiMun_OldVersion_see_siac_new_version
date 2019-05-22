@@ -34,7 +34,7 @@ class DenunciaCiudadanaController extends Controller
         return view('denuncia.denuncia_ciudadana.denuncia_ciudadana_list',
             [
                 'items' => $items,
-                'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_catalogo' => "Mis " . ucwords($this->tableName),
                 'user' => $user,
                 'searchInListDenuncia' => 'listDenunciasCiudadanas',
                 'newWindow' => true,
@@ -42,7 +42,7 @@ class DenunciaCiudadanaController extends Controller
                 'showEdit' => 'editDenunciaCiudadana',
                 'showProcess1' => 'showDataListDenunciaExcel1A',
 //                'putEdit' => 'updateDenuncia',
-                'newItem' => 'newDenunciaCiudadana9',
+                'newItem' => 'newDenunciaCiudadana',
                 'removeItem' => 'removeDenunciaCiudadana',
                 'respuestasDenunciaCiudadanaItem' => 'listRespuestasCiudadanas',
                 'imagenesDenunciaItem' => 'listImagenes',

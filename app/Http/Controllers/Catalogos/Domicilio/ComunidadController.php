@@ -47,6 +47,7 @@ class ComunidadController extends Controller
                 'newItem' => 'newComunidad',
                 'removeItem' => 'removeComunidad',
 //                'showProcess1' => 'showFileListUserExcel1A',
+                'exportModel' => 12,
             ]
         );
     }

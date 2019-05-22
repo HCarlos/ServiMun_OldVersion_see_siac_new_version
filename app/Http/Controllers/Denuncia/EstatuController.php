@@ -40,6 +40,7 @@ class EstatuController extends Controller
                 'newItem' => 'newEstatu',
                 'removeItem' => 'removeEstatu',
 //                'showProcess1' => 'showFileListUserExcel1A',
+                'exportModel' => 24,
             ]
         );
     }

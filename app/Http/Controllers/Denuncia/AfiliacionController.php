@@ -43,6 +43,7 @@ class AfiliacionController extends Controller
                 'newItem' => 'newAfiliacion',
                 'removeItem' => 'removeAfiliacion',
 //                'showProcess1' => 'showFileListUserExcel1A',
+                'exportModel' => 22,
             ]
         );
     }

@@ -62,20 +62,22 @@
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     @csrf
                 </form>
-
             </div>
         </li>
-
     </ul>
+
     @include('shared.search.__search_word_in_list')
 
     @if(Auth::user()->isRole('Administrator|SysOp'))
         @include('shared.search.__search_denuncia_adress_list')
     @endif
-
+    @if(Auth::user()->isRole('DELEGADO'))
+        @include('shared.search.__title_denuncia_ciudadana_sin_busqueda')
+    @endif
     @include('shared.search.__search_alumno_baca_list')
     @include('shared.search.__search_empty_tool_list')
 </div>
+
 @endguest
 
 <!-- end Topbar -->

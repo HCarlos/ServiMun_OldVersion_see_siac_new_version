@@ -43,6 +43,7 @@ class ColoniaController extends Controller
                 'newItem' => 'newColonia',
                 'removeItem' => 'removeColonia',
 //                'showProcess1' => 'showFileListUserExcel1A',
+                'exportModel' => 11,
             ]
         );
     }

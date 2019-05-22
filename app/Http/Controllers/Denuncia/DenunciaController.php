@@ -141,7 +141,8 @@ class DenunciaController extends Controller
                 'ciudadanos'      => $Ciudadanos,
                 'estatus'         => $Estatus,
                 'postNew'         => 'createDenuncia',
-                'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_catalogo' => "Mis " . ucwords($this->tableName),
+                'exportModel' => 23,
             ]
         );
     }

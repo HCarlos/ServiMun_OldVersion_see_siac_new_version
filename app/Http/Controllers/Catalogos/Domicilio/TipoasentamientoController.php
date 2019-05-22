@@ -41,6 +41,7 @@ class TipoasentamientoController extends Controller
                 'newItem' => 'newTipoasentamiento',
                 'removeItem' => 'removeTipoasentamiento',
 //                'showProcess1' => 'showFileListUserExcel1A',
+                'exportModel' => 16,
             ]
         );
     }

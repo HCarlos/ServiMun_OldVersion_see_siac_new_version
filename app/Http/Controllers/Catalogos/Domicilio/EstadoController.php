@@ -41,6 +41,7 @@ class EstadoController extends Controller
                 'newItem' => 'newEstado',
                 'removeItem' => 'removeEstado',
 //                'showProcess1' => 'showFileListUserExcel1A',
+                'exportModel' => 13,
             ]
         );
     }

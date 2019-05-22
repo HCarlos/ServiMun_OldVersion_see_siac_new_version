@@ -38,7 +38,7 @@ class ImageneController extends Controller{
         return view('denuncia.images.imagene_list',
             [
                 'items' => $items,
-                'titulo_catalogo' => "Imagenes de " . ucwords($this->tableName),
+                'titulo_catalogo' => "Imagenes de la denuncia: " . $Id,
                 'user' => $user,
                 'searchInListImagene' => 'listImagenes',
                 'newWindow' => true,
@@ -49,6 +49,7 @@ class ImageneController extends Controller{
                 'removeItem' => 'removeImagene',
                 'showEdit' => 'editDenuncia',
                 'findDataInImagene'=>'findDataInImagene',
+                'exportModel' => 20,
             ]
         );
 
