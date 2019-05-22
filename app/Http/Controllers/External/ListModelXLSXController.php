@@ -150,15 +150,15 @@ class ListModelXLSXController extends Controller
             $sh->setCellValue('E3', Carbon::now()->format('d-m-Y h:m:s'));
 
             $attributes =$Model[0]->toArray();
-            $row = 0;
+            $row = 1;
             foreach ($attributes as $key=>$value){
-                $sh->setCellValueByColumnAndRow($row,$C, $key);
+                $sh->setCellValueByColumnAndRow($row,$C, strtoupper($key));
                 $row++;
             }
             $C++;
             foreach ($Model as $user){
                 $attributes = $user->toArray();
-                $row = 0;
+                $row = 1;
                 foreach ($attributes as $key=>$value) {
                         $sh->setCellValueByColumnAndRow($row, $C, $attributes[$key] );
                         $row++;
@@ -169,7 +169,7 @@ class ListModelXLSXController extends Controller
             $Cx = $C  - 1;
             $oVal = $sh->getCell('G1')->getValue();
             $sh->setCellValue('B'.$C, 'TOTAL DE REGISTROS')
-                ->setCellValue('C'.$C, '=COUNT(A'.$C0.':A'.$Cx.')')
+                ->setCellValue('C'.$C, $Model->count())
                 ->setCellValue('G'.$C, $oVal);
 
             $sh->getStyle('A'.$C0.':G'.$C)->getFont()
