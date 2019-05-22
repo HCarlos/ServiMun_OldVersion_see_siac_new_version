@@ -146,12 +146,15 @@ class ListModelXLSXController extends Controller
             $spreadsheet = $reader->load($archivo);
             $sh = $spreadsheet->setActiveSheetIndex(0);
 
+            $sh->getStyle('B3')->getFont()->setBold(true);
             $sh->setCellValue('B3', $nameTable);
+            $sh->getStyle('E3')->getFont()->setBold(true);
             $sh->setCellValue('E3', Carbon::now()->format('d-m-Y h:m:s'));
 
             $attributes =$Model[0]->toArray();
             $row = 1;
             foreach ($attributes as $key=>$value){
+                $sh->getStyleByColumnAndRow($row,$C)->getFont()->setBold(true);
                 $sh->setCellValueByColumnAndRow($row,$C, strtoupper($key));
                 $row++;
             }
