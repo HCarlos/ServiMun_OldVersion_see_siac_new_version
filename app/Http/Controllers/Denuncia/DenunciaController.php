@@ -59,6 +59,7 @@ class DenunciaController extends Controller
             [
                 'items' => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => '',
                 'user' => $user,
                 'searchInListDenuncia' => 'listDenuncias',
                 'newWindow' => true,
@@ -104,6 +105,7 @@ class DenunciaController extends Controller
                 'editItemTitle'   => isset($item->denuncia) ? $item->denuncia : 'Nuevo',
                 'putEdit'         => 'updateDenuncia',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Editando el Folio '.$Id,
             ]
         );
     }
@@ -142,6 +144,7 @@ class DenunciaController extends Controller
                 'estatus'         => $Estatus,
                 'postNew'         => 'createDenuncia',
                 'titulo_catalogo' => "Mis " . ucwords($this->tableName),
+                'titulo_header'   => 'Folio Nuevo',
                 'exportModel' => 23,
             ]
         );

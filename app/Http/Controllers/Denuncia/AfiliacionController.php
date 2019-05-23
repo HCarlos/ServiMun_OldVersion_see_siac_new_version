@@ -34,6 +34,7 @@ class AfiliacionController extends Controller
             [
                 'items' => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => '',
                 'user' => $user,
                 'searchInList' => 'listAfiliaciones',
                 'newWindow' => true,
@@ -59,6 +60,7 @@ class AfiliacionController extends Controller
                 'editItemTitle' => isset($item->categoria) ? $item->categoria : 'Nuevo',
                 'putEdit' => 'updateAfiliacion',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Editando el Folio '.$Id,
             ]
         );
     }
@@ -80,6 +82,7 @@ class AfiliacionController extends Controller
                 'editItemTitle' => 'Nuevo',
                 'postNew' => 'createAfiliacion',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Nuevo registro',
             ]
         );
     }

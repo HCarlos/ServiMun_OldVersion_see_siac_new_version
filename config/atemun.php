@@ -74,10 +74,12 @@ return [
             'denuncia_modificadopor' => 'denuncia_modificadopor',
             'dependencia_estatu'     => 'dependencia_estatu',
             'denuncia_respuesta'     => 'denuncia_respuesta',
+            'parent_respuesta'       => 'parent_respuesta',
             'respuesta_user'         => 'respuesta_user',
             'imagenes'               => 'imagenes',
             'denuncia_imagene'       => 'denuncia_imagene',
             'imagene_user'           => 'imagene_user',
+            'imagene_parent'         => 'imagene_parent',
         ],
         'domicilios' => [
             'users'             => 'users',

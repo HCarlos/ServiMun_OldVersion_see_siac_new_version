@@ -32,6 +32,7 @@ class CiudadController extends Controller
             [
                 'items' => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => ' ',
                 'user' => $user,
                 'searchInList' => 'listCiudades',
                 'newWindow' => true,
@@ -57,6 +58,7 @@ class CiudadController extends Controller
                 'editItemTitle' => isset($item->categoria) ? $item->categoria : 'Nuevo',
                 'putEdit' => 'updateCiudad',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Editando el Folio '.$Id,
             ]
         );
     }
@@ -78,6 +80,7 @@ class CiudadController extends Controller
                 'editItemTitle' => 'Nuevo',
                 'postNew' => 'createCiudad',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Nuevo registro ',
             ]
         );
     }

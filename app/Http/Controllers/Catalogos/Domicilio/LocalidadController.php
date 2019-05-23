@@ -31,6 +31,7 @@ class LocalidadController extends Controller
             [
                 'items' => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => '',
                 'user' => $user,
                 'searchInList' => 'listLocalidades',
                 'newWindow' => true,
@@ -56,6 +57,7 @@ class LocalidadController extends Controller
                 'editItemTitle' => isset($item->categoria) ? $item->categoria : 'Nuevo',
                 'putEdit' => 'updateLocalidad',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Editando el Folio '.$Id,
             ]
         );
     }
@@ -77,6 +79,7 @@ class LocalidadController extends Controller
                 'editItemTitle' => 'Nuevo',
                 'postNew' => 'createLocalidad',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Nuevo registro',
             ]
         );
     }

@@ -33,6 +33,7 @@ class ServicioController extends Controller
             [
                 'items' => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => '',
                 'user' => $user,
                 'searchInList' => 'listServicios',
                 'newWindow' => true,
@@ -62,6 +63,7 @@ class ServicioController extends Controller
                 'editItemTitle' => isset($item->categoria) ? $item->categoria : 'Nuevo',
                 'putEdit' => 'updateServicio',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Editando el Folio '.$Id,
             ]
         );
     }
@@ -87,6 +89,7 @@ class ServicioController extends Controller
                 'medidas' => $medidas,
                 'subareas' => $subareas,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Nuevo registro',
             ]
         );
     }

@@ -31,6 +31,7 @@ class EstatuController extends Controller
             [
                 'items' => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => '',
                 'user' => $user,
                 'searchInList' => 'listEstatus',
                 'newWindow' => true,
@@ -60,6 +61,7 @@ class EstatuController extends Controller
                 'putEdit' => 'updateEstatu',
                 'dependencia' => $Dependencias,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Editando el Folio '.$Id,
             ]
         );
     }
@@ -85,6 +87,7 @@ class EstatuController extends Controller
                 'editItemTitle' => 'Nuevo',
                 'postNew' => 'createEstatu',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Nuevo registro',
             ]
         );
     }

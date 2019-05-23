@@ -34,6 +34,7 @@ class ColoniaController extends Controller
             [
                 'items' => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => ' ',
                 'user' => $user,
                 'searchInList' => 'listColonias',
                 'newWindow' => true,
@@ -64,6 +65,7 @@ class ColoniaController extends Controller
                 'editItemTitle'   => isset($item->colonia) ? $item->colonia : 'Nuevo',
                 'putEdit'         => 'updateColonia',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Editando el Folio '.$Id,
             ]
         );
     }
@@ -90,6 +92,7 @@ class ColoniaController extends Controller
                 'comunidades'     => $Comunidades,
                 'postNew'         => 'createColonia',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Nuevo registro ',
             ]
         );
     }

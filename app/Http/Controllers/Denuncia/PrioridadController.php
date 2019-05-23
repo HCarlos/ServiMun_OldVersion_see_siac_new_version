@@ -31,6 +31,7 @@ class PrioridadController extends Controller
             [
                 'items' => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => '',
                 'user' => $user,
                 'searchInList' => 'listPrioridades',
                 'newWindow' => true,
@@ -56,6 +57,7 @@ class PrioridadController extends Controller
                 'editItemTitle' => isset($item->categoria) ? $item->categoria : 'Nuevo',
                 'putEdit' => 'updatePrioridad',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Editando el Folio '.$Id,
             ]
         );
     }
@@ -77,6 +79,7 @@ class PrioridadController extends Controller
                 'editItemTitle' => 'Nuevo',
                 'postNew' => 'createPrioridad',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Nuevo registro',
             ]
         );
     }

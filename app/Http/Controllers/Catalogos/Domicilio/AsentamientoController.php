@@ -32,6 +32,7 @@ class AsentamientoController extends Controller
             [
                 'items' => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => ' ',
                 'user' => $user,
                 'searchInList' => 'listAsentamientos',
                 'newWindow' => true,
@@ -57,6 +58,7 @@ class AsentamientoController extends Controller
                 'editItemTitle' => isset($item->categoria) ? $item->categoria : 'Nuevo',
                 'putEdit' => 'updateAsentamiento',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Editando el Folio '.$Id,
             ]
         );
     }
@@ -78,6 +80,7 @@ class AsentamientoController extends Controller
                 'editItemTitle' => 'Nuevo',
                 'postNew' => 'createAsentamiento',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Nuevo registro ',
             ]
         );
     }

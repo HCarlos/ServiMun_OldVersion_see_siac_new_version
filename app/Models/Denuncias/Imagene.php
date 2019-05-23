@@ -17,7 +17,7 @@ class Imagene extends Model{
     protected $disk = "denuncia";
 
     protected $fillable = [
-        'id', 'fecha','root','image','image_thumb','titulo','descripcion','momento','denuncia__id','user__id'
+        'id', 'fecha','root','image','image_thumb','titulo','descripcion','momento','denuncia__id','user__id','parent__id'
     ];
 
     public function user(){
@@ -34,6 +34,14 @@ class Imagene extends Model{
 
     public function denuncias(){
         return $this->belongsToMany(Denuncia::class,'denuncia_imagene','imagene_id','denuncia_id');
+    }
+
+    public function parent(){
+        return $this->hasOne(Imagene::class,'id','parent__id');
+    }
+
+    public function parents(){
+        return $this->belongsToMany(Imagene::class,'imagene_parent','imagene_id','imagen_parent_id');
     }
 
 

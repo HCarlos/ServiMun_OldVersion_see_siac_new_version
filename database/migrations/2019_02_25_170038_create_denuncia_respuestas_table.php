@@ -35,6 +35,29 @@ class CreateDenunciaRespuestasTable extends Migration
 
         });
 
+        Schema::create($tableNamesCatalogos['parent_respuesta'], function (Blueprint $table) use ($tableNamesCatalogos){
+            $table->increments('id');
+            $table->unsignedInteger('respuesta_id')->default(0)->index();
+            $table->unsignedInteger('respuesta_parent_id')->default(0)->index();
+            $table->softDeletes();
+            $table->timestamps();
+            $table->unique(['respuesta_id', 'respuesta_parent_id']);
+
+            $table->foreign('respuesta_id')
+                ->references('id')
+                ->on($tableNamesCatalogos['respuestas'])
+                ->onDelete('cascade');
+
+            $table->foreign('respuesta_parent_id')
+                ->references('id')
+                ->on($tableNamesCatalogos['respuestas'])
+                ->onDelete('cascade');
+
+        });
+
+
+
+
         Schema::create($tableNamesCatalogos['respuesta_user'], function (Blueprint $table) use ($tableNamesCatalogos){
             $table->increments('id');
             $table->unsignedInteger('respuesta_id')->default(0)->index();
@@ -66,6 +89,7 @@ class CreateDenunciaRespuestasTable extends Migration
     public function down()
     {
         Schema::dropIfExists('denuncia_respuesta');
+        Schema::dropIfExists('parent_respuesta');
         Schema::dropIfExists('respuesta_user');
     }
 }

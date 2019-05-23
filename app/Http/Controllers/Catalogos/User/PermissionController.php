@@ -38,6 +38,7 @@ class PermissionController extends Controller
                 'listTarget0' => $listTarget,
                 'lstAsigns0' => $this->lstAsigns,
                 'titulo_catalogo' => "Asignación de Permisos",
+                'titulo_header'   => '',
                 'user' => $user,
                 'Id' => $Id,
                 'titleLeft0'  => "Permisos",

@@ -32,6 +32,7 @@ class CodigopostalController extends Controller
             [
                 'items' => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => ' ',
                 'user' => $user,
                 'searchInList' => 'listCodigopostales',
                 'newWindow' => true,
@@ -57,6 +58,7 @@ class CodigopostalController extends Controller
                 'editItemTitle' => isset($item->categoria) ? $item->categoria : 'Nuevo',
                 'putEdit' => 'updateCodigopostal',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Editando el Folio '.$Id,
             ]
         );
     }
@@ -79,6 +81,7 @@ class CodigopostalController extends Controller
                 'editItemTitle' => 'Nuevo',
                 'postNew' => 'createCodigopostal',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Nuevo registro ',
             ]
         );
     }

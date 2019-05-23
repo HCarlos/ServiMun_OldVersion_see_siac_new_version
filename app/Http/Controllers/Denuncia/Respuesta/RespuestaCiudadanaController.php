@@ -32,6 +32,7 @@ class RespuestaCiudadanaController extends Controller
             [
                 'items' => $items,
                 'titulo_catalogo' =>ucwords($this->tableName).' de mi denuncia: '.$Id,
+                'titulo_header'   => '',
                 'user' => $user,
                 'searchInListRespuesta' => 'listRespuestasCiudadanas',
                 'newWindow' => true,

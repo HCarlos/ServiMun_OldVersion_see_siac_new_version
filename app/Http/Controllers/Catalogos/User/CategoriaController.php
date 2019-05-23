@@ -30,6 +30,7 @@ class CategoriaController extends Controller
             [
                 'items' => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => '',
                 'user' => $user,
                 'searchInList' => 'listCategorias',
                 'newWindow' => true,
@@ -55,6 +56,7 @@ class CategoriaController extends Controller
                 'editItemTitle' => isset($item->categoria) ? $item->categoria : 'Nuevo',
                 'putEdit' => 'updateCategoria',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Editando el Folio '.$Id,
             ]
         );
     }
@@ -76,6 +78,7 @@ class CategoriaController extends Controller
                 'editItemTitle' => 'Nuevo',
                 'postNew' => 'createCategoria',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Nuevo registro',
             ]
         );
     }

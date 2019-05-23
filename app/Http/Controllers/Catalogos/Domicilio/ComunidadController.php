@@ -38,6 +38,7 @@ class ComunidadController extends Controller
             [
                 'items' => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => '',
                 'user' => $user,
                 'searchInList' => 'listComunidades',
                 'newWindow' => true,
@@ -82,6 +83,7 @@ class ComunidadController extends Controller
                 'editItemTitle' => isset($item->comunidad) ? $item->comunidad : 'Nuevo',
                 'putEdit' => 'updateComunidad',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Editando el Folio '.$Id,
             ]
         );
     }
@@ -122,6 +124,7 @@ class ComunidadController extends Controller
                 'estado_id' => $Estado_Id->id,
                 'postNew' => 'createComunidad',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Nuevo registro ',
             ]
         );
     }

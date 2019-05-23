@@ -32,6 +32,7 @@ class AreaController extends Controller
             [
                 'items' => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => ' ',
                 'user' => $user,
                 'searchInList' => 'listAreas',
                 'newWindow' => true,
@@ -66,6 +67,7 @@ class AreaController extends Controller
                 'editItemTitle' => isset($item->dependencia) ? $item->dependencia : 'Nuevo',
                 'putEdit' => 'updateArea',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Editando el Folio '.$Id,
             ]
         );
     }
@@ -95,6 +97,7 @@ class AreaController extends Controller
                 'dependencia' => $Dependencias,
                 'postNew' => 'createArea',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Nuevo registro ',
             ]
         );
     }

@@ -32,6 +32,7 @@ class SubareaController extends Controller
             [
                 'items' => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => ' ',
                 'user' => $user,
                 'searchInList' => 'listSubareas',
                 'newWindow' => true,
@@ -66,6 +67,7 @@ class SubareaController extends Controller
                 'editItemTitle' => isset($item->subarea) ? $item->subarea : 'Nuevo',
                 'putEdit' => 'updateSubarea',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Editando el Folio '.$Id,
             ]
         );
     }
@@ -95,6 +97,7 @@ class SubareaController extends Controller
                 'area' => $Areas,
                 'postNew' => 'createSubarea',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Nuevo registro ',
             ]
         );
     }

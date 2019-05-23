@@ -40,6 +40,7 @@ class UbicacionController extends Controller
             [
                 'items' => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => '',
                 'user' => $user,
                 'searchInList' => 'listUbicaciones',
                 'newWindow' => true,
@@ -75,6 +76,7 @@ class UbicacionController extends Controller
                 'editItemTitle'   => isset($item->ubicacion) ? $item->ubicacion : 'Nuevo',
                 'putEdit'         => 'updateUbicacion',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Editando el Folio '.$Id,
             ]
         );
     }
@@ -104,6 +106,7 @@ class UbicacionController extends Controller
                 'codigospostales' => $Codigospostales,
                 'postNew'         => 'createUbicacion',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Nuevo registro',
             ]
         );
     }

@@ -39,6 +39,7 @@ class ImageneController extends Controller{
             [
                 'items' => $items,
                 'titulo_catalogo' => "Imagenes de la denuncia: " . $Id,
+                'titulo_header'   => '',
                 'user' => $user,
                 'searchInListImagene' => 'listImagenes',
                 'newWindow' => true,

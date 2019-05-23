@@ -321,6 +321,7 @@ class CreateDenunciaUbicacionTable extends Migration
             $table->text('observaciones')->default("")->nullable();
             $table->unsignedInteger('user__id')->default(0)->index();
             $table->unsignedInteger('denuncia__id')->default(0)->index();
+            $table->unsignedInteger('parent__id')->default(0)->index();
             $table->softDeletes();
             $table->timestamps();
         });

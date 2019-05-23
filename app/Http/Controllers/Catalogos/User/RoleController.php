@@ -34,11 +34,12 @@ class RoleController extends Controller
         $user = Auth::User();
         return view ('catalogos.asignaciones.roles_usuario',
             [
-                'catalogo_titulo' => 'hola Mundo',
+                'catalogo_titulo' => '',
                 'listEle0' => $listEle,
                 'listTarget0' => $listTarget,
                 'lstAsigns0' => $this->lstAsigns,
                 'titulo_catalogo' => "Asignación de Roles",
+                'titulo_header'   => '',
                 'user' => $user,
                 'Id' => $Id,
                 'titleLeft0'    => "Roles",

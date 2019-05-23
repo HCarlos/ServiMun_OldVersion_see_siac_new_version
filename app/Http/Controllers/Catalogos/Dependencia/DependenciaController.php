@@ -35,6 +35,7 @@ class DependenciaController extends Controller
             [
                 'items' => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => '',
                 'user' => $user,
                 'searchInList' => 'listDependencias',
                 'newWindow' => true,
@@ -65,6 +66,7 @@ class DependenciaController extends Controller
                 'editItemTitle' => isset($item->dependencia) ? $item->dependencia : 'Nuevo',
                 'putEdit' => 'updateDependencia',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Editando el Folio '.$Id,
             ]
         );
     }
@@ -90,6 +92,7 @@ class DependenciaController extends Controller
                 'jefes' => $Jefes,
                 'postNew' => 'createDependencia',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Nuevo registro',
             ]
         );
     }

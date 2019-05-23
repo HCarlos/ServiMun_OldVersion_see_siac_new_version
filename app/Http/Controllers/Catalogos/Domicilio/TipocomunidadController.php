@@ -32,6 +32,7 @@ class TipocomunidadController extends Controller
             [
                 'items' => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => '',
                 'user' => $user,
                 'searchInList' => 'listTipocomunidades',
                 'newWindow' => true,
@@ -57,6 +58,7 @@ class TipocomunidadController extends Controller
                 'editItemTitle' => isset($item->categoria) ? $item->categoria : 'Nuevo',
                 'putEdit' => 'updateTipocomunidad',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Editando el Folio '.$Id,
             ]
         );
     }
@@ -79,6 +81,7 @@ class TipocomunidadController extends Controller
                 'editItemTitle' => 'Nuevo',
                 'postNew' => 'createTipocomunidad',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Nuevo registro',
             ]
         );
     }

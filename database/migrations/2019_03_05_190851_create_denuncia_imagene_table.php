@@ -27,6 +27,7 @@ class CreateDenunciaImageneTable extends Migration
             $table->string('momento',10)->default("ANTES")->nullable();
             $table->unsignedInteger('user__id')->default(0)->index();
             $table->unsignedInteger('denuncia__id')->default(0)->index();
+            $table->unsignedInteger('parent__id')->default(0)->index();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -45,6 +46,25 @@ class CreateDenunciaImageneTable extends Migration
                 ->onDelete('cascade');
 
             $table->foreign('imagene_id')
+                ->references('id')
+                ->on($tableNamesCatalogos['imagenes'])
+                ->onDelete('cascade');
+        });
+
+        Schema::create($tableNamesCatalogos['imagene_parent'], function (Blueprint $table) use ($tableNamesCatalogos){
+            $table->increments('id');
+            $table->unsignedInteger('imagene_id')->default(0)->index();
+            $table->unsignedInteger('imagen_parent_id')->default(0)->index();
+            $table->softDeletes();
+            $table->timestamps();
+            $table->unique([ 'imagene_id','imagen_parent_id']);
+
+            $table->foreign('imagene_id')
+                ->references('id')
+                ->on($tableNamesCatalogos['imagenes'])
+                ->onDelete('cascade');
+
+            $table->foreign('imagen_parent_id')
                 ->references('id')
                 ->on($tableNamesCatalogos['imagenes'])
                 ->onDelete('cascade');
@@ -72,7 +92,6 @@ class CreateDenunciaImageneTable extends Migration
         });
 
 
-
     }
 
     /**
@@ -83,6 +102,7 @@ class CreateDenunciaImageneTable extends Migration
     public function down()
     {
         Schema::dropIfExists('denuncia_imagene');
+        Schema::dropIfExists('imagene_parent');
         Schema::dropIfExists('imagene_user');
         Schema::dropIfExists('imagenes');
     }

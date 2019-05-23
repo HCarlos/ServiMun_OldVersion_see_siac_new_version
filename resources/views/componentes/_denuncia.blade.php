@@ -1,12 +1,12 @@
-<div class="row">
-    <div class="col-12">
-        <div class="page-title-box">
-            <h4 class="page-title">{{$titulo_catalogo}} <small>{{$titulo_header}}</small></h4>
-        </div>
-    </div>
-</div>
+{{--<div class="row">--}}
+{{--    <div class="col-12">--}}
+{{--        <div class="page-title-box">--}}
+{{--            <h4 class="page-title">{{$titulo_catalogo}} <small>{{$titulo_header}}</small></h4>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--</div>--}}
 
-<div class="row">
+<div class="row mt-3">
     {{$contenido}}
 </div>
 

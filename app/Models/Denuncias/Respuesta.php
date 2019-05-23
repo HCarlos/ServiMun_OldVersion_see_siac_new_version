@@ -17,7 +17,7 @@ class Respuesta extends Model
     protected $table = 'respuestas';
 
     protected $fillable = [
-        'id', 'fecha','respuesta','observaciones','denuncia__id','user__id'
+        'id', 'fecha','respuesta','observaciones','denuncia__id','user__id','parent__id'
     ];
 
 //    public function Denuncia() {
@@ -43,6 +43,14 @@ class Respuesta extends Model
 
     public function denuncias(){
         return $this->belongsToMany(Denuncia::class,'denuncia_respuesta','respuesta_id','denuncia_id');
+    }
+
+    public function parent(){
+        return $this->hasOne(Respuesta::class,'id','parent__id');
+    }
+
+    public function parents(){
+        return $this->belongsToMany(Respuesta::class,'parent_respuesta','respuesta_id','respuesta_parent_id');
     }
 
 }

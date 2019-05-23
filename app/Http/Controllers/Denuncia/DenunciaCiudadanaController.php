@@ -35,6 +35,7 @@ class DenunciaCiudadanaController extends Controller
             [
                 'items' => $items,
                 'titulo_catalogo' => "Mis " . ucwords($this->tableName),
+                'titulo_header'   => '',
                 'user' => $user,
                 'searchInListDenuncia' => 'listDenunciasCiudadanas',
                 'newWindow' => true,

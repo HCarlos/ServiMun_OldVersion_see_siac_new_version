@@ -38,6 +38,7 @@ class UserDataController extends Controller
                 'roles' => $roles,
                 'checkedRoles' => collect(request('roles')),
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => '',
                 'user' => $user,
                 'searchInList' => 'listUsers',
                 'newWindow' => true,
@@ -60,7 +61,8 @@ class UserDataController extends Controller
             [
                 'user' => $user,
                 'items' => $user,
-                'titulo_catalogo' => "",
+                'titulo_catalogo' => "Catálogo de Usuarios",
+                'titulo_header'   => 'Editando datos',
             ]
         );
     }
@@ -70,7 +72,8 @@ class UserDataController extends Controller
     {
         return view('catalogos.catalogo.user.user_profile_new',
             [
-                'titulo_catalogo' => 'Nuevo',
+                'titulo_catalogo' => 'Catálogo de Usuarios',
+                'titulo_header'   => 'Nuevo Usuario ',
                 'postNew' => 'createUser',
             ]
         );
@@ -84,8 +87,8 @@ class UserDataController extends Controller
             [
                 'user' => $user,
                 'items' => $user,
-                'titulo_catalogo' => isset($user->Fullname) ? $user->Fullname : 'Nuevo',
-                'putEdit' => 'EditUser',
+                'titulo_catalogo' => "Catálogo de Usuarios",
+                'titulo_header'   => 'Editando el Folio '.$Id,
             ]
         );
     }
@@ -109,6 +112,7 @@ class UserDataController extends Controller
                 'user' => $user,
                 'items' => $user,
                 'titulo_catalogo' => $user->Fullname,
+                'titulo_header'   => '',
                 'putEdit' => 'EditUser',
             ]
         );
@@ -126,6 +130,7 @@ class UserDataController extends Controller
                 'user' => $user,
                 'items' => $user,
                 'titulo_catalogo' => $user->Fullname,
+                'titulo_header'   => 'Editando..',
                 'putEdit' => 'EditUser',
             ]
         );
@@ -138,7 +143,8 @@ class UserDataController extends Controller
         $titulo_catalogo = "";
         return view('catalogos.catalogo.user.user_photo_update', [
                 "user" => $user,
-                "titulo_catalogo" => $titulo_catalogo,
+                "titulo_catalogo" => "Catálogo de Usuarios",
+                'titulo_header'   => 'Actualizando avatar',
             ]
         );
     }
@@ -150,7 +156,8 @@ class UserDataController extends Controller
         $titulo_catalogo = "";
         return view('catalogos.catalogo.user.user_password_edit', [
                 "user" => $user,
-                "titulo_catalogo" => $titulo_catalogo,
+                "titulo_catalogo" =>"Catálogo de Usuarios",
+                'titulo_header'   => 'Actualizando password',
             ]
         );
     }
@@ -163,7 +170,8 @@ class UserDataController extends Controller
         return view('catalogos.catalogo.user.user_password_edit', [
             "user" => Auth::user(),
             "msg" => 'Password cambiado con éxito!',
-            "titulo_catalogo" => $titulo_catalogo,
+            "titulo_catalogo" =>"Catálogo de Usuarios",
+            'titulo_header'   => 'Editando password',
         ]);
     }
 

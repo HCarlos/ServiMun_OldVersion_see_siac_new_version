@@ -31,6 +31,7 @@ class MunicipioController extends Controller
             [
                 'items' => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => '',
                 'user' => $user,
                 'searchInList' => 'listMunicipios',
                 'newWindow' => true,
@@ -56,6 +57,7 @@ class MunicipioController extends Controller
                 'editItemTitle' => isset($item->categoria) ? $item->categoria : 'Nuevo',
                 'putEdit' => 'updateMunicipio',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Editando el Folio '.$Id,
             ]
         );
     }
@@ -77,6 +79,7 @@ class MunicipioController extends Controller
                 'editItemTitle' => 'Nuevo',
                 'postNew' => 'createMunicipio',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Nuevo registro',
             ]
         );
     }

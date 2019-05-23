@@ -32,6 +32,7 @@ class TipoasentamientoController extends Controller
             [
                 'items' => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => '',
                 'user' => $user,
                 'searchInList' => 'listTipoasentamientos',
                 'newWindow' => true,
@@ -57,6 +58,7 @@ class TipoasentamientoController extends Controller
                 'editItemTitle' => isset($item->categoria) ? $item->categoria : 'Nuevo',
                 'putEdit' => 'updateTipoasentamiento',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Editando el Folio '.$Id,
             ]
         );
     }
@@ -79,6 +81,7 @@ class TipoasentamientoController extends Controller
                 'editItemTitle' => 'Nuevo',
                 'postNew' => 'createTipoasentamiento',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Nuevo registro',
             ]
         );
     }
