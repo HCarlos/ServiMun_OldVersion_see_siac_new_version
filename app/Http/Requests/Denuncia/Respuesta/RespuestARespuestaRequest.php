@@ -12,12 +12,12 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class RespuestaRequest extends FormRequest
+class RespuestARespuestaRequest extends FormRequest
 {
 
 
 
-    protected $redirectRoute = '/showModalRespuestaEdit';
+    protected $redirectRoute = '/RespuestaARespuestaEdit';
 
     public function authorize()
     {
@@ -45,6 +45,7 @@ class RespuestaRequest extends FormRequest
                 'observaciones' => $this->observaciones,
                 'user__id'      => $this->user__id,
                 'denuncia__id'  => $this->denuncia__id,
+                'parent__id'     => $this->respuesta__id,
             ];
 
             if ((int)$this->id == 0) {
@@ -68,6 +69,8 @@ class RespuestaRequest extends FormRequest
         $Item->users()->attach($this->user__id);
         $den = Denuncia::find($this->denuncia__id);
         $den->respuestas()->attach($Item);
+        $res = Respuesta::find($this->respuesta__id);
+        $res->parents()->attach($Item);
         return $Item;
     }
 
@@ -75,6 +78,8 @@ class RespuestaRequest extends FormRequest
         $Item->users()->detach($this->user__id);
         $den = Denuncia::find($this->denuncia__id);
         $den->respuestas()->detach($this->id);
+        $res = Respuesta::find($this->respuesta__id);
+        $res->parents()->detach(respuesta__id);
 
         return $Item;
     }
@@ -120,6 +125,8 @@ class RespuestaRequest extends FormRequest
             ->withErrors($errors, $this->errorBag);
 
     }
+
+
 
 
 

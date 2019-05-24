@@ -2,6 +2,7 @@
     <thead>
     <tr role="row">
         <th class="sorting_asc" aria-sort="ascending" aria-label="Name: activate to sort column descending">ID</th>
+        <th class="sortingc" >RESPUESTA ID</th>
         <th class="sorting" >FOLIO</th>
         <th class="sorting">RESPUESTA</th>
         <th class="sorting">CIUDADANO</th>
@@ -14,6 +15,7 @@
     @foreach($items as $item)
             <tr>
                 <td class="table-user">{{ $item->id }}</td>
+                <td class="table-user">{{ $item->parent__id }}</td>
                 <td class="table-user">
                     <a href="{{route($showEdit,['Id'=>$item->denuncia->id])}}" class="action-icon text-center" @isset($newWindow) target="_blank" @endisset>
                         {{ $item->denuncia->id }}
@@ -26,6 +28,7 @@
                     <div class="button-list">
                         @include('shared.ui_kit.__edit_item_modal')
                         @include('shared.ui_kit.__remove_item')
+                        @include('shared.ui_kit.__respuesta_a_respuesta_item')
                     </div>
                 </td>
             </tr>

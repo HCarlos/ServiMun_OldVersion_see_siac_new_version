@@ -296,6 +296,9 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp|DELEGADO'], functio
     Route::post('saveRespuestaDen/', 'Denuncia\Respuesta\RespuestaController@saveRespuestaDen')->name('saveRespuestaDen');
     Route::put('saveRespuestaDen/', 'Denuncia\Respuesta\RespuestaController@saveRespuestaDen')->name('saveRespuestaDen');
 
+    Route::get('/RespuestaARespuestaNew/{denuncia_id}/{respuesta_id}', 'Denuncia\Respuesta\RespuestaController@RespuestaARespuestaNew')->name('/RespuestaARespuestaNew');
+    Route::post('saveRespuestaARespuestaDen/', 'Denuncia\Respuesta\RespuestaController@saveRespuestaARespuestaDen')->name('saveRespuestaARespuestaDen');
+
     Route::get('listRespuestasCiudadanas/{Id}', 'Denuncia\Respuesta\RespuestaCiudadanaController@index')->name('listRespuestasCiudadanas');
     Route::get('removeRespuestaCiudadana/{id}', 'Denuncia\Respuesta\RespuestaCiudadanaController@removeItem')->name('removeRespuestaCiudadana');
     Route::get('/showModalRespuestaCiudadanaNew/{denuncia_id}', 'Denuncia\Respuesta\RespuestaCiudadanaController@showModalRespuestaCiudadanaNew')->name('/showModalRespuestaCiudadanaNew');

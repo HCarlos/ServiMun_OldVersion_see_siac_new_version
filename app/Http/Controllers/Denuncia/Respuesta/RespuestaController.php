@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Denuncia\Respuesta;
 
 use App\Http\Requests\Denuncia\Respuesta\RespuestaRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Denuncia\Respuesta\RespuestARespuestaRequest;
 use App\Models\Denuncias\Respuesta;
 use App\User;
 use Illuminate\Support\Facades\Auth;
@@ -26,7 +27,7 @@ class RespuestaController extends Controller
             ->whereHas('denuncias', function ($q) use ($Id) {
                 return $q->where('denuncia_id',$Id);
             })
-            ->orderByDesc('id')
+            ->orderByDesc('id','parent__id')
             ->paginate();
 
         $user = Auth::User();
@@ -47,6 +48,9 @@ class RespuestaController extends Controller
                 'removeItem' => 'removeRespuesta',
                 'findDataInRespuesta'=>'findDataInRespuesta',
                 'exportModel' => 21,
+                'new2Item' => '/RespuestaARespuestaNew',
+                'RespuestaARespuestaNew' => '/RespuestaARespuestaNew',
+                'RespuestaARespuestaEdit' => '/RespuestaARespuestaEdit',
             ]
         );
 
@@ -110,6 +114,61 @@ class RespuestaController extends Controller
             return Response::json(['mensaje' => 'Hubo un error!', 'data' => $item, 'status' => '422'], 200);
         }
     }
+
+
+// RESPUESTA A RESPUESTA
+
+    protected function RespuestaARespuestaNew($denuncia_id,$respuesta_id){
+        $user = Auth::user();
+        $Ciudadanos   = User::all()->sortBy(function ($q){
+            return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
+        });
+
+        return view ('denuncia.respuesta_a_respuesta.respuesta_a_respuesta_new_modal',
+            [
+                'saveRespuestaARespuestaDen'=>'saveRespuestaARespuestaDen',
+                'denuncia_id' => $denuncia_id,
+                'respuesta_id' => $respuesta_id,
+                'ciudadanos' => $Ciudadanos,
+                'user' => $user,
+            ]
+        );
+    }
+
+//    protected function RespuestaARespuestaEdit($Id){
+//        $user = Auth::user();
+//        $resp = Respuesta::find($Id);
+//        $Ciudadanos   = User::all()->sortBy(function ($q){
+//            return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
+//        });
+//        return view ('denuncia.respuesta_a_respuesta.respuesta_a_respuesta_edit_modal',
+//            [
+//                'saveRespuestaARespuestaDen'=>'saveRespuestaARespuestaDen',
+//                'denuncia_id' => $resp->denuncia->id,
+//                'respuesta_id' => $Id,
+//                'ciudadanos' => $Ciudadanos,
+//                'id' => $Id,
+//                'user' => $user,
+//                'item' => $resp,
+//            ]
+//        );
+//    }
+
+    protected function saveRespuestaARespuestaDen(RespuestARespuestaRequest $request){
+        $item = $request->manage();
+        if (isset($item)){
+            return Response::json(['mensaje' => 'Información guardada con éxito!', 'data' => 'OK', 'status' => '200'], 200);
+        }else{
+            return Response::json(['mensaje' => 'Hubo un error!', 'data' => $item, 'status' => '422'], 200);
+        }
+    }
+
+
+
+
+
+
+
 
 
 

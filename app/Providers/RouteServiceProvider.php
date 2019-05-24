@@ -30,6 +30,7 @@ class RouteServiceProvider extends ServiceProvider
         Route::pattern('Id', NUMINT);
         Route::pattern('IdUbi', NUMINT);
         Route::pattern('denuncia_id', NUMINT);
+        Route::pattern('respuesta_id', NUMINT);
         Route::pattern('IdDep', NUMINT);
         Route::pattern('model', NUMINT);
 
