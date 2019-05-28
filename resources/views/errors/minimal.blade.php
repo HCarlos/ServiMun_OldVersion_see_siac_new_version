@@ -12,7 +12,7 @@
 
         <!-- Styles -->
         <style>
-            html, body {
+            html, body, a {
                 background-color: #fff;
                 color: #636b6f;
                 font-family: 'Nunito', sans-serif;
@@ -25,8 +25,24 @@
                 height: 100vh;
             }
 
+            .height-50 {
+                height: 50vh;
+            }
+
             .flex-center {
                 align-items: center;
+                display: flex;
+                justify-content: center;
+            }
+
+            .flex-bottom {
+                align-items: end;
+                display: flex;
+                justify-content: center;
+            }
+
+            .flex-top {
+                align-items: start;
                 display: flex;
                 justify-content: center;
             }
@@ -46,10 +62,19 @@
                 font-size: 18px;
                 text-align: center;
             }
+
+            .link1 {
+                /*border-right: 2px solid;*/
+                margin-top: 15px;
+                font-size: 22px;
+                padding: 0 15px 0 15px;
+                text-align: center;
+            }
+
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
+        <div class="flex-bottom position-ref height-50">
             <div class="code">
                 @yield('code')
             </div>
@@ -57,6 +82,19 @@
             <div class="message" style="padding: 10px;">
                 @yield('message')
             </div>
+        </div>
+
+        <div class="flex-top position-ref height-50">
+            <div class="link1">
+                <a href="/" style="text-decoration: none">Inicio</a>
+            </div>
+        </div>
+
+            <p>
+            <br>
+            <br>
+
+            </p>
         </div>
     </body>
 </html>

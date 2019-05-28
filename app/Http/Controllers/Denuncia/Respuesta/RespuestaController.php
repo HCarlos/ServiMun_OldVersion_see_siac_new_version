@@ -25,12 +25,15 @@ class RespuestaController extends Controller
 
         $items = Respuesta::select()
             ->whereHas('denuncias', function ($q) use ($Id) {
-                return $q->where('denuncia_id',$Id);
+                return $q->where('denuncia_id',$Id)
+                    ->where('parent__id',0);
             })
-            ->orderByDesc('id','parent__id')
+            ->orderByDesc('id')
+            ->orderBy('parent__id')
             ->paginate();
 
         $user = Auth::User();
+
 
         return view('denuncia.respuesta.respuesta_list',
             [

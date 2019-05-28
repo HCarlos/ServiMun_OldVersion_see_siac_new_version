@@ -70,7 +70,7 @@ class RespuestARespuestaRequest extends FormRequest
         $den = Denuncia::find($this->denuncia__id);
         $den->respuestas()->attach($Item);
         $res = Respuesta::find($this->respuesta__id);
-        $res->parents()->attach($Item);
+        $res->childs()->attach($Item);
         return $Item;
     }
 
@@ -79,7 +79,7 @@ class RespuestARespuestaRequest extends FormRequest
         $den = Denuncia::find($this->denuncia__id);
         $den->respuestas()->detach($this->id);
         $res = Respuesta::find($this->respuesta__id);
-        $res->parents()->detach(respuesta__id);
+        $res->childs()->detach(respuesta__id);
 
         return $Item;
     }
