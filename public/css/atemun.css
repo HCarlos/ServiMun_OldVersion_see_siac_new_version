@@ -633,3 +633,14 @@ input[readonly] {
     white-space: nowrap;
     overflow: hidden;
 }
+.bg-item-treview-outside {
+	background-color: lightgray;
+	border-radius: 20px;
+}
+.bg-item-treview-inside {
+	background-color: lightgray;
+	border-radius: 20px;
+	border-color:whitesmoke;
+	border-style: solid;
+	border-width: 2px;
+}

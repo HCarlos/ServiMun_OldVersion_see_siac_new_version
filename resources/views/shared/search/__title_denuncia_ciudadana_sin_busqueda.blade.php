@@ -1,4 +1,5 @@
-<div class="row pt-3">
+@isset($titulo_catalogo)
+    <div class="row pt-3">
     <div  class="col-lg-6 float-left">
         <h4 class="page-title-box ">
             {{ $titulo_catalogo }}
@@ -7,3 +8,4 @@
     <div  class="col-lg-6 float-right">
     </div>
 </div>
+@endisset

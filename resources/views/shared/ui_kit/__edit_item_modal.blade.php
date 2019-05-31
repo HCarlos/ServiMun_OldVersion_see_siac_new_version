@@ -1,3 +1,4 @@
+@if(Auth::user()->getAuthIdentifier() == $item->user__id)
 <span data-toggle="tooltip" title="Editar" >
     <a
         href="{{route($editItem,['Id'=>$item->id])}}"
@@ -11,3 +12,4 @@
         <i class="fas fa-edit text-success"></i>
     </a>
 </span>
+@endif

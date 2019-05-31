@@ -21,9 +21,11 @@ class RespuestaCiudadanaController extends Controller
 
         $items = Respuesta::select()
             ->whereHas('denuncias', function ($q) use ($Id) {
-                return $q->where('denuncia_id',$Id);
+                return $q->where('denuncia_id',$Id)
+                ->where('parent__id',0);
             })
             ->orderByDesc('id')
+            ->orderBy('parent__id')
             ->paginate();
 
         $user = Auth::User();
@@ -44,6 +46,9 @@ class RespuestaCiudadanaController extends Controller
                 'removeItem' => 'removeRespuestaCiudadana',
                 'findDataInRespuesta'=>'findDataInRespuesta',
                 'exportModel' => 21,
+                'new2Item' => '/RespuestaARespuestaNew',
+                'RespuestaARespuestaNew' => '/RespuestaARespuestaNew',
+                'RespuestaARespuestaEdit' => '/RespuestaARespuestaEdit',
             ]
         );
     }
