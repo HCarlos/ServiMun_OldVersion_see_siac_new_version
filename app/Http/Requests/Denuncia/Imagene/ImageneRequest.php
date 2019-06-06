@@ -48,7 +48,7 @@ class ImageneRequest extends FormRequest
                 'user__id'      => $this->user__id,
                 'denuncia__id'  => $this->denuncia__id,
             ];
-            dd($Item->momento);
+//            dd($Item->momento);
             if ((int)$this->id == 0) {
                 $item = Imagene::create($Item);
             }
