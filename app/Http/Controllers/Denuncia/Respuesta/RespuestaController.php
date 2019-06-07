@@ -138,25 +138,6 @@ class RespuestaController extends Controller
         );
     }
 
-//    protected function RespuestaARespuestaEdit($Id){
-//        $user = Auth::user();
-//        $resp = Respuesta::find($Id);
-//        $Ciudadanos   = User::all()->sortBy(function ($q){
-//            return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
-//        });
-//        return view ('denuncia.respuesta_a_respuesta.respuesta_a_respuesta_edit_modal',
-//            [
-//                'saveRespuestaARespuestaDen'=>'saveRespuestaARespuestaDen',
-//                'denuncia_id' => $resp->denuncia->id,
-//                'respuesta_id' => $Id,
-//                'ciudadanos' => $Ciudadanos,
-//                'id' => $Id,
-//                'user' => $user,
-//                'item' => $resp,
-//            ]
-//        );
-//    }
-
     protected function saveRespuestaARespuestaDen(RespuestARespuestaRequest $request){
         $item = $request->manage();
         if (isset($item)){

@@ -314,6 +314,11 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp|DELEGADO'], functio
     Route::post('saveImageneDen/', 'Denuncia\Imagene\ImageneController@saveImageneDen')->name('saveImageneDen');
     Route::put('saveImageneDen/', 'Denuncia\Imagene\ImageneController@saveImageneDen')->name('saveImageneDen');
 
+    Route::get('/ImagenAImagenNew/{denuncia_id}/{imagen_id}', 'Denuncia\Imagene\ImageneController@ImagenAImagenNew')->name('/ImagenAImagenNew');
+    Route::post('saveImagenAImagenDen/', 'Denuncia\Imagene\ImageneController@saveImagenAImagenDen')->name('saveImagenAImagenDen');
+    Route::get('removeImagenParent/{id}', 'Denuncia\Imagene\ImageneController@removeImagenParent')->name('removeImagenParent');
+
+
 });
 
 

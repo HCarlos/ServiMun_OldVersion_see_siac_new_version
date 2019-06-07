@@ -36,11 +36,11 @@ class Imagene extends Model{
         return $this->belongsToMany(Denuncia::class,'denuncia_imagene','imagene_id','denuncia_id');
     }
 
-    public function parent(){
+    public function child(){
         return $this->hasOne(Imagene::class,'id','parent__id');
     }
 
-    public function parents(){
+    public function childs(){
         return $this->belongsToMany(Imagene::class,'imagene_parent','imagene_id','imagen_parent_id');
     }
 

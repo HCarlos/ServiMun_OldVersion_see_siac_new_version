@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Denuncia\Imagene;
 
 use App\Classes\MessageAlertClass;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Denuncia\Imagene\ImagenAImagenRequest;
 use App\Http\Requests\Denuncia\Imagene\ImageneRequest;
+use App\Http\Requests\Denuncia\Respuesta\RespuestARespuestaRequest;
 use App\Models\Denuncias\Denuncia;
 use App\Models\Denuncias\Imagene;
+use App\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
@@ -20,6 +23,7 @@ class ImageneController extends Controller{
 //***************************************************************+++++++++++++++++++**
 
     protected $tableName = "imagenes";
+    protected $disk = 'denuncia';
     protected $F;
 
     // Obtiene el Listado de Imagenes
@@ -28,9 +32,11 @@ class ImageneController extends Controller{
 
         $items = Imagene::select()
             ->whereHas('denuncias', function ($q) use ($Id) {
-                return $q->where('denuncia_id',$Id);
+                return $q->where('denuncia_id',$Id)
+                    ->where('parent__id',0);;
             })
             ->orderByDesc('id')
+            ->orderBy('parent__id')
             ->paginate();
 
         $user = Auth::User();
@@ -51,6 +57,9 @@ class ImageneController extends Controller{
                 'showEdit' => 'editDenuncia',
                 'findDataInImagene'=>'findDataInImagene',
                 'exportModel' => 20,
+                'new2Item' => '/ImagenAImagenNew',
+                'ImagenAImagenNew' => '/ImagenAImagenNew',
+                'ImagenAImagenEdit' => '/ImagenAImagenEdit',
             ]
         );
 
@@ -163,6 +172,64 @@ class ImageneController extends Controller{
             return Response::json(['mensaje' => 'Hubo un error!', 'data' => $item, 'status' => '422','filename'=>'','Id'=>-1], 200);
         }
     }
+
+// IMAGEN A IMAGEN
+
+    protected function ImagenAImagenNew($denuncia_id,$imagen_id){
+        $user = Auth::user();
+        return view ('denuncia.imagen_a_imagen.imagen_a_imagen_upload',
+            [
+                'saveImagenAImagenDen' => 'saveImagenAImagenDen',
+                'denuncia_id'    => $denuncia_id,
+                'imagen_id'      => $imagen_id,
+                'removeItem'     => 'removeImagenParent',
+                'user' => $user,
+            ]
+        );
+    }
+
+    protected function saveImagenAImagenDen(ImagenAImagenRequest $request){
+        $item = $request->manage();
+        if (isset($item)){
+            return Response::json(['mensaje' => 'Información guardada con éxito!', 'data' => 'OK', 'status' => '200'], 200);
+        }else{
+            return Response::json(['mensaje' => 'Hubo un error!', 'data' => $item, 'status' => '422'], 200);
+        }
+    }
+
+
+    protected function removeImagenParent($id)
+    {
+        $valRet = Response::json(['mensaje' => 'none', 'data' => 'OK', 'status' => '200'], 200);
+//        foreach ($arrIds as $id){
+            $item = Imagene::withTrashed()->findOrFail( $id );
+            if (isset($item)) {
+                try{
+                    if (!$item->trashed()) {
+                        $item->forceDelete();
+                    } else {
+                        $item->forceDelete();
+                    }
+                    $item->users()->detach($item->user__id);
+                    $den = Denuncia::find($item->denuncia__id);
+                    $den->imagenes()->detach($item->id);
+
+                    $this->F = new FuncionesController();
+                    $this->F->deleteImageDropZone($item->image,$this->disk);
+                    $this->F->deleteImageDropZone($item->image_thumb,$this->disk);
+                    $valRet =  Response::json(['mensaje' => 'Registro eliminado con éxito', 'data' => 'OK', 'status' => '200'], 200);
+
+                }catch (QueryException $e){
+                    $Msg = new MessageAlertClass();
+                    $Msg->Message($e);
+                }
+            } else {
+                $valRet =  Response::json(['mensaje' => 'Se ha producido un error.', 'data' => 'Error', 'status' => '200'], 200);
+            }
+//        }
+        return $valRet;
+    }
+
 
 
 
