@@ -409,17 +409,17 @@
     },
     {
         "name": "doctrine/collections",
-        "version": "v1.6.1",
-        "version_normalized": "1.6.1.0",
+        "version": "v1.6.2",
+        "version_normalized": "1.6.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/doctrine/collections.git",
-            "reference": "d2ae4ef05e25197343b6a39bae1d3c427a2f6956"
+            "reference": "c5e0bc17b1620e97c968ac409acbff28b8b850be"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/doctrine/collections/zipball/d2ae4ef05e25197343b6a39bae1d3c427a2f6956",
-            "reference": "d2ae4ef05e25197343b6a39bae1d3c427a2f6956",
+            "url": "https://api.github.com/repos/doctrine/collections/zipball/c5e0bc17b1620e97c968ac409acbff28b8b850be",
+            "reference": "c5e0bc17b1620e97c968ac409acbff28b8b850be",
             "shasum": ""
         },
         "require": {
@@ -431,7 +431,7 @@
             "phpunit/phpunit": "^7.0",
             "vimeo/psalm": "^3.2.2"
         },
-        "time": "2019-03-25T19:03:48+00:00",
+        "time": "2019-06-09T13:48:14+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -851,23 +851,26 @@
     },
     {
         "name": "doctrine/lexer",
-        "version": "v1.0.1",
-        "version_normalized": "1.0.1.0",
+        "version": "1.0.2",
+        "version_normalized": "1.0.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/doctrine/lexer.git",
-            "reference": "83893c552fd2045dd78aef794c31e694c37c0b8c"
+            "reference": "1febd6c3ef84253d7c815bed85fc622ad207a9f8"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/doctrine/lexer/zipball/83893c552fd2045dd78aef794c31e694c37c0b8c",
-            "reference": "83893c552fd2045dd78aef794c31e694c37c0b8c",
+            "url": "https://api.github.com/repos/doctrine/lexer/zipball/1febd6c3ef84253d7c815bed85fc622ad207a9f8",
+            "reference": "1febd6c3ef84253d7c815bed85fc622ad207a9f8",
             "shasum": ""
         },
         "require": {
             "php": ">=5.3.2"
         },
-        "time": "2014-09-09T13:34:57+00:00",
+        "require-dev": {
+            "phpunit/phpunit": "^4.5"
+        },
+        "time": "2019-06-08T11:03:04+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -876,8 +879,8 @@
         },
         "installation-source": "dist",
         "autoload": {
-            "psr-0": {
-                "Doctrine\\Common\\Lexer\\": "lib/"
+            "psr-4": {
+                "Doctrine\\Common\\Lexer\\": "lib/Doctrine/Common/Lexer"
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -898,11 +901,14 @@
                 "email": "schmittjoh@gmail.com"
             }
         ],
-        "description": "Base library for a lexer that can be used in Top-Down, Recursive Descent Parsers.",
-        "homepage": "http://www.doctrine-project.org",
+        "description": "PHP Doctrine Lexer parser library that can be used in Top-Down, Recursive Descent Parsers.",
+        "homepage": "https://www.doctrine-project.org/projects/lexer.html",
         "keywords": [
+            "annotations",
+            "docblock",
             "lexer",
-            "parser"
+            "parser",
+            "php"
         ]
     },
     {
@@ -2282,17 +2288,17 @@
     },
     {
         "name": "laravel/framework",
-        "version": "v5.8.21",
-        "version_normalized": "5.8.21.0",
+        "version": "v5.8.24",
+        "version_normalized": "5.8.24.0",
         "source": {
             "type": "git",
             "url": "https://github.com/laravel/framework.git",
-            "reference": "c78796cc1159c8dc63c45a2011ddc4af17059cb4"
+            "reference": "bb2a0afef35f508f77c049c51f04087a14de0055"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/laravel/framework/zipball/c78796cc1159c8dc63c45a2011ddc4af17059cb4",
-            "reference": "c78796cc1159c8dc63c45a2011ddc4af17059cb4",
+            "url": "https://api.github.com/repos/laravel/framework/zipball/bb2a0afef35f508f77c049c51f04087a14de0055",
+            "reference": "bb2a0afef35f508f77c049c51f04087a14de0055",
             "shasum": ""
         },
         "require": {
@@ -2395,7 +2401,7 @@
             "symfony/psr-http-message-bridge": "Required to use PSR-7 bridging features (^1.1).",
             "wildbit/swiftmailer-postmark": "Required to use Postmark mail driver (^3.0)."
         },
-        "time": "2019-06-05T00:13:05+00:00",
+        "time": "2019-06-19T16:40:24+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2692,17 +2698,17 @@
     },
     {
         "name": "league/flysystem",
-        "version": "1.0.52",
-        "version_normalized": "1.0.52.0",
+        "version": "1.0.53",
+        "version_normalized": "1.0.53.0",
         "source": {
             "type": "git",
             "url": "https://github.com/thephpleague/flysystem.git",
-            "reference": "c5a5097156387970e6f0ccfcdf03f752856f3391"
+            "reference": "08e12b7628f035600634a5e76d95b5eb66cea674"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/c5a5097156387970e6f0ccfcdf03f752856f3391",
-            "reference": "c5a5097156387970e6f0ccfcdf03f752856f3391",
+            "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/08e12b7628f035600634a5e76d95b5eb66cea674",
+            "reference": "08e12b7628f035600634a5e76d95b5eb66cea674",
             "shasum": ""
         },
         "require": {
@@ -2732,7 +2738,7 @@
             "spatie/flysystem-dropbox": "Allows you to use Dropbox storage",
             "srmklive/flysystem-dropbox-v2": "Allows you to use Dropbox storage for PHP 5 applications"
         },
-        "time": "2019-05-20T20:21:14+00:00",
+        "time": "2019-06-18T20:09:29+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2843,17 +2849,17 @@
     },
     {
         "name": "maatwebsite/excel",
-        "version": "3.1.13",
-        "version_normalized": "3.1.13.0",
+        "version": "3.1.14",
+        "version_normalized": "3.1.14.0",
         "source": {
             "type": "git",
             "url": "https://github.com/Maatwebsite/Laravel-Excel.git",
-            "reference": "d79ee01175c6a5e93f2a873dcda1b755b7570076"
+            "reference": "002dad9fa08ac19902dded3ca3c2cafa0de399a7"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/Maatwebsite/Laravel-Excel/zipball/d79ee01175c6a5e93f2a873dcda1b755b7570076",
-            "reference": "d79ee01175c6a5e93f2a873dcda1b755b7570076",
+            "url": "https://api.github.com/repos/Maatwebsite/Laravel-Excel/zipball/002dad9fa08ac19902dded3ca3c2cafa0de399a7",
+            "reference": "002dad9fa08ac19902dded3ca3c2cafa0de399a7",
             "shasum": ""
         },
         "require": {
@@ -2870,7 +2876,7 @@
             "phpunit/phpunit": "^8.0",
             "predis/predis": "^1.1"
         },
-        "time": "2019-05-08T12:05:59+00:00",
+        "time": "2019-06-19T11:52:55+00:00",
         "type": "library",
         "extra": {
             "laravel": {
@@ -3279,17 +3285,17 @@
     },
     {
         "name": "nesbot/carbon",
-        "version": "2.19.1",
-        "version_normalized": "2.19.1.0",
+        "version": "2.19.2",
+        "version_normalized": "2.19.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/briannesbitt/Carbon.git",
-            "reference": "5cf102d1476fdf92f1f991bd1a1a0d93c65755ca"
+            "reference": "adcad3f3af52d0ad4ad7b05f43aa58243b6ca67b"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/5cf102d1476fdf92f1f991bd1a1a0d93c65755ca",
-            "reference": "5cf102d1476fdf92f1f991bd1a1a0d93c65755ca",
+            "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/adcad3f3af52d0ad4ad7b05f43aa58243b6ca67b",
+            "reference": "adcad3f3af52d0ad4ad7b05f43aa58243b6ca67b",
             "shasum": ""
         },
         "require": {
@@ -3305,7 +3311,7 @@
             "phpunit/phpunit": "^7.5 || ^8.0",
             "squizlabs/php_codesniffer": "^3.4"
         },
-        "time": "2019-06-04T20:07:46+00:00",
+        "time": "2019-06-07T09:56:45+00:00",
         "type": "library",
         "extra": {
             "laravel": {
@@ -4442,17 +4448,17 @@
     },
     {
         "name": "phpseclib/phpseclib",
-        "version": "2.0.17",
-        "version_normalized": "2.0.17.0",
+        "version": "2.0.18",
+        "version_normalized": "2.0.18.0",
         "source": {
             "type": "git",
             "url": "https://github.com/phpseclib/phpseclib.git",
-            "reference": "3ca5b88d582c69178c8d01fd9d02b94e15042bb8"
+            "reference": "60519001db8d791215a822efd366d24cafee9e63"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/3ca5b88d582c69178c8d01fd9d02b94e15042bb8",
-            "reference": "3ca5b88d582c69178c8d01fd9d02b94e15042bb8",
+            "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/60519001db8d791215a822efd366d24cafee9e63",
+            "reference": "60519001db8d791215a822efd366d24cafee9e63",
             "shasum": ""
         },
         "require": {
@@ -4470,7 +4476,7 @@
             "ext-mcrypt": "Install the Mcrypt extension in order to speed up a few other cryptographic operations.",
             "ext-openssl": "Install the OpenSSL extension in order to speed up a wide variety of cryptographic operations."
         },
-        "time": "2019-05-26T20:38:34+00:00",
+        "time": "2019-06-13T06:15:54+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -4536,17 +4542,17 @@
     },
     {
         "name": "phpspec/prophecy",
-        "version": "1.8.0",
-        "version_normalized": "1.8.0.0",
+        "version": "1.8.1",
+        "version_normalized": "1.8.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/phpspec/prophecy.git",
-            "reference": "4ba436b55987b4bf311cb7c6ba82aa528aac0a06"
+            "reference": "1927e75f4ed19131ec9bcc3b002e07fb1173ee76"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/phpspec/prophecy/zipball/4ba436b55987b4bf311cb7c6ba82aa528aac0a06",
-            "reference": "4ba436b55987b4bf311cb7c6ba82aa528aac0a06",
+            "url": "https://api.github.com/repos/phpspec/prophecy/zipball/1927e75f4ed19131ec9bcc3b002e07fb1173ee76",
+            "reference": "1927e75f4ed19131ec9bcc3b002e07fb1173ee76",
             "shasum": ""
         },
         "require": {
@@ -4560,7 +4566,7 @@
             "phpspec/phpspec": "^2.5|^3.2",
             "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.5 || ^7.1"
         },
-        "time": "2018-08-05T17:53:17+00:00",
+        "time": "2019-06-13T12:50:23+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -4569,8 +4575,8 @@
         },
         "installation-source": "dist",
         "autoload": {
-            "psr-0": {
-                "Prophecy\\": "src/"
+            "psr-4": {
+                "Prophecy\\": "src/Prophecy"
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -4863,17 +4869,17 @@
     },
     {
         "name": "phpunit/phpunit",
-        "version": "7.5.12",
-        "version_normalized": "7.5.12.0",
+        "version": "7.5.13",
+        "version_normalized": "7.5.13.0",
         "source": {
             "type": "git",
             "url": "https://github.com/sebastianbergmann/phpunit.git",
-            "reference": "9ba59817745b0fe0c1a5a3032dfd4a6d2994ad1c"
+            "reference": "b9278591caa8630127f96c63b598712b699e671c"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/9ba59817745b0fe0c1a5a3032dfd4a6d2994ad1c",
-            "reference": "9ba59817745b0fe0c1a5a3032dfd4a6d2994ad1c",
+            "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/b9278591caa8630127f96c63b598712b699e671c",
+            "reference": "b9278591caa8630127f96c63b598712b699e671c",
             "shasum": ""
         },
         "require": {
@@ -4912,7 +4918,7 @@
             "ext-xdebug": "*",
             "phpunit/php-invoker": "^2.0"
         },
-        "time": "2019-05-28T11:59:40+00:00",
+        "time": "2019-06-19T12:01:51+00:00",
         "bin": [
             "phpunit"
         ],
@@ -8062,17 +8068,17 @@
     },
     {
         "name": "theseer/tokenizer",
-        "version": "1.1.2",
-        "version_normalized": "1.1.2.0",
+        "version": "1.1.3",
+        "version_normalized": "1.1.3.0",
         "source": {
             "type": "git",
             "url": "https://github.com/theseer/tokenizer.git",
-            "reference": "1c42705be2b6c1de5904f8afacef5895cab44bf8"
+            "reference": "11336f6f84e16a720dae9d8e6ed5019efa85a0f9"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/theseer/tokenizer/zipball/1c42705be2b6c1de5904f8afacef5895cab44bf8",
-            "reference": "1c42705be2b6c1de5904f8afacef5895cab44bf8",
+            "url": "https://api.github.com/repos/theseer/tokenizer/zipball/11336f6f84e16a720dae9d8e6ed5019efa85a0f9",
+            "reference": "11336f6f84e16a720dae9d8e6ed5019efa85a0f9",
             "shasum": ""
         },
         "require": {
@@ -8081,7 +8087,7 @@
             "ext-xmlwriter": "*",
             "php": "^7.0"
         },
-        "time": "2019-04-04T09:56:43+00:00",
+        "time": "2019-06-13T22:48:21+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -8236,17 +8242,17 @@
     },
     {
         "name": "vlucas/phpdotenv",
-        "version": "v3.3.3",
-        "version_normalized": "3.3.3.0",
+        "version": "v3.4.0",
+        "version_normalized": "3.4.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/vlucas/phpdotenv.git",
-            "reference": "dbcc609971dd9b55f48b8008b553d79fd372ddde"
+            "reference": "5084b23845c24dbff8ac6c204290c341e4776c92"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/dbcc609971dd9b55f48b8008b553d79fd372ddde",
-            "reference": "dbcc609971dd9b55f48b8008b553d79fd372ddde",
+            "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/5084b23845c24dbff8ac6c204290c341e4776c92",
+            "reference": "5084b23845c24dbff8ac6c204290c341e4776c92",
             "shasum": ""
         },
         "require": {
@@ -8257,11 +8263,11 @@
         "require-dev": {
             "phpunit/phpunit": "^4.8.35 || ^5.0 || ^6.0"
         },
-        "time": "2019-03-06T09:39:45+00:00",
+        "time": "2019-06-15T22:40:20+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "3.3-dev"
+                "dev-master": "3.4-dev"
             }
         },
         "installation-source": "dist",
@@ -8404,17 +8410,17 @@
     },
     {
         "name": "yajra/laravel-datatables-oracle",
-        "version": "v9.4.0",
-        "version_normalized": "9.4.0.0",
+        "version": "v9.4.1",
+        "version_normalized": "9.4.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/yajra/laravel-datatables.git",
-            "reference": "fe397a9e3c2164df8eba83352cc51a2ccc380758"
+            "reference": "ac37f93026b6b607d1bb56789d147a4efd8d97d9"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/yajra/laravel-datatables/zipball/fe397a9e3c2164df8eba83352cc51a2ccc380758",
-            "reference": "fe397a9e3c2164df8eba83352cc51a2ccc380758",
+            "url": "https://api.github.com/repos/yajra/laravel-datatables/zipball/ac37f93026b6b607d1bb56789d147a4efd8d97d9",
+            "reference": "ac37f93026b6b607d1bb56789d147a4efd8d97d9",
             "shasum": ""
         },
         "require": {
@@ -8434,7 +8440,7 @@
             "yajra/laravel-datatables-fractal": "Plugin for server-side response using Fractal.",
             "yajra/laravel-datatables-html": "Plugin for server-side HTML builder of dataTables."
         },
-        "time": "2019-06-06T08:12:54+00:00",
+        "time": "2019-06-12T05:06:59+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {

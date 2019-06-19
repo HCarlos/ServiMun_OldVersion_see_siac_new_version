@@ -154,6 +154,7 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Http\\Client\\' => 16,
             'Psr\\Container\\' => 14,
+            'Prophecy\\' => 9,
             'Predis\\' => 7,
             'Picqer\\Barcode\\' => 15,
             'PhpParser\\' => 10,
@@ -228,6 +229,7 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
             'Doctrine\\ORM\\' => 13,
             'Doctrine\\Instantiator\\' => 22,
             'Doctrine\\DBAL\\' => 14,
+            'Doctrine\\Common\\Lexer\\' => 22,
             'Doctrine\\Common\\Inflector\\' => 26,
             'Doctrine\\Common\\Collections\\' => 28,
             'Doctrine\\Common\\Cache\\' => 22,
@@ -415,6 +417,10 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
         ),
+        'Prophecy\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy',
+        ),
         'Predis\\' => 
         array (
             0 => __DIR__ . '/..' . '/predis/predis/src',
@@ -580,6 +586,10 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         array (
             0 => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL',
         ),
+        'Doctrine\\Common\\Lexer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/lexer/lib/Doctrine/Common/Lexer',
+        ),
         'Doctrine\\Common\\Inflector\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Common/Inflector',
@@ -672,10 +682,6 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         ),
         'P' => 
         array (
-            'Prophecy\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/phpspec/prophecy/src',
-            ),
             'PhpOption\\' => 
             array (
                 0 => __DIR__ . '/..' . '/phpoption/phpoption/src',
@@ -690,13 +696,6 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
             'Mockery' => 
             array (
                 0 => __DIR__ . '/..' . '/mockery/mockery/library',
-            ),
-        ),
-        'D' => 
-        array (
-            'Doctrine\\Common\\Lexer\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/doctrine/lexer/lib',
             ),
         ),
     );
@@ -763,6 +762,7 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         'App\\Http\\Controllers\\Denuncia\\AfiliacionController' => __DIR__ . '/../..' . '/app/Http/Controllers/Denuncia/AfiliacionController.php',
         'App\\Http\\Controllers\\Denuncia\\DenunciaCiudadanaController' => __DIR__ . '/../..' . '/app/Http/Controllers/Denuncia/DenunciaCiudadanaController.php',
         'App\\Http\\Controllers\\Denuncia\\DenunciaController' => __DIR__ . '/../..' . '/app/Http/Controllers/Denuncia/DenunciaController.php',
+        'App\\Http\\Controllers\\Denuncia\\DenunciaDependenciaServicioController' => __DIR__ . '/../..' . '/app/Http/Controllers/Denuncia/DenunciaDependenciaServicioController.php',
         'App\\Http\\Controllers\\Denuncia\\EstatuController' => __DIR__ . '/../..' . '/app/Http/Controllers/Denuncia/EstatuController.php',
         'App\\Http\\Controllers\\Denuncia\\Imagene\\ImageneController' => __DIR__ . '/../..' . '/app/Http/Controllers/Denuncia/Imagene/ImageneController.php',
         'App\\Http\\Controllers\\Denuncia\\MedidaController' => __DIR__ . '/../..' . '/app/Http/Controllers/Denuncia/MedidaController.php',
@@ -789,6 +789,7 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Http\\Requests\\Denuncia\\AfiliacionRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Denuncia/AfiliacionRequest.php',
+        'App\\Http\\Requests\\Denuncia\\DenunciaDependenciaServicioRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Denuncia/DenunciaDependenciaServicioRequest.php',
         'App\\Http\\Requests\\Denuncia\\DenunciaRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Denuncia/DenunciaRequest.php',
         'App\\Http\\Requests\\Denuncia\\Imagene\\ImagenAImagenRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Denuncia/Imagene/ImagenAImagenRequest.php',
         'App\\Http\\Requests\\Denuncia\\Imagene\\ImageneRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Denuncia/Imagene/ImageneRequest.php',
@@ -3730,8 +3731,10 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         'Maatwebsite\\Excel\\Jobs\\AfterImportJob' => __DIR__ . '/..' . '/maatwebsite/excel/src/Jobs/AfterImportJob.php',
         'Maatwebsite\\Excel\\Jobs\\AppendDataToSheet' => __DIR__ . '/..' . '/maatwebsite/excel/src/Jobs/AppendDataToSheet.php',
         'Maatwebsite\\Excel\\Jobs\\AppendQueryToSheet' => __DIR__ . '/..' . '/maatwebsite/excel/src/Jobs/AppendQueryToSheet.php',
+        'Maatwebsite\\Excel\\Jobs\\AppendViewToSheet' => __DIR__ . '/..' . '/maatwebsite/excel/src/Jobs/AppendViewToSheet.php',
         'Maatwebsite\\Excel\\Jobs\\CloseSheet' => __DIR__ . '/..' . '/maatwebsite/excel/src/Jobs/CloseSheet.php',
         'Maatwebsite\\Excel\\Jobs\\ExtendedQueueable' => __DIR__ . '/..' . '/maatwebsite/excel/src/Jobs/ExtendedQueueable.php',
+        'Maatwebsite\\Excel\\Jobs\\ProxyFailures' => __DIR__ . '/..' . '/maatwebsite/excel/src/Jobs/ProxyFailures.php',
         'Maatwebsite\\Excel\\Jobs\\QueueExport' => __DIR__ . '/..' . '/maatwebsite/excel/src/Jobs/QueueExport.php',
         'Maatwebsite\\Excel\\Jobs\\QueueImport' => __DIR__ . '/..' . '/maatwebsite/excel/src/Jobs/QueueImport.php',
         'Maatwebsite\\Excel\\Jobs\\ReadChunk' => __DIR__ . '/..' . '/maatwebsite/excel/src/Jobs/ReadChunk.php',
