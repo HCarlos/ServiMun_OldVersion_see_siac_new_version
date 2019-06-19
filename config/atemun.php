@@ -65,7 +65,7 @@ return [
             'subarea_user' => 'subarea_user',
             'denuncia_prioridad'     => 'denuncia_prioridad',
             'denuncia_origen'        => 'denuncia_origen',
-            'denuncia_dependencia'   => 'denuncia_dependencia',
+            'denuncia_dependencia_servicio_estatus' => 'denuncia_dependencia_servicio_estatus',
             'denuncia_ubicacion'     => 'denuncia_ubicacion',
             'denuncia_servicio'      => 'denuncia_servicio',
             'denuncia_estatu'        => 'denuncia_estatu',

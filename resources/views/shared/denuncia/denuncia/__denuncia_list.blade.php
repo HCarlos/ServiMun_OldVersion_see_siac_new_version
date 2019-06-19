@@ -25,6 +25,7 @@
                     @include('shared.ui_kit.__respuestas_list_item')
                     @include('shared.ui_kit.__imagenes_list_item')
                     @include('shared.ui_kit.__print_denuncia_item')
+                    @include('shared.ui_kit.__edit_denuncia_dependencia_servicio_item')
                 </div>
             </td>
         </tr>

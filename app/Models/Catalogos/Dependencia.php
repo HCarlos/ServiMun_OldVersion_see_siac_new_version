@@ -3,6 +3,7 @@
 namespace App\Models\Catalogos;
 
 use App\Filters\Catalogo\Dependencia\DependenciaFilter;
+use App\Models\Denuncias\Denuncia;
 use App\Traits\Catalogos\DependenciaTraits;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
@@ -36,6 +37,18 @@ class Dependencia extends Model
 
     public function estatus(){
         return $this->belongsToMany(Estatu::class);
+    }
+
+    public function denuncias(){
+        return $this->belongsToMany(Denuncia::class,'denuncia_dependencia_servicio_estatus','dependencia_id','denuncia_id');
+    }
+
+    public function servicios(){
+        return $this->belongsToMany(Servicio::class,'denuncia_dependencia_servicio_estatus','dependencia_id','servicio_id');
+    }
+
+    public function dependencia_estatus(){
+        return $this->belongsToMany(Estatu::class,'denuncia_dependencia_servicio_estatus','dependencia_id','estatu_id');
     }
 
 

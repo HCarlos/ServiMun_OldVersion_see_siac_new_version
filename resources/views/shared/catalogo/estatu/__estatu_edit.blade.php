@@ -5,6 +5,7 @@
         <input type="text" name="estatus" id="estatus" value="{{ old('estatus',$items->estatus) }}" class="form-control" />
     </div>
 </div>
+
 <div class="form-group row mb-3">
     <label for = "dependencia_id" class="col-md-3 col-form-label">Dependencia</label>
     <div class="col-md-7">
@@ -32,6 +33,17 @@
         </ul>
     </div>
 </div>
+
+<div class="form-group row mb-3">
+    <label for = "predeterminado" class="col-md-3 col-form-label">Predeterminado</label>
+    <div class="col-md-9">
+        <select class="predeterminado form-control select2" name="predeterminado" id="predeterminado" size="1">
+            <option value="0">No</option>
+            <option value="1" @if($items->isDefault()) selected @endif >Si</option>
+        </select>
+    </div>
+</div>
+
 <input type="hidden" name="id" value="{{$items->id}}" >
 
 <hr>

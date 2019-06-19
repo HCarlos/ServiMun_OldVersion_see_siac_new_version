@@ -265,6 +265,8 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp'], function () {
     Route::post('showDataListDenunciaExcel1A/', 'External\Denuncia\ListDenunciaXLSXController@getListDenunciaXLSX')->name('showDataListDenunciaExcel1A');
     Route::get('/imprimir_denuncia/{Id}', 'External\Denuncia\HojaDenunciaController@imprimirDenuncia')->name('imprimirDenuncia/');
 
+    // PIVOTE DENUNCIA DEPENDENCIA SERVICIO
+//    Route::get('listDenunciaDependenciaServicio/{Id}', 'Denuncia\DenunciaDependenciaServicioController@index')->name('listDenunciaDependenciaServicio');
 
 });
 
@@ -277,6 +279,8 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp|DELEGADO'], functio
     Route::post('subirFotoProfile/', 'Storage\StorageProfileController@subirArchivoProfile')->name('subirArchivoProfile/');
     Route::get('quitarFotoProfile/', 'Storage\StorageProfileController@quitarArchivoProfile')->name('quitarArchivoProfile/');
 
+    // PIVOTE DENUNCIA DEPENDENCIA SERVICIO
+    Route::get('listDenunciaDependenciaServicio/{Id}', 'Denuncia\DenunciaDependenciaServicioController@index')->name('listDenunciaDependenciaServicio');
 
     // Catálogo de DENUNCIAS CIUDADANAS
     Route::get('listDenunciasCiudadanas/', 'Denuncia\DenunciaCiudadanaController@index')->name('listDenunciasCiudadanas');

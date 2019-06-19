@@ -366,13 +366,16 @@ class CreateDenunciaUbicacionTable extends Migration
 
         });
 
-        Schema::create($tableNamesCatalogos['denuncia_dependencia'], function (Blueprint $table) use ($tableNamesCatalogos){
+        Schema::create($tableNamesCatalogos['denuncia_dependencia_servicio_estatus'], function (Blueprint $table) use ($tableNamesCatalogos){
             $table->increments('id');
             $table->unsignedInteger('denuncia_id')->default(0)->index();
             $table->unsignedInteger('dependencia_id')->default(0)->index();
+            $table->unsignedInteger('servicio_id')->default(0)->index();
+            $table->unsignedInteger('estatu_id')->default(0)->index();
+            $table->dateTime('fecha_movimiento')->nullable();
             $table->softDeletes();
             $table->timestamps();
-            $table->unique(['denuncia_id', 'dependencia_id']);
+            $table->unique(['denuncia_id', 'dependencia_id', 'servicio_id']);
 
             $table->foreign('denuncia_id')
                 ->references('id')
@@ -382,6 +385,16 @@ class CreateDenunciaUbicacionTable extends Migration
             $table->foreign('dependencia_id')
                 ->references('id')
                 ->on($tableNamesCatalogos['dependencias'])
+                ->onDelete('cascade');
+
+            $table->foreign('servicio_id')
+                ->references('id')
+                ->on($tableNamesCatalogos['servicios'])
+                ->onDelete('cascade');
+
+            $table->foreign('estatu_id')
+                ->references('id')
+                ->on($tableNamesCatalogos['estatus'])
                 ->onDelete('cascade');
 
         });
@@ -620,9 +633,9 @@ class CreateDenunciaUbicacionTable extends Migration
         $tableNamesCatalogos = config('atemun.table_names.catalogos');
 
         Schema::dropIfExists($tableNamesCatalogos['ciudadano_denuncia']);
+        Schema::dropIfExists($tableNamesCatalogos['denuncia_dependencia_servicio_estatus']);
         Schema::dropIfExists($tableNamesCatalogos['denuncia_servicio']);
         Schema::dropIfExists($tableNamesCatalogos['denuncia_estatu']);
-        Schema::dropIfExists($tableNamesCatalogos['denuncia_dependencia']);
         Schema::dropIfExists($tableNamesCatalogos['denuncia_origen']);
         Schema::dropIfExists($tableNamesCatalogos['denuncia_prioridad']);
         Schema::dropIfExists($tableNamesCatalogos['denuncia_ubicacion']);

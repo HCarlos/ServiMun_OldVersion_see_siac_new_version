@@ -70,6 +70,7 @@ class EstatuController extends Controller
     protected function updateItem(StatuRequest $request)
     {
         $item = $request->manage();
+//        dd($item);
         if (!isset($item)) {
             abort(404);
         }

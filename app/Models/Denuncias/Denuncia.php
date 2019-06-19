@@ -60,11 +60,36 @@ class Denuncia extends Model
         return $this->belongsToMany(Origen::class,'denuncia_origen','denuncia_id','origen_id');
     }
 
+    public function estatu(){
+        return $this->hasOne(Estatu::class,'id','estatus_id');
+    }
+
+    public function estatus(){
+        return $this->belongsToMany(Estatu::class,'denuncia_estatu','denuncia_id','estatus_id');
+    }
+
     public function dependencia(){
         return $this->hasOne(Dependencia::class,'id','dependencia_id');
     }
+
+//    public function dependencias(){
+//        return $this->belongsToMany(Dependencia::class,'denuncia_dependencia','denuncia_id','dependencia_id');
+//    }
+
+//    public function denuncia_dependencias(){
+//        return $this->belongsToMany(Dependencia::class,'denuncia_dependencia_servicio_estatus','denuncia_id','dependencia_id');
+//    }
+
     public function dependencias(){
-        return $this->belongsToMany(Dependencia::class,'denuncia_dependencia','denuncia_id','dependencia_id');
+        return $this->belongsToMany(Dependencia::class,'denuncia_dependencia_servicio_estatus','denuncia_id','dependencia_id');
+    }
+
+    public function denuncia_servicios(){
+        return $this->belongsToMany(Servicio::class,'denuncia_dependencia_servicio_estatus','denuncia_id','servicio_id');
+    }
+
+    public function denuncia_estatus(){
+        return $this->belongsToMany(Estatu::class,'denuncia_dependencia_servicio_estatus','denuncia_id','estatu_id');
     }
 
     public function ubicacion(){
@@ -74,19 +99,12 @@ class Denuncia extends Model
         return $this->belongsToMany(Ubicacion::class,'denuncia_ubicacion','denuncia_id','ubicacion_id');
     }
 
+
     public function servicio(){
         return $this->hasOne(Servicio::class,'id','servicio_id');
     }
     public function servicios(){
         return $this->belongsToMany(Servicio::class,'denuncia_servicio','denuncia_id','servicio_id');
-    }
-
-    public function estatu(){
-        return $this->hasOne(Estatu::class,'id','estatus_id');
-    }
-    public function estatus(){
-        return $this->belongsToMany(Estatu::class,'denuncia_estatu','denuncia_id','estatus_id')
-            ->withPivot('ultimo');
     }
 
     public function ciudadano(){

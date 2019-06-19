@@ -7,6 +7,7 @@
                         <th class="sorting_asc" aria-sort="ascending" aria-label="Name: activate to sort column descending">ID</th>
                         <th class="sorting" >Status</th>
                         <th class="sorting" >Dependencia</th>
+                        <th class="sorting" >Predeterminado</th>
                         <th style="width: 100vw"></th>
                     </tr>
                 </thead>
@@ -15,12 +16,14 @@
                     <tr>
                         <td class="table-user">{{$item->id}}</td>
                         <td>{{$item->estatus}}</td>
-                        <td>
+                        <td class="w-30vh">
                             @foreach($item->dependencias as $dep)
-                            <span class="badge badge-warning"> {{$dep->dependencia}} </span>
+                            <b class="badge badge-warning"> {{$dep->dependencia}} </b><br>
                             @endforeach
                         </td>
-                        {{--<td>{{ $item->jefe->FullName }}</td>--}}
+                        <td class="text-center">
+                            @if ($item->isDefault()) <i class="fas fa-check-circle text-primary fa-2x"></i> @endif
+                        </td>
                         <td class="table-action">
                             <div class="button-list">
                                 @include('shared.ui_kit.__edit_item')

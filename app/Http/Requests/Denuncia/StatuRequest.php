@@ -52,19 +52,34 @@ class StatuRequest extends FormRequest
 
         $Item = [
             'estatus' => strtoupper($this->estatus),
+            'predeterminado' => $this->predeterminado==1 ? true : false,
         ];
 
         try {
+            if ( $this->predeterminado == 1) {
+                Estatu::where('predeterminado',true)->update(['predeterminado'=>false]);
+            };
+//            return $query->whereHas('roles', function ($q) use ($roles) {
+//                $q->whereIn('role_id', $roles);
+//            });
+            $idd = $this->dependencia_id;
+            $isExsit = Estatu::whereHas('dependencias', function ($q) use ($idd) {
+                return $q->where("dependencia_id",$idd);
+            })->first();
 
+//            dd($isExsit);
             if ($this->id == 0) {
                 $item = Estatu::create($Item);
-                if ($this->dependencia_id > 0){
+                if ($this->dependencia_id > 0 && $isExsit <= 0 ){
                     $item->dependencias()->attach($this->dependencia_id);
                 }
             } else {
                 $item = Estatu::find($this->id);
                 $item->update($Item);
-                $observer = PostUpdating::updating($item);
+                if ($this->dependencia_id > 0 && $isExsit <= 0 ){
+                    $item->dependencias()->attach($this->dependencia_id);
+                    $observer = PostUpdating::updating($item);
+                }
             }
         }catch (QueryException $e){
             $Msg = new MessageAlertClass();

@@ -2,60 +2,47 @@
 
 namespace App\Http\Controllers\Denuncia;
 
-use App\Classes\FiltersRules;
-use App\Classes\Items;
-use App\Http\Controllers\Funciones\FuncionesController;
-use App\Models\Catalogos\Dependencia;
-use App\Models\Catalogos\Domicilios\Ubicacion;
-use App\Models\Catalogos\Estatu;
-use App\Models\Catalogos\Origen;
-use App\Models\Catalogos\Prioridad;
-use App\Models\Catalogos\Servicio;
 use App\Models\Denuncias\Denuncia;
-use App\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Denuncia\DenunciaRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Response;
 
-class DenunciaController extends Controller
+class DenunciaDependenciaServicioController extends Controller
 {
 
 
-    protected $tableName = "denuncias";
+
+
+    protected $tableName = "denuncia_dependencia_servicio";
 
 // ***************** MUESTRA EL LISTADO DE USUARIOS ++++++++++++++++++++ //
-    protected function index(Request $request)
+    protected function index($Id)
     {
         ini_set('max_execution_time', 300);
-//        $filters = [
-//                    'ciudadano_id'=>Auth::user()->id,
-//                     $request->only(['search'])
-//                    ];
 
-        $filters = $request->only(['search']);
-        if (!Auth::user()->isRole('Administrator|SysOp')){
-            $filters['ciudadano_id']=Auth::user()->id;
-        }
-        $items = Denuncia::query()
-            ->filterBy($filters)
-            ->orderByDesc('id')
+//        $filters = $request->only(['search']);
+//        if (!Auth::user()->isRole('Administrator|SysOp')){
+//            $filters['ciudadano_id']=Auth::user()->id;
+//        }
+
+//        $items = Denuncia::query()
+//            ->filterBy($filters)
+//            ->orderByDesc('id')
+//            ->paginate();
+//        $items->appends($filters)->fragment('table');
+
+        $items = Denuncia::with('dependencias')
+            ->where('id',$Id)
             ->paginate();
-        $items->appends($filters)->fragment('table');
 
-        $request->session()->put('items', $items);
+        $items->appends('dds')->fragment('table');
 
-//        $sv = Items::getInstance();
-//        $sv->setItems($items);
-//
-//        //dd($sv->getItems());
+//        dd($items);
 
+//        $request->session()->put('items', $items);
 
         $user = Auth::User();
 
-        return view('denuncia.denuncia.denuncia_list',
+        return view('denuncia.denuncia_dependencia_servicio.denuncia_dependencia_servicio_list',
             [
                 'items' => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
@@ -65,7 +52,6 @@ class DenunciaController extends Controller
                 'newWindow' => true,
                 'tableName' => $this->tableName,
                 'showEdit' => 'editDenuncia',
-                'showEditDenunciaDependenciaServicio'=>'listDenunciaDependenciaServicio',
                 'showProcess1' => 'showDataListDenunciaExcel1A',
 //                'putEdit' => 'updateDenuncia',
                 'newItem' => 'newDenuncia',
@@ -79,6 +65,8 @@ class DenunciaController extends Controller
             ]
         );
     }
+
+/*
 
 // ***************** EDITA LOS DATOS  ++++++++++++++++++++ //
     protected function editItem($Id)
@@ -112,7 +100,7 @@ class DenunciaController extends Controller
     }
 
 // ***************** GUARDA LOS CAMBIOS ++++++++++++++++++++ //
-    protected function updateItem(DenunciaRequest $request)
+    protected function updateItem(DenunciaDependenciaServicioRequest $request)
     {
         $item = $request->manage();
         //dd($item);
@@ -129,7 +117,7 @@ class DenunciaController extends Controller
         $Dependencias = Dependencia::all()->sortBy('dependencia')->pluck('dependencia','id');
         $Servicios    = Servicio::all()->sortBy('servicio')->pluck('servicio','id');
         $Ciudadanos   = User::all()->sortBy(function ($q){
-           return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
+            return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
         });
         $Estatus      = Estatu::all()->sortBy('estatus');
 
@@ -152,7 +140,8 @@ class DenunciaController extends Controller
     }
 
     // ***************** CREAR NUEVO ++++++++++++++++++++ //
-    protected function createItem(DenunciaRequest $request){
+    protected function createItem(DenunciaDependenciaServicioRequest $request)
+    {
         $item = $request->manage();
 //        dd($item);
         if (!isset($item->id)) {
@@ -177,96 +166,7 @@ class DenunciaController extends Controller
         }
     }
 
-
-
-// ***************** MAUTOCOMPLETE DE UBICACIONES ++++++++++++++++++++ //
-    protected function searchAdress(Request $request)
-    {
-        ini_set('max_execution_time', 300);
-        $filters =$request->input('search');
-        $F           = new FuncionesController();
-        $tsString    = $F->string_to_tsQuery( strtoupper($filters),' & ');
-        $items = Ubicacion::query()
-            ->search($tsString)
-            ->orderBy('id')
-            ->get();
-        $data=array();
-
-        foreach ($items as $item) {
-//            $data[]=array('value'=>$item->id.' '.$item->calle.' '.$item->colonia.' '.$item->comunidad,' '.$item->ciudad,'id'=>$item->id);
-            $data[]=array('value'=>$item->calle.' '.$item->colonia.' '.$item->comunidad,' '.$item->ciudad,'id'=>$item->id);
-        }
-        if(count($data))
-            return $data;
-        else
-            return ['value'=>'No se encontraron resultados','id'=>0];
-
-    }
-
-// ***************** MAUTOCOMPLETE DE UBICACIONES ++++++++++++++++++++ //
-    protected function getUbi($IdUbi=0)
-    {
-        $items = Ubicacion::find($IdUbi);
-        return Response::json(['mensaje' => 'OK', 'data' => json_decode($items), 'status' => '200'], 200);
-
-    }
-
-    protected function showModalSearchDenuncia(){
-        $Dependencias = Dependencia::all()->sortBy('dependencia')->pluck('dependencia','id');
-        $Servicios    = Servicio::all()->sortBy('servicio')->pluck('servicio','id');
-        $Estatus      = Estatu::all()->sortBy('estatus');
-
-        $user = Auth::user();
-        return view ('denuncia.search.denuncia_search_panel',
-            [
-                'findDataInDenuncia'=>'findDataInDenuncia',
-                'dependencias'    => $Dependencias,
-                'servicios'       => $Servicios,
-                'estatus'         => $Estatus,
-                'items' => $user,
-            ]
-        );
-    }
-
-
- // ***************** MUESTRA EL MENU DE BUSQUEDA ++++++++++++++++++++ //
-    protected function findDataInDenuncia(Request $request)
-    {
-        $filters = new FiltersRules();
-
-        $items = Denuncia::query()
-            ->filterBy($filters->filterRulesDenuncia($request))
-            ->orderByDesc('id')
-            ->paginate();
-        $items->fragment('table');
-        $user = Auth::User();
-
-        $request->session()->put('items', $items);
-
-        return view('denuncia.denuncia.denuncia_list',
-            [
-                'items' => $items,
-                'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
-                'user' => $user,
-                'searchInListDenuncia' => 'listDenuncias',
-                'respuestasDenunciaItem' => 'listRespuestas',
-                'newWindow' => true,
-                'tableName' => $this->tableName,
-                'showEdit' => 'editDenuncia',
-                'newItem' => 'newDenuncia',
-                'removeItem' => 'removeDenuncia',
-                'showProcess1' => 'showDataListDenunciaExcel1A',
-                'searchAdressDenuncia' => 'listDenuncias',
-                'showModalSearchDenuncia' => 'showModalSearchDenuncia',
-                'findDataInDenuncia'=>'findDataInDenuncia',
-            ]
-        );
-
-    }
-
-
-
-
+*/
 
 
 }
