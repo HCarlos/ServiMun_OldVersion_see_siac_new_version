@@ -53,7 +53,8 @@ class ServicioController extends Controller
     {
         $item = Servicio::find($Id);
         $medidas = Medida::all(['id','medida'])->sortBy('medida');
-        $subareas = Subarea::all(['id','subarea'])->sortBy('subarea');
+        $subareas = Subarea::all()->sortBy('subarea');
+        //dd($item);
         return view('catalogos.catalogo.servicio.servicio_edit',
             [
                 'user' => Auth::user(),
@@ -81,7 +82,7 @@ class ServicioController extends Controller
     protected function newItem()
     {
         $medidas = Medida::all(['id','medida'])->sortBy('medida');
-        $subareas = Subarea::all(['id','subarea'])->sortBy('subarea');
+        $subareas = Subarea::all()->sortBy('subarea');
         return view('catalogos.catalogo.servicio.servicio_new',
             [
                 'editItemTitle' => 'Nuevo',

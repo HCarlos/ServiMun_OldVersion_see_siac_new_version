@@ -26,17 +26,33 @@ class Subarea extends Model
         return $this->hasOne(Area::class,'id','area_id');
     }
 
+    public function areas() {
+        return $this->belongsToMany(Area::class,'area_subarea','subarea_id','area_id');
+    }
+
     public function jefe() {
         return $this->hasOne(User::class,'id','jefe_id');
+    }
+
+    public function jefes() {
+        return $this->belongsToMany(User::class,'jefe_subarea','subarea_id','jefe_id');
     }
 
 //    public function jefe() {
 //        return $this->belongsTo(User::class,'jefe_id','id');
 //    }
-//
-//    public function dependencia() {
-//        return $this->hasOne(Dependencia::class,'id','dependencia_id');
-//    }
+
+    public function dependencia() {
+        return $this->hasOne(Dependencia::class,'id','dependencia_id');
+    }
+
+    public function servicio() {
+        return $this->hasOne(Servicio::class,'id','servicio_id');
+    }
+
+    public function servicios() {
+        return $this->hasOne(Servicio::class,'id','servicio_id');
+    }
 
     public static function findOrImport($subarea,$area_id,$jefe_id){
         $obj = static::where('subarea', trim($subarea))->first();
@@ -46,6 +62,11 @@ class Subarea extends Model
                 'area_id' => $area_id,
                 'jefe_id' => $jefe_id,
             ]);
+//            dd($obj);
+            if ($obj->id > 0) {
+                $obj->areas()->attach($area_id);
+                $obj->jefes()->attach($jefe_id);
+            }
         }
         return $obj;
     }

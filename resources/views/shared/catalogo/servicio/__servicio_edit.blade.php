@@ -26,7 +26,7 @@
     <div class="col-md-9">
         <select class="subarea_id form-control select2" data-toggle="select2"  name="subarea_id" id="subarea_id" size="1">
             @foreach($subareas as $t)
-                <option value="{{$t->id}}" @if($t->id ==$items->subarea_id) selected @endif>{{ $t->subarea }}</option>
+                <option value="{{$t->id}}" @if($t->id ==$items->subarea_id) selected @endif>{{ $t->subarea.' - '.$t->area->area.' - '.$t->area->dependencia->dependencia }}</option>
             @endforeach
         </select>
     </div>

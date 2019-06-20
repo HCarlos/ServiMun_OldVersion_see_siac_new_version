@@ -97,13 +97,15 @@
             <div class="form-group row mb-1">
                 <label for = "dependencia_id" class="col-md-3 col-form-label">Dependencia</label>
                 <div class="col-md-9">
-                    {{ Form::select('dependencia_id',$dependencias,null,['id'=>'dependencia_id','class'=>'form-control, select2','data-toggle'=>'select2']) }}
+{{--                    {{ Form::select('dependencia_id',$dependencias,null,['id'=>'dependencia_id','class'=>'form-control, select2','data-toggle'=>'select2']) }}--}}
+                    {{ Form::select('dependencia_id',$dependencias,null,['id'=>'dependencia_id','class'=>'form-control']) }}
                 </div>
             </div>
             <div class="form-group row mb-1">
                 <label for = "servicio_id" class="col-md-3 col-form-label">Servicio</label>
                 <div class="col-md-9">
-                    {{ Form::select('servicio_id',$servicios,null,['id'=>'servicio_id','class'=>'form-control, select2','data-toggle'=>'select2']) }}
+{{--                    {{ Form::select('servicio_id',$servicios,null,['id'=>'servicio_id','class'=>'form-control, select2','data-toggle'=>'select2']) }}--}}
+                    {{ Form::select('servicio_id',$servicios,null,['id'=>'servicio_id','class'=>'form-control']) }}
                 </div>
             </div>
             <div class="form-group row mb-1">

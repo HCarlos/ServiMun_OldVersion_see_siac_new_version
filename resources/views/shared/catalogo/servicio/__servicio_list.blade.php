@@ -17,8 +17,8 @@
                     <tr>
                         <td class="table-user">{{$item->id}}</td>
                         <td>{{$item->servicio}}</td>
-                        <td>{{$item->medidas->medida}}</td>
-                        <td>{{ $item->subareas->subarea }}</td>
+                        <td>{{$item->medida->medida}}</td>
+                        <td>{{ $item->subarea->subarea.' - '.$item->subarea->area->area.' - '.$item->subarea->area->dependencia->dependencia }}</td>
                         <td class="table-action">
                             <div class="button-list">
                                 @include('shared.ui_kit.__edit_item')

@@ -25,8 +25,11 @@
     <label for = "subarea_id" class="col-md-3 col-form-label">Subarea</label>
     <div class="col-md-9">
         <select class="subarea_id form-control select2" data-toggle="select2"  name="subarea_id" id="subarea_id" size="1">
+{{--            @foreach($subareas as $t)--}}
+{{--                <option value="{{$t->id}}">{{ $t->subarea }}</option>--}}
+{{--            @endforeach--}}
             @foreach($subareas as $t)
-                <option value="{{$t->id}}">{{ $t->subarea }}</option>
+                <option value="{{$t->id}}">{{ $t->subarea.' - '.$t->area->area.' - '.$t->area->dependencia->dependencia }}</option>
             @endforeach
         </select>
     </div>

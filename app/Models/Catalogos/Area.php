@@ -27,8 +27,24 @@ class Area extends Model
         return $this->belongsTo(User::class,'jefe_id','id');
     }
 
+    public function jefes() {
+        return $this->belongsToMany(User::class,'area_jefe','area_id','jefe_id');
+    }
+
     public function dependencia() {
         return $this->hasOne(Dependencia::class,'id','dependencia_id');
+    }
+
+    public function dependencias() {
+        return $this->belongsToMany(Dependencia::class,'area_dependencia','area_id','dependencia_id');
+    }
+
+    public function subarea() {
+        return $this->hasOne(Subarea::class,'id','subarea_id');
+    }
+
+    public function subareas() {
+        return $this->belongsToMany(Subarea::class,'area_subarea','area_id','subarea_id');
     }
 
     public static function findOrImport($area,$dependencia_id,$jefe_id){
@@ -39,6 +55,10 @@ class Area extends Model
                 'dependencia_id' => $dependencia_id,
                 'jefe_id' => $jefe_id,
             ]);
+            if ($obj->id > 0){
+                $obj->dependencias()->attach($dependencia_id);
+                $obj->jefes()->attach($jefe_id);
+            }
         }
         return $obj;
     }

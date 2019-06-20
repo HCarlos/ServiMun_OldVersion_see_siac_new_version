@@ -126,6 +126,109 @@ class CreateDenunciasTable extends Migration
                 ->onDelete('cascade');
         });
 
+        Schema::create($tableNames['area_dependencia'], function (Blueprint $table) use ($tableNames){
+            $table->increments('id');
+            $table->unsignedInteger('area_id')->default(0)->index();
+            $table->unsignedInteger('dependencia_id')->default(0)->index();
+            $table->softDeletes();
+            $table->timestamps();
+            $table->unique(['area_id', 'dependencia_id']);
+
+            $table->foreign('area_id')
+                ->references('id')
+                ->on($tableNames['areas'])
+                ->onDelete('cascade');
+
+            $table->foreign('dependencia_id')
+                ->references('id')
+                ->on($tableNames['dependencias'])
+                ->onDelete('cascade');
+
+        });
+
+        Schema::create($tableNames['area_subarea'], function (Blueprint $table) use ($tableNames){
+            $table->increments('id');
+            $table->unsignedInteger('area_id')->default(0)->index();
+            $table->unsignedInteger('subarea_id')->default(0)->index();
+            $table->softDeletes();
+            $table->timestamps();
+            $table->unique(['area_id', 'subarea_id']);
+
+            $table->foreign('area_id')
+                ->references('id')
+                ->on($tableNames['areas'])
+                ->onDelete('cascade');
+
+            $table->foreign('subarea_id')
+                ->references('id')
+                ->on($tableNames['subareas'])
+                ->onDelete('cascade');
+
+        });
+
+        Schema::create($tableNames['area_jefe'], function (Blueprint $table) use ($tableNames){
+            $table->increments('id');
+            $table->unsignedInteger('area_id')->default(0)->index();
+            $table->unsignedInteger('jefe_id')->default(0)->index();
+            $table->softDeletes();
+            $table->timestamps();
+            $table->unique(['area_id', 'jefe_id']);
+
+            $table->foreign('area_id')
+                ->references('id')
+                ->on($tableNames['areas'])
+                ->onDelete('cascade');
+
+            $table->foreign('jefe_id')
+                ->references('id')
+                ->on($tableNames['users'])
+                ->onDelete('cascade');
+
+        });
+
+        Schema::create($tableNames['servicio_subarea'], function (Blueprint $table) use ($tableNames){
+            $table->increments('id');
+            $table->unsignedInteger('servicio_id')->default(0)->index();
+            $table->unsignedInteger('subarea_id')->default(0)->index();
+            $table->softDeletes();
+            $table->timestamps();
+            $table->unique(['servicio_id', 'subarea_id']);
+
+            $table->foreign('servicio_id')
+                ->references('id')
+                ->on($tableNames['servicios'])
+                ->onDelete('cascade');
+
+            $table->foreign('subarea_id')
+                ->references('id')
+                ->on($tableNames['subareas'])
+                ->onDelete('cascade');
+
+        });
+
+
+
+        Schema::create($tableNames['jefe_subarea'], function (Blueprint $table) use ($tableNames){
+            $table->increments('id');
+            $table->unsignedInteger('jefe_id')->default(0)->index();
+            $table->unsignedInteger('subarea_id')->default(0)->index();
+            $table->softDeletes();
+            $table->timestamps();
+            $table->unique(['jefe_id', 'subarea_id']);
+
+            $table->foreign('jefe_id')
+                ->references('id')
+                ->on($tableNames['users'])
+                ->onDelete('cascade');
+
+            $table->foreign('subarea_id')
+                ->references('id')
+                ->on($tableNames['subareas'])
+                ->onDelete('cascade');
+
+        });
+
+
 
     }
 
@@ -146,6 +249,13 @@ class CreateDenunciasTable extends Migration
         Schema::dropIfExists($tableNames['respuestas']);
 
         Schema::dropIfExists($tableNames['denuncias']);
+
+        Schema::dropIfExists($tableNames['area_dependencia']);
+        Schema::dropIfExists($tableNames['area_subarea']);
+        Schema::dropIfExists($tableNames['area_jefe']);
+
+        Schema::dropIfExists($tableNames['jefe_subarea']);
+        Schema::dropIfExists($tableNames['servicio_subarea']);
 
         Schema::dropIfExists($tableNames['servicios']);
         Schema::dropIfExists($tableNames['subareas']);

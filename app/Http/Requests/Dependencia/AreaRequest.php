@@ -58,7 +58,8 @@ class AreaRequest extends FormRequest
 
             if ($this->id == 0) {
                 $item = Area::create($Item);
-
+                $item->dependencias()->attach($this->dependencia_id);
+                $item->jefes()->attach($this->jefe_id);
             } else {
                 $item = Area::find($this->id);
                 $item->update($Item);

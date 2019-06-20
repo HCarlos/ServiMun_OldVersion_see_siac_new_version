@@ -60,6 +60,7 @@ class ServicioRequest extends FormRequest
         try {
             if ($this->id == 0) {
                 $item = Servicio::create($Item);
+                $item->subareas()->attach($this->subarea_id);
             } else {
                 $item = Servicio::find($this->id);
                 $item->update($Item);

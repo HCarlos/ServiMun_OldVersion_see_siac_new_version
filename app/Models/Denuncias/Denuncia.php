@@ -81,11 +81,13 @@ class Denuncia extends Model
 //    }
 
     public function dependencias(){
-        return $this->belongsToMany(Dependencia::class,'denuncia_dependencia_servicio_estatus','denuncia_id','dependencia_id');
+        return $this->belongsToMany(Dependencia::class,'denuncia_dependencia_servicio_estatus','denuncia_id','dependencia_id')
+            ->withPivot('fecha_movimiento');
     }
 
     public function denuncia_servicios(){
-        return $this->belongsToMany(Servicio::class,'denuncia_dependencia_servicio_estatus','denuncia_id','servicio_id');
+        return $this->belongsToMany(Servicio::class,'denuncia_dependencia_servicio_estatus','denuncia_id','servicio_id')
+        ->withPivot('fecha_movimiento');
     }
 
     public function denuncia_estatus(){

@@ -57,6 +57,8 @@ class SubareaRequest extends FormRequest
 
             if ($this->id == 0) {
                 $item = Subarea::create($Item);
+                $item->areas()->attach($this->area_id);
+                $item->jefes()->attach($this->jefe_id);
 
             } else {
                 $item = Subarea::find($this->id);

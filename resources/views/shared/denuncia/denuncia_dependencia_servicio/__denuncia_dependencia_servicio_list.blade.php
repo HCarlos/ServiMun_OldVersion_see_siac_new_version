@@ -4,20 +4,21 @@
         <th class="sorting_asc" aria-sort="ascending" aria-label="Name: activate to sort column descending">ID</th>
         <th class="sorting" >DEPENDENCIA</th>
         <th class="sorting">SERVICIO</th>
-{{--        <th class="sorting">ESTATUS</th>--}}
+        <th class="sorting">ESTATUS</th>
+        <th class="sorting">FECHA</th>
         <th></th>
     </tr>
     </thead>
     <tbody>
 
     @foreach($items as $item)
-        @foreach($item->servicios as $serv)
+        @foreach($item->denuncia_servicios as $serv)
         <tr>
             <td class="table-user">{{$item->id}}</td>
             <td>{{$item->dependencia->dependencia}}</td>
             <td>{{($serv->servicio)}}</td>
-{{--            <td>{{($item->Estatu->estatus)}}</td>--}}
-{{--            <td>{{$item->fullUbication}}</td>--}}
+            <td>{{($item->Estatu->estatus)}}</td>
+            <td>{{($serv->pivot->fecha_movimiento)}}</td>
             <td class="table-action tbl100W">
                 <div class="button-list">
 {{--                    @include('shared.ui_kit.__edit_item')--}}

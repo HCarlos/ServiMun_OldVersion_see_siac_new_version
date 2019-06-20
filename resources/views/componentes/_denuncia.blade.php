@@ -17,6 +17,9 @@
     <script >
         jQuery(function($) {
             $(document).ready(function() {
+
+                // "use strict";
+
                 if ( $("#search_autocomplete") ){
 
                     src = "{{ route('searchAdress') }}";
@@ -55,6 +58,36 @@
                     $("#ubicacion").val("");
                     $("#ubicacion_id_span").html(0);
                 }
+
+                $("#dependencia_id").on("change",function (event) {
+                    var id = event.currentTarget.value;
+                    alert(id);
+                });
+
+                // var select2 = $("#dependencia_id").select2({
+                //     formatResult: format,
+                //     formatSelection: format,
+                //     escapeMarkup: function(m) { return m; }
+                // }).data('select2');
+
+                // select2.onSelect = (function(fn) {
+                    // return function(data, options) {
+                    //     var target;
+                    //
+                    //     if (options != null) {
+                    //         target = $(options.target);
+                    //     }
+                    //
+                    //     if (target && target.hasClass('info')) {
+                    //         alert('click!');
+                    //     } else {
+                    //         return fn.apply(this, arguments);
+                    //     }
+                    // }
+                // });
+
+                alert($("#dependencia_id").val());
+
 
             });
         });

@@ -40,7 +40,8 @@ class Dependencia extends Model
     }
 
     public function denuncias(){
-        return $this->belongsToMany(Denuncia::class,'denuncia_dependencia_servicio_estatus','dependencia_id','denuncia_id');
+        return $this->belongsToMany(Denuncia::class,'denuncia_dependencia_servicio_estatus','dependencia_id','denuncia_id')
+        ->withPivot('fecha_movimiento');
     }
 
     public function servicios(){

@@ -28,12 +28,29 @@ class Servicio extends Model
         return $this->habilitado;
     }
 
-    public function medidas() {
+    public function medida() {
         return $this->hasOne(Medida::class,'id', 'medida_id');
     }
 
-    public function subareas() {
+//    public function medidas() {
+//        return $this->hasOne(Medida::class,'id', 'medida_id');
+//    }
+
+
+    public function subarea() {
         return $this->hasOne(Subarea::class,'id','subarea_id');
+    }
+
+    public function subareas() {
+        return $this->belongsToMany(Subarea::class,'servicio_subarea','servicio_id','subarea_id');
+    }
+
+    public function area() {
+        return $this->hasOne(Area::class,'id','area_id');
+    }
+
+    public function dependencia(){
+        return $this->hasOne(Dependencia::class,'id','servicio_id');
     }
 
     public function dependencias(){
