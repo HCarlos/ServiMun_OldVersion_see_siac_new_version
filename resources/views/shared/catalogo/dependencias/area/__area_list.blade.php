@@ -7,7 +7,7 @@
                         <th class="sorting_asc" aria-sort="ascending" aria-label="Name: activate to sort column descending">ID</th>
                         <th class="sorting" >Área</th>
                         <th class="sorting" >Dependencia</th>
-                        {{--<th class="sorting" >Jefe</th>--}}
+                        <th class="sorting" >Jefe</th>
                         <th style="width: 100vw"></th>
                     </tr>
                 </thead>
@@ -17,7 +17,7 @@
                         <td class="table-user">{{$item->id}}</td>
                         <td>{{$item->area}}</td>
                         <td>{{$item->dependencia->dependencia}}</td>
-                        {{--<td>{{ $item->jefe->FullName }}</td>--}}
+                        <td>{{ $item->jefe->FullName }}</td>
                         <td class="table-action">
                             <div class="button-list">
                                 @include('shared.ui_kit.__edit_item')

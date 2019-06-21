@@ -6,6 +6,7 @@ use App\Classes\FiltersRules;
 use App\Classes\Items;
 use App\Http\Controllers\Funciones\FuncionesController;
 use App\Models\Catalogos\Dependencia;
+use App\Models\Catalogos\Domicilios\Comunidad;
 use App\Models\Catalogos\Domicilios\Ubicacion;
 use App\Models\Catalogos\Estatu;
 use App\Models\Catalogos\Origen;
@@ -264,6 +265,27 @@ class DenunciaController extends Controller
 
     }
 
+// ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //
+    protected function getServiciosFromDependencias($id= 0)
+    {
+//        dd($id);
+        $item = Servicio::whereHas('subareas', function($p) use ($id) {
+           $p->whereHas("areas", function($q) use ($id){
+               $q->whereHas("dependencias", function ($r) use ($id){
+                    return $r->where("dependencia_id",$id);
+               });
+            });
+        })->get();
+
+        //dd($item)
+
+        if (isset($item)) {
+            return Response::json(['mensaje' => 'OK', 'data' => $item, 'status' => '200'], 200);
+        } else {
+            return Response::json(['mensaje' => 'Error', 'data' => dd($item), 'status' => '200'], 200);
+        }
+
+    }
 
 
 

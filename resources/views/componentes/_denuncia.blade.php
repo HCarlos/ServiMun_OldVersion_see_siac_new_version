@@ -60,35 +60,18 @@
                 }
 
                 $("#dependencia_id").on("change",function (event) {
-                    var id = event.currentTarget.value;
-                    alert(id);
+                    var Id = event.currentTarget.value;
+                    $.get( "/getServiciosFromDependencias/"+Id, function( data ) {
+                        alert(data.data);
+                        // $("#ubicacion_id").val(data.data.id);
+                        // $("#ubicacion_id_span").html(data.data.id);
+                        // $("#ubicacion").val(data.data.calle+' '+data.data.colonia+' '+data.data.comunidad+' '+data.data.ciudad+' '+data.data.municipio+' '+data.data.estado+' '+data.data.cp);
+                        // $("#search_autocomplete").val("");
+                    }, "json" );
+
                 });
 
                 // var select2 = $("#dependencia_id").select2({
-                //     formatResult: format,
-                //     formatSelection: format,
-                //     escapeMarkup: function(m) { return m; }
-                // }).data('select2');
-
-                // select2.onSelect = (function(fn) {
-                    // return function(data, options) {
-                    //     var target;
-                    //
-                    //     if (options != null) {
-                    //         target = $(options.target);
-                    //     }
-                    //
-                    //     if (target && target.hasClass('info')) {
-                    //         alert('click!');
-                    //     } else {
-                    //         return fn.apply(this, arguments);
-                    //     }
-                    // }
-                // });
-
-                alert($("#dependencia_id").val());
-
-
             });
         });
 

@@ -185,6 +185,13 @@ class CatalogosSeeder extends Seeder
         Area::findOrImport('TURISMO',21,1);
 
         Subarea::findOrImport("general",1,1);
+        Subarea::findOrImport("general",3,1);
+        Subarea::findOrImport("general",4,1);
+        Subarea::findOrImport("general",5,1);
+        Subarea::findOrImport("general",14,1);
+        Subarea::findOrImport("general",15,1);
+        Subarea::findOrImport("general",16,1);
+        Subarea::findOrImport("general",17,1);
 
         Estatu::findOrImport( 'En Proceso', '0',1);
         Estatu::findOrImport( 'Gestión / Trámite Interno', '0',1);
@@ -237,7 +244,14 @@ class CatalogosSeeder extends Seeder
         Prioridad::findOrImport( 'Programable',FALSE, 'colorPrioridadProgramable');
         Prioridad::findOrImport( 'Requiere detalles',FALSE, 'colorPrioridadReqDet');
 
-        Servicio::findOrImport('computador',1,1,1);
+        Servicio::findOrImport('SERVICIO 1',1,1,1);
+        Servicio::findOrImport('SERVICIO 2',1,1,2);
+        Servicio::findOrImport('SERVICIO 3',1,1,3);
+        Servicio::findOrImport('SERVICIO 4',1,1,4);
+        Servicio::findOrImport('SERVICIO 5',1,1,5);
+        Servicio::findOrImport('SERVICIO 6',1,1,6);
+        Servicio::findOrImport('SERVICIO 7',1,1,7);
+        Servicio::findOrImport('SERVICIO 8',1,1,8);
 
         Afiliacion::findOrImport('Grupo 1');
         Afiliacion::findOrImport('Grupo 2');

@@ -1,24 +1,26 @@
 <div id="datatable-buttons_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer" style="position: relative; z-index: 0">
     <div class="row">
         <div class="col-sm-12">
-            <table  id="tblCat" class="table table-bordered table-striped dt-responsive nowrap dataTable " role="grid" aria-describedby="datatable-buttons_info" style="width: 100%; position: relative; z-index:0;" width="100%">
+            <table  id="tblCat" class="table table-bordered table-striped dataTable " role="grid" aria-describedby="datatable-buttons_info" style="width: 100%; position: relative; z-index:0;" width="100%">
                 <thead>
                     <tr role="row">
-                        <th class="sorting_asc" aria-sort="ascending" aria-label="Name: activate to sort column descending">ID</th>
-                        <th class="sorting" >Subrea</th>
-                        <th class="sorting" >Área</th>
-                        {{--<th class="sorting" >Jefe</th>--}}
-                        <th style="width: 100vw"></th>
+                        <th class="sorting_asc " aria-sort="ascending" aria-label="Name: activate to sort column descending">ID</th>
+                        <th class="sorting w-25">Subrea</th>
+                        <th class="sorting w-25">Área</th>
+                        <th class="sorting w-25">Dependencia</th>
+                        <th class="sorting w-15">Jefe</th>
+                        <th class="w-25"></th>
                     </tr>
                 </thead>
                 <tbody>
                 @foreach($items as $item)
                     <tr>
-                        <td class="table-user">{{$item->id}}</td>
+                        <td>{{$item->id}}</td>
                         <td>{{$item->subarea}}</td>
-                        <td>{{$item->area->area}}</td>
-                        {{--<td>{{ $item->jefe->FullName }}</td>--}}
-                        <td class="table-action">
+                        <td>{{trim($item->area->area)}}</td>
+                        <td>{{trim($item->area->dependencia->dependencia)}}</td>
+                        <td>{{trim($item->jefe->FullName) }}</td>
+                        <td class="table-action ">
                             <div class="button-list">
                                 @include('shared.ui_kit.__edit_item')
                                 @include('shared.ui_kit.__remove_item')

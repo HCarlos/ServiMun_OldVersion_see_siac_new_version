@@ -206,7 +206,25 @@ class CreateDenunciasTable extends Migration
 
         });
 
+        Schema::create($tableNames['dependencia_jefe'], function (Blueprint $table) use ($tableNames){
+            $table->increments('id');
+            $table->unsignedInteger('jefe_id')->default(0)->index();
+            $table->unsignedInteger('dependencia_id')->default(0)->index();
+            $table->softDeletes();
+            $table->timestamps();
+            $table->unique(['jefe_id', 'dependencia_id']);
 
+            $table->foreign('jefe_id')
+                ->references('id')
+                ->on($tableNames['users'])
+                ->onDelete('cascade');
+
+            $table->foreign('dependencia_id')
+                ->references('id')
+                ->on($tableNames['dependencias'])
+                ->onDelete('cascade');
+
+        });
 
         Schema::create($tableNames['jefe_subarea'], function (Blueprint $table) use ($tableNames){
             $table->increments('id');
@@ -254,6 +272,7 @@ class CreateDenunciasTable extends Migration
         Schema::dropIfExists($tableNames['area_subarea']);
         Schema::dropIfExists($tableNames['area_jefe']);
 
+        Schema::dropIfExists($tableNames['dependencia_jefe']);
         Schema::dropIfExists($tableNames['jefe_subarea']);
         Schema::dropIfExists($tableNames['servicio_subarea']);
 

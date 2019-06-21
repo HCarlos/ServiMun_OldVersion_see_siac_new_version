@@ -1,4 +1,4 @@
-@if(Auth::user()->getAuthIdentifier() == $item->user__id)
+@if(Auth::user()->getAuthIdentifier() == $user->id)
     <a href="#"
    class="action-icon text-center removeItemList"
    id="{{$removeItem.'-'.$item->id}}"

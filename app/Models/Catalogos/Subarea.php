@@ -62,7 +62,6 @@ class Subarea extends Model
                 'area_id' => $area_id,
                 'jefe_id' => $jefe_id,
             ]);
-//            dd($obj);
             if ($obj->id > 0) {
                 $obj->areas()->attach($area_id);
                 $obj->jefes()->attach($jefe_id);

@@ -68,6 +68,7 @@ return [
             'area_jefe' => 'area_jefe',
             'servicio_subarea' => 'servicio_subarea',
             'jefe_subarea' => 'jefe_subarea',
+            'dependencia_jefe' => 'dependencia_jefe',
             'denuncia_prioridad'     => 'denuncia_prioridad',
             'denuncia_origen'        => 'denuncia_origen',
             'denuncia_dependencia_servicio_estatus' => 'denuncia_dependencia_servicio_estatus',

@@ -75,6 +75,9 @@ class Servicio extends Model
                 'medida_id' => $medida_id,
                 'subarea_id' => $subarea_id,
             ]);
+            if ($obj->id > 0) {
+                $obj->subareas()->attach($subarea_id);
+            }
         }
         return $obj;
     }
