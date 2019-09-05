@@ -97,13 +97,21 @@
             <div class="form-group row mb-1">
                 <label for = "dependencia_id" class="col-md-3 col-form-label">Dependencia</label>
                 <div class="col-md-9">
-                    {{ Form::select('dependencia_id',$dependencias,$items->dependencia_id,['id'=>'dependencia_id','class'=>'form-control, select2','data-toggle'=>'select2']) }}
+                    <select id="dependencia_id" name="dependencia_id" class="form-control" size="1">
+                    @foreach($dependencias as $t)
+                        <option value="{{$t->id}}" {{ $t->id == $items->dependencia_id  ? 'selected': '' }} >{{ $t->dependencia }} </option>
+                    @endforeach
+                    </select>
                 </div>
             </div>
             <div class="form-group row mb-1">
                 <label for = "servicio_id" class="col-md-3 col-form-label">Servicio</label>
                 <div class="col-md-9">
-                    {{ Form::select('servicio_id',$servicios,$items->dependencia_id,['id'=>'servicio_id','class'=>'form-control, select2','data-toggle'=>'select2']) }}
+                    <select id="servicio_id" name="servicio_id" class="form-control" size="1">
+                        @foreach($servicios as $t)
+                            <option value="{{$t->id}}" {{ $t->id == $items->servicio_id  ? 'selected': '' }} >{{ $t->servicio }} </option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
             <div class="form-group row mb-1">

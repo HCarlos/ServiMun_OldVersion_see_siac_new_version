@@ -2270,16 +2270,16 @@
         },
         {
             "name": "laravelcollective/html",
-            "version": "v5.8.0",
+            "version": "v5.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/LaravelCollective/html.git",
-                "reference": "0e360143d3476fe4141d267a260c140569fa207b"
+                "reference": "3a1c9974ea629eed96e101a24e3852ced382eb29"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/LaravelCollective/html/zipball/0e360143d3476fe4141d267a260c140569fa207b",
-                "reference": "0e360143d3476fe4141d267a260c140569fa207b",
+                "url": "https://api.github.com/repos/LaravelCollective/html/zipball/3a1c9974ea629eed96e101a24e3852ced382eb29",
+                "reference": "3a1c9974ea629eed96e101a24e3852ced382eb29",
                 "shasum": ""
             },
             "require": {
@@ -2324,30 +2324,30 @@
             ],
             "authors": [
                 {
-                    "name": "Taylor Otwell",
-                    "email": "taylorotwell@gmail.com"
-                },
-                {
                     "name": "Adam Engebretson",
                     "email": "adam@laravelcollective.com"
+                },
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylorotwell@gmail.com"
                 }
             ],
             "description": "HTML and Form Builders for the Laravel Framework",
             "homepage": "https://laravelcollective.com",
-            "time": "2019-03-01T22:53:41+00:00"
+            "time": "2019-09-05T12:32:25+00:00"
         },
         {
             "name": "laravelcollective/remote",
-            "version": "v5.8",
+            "version": "v5.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/LaravelCollective/remote.git",
-                "reference": "f37309c1cbdfe5c2e01e4f90b6f21a6180e215e1"
+                "reference": "365376098e828b2a4e7ed15862161978111cc18d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/LaravelCollective/remote/zipball/f37309c1cbdfe5c2e01e4f90b6f21a6180e215e1",
-                "reference": "f37309c1cbdfe5c2e01e4f90b6f21a6180e215e1",
+                "url": "https://api.github.com/repos/LaravelCollective/remote/zipball/365376098e828b2a4e7ed15862161978111cc18d",
+                "reference": "365376098e828b2a4e7ed15862161978111cc18d",
                 "shasum": ""
             },
             "require": {
@@ -2363,6 +2363,9 @@
             },
             "type": "library",
             "extra": {
+                "branch-alias": {
+                    "dev-master": "6.0-dev"
+                },
                 "laravel": {
                     "providers": [
                         "Collective\\Remote\\RemoteServiceProvider"
@@ -2383,17 +2386,17 @@
             ],
             "authors": [
                 {
-                    "name": "Tom Shafer",
-                    "email": "tj@tjshafer.com"
-                },
-                {
                     "name": "Taylor Otwell",
                     "email": "taylorotwell@gmail.com"
+                },
+                {
+                    "name": "Tom Shafer",
+                    "email": "tj@tjshafer.com"
                 }
             ],
             "description": "Remote SSH access for The Laravel Framework.",
             "homepage": "http://laravelcollective.com",
-            "time": "2019-03-04T17:52:07+00:00"
+            "time": "2019-09-05T12:49:28+00:00"
         },
         {
             "name": "league/flysystem",
@@ -2544,29 +2547,29 @@
         },
         {
             "name": "maatwebsite/excel",
-            "version": "3.1.15",
+            "version": "3.1.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Maatwebsite/Laravel-Excel.git",
-                "reference": "7d47c7af2ddcf93b4fee4f167e10702e918f69f1"
+                "reference": "bd377ad37b285d9bc25c9adca360e4392041dea6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Maatwebsite/Laravel-Excel/zipball/7d47c7af2ddcf93b4fee4f167e10702e918f69f1",
-                "reference": "7d47c7af2ddcf93b4fee4f167e10702e918f69f1",
+                "url": "https://api.github.com/repos/Maatwebsite/Laravel-Excel/zipball/bd377ad37b285d9bc25c9adca360e4392041dea6",
+                "reference": "bd377ad37b285d9bc25c9adca360e4392041dea6",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "illuminate/support": "5.5.*|5.6.*|5.7.*|5.8.*",
+                "illuminate/support": "5.5.*|5.6.*|5.7.*|5.8.*|^6.0",
                 "opis/closure": "^3.1",
                 "php": "^7.0",
                 "phpoffice/phpspreadsheet": "^1.6"
             },
             "require-dev": {
                 "mockery/mockery": "^1.1",
-                "orchestra/database": "^3.8",
-                "orchestra/testbench": "^3.8",
+                "orchestra/database": "^4.0",
+                "orchestra/testbench": "^4.0",
                 "phpunit/phpunit": "^8.0",
                 "predis/predis": "^1.1"
             },
@@ -2608,7 +2611,7 @@
                 "php",
                 "phpspreadsheet"
             ],
-            "time": "2019-07-16T08:40:48+00:00"
+            "time": "2019-09-04T19:28:20+00:00"
         },
         {
             "name": "markbaker/complex",
@@ -6407,24 +6410,24 @@
         },
         {
             "name": "yajra/laravel-datatables-oracle",
-            "version": "v9.5.0",
+            "version": "v9.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yajra/laravel-datatables.git",
-                "reference": "4af0c9fcdc57734859ff418eb0474e44f2c807e6"
+                "reference": "d8a965ab91662216956288cafcc4c60306af7b3f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yajra/laravel-datatables/zipball/4af0c9fcdc57734859ff418eb0474e44f2c807e6",
-                "reference": "4af0c9fcdc57734859ff418eb0474e44f2c807e6",
+                "url": "https://api.github.com/repos/yajra/laravel-datatables/zipball/d8a965ab91662216956288cafcc4c60306af7b3f",
+                "reference": "d8a965ab91662216956288cafcc4c60306af7b3f",
                 "shasum": ""
             },
             "require": {
-                "illuminate/database": "5.8.*",
-                "illuminate/filesystem": "5.8.*",
-                "illuminate/http": "5.8.*",
-                "illuminate/support": "5.8.*",
-                "illuminate/view": "5.8.*",
+                "illuminate/database": "5.8.*|^6.0",
+                "illuminate/filesystem": "5.8.*|^6.0",
+                "illuminate/http": "5.8.*|^6.0",
+                "illuminate/support": "5.8.*|^6.0",
+                "illuminate/view": "5.8.*|^6.0",
                 "php": "^7.1.3"
             },
             "require-dev": {
@@ -6474,7 +6477,7 @@
                 "jquery",
                 "laravel"
             ],
-            "time": "2019-08-31T00:54:20+00:00"
+            "time": "2019-09-04T05:02:17+00:00"
         }
     ],
     "packages-dev": [
@@ -6541,16 +6544,16 @@
         },
         {
             "name": "beyondcode/laravel-er-diagram-generator",
-            "version": "1.2.2",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/beyondcode/laravel-er-diagram-generator.git",
-                "reference": "70c8cf8417146c6371b3bcbb67dcf4e6fb7b6968"
+                "reference": "02681138cffb0ab643e8893dbd1148c95f0c9809"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/beyondcode/laravel-er-diagram-generator/zipball/70c8cf8417146c6371b3bcbb67dcf4e6fb7b6968",
-                "reference": "70c8cf8417146c6371b3bcbb67dcf4e6fb7b6968",
+                "url": "https://api.github.com/repos/beyondcode/laravel-er-diagram-generator/zipball/02681138cffb0ab643e8893dbd1148c95f0c9809",
+                "reference": "02681138cffb0ab643e8893dbd1148c95f0c9809",
                 "shasum": ""
             },
             "require": {
@@ -6561,8 +6564,8 @@
             },
             "require-dev": {
                 "larapack/dd": "^1.0",
-                "orchestra/testbench": "~3.5",
-                "phpunit/phpunit": "^7.0",
+                "orchestra/testbench": "~3.5|~3.6|~3.7|~3.8|^4.0",
+                "phpunit/phpunit": "^7.0| ^8.0",
                 "spatie/phpunit-snapshot-assertions": "^1.3"
             },
             "type": "library",
@@ -6570,10 +6573,7 @@
                 "laravel": {
                     "providers": [
                         "BeyondCode\\ErdGenerator\\ErdGeneratorServiceProvider"
-                    ],
-                    "aliases": {
-                        "ErdGenerator": "BeyondCode\\ErdGenerator\\ErdGeneratorFacade"
-                    }
+                    ]
                 }
             },
             "autoload": {
@@ -6599,7 +6599,7 @@
                 "beyondcode",
                 "laravel-er-diagram-generator"
             ],
-            "time": "2019-05-30T09:30:07+00:00"
+            "time": "2019-09-04T07:29:53+00:00"
         },
         {
             "name": "filp/whoops",

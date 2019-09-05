@@ -101,10 +101,10 @@ class Denuncia extends Model
         return $this->belongsToMany(Ubicacion::class,'denuncia_ubicacion','denuncia_id','ubicacion_id');
     }
 
-
     public function servicio(){
         return $this->hasOne(Servicio::class,'id','servicio_id');
     }
+
     public function servicios(){
         return $this->belongsToMany(Servicio::class,'denuncia_servicio','denuncia_id','servicio_id');
     }

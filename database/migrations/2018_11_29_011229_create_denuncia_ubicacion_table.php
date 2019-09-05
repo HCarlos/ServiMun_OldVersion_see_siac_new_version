@@ -372,10 +372,11 @@ class CreateDenunciaUbicacionTable extends Migration
             $table->unsignedInteger('dependencia_id')->default(0)->index();
             $table->unsignedInteger('servicio_id')->default(0)->index();
             $table->unsignedInteger('estatu_id')->default(0)->index();
+            $table->text('observaciones')->default('')->nullable();
             $table->dateTime('fecha_movimiento')->nullable();
             $table->softDeletes();
             $table->timestamps();
-            $table->unique(['denuncia_id', 'dependencia_id', 'servicio_id']);
+            $table->unique(['denuncia_id', 'dependencia_id', 'servicio_id', 'estatu_id']);
 
             $table->foreign('denuncia_id')
                 ->references('id')

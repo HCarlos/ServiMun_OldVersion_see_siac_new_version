@@ -87,12 +87,16 @@ class DenunciaController extends Controller
         $item         = Denuncia::find($Id);
         $Prioridades  = Prioridad::all()->sortBy('prioridad');
         $Origenes     = Origen::all()->sortBy('origen');
-        $Dependencias = Dependencia::all()->sortBy('dependencia')->pluck('dependencia','id');
-        $Servicios    = Servicio::all()->sortBy('servicio')->pluck('servicio','id');
+        $Dependencias = Dependencia::all()->sortBy('dependencia');
+
+        $Servicios = $this->getQueryServiciosFromDependencias($item->dependencia_id);
+
         $Ciudadanos   = User::all()->sortBy(function ($q){
             return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
         });
         $Estatus      = Estatu::all()->sortBy('estatus');
+
+        //dd($Dependencias);
 
         return view('denuncia.denuncia.denuncia_edit',
             [
@@ -127,8 +131,7 @@ class DenunciaController extends Controller
     {
         $Prioridades  = Prioridad::all()->sortBy('prioridad');
         $Origenes     = Origen::all()->sortBy('origen');
-        $Dependencias = Dependencia::all()->sortBy('dependencia')->pluck('dependencia','id');
-        $Servicios    = Servicio::all()->sortBy('servicio')->pluck('servicio','id');
+        $Dependencias = Dependencia::all()->sortBy('dependencia');
         $Ciudadanos   = User::all()->sortBy(function ($q){
            return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
         });
@@ -141,7 +144,6 @@ class DenunciaController extends Controller
                 'prioridades'     => $Prioridades,
                 'origenes'        => $Origenes,
                 'dependencias'    => $Dependencias,
-                'servicios'       => $Servicios,
                 'ciudadanos'      => $Ciudadanos,
                 'estatus'         => $Estatus,
                 'postNew'         => 'createDenuncia',
@@ -268,16 +270,8 @@ class DenunciaController extends Controller
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //
     protected function getServiciosFromDependencias($id= 0)
     {
-//        dd($id);
-        $item = Servicio::whereHas('subareas', function($p) use ($id) {
-           $p->whereHas("areas", function($q) use ($id){
-               $q->whereHas("dependencias", function ($r) use ($id){
-                    return $r->where("dependencia_id",$id);
-               });
-            });
-        })->get();
 
-        //dd($item)
+        $item = $this->getQueryServiciosFromDependencias($id);
 
         if (isset($item)) {
             return Response::json(['mensaje' => 'OK', 'data' => $item, 'status' => '200'], 200);
@@ -287,7 +281,15 @@ class DenunciaController extends Controller
 
     }
 
-
+    private function getQueryServiciosFromDependencias($id=0){
+        return Servicio::whereHas('subareas', function($p) use ($id) {
+            $p->whereHas("areas", function($q) use ($id){
+                $q->whereHas("dependencias", function ($r) use ($id){
+                    return $r->where("dependencia_id",$id);
+                });
+            });
+        })->get();
+    }
 
 
 

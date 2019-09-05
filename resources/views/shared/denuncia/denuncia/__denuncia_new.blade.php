@@ -97,15 +97,19 @@
             <div class="form-group row mb-1">
                 <label for = "dependencia_id" class="col-md-3 col-form-label">Dependencia</label>
                 <div class="col-md-9">
-{{--                    {{ Form::select('dependencia_id',$dependencias,null,['id'=>'dependencia_id','class'=>'form-control, select2','data-toggle'=>'select2']) }}--}}
-                    {{ Form::select('dependencia_id',$dependencias,null,['id'=>'dependencia_id','class'=>'form-control']) }}
+                    <select id="dependencia_id" name="dependencia_id" class="form-control" size="1">
+                        <option value="0" selected>Seleccione una Dependencia</option>
+                        @foreach($dependencias as $t)
+                            <option value="{{$t->id}}" >{{ $t->dependencia }} </option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
             <div class="form-group row mb-1">
                 <label for = "servicio_id" class="col-md-3 col-form-label">Servicio</label>
                 <div class="col-md-9">
-{{--                    {{ Form::select('servicio_id',$servicios,null,['id'=>'servicio_id','class'=>'form-control, select2','data-toggle'=>'select2']) }}--}}
-                    {{ Form::select('servicio_id',$servicios,null,['id'=>'servicio_id','class'=>'form-control']) }}
+                    <select id="servicio_id" name="servicio_id" class="form-control" size="1">
+                    </select>
                 </div>
             </div>
             <div class="form-group row mb-1">

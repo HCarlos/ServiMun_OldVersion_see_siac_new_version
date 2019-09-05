@@ -5,6 +5,7 @@
             if( $(".preloader") ){
                 $(".preloader").hide();
             }
+
             if  ($("#fromPhotoProfile") ){
                 $("#fromPhotoProfile").on("submit",function(event){
                     // event.preventDefault();

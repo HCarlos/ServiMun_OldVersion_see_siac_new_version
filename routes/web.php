@@ -264,8 +264,10 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp'], function () {
     Route::put('findDataInDenuncia/', 'Denuncia\DenunciaController@findDataInDenuncia')->name('findDataInDenuncia');
     Route::post('showDataListDenunciaExcel1A/', 'External\Denuncia\ListDenunciaXLSXController@getListDenunciaXLSX')->name('showDataListDenunciaExcel1A');
     Route::get('/imprimir_denuncia/{Id}', 'External\Denuncia\HojaDenunciaController@imprimirDenuncia')->name('imprimirDenuncia/');
-    Route::get('getServiciosFromDependencias/{id}', 'Denuncia\DenunciaController@getServiciosFromDependencias')->name('getServiciosFromDependencias');
 
+    Route::get('getServiciosFromDependencias/{id}', 'Denuncia\DenunciaController@getServiciosFromDependencias')->name('getServiciosFromDependencias');
+//    Route::get('newServicioDependenciaDenuncia', 'Denuncia\DenunciaController@newServicioDependenciaDenuncia')->name('newServicioDependenciaDenuncia');
+//    Route::post('addServicioDependenciaDenuncia', 'Denuncia\DenunciaController@addServicioDependenciaDenuncia')->name('addServicioDependenciaDenuncia');
 
     // PIVOTE DENUNCIA DEPENDENCIA SERVICIO
 //    Route::get('listDenunciaDependenciaServicio/{Id}', 'Denuncia\DenunciaDependenciaServicioController@index')->name('listDenunciaDependenciaServicio');
@@ -283,6 +285,11 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp|DELEGADO'], functio
 
     // PIVOTE DENUNCIA DEPENDENCIA SERVICIO
     Route::get('listDenunciaDependenciaServicio/{Id}', 'Denuncia\DenunciaDependenciaServicioController@index')->name('listDenunciaDependenciaServicio');
+    Route::get('addDenunciaDependenciaServicio/{Id}', 'Denuncia\DenunciaDependenciaServicioController@addItem')->name('addDenunciaDependenciaServicio');
+    Route::post('postAddDenunciaDependenciaServicio', 'Denuncia\DenunciaDependenciaServicioController@postNew')->name('postAddDenunciaDependenciaServicio');
+    Route::get('editDenunciaDependenciaServicio/{Id}', 'Denuncia\DenunciaDependenciaServicioController@editItem')->name('editDenunciaDependenciaServicio');
+    Route::post('putAddDenunciaDependenciaServicio', 'Denuncia\DenunciaDependenciaServicioController@putEdit')->name('putAddDenunciaDependenciaServicio');
+    Route::get('removeDenunciaDependenciaServicio/{id}', 'Denuncia\DenunciaDependenciaServicioController@removeItem')->name('removeDenunciaDependenciaServicio');
 
     // Catálogo de DENUNCIAS CIUDADANAS
     Route::get('listDenunciasCiudadanas/', 'Denuncia\DenunciaCiudadanaController@index')->name('listDenunciasCiudadanas');

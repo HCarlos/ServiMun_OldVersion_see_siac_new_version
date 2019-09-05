@@ -150,6 +150,7 @@ return array(
     'App\\Models\\Catalogos\\Subarea' => $baseDir . '/app/Models/Catalogos/Subarea.php',
     'App\\Models\\Denuncias\\Denuncia' => $baseDir . '/app/Models/Denuncias/Denuncia.php',
     'App\\Models\\Denuncias\\DenunciaEstatu' => $baseDir . '/app/Models/Denuncias/DenunciaEstatu.php',
+    'App\\Models\\Denuncias\\Denuncia_Dependencia_Servicio' => $baseDir . '/app/Models/Denuncias/Denuncia_Dependencia_Servicio.php',
     'App\\Models\\Denuncias\\Imagene' => $baseDir . '/app/Models/Denuncias/Imagene.php',
     'App\\Models\\Denuncias\\Respuesta' => $baseDir . '/app/Models/Denuncias/Respuesta.php',
     'App\\Models\\Users\\Categoria' => $baseDir . '/app/Models/Users/Categoria.php',

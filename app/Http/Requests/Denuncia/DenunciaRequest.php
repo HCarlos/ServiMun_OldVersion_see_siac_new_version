@@ -109,7 +109,7 @@ class DenunciaRequest extends FormRequest
         $Item->origenes()->attach($this->origen_id);
         $Item->dependencias()->attach($this->dependencia_id,['servicio_id'=>$this->servicio_id,'estatu_id'=>$this->estatus_id,'fecha_movimiento' => now() ]);
         $Item->ubicaciones()->attach($this->ubicacion_id);
-//        $Item->servicios()->attach($this->servicio_id);
+        $Item->servicios()->attach($this->servicio_id);
 
 //        DenunciaEstatu::where('denuncia_id',$this->id)->update(['ultimo'=>false]);
         $Item->estatus()->attach($this->estatus_id,['ultimo'=>true]);
@@ -124,7 +124,8 @@ class DenunciaRequest extends FormRequest
         $Item->origenes()->detach($this->origen_id);
         $Item->dependencias()->detach($this->dependencia_id);
         $Item->ubicaciones()->detach($this->ubicacion_id);
-//        $Item->servicios()->detach($this->servicio_id);
+        $Item->servicios()->detach($this->servicio_id);
+
         $Item->estatus()->detach($this->estatus_id);
         DenunciaEstatu::where('denuncia_id',$this->id)->orderByDesc('id')->update(['ultimo'=>true]);
         $Item->ciudadanos()->detach($this->ciudadano_id);

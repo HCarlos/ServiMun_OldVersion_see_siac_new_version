@@ -845,6 +845,7 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         'App\\Models\\Catalogos\\Subarea' => __DIR__ . '/../..' . '/app/Models/Catalogos/Subarea.php',
         'App\\Models\\Denuncias\\Denuncia' => __DIR__ . '/../..' . '/app/Models/Denuncias/Denuncia.php',
         'App\\Models\\Denuncias\\DenunciaEstatu' => __DIR__ . '/../..' . '/app/Models/Denuncias/DenunciaEstatu.php',
+        'App\\Models\\Denuncias\\Denuncia_Dependencia_Servicio' => __DIR__ . '/../..' . '/app/Models/Denuncias/Denuncia_Dependencia_Servicio.php',
         'App\\Models\\Denuncias\\Imagene' => __DIR__ . '/../..' . '/app/Models/Denuncias/Imagene.php',
         'App\\Models\\Denuncias\\Respuesta' => __DIR__ . '/../..' . '/app/Models/Denuncias/Respuesta.php',
         'App\\Models\\Users\\Categoria' => __DIR__ . '/../..' . '/app/Models/Users/Categoria.php',

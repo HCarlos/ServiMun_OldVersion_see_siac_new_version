@@ -1,7 +1,7 @@
 
 <div class="button-list mt-md-2">
     @isset($newItem)
-        <a href="{{route($newItem)}}"  @isset($newWindow) target="_blank" @endisset class="btn btn-outline-light btn-rounded btn-sm ml-3" data-toggle="tooltip" data-placement="top" data-original-title="Nueva Denuncia">
+        <a href="{{route($newItem,['Id'=>$Id])}}"  @isset($newWindow) target="_blank" @endisset class="btn btn-outline-light btn-rounded btn-sm ml-3" data-toggle="tooltip" data-placement="top" data-original-title="Agregar dependencia a Denuncia">
             <i class="fas fa-plus"></i>
         </a>
     @endisset

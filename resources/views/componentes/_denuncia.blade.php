@@ -1,11 +1,3 @@
-{{--<div class="row">--}}
-{{--    <div class="col-12">--}}
-{{--        <div class="page-title-box">--}}
-{{--            <h4 class="page-title">{{$titulo_catalogo}} <small>{{$titulo_header}}</small></h4>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--</div>--}}
-
 <div class="row mt-3">
     {{$contenido}}
 </div>
@@ -17,8 +9,6 @@
     <script >
         jQuery(function($) {
             $(document).ready(function() {
-
-                // "use strict";
 
                 if ( $("#search_autocomplete") ){
 
@@ -61,17 +51,18 @@
 
                 $("#dependencia_id").on("change",function (event) {
                     var Id = event.currentTarget.value;
+                    $("#servicio_id").empty();
                     $.get( "/getServiciosFromDependencias/"+Id, function( data ) {
-                        alert(data.data);
-                        // $("#ubicacion_id").val(data.data.id);
-                        // $("#ubicacion_id_span").html(data.data.id);
-                        // $("#ubicacion").val(data.data.calle+' '+data.data.colonia+' '+data.data.comunidad+' '+data.data.ciudad+' '+data.data.municipio+' '+data.data.estado+' '+data.data.cp);
-                        // $("#search_autocomplete").val("");
+                        $("#servicio_id").empty();
+                        if ( data.data.length > 0 ){
+                            $.each(data.data, function(i, item) {
+                                $("#servicio_id").append('<option value="'+item.id+'" > '+item.servicio+'</option>');
+                            });
+                        }
                     }, "json" );
 
                 });
 
-                // var select2 = $("#dependencia_id").select2({
             });
         });
 

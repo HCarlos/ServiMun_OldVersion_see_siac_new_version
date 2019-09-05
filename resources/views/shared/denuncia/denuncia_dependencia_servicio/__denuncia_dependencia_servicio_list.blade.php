@@ -12,24 +12,22 @@
     <tbody>
 
     @foreach($items as $item)
-        @foreach($item->denuncia_servicios as $serv)
         <tr>
-            <td class="table-user">{{$item->id}}</td>
+        <td class="table-user">{{$item->id}}</td>
             <td>{{$item->dependencia->dependencia}}</td>
-            <td>{{($serv->servicio)}}</td>
-            <td>{{($item->Estatu->estatus)}}</td>
-            <td>{{($serv->pivot->fecha_movimiento)}}</td>
-            <td class="table-action tbl100W">
-                <div class="button-list">
-{{--                    @include('shared.ui_kit.__edit_item')--}}
-{{--                    @include('shared.ui_kit.__remove_item')--}}
-{{--                    @include('shared.ui_kit.__respuestas_list_item')--}}
-{{--                    @include('shared.ui_kit.__imagenes_list_item')--}}
-{{--                    @include('shared.ui_kit.__print_denuncia_item')--}}
-                </div>
-            </td>
+                <td>{{$item->servicio->servicio}}</td>
+                    <td>{{$item->estatu->estatus}}</td>
+                    <td>{{$item->fecha_movimiento}}</td>
+                    <td class="table-action tbl100W">
+                        <div class="button-list">
+                            @include('shared.ui_kit.__edit_item')
+                            @include('shared.ui_kit.__remove_item')
+        {{--                    @include('shared.ui_kit.__respuestas_list_item')--}}
+        {{--                    @include('shared.ui_kit.__imagenes_list_item')--}}
+        {{--                    @include('shared.ui_kit.__print_denuncia_item')--}}
+                        </div>
+                    </td>
         </tr>
-    @endforeach
     @endforeach
 
     </tbody>
