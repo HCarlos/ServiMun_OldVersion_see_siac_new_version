@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Collection;
 use ReflectionClass;
 use ReflectionMethod;
+use Illuminate\Support\Arr;
+
 
 class RelationFinder
 {
@@ -40,7 +42,7 @@ class RelationFinder
 
         $relations = $relations->filter();
 
-        if ($ignoreRelations = array_get(config('erd-generator.ignore', []),$model))
+        if ($ignoreRelations = Arr::get(config('erd-generator.ignore', []),$model))
         {
             $relations = $relations->diffKeys(array_flip($ignoreRelations));
         }
@@ -80,7 +82,7 @@ class RelationFinder
 
                 if ($return instanceof BelongsTo) {
                     $foreignKey = $this->getParentKey($return->getQualifiedOwnerKeyName());
-                    $localKey = $return->getForeignKeyName();
+                    $localKey = method_exists($return, 'getForeignKeyName') ? $return->getForeignKeyName() : $return->getForeignKey();
                 }
 
                 return [
@@ -96,5 +98,5 @@ class RelationFinder
         } catch (\Throwable $e) {}
         return null;
     }
-    
+
 }

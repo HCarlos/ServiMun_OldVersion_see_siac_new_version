@@ -18,8 +18,10 @@ use Geocoder\Laravel\Exceptions\InvalidDumperException;
 use Geocoder\ProviderAggregator;
 use Geocoder\Query\GeocodeQuery;
 use Geocoder\Query\ReverseQuery;
+use Illuminate\Log\Logger;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use Psr\Log\LoggerAwareTrait;
 use ReflectionClass;
 
 /**
@@ -219,6 +221,20 @@ class ProviderAndDumperAggregator
         return config('geocoder.adapter');
     }
 
+    protected function getReader()
+    {
+        $reader = config('geocoder.reader');
+
+        if (is_array(config('geocoder.reader'))) {
+            $readerClass = array_key_first(config('geocoder.reader'));
+            $readerArguments = config('geocoder.reader')[$readerClass];
+            $reflection = new ReflectionClass($readerClass);
+            $reader = $reflection->newInstanceArgs($readerArguments);
+        }
+
+        return $reader;
+    }
+
     protected function getArguments(array $arguments, string $provider) : array
     {
         if ($provider === 'Geocoder\Provider\Chain\Chain') {
@@ -230,9 +246,11 @@ class ProviderAndDumperAggregator
         $adapter = $this->getAdapterClass($provider);
 
         if ($adapter) {
-            $adapter = $this->requiresReader($provider)
-                ? new $adapter(config('geocoder.reader'))
-                : new $adapter;
+            if ($this->requiresReader($provider)) {
+                $adapter = new $adapter($this->getReader());
+            } else {
+                $adapter = new $adapter;
+            }
 
             array_unshift($arguments, $adapter);
         }
@@ -246,8 +264,17 @@ class ProviderAndDumperAggregator
             $arguments = $this->getArguments($arguments, $provider);
             $reflection = new ReflectionClass($provider);
 
-            if ($provider === 'Geocoder\Provider\Chain\Chain') {
-                return $reflection->newInstance($arguments);
+            if ($provider === "Geocoder\Provider\Chain\Chain") {
+                $chainProvider = $reflection->newInstance($arguments);
+
+                if (class_exists(Logger::class)
+                    && in_array(LoggerAwareTrait::class, class_uses($chainProvider))
+                    && app(Logger::class) !== null
+                ) {
+                    $chainProvider->setLogger(app(Logger::class));
+                }
+
+                return $chainProvider;
             }
 
             return $reflection->newInstanceArgs($arguments);

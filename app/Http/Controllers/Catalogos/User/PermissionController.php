@@ -54,10 +54,13 @@ class PermissionController extends Controller
 
     public function asignar($Id, $namePermissions)
     {
+        dd(1);
+        /*
         $user = User::findOrFail($Id);
-//        dd($user->username);
+        dd($namePermissions);
         $permissions = explode('|',$namePermissions);
         foreach($permissions AS $i=>$valor) {
+//                dd($permissions[$i]);
             if ($permissions[$i] !== ""){
                 $permission = Permission::where('id', $permissions[$i])->first();
 //                dd($permission);
@@ -71,6 +74,7 @@ class PermissionController extends Controller
                 }
             }
         }
+        */
         return Response::json(['mensaje' => "/asignaPermission/$Id", 'data' => 'OK', 'status' => '200'], 200);
 
     }

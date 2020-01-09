@@ -6,6 +6,8 @@
     "type": "project",
     "require": {
         "php": "^7.3.1",
+        "symfony/mime": "4.3.8",
+        "symfony/http-foundation": "4.3.8",
         "caouecs/laravel-lang": "~3.0",
         "doctrine/dbal": "^2.8",
         "elibyy/tcpdf-laravel": "^5.7",

@@ -88,12 +88,21 @@ return [
     |
     | You can specify a reader for specific providers, like GeoIp2, which
     | connect to a local file-database. The reader should be set to an
-    | instance of the required reader class.
+    | instance of the required reader class or an array containing the reader
+    | class and arguments.
     |
     | Please consult the official Geocoder documentation for more info.
     | https://github.com/geocoder-php/geoip2-provider
     |
     | Default: null
+    |
+    | Example:
+    |   'reader' => [
+    |       WebService::class => [
+    |           env('MAXMIND_USER_ID'),
+    |           env('MAXMIND_LICENSE_KEY')
+    |       ],
+    |   ],
     |
     */
     'reader' => null,

@@ -11,6 +11,7 @@
             @include('shared.catalogo.user.__user_list')
         </div>
     @endslot
+
 @endcatalogo
 
 @endsection
