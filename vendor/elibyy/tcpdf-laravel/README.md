@@ -1,7 +1,7 @@
-# Laravel 5.8 TCPDF
+# Laravel 6 & 7 TCPDF
 [![Latest Stable Version](https://poser.pugx.org/elibyy/tcpdf-laravel/v/stable)](https://packagist.org/packages/elibyy/tcpdf-laravel) [![Total Downloads](https://poser.pugx.org/elibyy/tcpdf-laravel/downloads)](https://packagist.org/packages/elibyy/tcpdf-laravel) [![Latest Unstable Version](https://poser.pugx.org/elibyy/tcpdf-laravel/v/unstable)](https://packagist.org/packages/elibyy/tcpdf-laravel) [![License](https://poser.pugx.org/elibyy/tcpdf-laravel/license)](https://packagist.org/packages/elibyy/tcpdf-laravel)
 
-A simple [Laravel 5](http://www.laravel.com) service provider with some basic configuration for including the [TCPDF library](http://www.tcpdf.org/)
+A simple [Laravel](http://www.laravel.com) service provider with some basic configuration for including the [TCPDF library](http://www.tcpdf.org/)
 
 #### TCPDF is not really supported in PHP 7 but there's a plan for supporting it, check [this](https://github.com/tecnickcom/tc-lib-pdf) out.
 
@@ -14,7 +14,7 @@ Laravel 5.5+ will use the auto-discovery function.
 ```json
 {
     "require": {
-        "elibyy/tcpdf-laravel": "5.8.*"
+        "elibyy/tcpdf-laravel": "6.0.*"
     }
 }
 ```
@@ -74,12 +74,12 @@ use PDF; // at the top of the file
 
 For a list of all available function take a look at the [TCPDF Documentation](http://www.tcpdf.org/doc/code/classTCPDF.html)
 
-## Configuration 
+## Configuration
 
 Laravel-TCPDF comes with some basic configuration.
 If you want to override the defaults, you can publish the config, like so:
 
-    php artisan vendor:publish
+    php artisan vendor:publish --provider="Elibyy\TCPDF\ServiceProvider"
 
 Now access `config/tcpdf.php` to customize.
 
@@ -88,7 +88,7 @@ Now access `config/tcpdf.php` to customize.
  * use_original_footer is to used the original `Footer()` from TCPDF.
     * Please note that `PDF::setFooterCallback(function($pdf){})` overrides this settings.
  * use_fpdi is so that our internal helper will extend `TcpdfFpdi` instead of `TCPDF`.
-    * Please note fpdi is not a dependency in my project so you will have to follow their install instructions [here](https://github.com/Setasign/FPDI)  
+    * Please note fpdi is not a dependency in my project so you will have to follow their install instructions [here](https://github.com/Setasign/FPDI)
 
 ## Header/Footer helpers
 

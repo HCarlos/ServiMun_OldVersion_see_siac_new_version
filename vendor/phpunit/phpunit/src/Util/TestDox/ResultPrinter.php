@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /*
  * This file is part of PHPUnit.
  *
@@ -12,17 +12,17 @@ namespace PHPUnit\Util\TestDox;
 use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\Test;
 use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\TestListener;
 use PHPUnit\Framework\TestSuite;
 use PHPUnit\Framework\Warning;
 use PHPUnit\Framework\WarningTestCase;
 use PHPUnit\Runner\BaseTestRunner;
+use PHPUnit\TextUI\ResultPrinter as ResultPrinterInterface;
 use PHPUnit\Util\Printer;
 
 /**
- * Base class for printers of TestDox documentation.
+ * @internal This class is not covered by the backward compatibility promise for PHPUnit
  */
-abstract class ResultPrinter extends Printer implements TestListener
+abstract class ResultPrinter extends Printer implements ResultPrinterInterface
 {
     /**
      * @var NamePrettifier
@@ -286,7 +286,7 @@ abstract class ResultPrinter extends Printer implements TestListener
     /**
      * Handler for 'on test' event.
      */
-    protected function onTest($name, bool $success = true): void
+    protected function onTest(string $name, bool $success = true): void
     {
     }
 
@@ -316,7 +316,7 @@ abstract class ResultPrinter extends Printer implements TestListener
 
         if (!empty($this->groups)) {
             foreach ($test->getGroups() as $group) {
-                if (\in_array($group, $this->groups)) {
+                if (\in_array($group, $this->groups, true)) {
                     return true;
                 }
             }
@@ -326,7 +326,7 @@ abstract class ResultPrinter extends Printer implements TestListener
 
         if (!empty($this->excludeGroups)) {
             foreach ($test->getGroups() as $group) {
-                if (\in_array($group, $this->excludeGroups)) {
+                if (\in_array($group, $this->excludeGroups, true)) {
                     return false;
                 }
             }

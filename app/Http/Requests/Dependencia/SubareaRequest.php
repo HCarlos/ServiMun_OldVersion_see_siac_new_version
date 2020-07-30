@@ -62,7 +62,13 @@ class SubareaRequest extends FormRequest
 
             } else {
                 $item = Subarea::find($this->id);
-                $item->update($Item);
+                $item->areas()->detach($item->area_id);
+                $item->jefes()->detach($item->jefe_id);
+
+                $item->areas()->attach($this->area_id);
+                $item->jefes()->attach($this->jefe_id);
+
+//                $item->update($Item);
             }
         }catch (QueryException $e){
             $Msg = new MessageAlertClass();
@@ -83,6 +89,6 @@ class SubareaRequest extends FormRequest
         }
     }
 
-    
-    
+
+
 }

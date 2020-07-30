@@ -8,7 +8,7 @@
     <div class="col-md-9">
         <select class="area_id form-control select2" data-toggle="select2"  name="area_id" id="area_id" size="1">
             @foreach($area as $t)
-                <option value="{{$t->id}}" @if($t->id == $items->area_id) selected @endif>{{ $t->area }}</option>
+                <option value="{{$t->id}}" @if($t->id == $items->area_id) selected @endif>{{ $t->area.' - '.$t->dependencia->abreviatura }}</option>
             @endforeach
         </select>
     </div>

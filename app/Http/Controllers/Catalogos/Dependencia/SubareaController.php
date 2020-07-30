@@ -54,10 +54,8 @@ class SubareaController extends Controller
         $Jefes = User::all()->sortBy(function($item) {
             return $item->ap_paterno.' '.$item->ap_materno.' '.$item->nombre;
         });
-        $Areas = Area::select('id','area')
-            ->orderBy('area')
-            ->get();
-
+        $Areas = Area::all(['id','area','dependencia_id'])->sortBy('area');
+//        dd($Areas);
         return view('catalogos.catalogo.dependencias.subarea.subarea_edit',
             [
                 'user' => Auth::user(),
@@ -87,9 +85,7 @@ class SubareaController extends Controller
         $Jefes = User::all()->sortBy(function($item) {
             return $item->ap_paterno.' '.$item->ap_materno.' '.$item->nombre;
         });
-        $Areas = Area::select('id','area')
-            ->orderBy('area')
-            ->get();
+        $Areas = Area::all(['id','area','dependencia_id'])->sortBy('area');
         return view('catalogos.catalogo.dependencias.subarea.subarea_new',
             [
                 'editItemTitle' => 'Nuevo',

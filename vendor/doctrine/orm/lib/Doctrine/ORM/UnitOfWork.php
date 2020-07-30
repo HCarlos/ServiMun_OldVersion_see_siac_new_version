@@ -21,10 +21,6 @@ namespace Doctrine\ORM;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\NotifyPropertyChanged;
-use Doctrine\Common\Persistence\Mapping\RuntimeReflectionService;
-use Doctrine\Common\Persistence\ObjectManagerAware;
-use Doctrine\Common\PropertyChangedListener;
 use Doctrine\DBAL\LockMode;
 use Doctrine\ORM\Cache\Persister\CachedPersister;
 use Doctrine\ORM\Event\LifecycleEventArgs;
@@ -43,10 +39,15 @@ use Doctrine\ORM\Persisters\Entity\JoinedSubclassPersister;
 use Doctrine\ORM\Persisters\Entity\SingleTablePersister;
 use Doctrine\ORM\Proxy\Proxy;
 use Doctrine\ORM\Utility\IdentifierFlattener;
+use Doctrine\Persistence\Mapping\RuntimeReflectionService;
+use Doctrine\Persistence\NotifyPropertyChanged;
+use Doctrine\Persistence\ObjectManagerAware;
+use Doctrine\Persistence\PropertyChangedListener;
 use InvalidArgumentException;
 use Throwable;
 use UnexpectedValueException;
 use function get_class;
+use function is_object;
 
 /**
  * The UnitOfWork is responsible for tracking changes to objects during an
@@ -424,10 +425,18 @@ class UnitOfWork implements PropertyChangedListener
                 }
             }
 
-            $conn->commit();
+            // Commit failed silently
+            if ($conn->commit() === false) {
+                $object = is_object($entity) ? $entity : null;
+
+                throw new OptimisticLockException('Commit failed', $object);
+            }
         } catch (Throwable $e) {
             $this->em->close();
-            $conn->rollBack();
+
+            if ($conn->isTransactionActive()) {
+                $conn->rollBack();
+            }
 
             $this->afterTransactionRolledBack();
 
@@ -1893,7 +1902,7 @@ class UnitOfWork implements PropertyChangedListener
      * @param object      $entity
      * @param array       $visited
      * @param object|null $prevManagedCopy
-     * @param array|null  $assoc
+     * @param string[]    $assoc
      *
      * @return object The managed copy of the entity.
      *
@@ -2588,13 +2597,13 @@ class UnitOfWork implements PropertyChangedListener
     /**
      * @param ClassMetadata $class
      *
-     * @return \Doctrine\Common\Persistence\ObjectManagerAware|object
+     * @return ObjectManagerAware|object
      */
     private function newInstance($class)
     {
         $entity = $class->newInstance();
 
-        if ($entity instanceof \Doctrine\Common\Persistence\ObjectManagerAware) {
+        if ($entity instanceof ObjectManagerAware) {
             $entity->injectObjectManager($this->em, $class);
         }
 

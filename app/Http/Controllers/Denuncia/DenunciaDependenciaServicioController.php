@@ -59,11 +59,11 @@ class DenunciaDependenciaServicioController extends Controller
     {
 //        dd($Id);
         $items        = Denuncia_Dependencia_Servicio::find($Id);
-//        dd($items);
+//        dd($items->dependencia_id);
         $Dependencias = Dependencia::all()->sortBy('dependencia');
         $Estatus      = Estatu::all()->sortBy('estatus');
         $Servicios    = $this->getQueryServiciosFromDependencias($items->dependencia_id);
-
+        dd($Servicios);
         return view('denuncia.denuncia_dependencia_servicio.denuncia_dependencia_servicio_edit',
             [
                 'user'            => Auth::user(),

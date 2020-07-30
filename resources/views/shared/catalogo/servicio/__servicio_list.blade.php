@@ -7,7 +7,6 @@
                     <tr role="row">
                         <th class="sorting_asc" aria-sort="ascending" aria-label="Name: activate to sort column descending">ID</th>
                         <th class="sorting" >Servicio</th>
-                        <th class="sorting" >Medida</th>
                         <th class="sorting" >Subarea</th>
                         <th style="width: 100vw"></th>
                     </tr>
@@ -17,7 +16,6 @@
                     <tr>
                         <td class="table-user">{{$item->id}}</td>
                         <td>{{$item->servicio}}</td>
-                        <td>{{$item->medida->medida}}</td>
                         <td>{{ $item->subarea->subarea.' - '.$item->subarea->area->area.' - '.$item->subarea->area->dependencia->dependencia }}</td>
                         <td class="table-action">
                             <div class="button-list">

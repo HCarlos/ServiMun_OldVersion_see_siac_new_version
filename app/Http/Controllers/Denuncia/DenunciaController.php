@@ -282,13 +282,16 @@ class DenunciaController extends Controller
     }
 
     private function getQueryServiciosFromDependencias($id=0){
-        return Servicio::whereHas('subareas', function($p) use ($id) {
+//        dd($id);
+        $items =  Servicio::whereHas('subareas', function($p) use ($id) {
             $p->whereHas("areas", function($q) use ($id){
                 $q->whereHas("dependencias", function ($r) use ($id){
                     return $r->where("dependencia_id",$id);
                 });
             });
         })->get();
+//        dd($items);
+        return $items;
     }
 
 

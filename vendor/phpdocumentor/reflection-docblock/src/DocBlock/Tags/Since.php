@@ -44,11 +44,11 @@ final class Since extends BaseTag implements Factory\StaticMethod
     )';
 
     /** @var string|null The version vector. */
-    private $version = '';
+    private $version;
 
     public function __construct(?string $version = null, ?Description $description = null)
     {
-        Assert::nullOrStringNotEmpty($version);
+        Assert::nullOrNotEmpty($version);
 
         $this->version     = $version;
         $this->description = $description;
@@ -69,6 +69,7 @@ final class Since extends BaseTag implements Factory\StaticMethod
         }
 
         Assert::notNull($descriptionFactory);
+
         return new static(
             $matches[1],
             $descriptionFactory->create($matches[2] ?? '', $context)
