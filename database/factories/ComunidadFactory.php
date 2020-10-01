@@ -1,6 +1,9 @@
 <?php
 
+use App\Models\Catalogos\Domicilios\Ciudad;
 use App\Models\Catalogos\Domicilios\Comunidad;
+use App\Models\Catalogos\Domicilios\Estado;
+use App\Models\Catalogos\Domicilios\Municipio;
 use App\Models\Catalogos\Domicilios\Tipocomunidad;
 use App\User;
 use Faker\Generator as Faker;

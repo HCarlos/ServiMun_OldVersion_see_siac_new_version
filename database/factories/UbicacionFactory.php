@@ -6,6 +6,7 @@ use App\Models\Catalogos\Domicilios\Colonia;
 use App\Models\Catalogos\Domicilios\Comunidad;
 use App\Models\Catalogos\Domicilios\Ubicacion;
 use Faker\Generator as Faker;
+use Illuminate\Support\Str;
 
 $factory->define(Ubicacion::class, function (Faker $faker) {
 
@@ -19,7 +20,7 @@ $factory->define(Ubicacion::class, function (Faker $faker) {
 
     return [
         'calle' => strtoupper($Calle->calle),
-        'num_ext' => str_random(10),
+        'num_ext' => Str::random(10),
         'colonia' => strtoupper($Colonia->colonia),
         'comunidad' => strtoupper($Comunidad->comunidad),
         'ciudad' => strtoupper($Comunidad->ciudad->ciudad),

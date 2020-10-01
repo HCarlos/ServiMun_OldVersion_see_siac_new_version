@@ -14,6 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Blade::withoutComponentTags();
 
         Blade::component('componentes._home','home');
         Blade::component('componentes._card','card');

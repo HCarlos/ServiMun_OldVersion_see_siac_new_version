@@ -6,13 +6,15 @@
     "type": "project",
     "require": {
         "php": "^7.3.1",
-        "caouecs/laravel-lang": "~7.0.1",
         "doctrine/dbal": "^2.10.2",
         "elibyy/tcpdf-laravel": "^7.0.0",
+        "facade/ignition": "^2.0",
         "fideloper/proxy": "^4.4",
+        "fruitcake/laravel-cors": "^2.0",
         "fzaninotto/faker": "^1.9.1",
         "intervention/image": "^2.5.1",
-        "laravel/framework": "^6.18.29",
+        "laravel-lang/lang": "~7.0",
+        "laravel/framework": "^7.0",
         "laravel/socialite": "^4.4.1",
         "laravel/tinker": "^2.4.1",
         "laravelcollective/html": "^6.1.2",
@@ -26,13 +28,11 @@
         "predis/predis": "^1.1.2",
         "setasign/fpdf": "^1.8.2",
         "spatie/laravel-permission": "^3.13.0",
-        "symfony/http-foundation": "4.3.8",
-        "symfony/mime": "4.3.8",
         "tecnickcom/tc-lib-pdf-font": "^1.8.7",
         "yajra/laravel-datatables-oracle": "^9.10.2"
     },
     "require-dev": {
-        "nunomaduro/collision": "^3.0.1",
+        "nunomaduro/collision": "^4.1",
         "phpunit/phpunit": "^9.2.6"
     },
     "autoload": {

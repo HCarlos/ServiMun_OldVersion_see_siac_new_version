@@ -14,12 +14,13 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+
 Route::get('/', function () {
     return view('welcome');
 });
 
 // Auth::routes();
-Auth::routes(['verify' => true]);
+//Auth::routes(['verify' => true]);
 
 // Authentication Routes...
 // $this

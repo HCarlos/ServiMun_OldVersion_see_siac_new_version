@@ -17,6 +17,8 @@ class ConfigurationUrlParser
         'postgres' => 'pgsql',
         'postgresql' => 'pgsql',
         'sqlite3' => 'sqlite',
+        'redis' => 'tcp',
+        'rediss' => 'tls',
     ];
 
     /**
@@ -31,9 +33,7 @@ class ConfigurationUrlParser
             $config = ['url' => $config];
         }
 
-        $url = $config['url'] ?? null;
-
-        $config = Arr::except($config, 'url');
+        $url = Arr::pull($config, 'url');
 
         if (! $url) {
             return $config;
