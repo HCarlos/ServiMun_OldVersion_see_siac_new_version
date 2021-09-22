@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
         Blade::component('componentes.form._form_modal','formModal');
         Blade::component('componentes.form._form_dropzone','formDropZone');
 
-        error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED);
+        //error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED);
 
     }
 

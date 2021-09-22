@@ -17,6 +17,7 @@ use PDO;
 use ReflectionClass;
 use ReflectionObject;
 use ReflectionProperty;
+use ReturnTypeWillChange;
 use stdClass;
 
 use function array_change_key_case;
@@ -270,6 +271,7 @@ class DB2Statement implements IteratorAggregate, StatementInterface, Result
      *
      * @deprecated Use iterateNumeric(), iterateAssociative() or iterateColumn() instead.
      */
+    #[ReturnTypeWillChange]
     public function getIterator()
     {
         return new StatementIterator($this);
@@ -455,9 +457,9 @@ class DB2Statement implements IteratorAggregate, StatementInterface, Result
     /**
      * Casts a stdClass object to the given class name mapping its' properties.
      *
-     * @param stdClass      $sourceObject     Object to cast from.
-     * @param string|object $destinationClass Name of the class or class instance to cast to.
-     * @param mixed[]       $ctorArgs         Arguments to use for constructing the destination class instance.
+     * @param stdClass            $sourceObject     Object to cast from.
+     * @param class-string|object $destinationClass Name of the class or class instance to cast to.
+     * @param mixed[]             $ctorArgs         Arguments to use for constructing the destination class instance.
      *
      * @return object
      *
@@ -527,7 +529,7 @@ class DB2Statement implements IteratorAggregate, StatementInterface, Result
         $handle = @tmpfile();
 
         if ($handle === false) {
-            throw CannotCreateTemporaryFile::new(error_get_last()['message']);
+            throw CannotCreateTemporaryFile::new(error_get_last());
         }
 
         return $handle;
@@ -542,7 +544,7 @@ class DB2Statement implements IteratorAggregate, StatementInterface, Result
     private function copyStreamToStream($source, $target): void
     {
         if (@stream_copy_to_stream($source, $target) === false) {
-            throw CannotCopyStreamToStream::new(error_get_last()['message']);
+            throw CannotCopyStreamToStream::new(error_get_last());
         }
     }
 
@@ -554,7 +556,7 @@ class DB2Statement implements IteratorAggregate, StatementInterface, Result
     private function writeStringToStream(string $string, $target): void
     {
         if (@fwrite($target, $string) === false) {
-            throw CannotWriteToTemporaryFile::new(error_get_last()['message']);
+            throw CannotWriteToTemporaryFile::new(error_get_last());
         }
     }
 }

@@ -30,70 +30,53 @@ use PHPUnit\Framework\TestCase;
  *
  * @SuppressWarnings(PHPMD.LongVariable)
  */
-class ImportTest extends TestCase
+class ImportTest extends TestUtil
 {
     protected $preserveGlobalState = false;
     protected $runTestInSeparateProcess = true;
 
-    public function setUp()
-    {
-        //$this->markTestSkipped(); // skip this test
-    }
-
-    /**
-     * @expectedException \Com\Tecnick\Pdf\Font\Exception
-     */
     public function testImportEmptyName()
     {
+        $this->bcExpectException('\Com\Tecnick\Pdf\Font\Exception');
         new \Com\Tecnick\Pdf\Font\Import('');
     }
 
-    /**
-     * @expectedException \Com\Tecnick\Pdf\Font\Exception
-     */
     public function testImportExist()
     {
-        $fin = __DIR__.'/../util/vendor/font/core/Helvetica.afm';
-        $outdir = __DIR__.'/../target/tmptest/';
+        $this->bcExpectException('\Com\Tecnick\Pdf\Font\Exception');
+        $fin = dirname(__DIR__).'/util/vendor/tecnickcom/tc-font-mirror/core/Helvetica.afm';
+        $outdir = dirname(__DIR__).'/target/tmptest/';
         system('rm -rf '.$outdir.' && mkdir -p '.$outdir);
         new \Com\Tecnick\Pdf\Font\Import($fin, $outdir);
         new \Com\Tecnick\Pdf\Font\Import($fin, $outdir);
     }
 
-    /**
-     * @expectedException \Com\Tecnick\Pdf\Font\Exception
-     */
     public function testImportWrongFile()
     {
-        new \Com\Tecnick\Pdf\Font\Import(__DIR__.'/../util/vendor/font/core/Missing.afm');
+        $this->bcExpectException('\Com\Tecnick\Pdf\Font\Exception');
+        new \Com\Tecnick\Pdf\Font\Import(dirname(__DIR__).'/util/vendor/tecnickcom/tc-font-mirror/core/Missing.afm');
     }
 
-    /**
-     * @expectedException \Com\Tecnick\Pdf\Font\Exception
-     */
     public function testImportDefaultOutput()
     {
-        define('K_PATH_FONTS', __DIR__.'/../target/tmptest/');
-        new \Com\Tecnick\Pdf\Font\Import(__DIR__.'/../util/vendor/font/core/Missing.afm');
+        $this->bcExpectException('\Com\Tecnick\Pdf\Font\Exception');
+        define('K_PATH_FONTS', dirname(__DIR__).'/target/tmptest/');
+        new \Com\Tecnick\Pdf\Font\Import(dirname(__DIR__).'/util/vendor/tecnickcom/tc-font-mirror/core/Missing.afm');
     }
 
-    /**
-     * @expectedException \Com\Tecnick\Pdf\Font\Exception
-     */
     public function testImportUnsupportedType()
     {
-        $fin = __DIR__.'/../util/vendor/font/core/Helvetica.afm';
-        $outdir = __DIR__.'/../target/tmptest/core/';
+        $this->bcExpectException('\Com\Tecnick\Pdf\Font\Exception');
+        $fin = dirname(__DIR__).'/util/vendor/tecnickcom/tc-font-mirror/core/Helvetica.afm';
+        $outdir = dirname(__DIR__).'/target/tmptest/core/';
         system('rm -rf '.$outdir.' && mkdir -p '.$outdir);
         new \Com\Tecnick\Pdf\Font\Import($fin, $outdir, 'ERROR');
     }
 
-    /**
-     * @expectedException \Com\Tecnick\Pdf\Font\Exception
-     */
     public function testImportUnsupportedOpenType()
     {
-        $outdir = __DIR__.'/../target/tmptest/core/';
+        $this->bcExpectException('\Com\Tecnick\Pdf\Font\Exception');
+        $outdir = dirname(__DIR__).'/target/tmptest/core/';
         system('rm -rf '.$outdir.' && mkdir -p '.$outdir);
         file_put_contents($outdir.'test.ttf', 'OTTO 1234');
         new \Com\Tecnick\Pdf\Font\Import($outdir.'test.ttf', $outdir);
@@ -104,9 +87,9 @@ class ImportTest extends TestCase
      */
     public function testImport($fontdir, $font, $outname, $type = null, $encoding = null)
     {
-        $indir = __DIR__.'/../util/vendor/font/'.$fontdir.'/';
-        $outdir = __DIR__.'/../target/tmptest/'.$fontdir.'/';
-        system('rm -rf '.__DIR__.'/../target/tmptest/ && mkdir -p '.$outdir);
+        $indir = dirname(__DIR__).'/util/vendor/tecnickcom/tc-font-mirror/'.$fontdir.'/';
+        $outdir = dirname(__DIR__).'/target/tmptest/'.$fontdir.'/';
+        system('rm -rf '.dirname(__DIR__).'/target/tmptest/ && mkdir -p '.$outdir);
         
         $imp = new \Com\Tecnick\Pdf\Font\Import($indir.$font, $outdir, $type, $encoding);
         $this->assertEquals($outname, $imp->getFontName());

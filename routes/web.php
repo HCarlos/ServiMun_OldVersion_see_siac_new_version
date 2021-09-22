@@ -19,8 +19,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Auth::routes();
-//Auth::routes(['verify' => true]);
+Auth::routes();
+Auth::routes(['verify' => true]);
 
 // Authentication Routes...
 // $this

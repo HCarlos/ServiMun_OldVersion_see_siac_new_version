@@ -18,18 +18,41 @@ class Storage
 
     public function load(string $path)
     {
-        return include $this->realpath($path);
+        $include = $this->realpath($path);
+
+        return file_exists($include)
+            ? include $include
+            : null;
     }
 
     public function store(string $path, string $content): void
     {
-        $path = $this->realpath($path);
         file_put_contents($path, $content);
     }
 
     public function realpath(string $path): string
     {
         return realpath($path);
+    }
+
+    public function isExclusionList(string $language, $key): bool
+    {
+        if (is_string($key)) {
+            $exclude = $this->getExclusionList($language) ?? [];
+
+            if (in_array($key, $exclude, true)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function getExclusionList(string $language, string $directory = __DIR__): ?array
+    {
+        return $this->load(
+            implode(DIRECTORY_SEPARATOR, [$directory, 'excludes', $language . '.php'])
+        );
     }
 }
 
@@ -83,17 +106,32 @@ class Output
             return $this->eol . 'All lines are translated 😊' . $this->eol;
         }
 
-        $content = implode($this->eol, $values);
+        $content       = implode($this->eol, $values);
+        $sumMissing    = count($values);
+        $sumNotPresent = $this->getSumNotPresent($values);
 
         return <<<HTML
 <details>
-<summary>show</summary>
+<summary>show<small> (all missing: $sumMissing, including not present: $sumNotPresent)</small></summary>
 
 {$content}
 
 [ [to top](#todo-list) ]
 </details>
 HTML;
+    }
+
+    protected function getSumNotPresent(array $data): int
+    {
+        $sum = 0;
+
+        foreach ($data as $value) {
+            if (strpos($value, ' : not present') !== false) {
+                $sum++;
+            }
+        }
+
+        return $sum;
     }
 
     protected function table(): string
@@ -272,26 +310,56 @@ class TodoGenerator
 
             $current = $this->getTranslations($language, $this->basePath);
 
-            foreach ($default as $key => $values) {
-                array_map(function ($key2) use ($key, $current, $language, $default) {
-                    if (in_array($key2, ['custom', 'attributes'], true)) {
-                        return;
-                    }
-
-                    if (! isset($current[$key][$key2])) {
-                        $this->output->add(
-                            $language,
-                            " * {$key} : {$key2} : not present"
-                        );
-                    } elseif ($current[$key][$key2] === $default[$key][$key2]) {
-                        $this->output->add(
-                            $language,
-                            " * {$key} : {$key2}"
-                        );
-                    }
-                }, array_keys($values));
-            }
+            $this->generatingInfoList($default, $current, $language);
         }, $languages);
+    }
+
+    private function generatingInfoList($default, $current, $language)
+    {
+        $arrayDefault = $this->align($default, ['custom', 'attributes']);
+        $arrayCurrent = $this->align($current);
+
+        foreach ($arrayDefault as $key => $values) {
+            if (! isset($arrayCurrent[$key])) {
+                $this->output->add(
+                    $language,
+                    " * {$key} : not present"
+                );
+            } elseif ($arrayCurrent[$key] === $values) {
+                if (! $this->storage->isExclusionList($language, $arrayCurrent[$key])) {
+                    $this->output->add(
+                        $language,
+                        " * {$key}"
+                    );
+                }
+            }
+        }
+    }
+
+    private function align($items = [], $ignore = [], $prefix = '', $connector = ' : ')
+    {
+        $newArray = [];
+
+        if ( ! is_array($ignore)) {
+            $ignore = (array) $ignore;
+        }
+
+        foreach ($items as $key => $value) {
+            if( in_array($key, $ignore)) {
+                continue;
+            }
+
+            if (is_array($value) && ! empty($value)) {
+                $newArray = array_merge(
+                    $newArray,
+                    $this->align($value, $ignore, $prefix . $key . $connector, '.')
+                );
+            } else {
+                $newArray[$prefix.$key] = $value;
+            }
+        }
+
+        return $newArray;
     }
 }
 

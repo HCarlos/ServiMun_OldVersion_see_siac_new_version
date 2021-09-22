@@ -2,12 +2,15 @@
 
 namespace Maatwebsite\Excel\Imports;
 
+use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithCalculatedFormulas;
 use Maatwebsite\Excel\Concerns\WithColumnLimit;
+use Maatwebsite\Excel\Concerns\WithFormatData;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithProgressBar;
+use Maatwebsite\Excel\Concerns\WithValidation;
 use Maatwebsite\Excel\Row;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
@@ -46,6 +49,8 @@ class ModelImporter
         $progessBar       = $import instanceof WithProgressBar;
         $withMapping      = $import instanceof WithMapping;
         $withCalcFormulas = $import instanceof WithCalculatedFormulas;
+        $formatData       = $import instanceof WithFormatData;
+        $withValidation   = $import instanceof WithValidation && method_exists($import, 'prepareForValidation');
         $endColumn        = $import instanceof WithColumnLimit ? $import->endColumn() : null;
 
         $this->manager->setRemembersRowNumber(method_exists($import, 'rememberRowNumber'));
@@ -54,25 +59,31 @@ class ModelImporter
         foreach ($worksheet->getRowIterator($startRow, $endRow) as $spreadSheetRow) {
             $i++;
 
-            $row      = new Row($spreadSheetRow, $headingRow);
-            $rowArray = $row->toArray(null, $withCalcFormulas, true, $endColumn);
+            $row = new Row($spreadSheetRow, $headingRow);
+            if (!$import instanceof SkipsEmptyRows || ($import instanceof SkipsEmptyRows && !$row->isEmpty($withCalcFormulas))) {
+                $rowArray = $row->toArray(null, $withCalcFormulas, $formatData, $endColumn);
 
-            if ($withMapping) {
-                $rowArray = $import->map($rowArray);
-            }
+                if ($withValidation) {
+                    $rowArray = $import->prepareForValidation($rowArray, $row->getIndex());
+                }
 
-            $this->manager->add(
-                $row->getIndex(),
-                $rowArray
-            );
+                if ($withMapping) {
+                    $rowArray = $import->map($rowArray);
+                }
 
-            // Flush each batch.
-            if (($i % $batchSize) === 0) {
-                $this->manager->flush($import, $batchSize > 1);
-                $i = 0;
+                $this->manager->add(
+                    $row->getIndex(),
+                    $rowArray
+                );
 
-                if ($progessBar) {
-                    $import->getConsoleOutput()->progressAdvance($batchSize);
+                // Flush each batch.
+                if (($i % $batchSize) === 0) {
+                    $this->manager->flush($import, $batchSize > 1);
+                    $i = 0;
+
+                    if ($progessBar) {
+                        $import->getConsoleOutput()->progressAdvance($batchSize);
+                    }
                 }
             }
         }

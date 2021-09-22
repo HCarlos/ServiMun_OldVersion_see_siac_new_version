@@ -30,22 +30,21 @@ use PHPUnit\Framework\TestCase;
  *
  * @SuppressWarnings(PHPMD.LongVariable)
  */
-class OutputTest extends TestCase
+class OutputTest extends TestUtil
 {
     protected $preserveGlobalState = false;
     protected $runTestInSeparateProcess = true;
 
-    public function setUp()
+    protected function setupTest()
     {
-        //$this->markTestSkipped(); // skip this test
-
-        define('K_PATH_FONTS', __DIR__.'/../target/tmptest/');
+        define('K_PATH_FONTS', dirname(__DIR__).'/target/tmptest/');
         system('rm -rf '.K_PATH_FONTS.' && mkdir -p '.K_PATH_FONTS);
     }
 
     public function testOutput()
     {
-        $indir = __DIR__.'/../util/vendor/font/';
+        $this->setupTest();
+        $indir = dirname(__DIR__).'/util/vendor/tecnickcom/tc-font-mirror/';
 
         $objnum = 1;
         $buffer = new \Com\Tecnick\Pdf\Font\Stack(1);
