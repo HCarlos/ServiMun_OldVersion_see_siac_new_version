@@ -45,6 +45,7 @@
     "dependencies": {
         "acorn": "^8.0.2",
         "ajv": "^6.12.3",
+        "ansi-html": "0.0.7",
         "axios": "^0.19.2",
         "dot-prop": "^5.2.0",
         "elliptic": "^6.5.3",
