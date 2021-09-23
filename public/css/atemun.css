@@ -644,3 +644,26 @@ input[readonly] {
 	border-style: solid;
 	border-width: 2px;
 }
+
+.bg-item-treview-inside {
+    background-color: lightgray;
+    border-radius: 20px;
+    border-color:whitesmoke;
+    border-style: solid;
+    border-width: 2px;
+}
+
+.sidebar-atemun-bg{
+    background-color: #9e742b !important;
+}
+
+.sidebar-right-bg{
+    background-color: lightslategrey !important;;
+}
+
+.sidebar-right-image{
+    display:flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+

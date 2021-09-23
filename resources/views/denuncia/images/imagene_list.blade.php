@@ -2,14 +2,16 @@
 
 @section('container')
 
-    @catalogo
-    @slot('buttons')
-        @include('shared.ui_kit.__menu_imagene')
-    @endslot
-    @slot('body_catalogo')
-        @include('shared.denuncia.images.__imagene_list')
-    @endslot
-    @endcatalogo
+    @component('components.catalogo')
+
+        @slot('buttons')
+            @include('shared.ui_kit.__menu_imagene')
+        @endslot
+        @slot('body_catalogo')
+            @include('shared.denuncia.images.__imagene_list')
+        @endslot
+
+    @endcomponent
 
 @endsection
 

@@ -40,7 +40,7 @@ class DenunciaTCPDF extends TCPDF{
         $this->SetTextColor(64,64,64);
         $this->SetFillColor(212,212,212);
 
-        $this->Image(ATEMUN['logo_reportes_encabezado'],0,15,70,20);
+        $this->Image(ATEMUN['logo_reportes_encabezado'],0,15,65,19);
 
         $this->Cell(60,$this->alto,"","R",0,"L");
         $this->Cell(2,$this->alto,"","",0,"L");

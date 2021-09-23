@@ -123,7 +123,7 @@ class ImagenAImagenRequest extends FormRequest
     public function saveFile($Item){
         $file = $this->file('file');
         $ext = $file->extension();
-        $name = sha1(date('YmdHis') . str_random(30)).'-'.$this->denuncia__id.'-'.$Item->id;
+        $name = sha1(date('YmdHis') . time()).'-'.$this->denuncia__id.'-'.$Item->id;
         $fileName = $name.'.' . $ext;
         $thumbnail = '_thumb_'.$name.'.png';
         $Item->update([

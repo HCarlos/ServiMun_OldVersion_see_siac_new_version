@@ -18,7 +18,7 @@
     <style>
         html, body {
             background-color: #fff;
-            background: url('{{asset("images/bg-auth.jpg")}}') no-repeat center;
+            background: url('{{asset("images/bg-auth.png")}}') no-repeat center;
             background-size: cover;
             min-height: 100vh;
             color: #fff;
@@ -65,7 +65,7 @@
             background-color: transparent !important;
         }
         .links a {
-            color: #fff !important;
+            color: #b2292e !important;
             padding: 0 25px;
             font-size: 12px;
             font-weight: 600;
@@ -93,22 +93,18 @@
             <ul class="navbar navbar-nav">
         <li class="links top-right ">
             @auth
-                @role('alumno')
-                {{--<a href="/home_alumno">Realizar búsqueda</a>--}}
+                <a href="{{ url('/home') }}" ><strong>Entrar</strong></a>
             @else
-                <a href="{{ url('/home') }}">Entrar</a>
-                @endrole
-                @else
-                    <a href="{{ route('login') }}">Iniciar sesión</a>
+                <a href="{{ route('login') }}" ><strong>Iniciar sesión</strong></a>
                     {{--<a href="{{ route('register') }}">Regístrate</a>--}}
-                @endauth
+            @endauth
         </li>
             </ul>
     @endif
 
     <div class="content" style="margin-top: -15em;">
         <span class="text-cafe  font-effect-3d-float font_Tangerine_700">
-            <img src="{{ asset('images/web/plataforma-gestion-0-logo.jpg') }}" alt="{{ config('app.name', 'Laravel') }}" />
+{{--            <img src="{{ asset('images/web/plataforma-gestion-0-logo.jpg') }}" alt="{{ config('app.name', 'Laravel') }}" />--}}
         </span>
         {{--<h2 class="text-inverse text-center font_Roboto_Condensed_400" style="margin-top: -2em; ">Plataforma de Control Escolar</h2>--}}
         {{--<h3 class="text-inverse text-center font_Open_Sans_Condensed_expanded_300" style="margin-top: -1em;">SOFTWARE</h3>--}}

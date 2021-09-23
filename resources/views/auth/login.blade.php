@@ -5,18 +5,18 @@
 
     <div class="auth-fluid">
         <!--Auth fluid left content -->
-        <div class="auth-fluid-form-box">
+        <div class="auth-fluid-form-box sidebar-atemun-bg" style="background-color: lightgrey !important;">
             <div class="align-items-center d-flex h-100">
                 <div class="card-body">
                     @include('shared.code.__logo_guest')
                     <!-- title-->
                     <h4 class="mt-4">Ingresar</h4>
-                    <p class="text-muted mb-3">Escribe tus datos de acceso.</p>
+                    <p class="text-muted mb-3"></p>
                     <!-- form -->
                     <form method="POST" action="{{ route('login') }}" class="mt-0">
                         @csrf
                         <div class="form-group">
-                            <label for="username" class="{{$errors->has('username')?'text-danger':''}}">Username</label>
+                            <label for="username" class="{{$errors->has('username')?'text-danger':''}}">Nombre de Usuario</label>
                             <input class="form-control {{$errors->has('username')?'has-error form-error':''}}" type="text" id="username" name="username" value="{{ old('username') }}" required placeholder="Username">
                             @if ($errors->has('username'))
                                 <span class="has-error">
@@ -52,14 +52,9 @@
         <!-- end auth-fluid-form-box-->
 
         <!-- Auth fluid right content -->
-        <div class="auth-fluid-right text-center">
-            <div class="auth-user-testimonial">
-                <h2 class="mb-3">{{env('NOMBRE_EMPRESA')}}</h2>
-                <p class="lead"><i class="mdi mdi-format-quote-open"></i>{{env('LEMA_CAMPANA')}}<i class="mdi mdi-format-quote-close"></i>
-                </p>
-                <p>
-                    {{env('INFO_ONE')}}
-                </p>
+        <div class="auth-fluid-right text-center sidebar-right-bg" >
+            <div class="sidebar-right-image" >
+                <img src="/images/bg-auth.png"   />
             </div> <!-- end auth-user-testimonial-->
         </div>
         <!-- end Auth fluid right content -->

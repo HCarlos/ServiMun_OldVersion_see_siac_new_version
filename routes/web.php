@@ -42,6 +42,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::group(['middleware' => 'role:auth|Administrator|SysOp'], function () {
+
     Route::get('/home', 'HomeController@index')->name('home');
 
     Route::get('newUser', 'Catalogos\User\UserDataController@newUser')->name('newUser');
@@ -240,6 +241,7 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp'], function () {
     // EXTERNAL FILES
     Route::get('archivosConfig','Storage\StorageExternalFilesController@archivos_config')->name('archivosConfig');
     Route::post('subirArchivoBase/', 'Storage\StorageExternalFilesController@subirArchivoBase')->name('subirArchivoBase/');
+
     Route::get('quitarArchivoBase/{driver}/{archivo}', 'Storage\StorageExternalFilesController@quitarArchivoBase')->name('quitarArchivoBase/');
 
     Route::post('showFileListUserExcel1A','External\User\ListUserXLSXController@getListUserXLSX')->name('showFileListUserExcel1A');

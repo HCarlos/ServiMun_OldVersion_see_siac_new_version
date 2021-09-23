@@ -2,11 +2,11 @@
 
 @section('container')
 
-@denunciaContainer
+@component('components.denuncia')
 {{--    @slot('titulo_catalogo',$titulo_catalogo)--}}
 {{--    @slot('titulo_header','Folio: '. $items->id)--}}
     @slot('contenido')
-            @card
+            @component('components.card')
                 @slot('title_card','')
                 @slot('body_card')
                     @include('shared.code.__errors')
@@ -15,13 +15,13 @@
                         @csrf
                         {{method_field('PUT')}}
                         @include('shared.denuncia.denuncia.__denuncia_edit')
-                        @buttonsFormDenuncia
+                        @component('components.tools.buttons-form-denuncia')
                             @slot('msgLeft',' ')
-                        @endbuttonsFormDenuncia
+                        @endcomponent
                     </form>
                 @endslot
-            @endcard
+            @endcomponent
     @endslot
-@enddenunciaContainer
+@endcomponent
 
 @endsection

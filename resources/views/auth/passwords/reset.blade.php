@@ -5,7 +5,7 @@
 
 <div class="auth-fluid">
     <!--Auth fluid left content -->
-    <div class="auth-fluid-form-box">
+    <div class="auth-fluid-form-box" style="background-color: lightgrey !important;">
         <div class="align-items-center d-flex h-100">
             <div class="card-body">
 
@@ -65,11 +65,11 @@
     <!-- Auth fluid right content -->
     <div class="auth-fluid-right text-center">
         <div class="auth-user-testimonial">
-            <h2 class="mb-3">{{env('NOMBRE_EMPRESA')}}</h2>
-            <p class="lead"><i class="mdi mdi-format-quote-open"></i>{{env('LEMA_CAMPANA')}}<i class="mdi mdi-format-quote-close"></i>
+            <h2 class="mb-3">{{config('atemun.nombre_empresa')}}</h2>
+            <p class="lead"><i class="mdi mdi-format-quote-open"></i>{{config('atemun.lema_empresa')}}<i class="mdi mdi-format-quote-close"></i>
             </p>
             <p>
-                {{env('INFO_ONE')}}
+                {{config('atemun.lema_empresa')}}
             </p>
         </div> <!-- end auth-user-testimonial-->
     </div>

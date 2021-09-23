@@ -2,7 +2,7 @@
 
 @section('container')
 
-@catalogo
+@component('components.catalogo')
     @slot('buttons')
         @include('shared.ui_kit.__menu_catalogo')
     @endslot

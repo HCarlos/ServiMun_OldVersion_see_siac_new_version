@@ -139,6 +139,9 @@ $(document).ready(function() {
                 return false;
             }
             var Url = '/'+urlAsigna+'/'+y+'/'+x;
+
+            alert(Url);
+
             $(function() {
                 $.ajax({
                     method: "GET",

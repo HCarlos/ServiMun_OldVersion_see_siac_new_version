@@ -32,6 +32,8 @@ class RespuestaController extends Controller
             ->orderBy('parent__id')
             ->paginate();
 
+        // dd($items);
+
         $user = Auth::User();
 
 

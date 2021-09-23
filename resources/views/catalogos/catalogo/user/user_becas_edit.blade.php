@@ -1,4 +1,4 @@
-@formFullModal
+@component('components.form-full-modal')
     @slot('metodo','POST')
     @slot('action','putAluBecas')
     @slot('_csrf')
@@ -11,4 +11,4 @@
     @slot('body_full_modal')
         @include('shared.catalogo.user.__user_becas_edit')
     @endslot
-@endformFullModal
+@endcomponent

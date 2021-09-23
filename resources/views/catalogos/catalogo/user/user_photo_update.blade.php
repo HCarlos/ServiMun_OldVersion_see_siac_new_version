@@ -2,7 +2,7 @@
 
 @section('container')
 
-@home
+@component('components.home')
     @slot('titulo_catalogo',$titulo_catalogo)
     @slot('titulo_header','Cambiar mi foto')
     @slot('contenido')
@@ -12,7 +12,7 @@
 
         <div class="col-md-8">
             <!-- Chart-->
-            @card
+            @component('components.card')
                 @slot('title_card',Auth::user()->FullName)
                 @slot('body_card')
                     @include('shared.code.__errors')
@@ -27,10 +27,10 @@
                         </div>
                     </form>
                 @endslot
-            @endcard
+            @endcomponent
         </div>
     @endslot
-@endhome
+@endcomponent
 {{--@section('script_extra')--}}
 {{--<script src="{{asset('js/dropzone.min.js')}}"></script>--}}
 {{--<script src="{{asset('js/component.fileupload.js')}}"></script>--}}

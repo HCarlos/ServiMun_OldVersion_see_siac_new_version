@@ -1,12 +1,12 @@
 <!-- ========== Left Sidebar Start ========== -->
-<div class="left-side-menu">
+<div class="left-side-menu sidebar-atemun-bg" style="background: #9e742b" >
 
     <div class="slimscroll-menu">
 
         <!-- LOGO -->
-        <a href="/" class="logo text-left">
+        <a href="/" class="logo text-left" style="background: #FFF">
             <span class="logo-lg">
-                <img src="{{asset('images/logo-interior.png')}}" alt="" >
+                <img src="{{asset('images/web/logo-0.png')}}" width="251" height="82" alt="" >
             </span>
             <span class="logo-sm">
                 <img src="{{asset('images/logo_sm.png')}}" >

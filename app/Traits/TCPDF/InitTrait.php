@@ -9,8 +9,12 @@ use TCPDF_COLORS;
 use TCPDF_FONTS;
 use TCPDF_STATIC;
 
-define('FONT_ANDALEMONO', TCPDF_FONTS::addTTFfont(public_path().'/fonts/AndaleMono.php', 'TrueTypeUnicode', '', 32));
-define('FONT_ARIALN', TCPDF_FONTS::addTTFfont(public_path().'/fonts/arialn.php', 'TrueTypeUnicode', '', 32));
+
+
+define('FONT_ANDALEMONO', TCPDF_FONTS::addTTFfont(public_path().'/fonts/AndaleMono.ttf', 'TrueTypeUnicode', '', 32));
+
+define('FONT_ARIALN', TCPDF_FONTS::addTTFfont(public_path().'/fonts/arialn.ttf', 'TrueTypeUnicode', '', 32));
+
 define('FONT_AKODIA', TCPDF_FONTS::addTTFfont(public_path().'/fonts/Akodia.php', 'TrueTypeUnicode', '', 32));
 define('FONT_LATO', TCPDF_FONTS::addTTFfont(public_path().'/fonts/Lato/Lato.php', 'TrueTypeUnicode', '', 32));
 define('FONT_FREEMONO', TCPDF_FONTS::addTTFfont(public_path().'/fonts/freemono.php', 'TrueTypeUnicode', '', 32));
@@ -28,6 +32,7 @@ define('FONT_PDFACOURIER', TCPDF_FONTS::addTTFfont(public_path().'/fonts/pdfacou
 define('FONT_PDFAHELVETICA', TCPDF_FONTS::addTTFfont(public_path().'/fonts/pdfahelvetica.php', 'TrueTypeUnicode', '', 32));
 define('FONT_PDFATIMES', TCPDF_FONTS::addTTFfont(public_path().'/fonts/pdfatimes.php', 'TrueTypeUnicode', '', 32));
 define('FONT_TIMES', TCPDF_FONTS::addTTFfont(public_path().'/fonts/times.php', 'TrueTypeUnicode', '', 32));
+
 
 define('ATEMUN',config('atemun'));
 
@@ -51,8 +56,9 @@ trait InitTrait
 //        $this->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
         $this->setImageScale(PDF_IMAGE_SCALE_RATIO);
         if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
+
             require_once(dirname(__FILE__).'/lang/eng.php');
-            $this->setLanguageArray($l);
+            //$this->setLanguageArray($l);
         }
     }
 
@@ -711,10 +717,10 @@ trait InitTrait
                     if (($dom[$key]['value'] == 'pre') OR ($dom[$key]['value'] == 'tt')) {
                         $dom[$key]['fontname'] = $this->default_monospaced_font;
                     }
-                    if (!empty($dom[$key]['value']) AND ($dom[$key]['value'][0] == 'h') AND (intval($dom[$key]['value']{1}) > 0) AND (intval($dom[$key]['value']{1}) < 7)) {
+                    if (!empty($dom[$key]['value']) AND ($dom[$key]['value'][0] == 'h') AND (intval($dom[$key]['value'][1]) > 0) AND (intval($dom[$key]['value'][1]) < 7)) {
                         // headings h1, h2, h3, h4, h5, h6
                         if (!isset($dom[$key]['attribute']['size']) AND !isset($dom[$key]['style']['font-size'])) {
-                            $headsize = (4 - intval($dom[$key]['value']{1})) * 2;
+                            $headsize = (4 - intval($dom[$key]['value'][1])) * 2;
                             $dom[$key]['fontsize'] = $dom[0]['fontsize'] + $headsize;
                         }
                         if (!isset($dom[$key]['style']['font-weight'])) {

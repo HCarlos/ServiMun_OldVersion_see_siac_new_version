@@ -2,7 +2,7 @@
 
 @section('container')
 
-    @home
+@component('components.home')
     @slot('titulo_catalogo','Archivos de Configuración')
     @slot('titulo_header','')
     @slot('contenido')
@@ -12,7 +12,7 @@
                 @foreach($archivos as $archivo)
                     <li>
                         <a href="{{ asset('storage/externo/'.$archivo)  }}" target="_blank">{{$archivo}}</a>
-                        <a href="{{ route('quitarArchivoBase/', array('driver' => 'externo','archivo'=>$archivo)) }}" title="Eliminar archivo">
+                        <a href="{{ route('quitarArchivoBase/', ['driver' => 'externo','archivo'=>$archivo]) }}" title="Eliminar archivo">
                             <i class="fa fa-trash red"></i>
                         </a>
                     </li>
@@ -23,7 +23,7 @@
 
         <div class="col-md-8">
             <!-- Chart-->
-            @card
+            @component('components.card')
             @slot('title_card','Subir Archivo')
             @slot('body_card')
 
@@ -55,9 +55,9 @@
                 </div>
 
             @endslot
-            @endcard
+            @endcomponent
         </div>
     @endslot
-    @endhome
+    @endcomponent
 
 @endsection

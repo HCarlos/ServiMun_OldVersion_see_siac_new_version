@@ -1,10 +1,10 @@
 <!-- ========== Left Sidebar Start ========== -->
-<div class="left-side-menu">
+<div class="left-side-menu sidebar-atemun-bg" style="background: #9e742b" >
 
-    <div class="slimscroll-menu">
+    <div class="slimscroll-menu sidebar-atemun-bg">
 
         <!-- LOGO -->
-        <a href="/" class="logo text-left">
+        <a href="/" class="logo text-left"  style="background: #FFF">
             <span class="logo-lg">
                 <img src="{{asset('images/logo-interior.png')}}" alt="" >
             </span>

@@ -35,19 +35,19 @@ class RoleController extends Controller
         return view ('catalogos.asignaciones.roles_usuario',
             [
                 'catalogo_titulo' => '',
-                'listEle0' => $listEle,
-                'listTarget0' => $listTarget,
-                'lstAsigns0' => $this->lstAsigns,
+                'listEle0'        => $listEle,
+                'listTarget0'     => $listTarget,
+                'lstAsigns0'      => $this->lstAsigns,
                 'titulo_catalogo' => "Asignación de Roles",
                 'titulo_header'   => '',
-                'user' => $user,
-                'Id' => $Id,
-                'titleLeft0'    => "Roles",
-                'titleUsuario0' => "Usuario",
-                'titleAsign0'  => "Roles asignados",
-                'urlAsigna'     => "assignRoleToUser",
-                'urlRegresa'    => "asignaRole",
-                'urlElimina'    => "unAssignRoleToUser",
+                'user'            => $user,
+                'Id'              => $Id,
+                'titleLeft0'      => "Roles",
+                'titleUsuario0'   => "Usuario",
+                'titleAsign0'     => "Roles asignados",
+                'urlAsigna'       => "assignRoleToUser",
+                'urlRegresa'      => "asignaRole",
+                'urlElimina'      => "unAssignRoleToUser",
             ]
         );
 
@@ -55,6 +55,8 @@ class RoleController extends Controller
 
     public function asignar($Id, $nameRoles)
     {
+        dd($Id);
+
         $user = User::findOrFail($Id);
 //        dd($user->username);
         $roles = explode('|',$nameRoles);

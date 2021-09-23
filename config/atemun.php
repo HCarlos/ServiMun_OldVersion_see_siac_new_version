@@ -32,6 +32,12 @@ return [
 
     // ARCHIVOS DE IMAGENES DEL SISTEMA
     'logo_reportes_encabezado' => public_path().'/images/web/logo-0.png',
+    'nombre_empresa' => env('NOMBRE_EMPRESA',''),
+    'lema_empresa'   => env('LEMA_CAMPANA',''),
+    'periodo_empresa' => env('INFO_ONE',''),
+    'direccion_responsable' => env('INFO_TWO',''),
+    'telefono_responsable' => env('INFO_THREE',''),
+    'web_responsable' => env('INFO_FOUR',''),
 
     // -----------------------------------------------------------
     // La mayor parte de los Tablas estan configuradas aquí,
@@ -124,7 +130,7 @@ return [
     ],
 
     'style' => [
-        'denuncia' => "<style> 
+        'denuncia' => "<style>
                             b { font-family: arial, sans-serif; }
                             bAzul { font-family: arial, sans-serif; color:blue; }
                             p {text-align: justify;}

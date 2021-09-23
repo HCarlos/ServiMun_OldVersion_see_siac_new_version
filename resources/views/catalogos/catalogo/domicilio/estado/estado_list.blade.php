@@ -2,7 +2,7 @@
 
 @section('container')
 
-@catalogo
+@component('components.catalogo')
     @slot('buttons')
         @include('shared.ui_kit.__menu_catalogo')
     @endslot
@@ -11,6 +11,6 @@
             @include('shared.catalogo.domicilio.estado.__estado_list')
         </div>
     @endslot
-@endcatalogo
+@endcomponent
 
 @endsection

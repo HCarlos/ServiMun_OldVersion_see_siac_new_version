@@ -46,6 +46,7 @@ class DenunciaController extends Controller
             ->paginate();
         $items->appends($filters)->fragment('table');
 
+
         $request->session()->put('items', $items);
 
 //        $sv = Items::getInstance();
@@ -262,6 +263,11 @@ class DenunciaController extends Controller
                 'searchAdressDenuncia' => 'listDenuncias',
                 'showModalSearchDenuncia' => 'showModalSearchDenuncia',
                 'findDataInDenuncia'=>'findDataInDenuncia',
+                'showEditDenunciaDependenciaServicio'=>'listDenunciaDependenciaServicio',
+                'imagenesDenunciaItem' => 'listImagenes',
+                'imprimirDenuncia'=> "imprimirDenuncia/",
+
+
             ]
         );
 

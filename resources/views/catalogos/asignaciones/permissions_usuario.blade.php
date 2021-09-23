@@ -2,7 +2,8 @@
 
 @section('container')
 
-    @asignaciones
+@component('components.asignaciones')
+
     @slot('titulo_catalogo', $titulo_catalogo)
     @slot('titulo_header','')
     @slot('altoPanelIzq','asign-pnl-left')
@@ -31,6 +32,7 @@
         {{ Form::select('lstAsigns', $lstAsigns0, '', ['multiple' => 'multiple', 'class'=>'lstAsigns form-control asign-lstAsigns0']) }}
     @endslot
     @slot('countAsign0') {{ $lstAsigns0->count() }} @endslot
-    @endasignaciones
+
+@endcomponent
 
 @endsection

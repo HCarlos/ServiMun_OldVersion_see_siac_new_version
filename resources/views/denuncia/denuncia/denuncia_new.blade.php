@@ -2,22 +2,22 @@
 
 @section('container')
 
-@denunciaContainer
+@component('components.denuncia')
     @slot('contenido')
-            @card
+            @component('components.card')
                 @slot('title_card','')
                 @slot('body_card')
                     @include('shared.code.__errors')
                     <form method="POST" action="{{ route('createDenuncia') }}">
                         @csrf
                         @include('shared.denuncia.denuncia.__denuncia_new')
-                        @buttonsFormDenuncia
+                        @component('components.tools.buttons-form-denuncia')
                             @slot('msgLeft',' ')
-                        @endbuttonsFormDenuncia
+                        @endcomponent
                     </form>
                 @endslot
-            @endcard
+            @endcomponent
     @endslot
-@enddenunciaContainer
+@endcomponent
 
 @endsection

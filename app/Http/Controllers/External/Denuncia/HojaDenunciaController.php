@@ -8,7 +8,7 @@ use App\Models\Denuncias\Denuncia;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
-//define('ATEMUN',config('atemun.style'));
+define('NOMBRE_EMPRESA',config('atemun.nombre_empresa',''));
 
 class HojaDenunciaController extends Controller
 {
@@ -18,6 +18,8 @@ class HojaDenunciaController extends Controller
         $timex  = Carbon::now()->format('d-m-Y H:i:s');
         $folio  = $Id;
         $alto   = 6;
+
+        //dd(NOMBRE_EMPRESA);
 
         $pdf = new DenunciaTCPDF('','mm',array(215.9, 139.7), true, 'UTF-8', false);
         $pdf->folio = $folio;
@@ -43,7 +45,7 @@ class HojaDenunciaController extends Controller
         $roles = $den->ciudadano->RoleNameStrArray;
         $html = ATEMUN['style']['denuncia'];
         $html .= "<p>Estimado <bAzul>{$den->ciudadano->FullName}</bAzul> (<bChocolate>{$den->ciudadano->id}</bChocolate>) ( <bOrange>$roles</bOrange> ), su petición ha sido recibida y se iniciará el trámite pertinente. <br><br>";
-        $html .= "El <b>". env('NOMBRE_EMPRESA'). "</b> agradece su colaboración y le garantiza confidencialidad y una pronta respuesta.  <br><br>";
+        $html .= "El <b>". NOMBRE_EMPRESA . "</b> agradece su colaboración y le garantiza confidencialidad y una pronta respuesta.  <br><br>";
         $html .= "Fue atendido por <bVerde>{$den->creadopor->FullName}</bVerde> (<bChocolate>{$den->creadopor->id}</bChocolate>). <br><br>";
         $html .= "</p>";
         $html .= "<span></span>";

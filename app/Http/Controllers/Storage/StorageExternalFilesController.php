@@ -46,13 +46,16 @@ class StorageExternalFilesController extends Controller
 
     }
 
-    public function quitarArchivoBase($driver,$archivo)
-    {
+    public function quitarArchivoBase($driver='',$archivo=''){
+
+        dd($driver);
+
         Storage::disk($driver)->delete($archivo);
         $e1 = Storage::disk($driver)->exists($archivo);
         if ($e1) {
             Storage::disk($driver)->delete($archivo);
         }
+
         return redirect($this->redirectTo);
 
     }
