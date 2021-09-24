@@ -46,9 +46,11 @@ class StorageExternalFilesController extends Controller
 
     }
 
-    public function quitarArchivoBase($driver='',$archivo=''){
+    public function quitarArchivoBase(Request $request){
 
-        dd($driver);
+        $data    = $request->all(['driver','archivo']);
+        $driver  = $data['driver'];
+        $archivo = $data['archivo'];
 
         Storage::disk($driver)->delete($archivo);
         $e1 = Storage::disk($driver)->exists($archivo);

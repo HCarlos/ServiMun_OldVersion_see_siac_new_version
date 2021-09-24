@@ -12,9 +12,20 @@
                 @foreach($archivos as $archivo)
                     <li>
                         <a href="{{ asset('storage/externo/'.$archivo)  }}" target="_blank">{{$archivo}}</a>
-                        <a href="{{ route('quitarArchivoBase/', ['driver' => 'externo','archivo'=>$archivo]) }}" title="Eliminar archivo">
+
+                        <a href="{{ route('quitarArchivoBase') }}" title="Eliminar archivo"
+                           onclick="event.preventDefault();
+                             document.getElementById('remove-file-form-{{$archivo}}').submit();">
                             <i class="fa fa-trash red"></i>
                         </a>
+
+                        <form id="remove-file-form-{{$archivo}}" action="{{ route('quitarArchivoBase') }}" method="POST" style="display: none;">
+                            @csrf
+                            <input type="hidden" name="driver" value="externo">
+                            <input type="hidden" name="archivo" value="{{$archivo}}">
+                        </form>
+
+
                     </li>
                 @endforeach
             </ul>

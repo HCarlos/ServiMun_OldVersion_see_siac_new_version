@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Catalogos\User;
 use App\User;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use Spatie\Permission\Models\Permission;
@@ -45,19 +46,21 @@ class PermissionController extends Controller
                 'titleUsuario0' => "Usuario",
                 'titleAsign0'  => "Permisos asignados",
                 'urlAsigna'   => "assignPermissionToUser",
-                'urlRegresa'  => "asignaPermission",
+                'urlRegresa'  => "asignaPermissionList",
                 'urlElimina'  => "unAssignPermissionToUser",
             ]
         );
 
     }
 
-    public function asignar($Id, $namePermissions)
-    {
-        dd(1);
-        /*
+    public function asignar(Request $request){
+
+        $data            = $request->all(['Id','names']);
+        $Id              = $data['Id'];
+        $namePermissions = $data['names'];
+
         $user = User::findOrFail($Id);
-        dd($namePermissions);
+
         $permissions = explode('|',$namePermissions);
         foreach($permissions AS $i=>$valor) {
 //                dd($permissions[$i]);
@@ -74,13 +77,17 @@ class PermissionController extends Controller
                 }
             }
         }
-        */
-        return Response::json(['mensaje' => "/asignaPermission/$Id", 'data' => 'OK', 'status' => '200'], 200);
+
+        return Response::json(['mensaje' => "/asignaPermissionList/$Id", 'data' => 'OK', 'status' => '200'], 200);
 
     }
 
-    public function desasignar($Id, $namePermissions)
-    {
+    public function desasignar(Request $request){
+
+        $data            = $request->all(['Id','names']);
+        $Id              = $data['Id'];
+        $namePermissions = $data['names'];
+
         $user = User::findOrFail($Id);
         $permissions = explode('|',$namePermissions);
         foreach($permissions AS $i=>$valor) {
@@ -94,7 +101,7 @@ class PermissionController extends Controller
 
             }
         }
-        return Response::json(['mensaje' => "/asignaPermission/$Id", 'data' => 'OK', 'status' => '200'], 200);
+        return Response::json(['mensaje' => "/asignaPermissionList/$Id", 'data' => 'OK', 'status' => '200'], 200);
     }
 
 }

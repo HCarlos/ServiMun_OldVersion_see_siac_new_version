@@ -11,6 +11,6 @@
             @include('shared.catalogo.domicilio.colonia.__colonia_list')
         </div>
     @endslot
-@endcatalogo
+@endcomponent
 
 @endsection

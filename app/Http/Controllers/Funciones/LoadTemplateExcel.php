@@ -22,7 +22,11 @@ class LoadTemplateExcel
     }
 
     public static function getFileTemplate($file){
-        return env('EXTERNO_ROOT_LOCAL') . $file;
+        $e1 = Storage::disk('externo')->exists($file);
+        if ($e1) {
+            return  storage_path('app/public/externo') . "/" . $file;
+        }
+        return null;
     }
 
     public static function getDirFormatUser($extension){

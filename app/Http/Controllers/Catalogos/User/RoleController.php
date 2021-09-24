@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Catalogos\User;
 use App\User;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use Spatie\Permission\Models\Role;
@@ -46,16 +47,20 @@ class RoleController extends Controller
                 'titleUsuario0'   => "Usuario",
                 'titleAsign0'     => "Roles asignados",
                 'urlAsigna'       => "assignRoleToUser",
-                'urlRegresa'      => "asignaRole",
+                'urlRegresa'      => "asignaRoleList",
                 'urlElimina'      => "unAssignRoleToUser",
             ]
         );
 
     }
 
-    public function asignar($Id, $nameRoles)
-    {
-        dd($Id);
+    public function asignar(Request $request){
+
+        $data     = $request->all(['Id','names']);
+
+        $Id        = $data['Id'];
+        $nameRoles = $data['names'];
+
 
         $user = User::findOrFail($Id);
 //        dd($user->username);
@@ -73,12 +78,18 @@ class RoleController extends Controller
                 }
             }
         }
-        return Response::json(['mensaje' => "/asignaRole/$Id", 'data' => 'OK', 'status' => '200'], 200);
+        return Response::json(['mensaje' => "/asignaRoleList/$Id", 'data' => 'OK', 'status' => '200'], 200);
+
+        //return redirect()->route("asignaRoleList",["Id"=>$Id]);
 
     }
 
-    public function desasignar($Id, $nameRoles)
-    {
+    public function desasignar(Request $request){
+
+        $data     = $request->all(['Id','names']);
+        $Id        = $data['Id'];
+        $nameRoles = $data['names'];
+
         $user = User::findOrFail($Id);
         $roles = explode('|',$nameRoles);
         foreach($roles AS $i=>$valor) {
@@ -92,7 +103,7 @@ class RoleController extends Controller
 
             }
         }
-        return Response::json(['mensaje' => "/asignaRole/$Id", 'data' => 'OK', 'status' => '200'], 200);
+        return Response::json(['mensaje' => "/asignaRoleList/$Id", 'data' => 'OK', 'status' => '200'], 200);
     }
 
 }

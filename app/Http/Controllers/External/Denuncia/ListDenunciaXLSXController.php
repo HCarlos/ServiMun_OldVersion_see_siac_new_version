@@ -36,6 +36,7 @@ class ListDenunciaXLSXController extends Controller
 
         try {
             $file_external = trim(config("atemun.archivos.fmt_lista_denuncias"));
+            //dd($file_external);
             $arrFE = explode('.',$file_external);
             $extension = Str::ucfirst($arrFE[1]);
 

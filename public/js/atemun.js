@@ -138,19 +138,31 @@ $(document).ready(function() {
                 alert("Seleccione un elemento");
                 return false;
             }
-            var Url = '/'+urlAsigna+'/'+y+'/'+x;
+            // var Url = '/'+urlAsigna+'/'+y+'/'+x;
 
-            alert(Url);
+            //alert(Url);
+
+            var Data = new FormData();
+            Data.append( 'Id', y );
+            Data.append( 'names', x );
+
 
             $(function() {
+
                 $.ajax({
-                    method: "GET",
-                    url: Url
-                })
-                    .done(function( response ) {
-                        window.location.href = response.mensaje;
-                    });
+                    url: '/'+urlAsigna,
+                    data: Data,
+                    cache: false,
+                    processData: false,
+                    contentType: false,
+                    type: 'POST',
+                    success: function ( data ) {
+                        window.location.href = data.mensaje;
+                    }
+                });
+
             });
+
         });
     }
 
@@ -175,15 +187,27 @@ $(document).ready(function() {
                 alert("Seleccione un elemento");
                 return false;
             }
-            var Url = '/'+urlElimina+'/'+y+'/'+z;
+
+
+            var Data = new FormData();
+            Data.append( 'Id', y );
+            Data.append( 'names', z );
+
+
             $(function() {
+
                 $.ajax({
-                    method: "GET",
-                    url: Url
-                })
-                    .done(function( response ) {
-                        window.location.href = response.mensaje;
-                    });
+                    url: '/'+urlElimina,
+                    data: Data,
+                    cache: false,
+                    processData: false,
+                    contentType: false,
+                    type: 'POST',
+                    success: function ( data ) {
+                        window.location.href = data.mensaje;
+                    }
+                });
+
             });
 
         });
@@ -303,6 +327,10 @@ $(document).ready(function() {
         });
     }
 
+    if ( $(".home").html().length == 37 ){
+        $(".home").html("<div class='img_bg_home' ></div>");
+
+    }
 
 
 

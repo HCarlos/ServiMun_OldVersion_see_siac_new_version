@@ -229,20 +229,21 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp'], function () {
     Route::get('removeUbicacion/{id}', 'Catalogos\Domicilio\UbicacionController@removeItem')->name('removeUbicacion');
 
     // ROLES
-    Route::get('asignaRole/{Id}','Catalogos\User\RoleController@index')->name('asignaRole');
-    Route::get('assignRoleToUser/{Id}/{nameRoles}','Catalogos\User\RoleController@asignar')->name('assignRoleToUser');
-    Route::get('unAssignRoleToUser/{Id}/{nameRoles}','Catalogos\User\RoleController@desasignar')->name('unAssignRoleToUser');
+    Route::get('asignaRoleList/{Id}','Catalogos\User\RoleController@index')->name('asignaRoleList');
+    Route::post('assignRoleToUser','Catalogos\User\RoleController@asignar')->name('assignRoleToUser');
+    Route::post('unAssignRoleToUser','Catalogos\User\RoleController@desasignar')->name('unAssignRoleToUser');
 
     // PERMISSIONS
-    Route::get('asignaPermission/{Id}','Catalogos\User\PermissionController@index')->name('asignaPermission');
-    Route::get('assignPermissionToUser/{Id}/{namePermissions}','Catalogos\User\PermissionController@asignar')->name('assignPermissionToUser');
-    Route::get('unAssignPermissionToUser/{Id}/{namePermissions}','Catalogos\User\PermissionController@desasignar')->name('unAssignPermissionToUser');
+    Route::get('asignaPermissionList/{Id}','Catalogos\User\PermissionController@index')->name('asignaPermissionList');
+    Route::post('assignPermissionToUser','Catalogos\User\PermissionController@asignar')->name('assignPermissionToUser');
+    Route::post('unAssignPermissionToUser','Catalogos\User\PermissionController@desasignar')->name('unAssignPermissionToUser');
 
     // EXTERNAL FILES
     Route::get('archivosConfig','Storage\StorageExternalFilesController@archivos_config')->name('archivosConfig');
     Route::post('subirArchivoBase/', 'Storage\StorageExternalFilesController@subirArchivoBase')->name('subirArchivoBase/');
 
-    Route::get('quitarArchivoBase/{driver}/{archivo}', 'Storage\StorageExternalFilesController@quitarArchivoBase')->name('quitarArchivoBase/');
+//    Route::get('quitarArchivoBase/{driver}/{archivo}', 'Storage\StorageExternalFilesController@quitarArchivoBase')->name('quitarArchivoBase/');
+    Route::post('quitarArchivoBase', 'Storage\StorageExternalFilesController@quitarArchivoBase')->name('quitarArchivoBase');
 
     Route::post('showFileListUserExcel1A','External\User\ListUserXLSXController@getListUserXLSX')->name('showFileListUserExcel1A');
 
