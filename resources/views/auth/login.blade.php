@@ -25,7 +25,7 @@
                             @endif
                         </div>
                         <div class="form-group">
-                            <a href="{{ route('password.request') }}" class="text-info float-right"><small>Olvidaste tu password</small></a>
+                            <a href="{{ route('password.request') }}" class="text-danger-light float-right"><strong>Olvidaste tu password</strong></a>
                             <label for="password" class="{{$errors->has('password')?'text-danger':''}}">Password</label>
                             <input class="form-control {{$errors->has('password')?'has-error form-error':''}}" type="password" required="" id="password" name="password" placeholder="Password">
                             @if ($errors->has('password'))
@@ -43,6 +43,11 @@
                         <div class="form-group mb-0 text-center">
                             <button class="btn btn-primary btn-block" type="submit"><i class="mdi mdi-login"></i> Ingresar </button>
                         </div>
+                        <div class="clearfix"></div>
+                        <div class="form-group  mt-2">
+                            <a href="{{ route('register') }}" class="text-danger-light float-right"><strong>Me quiero registrar</strong></a>
+                        </div>
+
                     </form>
                     <!-- end form-->
 

@@ -26,6 +26,11 @@ class HomeController extends Controller
         return view('home');
     }
 
+    public function index2()
+    {
+        return view('home-original');
+    }
+
     public function index_ciudadano()
     {
         return view('home-ciudadano');

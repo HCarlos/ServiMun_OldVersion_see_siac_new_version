@@ -16,15 +16,13 @@
     @else()
         <!--- Sidemenu -->
         <ul class="metismenu side-nav">
-            <ul class="side-nav-second-level" aria-expanded="true">
-                <li>
-                    <a href="{{route('listDenunciasCiudadanas')}}">
-                        <i class="mdi modal-dialog-popout"></i>
-                        <span class="badge badge-light float-right">{{\App\Models\Denuncias\Denuncia::where('ciudadano_id',Auth::user()->id)->count()}}</span>
-                        <span>Mis Reportes</span>
-                    </a>
-                </li>
-            </ul>
+            <li class="side-nav-item">
+                <a href="{{route('listDenunciasCiudadanas')}}">
+                    <i class="mdi modal-dialog-popout"></i>
+                    <span class="badge badge-light float-right">{{\App\Models\Denuncias\Denuncia::where('ciudadano_id',Auth::user()->id)->count()}}</span>
+                    <span>Mis Reportes</span>
+                </a>
+            </li>
         </ul>
 
         <div class="clearfix"></div>

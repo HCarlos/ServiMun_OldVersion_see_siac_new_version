@@ -110,7 +110,6 @@
         {{--<h3 class="text-inverse text-center font_Open_Sans_Condensed_expanded_300" style="margin-top: -1em;">SOFTWARE</h3>--}}
     </div>
     <p class="wellcome-pos-version font_Open_Sans_Condensed_300">v 2.0</p>
-    <p class="wellcome-pos-twitter ">by <a href="https://twitter.com/DevCH" target="_blank" class="font_Roboto_Condensed_400">@DevCH</a></p>
 </div>
 </body>
 </html>

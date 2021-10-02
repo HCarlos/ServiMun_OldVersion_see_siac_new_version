@@ -13,6 +13,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -44,6 +45,7 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => 'role:auth|Administrator|SysOp'], function () {
 
     Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/home2', 'HomeController@index2')->name('home2');
 
     Route::get('newUser', 'Catalogos\User\UserDataController@newUser')->name('newUser');
     Route::post('createUser', 'Catalogos\User\UserDataController@createUser')->name('createUser');
@@ -345,11 +347,14 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp|DELEGADO'], functio
 
 
 Route::get('enviar', ['as' => 'enviar', function () {
-    $data = ['link' => 'http://atemun.mx'];
+    $data = ['link' => 'https://servimun.mx'];
     Mail::send('emails.notificacion', $data, function ($message) {
-        $message->from('manager@logydes.com.mx', 'Logydes.com.mx');
-        $message->to('logydes@gmail.com')->subject('Notificación');
+        $message->from('logydes@gmail.com', 'villahermosa.gob.mx');
+        $message->to('sentauro@gmail.com')->subject('Notificación');
     });
     return "Se envío el email";
 }]);
 
+//Route::get('home-original', function (){
+//    return Redirect::to('http://localhost:8000/home-original/');
+//});

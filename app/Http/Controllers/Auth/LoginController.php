@@ -40,9 +40,30 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function username()
-    {
-        return 'username';
+    public function login(Request $request){
+
+        $input = $request->all();
+
+        $this->validate($request, [
+            'username' => 'required',
+            'password' => 'required',
+        ]);
+        $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        if(auth()->attempt(array($fieldType => $input['username'], 'password' => $input['password']))) {
+            //return redirect()->route('home');
+            //$this->redirectPath();
+            $role = Auth::user()->hasRole('Administrator|SysOp|Capturista-A|Capturista-B|Capturista-C');
+            if ($role) {
+                return redirect()->route('home');
+            } else {
+                return redirect()->route('home-ciudadano');
+            }
+
+        }else{
+            return redirect()->route('login')
+                ->with('error','Username, email ó password incorrecto');
+        }
+
     }
 
     protected function guard()
@@ -54,9 +75,9 @@ class LoginController extends Controller
     {
         $role = Auth::user()->hasRole('Administrator|SysOp|Capturista');
         if ($role) {
-            return $this->redirectTo;
+            return redirect()->route('home');
         } else {
-            return '/home-ciudadano';
+            return redirect()->route('home-ciudadano');
         }
     }
 

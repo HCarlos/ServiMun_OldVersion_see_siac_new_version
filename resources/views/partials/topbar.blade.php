@@ -62,9 +62,14 @@
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     @csrf
                 </form>
+
             </div>
         </li>
     </ul>
+
+    <button class="button-menu-mobile open-left disable-btn">
+        <i class="mdi mdi-menu"></i>
+    </button>
 
     @include('shared.search.__search_word_in_list')
 

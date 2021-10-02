@@ -8,7 +8,7 @@
         <div class="content-page">
             <div class="content">
                 @include('partials/topbar')
-                <div class="container-fluid">
+                <div class="container-fluid home">
                     @yield('container')
                 </div>
                 <!-- container -->

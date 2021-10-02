@@ -16,15 +16,14 @@
     @else()
         <!--- Sidemenu -->
         <ul class="metismenu side-nav">
-            <ul class="side-nav-second-level" aria-expanded="true">
-                <li>
-                    <a href="{{route('listDenuncias')}}">
-                        <i class="mdi modal-dialog-popout"></i>
-                        <span class="badge badge-light float-right">{{\App\Models\Denuncias\Denuncia::count()}}</span>
-                        <span>Denuncias</span>
-                    </a>
-                </li>
-            </ul>
+
+            <li class="side-nav-item">
+                <a href="{{route('listDenuncias')}}" class="side-nav-link">
+                    <i class="dripicons-meter"></i>
+                    <span class="badge badge-light float-right">{{\App\Models\Denuncias\Denuncia::count()}}</span>
+                    <span>Denuncias</span>
+                </a>
+            </li>
 
             <li class="side-nav-item">
                 <a href="javascript: void(0);" class="side-nav-link">
