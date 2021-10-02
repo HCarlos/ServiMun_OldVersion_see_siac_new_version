@@ -13,7 +13,6 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -45,7 +44,6 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => 'role:auth|Administrator|SysOp'], function () {
 
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/home2', 'HomeController@index2')->name('home2');
 
     Route::get('newUser', 'Catalogos\User\UserDataController@newUser')->name('newUser');
     Route::post('createUser', 'Catalogos\User\UserDataController@createUser')->name('createUser');
@@ -282,7 +280,7 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp'], function () {
 
 Route::group(['middleware' => 'role:auth|Administrator|SysOp|DELEGADO'], function () {
 
-    Route::get('/home-ciudadano', 'HomeController@index_ciudadano')->name('home_ciudadano');
+    Route::get('/home-ciudadano', 'HomeController@index_ciudadano')->name('home-ciudadano');
 
     Route::get('showEditProfilePassword/', 'Catalogos\User\UserDataController@showEditProfilePassword')->name('showEditProfilePassword/');
     Route::put('changePasswordUser/', 'Catalogos\User\UserDataController@changePasswordUser')->name('changePasswordUser/');
@@ -355,6 +353,4 @@ Route::get('enviar', ['as' => 'enviar', function () {
     return "Se envío el email";
 }]);
 
-//Route::get('home-original', function (){
-//    return Redirect::to('http://localhost:8000/home-original/');
-//});
+//Route::get('/home-original', 'HomeController@index')->name('home-original');
