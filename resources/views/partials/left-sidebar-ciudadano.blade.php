@@ -13,6 +13,7 @@
             </span>
         </a>
     @guest()
+
     @else()
         <!--- Sidemenu -->
         <ul class="metismenu side-nav">
