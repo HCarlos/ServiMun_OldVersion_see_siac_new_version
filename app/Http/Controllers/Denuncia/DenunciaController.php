@@ -26,6 +26,7 @@ class DenunciaController extends Controller
 
 
     protected $tableName = "denuncias";
+    protected $msg = "";
 
 // ***************** MUESTRA EL LISTADO DE USUARIOS ++++++++++++++++++++ //
     protected function index(Request $request)
@@ -46,13 +47,11 @@ class DenunciaController extends Controller
             ->paginate();
         $items->appends($filters)->fragment('table');
 
+        //dd($items);
 
         $request->session()->put('items', $items);
 
-//        $sv = Items::getInstance();
-//        $sv->setItems($items);
-//
-//        //dd($sv->getItems());
+        session(['msg' => '']);
 
 
         $user = Auth::User();
@@ -96,9 +95,7 @@ class DenunciaController extends Controller
             return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
         });
         $Estatus      = Estatu::all()->sortBy('estatus');
-
-        //dd($Dependencias);
-
+        $this->msg = "";
         return view('denuncia.denuncia.denuncia_edit',
             [
                 'user'            => Auth::user(),
@@ -113,6 +110,7 @@ class DenunciaController extends Controller
                 'putEdit'         => 'updateDenuncia',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
                 'titulo_header'   => 'Editando el Folio '.$Id,
+                'msg'             => $this->msg,
             ]
         );
     }
@@ -125,6 +123,9 @@ class DenunciaController extends Controller
         if (!isset($item->id)) {
             abort(405);
         }
+        $this->msg = "Registro Guardado con éxito!";
+        session(['msg' => $this->msg]);
+
         return Redirect::to('editDenuncia/'.$item->id);
     }
 
@@ -137,7 +138,7 @@ class DenunciaController extends Controller
            return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
         });
         $Estatus      = Estatu::all()->sortBy('estatus');
-
+        $this->msg = "";
         return view('denuncia.denuncia.denuncia_new',
             [
                 'user'            => Auth::user(),
@@ -151,6 +152,7 @@ class DenunciaController extends Controller
                 'titulo_catalogo' => "Mis " . ucwords($this->tableName),
                 'titulo_header'   => 'Folio Nuevo',
                 'exportModel' => 23,
+                'msg'             => $this->msg,
             ]
         );
     }
@@ -162,6 +164,8 @@ class DenunciaController extends Controller
         if (!isset($item->id)) {
             abort(404);
         }
+        $this->msg = "Registro Guardado con éxito!";
+        session(['msg' => $this->msg]);
         return Redirect::to('editDenuncia/'.$item->id);
     }
 

@@ -278,7 +278,7 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp'], function () {
 
 });
 
-Route::group(['middleware' => 'role:auth|Administrator|SysOp|DELEGADO'], function () {
+Route::group(['middleware' => 'role:auth|Administrator|SysOp|DELEGADO|CIUDADANO'], function () {
 
     Route::get('/home-ciudadano', 'HomeController@index_ciudadano')->name('home-ciudadano');
 
@@ -297,13 +297,13 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp|DELEGADO'], functio
 
     // Catálogo de DENUNCIAS CIUDADANAS
     Route::get('listDenunciasCiudadanas/', 'Denuncia\DenunciaCiudadanaController@index')->name('listDenunciasCiudadanas');
-    Route::get('editDenuncia/{Id}', 'Denuncia\DenunciaController@editItem')->name('editDenuncia');
-    Route::put('updateDenuncia', 'Denuncia\DenunciaController@updateItem')->name('updateDenuncia');
-    Route::get('newDenuncia', 'Denuncia\DenunciaController@newItem')->name('newDenuncia');
-    Route::post('createDenuncia', 'Denuncia\DenunciaController@createItem')->name('createDenuncia');
-    Route::get('removeDenuncia/{id}', 'Denuncia\DenunciaController@removeItem')->name('removeDenuncia');
-    Route::get('searchAdress/', 'Denuncia\DenunciaController@searchAdress')->name('searchAdress');
-    Route::get('getUbi/{IdUbi}', 'Denuncia\DenunciaController@getUbi')->name('getUbi');
+    Route::get('editDenunciaCiudadana/{Id}', 'Denuncia\DenunciaCiudadanaController@editItem')->name('editDenunciaCiudadana');
+    Route::put('updateDenunciaCiudadana', 'Denuncia\DenunciaCiudadanaController@updateItem')->name('updateDenunciaCiudadana');
+    Route::get('newDenunciaCiudadana', 'Denuncia\DenunciaCiudadanaController@newItem')->name('newDenunciaCiudadana');
+    Route::post('createDenunciaCiudadana', 'Denuncia\DenunciaCiudadanaController@createItem')->name('createDenunciaCiudadana');
+    Route::get('removeDenunciaCiudadana/{id}', 'Denuncia\DenunciaCiudadanaController@removeItem')->name('removeDenunciaCiudadana');
+    Route::get('searchAdressCiudadana/', 'Denuncia\DenunciaCiudadanaController@searchAdress')->name('searchAdressCiudadana');
+    Route::get('getUbiCiudadana/{IdUbi}', 'Denuncia\DenunciaCiudadanaController@getUbi')->name('getUbiCiudadana');
 
     // Catálogo de Respuestas
     Route::get('listRespuestas/{Id}', 'Denuncia\Respuesta\RespuestaController@index')->name('listRespuestas');
@@ -334,6 +334,9 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp|DELEGADO'], functio
     Route::get('/ImagenAImagenNew/{denuncia_id}/{imagen_id}', 'Denuncia\Imagene\ImageneController@ImagenAImagenNew')->name('/ImagenAImagenNew');
     Route::post('saveImagenAImagenDen/', 'Denuncia\Imagene\ImageneController@saveImagenAImagenDen')->name('saveImagenAImagenDen');
     Route::get('removeImagenParent/{id}', 'Denuncia\Imagene\ImageneController@removeImagenParent')->name('removeImagenParent');
+
+
+    Route::get('getServiciosFromDependencias/{id}', 'Denuncia\DenunciaController@getServiciosFromDependencias')->name('getServiciosFromDependencias');
 
 
 });

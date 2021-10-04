@@ -117,12 +117,12 @@ class CreateDomiciliosTable extends Migration
             $table->unsignedInteger('tipocomunidad_id')->default(0)->index();
             $table->softDeletes();
             $table->timestamps();
-            $table->unique(['delegado_id', 'tipocomunidad_id']);
+            $table->unique(['delegado_id', 'comunidad' , 'tipocomunidad_id']);
 
-            $table->foreign('delegado_id')
-                ->references('id')
-                ->on($tableNames['users'])
-                ->onDelete('cascade');
+//            $table->foreign('delegado_id')
+//                ->references('id')
+//                ->on($tableNames['users'])
+//                ->onDelete('cascade');
 
             $table->foreign('tipocomunidad_id')
                 ->references('id')

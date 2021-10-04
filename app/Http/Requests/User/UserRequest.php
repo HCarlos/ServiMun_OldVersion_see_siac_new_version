@@ -11,6 +11,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserRequest extends FormRequest
 {
@@ -85,7 +86,7 @@ class UserRequest extends FormRequest
         $UserN = [
             'username' => $this->username,
             'email' => $this->email,
-            'password' => bcrypt($this->username)
+            'password' => Hash::make($this->username),
         ];
 
         $User = [
@@ -124,6 +125,8 @@ class UserRequest extends FormRequest
                 $user->update($User);
                 $role_invitado = Role::findByName('Invitado');
                 $user->roles()->attach($role_invitado);
+                $role_ciudadano = Role::findByName('CIUDADANO');
+                $user->roles()->attach($role_ciudadano);
                 $P1 = Permission::findByName('consultar');
                 $user->permissions()->attach($P1);
                 $user->user_adress()->create();

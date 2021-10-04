@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Denuncia;
+namespace App\Http\Requests\DenunciaCiudadana;
 
 use App\Models\Catalogos\Domicilios\Ubicacion;
 use App\Models\Denuncias\Denuncia;
@@ -9,13 +9,15 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Classes\MessageAlertClass;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 
-class DenunciaRequest extends FormRequest
+class DenunciaCiudadanaRequest extends FormRequest
 {
 
 
-    protected $redirectRoute = 'editDenuncia';
+    protected $redirectRoute = 'newDenunciaCiudadana';
 
     public function authorize(){
         return true;
@@ -28,23 +30,16 @@ class DenunciaRequest extends FormRequest
             'descripcion'      => ['required'],
             'referencia'       => ['required'],
             'fecha_ingreso'    => ['required','date'],
-            'fecha_limite'     => ['required','date'],
-            'fecha_ejecucion'  => ['required','date'],
-            'prioridad_id'     => ['required'],
-            'origen_id'        => ['required'],
-            'dependencia_id'   => ['required'],
             'servicio_id'      => ['required'],
-            'ciudadano_id'     => ['required'],
-            'ubicacion_id'     => ['required','numeric','min:1'],
-            'estatus_id'       => ['required'],
         ];
     }
 
     public function messages(){
         return [
             'descripcion.required'      => 'La :attribute requiere por lo menos de 4 caracter',
-            'referencia.required'      => 'La :attribute es requerida',
-            'fecha_ingreso.required'      => 'La :attribute es requerida',
+            'referencia.required'       => 'La :attribute es requerida',
+            'fecha_ingreso.required'    => 'La :attribute es requerida',
+            'servicio_id.required'      => 'El :attribute es requerida',
         ];
     }
 
@@ -53,14 +48,7 @@ class DenunciaRequest extends FormRequest
             'descripcion'     => 'Denuncia',
             'referencia'      => 'Referencia',
             'fecha_ingreso'   => 'Fecha de Ingreso',
-            'fecha_limite'    => 'Fecha Límite',
-            'fecha_ejecucion' => 'Fecha de Ejecución',
-            'prioridad_id'    => 'Prioridad',
-            'origen_id'       => 'Origen',
-            'dependencia_id'  => 'Dependencia',
             'servicio_id'     => 'Servicio',
-            'ciudadano_id'    => 'Ciudadano',
-            'ubicacion_id'    => 'Ubicación',
         ];
     }
 
@@ -68,7 +56,7 @@ class DenunciaRequest extends FormRequest
         //dd($this->all());
         try {
 
-            $Ubicacion = Ubicacion::findOrFail($this->ubicacion_id);
+            $Ubicacion = Ubicacion::findOrFail(1);
 
             $fechaActual    = Carbon::now();
             $fechaLimite    = Carbon::now();
@@ -76,8 +64,6 @@ class DenunciaRequest extends FormRequest
 
             $Item = [
                 'fecha_ingreso'                => $fechaActual,
-                'oficio_envio'                 => strtoupper($this->oficio_envio),
-                'fecha_oficio_dependencia'     => $this->fecha_oficio_dependencia,
                 'fecha_limite'                 => $fechaLimite->addDays(5),
                 'fecha_ejecucion'              => $fechaEjecucion->addDays(3),
 
@@ -94,32 +80,31 @@ class DenunciaRequest extends FormRequest
                 'estado'                       => strtoupper($Ubicacion->estado),
                 'cp'                           => strtoupper($Ubicacion->cp),
 
-                'latitud'                      => $this->latitud,
-                'longitud'                     => $this->longitud,
-
-                'prioridad_id'                 => $this->prioridad_id,
-                'origen_id'                    => $this->origen_id,
+                'prioridad_id'                 => 2,
+                'origen_id'                    => 4,
                 'dependencia_id'               => $this->dependencia_id,
-                'ubicacion_id'                 => $this->ubicacion_id,
+                'ubicacion_id'                 => 1,
                 'servicio_id'                  => $this->servicio_id,
-                'estatus_id'                   => $this->estatus_id,
-                'ciudadano_id'                 => $this->ciudadano_id,
-                'creadopor_id'                 => $this->creadopor_id,
+                'estatus_id'                   => 8,
+                'ciudadano_id'                 => Auth::id(),
+                'creadopor_id'                 => Auth::id(),
                 'modificadopor_id'             => $this->modificadopor_id,
                 'domicilio_ciudadano_internet' => strtoupper(trim($this->domicilio_ciudadano_internet)),
-                'observaciones'                => strtoupper(trim($this->observaciones)),
 
             ];
 
+           // dd($Item);
+
             if ($this->id == 0) {
                 $item = Denuncia::create($Item);
-            } else {
-                $item = Denuncia::find($this->id);
-                $this->detaches($item);
-                $item->update($Item);
+//            } else {
+//                $item = Denuncia::find($this->id);
+//                $this->detaches($item);
+//                $item->update($Item);
             }
             $this->attaches($item);
         }catch (QueryException $e){
+            Log::alert( $e->getMessage() );
             $Msg = new MessageAlertClass();
             return $Msg->Message($e);
         }
@@ -163,7 +148,7 @@ class DenunciaRequest extends FormRequest
         if ($this->id > 0){
             return $url->route($this->redirectRoute,['Id'=>$this->id]);
         }else{
-            return $url->route('newDenuncia');
+            return $url->route('newDenunciaCiudadana');
         }
     }
 

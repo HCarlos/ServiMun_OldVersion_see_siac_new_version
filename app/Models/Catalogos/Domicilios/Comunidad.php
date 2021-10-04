@@ -46,6 +46,4 @@ class Comunidad extends Model
     }
 
 
-
-
 }

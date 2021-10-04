@@ -16,10 +16,9 @@
     @else()
         <!--- Sidemenu -->
         <ul class="metismenu side-nav">
-
             <li class="side-nav-item">
                 <a href="{{route('listDenuncias')}}" class="side-nav-link">
-                    <i class="dripicons-meter"></i>
+                    <i class="mdi dripicons-archive"></i>
                     <span class="badge badge-light float-right">{{\App\Models\Denuncias\Denuncia::count()}}</span>
                     <span>Denuncias</span>
                 </a>

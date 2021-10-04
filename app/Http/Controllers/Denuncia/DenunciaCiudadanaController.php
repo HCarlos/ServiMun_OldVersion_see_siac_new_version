@@ -2,10 +2,18 @@
 
 namespace App\Http\Controllers\Denuncia;
 
+use App\Http\Requests\Denuncia\DenunciaRequest;
+use App\Http\Requests\DenunciaCiudadana\DenunciaCiudadanaRequest;
+use App\Models\Catalogos\Dependencia;
+use App\Models\Catalogos\Estatu;
+use App\Models\Catalogos\Origen;
+use App\Models\Catalogos\Prioridad;
 use App\Models\Denuncias\Denuncia;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class DenunciaCiudadanaController extends Controller
 {
@@ -33,28 +41,64 @@ class DenunciaCiudadanaController extends Controller
 
         return view('denuncia.denuncia_ciudadana.denuncia_ciudadana_list',
             [
-                'items' => $items,
-                'titulo_catalogo' => "Mis " . ucwords($this->tableName),
-                'titulo_header'   => '',
-                'user' => $user,
-                'searchInListDenuncia' => 'listDenunciasCiudadanas',
-                'newWindow' => true,
-                'tableName' => $this->tableName,
-                'showEdit' => 'editDenunciaCiudadana',
-                'showProcess1' => 'showDataListDenunciaExcel1A',
+                'items'                           => $items,
+                'titulo_catalogo'                 => "Mis " . ucwords($this->tableName),
+                'titulo_header'                   => '',
+                'user'                            => $user,
+                'searchInListDenuncia'            => 'listDenunciasCiudadanas',
+                'newWindow'                       => true,
+                'tableName'                       => $this->tableName,
+                'showEdit'                        => 'editDenunciaCiudadana',
+                'showProcess1'                    => 'showDataListDenunciaExcel1A',
 //                'putEdit' => 'updateDenuncia',
-                'newItem' => 'newDenunciaCiudadana',
-                'removeItem' => 'removeDenunciaCiudadana',
+                'newItem'                         => 'newDenunciaCiudadana',
+                'removeItem'                      => 'removeDenunciaCiudadana',
                 'respuestasDenunciaCiudadanaItem' => 'listRespuestasCiudadanas',
-                'imagenesDenunciaItem' => 'listImagenes',
-                'searchAdressDenuncia' => 'listDenuncias',
-                'showModalSearchDenuncia' => 'showModalSearchDenuncia',
-                'findDataInDenuncia'=>'findDataInDenuncia',
-                'imprimirDenuncia'=> "imprimirDenuncia/",
+                'imagenesDenunciaItem'            => 'listImagenes',
+                'searchAdressDenuncia'            => 'listDenuncias',
+                'showModalSearchDenuncia'         => 'showModalSearchDenuncia',
+                'findDataInDenuncia'              =>'findDataInDenuncia',
+                'imprimirDenuncia'                => "imprimirDenuncia/",
             ]
         );
     }
 
+    protected function newItem()
+    {
+        $Prioridades  = Prioridad::all()->sortBy('prioridad');
+        $Origenes     = Origen::all()->sortBy('origen');
+        $Dependencias = Dependencia::all()->sortBy('dependencia');
+        $Ciudadanos   = User::all()->sortBy(function ($q){
+            return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
+        });
+        $Estatus      = Estatu::all()->sortBy('estatus');
+
+        return view('denuncia.denuncia_ciudadana.denuncia_ciudadana_new',
+            [
+                'user'            => Auth::user(),
+                'editItemTitle'   => 'Nuevo',
+                'prioridades'     => $Prioridades,
+                'origenes'        => $Origenes,
+                'dependencias'    => $Dependencias,
+                'ciudadanos'      => $Ciudadanos,
+                'estatus'         => $Estatus,
+                'postNew'         => 'createDenuncia',
+                'titulo_catalogo' => "Mis " . ucwords($this->tableName),
+                'titulo_header'   => 'Folio Nuevo',
+                'exportModel'     => 23,
+            ]
+        );
+    }
+
+    // ***************** CREAR NUEVO ++++++++++++++++++++ //
+    protected function createItem(DenunciaCiudadanaRequest $request){
+        $item = $request->manage();
+        dd($item);
+        if (!isset($item->id)) {
+            abort(404);
+        }
+        return Redirect::to('listDenunciasCiudadanas/');
+    }
 
 
 }
