@@ -1,11 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
+
+@section('styles')
+    <link href="{{ asset('css/servimun.css') }}" rel="stylesheet"  type="text/css">
+@endsection
+
     <body class="auth-fluid-pages pb-0">
 
     <div class="auth-fluid">
         <!--Auth fluid left content -->
-        <div class="auth-fluid-form-box sidebar-atemun-bg" style="background-color: lightgrey !important;">
+        <div class="auth-fluid-form-box sidebar-atemun-bg sidebar-left-bg" >
             <div class="align-items-center d-flex h-100">
                 <div class="card-body">
                     @include('shared.code.__logo_guest')

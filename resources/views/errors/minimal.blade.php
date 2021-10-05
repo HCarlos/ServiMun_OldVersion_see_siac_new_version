@@ -75,18 +75,12 @@
     </head>
     <body>
         <div class="flex-bottom position-ref height-50">
-            <div class="code">
-                @yield('code')
-            </div>
 
             <div class="message" style="padding: 10px;">
                 @yield('message')
-            </div>
-        </div>
-
-        <div class="flex-top position-ref height-50">
-            <div class="link1">
-                <a href="/" style="text-decoration: none">Inicio</a>
+                <div class="link1">
+                    <a href="/" style="text-decoration: none">Inicio</a>
+                </div>
             </div>
         </div>
 

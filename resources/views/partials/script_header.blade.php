@@ -17,6 +17,7 @@
 <link href="{{ asset('css/dataTables.bootstrap4.css') }}" rel="stylesheet">
 <link href="{{ asset('css/dataTables.bootstrap4.css') }}" rel="stylesheet">
 <link href="{{ asset('css/dropzone.css') }}" rel="stylesheet">
-<link href="{{ asset('css/atemun.css') }}" rel="stylesheet">
+
+<link href="{{ asset('css/atemun.css') }}" rel="stylesheet"  type="text/css">
 
 @yield('styles')

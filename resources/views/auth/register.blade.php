@@ -1,11 +1,24 @@
 @extends('layouts.app')
 
+
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
+
+@section('styles')
+    <link href="{{ asset('css/servimun.css') }}" rel="stylesheet"  type="text/css">
+@endsection
+<div class="full-height content-full bg-ciudad">
+
+<div class="container bg-ciudad ">
+    <div class="row justify-content-center" >
         <div class="col-md-8">
+            <div class="m-2 text-center ">
+                <a href="/login" >
+                    <span><img src="{{ asset('/images/web/logo-1.png') }} " alt=""></span>
+                </a>
+            </div>
+
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header">{{ __('Register') }} | Ingrese los datos que se piden</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
@@ -102,7 +115,11 @@
                                 <button type="submit" class="btn btn-primary">
                                     Registrar
                                 </button>
+                                <a href="login"  class="btn btn-info float-right">
+                                    Ingresar
+                                </a>
                             </div>
+
                         </div>
                     </form>
                 </div>
@@ -110,4 +127,6 @@
         </div>
     </div>
 </div>
+</div>
+
 @endsection

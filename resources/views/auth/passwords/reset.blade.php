@@ -1,11 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+@section('styles')
+    <link href="{{ asset('css/servimun.css') }}" rel="stylesheet"  type="text/css">
+@endsection
+
 <body class="auth-fluid-pages pb-0">
 
 <div class="auth-fluid">
     <!--Auth fluid left content -->
-    <div class="auth-fluid-form-box" style="background-color: lightgrey !important;">
+    <div class="auth-fluid-form-box idebar-atemun-bg sidebar-left-bg">
         <div class="align-items-center d-flex h-100">
             <div class="card-body">
 
@@ -63,14 +67,9 @@
     <!-- end auth-fluid-form-box-->
 
     <!-- Auth fluid right content -->
-    <div class="auth-fluid-right text-center">
-        <div class="auth-user-testimonial">
-            <h2 class="mb-3">{{config('atemun.nombre_empresa')}}</h2>
-            <p class="lead"><i class="mdi mdi-format-quote-open"></i>{{config('atemun.lema_empresa')}}<i class="mdi mdi-format-quote-close"></i>
-            </p>
-            <p>
-                {{config('atemun.lema_empresa')}}
-            </p>
+    <div class="auth-fluid-right text-center sidebar-right-bg" >
+        <div class="sidebar-right-image" >
+            <img src="/images/bg-auth.png"   />
         </div> <!-- end auth-user-testimonial-->
     </div>
     <!-- end Auth fluid right content -->

@@ -1,5 +1,5 @@
 <!-- ========== Left Sidebar Start ========== -->
-<div class="left-side-menu sidebar-atemun-bg" style="background: #9e742b" >
+<div class="left-side-menu sidebar-atemun-bg" >
 
     <div class="slimscroll-menu">
 

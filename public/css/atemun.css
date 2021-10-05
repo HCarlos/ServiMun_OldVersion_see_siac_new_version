@@ -653,29 +653,3 @@ input[readonly] {
     border-width: 2px;
 }
 
-.sidebar-atemun-bg{
-    background-color: #9e742b !important;
-}
-
-.sidebar-right-bg{
-    background-color: lightslategrey !important;;
-}
-
-.sidebar-right-image{
-    display:flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-}
-
-.img_bg_home{
-
-    background-image: url("../images/bg-auth.png") !important;
-    background-repeat: no-repeat;
-    display:flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    margin-top: 5em;
-    margin-left: 5em;
-    height: 80em;
-
-}
