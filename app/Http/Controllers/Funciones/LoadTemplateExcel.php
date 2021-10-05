@@ -23,8 +23,8 @@ class LoadTemplateExcel
 
     public static function getFileTemplate($file){
         $e1 = Storage::disk('externo')->exists($file);
-        if ($e1) {
-            return  storage_path('app/public/externo') . "/" . $file;
+        if ( $e1 ) {
+            return   Storage::disk('externo')->path($file);
         }
         return null;
     }
