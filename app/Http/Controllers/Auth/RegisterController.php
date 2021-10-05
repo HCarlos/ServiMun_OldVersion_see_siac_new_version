@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Funciones\FuncionesController;
 use App\Role;
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -50,9 +54,12 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'username' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'username'   => ['required', 'string', 'max:255', 'unique:users'],
+            'email'      => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password'   => ['required', 'string', 'min:6', 'confirmed'],
+            'ap_paterno' => ['required', 'string'],
+            'ap_materno' => ['required', 'string'],
+            'nombre'     => ['required', 'string'],
         ]);
     }
 
@@ -62,17 +69,60 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
-    {
+    protected function create(array $data){
+
+        app()['cache']->forget('spatie.permission.cache');
+
+        $F = new FuncionesController();
+        $ip   = 'root_init';//$_SERVER['REMOTE_ADDR'];
+        $host = 'root_init';//gethostbyaddr($_SERVER['REMOTE_ADDR']);
+        $idemp = config('atemun.empresa_id');
+
         $user =  User::create([
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'ap_paterno' => $data['ap_paterno'],
+            'ap_materno' => $data['ap_materno'],
+            'nombre' => $data['nombre'],
         ]);
         $role_invitado = Role::findByName('Invitado');
         $user->roles()->attach($role_invitado);
         $role_ciudadano = Role::findByName('CIUDADANO');
         $user->roles()->attach($role_ciudadano);
+        $user->admin = false;
+        $user->empresa_id = $idemp;
+        $user->ip = $ip;
+        $user->host = $host;
+        $user->email_verified_at = now();
+        $user->save();
+        $user->permissions()->attach(7);
+        $user->user_adress()->create();
+        $user->user_data_extend()->create();
+        $F->validImage($user,'profile','profile/');
+
+
         return $user;
     }
+
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        //$this->guard()->login($user);
+
+        if ($response = $this->registered($request, $user)) {
+            return $response;
+        }
+
+        return $request->wantsJson()
+            ? new JsonResponse([], 201)
+            : redirect($this->redirectPath());
+    }
+
+
+
+
 }

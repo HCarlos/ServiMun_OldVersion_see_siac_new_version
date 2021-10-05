@@ -39,6 +39,7 @@ return [
     'telefono_responsable' => env('INFO_THREE',''),
     'web_responsable' => env('INFO_FOUR',''),
     'nombre_software' => env('NOMBRE_SOFTWARE',''),
+    'empresa_id' => env('EMPRESA_ID',1),
 
     // -----------------------------------------------------------
     // La mayor parte de los Tablas estan configuradas aquí,

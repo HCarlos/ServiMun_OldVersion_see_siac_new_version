@@ -26,9 +26,11 @@ class LogLastLogin
      * @return void
      */
     public function handle(Login $event){
-        $fecha = Carbon::now()->toDateTimeString();
-        Auth::user()->update(['logged'=>true,'logged_at'=>$fecha]);
-        Log::info("El usuario {$event->user->username} se ha logueado");
+        if ( Auth::user() ) {
+            $fecha = Carbon::now()->toDateTimeString();
+            Auth::user()->update(['logged' => true, 'logged_at' => $fecha]);
+            Log::info("El usuario {$event->user->username} se ha logueado");
+        }
     }
 
 }

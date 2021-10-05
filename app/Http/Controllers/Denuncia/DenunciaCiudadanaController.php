@@ -82,7 +82,7 @@ class DenunciaCiudadanaController extends Controller
                 'dependencias'    => $Dependencias,
                 'ciudadanos'      => $Ciudadanos,
                 'estatus'         => $Estatus,
-                'postNew'         => 'createDenuncia',
+                'postNew'         => 'createDenunciaCiudadana',
                 'titulo_catalogo' => "Mis " . ucwords($this->tableName),
                 'titulo_header'   => 'Folio Nuevo',
                 'exportModel'     => 23,
@@ -92,11 +92,7 @@ class DenunciaCiudadanaController extends Controller
 
     // ***************** CREAR NUEVO ++++++++++++++++++++ //
     protected function createItem(DenunciaCiudadanaRequest $request){
-        $item = $request->manage();
-        dd($item);
-        if (!isset($item->id)) {
-            abort(404);
-        }
+        $item = $request->manageDC();
         return Redirect::to('listDenunciasCiudadanas/');
     }
 

@@ -36,12 +36,17 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'username' => ['required','min:4','unique:users,username,'.$this->id],
-            'email' => ['required','email','unique:users,email,'.$this->id],
-            'nombre' => ['required','min:1'],
-            'ap_paterno' => ['required','min:1'],
-//            'curp' => ['required','min:18','max:18'],
-//            'fecha_nacimiento' => ['required','date'],
+//            'username' => ['required','min:4','unique:users,username,'.$this->id],
+//            'email' => ['required','email','unique:users,email,'.$this->id],
+//            'nombre' => ['required','min:1'],
+//            'ap_paterno' => ['required','min:1'],
+            'username'   => ['required', 'string', 'max:255', 'unique:users'],
+            'email'      => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password'   => ['required', 'string', 'min:6', 'confirmed'],
+            'ap_paterno' => ['required', 'string'],
+            'ap_materno' => ['required', 'string'],
+            'nombre'     => ['required', 'string'],
+
         ];
     }
 

@@ -94,6 +94,23 @@ class RolesAndPermissionsSeeder extends Seeder
         $user->user_data_extend()->create();
         $F->validImage($user,'profile','profile/');
 
+        $user = new User();
+        $user->nombre = 'Invitado';
+        $user->username = 'Invitado';
+        $user->email = 'invitado@example.com';
+        $user->password = bcrypt('Invitado');
+        $user->admin = false;
+        $user->empresa_id = $idemp;
+        $user->ip = $ip;
+        $user->host = $host;
+        $user->email_verified_at = now();
+        $user->save();
+        $user->roles()->attach($role_invitado);
+        $user->permissions()->attach($P7);
+        $user->user_adress()->create();
+        $user->user_data_extend()->create();
+        $F->validImage($user,'profile','profile/');
+
 
         Role::create(['name'=>'JEFE','description'=>'Jefe','guard_name'=>'web'])->permissions()->attach($P7);
         Role::create(['name'=>'SUBJEFE','description'=>'Subjefe','guard_name'=>'web'])->permissions()->attach($P7);

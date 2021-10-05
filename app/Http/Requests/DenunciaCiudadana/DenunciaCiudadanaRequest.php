@@ -52,7 +52,7 @@ class DenunciaCiudadanaRequest extends FormRequest
         ];
     }
 
-    public function manage(){
+    public function manageDC(){
         //dd($this->all());
         try {
 
@@ -97,14 +97,10 @@ class DenunciaCiudadanaRequest extends FormRequest
 
             if ($this->id == 0) {
                 $item = Denuncia::create($Item);
-//            } else {
-//                $item = Denuncia::find($this->id);
-//                $this->detaches($item);
-//                $item->update($Item);
             }
-            $this->attaches($item);
+            $item = $this->attaches($item);
         }catch (QueryException $e){
-            Log::alert( $e->getMessage() );
+            Log::alert( "Error del Sistema: " . $e->getMessage() );
             $Msg = new MessageAlertClass();
             return $Msg->Message($e);
         }

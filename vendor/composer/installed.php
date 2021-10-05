@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'ef6a8a74ea7b933430ec14ea9aee5c8bf6802042',
+        'reference' => 'e8a4d89efde6c4f293c47fff72c62bff71980365',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -128,12 +128,12 @@
             'dev_requirement' => false,
         ),
         'doctrine/orm' => array(
-            'pretty_version' => '2.9.5',
-            'version' => '2.9.5.0',
+            'pretty_version' => '2.10.1',
+            'version' => '2.10.1.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../doctrine/orm',
             'aliases' => array(),
-            'reference' => '77cc86ed880e3f1f6c9c5819e131a8aaeeeee0da',
+            'reference' => 'f346379c7bf39a9f46771cfd9043e0eb2dd98793',
             'dev_requirement' => false,
         ),
         'doctrine/persistence' => array(
@@ -218,12 +218,12 @@
             'dev_requirement' => false,
         ),
         'filp/whoops' => array(
-            'pretty_version' => '2.14.3',
-            'version' => '2.14.3.0',
+            'pretty_version' => '2.14.4',
+            'version' => '2.14.4.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../filp/whoops',
             'aliases' => array(),
-            'reference' => '89584ce67dd32307f1063cc43846674f4679feda',
+            'reference' => 'f056f1fe935d9ed86e698905a957334029899895',
             'dev_requirement' => true,
         ),
         'fruitcake/laravel-cors' => array(
@@ -455,12 +455,12 @@
             ),
         ),
         'intervention/image' => array(
-            'pretty_version' => '2.6.1',
-            'version' => '2.6.1.0',
+            'pretty_version' => '2.7.0',
+            'version' => '2.7.0.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../intervention/image',
             'aliases' => array(),
-            'reference' => '0925f10b259679b5d8ca58f3a2add9255ffcda45',
+            'reference' => '9a8cc99d30415ec0b3f7649e1647d03a55698545',
             'dev_requirement' => false,
         ),
         'jakub-onderka/php-console-color' => array(
@@ -499,7 +499,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'ef6a8a74ea7b933430ec14ea9aee5c8bf6802042',
+            'reference' => 'e8a4d89efde6c4f293c47fff72c62bff71980365',
             'dev_requirement' => false,
         ),
         'laravel/legacy-factories' => array(
@@ -976,8 +976,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0|2.0',
-                1 => '1.0.0 || 2.0.0 || 3.0.0',
+                0 => '1.0.0 || 2.0.0 || 3.0.0',
+                1 => '1.0|2.0',
             ),
         ),
         'psr/simple-cache' => array(
@@ -1530,12 +1530,12 @@
             'dev_requirement' => false,
         ),
         'vlucas/phpdotenv' => array(
-            'pretty_version' => 'v4.2.0',
-            'version' => '4.2.0.0',
+            'pretty_version' => 'v4.2.1',
+            'version' => '4.2.1.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../vlucas/phpdotenv',
             'aliases' => array(),
-            'reference' => 'da64796370fc4eb03cc277088f6fede9fde88482',
+            'reference' => 'd38f4d1edcbe32515a0ad593cbd4c858e337263c',
             'dev_requirement' => false,
         ),
         'voku/portable-ascii' => array(

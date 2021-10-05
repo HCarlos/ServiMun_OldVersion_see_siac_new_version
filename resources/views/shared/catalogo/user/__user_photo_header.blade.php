@@ -1,5 +1,5 @@
 <!-- Personal-Information -->
-@card
+@component('components.card')
 @slot('title_card', $user->username)
 @slot('body_card')
     @if( $user->IsEmptyPhoto() )
@@ -15,4 +15,4 @@
         </a>
     @endif
 @endslot
-@endcard
+@endcomponent

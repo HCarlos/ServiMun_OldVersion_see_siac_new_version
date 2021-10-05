@@ -40,6 +40,42 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="ap_paterno" class="col-md-4 col-form-label text-md-right">Apellido Paterno </label>
+                            <div class="col-md-6">
+                                <input id="ap_paterno" type="text" class="form-control{{ $errors->has('ap_paterno') ? ' is-invalid' : '' }}" name="ap_paterno" value="{{ old('ap_paterno') }}" required>
+                                @if ($errors->has('ap_paterno'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('ap_paterno') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="ap_materno" class="col-md-4 col-form-label text-md-right">Apellido Materno </label>
+                            <div class="col-md-6">
+                                <input id="ap_materno" type="text" class="form-control{{ $errors->has('ap_materno') ? ' is-invalid' : '' }}" name="ap_materno" value="{{ old('ap_materno') }}" required>
+                                @if ($errors->has('ap_materno'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('ap_materno') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="nombre" class="col-md-4 col-form-label text-md-right">Nombre </label>
+                            <div class="col-md-6">
+                                <input id="nombre" type="text" class="form-control{{ $errors->has('nombre') ? ' is-invalid' : '' }}" name="nombre" value="{{ old('nombre') }}" required>
+                                @if ($errors->has('nombre'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('nombre') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
 
                             <div class="col-md-6">
