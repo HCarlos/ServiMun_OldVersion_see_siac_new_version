@@ -2,6 +2,10 @@
 
 @section('content')
 
+@section('styles')
+    <link href="{{ asset('css/servimun.css') }}" rel="stylesheet"  type="text/css">
+@endsection
+
 <body>
     <div class="wrapper">
         @include('partials/left-sidebar-ciudadano')

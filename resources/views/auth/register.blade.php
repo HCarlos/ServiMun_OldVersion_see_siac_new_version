@@ -6,6 +6,7 @@
 @section('styles')
     <link href="{{ asset('css/servimun.css') }}" rel="stylesheet"  type="text/css">
 @endsection
+
 <div class="full-height content-full bg-ciudad">
 
 <div class="container bg-ciudad ">

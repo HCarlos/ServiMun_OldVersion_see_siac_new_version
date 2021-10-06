@@ -1,1 +1,1 @@
-Ingresa a más tutoriales en <a href="{{ $link }}">{{ $link }}</a>
+Ingresa a la plataforma en <a href="{{ $link }}">{{ $link }}</a>

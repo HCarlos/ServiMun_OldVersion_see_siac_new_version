@@ -15,13 +15,13 @@
                 <div class="card-body">
                     @include('shared.code.__logo_guest')
                     <!-- title-->
-                    <h4 class="mt-4">Ingresar</h4>
+                    <h4 class="mt-0">Ingresar</h4>
                     <p class="text-muted mb-3"></p>
                     <!-- form -->
                     <form method="POST" action="{{ route('login') }}" class="mt-0">
                         @csrf
                         <div class="form-group">
-                            <label for="username" class="{{$errors->has('username')?'text-danger':''}}">Nombre de Usuario</label>
+                            <label for="username" class="{{$errors->has('username')?'text-danger':''}}">Nombre de Usuario ó Correo Electrónico</label>
                             <input class="form-control {{$errors->has('username')?'has-error form-error':''}}" type="text" id="username" name="username" value="{{ old('username') }}" required placeholder="Username">
                             @if ($errors->has('username'))
                                 <span class="has-error">
@@ -62,7 +62,7 @@
         <!-- end auth-fluid-form-box-->
 
         <!-- Auth fluid right content -->
-        <div class="auth-fluid-right text-center sidebar-right-bg" >
+        <div class="auth-fluid-right text-center bg-ciudad sidebar-right-bg" >
             <div class="sidebar-right-image" >
                 <img src="/images/bg-auth.png"   />
             </div> <!-- end auth-user-testimonial-->

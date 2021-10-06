@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 @section('styles')
     <link href="{{ asset('css/servimun.css') }}" rel="stylesheet"  type="text/css">
 @endsection
@@ -12,12 +13,9 @@
     <div class="auth-fluid-form-box sidebar-atemun-bg sidebar-left-bg">
         <div class="align-items-center d-flex h-100">
             <div class="card-body">
-
                 @include('shared.code.__logo_guest')
-                <!-- title-->
                 <h4 class="mt-0">Restablecar Password</h4>
                 <p class="text-muted mb-4">Ingresa tu email y tu nuevo password.</p>
-
                 <!-- form -->
                 <form method="POST" action="{{ route('password.update') }}">
                     @csrf
@@ -67,7 +65,7 @@
     <!-- end auth-fluid-form-box-->
 
     <!-- Auth fluid right content -->
-    <div class="auth-fluid-right text-center sidebar-right-bg" >
+    <div class="auth-fluid-right text-center  sidebar-right-bg" >
         <div class="sidebar-right-image" >
             <img src="/images/bg-auth.png"   />
         </div> <!-- end auth-user-testimonial-->

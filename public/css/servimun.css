@@ -7,14 +7,17 @@
     background-color: lightgrey !important;
 }
 
+.sidebar-right-bg {
+    background-color: white !important;
+}
+
 .sidebar-right-image {
     display:flex !important;
     justify-content: center !important;
     align-items: center !important;
 }
 
-.img_bg_home {
-
+.img-bg-home {
     background-image: url("../images/bg-auth.png") !important;
     background-repeat: no-repeat;
     display:flex !important;

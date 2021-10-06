@@ -2,6 +2,7 @@
 
 @section('content')
 @section('styles')
+
     <link href="{{ asset('css/servimun.css') }}" rel="stylesheet"  type="text/css">
 @endsection
 
@@ -15,7 +16,7 @@
 
                 @include('shared.code.__logo_guest')
                 <!-- title-->
-                <h4 class="mt-0">Reset Password--</h4>
+                <h4 class="mt-0">Reset Password</h4>
                 <p class="text-muted mb-4">Ingresa tu cuenta de correo electrónico y te enviaremos un email con las indicaciones para resetear tu password.</p>
 
                 <!-- form -->
