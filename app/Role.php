@@ -14,7 +14,7 @@ class Role extends Model
 
     protected $guard_name = 'web'; // or whatever guard you want to use
     protected $table = 'roles';
-    protected $fillable = ['name',];
+    protected $fillable = ['id','name','descripcion','abreviatura','color',];
 
     public static function findByName($name){
         return static::where( 'name',$name )->first();

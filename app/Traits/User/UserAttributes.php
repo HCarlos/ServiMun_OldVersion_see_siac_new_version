@@ -8,7 +8,9 @@
 namespace App\Traits\User;
 
 
+use App\Role;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 trait UserAttributes
@@ -110,6 +112,18 @@ trait UserAttributes
         }
         return $withSlash ? $slash . $home : $home;
     }
+
+    public static function getUsernameNext( string $Abreviatura ): array{
+        $Abreviatura = $Abreviatura == "0" ? "inv" : $Abreviatura;
+        $next_id=DB::select("SELECT NEXTVAL('users_id_seq')");
+        $Id = intval($next_id['0']->nextval);
+        DB::select("SELECT SETVAL('users_id_seq',".($Id-1).")" );
+        $Id = str_pad($Id,6,'0',0);
+        $role = Role::query()->where('abreviatura',$Abreviatura)->first();
+        return ['username'=>$role->abreviatura.$Id,'role_id'=>$role->id];
+    }
+
+
 
 
 }

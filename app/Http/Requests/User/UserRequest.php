@@ -36,15 +36,8 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-//            'username' => ['required','min:4','unique:users,username,'.$this->id],
-//            'email' => ['required','email','unique:users,email,'.$this->id],
-//            'nombre' => ['required','min:1'],
-//            'ap_paterno' => ['required','min:1'],
-            'username'   => ['required', 'string', 'max:255', 'unique:users'],
             'email'      => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password'   => ['required', 'string', 'min:6', 'confirmed'],
             'ap_paterno' => ['required', 'string'],
-            'ap_materno' => ['required', 'string'],
             'nombre'     => ['required', 'string'],
 
         ];
@@ -53,22 +46,11 @@ class UserRequest extends FormRequest
     public function messages()
     {
         return [
-            'username.required' => 'El :attribute requiere por lo menos de 4 caracter',
-            'username.unique' => 'El :attribute ya existe',
-
-            'email.required' => 'El :attribute es obligatorio',
-            'email.unique' => 'El :attribute ya existe',
 
             'nombre.required' => 'Se requiere el :attribute',
             'nombre.min' => 'El :attribute requiere por lo menos de 1 caracter',
             'ap_paterno.required' => 'Se requiere el :attribute',
             'ap_paterno.min' => 'El :attribute requiere por lo menos de 1 caracter',
-
-//            'curp.min' => 'Para la :attribute se requieren 18 caracteres',
-//            'curp.max' => 'Para la :attribute se requieren 18 caracteres',
-//            'curp.required' => 'Se requiere la :attribute',
-//
-//            'fecha_nacimiento.required' => 'Se requiere la :attribute',
 
         ];
     }
@@ -76,24 +58,29 @@ class UserRequest extends FormRequest
     public function attributes()
     {
         return [
-            'username' => 'Username',
-            'email' => 'Email',
             'nombre' => 'Nombre',
             'ap_paterno' => 'Apellido Paterno',
-//            'curp' => 'CURP',
-//            'fecha_nacimiento' => 'Fecha de Nacimiento',
         ];
     }
 
     public function manageUser()
     {
+        if ($this->id == 0) {
 
-        $UserN = [
-            'username' => $this->username,
-            'email' => $this->email,
-            'password' => Hash::make($this->username),
-        ];
+            $UN       =  User::getUsernameNext('CIU');
+            $Username = $UN['username'];
+            $Email    = strtolower(trim($this->email));
+            $Email2   =  strtolower($Username) . '@example.com' ;
 
+            $UserN = [
+                'username' => $Username,
+                'email'    => $Email == "" ? $Email2 : $Email,
+                'password' => Hash::make($Username),
+            ];
+
+        }else{
+            $UserN = [ 'email'            => strtolower(trim($this->email)), ];
+        }
         $User = [
             'ap_paterno'       => strtoupper($this->ap_paterno),
             'ap_materno'       => strtoupper($this->ap_materno),
@@ -144,6 +131,8 @@ class UserRequest extends FormRequest
             } else {
                 $user = User::find($this->id);
                 $user->update($User);
+                $user->update($UserN);
+
                 $user->user_adress()->update($User_Adress);
                 $user->user_data_extend()->update($User_Data_Extend);
             }

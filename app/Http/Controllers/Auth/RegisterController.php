@@ -33,7 +33,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/login';
+    protected $redirectTo = '/registered';
 
     /**
      * Create a new controller instance.
@@ -54,9 +54,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'username'   => ['required', 'string', 'max:255', 'unique:users'],
-            'email'      => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password'   => ['required', 'string', 'min:6', 'confirmed'],
+//            'username'   => ['required', 'string', 'max:255', 'unique:users'],
+//            'email'      => ['required', 'string', 'email', 'max:255', 'unique:users'],
+//            'password'   => ['required', 'string', 'min:6', 'confirmed'],
             'ap_paterno' => ['required', 'string'],
             'ap_materno' => ['required', 'string'],
             'nombre'     => ['required', 'string'],
@@ -78,18 +78,23 @@ class RegisterController extends Controller
         $host = 'root_init';//gethostbyaddr($_SERVER['REMOTE_ADDR']);
         $idemp = config('atemun.empresa_id');
 
+        $UN =  User::getUsernameNext('CIUINT');
+        $Username = $UN['username'];
+        $Email =  strtolower($Username) . '@example.com' ;
         $user =  User::create([
-            'username' => $data['username'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'username'    => $Username,
+            'email'      => $Email ,
+            'password'   => Hash::make($Username),
             'ap_paterno' => $data['ap_paterno'],
             'ap_materno' => $data['ap_materno'],
-            'nombre' => $data['nombre'],
+            'nombre'     => $data['nombre'],
         ]);
         $role_invitado = Role::findByName('Invitado');
         $user->roles()->attach($role_invitado);
         $role_ciudadano = Role::findByName('CIUDADANO');
         $user->roles()->attach($role_ciudadano);
+        $role_ciudadano_internet = Role::findByName('CIUDADANO_INTERNET');
+        $user->roles()->attach($role_ciudadano_internet);
         $user->admin = false;
         $user->empresa_id = $idemp;
         $user->ip = $ip;
@@ -119,10 +124,23 @@ class RegisterController extends Controller
 
         return $request->wantsJson()
             ? new JsonResponse([], 201)
-            : redirect($this->redirectPath());
+            : $this->registrado($user);
+
+    // redirect($this->redirectPath());
+
+
     }
 
+    protected function registrado($user)
+    {
+        return view ('auth.passwords.new_user',
+            [
+                'email' =>    $user->email,
+                'username' => $user->username,
+            ]
+        );
 
+    }
 
 
 }

@@ -17,6 +17,7 @@ class UserDataController extends Controller
 {
 
     protected $tableName = "users";
+    protected $msg = "";
 
 // ***************** MUESTRA EL LISTADO DE USUARIOS ++++++++++++++++++++ //
     protected function showListUser(Request $request)
@@ -31,7 +32,7 @@ class UserDataController extends Controller
         $items->appends($filters)->fragment('table');
         $user = Auth::User();
         $roles = Role::all();
-
+        $this->msg = "";
         return view('catalogos.catalogo.user.user_list',
             [
                 'items' => $items,
@@ -49,6 +50,7 @@ class UserDataController extends Controller
                 'showEditBecas' => 'showEditBecas',
                 'showProcess1' => 'showFileListUserExcel1A',
                 'exportModel' => 19,
+                'msg'             => $this->msg,
             ]
         );
     }
@@ -57,12 +59,14 @@ class UserDataController extends Controller
     protected function showEditUserData()
     {
         $user = Auth::user();
+        $this->msg = "";
         return view('catalogos.catalogo.user.user_profile_solo_lectura',
             [
                 'user' => $user,
                 'items' => $user,
                 'titulo_catalogo' => "Catálogo de Usuarios",
                 'titulo_header'   => 'Editando datos',
+                'msg'             => $this->msg,
             ]
         );
     }
@@ -70,11 +74,13 @@ class UserDataController extends Controller
 // ***************** MANDA A LLAMAR LA PANTALLA PARA NUEVO USUARIO ++++++++++++++++++++ //
     protected function newUser()
     {
+        $this->msg = "";
         return view('catalogos.catalogo.user.user_profile_new',
             [
                 'titulo_catalogo' => 'Catálogo de Usuarios',
                 'titulo_header'   => 'Nuevo Usuario ',
                 'postNew' => 'createUser',
+                'msg'             => $this->msg,
             ]
         );
     }
@@ -83,12 +89,14 @@ class UserDataController extends Controller
     protected function showEditUser($Id)
     {
         $user = User::find($Id);
+        $this->msg = "";
         return view('catalogos.catalogo.user.user_profile_edit',
             [
                 'user' => $user,
                 'items' => $user,
                 'titulo_catalogo' => "Catálogo de Usuarios",
                 'titulo_header'   => 'Editando el Folio '.$Id,
+                'msg'             => $this->msg,
             ]
         );
     }
@@ -97,16 +105,26 @@ class UserDataController extends Controller
     protected function update(UserRequest $request)
     {
         $request->updateUser();
+        $this->msg = "Registro Guardado con éxito!";
+        session(['msg' => $this->msg]);
         return redirect()->route('edit');
     }
 
 // ***************** GUARDA LOS CAMBIOS EN EL USUARIO ++++++++++++++++++++ //
     protected function updateUser(UserRequest $request)
     {
+        $Data = $request->all(['id']);
+        //dd($UserId);
         $user = $request->manageUser();
-        if (!isset($user)) {
-            abort(404);
+
+        if ( !isset($user) || !is_object($user) ) {
+            $this->msg = $user;
+            $user = User::find($Data['id']);
+        }else{
+            $this->msg = "Registro Guardado con éxito!";
         }
+        session(['msg' => $this->msg]);
+
         return view('catalogos.catalogo.user.user_profile_edit',
             [
                 'user' => $user,
@@ -114,17 +132,26 @@ class UserDataController extends Controller
                 'titulo_catalogo' => $user->Fullname,
                 'titulo_header'   => '',
                 'putEdit' => 'EditUser',
+                'msg'             => $this->msg,
             ]
         );
     }
 
 // ***************** CREAR NUEVO USUARIO ++++++++++++++++++++ //
-    protected function createUser(UserRequest $request)
-    {
+    protected function createUser(UserRequest $request){
+
+        $Data = $request->all(['id']);
+        //dd($UserId);
         $user = $request->manageUser();
-        if (!isset($user)) {
-            abort(404);
+
+        if ( !isset($user) || !is_object($user) ) {
+            $this->msg = $user;
+            $user = User::find($Data['id']);
+        }else{
+            $this->msg = "Registro Guardado con éxito!";
         }
+        session(['msg' => $this->msg]);
+
         return view('catalogos.catalogo.user.user_profile_edit',
             [
                 'user' => $user,
@@ -132,6 +159,7 @@ class UserDataController extends Controller
                 'titulo_catalogo' => $user->Fullname,
                 'titulo_header'   => 'Editando..',
                 'putEdit' => 'EditUser',
+                'msg'             => $this->msg,
             ]
         );
     }
@@ -141,10 +169,12 @@ class UserDataController extends Controller
     {
         $user = Auth::user();
         $titulo_catalogo = "";
+        $this->msg = "";
         return view('catalogos.catalogo.user.user_photo_update', [
                 "user" => $user,
                 "titulo_catalogo" => "Catálogo de Usuarios",
                 'titulo_header'   => 'Actualizando avatar',
+                'msg'             => $this->msg,
             ]
         );
     }
@@ -154,10 +184,12 @@ class UserDataController extends Controller
     {
         $user = Auth::user();
         $titulo_catalogo = "";
+        $this->msg = "";
         return view('catalogos.catalogo.user.user_password_edit', [
                 "user" => $user,
                 "titulo_catalogo" =>"Catálogo de Usuarios",
                 'titulo_header'   => 'Actualizando password',
+                'msg'             => $this->msg,
             ]
         );
     }
@@ -167,11 +199,13 @@ class UserDataController extends Controller
     {
         $request->updateUserPassword();
         $titulo_catalogo = "";
+        $this->msg = "";
         return view('catalogos.catalogo.user.user_password_edit', [
             "user" => Auth::user(),
             "msg" => 'Password cambiado con éxito!',
             "titulo_catalogo" =>"Catálogo de Usuarios",
             'titulo_header'   => 'Editando password',
+            'msg'             => $this->msg,
         ]);
     }
 
@@ -195,24 +229,15 @@ class UserDataController extends Controller
     protected function showEditBecas($Id)
     {
         $user = User::find($Id);
+        $this->msg = "";
         return view('catalogos.catalogo.user.user_becas_edit',
             [
                 'items' => $user,
+                'msg'   => $this->msg,
             ]
         );
     }
 
-// ***************** GUARDA LOS CAMBIOS EN LAS BECAS DEL USUARIO ALUMNO ++++++++++++++++++++ //
-    protected function putAluBecas(UserAlumnoBecasRequest $request)
-    {
-        $becas = $request->updateBecas();
-        if (isset($becas)) {
-            return Response::json(['mensaje' => 'Registro actualizado con éxito', 'data' => 'OK', 'status' => '200'], 200);
-        } else {
-            return Response::json(['mensaje' => 'Error', 'data' => 'Error', 'status' => '422'], 200);
-        }
-
-    }
 
 
 }

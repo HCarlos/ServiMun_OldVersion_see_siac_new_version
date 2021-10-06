@@ -1,11 +1,11 @@
 <div class="form-group row mb-3">
     <label for = "username" class="col-md-3 col-form-label">Username</label>
     <div class="col-md-9">
-        <input type="text" name="username" id="username" value="{{ old('username') }}" class="form-control" />
+        <input type="text" name="username" id="username" value="{{ old('username') }}" class="form-control" readonly/>
     </div>
     <label for = "email" class="col-md-3 col-form-label">Email</label>
     <div class="col-md-9">
-        <input type="email" name="email" id="email" value="{{ old('email') }}" class="form-control" />
+        <input type="email" name="email" id="email" value="{{ old('email') }}" class="form-control"  />
     </div>
 </div>
 

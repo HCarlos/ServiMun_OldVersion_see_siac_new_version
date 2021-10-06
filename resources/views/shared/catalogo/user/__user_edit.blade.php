@@ -5,7 +5,7 @@
     </div>
     <label for = "email" class="col-md-3 col-form-label">Email</label>
     <div class="col-md-9">
-        <input type="email" name="email" id="email" value="{{ old('email',$items->email) }}" class="form-control" readonly />
+        <input type="email" name="email" id="email" value="{{ old('email',$items->email) }}" class="form-control"  />
     </div>
 </div>
 

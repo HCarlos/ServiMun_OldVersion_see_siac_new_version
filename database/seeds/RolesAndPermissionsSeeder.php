@@ -40,21 +40,24 @@ class RolesAndPermissionsSeeder extends Seeder
 
         $role_admin = Role::create([
             'name' => 'Administrator',
-            'description' => 'Administrator',
+            'descripcion' => 'Administrator',
+            'abreviatura' => 'ADM',
             'guard_name' => 'web',
         ]);
         $role_admin->permissions()->attach($P1);
 
         $role_sysop = Role::create([
             'name' => 'SysOp',
-            'description' => 'System Operator',
+            'descripcion' => 'System Operator',
+            'abreviatura' => 'SysOp',
             'guard_name' => 'web',
         ]);
         $role_sysop->permissions()->attach($P11);
 
         $role_invitado = Role::create([
             'name' => 'Invitado',
-            'description' => 'Invitado',
+            'descripcion' => 'Invitado',
+            'abreviatura' => 'INV',
             'guard_name' => 'web',
         ]);
         $role_invitado->permissions()->attach($P7);
@@ -112,15 +115,16 @@ class RolesAndPermissionsSeeder extends Seeder
         $F->validImage($user,'profile','profile/');
 
 
-        Role::create(['name'=>'JEFE','description'=>'Jefe','guard_name'=>'web'])->permissions()->attach($P7);
-        Role::create(['name'=>'SUBJEFE','description'=>'Subjefe','guard_name'=>'web'])->permissions()->attach($P7);
-        Role::create(['name'=>'REPORTES','description'=>'Reportes','guard_name'=>'web'])->permissions()->attach($P7);
-        Role::create(['name'=>'CAPTURISTA_A','description'=>'Capturista_A','guard_name'=>'web'])->permissions()->attach($P7);
-        Role::create(['name'=>'CAPTURISTA_B','description'=>'Capturista_B','guard_name'=>'web'])->permissions()->attach($P7);
-        Role::create(['name'=>'CAPTURISTA_C','description'=>'Capturista_C','guard_name'=>'web'])->permissions()->attach($P7);
-        Role::create(['name'=>'ENLACE','description'=>'Enlace','guard_name'=>'web'])->permissions()->attach($P7);
-        Role::create(['name'=>'CIUDADANO','description'=>'Ciudadano','guard_name'=>'web'])->permissions()->attach($P7);
-        Role::create(['name'=>'DELEGADO','description'=>'Delegado','guard_name'=>'web'])->permissions()->attach($P7);
+        Role::create(['name'=>'JEFE','descripcion'=>'Jefe','abreviatura'=>'JEFE','guard_name'=>'web'])->permissions()->attach($P7);
+        Role::create(['name'=>'SUBJEFE','descripcion'=>'Subjefe','abreviatura'=>'SUBJ','guard_name'=>'web'])->permissions()->attach($P7);
+        Role::create(['name'=>'REPORTES','descripcion'=>'Reportes','abreviatura'=>'REP','guard_name'=>'web'])->permissions()->attach($P7);
+        Role::create(['name'=>'CAPTURISTA_A','descripcion'=>'Capturista_A','abreviatura'=>'CAPA','guard_name'=>'web'])->permissions()->attach($P7);
+        Role::create(['name'=>'CAPTURISTA_B','descripcion'=>'Capturista_B','abreviatura'=>'CAPB','guard_name'=>'web'])->permissions()->attach($P7);
+        Role::create(['name'=>'CAPTURISTA_C','descripcion'=>'Capturista_C','abreviatura'=>'CAPC','guard_name'=>'web'])->permissions()->attach($P7);
+        Role::create(['name'=>'ENLACE','descripcion'=>'Enlace','abreviatura'=>'ENL','guard_name'=>'web'])->permissions()->attach($P7);
+        Role::create(['name'=>'CIUDADANO','descripcion'=>'Ciudadano','abreviatura'=>'CIU','guard_name'=>'web'])->permissions()->attach($P7);
+        Role::create(['name'=>'CIUDADANO_INTERNET','descripcion'=>'Ciudadano','abreviatura'=>'CIUINT','guard_name'=>'web'])->permissions()->attach($P7);
+        Role::create(['name'=>'DELEGADO','descripcion'=>'Delegado','abreviatura'=>'DEL','guard_name'=>'web'])->permissions()->attach($P7);
 
     }
 

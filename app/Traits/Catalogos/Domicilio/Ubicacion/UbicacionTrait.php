@@ -64,6 +64,10 @@ trait UbicacionTrait
 
     public static function attachesColonia($colonia_id){
         $Colonia   = Colonia::find($colonia_id);
+        if ( is_null($Colonia) ){
+            //dd($colonia_id);
+            return false;
+        }
         $Comunidad = Comunidad::find($Colonia->comunidad_id);
         $CPs       = Codigopostal::find($Colonia->codigopostal_id);
 

@@ -85,7 +85,7 @@ class Ubicacion extends Model
     }
 
     public function getUbicacionAttribute() {
-        return trim($this->calle).', '.trim($this->colonia).', '.trim($this->comunidad).', '.trim($this->ciudad).', '.trim($this->municipio);
+        return trim($this->calle).' '.trim($this->num_ext).' '.trim($this->num_int).', '.trim($this->colonia).', '.trim($this->comunidad).', '.trim($this->ciudad).', '.trim($this->municipio);
     }
 
 

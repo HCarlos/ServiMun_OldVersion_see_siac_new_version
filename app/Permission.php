@@ -16,6 +16,8 @@ class Permission extends Model
     protected $guard_name = 'web'; // or whatever guard you want to use
     protected $table = 'permissions';
 
+    protected $fillable = ['id','name','descripcion','abreviatura',];
+
     public static function findByName($name){
         return static::where( 'name',$name )->first();
     }
