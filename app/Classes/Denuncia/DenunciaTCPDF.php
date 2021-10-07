@@ -40,23 +40,24 @@ class DenunciaTCPDF extends TCPDF{
         $this->SetTextColor(64,64,64);
         $this->SetFillColor(212,212,212);
 
-        $this->Image(ATEMUN['logo_reportes_encabezado'],0,15,65,19);
+        $this->Image(ATEMUN['logo_reportes_encabezado'],5,15,60,19);
 
-        $this->Cell(60,$this->alto,"","R",0,"L");
+        $this->Cell(62,$this->alto,"","R",0,"L");
         $this->Cell(2,$this->alto,"","",0,"L");
         $this->SetFont(FONT_ARIALN,'',11);
         $this->Cell(120,$this->alto,env("NOMBRE_EMPRESA"),"",1,"L");
 
-        $this->Cell(60,$this->alto,"","R",0,"L");
+        $this->Cell(62,$this->alto,"","R",0,"L");
         $this->Cell(2,$this->alto,"","",0,"L");
         $this->SetFont(FONT_FREEMONO,'B',14);
         $this->Cell(120,$this->alto,env('INFO_TWO'),"",1,"L");
 
-        $this->Cell(60,$this->alto,"","R",0,"L");
+        $this->Cell(62,$this->alto,"","R",0,"L");
         $this->Cell(2,$this->alto,"","",0,"L");
-        $this->SetFont(FONT_ARIALN,'',9);
-        $this->Cell(85,$this->alto,"REPORTE CIUDADANO","",0,"L");
+        $this->SetFont(FONT_ARIALN,'',10);
+        $this->Cell(85,$this->alto,"REPORTE CIUDADANO","",1,"L");
         $this->SetFont(FONT_FREEMONO,'B',10);
+        $this->Cell(149,$this->alto,"","",0,"L");
         $this->Cell(22,$this->alto,"FOLIO: ","",0,"L");
         $this->SetFont(FONT_DEJAVUSANSMONO,'B',10);
         $this->SetTextColor(255,64,64);
@@ -64,7 +65,7 @@ class DenunciaTCPDF extends TCPDF{
         $this->SetTextColor(64,64,64);
 
         $this->SetFont(FONT_FREEMONO,'B',10);
-        $this->Cell(147,$this->alto,"","",0,"L");
+        $this->Cell(149,$this->alto,"","",0,"L");
         $this->Cell(22,$this->alto,"FECHA: ","",0,"L");
         $this->SetFont(FONT_ARIALN,'',10);
         $this->Cell(25,$this->alto,$this->timex,"",1,"R");

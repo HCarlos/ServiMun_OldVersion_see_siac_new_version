@@ -43,10 +43,11 @@ class HojaDenunciaController extends Controller
 
         $den = Denuncia::find($Id);
         $roles = $den->ciudadano->RoleNameStrArray;
+        $username = $den->ciudadano->username;
         $html = ATEMUN['style']['denuncia'];
-        $html .= "<p>Estimado <bAzul>{$den->ciudadano->FullName}</bAzul> (<bChocolate>{$den->ciudadano->id}</bChocolate>) ( <bOrange>$roles</bOrange> ), su petición ha sido recibida y se iniciará el trámite pertinente. <br><br>";
+        $html .= "<p>Estimado <bAzul>{$den->ciudadano->FullName}</bAzul> (<bChocolate>{$den->ciudadano->id}</bChocolate>, <bOrange>$username</bOrange>), su petición ha sido recibida y se iniciará el trámite pertinente. <br><br>";
         $html .= "El <b>". NOMBRE_EMPRESA . "</b> agradece su colaboración y le garantiza confidencialidad y una pronta respuesta.  <br><br>";
-        $html .= "Fue atendido por <bVerde>{$den->creadopor->FullName}</bVerde> (<bChocolate>{$den->creadopor->id}</bChocolate>). <br><br>";
+        $html .= "Fue atendido por <bVerde>{$den->creadopor->FullName}</bVerde>. <br><br>";
         $html .= "</p>";
         $html .= "<span></span>";
         $html .= "<pCentrado>";

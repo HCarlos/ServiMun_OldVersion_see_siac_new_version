@@ -42,7 +42,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('EditUser', 'Catalogos\User\UserDataController@updateUser')->name('EditUser');
 });
 
-Route::group(['middleware' => 'role:auth|Administrator|SysOp'], function () {
+Route::group(['middleware' => 'role:auth|Administrator|SysOp|CAPTURISTA_A|CAPTURISTA_B|CAPTURISTA_C'], function () {
 
     Route::get('/home', 'HomeController@index')->name('home');
 
@@ -271,11 +271,6 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp'], function () {
     Route::get('/imprimir_denuncia/{Id}', 'External\Denuncia\HojaDenunciaController@imprimirDenuncia')->name('imprimirDenuncia/');
 
     Route::get('getServiciosFromDependencias/{id}', 'Denuncia\DenunciaController@getServiciosFromDependencias')->name('getServiciosFromDependencias');
-//    Route::get('newServicioDependenciaDenuncia', 'Denuncia\DenunciaController@newServicioDependenciaDenuncia')->name('newServicioDependenciaDenuncia');
-//    Route::post('addServicioDependenciaDenuncia', 'Denuncia\DenunciaController@addServicioDependenciaDenuncia')->name('addServicioDependenciaDenuncia');
-
-    // PIVOTE DENUNCIA DEPENDENCIA SERVICIO
-//    Route::get('listDenunciaDependenciaServicio/{Id}', 'Denuncia\DenunciaDependenciaServicioController@index')->name('listDenunciaDependenciaServicio');
 
 });
 
@@ -321,8 +316,6 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp|DELEGADO|CIUDADANO'
     Route::get('removeRespuestaCiudadana/{id}', 'Denuncia\Respuesta\RespuestaCiudadanaController@removeItem')->name('removeRespuestaCiudadana');
     Route::get('/showModalRespuestaCiudadanaNew/{denuncia_id}', 'Denuncia\Respuesta\RespuestaCiudadanaController@showModalRespuestaCiudadanaNew')->name('/showModalRespuestaCiudadanaNew');
     Route::get('showModalRespuestaCiudadanaEdit/{Id}', 'Denuncia\Respuesta\RespuestaCiudadanaController@showModalRespuestaCiudadanaEdit')->name('/showModalRespuestaCiudadanaEdit');
-//    Route::post('saveRespuestaDen/', 'Denuncia\Respuesta\RespuestaCiudadanaController@saveRespuestaDen')->name('saveRespuestaDen');
-//    Route::put('saveRespuestaDen/', 'Denuncia\Respuesta\RespuestaCiudadanaController@saveRespuestaDen')->name('saveRespuestaDen');
 
     // Catálogo de Imagenes
     Route::get('listImagenes/{Id}', 'Denuncia\Imagene\ImageneController@index')->name('listImagenes');
@@ -336,16 +329,9 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp|DELEGADO|CIUDADANO'
     Route::post('saveImagenAImagenDen/', 'Denuncia\Imagene\ImageneController@saveImagenAImagenDen')->name('saveImagenAImagenDen');
     Route::get('removeImagenParent/{id}', 'Denuncia\Imagene\ImageneController@removeImagenParent')->name('removeImagenParent');
 
-
     Route::get('getServiciosFromDependencias/{id}', 'Denuncia\DenunciaController@getServiciosFromDependencias')->name('getServiciosFromDependencias');
 
-
 });
-
-
-    // END FILES EXTERNAL
-
-
 
 
 Route::get('enviar', ['as' => 'enviar', function () {

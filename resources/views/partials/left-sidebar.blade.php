@@ -218,6 +218,7 @@
                 </a>
 
                 <ul class="side-nav-second-level" aria-expanded="false">
+                    @if (Auth::user()->hasRole('Administrator|SysOp'))
                     <li>
                         <a href="{{route('listCategorias')}}">
                             <i class="fas fa-user-tag"></i>
@@ -225,7 +226,8 @@
                             <span>Categorias Usuario</span>
                         </a>
                     </li>
-
+                    @endif
+                    @if (Auth::user()->hasRole('Administrator|SysOp|CAPTURISTA_A|CAPTURISTA_B|CAPTURISTA_C'))
                     <li>
                         <a href="{{route('listUsers')}}">
                             <i class="fas fa-users"></i>
@@ -233,6 +235,8 @@
                             <span>Usuarios</span>
                         </a>
                     </li>
+                    @endif
+                    @if (Auth::user()->hasRole('Administrator|SysOp'))
                     <li>
                         <a href="{{route('asignaRoleList',['Id'=>0])}}">
                             <i class="fas fa-users-cog"></i>
@@ -240,7 +244,8 @@
                             <span>Roles</span>
                         </a>
                     </li>
-
+                    @endif
+                    @if (Auth::user()->hasRole('Administrator|SysOp'))
                     <li>
                         <a href="{{route('asignaPermissionList',['Id'=>0])}}">
                             <i class="fas fa-user-cog"></i>
@@ -248,14 +253,15 @@
                             <span>Permisos</span>
                         </a>
                     </li>
-
+                    @endif
+                    @if (Auth::user()->hasRole('Administrator|SysOp'))
                     <li>
                         <a href="{{route('archivosConfig')}}">
                             <i class="fas fa-file-excel"></i>
                             <span>Formatos Excel</span>
                         </a>
                     </li>
-
+                    @endif
                 </ul>
 
             </li>

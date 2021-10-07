@@ -51,7 +51,7 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    protected function validator(array $data): \Illuminate\Contracts\Validation\Validator
     {
         return Validator::make($data, [
 //            'username'   => ['required', 'string', 'max:255', 'unique:users'],
@@ -69,7 +69,8 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data){
+    protected function create(array $data): User
+    {
 
         app()['cache']->forget('spatie.permission.cache');
 
@@ -82,12 +83,12 @@ class RegisterController extends Controller
         $Username = $UN['username'];
         $Email =  strtolower($Username) . '@example.com' ;
         $user =  User::create([
-            'username'    => $Username,
+            'username'   => $Username,
             'email'      => $Email ,
             'password'   => Hash::make($Username),
-            'ap_paterno' => $data['ap_paterno'],
-            'ap_materno' => $data['ap_materno'],
-            'nombre'     => $data['nombre'],
+            'ap_paterno' => strtoupper(trim( $data["ap_paterno"] )),
+            'ap_materno' => strtoupper(trim( $data["ap_materno"] )),
+            'nombre'     => strtoupper(trim( $data["nombre"] )),
         ]);
         $role_invitado = Role::findByName('Invitado');
         $user->roles()->attach($role_invitado);
@@ -106,8 +107,8 @@ class RegisterController extends Controller
         $user->user_data_extend()->create();
         $F->validImage($user,'profile','profile/');
 
-
         return $user;
+
     }
 
     public function register(Request $request)

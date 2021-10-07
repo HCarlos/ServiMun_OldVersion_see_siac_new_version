@@ -60,7 +60,7 @@ final class Versions
   'fzaninotto/faker' => 'v1.9.2@848d8125239d7dbf8ab25cb7f054f1a630e68c2e',
   'guzzlehttp/guzzle' => '7.3.0@7008573787b430c1c1f650e3722d9bba59967628',
   'guzzlehttp/promises' => '1.4.1@8e7d04f1f6450fef59366c399cfad4b9383aa30d',
-  'guzzlehttp/psr7' => '2.0.0@1dc8d9cba3897165e16d12bb13d813afb1eb3fe7',
+  'guzzlehttp/psr7' => '2.1.0@089edd38f5b8abba6cb01567c2a8aaa47cec4c72',
   'illuminate/macroable' => 'v8.62.0@300aa13c086f25116b5f3cde3ca54ff5c822fb05',
   'intervention/image' => '2.7.0@9a8cc99d30415ec0b3f7649e1647d03a55698545',
   'laravel-lang/lang' => '7.0.9@679a65755db37b35acd36a5e0ca51e055815a00a',
@@ -91,7 +91,7 @@ final class Versions
   'phpoption/phpoption' => '1.8.0@5455cb38aed4523f99977c4a12ef19da4bfe2a28',
   'phpseclib/phpseclib' => '2.0.33@fb53b7889497ec7c1362c94e61d8127ac67ea094',
   'picqer/php-barcode-generator' => 'v2.2.0@7df93b40099e5fefad055543320a36b80dccda05',
-  'predis/predis' => 'v1.1.8@cf5c118a077fbab8b9af1482c20952173125c041',
+  'predis/predis' => 'v1.1.9@c50c3393bb9f47fa012d0cdfb727a266b0818259',
   'psr/cache' => '1.0.1@d11b50ad223250cf17b86e38383413f5a6764bf8',
   'psr/container' => '1.1.1@8622567409010282b7aeebe4bb841fe98b58dcaf',
   'psr/event-dispatcher' => '1.0.0@dbefd12671e8a14ec7f180cab83036ed26714bb0',
@@ -177,7 +177,7 @@ final class Versions
   'sebastian/version' => '3.0.2@c6c1022351a901512170118436c764e473f6de8c',
   'theseer/tokenizer' => '1.2.1@34a41e998c2183e22995f158c581e7b5e755ab9e',
   'webmozart/assert' => '1.10.0@6964c76c7804814a842473e0c8fd15bab0f18e25',
-  'laravel/laravel' => 'dev-master@e8a4d89efde6c4f293c47fff72c62bff71980365',
+  'laravel/laravel' => 'dev-master@f3aa363708a94eb8f49d493356b676137eb65371',
 );
 
     private function __construct()

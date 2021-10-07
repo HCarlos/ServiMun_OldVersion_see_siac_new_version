@@ -52,7 +52,7 @@ class LoginController extends Controller
         if(auth()->attempt(array($fieldType => $input['username'], 'password' => $input['password']))) {
             //return redirect()->route('home');
             //$this->redirectPath();
-            $role = Auth::user()->hasRole('Administrator|SysOp|Capturista-A|Capturista-B|Capturista-C');
+            $role = Auth::user()->hasRole('Administrator|SysOp|CAPTURISTA_A|CAPTURISTA_B|CAPTURISTA_C');
             if ($role) {
                 return redirect()->route('home');
             } else {
@@ -73,7 +73,7 @@ class LoginController extends Controller
 
     public function redirectPath()
     {
-        $role = Auth::user()->hasRole('Administrator|SysOp|Capturista');
+        $role = Auth::user()->hasRole('Administrator|SysOp|CAPTURISTA_A|CAPTURISTA_B|CAPTURISTA_C');
         if ($role) {
             return redirect()->route('home');
         } else {

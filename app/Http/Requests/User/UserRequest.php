@@ -82,33 +82,33 @@ class UserRequest extends FormRequest
             $UserN = [ 'email'            => strtolower(trim($this->email)), ];
         }
         $User = [
-            'ap_paterno'       => strtoupper($this->ap_paterno),
-            'ap_materno'       => strtoupper($this->ap_materno),
-            'nombre'           => strtoupper($this->nombre),
-            'curp'             => strtoupper($this->curp),
+            'ap_paterno'       => strtoupper(trim($this->ap_paterno)),
+            'ap_materno'       => strtoupper(trim($this->ap_materno)),
+            'nombre'           => strtoupper(trim($this->nombre)),
+            'curp'             => strtoupper(trim($this->curp)),
             'emails'           => $this->emails,
-            'celulares'        => $this->celulares,
-            'telefonos'        => $this->telefonos,
-            'fecha_nacimiento' => $this->fecha_nacimiento,
-            'genero'           => $this->genero,
+            'celulares'        => strtoupper(trim($this->celulares)),
+            'telefonos'        => strtoupper(trim($this->telefonos)),
+            'fecha_nacimiento' => strtoupper(trim($this->fecha_nacimiento)),
+            'genero'           => strtoupper(trim($this->genero)),
         ];
 
         $User_Adress = [
-            'calle'     => strtoupper($this->calle),
+            'calle'     => strtoupper(trim($$this->calle)),
             'num_ext'   => $this->num_ext,
             'num_int'   => $this->num_int,
-            'colonia'   => strtoupper($this->colonia),
-            'localidad' => strtoupper($this->localidad),
-            'municipio' => strtoupper($this->municipio),
-            'estado'    => strtoupper($this->estado),
-            'pais'      => strtoupper($this->pais),
+            'colonia'   => strtoupper(trim($$this->colonia)),
+            'localidad' => strtoupper(trim($$this->localidad)),
+            'municipio' => strtoupper(trim($$this->municipio)),
+            'estado'    => strtoupper(trim($$this->estado)),
+            'pais'      => strtoupper(trim($$this->pais)),
             'cp'        => $this->cp,
         ];
 
         $User_Data_Extend = [
-            'lugar_nacimiento' => strtoupper($this->lugar_nacimiento),
-            'ocupacion'        => strtoupper($this->ocupacion),
-            'profesion'        => strtoupper($this->profesion),
+            'lugar_nacimiento' => strtoupper(trim($$this->lugar_nacimiento)),
+            'ocupacion'        => strtoupper(trim($$this->ocupacion)),
+            'profesion'        => strtoupper(trim($$this->profesion)),
         ];
         try {
 
