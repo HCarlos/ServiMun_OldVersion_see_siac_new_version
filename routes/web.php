@@ -239,6 +239,11 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp|CAPTURISTA_A|CAPTUR
     Route::post('assignPermissionToUser','Catalogos\User\PermissionController@asignar')->name('assignPermissionToUser');
     Route::post('unAssignPermissionToUser','Catalogos\User\PermissionController@desasignar')->name('unAssignPermissionToUser');
 
+    // USUARIOS DEPENDENCIAS
+    Route::get('asignaDependenciaList/{Id}','Catalogos\User\DependenciaController@index')->name('asignaDependenciaList');
+    Route::post('assignDepToUser','Catalogos\User\DependenciaController@asignarDep')->name('assignDepToUser');
+    Route::post('unAssignDepToUser','Catalogos\User\DependenciaController@desasignarDep')->name('unAssignDepToUser');
+
     // EXTERNAL FILES
     Route::get('archivosConfig','Storage\StorageExternalFilesController@archivos_config')->name('archivosConfig');
     Route::post('subirArchivoBase/', 'Storage\StorageExternalFilesController@subirArchivoBase')->name('subirArchivoBase/');

@@ -119,8 +119,12 @@ $(document).ready(function() {
     }
 
     if ( $(".btnAsign0").length > 0  ){
+        //alert('btnAsign0');
         $(".btnAsign0").on('click', function(event) {
             event.preventDefault();
+
+            //alert(this.id);
+
             var IdArr  = this.id.split('-');
             var urlAsigna = IdArr[0];
             var x = $('.listEle option:selected').val();
@@ -138,27 +142,26 @@ $(document).ready(function() {
                 alert("Seleccione un elemento");
                 return false;
             }
-            // var Url = '/'+urlAsigna+'/'+y+'/'+x;
 
-            //alert(Url);
+            var Url = '/'+urlAsigna+'/'+y+'/'+x;
 
-            var Data = new FormData();
-            Data.append( 'Id', y );
-            Data.append( 'names', x );
 
+            var formData = {};
+            formData['Id'] = y;
+            formData['names'] = x;
 
             $(function() {
 
                 $.ajax({
                     url: '/'+urlAsigna,
-                    data: Data,
-                    cache: false,
-                    processData: false,
-                    contentType: false,
-                    type: 'POST',
-                    success: function ( data ) {
-                        window.location.href = data.mensaje;
+                    data: formData,
+                    method: 'POST'
+                }).done(function( response ) {
+                    if (response.data == "OK"){
+                        window.location.href = response.mensaje;
                     }
+                }).fail(function(response) {
+                    alert("--"+response);
                 });
 
             });
@@ -188,24 +191,22 @@ $(document).ready(function() {
                 return false;
             }
 
-
-            var Data = new FormData();
-            Data.append( 'Id', y );
-            Data.append( 'names', z );
-
+            var formData = {};
+            formData['Id'] = y;
+            formData['names'] = z;
 
             $(function() {
 
                 $.ajax({
                     url: '/'+urlElimina,
-                    data: Data,
-                    cache: false,
-                    processData: false,
-                    contentType: false,
-                    type: 'POST',
-                    success: function ( data ) {
-                        window.location.href = data.mensaje;
+                    data: formData,
+                    method: 'POST'
+                }).done(function( response ) {
+                    if (response.data == "OK"){
+                        window.location.href = response.mensaje;
                     }
+                }).fail(function(response) {
+                    alert("--"+response);
                 });
 
             });

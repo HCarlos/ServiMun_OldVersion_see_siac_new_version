@@ -30,6 +30,10 @@ trait UserAttributes
         return $this->roles()->pluck('name')->implode('|','name');
     }
 
+    public function hasDependencia($dependencia): bool{
+        return $this->dependencias->contains('id',$dependencia);
+    }
+
     public function getFullNameAttribute() {
 //        return "{$this->ap_paterno} {$this->ap_materno} {$this->nombre}";
         return trim($this->ap_paterno).' '.trim($this->ap_materno).' '.trim($this->nombre);

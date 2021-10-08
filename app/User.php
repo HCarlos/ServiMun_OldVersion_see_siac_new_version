@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Filters\User\UserFilter;
+use App\Models\Catalogos\Dependencia;
 use App\Models\Denuncias\Respuesta;
 use App\Models\Familias\Familia;
 use App\Models\Familias\Parentesco;
@@ -56,6 +57,10 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function roles(){
         return $this->belongsToMany(Role::class);
+    }
+
+    public function dependencias(){
+        return $this->belongsToMany(Dependencia::class);
     }
 
     public function user_adress(){

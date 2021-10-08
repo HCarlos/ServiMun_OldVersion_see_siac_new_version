@@ -60,6 +60,7 @@ return array(
     'App\\Http\\Controllers\\Catalogos\\Domicilio\\TipocomunidadController' => $baseDir . '/app/Http/Controllers/Catalogos/Domicilio/TipocomunidadController.php',
     'App\\Http\\Controllers\\Catalogos\\Domicilio\\UbicacionController' => $baseDir . '/app/Http/Controllers/Catalogos/Domicilio/UbicacionController.php',
     'App\\Http\\Controllers\\Catalogos\\User\\CategoriaController' => $baseDir . '/app/Http/Controllers/Catalogos/User/CategoriaController.php',
+    'App\\Http\\Controllers\\Catalogos\\User\\DependenciaController' => $baseDir . '/app/Http/Controllers/Catalogos/User/DependenciaController.php',
     'App\\Http\\Controllers\\Catalogos\\User\\PermissionController' => $baseDir . '/app/Http/Controllers/Catalogos/User/PermissionController.php',
     'App\\Http\\Controllers\\Catalogos\\User\\RoleController' => $baseDir . '/app/Http/Controllers/Catalogos/User/RoleController.php',
     'App\\Http\\Controllers\\Catalogos\\User\\UserDataController' => $baseDir . '/app/Http/Controllers/Catalogos/User/UserDataController.php',

@@ -39,7 +39,7 @@
         "vue": "^2.6.14",
         "vue-template-compiler": "^2.6.14",
         "webpack-dev-server": "^3.11.0",
-        "ws": "^8.2.2",
+        "ws": "^8.2.3",
         "y18n": "^5.0.8"
     },
     "dependencies": {

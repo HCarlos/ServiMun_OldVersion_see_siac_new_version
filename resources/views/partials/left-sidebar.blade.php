@@ -255,6 +255,15 @@
                     </li>
                     @endif
                     @if (Auth::user()->hasRole('Administrator|SysOp'))
+                        <li>
+                            <a href="{{route('asignaDependenciaList',['Id'=>0])}}">
+                                <i class="fas fa-user-cog"></i>
+                                <span class="badge badge-light float-right">{{\App\Models\Catalogos\Dependencia::count()}}</span>
+                                <span>Dependencias</span>
+                            </a>
+                        </li>
+                    @endif
+                    @if (Auth::user()->hasRole('Administrator|SysOp'))
                     <li>
                         <a href="{{route('archivosConfig')}}">
                             <i class="fas fa-file-excel"></i>

@@ -39,6 +39,10 @@ class Dependencia extends Model
         return $this->belongsToMany(Estatu::class);
     }
 
+    public function enlaces(){
+        return $this->belongsToMany(User::class);
+    }
+
     public function denuncias(){
         return $this->belongsToMany(Denuncia::class,'denuncia_dependencia_servicio_estatus','dependencia_id','denuncia_id')
         ->withPivot('fecha_movimiento');

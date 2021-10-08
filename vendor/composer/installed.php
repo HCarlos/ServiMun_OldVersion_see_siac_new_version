@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'f3aa363708a94eb8f49d493356b676137eb65371',
+        'reference' => '23d12b5d94912f7962325812b0a90b0f73d66223',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -254,12 +254,12 @@
             'dev_requirement' => false,
         ),
         'guzzlehttp/promises' => array(
-            'pretty_version' => '1.4.1',
-            'version' => '1.4.1.0',
+            'pretty_version' => '1.5.0',
+            'version' => '1.5.0.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../guzzlehttp/promises',
             'aliases' => array(),
-            'reference' => '8e7d04f1f6450fef59366c399cfad4b9383aa30d',
+            'reference' => '136a635e2b4a49b9d79e9c8fee267ffb257fdba0',
             'dev_requirement' => false,
         ),
         'guzzlehttp/psr7' => array(
@@ -499,7 +499,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'f3aa363708a94eb8f49d493356b676137eb65371',
+            'reference' => '23d12b5d94912f7962325812b0a90b0f73d66223',
             'dev_requirement' => false,
         ),
         'laravel/legacy-factories' => array(

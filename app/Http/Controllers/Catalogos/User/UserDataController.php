@@ -116,20 +116,21 @@ class UserDataController extends Controller
         $Data = $request->all(['id']);
         //dd($UserId);
         $user = $request->manageUser();
-
         if ( !isset($user) || !is_object($user) ) {
             $this->msg = $user;
             $user = User::find($Data['id']);
         }else{
-            $this->msg = "Registro Guardado con éxito!";
+            $this->msg = "Registro Guardado con éxito!!!";
         }
         session(['msg' => $this->msg]);
+        // dd ($user);
+        $user = is_null($user) || trim($user) == "" ? User::all()->last() : $user;
 
         return view('catalogos.catalogo.user.user_profile_edit',
             [
                 'user' => $user,
                 'items' => $user,
-                'titulo_catalogo' => $user->Fullname,
+                'titulo_catalogo' => $user->Fullname ?? '' ,
                 'titulo_header'   => '',
                 'putEdit' => 'EditUser',
                 'msg'             => $this->msg,
@@ -143,7 +144,6 @@ class UserDataController extends Controller
         $Data = $request->all(['id']);
         //dd($UserId);
         $user = $request->manageUser();
-
         if ( !isset($user) || !is_object($user) ) {
             $this->msg = $user;
             $user = User::find($Data['id']);
@@ -151,14 +151,16 @@ class UserDataController extends Controller
             $this->msg = "Registro Guardado con éxito!";
         }
         session(['msg' => $this->msg]);
+        //dd ("Create : ".$user);
+        $user = is_null($user) || trim($user) == "" ? User::all()->last() : $user;
 
         return view('catalogos.catalogo.user.user_profile_edit',
             [
-                'user' => $user,
-                'items' => $user,
-                'titulo_catalogo' => $user->Fullname,
-                'titulo_header'   => 'Editando..',
-                'putEdit' => 'EditUser',
+                'user'             => $user,
+                'items'           => $user,
+                'titulo_catalogo' => $user->Fullname ?? '' ,
+                'titulo_header'   => 'Editando...',
+                'putEdit'         => 'EditUser',
                 'msg'             => $this->msg,
             ]
         );

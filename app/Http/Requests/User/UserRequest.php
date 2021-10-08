@@ -36,7 +36,8 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'email'      => ['required', 'string', 'email', 'max:255', 'unique:users'],
+//            'email'      => ['required', 'string', 'email', 'max:255', 'unique:users,'.$this->id],
+            'email'      => ['required', 'string', 'email', 'max:255','unique:users,email,'.$this->id],
             'ap_paterno' => ['required', 'string'],
             'nombre'     => ['required', 'string'],
 
@@ -89,31 +90,33 @@ class UserRequest extends FormRequest
             'emails'           => $this->emails,
             'celulares'        => strtoupper(trim($this->celulares)),
             'telefonos'        => strtoupper(trim($this->telefonos)),
-            'fecha_nacimiento' => strtoupper(trim($this->fecha_nacimiento)),
-            'genero'           => strtoupper(trim($this->genero)),
+            'fecha_nacimiento' => $this->fecha_nacimiento,
+            'genero'           => $this->genero,
         ];
 
         $User_Adress = [
-            'calle'     => strtoupper(trim($$this->calle)),
+            'calle'     => strtoupper(trim($this->calle)),
             'num_ext'   => $this->num_ext,
             'num_int'   => $this->num_int,
-            'colonia'   => strtoupper(trim($$this->colonia)),
-            'localidad' => strtoupper(trim($$this->localidad)),
-            'municipio' => strtoupper(trim($$this->municipio)),
-            'estado'    => strtoupper(trim($$this->estado)),
-            'pais'      => strtoupper(trim($$this->pais)),
+            'colonia'   => strtoupper(trim($this->colonia)),
+            'localidad' => strtoupper(trim($this->localidad)),
+            'municipio' => strtoupper(trim($this->municipio)),
+            'estado'    => strtoupper(trim($this->estado)),
+            'pais'      => strtoupper(trim($this->pais)),
             'cp'        => $this->cp,
         ];
 
         $User_Data_Extend = [
-            'lugar_nacimiento' => strtoupper(trim($$this->lugar_nacimiento)),
-            'ocupacion'        => strtoupper(trim($$this->ocupacion)),
-            'profesion'        => strtoupper(trim($$this->profesion)),
+            'lugar_nacimiento' => strtoupper(trim($this->lugar_nacimiento)),
+            'ocupacion'        => strtoupper(trim($this->ocupacion)),
+            'profesion'        => strtoupper(trim($this->profesion)),
         ];
         try {
 
             if ($this->id == 0) {
                 $user = User::create($UserN);
+                $user->user_adress()->create();
+                $user->user_data_extend()->create();
                 $user->update($User);
                 $role_invitado = Role::findByName('Invitado');
                 $user->roles()->attach($role_invitado);
@@ -121,13 +124,11 @@ class UserRequest extends FormRequest
                 $user->roles()->attach($role_ciudadano);
                 $P1 = Permission::findByName('consultar');
                 $user->permissions()->attach($P1);
-                $user->user_adress()->create();
-                $user->user_data_extend()->create();
                 $F = new FuncionesController();
                 $F->validImage($user, 'profile', 'profile/');
 
-                $user->user_adress()->create($User_Adress);
-                $user->user_data_extend()->create($User_Data_Extend);
+                $user->user_adress()->update($User_Adress);
+                $user->user_data_extend()->update($User_Data_Extend);
             } else {
                 $user = User::find($this->id);
                 $user->update($User);
