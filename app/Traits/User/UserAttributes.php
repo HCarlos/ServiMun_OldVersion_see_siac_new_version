@@ -72,6 +72,20 @@ trait UserAttributes
 
     // Get Image
     public function getPathImageProfileAttribute(){
+        return $this->getImage("");
+    }
+
+    // Get Image Thumbnail
+    public function getPathImageThumbProfileAttribute(){
+        return $this->getImage("thumb");
+    }
+
+    // Get Image PNG
+    public function getPathImagePNGProfileAttribute(){
+        return $this->getImage("png");
+    }
+
+    public function getImage($tipoImage="thumb"){
         $ret = 'images/web/file-not-found.png';
         if ( $this->IsEmptyPhoto() ){
             if ( $this->IsFemale() ){
@@ -80,32 +94,14 @@ trait UserAttributes
                 $ret = 'images/web/empty_user_male.png';
             }
         }else{
-            $tFile = $this->getTipoImageProfile("");
+            $tFile = $this->getTipoImageProfile($tipoImage);
             $exists = Storage::disk($this->disk1)->exists($tFile);
             $ret = $exists
                 ? "storage/".$this->disk1."/".$tFile
                 : $ret;
         }
         return $ret;
-    }
 
-    // Get Image Thumbnail
-    public function getPathImageThumbProfileAttribute(){
-        $ret = '/images/web/file-not-found.png';
-        if ( $this->IsEmptyPhoto() ){
-            if ( $this->IsFemale() ){
-                $ret = '/images/web/empty_user_female.png';
-            }else{
-                $ret = '/images/web/empty_user_male.png';
-            }
-        }else{
-            $tFile = $this->getTipoImageProfile("thumb");
-            $exists = Storage::disk($this->disk1)->exists($tFile);
-            $ret = $exists
-                ? "/storage/".$this->disk1."/".$tFile
-                : $ret;
-        }
-        return $ret;
     }
 
     public function getHomeAttribute($withSlash=false): string {
