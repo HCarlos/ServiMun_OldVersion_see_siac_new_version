@@ -20,6 +20,7 @@ use App\Http\Requests\Denuncia\DenunciaRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Session;
 
 class DenunciaController extends Controller
 {
@@ -36,10 +37,18 @@ class DenunciaController extends Controller
 //                    'ciudadano_id'=>Auth::user()->id,
 //                     $request->only(['search'])
 //                    ];
-
         $filters = $request->only(['search']);
-        if (!Auth::user()->isRole('Administrator|SysOp')){
+
+        $IsEnlace =Auth::user()->isRole('ENLACE');
+        $DependenciaArray = null;
+         IF ($IsEnlace){
+             $DependenciaArray = Auth::user()->DependenciaArray;
+         }elseif (Auth::user()->isRole('CIUDADANO|DELEGADO')){
             $filters['ciudadano_id']=Auth::user()->id;
+         }elseif (Auth::user()->isRole('CIUDADANO|DELEGADO')){
+             $filters['ciudadano_id']=Auth::user()->id;
+         }else{
+             $filters = $request->only(['search']);
         }
         $items = Denuncia::query()
             ->filterBy($filters)
@@ -52,6 +61,8 @@ class DenunciaController extends Controller
         $request->session()->put('items', $items);
 
         session(['msg' => '']);
+        session(['IsEnlace' => $IsEnlace]);
+        session(['DependenciaArray' => $DependenciaArray]);
 
 
         $user = Auth::User();
@@ -68,7 +79,6 @@ class DenunciaController extends Controller
                 'showEdit' => 'editDenuncia',
                 'showEditDenunciaDependenciaServicio'=>'listDenunciaDependenciaServicio',
                 'showProcess1' => 'showDataListDenunciaExcel1A',
-//                'putEdit' => 'updateDenuncia',
                 'newItem' => 'newDenuncia',
                 'removeItem' => 'removeDenuncia',
                 'respuestasDenunciaItem' => 'listRespuestas',
@@ -77,6 +87,8 @@ class DenunciaController extends Controller
                 'showModalSearchDenuncia' => 'showModalSearchDenuncia',
                 'findDataInDenuncia'=>'findDataInDenuncia',
                 'imprimirDenuncia'=> "imprimirDenuncia/",
+                'IsEnlace' => $IsEnlace,
+                'DependenciaArray' => $DependenciaArray,
             ]
         );
     }
@@ -87,10 +99,16 @@ class DenunciaController extends Controller
         $item         = Denuncia::find($Id);
         $Prioridades  = Prioridad::all()->sortBy('prioridad');
         $Origenes     = Origen::all()->sortBy('origen');
-        $Dependencias = Dependencia::all()->sortBy('dependencia');
+
+        $IsEnlace = Session::get('IsEnlace');
+        if($IsEnlace){
+            $DependenciaArray = explode('|',Session::get('DependenciaArray'));
+            $Dependencias = Dependencia::all()->whereIn('dependencia',$DependenciaArray,true)->sortBy('dependencia');
+        }else{
+            $Dependencias = Dependencia::all()->sortBy('dependencia');
+        }
 
         $Servicios = $this->getQueryServiciosFromDependencias($item->dependencia_id);
-
         $Ciudadanos   = User::all()->sortBy(function ($q){
             return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
         });
@@ -133,7 +151,15 @@ class DenunciaController extends Controller
     {
         $Prioridades  = Prioridad::all()->sortBy('prioridad');
         $Origenes     = Origen::all()->sortBy('origen');
-        $Dependencias = Dependencia::all()->sortBy('dependencia');
+
+        $IsEnlace = Session::get('IsEnlace');
+        if($IsEnlace){
+            $DependenciaArray = explode('|',Session::get('DependenciaArray'));
+            $Dependencias = Dependencia::all()->whereIn('dependencia',$DependenciaArray,true)->sortBy('dependencia');
+        }else{
+            $Dependencias = Dependencia::all()->sortBy('dependencia');
+        }
+
         $Ciudadanos   = User::all()->sortBy(function ($q){
            return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
         });

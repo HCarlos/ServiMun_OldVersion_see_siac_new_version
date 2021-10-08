@@ -36,4 +36,9 @@ class HomeController extends Controller
         return view('home-ciudadano');
     }
 
+    public function index_dependencia()
+    {
+        return view('home-dependencia');
+    }
+
 }

@@ -42,7 +42,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('EditUser', 'Catalogos\User\UserDataController@updateUser')->name('EditUser');
 });
 
-Route::group(['middleware' => 'role:auth|Administrator|SysOp|CAPTURISTA_A|CAPTURISTA_B|CAPTURISTA_C'], function () {
+Route::group(['middleware' => 'role:auth|Administrator|SysOp|CAPTURISTA_A|CAPTURISTA_B|CAPTURISTA_C|ENLACE'], function () {
 
     Route::get('/home', 'HomeController@index')->name('home');
 

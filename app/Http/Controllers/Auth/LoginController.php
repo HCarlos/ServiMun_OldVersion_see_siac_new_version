@@ -50,15 +50,16 @@ class LoginController extends Controller
         ]);
         $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
         if(auth()->attempt(array($fieldType => $input['username'], 'password' => $input['password']))) {
-            //return redirect()->route('home');
-            //$this->redirectPath();
-            $role = Auth::user()->hasRole('Administrator|SysOp|CAPTURISTA_A|CAPTURISTA_B|CAPTURISTA_C');
-            if ($role) {
-                return redirect()->route('home');
-            } else {
-                return redirect()->route('home-ciudadano');
-            }
 
+            $role1 = Auth::user()->hasRole('Administrator|SysOp|CAPTURISTA_A|CAPTURISTA_B|CAPTURISTA_C');
+            $role2 = Auth::user()->hasRole('CIUDADANO|DELEGADO');
+            if ($role1) {
+                return redirect()->route('home');
+            } elseif($role2) {
+                return redirect()->route('home-ciudadano');
+            } else {
+                return redirect()->route('home');
+            }
         }else{
             return redirect()->route('login')
                 ->with('error','Username, email ó password incorrecto');
@@ -71,14 +72,18 @@ class LoginController extends Controller
         return Auth::guard('web');
     }
 
-    public function redirectPath()
-    {
-        $role = Auth::user()->hasRole('Administrator|SysOp|CAPTURISTA_A|CAPTURISTA_B|CAPTURISTA_C');
-        if ($role) {
-            return redirect()->route('home');
-        } else {
-            return redirect()->route('home-ciudadano');
-        }
+    public function redirectPath(){
+
+//        $role1 = Auth::user()->hasRole('Administrator|SysOp|CAPTURISTA_A|CAPTURISTA_B|CAPTURISTA_C');
+//        $role2 = Auth::user()->hasRole('Administrator|SysOp|ENLACE');
+//        if ($role1) {
+//            return redirect()->route('home');
+//        } elseif($role2) {
+//            return redirect()->route('home-dependencia');
+//        } else {
+//            return redirect()->route('home-ciudadano');
+//        }
+//
     }
 
     public function authenticated(Request $request, $user)
