@@ -14,6 +14,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Raleway|Roboto+Condensed|Tangerine&effect=3d-float" rel="stylesheet">
     <link href="{{ asset('css/atemun.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/servimun.css') }}" rel="stylesheet">
 
     <style>
         html, body {
@@ -65,9 +66,9 @@
             background-color: transparent !important;
         }
         .links a {
-            color: #b2292e !important;
+            color: #ffffff !important;
             padding: 0 25px;
-            font-size: 12px;
+            font-size: 16px;
             font-weight: 600;
             letter-spacing: .1rem;
             text-decoration: none !important;;
@@ -91,11 +92,11 @@
 
     @if (Route::has('login'))
             <ul class="navbar navbar-nav">
-        <li class="links top-right ">
+        <li class="links top-right " >
             @auth
-                <a href="{{ url('/home') }}" ><strong>Entrar</strong></a>
+                <a href="{{ url('/home') }}" class="" ><strong>Entrar</strong></a>
             @else
-                <a href="{{ route('login') }}" ><strong>Iniciar sesión</strong></a>
+                <a href="{{ route('login') }}" class="text-blanco "><strong>Iniciar sesión</strong></a>
                     {{--<a href="{{ route('register') }}">Regístrate</a>--}}
             @endauth
         </li>

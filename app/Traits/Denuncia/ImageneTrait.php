@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Storage;
 
 trait ImageneTrait
 {
+    
     protected $disk = 'denuncia';
 
     // Get Image

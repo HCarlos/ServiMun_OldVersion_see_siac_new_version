@@ -5,16 +5,23 @@
 
 @section('styles')
     <link href="{{ asset('css/servimun.css') }}" rel="stylesheet"  type="text/css">
+    <style rel="stylesheet"  type="text/css">
+        .bg-registry
+        {
+            background: url("{{ asset('/images/web/bg-registry.png') }}") no-repeat center !important;
+        }
+    </style>
+
 @endsection
 
-<div class="full-height content-full bg-ciudad">
+<div class="full-height content-full bg-registry" >
 
-<div class="container bg-ciudad ">
+<div class="container  ">
     <div class="row justify-content-center" >
         <div class="col-md-8">
-            <div class="m-2 text-center ">
-                <a href="/login" >
-                    <span><img src="{{ asset('/images/web/logo-1.png') }} " alt=""></span>
+            <div class="m-2 text-center " >
+                <a href="/login"  >
+                    <span><img src=" {{ asset('/images/web/bg-logo-registry.png') }} " alt=""></span>
                 </a>
             </div>
 

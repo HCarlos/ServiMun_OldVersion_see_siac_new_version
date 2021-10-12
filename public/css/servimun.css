@@ -8,7 +8,7 @@
 }
 
 .sidebar-right-bg {
-    background-color: white !important;
+    background-image: url( "../images/bg-auth.png" ) !important;
 }
 
 .sidebar-right-image {
@@ -26,11 +26,18 @@
     margin-top: 5em;
     margin-left: 5em;
     height: 80em;
-
 }
 
 .bg-ciudad
 {
     background-color: darkgray ;
+}
 
+.text-blanco {
+    color: #ffffff !important;
+}
+
+.bg-registry
+{
+    background-image: url("../images/web/bg-registry.png") no-repeat center !important;
 }

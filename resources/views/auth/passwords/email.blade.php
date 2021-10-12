@@ -2,22 +2,29 @@
 
 @section('content')
 @section('styles')
-
     <link href="{{ asset('css/servimun.css') }}" rel="stylesheet"  type="text/css">
+    <style rel="stylesheet" type="text/css">
+        .bg-registro-bg
+        {
+            background-image: url('{{asset("images/web/bg-registry.png")}}') no-repeat center !important;
+        }
+    </style>
 @endsection
 
-<body class="auth-fluid-pages pb-0">
+<body class="auth-fluid-pages bg-registry  pb-0 m-0" >
 
-<div class="auth-fluid">
+<div class="auth-fluid m-0 p-0">
     <!--Auth fluid left content -->
-    <div class="auth-fluid-form-box  sidebar-atemun-bg sidebar-left-bg" >
-        <div class="align-items-center d-flex h-100">
+    <div class=" p-0 m-0 " style="background: url('../images/web/bg-registry.png')  no-repeat  !important;">
+        <div class="d-flex h-15 " >
+            @include('shared.code.__logo_guest')
+        </div>
+        <div class="align-items-center " >
             <div class="card-body">
 
-                @include('shared.code.__logo_guest')
                 <!-- title-->
                 <h4 class="mt-0">Reset Password</h4>
-                <p class="text-muted mb-4">Ingresa tu cuenta de correo electrónico y te enviaremos un email con las indicaciones para resetear tu password.</p>
+                <p class="text-muted mb-4">Ingresa tu cuenta de correo electrónico <br>y te enviaremos un email con las <br>indicaciones para resetear tu password.</p>
 
                 <!-- form -->
                 <form method="POST" action="{{ route('password.email') }}">
@@ -32,27 +39,17 @@
                         @endif
                     </div>
                     <div class="form-group mb-0 text-center">
-                        <button class="btn btn-primary btn-block" type="submit"><i class="mdi mdi-lock-reset"></i> Reset Password </button>
+                        <button class="btn btn-primary btn-block" type="submit"><i class="mdi mdi-lock-reset"></i> Reset Password </button><br><br>
+                        <a href="{{ route('login') }}" class="btn btn-secondary btn-block text-white ml-1"><b>INGRESAR</b></a>
                     </div>
 
                 </form>
-                <!-- end form-->
-
-                <!-- Footer-->
-                <footer class="footer footer-alt">
-                    <a href="{{ route('login') }}" class="text-dark ml-1"><b>Regresar</b></a>
-                </footer>
-
-            </div> <!-- end .card-body -->
-        </div> <!-- end .align-items-center.d-flex.h-100-->
+            </div>
+        </div>
     </div>
-    <!-- end auth-fluid-form-box-->
 
-    <!-- Auth fluid right content -->
-    <div class="auth-fluid-right text-center sidebar-right-bg" >
-        <div class="sidebar-right-image" >
-            <img src="/images/bg-auth.png"   />
-        </div> <!-- end auth-user-testimonial-->
+    <div class="auth-fluid-right  m-0 p-0" >
+        <img src="/images/bg-auth.png" height="100%" width="100%"  />
     </div>
     <!-- end Auth fluid right content -->
 </div>

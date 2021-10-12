@@ -1,7 +1,7 @@
 <!-- Logo -->
-<div class="auth-brand m-0 ">
+<div class=" text-center p-1" style="background-color: white; width: 100% !important;">
     <a href="/" >
-        <span><img src="{{ asset('images/web/logo-1.png') }} " alt=""></span>
+        <span><img src="{{ asset('images/web/logo-1.png') }} " ></span>
     </a>
 </div>
 
