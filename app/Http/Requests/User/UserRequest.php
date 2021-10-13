@@ -6,6 +6,7 @@ use App\Classes\MessageAlertClass;
 use App\Http\Controllers\Funciones\FuncionesController;
 use App\Permission;
 use App\Role;
+use App\Rules\IsCURPRule;
 use App\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Http\FormRequest;
@@ -37,7 +38,8 @@ class UserRequest extends FormRequest
     {
         return [
 //            'email'      => ['required', 'string', 'email', 'max:255', 'unique:users,'.$this->id],
-            'email'      => ['required', 'string', 'email', 'max:255','unique:users,email,'.$this->id],
+            'email'      => ['required', 'string', 'email', 'max:255','unique:users,email,'.$this->id, new IsCURPRule()],
+            'curp'       => ['required', 'string', 'curp', 'max:255','unique:users,curp,'.$this->id],
             'ap_paterno' => ['required', 'string'],
             'nombre'     => ['required', 'string'],
 
@@ -48,6 +50,10 @@ class UserRequest extends FormRequest
     {
         return [
 
+            'curp.required' => 'Se requiere el :attribute',
+            'curp.min' => 'El :attribute requiere por lo menos de 1 caracter',
+            'email.required' => 'Se requiere el :attribute',
+            'email.min' => 'El :attribute requiere por lo menos de 1 caracter',
             'nombre.required' => 'Se requiere el :attribute',
             'nombre.min' => 'El :attribute requiere por lo menos de 1 caracter',
             'ap_paterno.required' => 'Se requiere el :attribute',
@@ -59,7 +65,10 @@ class UserRequest extends FormRequest
     public function attributes()
     {
         return [
-            'nombre' => 'Nombre',
+            'nombre'     => 'Nombre',
+            'curp'       => 'CURP',
+            'email'      => 'Email',
+            'nombre'     => 'Nombre',
             'ap_paterno' => 'Apellido Paterno',
         ];
     }
@@ -70,11 +79,13 @@ class UserRequest extends FormRequest
 
             $UN       =  User::getUsernameNext('CIU');
             $Username = $UN['username'];
+            $CURP     = strtolower(trim($this->curp));
             $Email    = strtolower(trim($this->email));
             $Email2   =  strtolower($Username) . '@example.com' ;
 
             $UserN = [
                 'username' => $Username,
+                'curp'     => $CURP,
                 'email'    => $Email == "" ? $Email2 : $Email,
                 'password' => Hash::make($Username),
             ];

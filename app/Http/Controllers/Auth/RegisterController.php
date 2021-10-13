@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Funciones\FuncionesController;
 use App\Role;
+use App\Rules\IsCURPRule;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Registered;
@@ -12,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Validation\Rule;
 
 class RegisterController extends Controller
 {
@@ -54,8 +56,8 @@ class RegisterController extends Controller
     protected function validator(array $data): \Illuminate\Contracts\Validation\Validator
     {
         return Validator::make($data, [
-//            'username'   => ['required', 'string', 'max:255', 'unique:users'],
-//            'email'      => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'curp'   => ['required', 'string', 'min:18', 'max:18', 'unique:users',new IsCURPRule()],
+            'email'      => ['required', 'string', 'email', 'max:255', 'unique:users'],
 //            'password'   => ['required', 'string', 'min:6', 'confirmed'],
             'ap_paterno' => ['required', 'string'],
             'ap_materno' => ['required', 'string'],
@@ -73,7 +75,8 @@ class RegisterController extends Controller
     {
 
         app()['cache']->forget('spatie.permission.cache');
-
+        $F = new FuncionesController();
+            // dd ( $F->getCURPFromRENAPO( strtoupper(trim( $data["curp"] )) ) );
         $F = new FuncionesController();
         $ip   = 'root_init';//$_SERVER['REMOTE_ADDR'];
         $host = 'root_init';//gethostbyaddr($_SERVER['REMOTE_ADDR']);
@@ -86,6 +89,7 @@ class RegisterController extends Controller
             'username'   => $Username,
             'email'      => $Email ,
             'password'   => Hash::make($Username),
+            'curp'       => strtoupper(trim( $data["curp"] )),
             'ap_paterno' => strtoupper(trim( $data["ap_paterno"] )),
             'ap_materno' => strtoupper(trim( $data["ap_materno"] )),
             'nombre'     => strtoupper(trim( $data["nombre"] )),
@@ -136,7 +140,8 @@ class RegisterController extends Controller
     {
         return view ('auth.passwords.new_user',
             [
-                'email' =>    $user->email,
+                'email'    => $user->email,
+                'curp'     => $user->curp,
                 'username' => $user->username,
             ]
         );

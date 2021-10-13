@@ -32,33 +32,32 @@
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
-{{--                        <div class="form-group row">--}}
-{{--                            <label for="username" class="col-md-4 col-form-label text-md-right">Username</label>--}}
+                        <div class="form-group row">
+                            <label for="curp" class="col-md-4 col-form-label text-md-right">CURP</label>
+                            <div class="col-md-6">
+                                <input id="curp" type="text" class="form-control{{ $errors->has('curp') ? ' is-invalid' : '' }}" name="curp" value="{{ old('curp') }}" onchange="validaInputCURP(this)" required autofocus>
+                                <pre id="resultadoCURP"></pre>
+                                @if ($errors->has('curp'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('curp') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 
-{{--                            <div class="col-md-6">--}}
-{{--                                <input id="username" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" required autofocus>--}}
+                        <div class="form-group row">
+                            <label for="email" class="col-md-4 col-form-label text-md-right">E-Mail </label>
 
-{{--                                @if ($errors->has('username'))--}}
-{{--                                    <span class="invalid-feedback">--}}
-{{--                                        <strong>{{ $errors->first('username') }}</strong>--}}
-{{--                                    </span>--}}
-{{--                                @endif--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
+                            <div class="col-md-6">
+                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
 
-{{--                        <div class="form-group row">--}}
-{{--                            <label for="email" class="col-md-4 col-form-label text-md-right">E-Mail </label>--}}
-
-{{--                            <div class="col-md-6">--}}
-{{--                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>--}}
-
-{{--                                @if ($errors->has('email'))--}}
-{{--                                    <span class="invalid-feedback">--}}
-{{--                                        <strong>{{ $errors->first('email') }}</strong>--}}
-{{--                                    </span>--}}
-{{--                                @endif--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
+                                @if ($errors->has('email'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <label for="ap_paterno" class="col-md-4 col-form-label text-md-right">Apellido Paterno </label>
@@ -137,4 +136,7 @@
 </div>
 </div>
 
+@include('partials/script_footer')
+
 @endsection
+

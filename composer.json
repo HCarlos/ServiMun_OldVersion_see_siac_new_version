@@ -28,6 +28,7 @@
         "phpoffice/phpspreadsheet": "^1.18",
         "picqer/php-barcode-generator": "^2.2",
         "predis/predis": "^1.1.7",
+        "rapidapi/rapidapi-connect": "^0.0.2",
         "setasign/fpdf": "^1.8.4",
         "spatie/laravel-permission": "^3.18",
         "tecnickcom/tc-lib-pdf-font": "^1.9",

@@ -1,4 +1,13 @@
 
+#resultado {
+    background-color: red;
+    color: white;
+    font-weight: bold;
+}
+#resultado.ok {
+    background-color: green;
+}
+
 .sidebar-atemun-bg {
     background: #9e742b !important;
 }

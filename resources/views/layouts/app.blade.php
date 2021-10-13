@@ -4,4 +4,5 @@
 @include('partials/script_header')
 </head>
     @yield('content')
+
 </html>

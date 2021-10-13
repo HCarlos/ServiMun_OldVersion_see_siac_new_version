@@ -73,7 +73,7 @@
 
         <!-- Auth fluid right content -->
         <div class="auth-fluid-right  m-0 p-0" >
-            <img src="/images/bg-auth.png" height="100%" width="100%"  />
+            <img src="/images/web/bg-auth-login.png" height="100%" width="100%"  />
         </div>
         <!-- end Auth fluid right content -->
     </div>

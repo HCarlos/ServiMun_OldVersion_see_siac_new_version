@@ -23,6 +23,8 @@ return [
     'array'                => ':attribute debe ser un conjunto.',
     'before'               => ':attribute debe ser una fecha anterior a :date.',
     'before_or_equal'      => ':attribute debe ser una fecha anterior o igual a :date.',
+    'iscurp'               => 'El campo :attribute no es correcto.',
+    'isvalidcurp'          => 'Esa :attribute no existe en México.',
     'between'              => [
         'numeric' => ':attribute tiene que estar entre :min - :max.',
         'file'    => ':attribute debe pesar entre :min - :max kilobytes.',
