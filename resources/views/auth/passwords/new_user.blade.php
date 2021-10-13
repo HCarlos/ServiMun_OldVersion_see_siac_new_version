@@ -17,7 +17,7 @@
 
 <div class="auth-fluid m-0 p-0">
     <!--Auth fluid left content -->
-    <div class=" p-0 m-0 " style="background: url('../images/web/bg-registry.png')  no-repeat  !important;">
+    <div class=" p-0 m-0 bg-form" >
         <div class="d-flex h-15 " >
             @include('shared.code.__logo_guest')
         </div>
@@ -26,14 +26,14 @@
 
                 <!-- email send icon with text-->
                 <div class="text-left m-auto">
-                    <h4 class="text-dark-50 text-center mt-4 font-weight-bold">Felicidades!</h4>
-                    <p class="text-primary-dark mb-4">
+                    <h4 class="text-white-50 text-center mt-4 font-weight-bold">Felicidades!</h4>
+                    <p class="text-white-50 mb-4">
                         Se ha creado tu cuenta satisfactoriamente, estos son tus datos:<br><br>
                         - Email: <b>{{$email}}</b>.<br>
                         - Username: <b>{{$username}}</b>.<br>
                         - Password: <b>{{$username}}</b>.<br><br>
                         Resguarda bien estos datos.<br><br><br><br>
-                        <a href="{{ route('login') }}" class="btn btn-primary btn-block text-white ml-1"><b>INGRESAR</b></a>
+                        <a href="{{ route('login') }}" class="btn btn-danger-primary btn-block text-white ml-1"><b>INGRESAR</b></a>
                     </p>
                 </div>
 
@@ -44,7 +44,7 @@
 
     <!-- Auth fluid right content -->
     <div class="auth-fluid-right  m-0 p-0" >
-        <img src="/images/bg-auth.png" height="100%" width="100%"  />
+        <img src="/images/web/bg-auth-login.png" height="100%" width="100%"  />
     </div>
     <!-- end Auth fluid right content -->
 </div>

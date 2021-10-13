@@ -12,7 +12,7 @@
 
         <div class="col-md-8">
             <!-- Chart-->
-            @component('components.card')
+            @component('components.card-sin-fondo')
                 @slot('title_card',Auth::user()->FullName)
                 @slot('body_card')
                     @include('shared.code.__errors')

@@ -13,11 +13,12 @@
 <link href="{{ asset('css/jquery-jvectormap-1.2.2.css')}}" rel="stylesheet" type="text/css" />
 <!-- App css -->
 <link href="{{ asset('css/icons.min.css')}}" rel="stylesheet" type="text/css" />
-<link href="{{ asset( 'css/app.css' )}}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/app.css' )}}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('css/dataTables.bootstrap4.css') }}" rel="stylesheet">
 <link href="{{ asset('css/dataTables.bootstrap4.css') }}" rel="stylesheet">
 <link href="{{ asset('css/dropzone.css') }}" rel="stylesheet">
 
 <link href="{{ asset('css/atemun.css') }}" rel="stylesheet"  type="text/css">
+<link rel="stylesheet"  href="{{ URL::asset('/css/servimun.css') }}"  />
 
 @yield('styles')

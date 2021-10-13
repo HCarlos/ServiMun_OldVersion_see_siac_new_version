@@ -1,5 +1,5 @@
 <!-- Personal-Information -->
-@component('components.card')
+@component('components.card-sin-fondo')
 @slot('title_card', $user->username)
 @slot('body_card')
     @if( $user->IsEmptyPhoto() )

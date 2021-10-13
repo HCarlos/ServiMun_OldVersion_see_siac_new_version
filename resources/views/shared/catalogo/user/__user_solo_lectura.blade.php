@@ -7,6 +7,10 @@
     <div class="col-md-9">
         <input type="email" name="email" id="email" value="{{ old('email',$items->email) }}" class="form-control" readonly />
     </div>
+    <label for = "curp" class="col-md-3 col-form-label">CURP</label>
+    <div class="col-md-9">
+        <input type="curp" name="curp" id="curp" value="{{ old('curp',$items->curp) }}" class="form-control" readonly />
+    </div>
 </div>
 
 <div class="form-group row mb-3">

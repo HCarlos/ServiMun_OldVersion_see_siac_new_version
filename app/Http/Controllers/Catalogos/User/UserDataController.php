@@ -187,6 +187,7 @@ class UserDataController extends Controller
         $user = Auth::user();
         $titulo_catalogo = "";
         $this->msg = "";
+        session(['msg' => $this->msg]);
         return view('catalogos.catalogo.user.user_password_edit', [
                 "user" => $user,
                 "titulo_catalogo" =>"Catálogo de Usuarios",
@@ -202,6 +203,7 @@ class UserDataController extends Controller
         $request->updateUserPassword();
         $titulo_catalogo = "";
         $this->msg = "";
+        session(['msg' => $this->msg]);
         return view('catalogos.catalogo.user.user_password_edit', [
             "user" => Auth::user(),
             "msg" => 'Password cambiado con éxito!',
@@ -232,6 +234,7 @@ class UserDataController extends Controller
     {
         $user = User::find($Id);
         $this->msg = "";
+        session(['msg' => $this->msg]);
         return view('catalogos.catalogo.user.user_becas_edit',
             [
                 'items' => $user,

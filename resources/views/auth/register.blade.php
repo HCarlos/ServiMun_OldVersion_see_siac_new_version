@@ -25,18 +25,18 @@
                 </a>
             </div>
 
-            <div class="card">
-                <div class="card-header">{{ __('Register') }} | Ingrese los datos que se piden</div>
+            <div class="card bg-form">
+                <div class="card-header text-darkred">{{ __('REGISTER') }} | Ingrese los datos que se piden</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
                         <div class="form-group row">
-                            <label for="curp" class="col-md-4 col-form-label text-md-right">CURP</label>
+                            <label for="curp" class="col-md-4 col-form-label text-md-right text-white">CURP</label>
                             <div class="col-md-6">
                                 <input id="curp" type="text" class="form-control{{ $errors->has('curp') ? ' is-invalid' : '' }}" name="curp" value="{{ old('curp') }}" onchange="validaInputCURP(this)" required autofocus>
-                                <pre id="resultadoCURP"></pre>
+                                <pre class="text-white" id="resultadoCURP"></pre>
                                 @if ($errors->has('curp'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('curp') }}</strong>
@@ -46,7 +46,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">E-Mail </label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right text-white">E-Mail </label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
@@ -60,7 +60,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="ap_paterno" class="col-md-4 col-form-label text-md-right">Apellido Paterno </label>
+                            <label for="ap_paterno" class="col-md-4 col-form-label text-md-right text-white">Apellido Paterno </label>
                             <div class="col-md-6">
                                 <input id="ap_paterno" type="text" class="form-control{{ $errors->has('ap_paterno') ? ' is-invalid' : '' }}" name="ap_paterno" value="{{ old('ap_paterno') }}" required>
                                 @if ($errors->has('ap_paterno'))
@@ -72,7 +72,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="ap_materno" class="col-md-4 col-form-label text-md-right">Apellido Materno </label>
+                            <label for="ap_materno" class="col-md-4 col-form-label text-md-right text-white">Apellido Materno </label>
                             <div class="col-md-6">
                                 <input id="ap_materno" type="text" class="form-control{{ $errors->has('ap_materno') ? ' is-invalid' : '' }}" name="ap_materno" value="{{ old('ap_materno') }}" required>
                                 @if ($errors->has('ap_materno'))
@@ -84,7 +84,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="nombre" class="col-md-4 col-form-label text-md-right">Nombre </label>
+                            <label for="nombre" class="col-md-4 col-form-label text-md-right text-white">Nombre </label>
                             <div class="col-md-6">
                                 <input id="nombre" type="text" class="form-control{{ $errors->has('nombre') ? ' is-invalid' : '' }}" name="nombre" value="{{ old('nombre') }}" required>
                                 @if ($errors->has('nombre'))

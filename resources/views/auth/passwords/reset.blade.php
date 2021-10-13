@@ -16,7 +16,7 @@
 
 <div class="auth-fluid m-0 p-0">
     <!--Auth fluid left content -->
-    <div class=" p-0 m-0 " style="background: url('../images/web/bg-registry.png')  no-repeat  !important;">
+    <div class=" p-0 m-0 bg-form" >
         <div class="d-flex h-15 " >
             @include('shared.code.__logo_guest')
         </div>

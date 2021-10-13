@@ -1,6 +1,10 @@
+/*
+ * Copyright (c) 2021. Realizado por Carlos Hidalgo
+ */
+
 
 #resultado {
-    background-color: red;
+    background-color: darkred;
     color: white;
     font-weight: bold;
 }
@@ -50,3 +54,55 @@
 {
     background-image: url("../images/web/bg-registry.png") no-repeat center !important;
 }
+
+.bg-registro-bg
+{
+    background-image: url('{{asset("images/web/bg-registry.png")}}') no-repeat center !important;
+}
+
+label{
+    color:white;
+}
+
+a, .text-darkred{
+    color: darkred;
+}
+
+.bg-form{
+    background: #56585a;
+}
+
+.bg-form-body{
+    background: #84878a;
+}
+.color-title{
+    color: whitesmoke !important;
+
+}
+.btn-danger-primary{
+    background-color: darkred;
+    border-color: red
+}
+.btn-danger-primary:hover {
+    color: #fff;
+    background-color: #f9375e;
+    border-color: #f82b54; }
+.btn-danger-primary:focus, .btn-danger-primary.focus {
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(250, 92, 124, 0.5);
+    box-shadow: 0 0 0 0.2rem rgba(250, 92, 124, 0.5); }
+.btn-danger-primary.disabled, .btn-danger-primary:disabled {
+    color: #fff;
+    background-color: #fa5c7c;
+    border-color: #fa5c7c; }
+.btn-danger-primary:not(:disabled):not(.disabled):active, .btn-danger-primary:not(:disabled):not(.disabled).active,
+.show > .btn-danger-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #f82b54;
+    border-color: #f81e4a; }
+.btn-danger-primary:not(:disabled):not(.disabled):active:focus, .btn-danger-primary:not(:disabled):not(.disabled).active:focus,
+.show > .btn-danger-primary.dropdown-toggle:focus {
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(250, 92, 124, 0.5);
+    box-shadow: 0 0 0 0.2rem rgba(250, 92, 124, 0.5); }
+
+
+

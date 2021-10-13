@@ -169,7 +169,6 @@ return array(
     'App\\Providers\\ValidatorServiceProvider' => $baseDir . '/app/Providers/ValidatorServiceProvider.php',
     'App\\Role' => $baseDir . '/app/Role.php',
     'App\\Rules\\IsCURPRule' => $baseDir . '/app/Rules/IsCURPRule.php',
-    'App\\Rules\\IsValidCURP' => $baseDir . '/app/Rules/IsValidCURP.php',
     'App\\Rules\\UbicacionUnica' => $baseDir . '/app/Rules/UbicacionUnica.php',
     'App\\Rules\\Uppercase' => $baseDir . '/app/Rules/Uppercase.php',
     'App\\Traits\\Catalogos\\DependenciaTraits' => $baseDir . '/app/Traits/Catalogos/DependenciaTraits.php',
