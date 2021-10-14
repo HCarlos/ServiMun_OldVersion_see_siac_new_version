@@ -21,7 +21,7 @@
                 <form method="POST" action="{{ route('password.email') }}">
                     @csrf
                     <div class="form-group mb-3 ">
-                        <label for="email">Email</label>
+                        <label for="email" class=" text-white">Email</label>
                         <input class="form-control {{$errors->has('email')?'has-error form-error':''}}" type="email" id="email" name="email" value="" placeholder="Ingresa tu email">
                         @if ($errors->has('email'))
                             <span class="has-error">
@@ -30,8 +30,8 @@
                         @endif
                     </div>
                     <div class="form-group mb-0 text-center">
-                        <button class="btn btn-danger-primary btn-block text-white" type="submit"><i class="mdi mdi-lock-reset"></i> Restablecer Password </button><br><br>
-                        <a href="{{ route('login') }}" class="btn btn-hero-secondary btn-block text-white"><b>INGRESAR</b></a>
+                        <button class="btn btn-danger-primary btn-block text-white" type="submit"><i class="mdi mdi-lock-reset"></i> Restablecer Password </button><br>
+                        <a href="{{ route('login') }}" class="btn btn-info btn-block text-white "><b>REGRESAR</b></a>
                     </div>
 
                 </form>

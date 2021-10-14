@@ -19,15 +19,16 @@ class DenunciaFilter extends QueryFilter
 
     public function rules(): array{
         return [
-            'search' => '',
-            'ciudadano' => '',
-            'id' => '',
-            'desde' => '',
-            'hasta' => '',
+            'search'         => '',
+            'ciudadano'      => '',
+            'id'             => '',
+            'desde'          => '',
+            'hasta'          => '',
             'dependencia_id' => '',
-            'servicio_id' => '',
-            'estatus_id' => '',
-            'ciudadano_id' => '',
+            'servicio_id'    => '',
+            'estatus_id'     => '',
+            'ciudadano_id'   => '',
+            'dependencias'   => '',
         ];
     }
 
@@ -104,6 +105,15 @@ class DenunciaFilter extends QueryFilter
     public function ciudadano_id($query, $search){
         if (is_null($search) || empty ($search) || trim($search) == "0") {return $query;}
         return $query->where('ciudadano_id', $search);
+    }
+
+    public function dependencias($query, $search){
+        if (is_null($search) || empty ($search) || trim($search) == "0") {return $query;}
+        $search = explode('|',$search);
+        return $query->orWhereHas('dependencias', function ($q) use ($search) {
+            return $q->whereIn('dependencia',$search);
+        });
+
     }
 
 }

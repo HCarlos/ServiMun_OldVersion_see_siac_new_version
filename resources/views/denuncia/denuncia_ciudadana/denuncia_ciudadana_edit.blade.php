@@ -7,7 +7,7 @@
 {{--    @slot('titulo_header','Folio: '. $items->id)--}}
     @slot('contenido')
             @component('components.card')
-                @slot('title_card','')
+                @slot('title_card','Editando... ')
                 @slot('body_card')
                     @include('shared.code.__errors')
 {{--                    @include('shared.search.__search_denuncia_adress_list')--}}

@@ -54,7 +54,7 @@ final class Versions
   'evenement/evenement' => 'v2.1.0@6ba9a777870ab49f417e703229d53931ed40fd7a',
   'ezyang/htmlpurifier' => 'v4.13.0@08e27c97e4c6ed02f37c5b2b20488046c8d90d75',
   'facade/flare-client-php' => '1.9.1@b2adf1512755637d0cef4f7d1b54301325ac78ed',
-  'facade/ignition' => '2.14.1@6d89c4c99537f487ad29f646d57ebf107ef714ed',
+  'facade/ignition' => '2.15.0@3ee6e94815462bcf09bca0efc1c9069685df8da3',
   'facade/ignition-contracts' => '1.0.2@3c921a1cdba35b68a7f0ccffc6dffc1995b18267',
   'fideloper/proxy' => '4.4.1@c073b2bd04d1c90e04dc1b787662b558dd65ade0',
   'fruitcake/laravel-cors' => 'v2.0.4@a8ccedc7ca95189ead0e407c43b530dc17791d6a',
@@ -62,7 +62,7 @@ final class Versions
   'guzzlehttp/guzzle' => '7.3.0@7008573787b430c1c1f650e3722d9bba59967628',
   'guzzlehttp/promises' => '1.5.0@136a635e2b4a49b9d79e9c8fee267ffb257fdba0',
   'guzzlehttp/psr7' => '1.8.3@1afdd860a2566ed3c2b0b4a3de6e23434a79ec85',
-  'illuminate/macroable' => 'v8.62.0@300aa13c086f25116b5f3cde3ca54ff5c822fb05',
+  'illuminate/macroable' => 'v8.64.0@300aa13c086f25116b5f3cde3ca54ff5c822fb05',
   'intervention/image' => '2.7.0@9a8cc99d30415ec0b3f7649e1647d03a55698545',
   'laravel-lang/lang' => '7.0.9@679a65755db37b35acd36a5e0ca51e055815a00a',
   'laravel/framework' => 'v7.30.4@9dd38140dc2924daa1a020a3d7a45f9ceff03df3',
@@ -101,9 +101,9 @@ final class Versions
   'psr/http-message' => '1.0.1@f6561bf28d520154e4b0ec72be95418abe6d9363',
   'psr/log' => '1.1.4@d49695b909c3b7628b6289db5479a1c204601f11',
   'psr/simple-cache' => '1.0.1@408d5eafb83c57f6365a3ca330ff23aa4a5fa39b',
-  'psy/psysh' => 'v0.10.8@e4573f47750dd6c92dca5aee543fa77513cbd8d3',
+  'psy/psysh' => 'v0.10.9@01281336c4ae557fe4a994544f30d3a1bc204375',
   'ralouphie/getallheaders' => '3.0.3@120b605dfeb996808c31b6477290a714d356e822',
-  'ramsey/collection' => '1.2.1@eaca1dc1054ddd10cbd83c1461907bee6fb528fa',
+  'ramsey/collection' => '1.2.2@cccc74ee5e328031b15640b51056ee8d3bb66c0a',
   'ramsey/uuid' => '4.2.3@fc9bb7fb5388691fd7373cd44dcb4d63bbcf24df',
   'rapidapi/rapidapi-connect' => '0.0.2@e23c29890f0a66f283219c93bb86b4666e976854',
   'ratchet/pawl' => 'v0.2.3@55256f590ab457fc9da57aa3f88e2edb5a2386c1',
@@ -188,7 +188,7 @@ final class Versions
   'sebastian/version' => '3.0.2@c6c1022351a901512170118436c764e473f6de8c',
   'theseer/tokenizer' => '1.2.1@34a41e998c2183e22995f158c581e7b5e755ab9e',
   'webmozart/assert' => '1.10.0@6964c76c7804814a842473e0c8fd15bab0f18e25',
-  'laravel/laravel' => 'dev-master@ab133ba189a11b5c5774549f3c6ca31789d868ff',
+  'laravel/laravel' => 'dev-master@ba110d599ca13aa234e72ab8dadec29e4f84b9fb',
 );
 
     private function __construct()

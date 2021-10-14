@@ -5,7 +5,7 @@
 @component('components.denuncia')
     @slot('contenido')
             @component('components.card')
-                @slot('title_card','')
+                @slot('title_card','Nueva Denuncia')
                 @slot('body_card')
                     @include('shared.code.__errors')
                     <form method="POST" action="{{ route('createDenunciaCiudadana') }}">

@@ -275,7 +275,6 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp|CAPTURISTA_A|CAPTUR
     Route::post('showDataListDenunciaExcel1A/', 'External\Denuncia\ListDenunciaXLSXController@getListDenunciaXLSX')->name('showDataListDenunciaExcel1A');
     Route::get('/imprimir_denuncia/{Id}', 'External\Denuncia\HojaDenunciaController@imprimirDenuncia')->name('imprimirDenuncia/');
 
-    Route::get('getServiciosFromDependencias/{id}', 'Denuncia\DenunciaController@getServiciosFromDependencias')->name('getServiciosFromDependencias');
 
 });
 
@@ -305,6 +304,7 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp|DELEGADO|CIUDADANO'
     Route::get('removeDenunciaCiudadana/{id}', 'Denuncia\DenunciaCiudadanaController@removeItem')->name('removeDenunciaCiudadana');
     Route::get('searchAdressCiudadana/', 'Denuncia\DenunciaCiudadanaController@searchAdress')->name('searchAdressCiudadana');
     Route::get('getUbiCiudadana/{IdUbi}', 'Denuncia\DenunciaCiudadanaController@getUbi')->name('getUbiCiudadana');
+    Route::get('/imprimir_denuncia/{Id}', 'External\Denuncia\HojaDenunciaController@imprimirDenuncia')->name('imprimirDenuncia/');
 
     // Catálogo de Respuestas
     Route::get('listRespuestas/{Id}', 'Denuncia\Respuesta\RespuestaController@index')->name('listRespuestas');
@@ -337,6 +337,9 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp|DELEGADO|CIUDADANO'
     Route::get('getServiciosFromDependencias/{id}', 'Denuncia\DenunciaController@getServiciosFromDependencias')->name('getServiciosFromDependencias');
 
 });
+
+
+Route::get('getServiciosFromDependencias/{id}', 'Denuncia\DenunciaController@getServiciosFromDependencias')->name('getServiciosFromDependencias');
 
 
 Route::get('enviar', ['as' => 'enviar', function () {

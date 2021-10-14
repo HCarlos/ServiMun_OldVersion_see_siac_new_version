@@ -5,6 +5,8 @@
                         <th class="sorting" >Username</th>
                         <th class="sorting">Nombre Completo</th>
                         <th class="sorting">Género</th>
+                        <th class="sorting">Email</th>
+                        <th class="sorting">CURP</th>
                         <th class="sorting ">Roles</th>
                         <th></th>
                     </tr>
@@ -15,6 +17,8 @@
                         <td class="table-user">{{$item->id}}</td>
                         <td>{{$item->username}}</td>
                         <td>{{($item->FullName)}}</td>
+                        <td>{{($item->email)}}</td>
+                        <td>{{($item->curp)}}</td>
                        <td class="action-icon text-center">@if($item->genero==0)
                                <i class="fas fa-female text-danger"></i>
                            @else

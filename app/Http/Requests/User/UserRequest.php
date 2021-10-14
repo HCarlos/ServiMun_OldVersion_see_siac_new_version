@@ -7,6 +7,7 @@ use App\Http\Controllers\Funciones\FuncionesController;
 use App\Permission;
 use App\Role;
 use App\Rules\IsCURPRule;
+use App\Rules\Uppercase;
 use App\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Http\FormRequest;
@@ -38,8 +39,8 @@ class UserRequest extends FormRequest
     {
         return [
 //            'email'      => ['required', 'string', 'email', 'max:255', 'unique:users,'.$this->id],
-            'email'      => ['required', 'string', 'email', 'max:255','unique:users,email,'.$this->id, new IsCURPRule()],
-            'curp'       => ['required', 'string', 'curp', 'max:255','unique:users,curp,'.$this->id],
+            'email'      => ['required', 'string', 'email', 'max:255','unique:users,email,'.$this->id],
+            'curp'       => ['unique:users,curp,'.$this->id, new IsCURPRule() ],
             'ap_paterno' => ['required', 'string'],
             'nombre'     => ['required', 'string'],
 
@@ -50,14 +51,17 @@ class UserRequest extends FormRequest
     {
         return [
 
-            'curp.required' => 'Se requiere el :attribute',
-            'curp.min' => 'El :attribute requiere por lo menos de 1 caracter',
-            'email.required' => 'Se requiere el :attribute',
-            'email.min' => 'El :attribute requiere por lo menos de 1 caracter',
-            'nombre.required' => 'Se requiere el :attribute',
-            'nombre.min' => 'El :attribute requiere por lo menos de 1 caracter',
+            'curp.required'       => 'Se requiere el :attribute',
+            'curp.min'            => 'La :attribute requiere 18 caracteres',
+            'curp.max'            => 'La :attribute requiere 18 caracteres',
+            'curp.unique'         => 'La :attribute ya existe',
+            'email.required'      => 'Se requiere el :attribute',
+            'email.min'           => 'El :attribute requiere por lo menos de 1 caracter',
+            'email.unique'        => 'El :attribute ya existe',
+            'nombre.required'     => 'Se requiere el :attribute',
+            'nombre.min'          => 'El :attribute requiere por lo menos de 1 caracter',
             'ap_paterno.required' => 'Se requiere el :attribute',
-            'ap_paterno.min' => 'El :attribute requiere por lo menos de 1 caracter',
+            'ap_paterno.min'      => 'El :attribute requiere por lo menos de 1 caracter',
 
         ];
     }
@@ -75,6 +79,7 @@ class UserRequest extends FormRequest
 
     public function manageUser()
     {
+
         if ($this->id == 0) {
 
             $UN       =  User::getUsernameNext('CIU');
@@ -97,7 +102,7 @@ class UserRequest extends FormRequest
             'ap_paterno'       => strtoupper(trim($this->ap_paterno)),
             'ap_materno'       => strtoupper(trim($this->ap_materno)),
             'nombre'           => strtoupper(trim($this->nombre)),
-            'curp'             => strtoupper(trim($this->curp)),
+            'curp'             => $CURP,
             'emails'           => $this->emails,
             'celulares'        => strtoupper(trim($this->celulares)),
             'telefonos'        => strtoupper(trim($this->telefonos)),

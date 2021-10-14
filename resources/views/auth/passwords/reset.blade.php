@@ -22,7 +22,7 @@
         </div>
         <div class="align-items-center " >
             <div class="card-body">
-                <h4 class="mt-0">Restablecar Password</h4>
+                <h4 class="mt-0 text-white">Restablecer Password</h4>
                 <p class="text-muted mb-4">Ingresa tu email y tu nuevo password.</p>
                 <!-- form -->
                 <form method="POST" action="{{ route('password.update') }}">
@@ -56,8 +56,8 @@
                         @endif
                     </div>
                     <div class="form-group mb-0 text-center">
-                        <button class="btn btn-primary btn-block" type="submit"><i class="mdi mdi-lock-reset"></i> Reset Password </button>
-                        <a href="{{ route('login') }}" class="btn btn-secondary text-dark ml-1"><b>REGRESAR</b></a>
+                        <button class="btn btn-danger-primary btn-block text-white" type="submit"><i class="mdi mdi-lock-reset"></i> Restablecer Password </button><br>
+                        <a href="{{ route('login') }}" class="btn btn-info btn-block text-white "><b>REGRESAR</b></a>
                     </div>
 
                 </form>
@@ -71,7 +71,7 @@
 
     <!-- Auth fluid right content -->
     <div class="auth-fluid-right  m-0 p-0" >
-        <img src="/images/bg-auth.png" height="100%" width="100%"  />
+        <img src="/images/web/bg-auth-login.png" height="100%" width="100%"  />
     </div>
     <!-- end Auth fluid right content -->
 </div>

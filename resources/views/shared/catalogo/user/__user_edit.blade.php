@@ -9,7 +9,7 @@
     </div>
     <label for = "curp" class="col-md-3 col-form-label">CURP</label>
     <div class="col-md-9">
-        <input type="curp" name="curp" id="curp" value="{{ old('curp',$items->curp) }}" class="form-control" readonly />
+        <input type="text" name="curp" id="curp" value="{{ old('curp',$items->curp) }}" class="form-control" readonly />
     </div>
 </div>
 

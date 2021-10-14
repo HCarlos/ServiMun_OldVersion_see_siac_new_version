@@ -29,7 +29,17 @@ class DenunciaController extends Controller
     protected $tableName = "denuncias";
     protected $msg = "";
 
+
+
 // ***************** MUESTRA EL LISTADO DE USUARIOS ++++++++++++++++++++ //
+
+    /**
+     * @param string $tableName
+     */
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     protected function index(Request $request)
     {
         ini_set('max_execution_time', 300);
@@ -43,10 +53,10 @@ class DenunciaController extends Controller
         $DependenciaArray = null;
          IF ($IsEnlace){
              $DependenciaArray = Auth::user()->DependenciaArray;
+             //dd( $DependenciaArray );
+             $filters['dependencias'] = $DependenciaArray;
          }elseif (Auth::user()->isRole('CIUDADANO|DELEGADO')){
-            $filters['ciudadano_id']=Auth::user()->id;
-         }elseif (Auth::user()->isRole('CIUDADANO|DELEGADO')){
-             $filters['ciudadano_id']=Auth::user()->id;
+            $filters['ciudadano_id'] = Auth::user()->id;
          }else{
              $filters = $request->only(['search']);
         }
@@ -73,22 +83,22 @@ class DenunciaController extends Controller
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
                 'titulo_header'   => '',
                 'user' => $user,
-                'searchInListDenuncia' => 'listDenuncias',
-                'newWindow' => true,
-                'tableName' => $this->tableName,
-                'showEdit' => 'editDenuncia',
+                'searchInListDenuncia'    => 'listDenuncias',
+                'newWindow'               => true,
+                'tableName'               => $this->tableName,
+                'showEdit'                => 'editDenuncia',
                 'showEditDenunciaDependenciaServicio'=>'listDenunciaDependenciaServicio',
-                'showProcess1' => 'showDataListDenunciaExcel1A',
-                'newItem' => 'newDenuncia',
-                'removeItem' => 'removeDenuncia',
-                'respuestasDenunciaItem' => 'listRespuestas',
-                'imagenesDenunciaItem' => 'listImagenes',
-                'searchAdressDenuncia' => 'listDenuncias',
+                'showProcess1'            => 'showDataListDenunciaExcel1A',
+                'newItem'                 => 'newDenuncia',
+                'removeItem'              => 'removeDenuncia',
+                'respuestasDenunciaItem'  => 'listRespuestas',
+                'imagenesDenunciaItem'    => 'listImagenes',
+                'searchAdressDenuncia'    => 'listDenuncias',
                 'showModalSearchDenuncia' => 'showModalSearchDenuncia',
-                'findDataInDenuncia'=>'findDataInDenuncia',
-                'imprimirDenuncia'=> "imprimirDenuncia/",
-                'IsEnlace' => $IsEnlace,
-                'DependenciaArray' => $DependenciaArray,
+                'findDataInDenuncia'      => 'findDataInDenuncia',
+                'imprimirDenuncia'        => "imprimirDenuncia/",
+                'IsEnlace'                => $IsEnlace,
+                'DependenciaArray'        => $DependenciaArray,
             ]
         );
     }
@@ -175,9 +185,9 @@ class DenunciaController extends Controller
                 'ciudadanos'      => $Ciudadanos,
                 'estatus'         => $Estatus,
                 'postNew'         => 'createDenuncia',
-                'titulo_catalogo' => "Mis " . ucwords($this->tableName),
+                'titulo_catalogo' => ucwords($this->tableName),
                 'titulo_header'   => 'Folio Nuevo',
-                'exportModel' => 23,
+                'exportModel'     => 23,
                 'msg'             => $this->msg,
             ]
         );
@@ -186,9 +196,8 @@ class DenunciaController extends Controller
     // ***************** CREAR NUEVO ++++++++++++++++++++ //
     protected function createItem(DenunciaRequest $request){
         $item = $request->manage();
-//        dd($item);
         if (!isset($item->id)) {
-            abort(404);
+            dd($item);
         }
         $this->msg = "Registro Guardado con éxito!";
         session(['msg' => $this->msg]);
@@ -253,10 +262,10 @@ class DenunciaController extends Controller
         $user = Auth::user();
         return view ('denuncia.search.denuncia_search_panel',
             [
-                'findDataInDenuncia'=>'findDataInDenuncia',
-                'dependencias'    => $Dependencias,
-                'servicios'       => $Servicios,
-                'estatus'         => $Estatus,
+                'findDataInDenuncia' => 'findDataInDenuncia',
+                'dependencias'       => $Dependencias,
+                'servicios'          => $Servicios,
+                'estatus'            => $Estatus,
                 'items' => $user,
             ]
         );
@@ -279,23 +288,23 @@ class DenunciaController extends Controller
 
         return view('denuncia.denuncia.denuncia_list',
             [
-                'items' => $items,
-                'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
-                'user' => $user,
-                'searchInListDenuncia' => 'listDenuncias',
-                'respuestasDenunciaItem' => 'listRespuestas',
-                'newWindow' => true,
-                'tableName' => $this->tableName,
-                'showEdit' => 'editDenuncia',
-                'newItem' => 'newDenuncia',
-                'removeItem' => 'removeDenuncia',
-                'showProcess1' => 'showDataListDenunciaExcel1A',
-                'searchAdressDenuncia' => 'listDenuncias',
-                'showModalSearchDenuncia' => 'showModalSearchDenuncia',
-                'findDataInDenuncia'=>'findDataInDenuncia',
-                'showEditDenunciaDependenciaServicio'=>'listDenunciaDependenciaServicio',
-                'imagenesDenunciaItem' => 'listImagenes',
-                'imprimirDenuncia'=> "imprimirDenuncia/",
+                'items'                               => $items,
+                'titulo_catalogo'                     => "Catálogo de " . ucwords($this->tableName),
+                'user'                                => $user,
+                'searchInListDenuncia'                => 'listDenuncias',
+                'respuestasDenunciaItem'              => 'listRespuestas',
+                'newWindow'                           => true,
+                'tableName'                           => $this->tableName,
+                'showEdit'                            => 'editDenuncia',
+                'newItem'                             => 'newDenuncia',
+                'removeItem'                          => 'removeDenuncia',
+                'showProcess1'                        => 'showDataListDenunciaExcel1A',
+                'searchAdressDenuncia'                => 'listDenuncias',
+                'showModalSearchDenuncia'             => 'showModalSearchDenuncia',
+                'findDataInDenuncia'                  => 'findDataInDenuncia',
+                'showEditDenunciaDependenciaServicio' => 'listDenunciaDependenciaServicio',
+                'imagenesDenunciaItem'                => 'listImagenes',
+                'imprimirDenuncia'                    => "imprimirDenuncia/",
 
 
             ]
@@ -318,7 +327,7 @@ class DenunciaController extends Controller
     }
 
     private function getQueryServiciosFromDependencias($id=0){
-//        dd($id);
+
         $items =  Servicio::whereHas('subareas', function($p) use ($id) {
             $p->whereHas("areas", function($q) use ($id){
                 $q->whereHas("dependencias", function ($r) use ($id){
@@ -326,8 +335,8 @@ class DenunciaController extends Controller
                 });
             });
         })->get();
-//        dd($items);
         return $items;
+
     }
 
 

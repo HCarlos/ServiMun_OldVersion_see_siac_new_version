@@ -171,6 +171,8 @@ class FuncionesController extends Controller
         }
     }
 
+/*
+
     public function getDatosFromCURPRENAPO($value){
 
         $curl = curl_init();
@@ -248,7 +250,7 @@ class FuncionesController extends Controller
 //        $img  = base64_decode( $result["returnFileQRCode"] );
 
     }
-
+*/
 
 
 }

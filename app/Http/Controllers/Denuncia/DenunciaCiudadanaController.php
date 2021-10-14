@@ -20,6 +20,7 @@ class DenunciaCiudadanaController extends Controller
 
 
     protected $tableName = "denuncias";
+    protected $msg = "";
 
 // ***************** MUESTRA EL LISTADO DE USUARIOS ++++++++++++++++++++ //
     protected function index(Request $request)
@@ -34,6 +35,8 @@ class DenunciaCiudadanaController extends Controller
             ->orderByDesc('id')
             ->paginate();
         $items->appends($filters)->fragment('table');
+
+//        dd($items);
 
         $request->session()->put('items', $items);
 
@@ -59,6 +62,7 @@ class DenunciaCiudadanaController extends Controller
                 'showModalSearchDenuncia'         => 'showModalSearchDenuncia',
                 'findDataInDenuncia'              =>'findDataInDenuncia',
                 'imprimirDenuncia'                => "imprimirDenuncia/",
+                'showEditDenunciaDependenciaServicio'=>'listDenunciaDependenciaServicio',
             ]
         );
     }
@@ -72,6 +76,7 @@ class DenunciaCiudadanaController extends Controller
             return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
         });
         $Estatus      = Estatu::all()->sortBy('estatus');
+        $this->msg = "";
 
         return view('denuncia.denuncia_ciudadana.denuncia_ciudadana_new',
             [
@@ -86,6 +91,7 @@ class DenunciaCiudadanaController extends Controller
                 'titulo_catalogo' => "Mis " . ucwords($this->tableName),
                 'titulo_header'   => 'Folio Nuevo',
                 'exportModel'     => 23,
+                'msg'             => $this->msg,
             ]
         );
     }

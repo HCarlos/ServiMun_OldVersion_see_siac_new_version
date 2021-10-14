@@ -21,6 +21,7 @@ class DenunciaDependenciaServicioController extends Controller
 
     protected $tableName = "denuncia_dependencia_servicio";
     protected $Id = 0;
+    protected $msg = "";
 
 // ***************** MUESTRA EL LISTADO DE USUARIOS ++++++++++++++++++++ //
     protected function index($Id)
@@ -35,21 +36,23 @@ class DenunciaDependenciaServicioController extends Controller
 
         return view('denuncia.denuncia_dependencia_servicio.denuncia_dependencia_servicio_list',
             [
-                'items' => $items,
-                'Id' => $this->Id,
-                'titulo_catalogo' => ucwords($this->tableName),
-                'titulo_header'   => '',
-                'user' => $user,
-                'newWindow' => true,
-                'newItem' => 'addDenunciaDependenciaServicio',
-                'tableName' => $this->tableName,
-                'showEdit' => 'editDenunciaDependenciaServicio',
-                'showProcess1' => 'showDataListDenunciaExcel1A',
-                'postNew'         => 'postAddDenunciaDependenciaServicio',
+                'items'                               => $items,
+                'Id'                                  => $this->Id,
+                'titulo_catalogo'                     => ucwords($this->tableName),
+                'titulo_header'                       => '',
+                'user'                                => $user,
+                'newWindow'                           => true,
+                'newItem'                             => 'addDenunciaDependenciaServicio',
+                'tableName'                           => $this->tableName,
+                'showEdit'                            => 'editDenunciaDependenciaServicio',
+                'showProcess1'                        => 'showDataListDenunciaExcel1A',
+                'postNew'                             => 'postAddDenunciaDependenciaServicio',
 //                'putEdit' => 'updateDenuncia',
-                'addItem' => 'addDenunciaDependenciaServicio',
-                'removeItem' => 'removeDenunciaDependenciaServicio',
-                'imprimirDenuncia'=> "imprimirDenuncia/",
+                'addItem'                             => 'addDenunciaDependenciaServicio',
+                'removeItem'                          => 'removeDenunciaDependenciaServicio',
+                'imprimirDenuncia'                    => "imprimirDenuncia/",
+                'showEditDenunciaDependenciaServicio' =>'listDenunciaDependenciaServicio',
+                'imagenesDenunciaItem'                => 'listImagenes',
             ]
         );
     }
@@ -67,8 +70,8 @@ class DenunciaDependenciaServicioController extends Controller
         return view('denuncia.denuncia_dependencia_servicio.denuncia_dependencia_servicio_edit',
             [
                 'user'            => Auth::user(),
-                'items' => $items,
-                'Id' => $Id,
+                'items'           => $items,
+                'Id'              => $Id,
                 'dependencias'    => $Dependencias,
                 'servicios'       => $Servicios,
                 'estatus'         => $Estatus,

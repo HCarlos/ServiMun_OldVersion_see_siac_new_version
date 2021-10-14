@@ -4,7 +4,9 @@
         <th class="sorting_asc" aria-sort="ascending" aria-label="Name: activate to sort column descending">ID</th>
         <th class="sorting" >Ciudadano</th>
         <th class="sorting">Fecha</th>
+        <th class="sorting">Dependencia</th>
         <th class="sorting">Estatus</th>
+        <th class="sorting">USERNAME</th>
         <th class="sorting ">Ubicación</th>
         <th></th>
     </tr>
@@ -16,7 +18,9 @@
             <td class="table-user">{{$item->id}}</td>
             <td>{{$item->ciudadano->FullName}}</td>
             <td>{{($item->fecha_ingreso)}}</td>
+            <td>{{($item->dependencia->dependencia)}}</td>
             <td>{{($item->Estatu->estatus)}}</td>
+            <td>{{($item->creadopor->username)}}</td>
             <td>{{$item->fullUbication}}</td>
             <td class="table-action tbl100W">
                 <div class="button-list">

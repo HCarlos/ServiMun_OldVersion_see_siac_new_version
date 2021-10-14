@@ -183,6 +183,7 @@ return array(
     'App\\User' => $baseDir . '/app/User.php',
     'App\\View\\Components\\Asignaciones' => $baseDir . '/app/View/Components/Asignaciones.php',
     'App\\View\\Components\\Card' => $baseDir . '/app/View/Components/Card.php',
+    'App\\View\\Components\\CardSinFondo' => $baseDir . '/app/View/Components/CardSinFondo.php',
     'App\\View\\Components\\Catalogo' => $baseDir . '/app/View/Components/Catalogo.php',
     'App\\View\\Components\\Denuncia' => $baseDir . '/app/View/Components/Denuncia.php',
     'App\\View\\Components\\Details' => $baseDir . '/app/View/Components/Details.php',

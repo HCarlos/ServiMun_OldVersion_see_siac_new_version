@@ -61,7 +61,7 @@
 }
 
 label{
-    color:white;
+    color:#56585a;
 }
 
 a, .text-darkred{
@@ -75,9 +75,11 @@ a, .text-darkred{
 .bg-form-body{
     background: #84878a;
 }
+.bg-form-body label{
+    color: white;
+}
 .color-title{
     color: whitesmoke !important;
-
 }
 .btn-danger-primary{
     background-color: darkred;

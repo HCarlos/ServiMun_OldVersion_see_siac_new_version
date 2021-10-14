@@ -1,6 +1,3 @@
-@section('styles')
-    <link href="{{ asset('css/servimun.css') }}" rel="stylesheet"  type="text/css">
-@endsection
 
 <div class="row mt-4">
     {{$contenido}}

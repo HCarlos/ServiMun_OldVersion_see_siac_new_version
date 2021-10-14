@@ -11,10 +11,6 @@ class IsCURPRule implements Rule
      *
      * @return void
      */
-    public function __construct()
-    {
-        //
-    }
 
     /**
      * Determine if the validation rule passes.
@@ -25,25 +21,33 @@ class IsCURPRule implements Rule
      */
     public function passes($attribute, $value){
 
-            $string = mb_strtoupper($value, "UTF-8");
-            $pattern = "/^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/";
-            $validate = preg_match($pattern, $string, $match);
-            //dd($validate);
-            if( $validate === 0 ){
-                return false;
-            }
-            $ind = preg_split( '//u', '0123456789ABCDEFGHIJKLMNÑOPQRSTUVWXYZ', null, PREG_SPLIT_NO_EMPTY );
-            //dd($match);
-            $vals = str_split( strrev( $match[0]."?" ) );
-            unset( $vals[0] );
-            unset( $vals[1] );
-            $tempSum = 0;
-            foreach( $vals as $v => $d ){
-                $tempSum = (array_search( $d, $ind ) * $v)+$tempSum;
-            }
-            $digit = 10 - $tempSum % 10;
-            $digit = $digit == 10 ? 0 : $digit;
-            return $match[2] == $digit;
+        if ($value == ""){
+            return true;
+        }
+
+        $string = mb_strtoupper($value, "UTF-8");
+        $pattern = "/^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/";
+        $validate = preg_match($pattern, $string, $match);
+
+//            dd($validate);
+
+        if( $validate === 0 ){
+            return false;
+        }
+        $ind = preg_split( '//u', '0123456789ABCDEFGHIJKLMNÑOPQRSTUVWXYZ', null, PREG_SPLIT_NO_EMPTY );
+//            dd($match);
+        $vals = str_split( strrev( $match[0]."?" ) );
+        unset( $vals[0] );
+        unset( $vals[1] );
+        $tempSum = 0;
+        foreach( $vals as $v => $d ){
+            $tempSum = (array_search( $d, $ind ) * $v)+$tempSum;
+        }
+        $digit = 10 - $tempSum % 10;
+        $digit = $digit == 10 ? 0 : $digit;
+
+        return $match[2] == $digit;
+
     }
 
     /**
@@ -53,7 +57,6 @@ class IsCURPRule implements Rule
      */
     public function message()
     {
-        //return 'The validation error message.';
         return trans('validation.iscurp');
     }
 }

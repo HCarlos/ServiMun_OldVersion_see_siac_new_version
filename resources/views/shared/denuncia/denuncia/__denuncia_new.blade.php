@@ -52,9 +52,13 @@
 
         </div>
     </div>
+
     <div class="col-md-6 ">
+
         <div class="grid-container">
+
             <div class="form-group row mb-1">
+
                 <label for = "search_autocomplete" class="col-md-3 col-form-label">Buscar</label>
                 <div class="col-md-9">
                     <div class="input-group">
@@ -64,7 +68,9 @@
                         </span>
                     </div>
                 </div>
+
             </div>
+
             <div class="form-group row mb-1">
                 <label for = "ubicacion" class="col-md-3 col-form-label">Ubicacion</label>
                 <div class="col-md-9">
@@ -76,6 +82,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="form-group row mb-1">
                 <label for = "prioridad_id" class="col-md-3 col-form-label">Prioridad</label>
                 <div class="col-md-3">
@@ -94,6 +101,7 @@
                     </select>
                 </div>
             </div>
+
             <div class="form-group row mb-1">
                 <label for = "dependencia_id" class="col-md-3 col-form-label">Dependencia</label>
                 <div class="col-md-9">
@@ -105,6 +113,7 @@
                     </select>
                 </div>
             </div>
+
             <div class="form-group row mb-1">
                 <label for = "servicio_id" class="col-md-3 col-form-label">Servicio</label>
                 <div class="col-md-9">
@@ -112,6 +121,7 @@
                     </select>
                 </div>
             </div>
+
             <div class="form-group row mb-1">
                 <label for = "ciudadano_id" class="col-md-3 col-form-label">Ciudadano</label>
                 <div class="col-md-9">
@@ -122,6 +132,7 @@
                     </select>
                 </div>
             </div>
+
             <div class="form-group row mb-1">
                 <label for = "estatus_id" class="col-md-3 col-form-label">Estatus</label>
                 <div class="col-md-5">
@@ -132,8 +143,11 @@
                     </select>
                 </div>
             </div>
+
         </div>
+
     </div>
+
     <div class="col-md-12 ">
         <div class="grid-container">
             <div class="form-row mb-1">

@@ -35,7 +35,7 @@
                         <div class="form-group row">
                             <label for="curp" class="col-md-4 col-form-label text-md-right text-white">CURP</label>
                             <div class="col-md-6">
-                                <input id="curp" type="text" class="form-control{{ $errors->has('curp') ? ' is-invalid' : '' }}" name="curp" value="{{ old('curp') }}" onchange="validaInputCURP(this)" required autofocus>
+                                <input id="curp" type="text" class="form-control {{ $errors->has('curp') ? ' is-invalid' : '' }}" name="curp" value="{{ old('curp') }}" onchange="validaInputCURP(this)" required autofocus>
                                 <pre class="text-white" id="resultadoCURP"></pre>
                                 @if ($errors->has('curp'))
                                     <span class="invalid-feedback">

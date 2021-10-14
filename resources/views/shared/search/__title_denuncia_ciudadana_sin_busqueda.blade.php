@@ -1,11 +1,10 @@
 @isset($titulo_catalogo)
-    <div class="row pt-3">
-    <div  class="col-lg-6 float-left">
-        <h4 class="page-title-box ">
-            {{ $titulo_catalogo }}
-        </h4>
-    </div>
-    <div  class="col-lg-6 float-right">
-    </div>
-</div>
+    <h4 class="page-title-box pt-3 float-left">
+        {{$titulo_catalogo}}
+        <small>
+            @isset($titulo_header)
+                {{$titulo_header}}
+            @endisset
+        </small>
+    </h4>
 @endisset

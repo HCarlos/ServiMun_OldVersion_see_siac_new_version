@@ -79,7 +79,7 @@ class UserDataController extends Controller
             [
                 'titulo_catalogo' => 'Catálogo de Usuarios',
                 'titulo_header'   => 'Nuevo Usuario ',
-                'postNew' => 'createUser',
+                'postNew'         => 'createUser',
                 'msg'             => $this->msg,
             ]
         );
@@ -128,11 +128,11 @@ class UserDataController extends Controller
 
         return view('catalogos.catalogo.user.user_profile_edit',
             [
-                'user' => $user,
-                'items' => $user,
+                'user'            => $user,
+                'items'           => $user,
                 'titulo_catalogo' => $user->Fullname ?? '' ,
                 'titulo_header'   => '',
-                'putEdit' => 'EditUser',
+                'putEdit'         => 'EditUser',
                 'msg'             => $this->msg,
             ]
         );
@@ -156,7 +156,7 @@ class UserDataController extends Controller
 
         return view('catalogos.catalogo.user.user_profile_edit',
             [
-                'user'             => $user,
+                'user'            => $user,
                 'items'           => $user,
                 'titulo_catalogo' => $user->Fullname ?? '' ,
                 'titulo_header'   => 'Editando...',

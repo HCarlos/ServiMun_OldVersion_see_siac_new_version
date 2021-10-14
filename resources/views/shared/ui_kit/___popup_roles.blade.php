@@ -11,7 +11,7 @@
             </button>
             <ul class="dropdown-menu dropdown-menu-right dropdown-menu-animated ">
                 @foreach($roles as $role)
-                    <li class="text-left w-30vh">
+                    <li class="text-left w-30vh text-darkred">
                         <div class=" ml-1 w-100 ">
                             <div class="form-group w-75 float-left">
                                 <div class="custom-control custom-checkbox">

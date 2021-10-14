@@ -7,8 +7,6 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script >
-        jQuery(function($) {
-            $(document).ready(function() {
 
                 if ( $("#search_autocomplete") ){
 
@@ -51,6 +49,7 @@
 
                 $("#dependencia_id").on("change",function (event) {
                     var Id = event.currentTarget.value;
+                    //alert(Id);
                     $("#servicio_id").empty();
                     $.get( "/getServiciosFromDependencias/"+Id, function( data ) {
                         $("#servicio_id").empty();
@@ -63,8 +62,6 @@
 
                 });
 
-            });
-        });
 
     </script>
 

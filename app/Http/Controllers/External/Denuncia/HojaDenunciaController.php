@@ -19,7 +19,7 @@ class HojaDenunciaController extends Controller
         $folio  = $Id;
         $alto   = 6;
 
-        //dd(NOMBRE_EMPRESA);
+        // dd(NOMBRE_EMPRESA);
 
         $pdf = new DenunciaTCPDF('','mm',array(215.9, 139.7), true, 'UTF-8', false);
         $pdf->folio = $folio;

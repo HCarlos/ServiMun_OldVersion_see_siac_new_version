@@ -73,10 +73,9 @@
 
     @include('shared.search.__search_word_in_list')
 
-    @if(Auth::user()->isRole('Administrator|SysOp'))
+    @if (Auth::user()->isRole('Administrator|SysOp|ENLACE') )
         @include('shared.search.__search_denuncia_adress_list')
-    @endif
-    @if(Auth::user()->isRole('DELEGADO'))
+    @elseif (Auth::user()->isRole('CIUDADANO|CIUDADANO_INTERNET|DELEGADO') )
         @include('shared.search.__title_denuncia_ciudadana_sin_busqueda')
     @endif
     @include('shared.search.__search_alumno_baca_list')
