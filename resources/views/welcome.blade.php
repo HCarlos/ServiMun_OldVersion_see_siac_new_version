@@ -66,7 +66,7 @@
             background-color: transparent !important;
         }
         .links a {
-            color: #ffffff !important;
+            color: darkred !important;
             padding: 0 25px;
             font-size: 16px;
             font-weight: 600;
