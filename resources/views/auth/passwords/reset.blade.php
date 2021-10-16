@@ -57,7 +57,7 @@
                     </div>
                     <div class="form-group mb-0 text-center">
                         <button class="btn btn-danger-primary btn-block text-white" type="submit"><i class="mdi mdi-lock-reset"></i> Restablecer Password </button><br>
-                        <a href="{{ route('login') }}" class="btn btn-info btn-block text-white "><b>REGRESAR</b></a>
+                        <a href="{{ route('login') }}" class="btn btn-info btn-block text-white "><b>INICIAR SESIÓN</b></a>
                     </div>
 
                 </form>

@@ -89,28 +89,22 @@
 
 <body>
 <div class="flex-center position-ref full-height">
-
     @if (Route::has('login'))
-            <ul class="navbar navbar-nav">
-        <li class="links top-right " >
-            @auth
-                <a href="{{ url('/home') }}" class="" ><strong>Entrar</strong></a>
-            @else
-                <a href="{{ route('login') }}" class="text-blanco "><strong>Iniciar sesión</strong></a>
-                    {{--<a href="{{ route('register') }}">Regístrate</a>--}}
-            @endauth
-        </li>
-            </ul>
+        <ul class="navbar navbar-nav">
+            <li class="links top-right " >
+                @auth
+                    <a href="{{ url('/home') }}" class="" ><strong>Entrar</strong></a>
+                @else
+                    <a href="{{ route('login') }}" class="text-blanco "><strong>Iniciar sesión</strong></a>
+                    <a href="{{ route('register') }}" class="text-blanco">Regístrate</a>
+                @endauth
+            </li>
+        </ul>
     @endif
-
     <div class="content" style="margin-top: -15em;">
-        <span class="text-cafe  font-effect-3d-float font_Tangerine_700">
-{{--            <img src="{{ asset('images/web/plataforma-gestion-0-logo.jpg') }}" alt="{{ config('app.name', 'Laravel') }}" />--}}
-        </span>
-        {{--<h2 class="text-inverse text-center font_Roboto_Condensed_400" style="margin-top: -2em; ">Plataforma de Control Escolar</h2>--}}
-        {{--<h3 class="text-inverse text-center font_Open_Sans_Condensed_expanded_300" style="margin-top: -1em;">SOFTWARE</h3>--}}
+        <span class="text-cafe  font-effect-3d-float font_Tangerine_700"></span>
     </div>
-    <p class="wellcome-pos-version font_Open_Sans_Condensed_300">v 2.0</p>
+    <p class="wellcome-pos-version font_Open_Sans_Condensed_300">v 1.0</p>
 </div>
 </body>
 </html>

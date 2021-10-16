@@ -47,7 +47,7 @@
                             </div>
                         </div>
                         <div class="form-group mb-0 text-center">
-                            <button class="btn btn-danger btn-danger-primary btn-block" type="submit"><i class="mdi mdi-login"></i> Ingresar </button>
+                            <button class="btn btn-danger btn-danger-primary btn-block" type="submit"><i class="mdi mdi-login"></i> INICIAR SESIÓN </button>
                         </div>
                         <div class="clearfix"></div>
                         <div class="form-group  mt-2">

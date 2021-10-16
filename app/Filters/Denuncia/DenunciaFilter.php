@@ -10,8 +10,10 @@ namespace App\Filters\Denuncia;
 
 
 use App\Filters\Common\QueryFilter;
+use App\Models\Catalogos\Dependencia;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class DenunciaFilter extends QueryFilter
 {
@@ -35,9 +37,25 @@ class DenunciaFilter extends QueryFilter
     public function search($query, $search){
         if (is_null($search) || empty ($search) || trim($search) == "") {return $query;}
         $search = strtoupper($search);
+
+//        $IsEnlace = Session::get('IsEnlace');
+//        if($IsEnlace==false){
+//            $DependenciaArray = explode('|',Session::get('DependenciaArray'));
+//            $Dependencias = Dependencia::all()->whereIn('dependencia',$DependenciaArray,true)->sortBy('dependencia');
+//        }else{
+//            $Dependencias = Dependencia::all()->sortBy('dependencia');
+//        }
+//
         return $query->where(function ($query) use ($search) {
                 $query->orWhereHas('ciudadanos', function ($q) use ($search) {
                     return $q->whereRaw("CONCAT(ap_paterno,' ',ap_materno,' ',nombre) like ?", "%{$search}%");
+                })
+                ->orWhereHas('dependencias', function ($q) use ($search) {
+                    if ($this->IsEnlace()){
+                        return $q->whereIn('dependencia',$this->getDependencia(),true);
+                    }else{
+                        return $q->whereRaw("UPPER(dependencia) like ?", "%{$search}%");
+                    }
                 })
                 ->orWhereHas('estatus', function ($q) use ($search) {
                     return $q->whereRaw("UPPER(estatus) like ?", "%{$search}%")
@@ -86,8 +104,16 @@ class DenunciaFilter extends QueryFilter
 
     public function dependencia_id($query, $search){
         if (is_null($search) || empty ($search) || trim($search) == "0") {return $query;}
-//        $search = strtoupper($search);
-        return $query->where('dependencia_id', $search);
+
+        return $query->whereHas('dependencias', function ($q) use ($search) {
+            if ($this->IsEnlace()){
+//                dd( $this->getDependenciaId() );
+                return $q->whereIn('dependencia_id',$this->getDependenciaId());
+            }else{
+                return $q->where('dependencia_id', $search);
+            }
+        });
+
     }
 
     public function servicio_id($query, $search){
@@ -114,6 +140,27 @@ class DenunciaFilter extends QueryFilter
             return $q->whereIn('dependencia',$search);
         });
 
+    }
+
+    function IsEnlace(){
+        return Session::get('IsEnlace');
+//        if($IsEnlace){
+//            $DependenciaArray = explode('|',Session::get('DependenciaArray'));
+//            $Dependencias = Dependencia::all()->whereIn('dependencia',$DependenciaArray,true)->sortBy('dependencia');
+//        }else{
+//            $Dependencias = Dependencia::all()->sortBy('dependencia');
+//        }
+    }
+
+    function getDependencia(){
+            return $DependenciaArray = explode('|',Session::get('DependenciaArray'));
+            //return Dependencia::all()->whereIn('dependencia',$DependenciaArray,true)->sortBy('dependencia');
+    }
+
+    function getDependenciaId(){
+        $depId = Auth::user()->DependenciaIdArray;
+        return $DependenciaIdArray = explode('|',$depId);
+        //return Dependencia::all()->whereIn('dependencia',$DependenciaArray,true)->sortBy('dependencia');
     }
 
 }

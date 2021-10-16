@@ -4,10 +4,9 @@
 @section('content')
 
 @section('styles')
-    <link href="{{ asset('css/servimun.css') }}" rel="stylesheet"  type="text/css">
+{{--    <link href="{{ asset('css/servimun.css') }}" rel="stylesheet"  type="text/css">--}}
     <style rel="stylesheet"  type="text/css">
-        .bg-registry
-        {
+        .bg-registry {
             background: url("{{ asset('/images/web/bg-registry.png') }}") no-repeat center !important;
         }
     </style>
@@ -119,11 +118,11 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Registrar
-                                </button>
-                                <a href="login"  class="btn btn-info float-right">
-                                    Ingresar
+                                <button type="submit" class="btn btn-danger-primary btn-block text-white">
+                                    REGISTRAR
+                                </button><br><br>
+                                <a href="login"  class="btn btn-info btn-block">
+                                    INICIAR SESIÓN
                                 </a>
                             </div>
 

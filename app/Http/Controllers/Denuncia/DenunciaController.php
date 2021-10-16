@@ -47,10 +47,10 @@ class DenunciaController extends Controller
 //                    'ciudadano_id'=>Auth::user()->id,
 //                     $request->only(['search'])
 //                    ];
-        $filters = $request->only(['search']);
-
+        $search = $request->only(['search']);
+        /*
         $IsEnlace =Auth::user()->isRole('ENLACE');
-        $DependenciaArray = null;
+        $DependenciaArray = '';
          IF ($IsEnlace){
              $DependenciaArray = Auth::user()->DependenciaArray;
              //dd( $DependenciaArray );
@@ -60,8 +60,11 @@ class DenunciaController extends Controller
          }else{
              $filters = $request->only(['search']);
         }
+*/
+         $filters['filterdata'] = $request->only(['search']);;
+         //dd( $filter );
         $items = Denuncia::query()
-            ->filterBy($filters)
+            ->getDenunciasItemCustomFilter($filters)
             ->orderByDesc('id')
             ->paginate();
         $items->appends($filters)->fragment('table');
@@ -71,8 +74,6 @@ class DenunciaController extends Controller
         $request->session()->put('items', $items);
 
         session(['msg' => '']);
-        session(['IsEnlace' => $IsEnlace]);
-        session(['DependenciaArray' => $DependenciaArray]);
 
 
         $user = Auth::User();
@@ -97,8 +98,8 @@ class DenunciaController extends Controller
                 'showModalSearchDenuncia' => 'showModalSearchDenuncia',
                 'findDataInDenuncia'      => 'findDataInDenuncia',
                 'imprimirDenuncia'        => "imprimirDenuncia/",
-                'IsEnlace'                => $IsEnlace,
-                'DependenciaArray'        => $DependenciaArray,
+                'IsEnlace'                => session('IsEnlace'),
+                'DependenciaArray'        => session('DependenciaArray'),
             ]
         );
     }
@@ -277,6 +278,8 @@ class DenunciaController extends Controller
     {
         $filters = new FiltersRules();
 
+//        ->filterBy($filters->filterRulesDenuncia($request))
+//        ->getDenunciasItemCustomFilter($filters->filterRulesDenuncia($request))
         $items = Denuncia::query()
             ->filterBy($filters->filterRulesDenuncia($request))
             ->orderByDesc('id')
