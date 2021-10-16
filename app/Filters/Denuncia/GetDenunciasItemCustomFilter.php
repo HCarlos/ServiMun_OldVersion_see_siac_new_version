@@ -18,10 +18,7 @@ class GetDenunciasItemCustomFilter extends QueryFilter{
     }
 
     public function filterdata($query, $search){
-//        if (is_null($filter) || empty ($filter) || trim($filter) == "") {return $query;}
-        //dd( $search );
         $search = isset($search['search']) ? $search['search'] : '';
-        //dd( $search );
         $search = strtoupper($search);
         //dd( $filter );
         $IsEnlace =Auth::user()->isRole('ENLACE');
