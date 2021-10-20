@@ -56,9 +56,9 @@ class RegisterController extends Controller
     protected function validator(array $data): \Illuminate\Contracts\Validation\Validator
     {
         return Validator::make($data, [
-            'curp'   => ['required', 'string', 'min:18', 'max:18', 'unique:users',new IsCURPRule()],
+//            'curp'       => ['required', 'string', 'min:18', 'max:18', 'unique:users',new IsCURPRule()],
+            'curp'       => ['unique:users', new IsCURPRule() ],
             'email'      => ['required', 'string', 'email', 'max:255', 'unique:users'],
-//            'password'   => ['required', 'string', 'min:6', 'confirmed'],
             'ap_paterno' => ['required', 'string'],
             'ap_materno' => ['required', 'string'],
             'nombre'     => ['required', 'string'],
@@ -84,7 +84,7 @@ class RegisterController extends Controller
 
         $UN =  User::getUsernameNext('CIUINT');
         $Username = $UN['username'];
-        $Email =  strtolower($Username) . '@example.com' ;
+        $Email =  $data["email"] == "" ? strtolower($Username) . '@example.com' : $data["email"];
         $user =  User::create([
             'username'   => $Username,
             'email'      => $Email ,

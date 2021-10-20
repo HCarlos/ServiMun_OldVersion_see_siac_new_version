@@ -21,6 +21,7 @@
             <td class="table-action tbl100W">
                 <div class="button-list">
                     @include('shared.ui_kit.__respuestas_ciudadana_list_item')
+                    @include('shared.ui_kit.__imagenes_list_item')
                     @include('shared.ui_kit.__print_denuncia_item')
 {{--                    @include('shared.ui_kit.__edit_denuncia_dependencia_servicio_item')--}}
                 </div>

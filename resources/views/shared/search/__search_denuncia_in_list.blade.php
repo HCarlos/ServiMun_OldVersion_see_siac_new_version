@@ -15,11 +15,11 @@
 <div class="form-row mb-1">
         <label for="desde" class="col-md-2 col-form-label">Desde</label>
         <div class="col-md-4">
-            <input type="date" class="form-control" id="desde" name="desde">
+            {{ Form::date('desde', \Carbon\Carbon::now(), ['id'=>'desde','class'=>'form-control']) }}
         </div>
         <label for="hasta" class="col-md-2 col-form-label">Hasta</label>
         <div class="col-md-4">
-            <input type="date" class="form-control" id="hasta" name="hasta">
+            {{ Form::date('hasta', \Carbon\Carbon::now(), ['id'=>'hasta','class'=>'form-control']) }}
         </div>
 </div>
 

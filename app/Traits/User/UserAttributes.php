@@ -90,18 +90,18 @@ trait UserAttributes
     }
 
     public function getImage($tipoImage="thumb"){
-        $ret = 'images/web/file-not-found.png';
+        $ret = '/images/web/file-not-found.png';
         if ( $this->IsEmptyPhoto() ){
             if ( $this->IsFemale() ){
-                $ret = 'images/web/empty_user_female.png';
+                $ret = '/images/web/empty_user_female.png';
             }else{
-                $ret = 'images/web/empty_user_male.png';
+                $ret = '/images/web/empty_user_male.png';
             }
         }else{
             $tFile = $this->getTipoImageProfile($tipoImage);
             $exists = Storage::disk($this->disk1)->exists($tFile);
             $ret = $exists
-                ? "storage/".$this->disk1."/".$tFile
+                ? "/storage/".$this->disk1."/".$tFile
                 : $ret;
         }
         return $ret;

@@ -115,14 +115,20 @@ class DenunciaController extends Controller
         if($IsEnlace){
             $DependenciaArray = explode('|',Session::get('DependenciaArray'));
             $Dependencias = Dependencia::all()->whereIn('dependencia',$DependenciaArray,true)->sortBy('dependencia');
+            $Ciudadanos   = User::query()->whereHas('dependencias',function ($r) use ($DependenciaArray) {
+                                return $r->whereIn('dependencia',$DependenciaArray);
+                            })->get()->sortBy(function ($q){
+                                return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
+                            });
+
         }else{
             $Dependencias = Dependencia::all()->sortBy('dependencia');
+            $Ciudadanos   = User::all()->sortBy(function ($q){
+                return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
+            });
         }
 
         $Servicios = $this->getQueryServiciosFromDependencias($item->dependencia_id);
-        $Ciudadanos   = User::all()->sortBy(function ($q){
-            return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
-        });
         $Estatus      = Estatu::all()->sortBy('estatus');
         $this->msg = "";
         return view('denuncia.denuncia.denuncia_edit',
@@ -164,16 +170,23 @@ class DenunciaController extends Controller
         $Origenes     = Origen::all()->sortBy('origen');
 
         $IsEnlace = Session::get('IsEnlace');
+
         if($IsEnlace){
             $DependenciaArray = explode('|',Session::get('DependenciaArray'));
             $Dependencias = Dependencia::all()->whereIn('dependencia',$DependenciaArray,true)->sortBy('dependencia');
+            $Ciudadanos   = User::query()->whereHas('dependencias',function ($r) use ($DependenciaArray) {
+                return $r->whereIn('dependencia',$DependenciaArray);
+            })->get()->sortBy(function ($q){
+                return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
+            });
+
         }else{
             $Dependencias = Dependencia::all()->sortBy('dependencia');
+            $Ciudadanos   = User::all()->sortBy(function ($q){
+                return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
+            });
         }
 
-        $Ciudadanos   = User::all()->sortBy(function ($q){
-           return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
-        });
         $Estatus      = Estatu::all()->sortBy('estatus');
         $this->msg = "";
         return view('denuncia.denuncia.denuncia_new',
