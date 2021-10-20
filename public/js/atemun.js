@@ -401,3 +401,21 @@
         $(this).val($(this).val().toUpperCase());
     });
 
+    var WebSocketServer = require('websocket').server;
+    var WebSocketClient = require('websocket').client;
+    var WebSocketFrame  = require('websocket').frame;
+    var WebSocketRouter = require('websocket').router;
+    var W3CWebSocket = require('websocket').w3cwebsocket;
+
+    // Crea una nueva conexión.
+    const socket = new WebSocket('http://localhost:8000');
+
+    // Abre la conexión
+    socket.addEventListener('open', function (event) {
+        socket.send('Hello Server!');
+    });
+
+    // Escucha por mensajes
+    socket.addEventListener('message', function (event) {
+        console.log('Message from server', event.data);
+    });

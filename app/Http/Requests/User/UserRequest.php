@@ -97,6 +97,7 @@ class UserRequest extends FormRequest
 
         }else{
             $UserN = [ 'email'            => strtolower(trim($this->email)), ];
+            $CURP  = strtolower(trim($this->curp));
         }
         $User = [
             'ap_paterno'       => strtoupper(trim($this->ap_paterno)),
