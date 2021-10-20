@@ -4,9 +4,9 @@
                         <th class="sorting_asc" aria-sort="ascending" aria-label="Name: activate to sort column descending">ID</th>
                         <th class="sorting" >Username</th>
                         <th class="sorting">Nombre Completo</th>
-                        <th class="sorting">Género</th>
                         <th class="sorting">Email</th>
                         <th class="sorting">CURP</th>
+                        <th class="sorting">Genero</th>
                         <th class="sorting ">Roles</th>
                         <th></th>
                     </tr>
