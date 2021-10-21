@@ -8,7 +8,7 @@
     @slot('contenido')
         <div class="col-md-8">
             <!-- Chart-->
-            @component('components.home')
+            @component('components.card')
                 @slot('title_card','')
                 @slot('body_card')
                     @include('shared.code.__errors')

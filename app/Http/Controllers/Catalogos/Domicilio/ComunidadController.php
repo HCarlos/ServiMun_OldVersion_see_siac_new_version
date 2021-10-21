@@ -104,9 +104,13 @@ class ComunidadController extends Controller
         $Municipios     = Municipio::all()->sortBy('municipio');
         $Estados        = Estado::all()->sortBy('estado');
 
-        $Ciudad_Id      = Ciudad::all()->where('ciudad',env('CIUDAD_DEFAULT'))->first();
-        $Municipio_Id   = Municipio::all()->where('municipio',env('MUNICIPIO_DEFAULT'))->first();
-        $Estado_Id      = Estado::all()->where('estado',env('ESTADO_DEFAULT'))->first();
+//        $Ciudad_Id      = Ciudad::all()->where('ciudad',env('CIUDAD_DEFAULT'))->first();
+//        $Municipio_Id   = Municipio::all()->where('municipio',env('MUNICIPIO_DEFAULT'))->first();
+//        $Estado_Id      = Estado::all()->where('estado',env('ESTADO_DEFAULT'))->first();
+
+        $Ciudad_Id      = Ciudad::all()->where('ciudad',config('atemun.ciudad_default'))->first();
+        $Municipio_Id   = Municipio::all()->where('municipio',config('atemun.municipio_default'))->first();
+        $Estado_Id      = Estado::all()->where('estado',config('atemun.estado_default'))->first();
 
         $Delegados = $this->getUserFromRoles('DELEGADO');
         $Tipocomunidades = Tipocomunidad::all(['id','tipocomunidad'])->sortBy('tipocomunidad');
