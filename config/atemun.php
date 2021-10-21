@@ -32,14 +32,18 @@ return [
 
     // ARCHIVOS DE IMAGENES DEL SISTEMA
     'logo_reportes_encabezado' => public_path().'/images/web/logo-0-reporte.png',
-    'nombre_empresa' => env('NOMBRE_EMPRESA',''),
-    'lema_empresa'   => env('LEMA_CAMPANA',''),
-    'periodo_empresa' => env('INFO_ONE',''),
-    'direccion_responsable' => env('INFO_TWO',''),
-    'telefono_responsable' => env('INFO_THREE',''),
-    'web_responsable' => env('INFO_FOUR',''),
-    'nombre_software' => env('NOMBRE_SOFTWARE',''),
-    'empresa_id' => env('EMPRESA_ID',1),
+    'nombre_empresa'           => env('NOMBRE_EMPRESA',''),
+    'lema_empresa'             => env('LEMA_CAMPANA',''),
+    'periodo_empresa'          => env('INFO_ONE',''),
+    'direccion_responsable'    => env('INFO_TWO',''),
+    'telefono_responsable'     => env('INFO_THREE',''),
+    'web_responsable'          => env('INFO_FOUR',''),
+    'nombre_software'          => env('NOMBRE_SOFTWARE',''),
+
+    'ciudad_default'           => env('CIUDAD_DEFAULT',''),
+    'municipio_default'        => env('MUNICIPIO_DEFAULT',''),
+    'estado_default'           => env('ESTADO_DEFAULT',''),
+    'empresa_id'               => env('EMPRESA_ID',1),
 
     // -----------------------------------------------------------
     // La mayor parte de los Tablas estan configuradas aquí,
