@@ -3623,6 +3623,7 @@ return array(
     'League\\OAuth1\\Client\\Signature\\RsaSha1Signature' => $vendorDir . '/league/oauth1-client/src/Signature/RsaSha1Signature.php',
     'League\\OAuth1\\Client\\Signature\\Signature' => $vendorDir . '/league/oauth1-client/src/Signature/Signature.php',
     'League\\OAuth1\\Client\\Signature\\SignatureInterface' => $vendorDir . '/league/oauth1-client/src/Signature/SignatureInterface.php',
+    'Llenado_de_Catalogo_01_Seeder' => $baseDir . '/database/seeds/Llenado_de_Catalogo_01_Seeder.php',
     'Maatwebsite\\Excel\\Cache\\BatchCache' => $vendorDir . '/maatwebsite/excel/src/Cache/BatchCache.php',
     'Maatwebsite\\Excel\\Cache\\CacheManager' => $vendorDir . '/maatwebsite/excel/src/Cache/CacheManager.php',
     'Maatwebsite\\Excel\\Cache\\MemoryCache' => $vendorDir . '/maatwebsite/excel/src/Cache/MemoryCache.php',

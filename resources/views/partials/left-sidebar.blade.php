@@ -30,8 +30,8 @@
                     <span> Estructura </span>
                     <span class="menu-arrow"></span>
                 </a>
-
                 <ul class="side-nav-second-level" aria-expanded="false">
+                    @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN'))
                     <li>
                         <a href="{{route('listDependencias')}}">
                             <i class="mdi mdi-account-multiple-outline"></i>
@@ -39,6 +39,8 @@
                             <span>Dependencias</span>
                         </a>
                     </li>
+                    @endif
+                    @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN'))
                     <li>
                         <a href="{{route('listAreas')}}">
                             <i class="mdi mdi-account-group"></i>
@@ -46,7 +48,8 @@
                             <span>Áreas</span>
                         </a>
                     </li>
-
+                    @endif
+                    @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN'))
                     <li>
                         <a href="{{route('listSubareas')}}">
                             <i class="fas fa-money-check-alt"></i>
@@ -54,6 +57,8 @@
                             <span>Subareas</span>
                         </a>
                     </li>
+                    @endif
+                    @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN'))
                     <li>
                         <a href="{{route('listEstatus')}}">
                             <i class="fas fa-money-check-alt"></i>
@@ -61,6 +66,8 @@
                             <span>Status</span>
                         </a>
                     </li>
+                    @endif
+                    @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN'))
                     <li>
                         <a href="{{route('listMedidas')}}">
                             <i class="fas fa-money-check-alt"></i>
@@ -68,6 +75,8 @@
                             <span>Medidas</span>
                         </a>
                     </li>
+                    @endif
+                    @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN'))
                     <li>
                         <a href="{{route('listOrigenes')}}">
                             <i class="fas fa-money-check-alt"></i>
@@ -75,7 +84,8 @@
                             <span>Origenes</span>
                         </a>
                     </li>
-
+                    @endif
+                    @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN'))
                     <li>
                         <a href="{{route('listPrioridades')}}">
                             <i class="fas fa-money-check-alt"></i>
@@ -83,7 +93,8 @@
                             <span>Prioridades</span>
                         </a>
                     </li>
-
+                    @endif
+                    @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN'))
                     <li>
                         <a href="{{route('listServicios')}}">
                             <i class="fas fa-money-check-alt"></i>
@@ -91,7 +102,8 @@
                             <span>Servicios</span>
                         </a>
                     </li>
-
+                    @endif
+                    @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN'))
                     <li>
                         <a href="{{route('listAfiliaciones')}}">
                             <i class="fas fa-money-check-alt"></i>
@@ -99,7 +111,8 @@
                             <span>Afiliaciones</span>
                         </a>
                     </li>
-
+                    @endif
+                    @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN'))
                     <li>
                         <a href="{{route('listTipoasentamientos')}}">
                             <i class="fas fa-money-check-alt"></i>
@@ -107,7 +120,8 @@
                             <span>Tipo Asentamientos</span>
                         </a>
                     </li>
-
+                    @endif
+                    @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN'))
                     <li>
                         <a href="{{route('listAsentamientos')}}">
                             <i class="fas fa-money-check-alt"></i>
@@ -115,7 +129,7 @@
                             <span>Asentamientos</span>
                         </a>
                     </li>
-
+                    @endif
 
                 </ul>
 
@@ -127,7 +141,7 @@
                     <span class="menu-arrow"></span>
                 </a>
                 <ul class="side-nav-second-level" aria-expanded="false">
-
+                    @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN|ENLACE'))
                     <li>
                         <a href="{{route('listCalles')}}">
                             <i class="fas fa-money-check-alt"></i>
@@ -135,7 +149,8 @@
                             <span>Calles</span>
                         </a>
                     </li>
-
+                    @endif
+                    @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN|ENLACE'))
                     <li>
                         <a href="{{route('listCiudades')}}">
                             <i class="fas fa-money-check-alt"></i>
@@ -143,7 +158,8 @@
                             <span>Ciudad</span>
                         </a>
                     </li>
-
+                    @endif
+                    @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN|ENLACE'))
                     <li>
                         <a href="{{route('listLocalidades')}}">
                             <i class="fas fa-money-check-alt"></i>
@@ -151,7 +167,8 @@
                             <span>Localidades</span>
                         </a>
                     </li>
-
+                    @endif
+                    @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN|ENLACE'))
                     <li>
                         <a href="{{route('listMunicipios')}}">
                             <i class="fas fa-money-check-alt"></i>
@@ -159,7 +176,8 @@
                             <span>Municipios</span>
                         </a>
                     </li>
-
+                    @endif
+                    @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN|ENLACE'))
                     <li>
                         <a href="{{route('listEstados')}}">
                             <i class="fas fa-money-check-alt"></i>
@@ -167,7 +185,8 @@
                             <span>Estados</span>
                         </a>
                     </li>
-
+                    @endif
+                    @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN|ENLACE'))
                     <li>
                         <a href="{{route('listCodigopostales')}}">
                             <i class="fas fa-money-check-alt"></i>
@@ -175,7 +194,8 @@
                             <span>Códigos Postales</span>
                         </a>
                     </li>
-
+                    @endif
+                    @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN|ENLACE'))
                     <li>
                         <a href="{{route('listTipocomunidades')}}">
                             <i class="fas fa-money-check-alt"></i>
@@ -183,7 +203,8 @@
                             <span>Tipo Comunidades</span>
                         </a>
                     </li>
-
+                    @endif
+                    @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN|ENLACE'))
                     <li>
                         <a href="{{route('listComunidades')}}">
                             <i class="fas fa-money-check-alt"></i>
@@ -191,7 +212,8 @@
                             <span>Comunidades</span>
                         </a>
                     </li>
-
+                    @endif
+                    @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN|ENLACE'))
                     <li>
                         <a href="{{route('listColonias')}}">
                             <i class="fas fa-money-check-alt"></i>
@@ -199,7 +221,8 @@
                             <span>Colonias</span>
                         </a>
                     </li>
-
+                    @endif
+                    @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN|ENLACE'))
                     <li>
                         <a href="{{route('listUbicaciones')}}">
                             <i class="fas fa-money-check-alt"></i>
@@ -207,7 +230,7 @@
                             <span>Ubicaciones</span>
                         </a>
                     </li>
-
+                    @endif
                 </ul>
             </li>
             <li class="side-nav-item">
@@ -218,7 +241,7 @@
                 </a>
 
                 <ul class="side-nav-second-level" aria-expanded="false">
-                    @if (Auth::user()->hasRole('Administrator|SysOp'))
+                    @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_SIAC'))
                     <li>
                         <a href="{{route('listCategorias')}}">
                             <i class="fas fa-user-tag"></i>
@@ -227,7 +250,7 @@
                         </a>
                     </li>
                     @endif
-                    @if (Auth::user()->hasRole('Administrator|SysOp|CAPTURISTA_A|CAPTURISTA_B|CAPTURISTA_C'))
+                    @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_SIAC|ENLACE'))
                     <li>
                         <a href="{{route('listUsers')}}">
                             <i class="fas fa-users"></i>
@@ -263,7 +286,7 @@
                             </a>
                         </li>
                     @endif
-                    @if (Auth::user()->hasRole('Administrator|SysOp'))
+                    @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_ADMIN'))
                     <li>
                         <a href="{{route('archivosConfig')}}">
                             <i class="fas fa-file-excel"></i>
@@ -274,8 +297,6 @@
                 </ul>
 
             </li>
-
-
 
         </ul>
 
