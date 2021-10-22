@@ -26,8 +26,9 @@ class AreaRequest extends FormRequest
     public function rules()
     {
         return [
-            'area' => ['required','min:2',new Uppercase,'unique:areas,area,'.$this->id],
+            'area' => ['required','min:2',new Uppercase],
         ];
+//        'area' => ['required','min:2',new Uppercase,'unique:areas,area,'.$this->id],
     }
 
     public function messages()
