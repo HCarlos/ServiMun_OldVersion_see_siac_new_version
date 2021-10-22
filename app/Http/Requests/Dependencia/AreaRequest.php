@@ -34,8 +34,8 @@ class AreaRequest extends FormRequest
     {
         return [
             'area.required' => 'La :attribute requiere por lo menos de 2 caracteres',
-            'area.unique' => 'La :attribute ya existe',
         ];
+//        'area.unique' => 'La :attribute ya existe',
     }
 
     public function attributes()

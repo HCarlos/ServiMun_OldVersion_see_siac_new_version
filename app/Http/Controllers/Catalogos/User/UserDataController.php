@@ -221,7 +221,7 @@ class UserDataController extends Controller
 // ***************** ELIMINA AL USUARIO VIA AJAX ++++++++++++++++++++ //
     protected function removeUser($id = 0)
     {
-        If ($id > 2){
+        If ($id > 3){
             $user = User::withTrashed()->findOrFail($id);
             if (isset($user)) {
                 if (!$user->trashed()) {
