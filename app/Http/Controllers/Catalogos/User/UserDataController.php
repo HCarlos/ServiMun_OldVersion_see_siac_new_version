@@ -107,7 +107,7 @@ class UserDataController extends Controller
         $request->updateUser();
         $this->msg = "Registro Guardado con éxito!";
         session(['msg' => $this->msg]);
-        return redirect()->route('edit');
+        return redirect()->route('listUsers');
     }
 
 // ***************** GUARDA LOS CAMBIOS EN EL USUARIO ++++++++++++++++++++ //
@@ -123,6 +123,7 @@ class UserDataController extends Controller
             $this->msg = "Registro Guardado con éxito!!!";
         }
         session(['msg' => $this->msg]);
+        /*
         // dd ($user);
         $user = is_null($user) || trim($user) == "" ? User::all()->last() : $user;
 
@@ -136,6 +137,10 @@ class UserDataController extends Controller
                 'msg'             => $this->msg,
             ]
         );
+        */
+
+        return redirect()->route('listUsers');
+
     }
 
 // ***************** CREAR NUEVO USUARIO ++++++++++++++++++++ //

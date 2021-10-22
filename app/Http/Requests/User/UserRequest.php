@@ -30,6 +30,14 @@ class UserRequest extends FormRequest
         return true;
     }
 
+    public function validationData(){
+        $attributes = parent::all();
+        $attributes['curp'] = strtoupper(trim($attributes['curp']));
+        $this->replace($attributes);
+        return parent::all();
+    }
+
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -96,8 +104,8 @@ class UserRequest extends FormRequest
             ];
 
         }else{
-            $UserN = [ 'email'            => strtolower(trim($this->email)), ];
-            $CURP  = strtolower(trim($this->curp));
+            $UserN = [ 'email' => strtolower(trim($this->email)), ];
+            $CURP  = $this->curp;
         }
         $User = [
             'ap_paterno'       => strtoupper(trim($this->ap_paterno)),
