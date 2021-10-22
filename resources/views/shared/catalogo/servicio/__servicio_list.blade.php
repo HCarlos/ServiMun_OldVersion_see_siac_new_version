@@ -18,7 +18,7 @@
                         <td>{{$item->servicio}}</td>
                         <td>{{ $item->subarea->subarea.' - '.$item->subarea->area->area.' - '.$item->subarea->area->dependencia->dependencia }}</td>
                         <td class="table-action w-100">
-                            <div class="button-list">
+                            <div class="button-list w-100">
                                 @include('shared.ui_kit.__edit_item')
                                 @include('shared.ui_kit.__remove_item')
                             </div>

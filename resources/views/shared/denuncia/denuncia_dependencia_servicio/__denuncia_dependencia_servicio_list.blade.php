@@ -15,10 +15,10 @@
         <tr>
         <td class="table-user">{{$item->id}}</td>
             <td>{{$item->dependencia->dependencia}}</td>
-                <td>{{$item->servicio->servicio}}</td>
+                <td class="w-75">{{$item->servicio->servicio}}</td>
                     <td>{{$item->estatu->estatus}}</td>
                     <td>{{$item->fecha_movimiento}}</td>
-                    <td class="table-action  w-100">
+                    <td class="table-action  w-25">
                         <div class="button-list">
                             @include('shared.ui_kit.__edit_item')
                             @include('shared.ui_kit.__remove_item')

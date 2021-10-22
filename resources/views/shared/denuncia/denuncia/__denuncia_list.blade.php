@@ -21,8 +21,8 @@
             <td>{{($item->dependencia->dependencia)}}</td>
             <td>{{($item->Estatu->estatus)}}</td>
             <td>{{($item->creadopor->username)}}</td>
-            <td>{{$item->fullUbication}}</td>
-            <td class="table-action  w-100">
+            <td class="w-75">{{$item->fullUbication}}</td>
+            <td class="table-action w-25">
                 <div class="button-list">
                     @include('shared.ui_kit.__edit_item')
                     @include('shared.ui_kit.__remove_item')
