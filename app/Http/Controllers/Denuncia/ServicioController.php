@@ -76,7 +76,7 @@ class ServicioController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return Redirect::to('editServicio/'.$item->id);
+        return Redirect::to('listServicios');
     }
 
     protected function newItem()
@@ -102,7 +102,7 @@ class ServicioController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return Redirect::to('editServicio/'.$item->id);
+        return Redirect::to('listServicios');
     }
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //
@@ -120,8 +120,8 @@ class ServicioController extends Controller
             return Response::json(['mensaje' => 'Se ha producido un error.', 'data' => 'Error', 'status' => '200'], 200);
         }
     }
-    
-    
-    
-    
+
+
+
+
 }
