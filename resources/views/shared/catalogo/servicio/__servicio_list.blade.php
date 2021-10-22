@@ -8,7 +8,7 @@
                         <th class="sorting_asc" aria-sort="ascending" aria-label="Name: activate to sort column descending">ID</th>
                         <th class="sorting" >Servicio</th>
                         <th class="sorting" >Subarea</th>
-                        <th style="width: 100vw"></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
