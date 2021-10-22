@@ -6,7 +6,6 @@
                         <th class="sorting">Nombre Completo</th>
                         <th class="sorting">Email</th>
                         <th class="sorting">CURP</th>
-                        <th class="sorting">Genero</th>
                         <th class="sorting ">Roles</th>
                         <th></th>
                     </tr>
@@ -19,19 +18,13 @@
                         <td>{{($item->FullName)}}</td>
                         <td>{{($item->email)}}</td>
                         <td>{{($item->curp)}}</td>
-                       <td class="action-icon text-center">@if($item->genero==0)
-                               <i class="fas fa-female text-danger"></i>
-                           @else
-                               <i class="fas fa-male text-primary"></i>
-                           @endif
-                       </td>
                         <td>
                             @foreach($item->roles as $role)
                                 <span class="badge badge-primary">{{$role->name}}</span>
                             @endforeach
                         </td>
-                        <td class="table-action">
-                            <div class="button-list">
+                        <td class="table-action w-100">
+                            <div class="button-list w-100">
                                 @include('shared.ui_kit.__edit_item')
                                 @include('shared.ui_kit.__remove_item')
                                 @include('shared.ui_kit.__edit_item_becas')
