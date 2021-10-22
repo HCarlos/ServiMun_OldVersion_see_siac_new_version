@@ -14,10 +14,10 @@
                 <tbody>
                 @foreach($items as $item)
                     <tr>
-                        <td class="table-user">{{$item->id}}</td>
-                        <td class="w-37">{{$item->servicio}}</td>
-                        <td class="w-38">{{ $item->subarea->subarea.' - '.$item->subarea->area->area.' - '.$item->subarea->area->dependencia->dependencia }}</td>
-                        <td class="table-action w-25">
+                        <td class="w-auto">{{$item->id}}</td>
+                        <td class="w-auto">{{$item->servicio}}</td>
+                        <td class="w-auto">{{ $item->subarea->subarea.' - '.$item->subarea->area->area.' - '.$item->subarea->area->dependencia->dependencia }}</td>
+                        <td class="table-action w-auto">
                             <div class="button-list ">
                                 @include('shared.ui_kit.__edit_item')
                                 @include('shared.ui_kit.__remove_item')
