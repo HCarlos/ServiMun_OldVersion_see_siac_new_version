@@ -221,16 +221,20 @@ class UserDataController extends Controller
 // ***************** ELIMINA AL USUARIO VIA AJAX ++++++++++++++++++++ //
     protected function removeUser($id = 0)
     {
-        $user = User::withTrashed()->findOrFail($id);
-        if (isset($user)) {
-            if (!$user->trashed()) {
-                $user->forceDelete();
+        If ($id > 2){
+            $user = User::withTrashed()->findOrFail($id);
+            if (isset($user)) {
+                if (!$user->trashed()) {
+                    $user->forceDelete();
+                } else {
+                    $user->forceDelete();
+                }
+                return Response::json(['mensaje' => 'Registro eliminado con éxito', 'data' => 'OK', 'status' => '200'], 200);
             } else {
-                $user->forceDelete();
+                return Response::json(['mensaje' => 'Se ha producido un error.', 'data' => 'Error', 'status' => '200'], 200);
             }
-            return Response::json(['mensaje' => 'Registro eliminado con éxito', 'data' => 'OK', 'status' => '200'], 200);
-        } else {
-            return Response::json(['mensaje' => 'Se ha producido un error.', 'data' => 'Error', 'status' => '200'], 200);
+        }else{
+            return Response::json(['mensaje' => 'Este usuario no se puede eliminar', 'data' => 'Error', 'status' => '200'], 200);
         }
     }
 
