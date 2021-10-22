@@ -14,7 +14,7 @@
                     <tr>
                         <td class="table-user">{{$item->id}}</td>
                         <td style="width: 70% !important;">{{$item->calle.' '.$item->num_ext.' '.$item->num_int.' '.$item->colonia.' '.$item->localidad.' '.$item->ciudad.' '.$item->municipio.' '.$item->estado.' '.$item->pais.' '.$item->cp}}</td>
-                        <td class="table-action">
+                        <td class="table-action w-100">
                             <div class="button-list">
                                 @include('shared.ui_kit.__edit_item')
                                 @include('shared.ui_kit.__remove_item')

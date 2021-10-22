@@ -20,7 +20,7 @@
                         <td>{{trim($item->area->area)}}</td>
                         <td>{{trim($item->area->dependencia->dependencia)}}</td>
                         <td>{{trim($item->jefe->FullName) }}</td>
-                        <td class="table-action ">
+                        <td class="table-action w-100">
                             <div class="button-list">
                                 @include('shared.ui_kit.__edit_item')
                                 @include('shared.ui_kit.__remove_item')

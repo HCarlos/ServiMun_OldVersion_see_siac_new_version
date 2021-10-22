@@ -16,7 +16,7 @@
                         <td class="table-user">{{$item->id}}</td>
                         <td>{{$item->codigo}}</td>
                         <td>{{$item->cp}}</td>
-                        <td class="table-action">
+                        <td class="table-action w-100">
                             <div class="button-list">
                                 @include('shared.ui_kit.__edit_item')
                                 @include('shared.ui_kit.__remove_item')

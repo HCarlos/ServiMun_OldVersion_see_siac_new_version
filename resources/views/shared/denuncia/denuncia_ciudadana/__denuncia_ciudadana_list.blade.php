@@ -18,7 +18,7 @@
             <td>{{($item->fecha_ingreso)}}</td>
             <td>{{($item->Estatu->estatus)}}</td>
             <td>{{$item->fullUbication}}</td>
-            <td class="table-action tbl100W">
+            <td class="table-action  w-100">
                 <div class="button-list">
                     @include('shared.ui_kit.__respuestas_ciudadana_list_item')
                     @include('shared.ui_kit.__imagenes_list_item')

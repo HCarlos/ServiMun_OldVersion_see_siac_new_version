@@ -24,7 +24,7 @@
                         <td class="text-center">
                             @if ($item->isDefault()) <i class="fas fa-check-circle text-primary fa-2x"></i> @endif
                         </td>
-                        <td class="table-action">
+                        <td class="table-action w-100">
                             <div class="button-list">
                                 @include('shared.ui_kit.__edit_item')
                                 @include('shared.ui_kit.__remove_item')

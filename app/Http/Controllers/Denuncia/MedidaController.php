@@ -69,7 +69,7 @@ class MedidaController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return Redirect::to('editMedida/'.$item->id);
+        return Redirect::to('listMedidas');
     }
 
     protected function newItem()
@@ -91,7 +91,7 @@ class MedidaController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return Redirect::to('editMedida/'.$item->id);
+        return Redirect::to('listMedidas');
     }
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //
