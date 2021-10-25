@@ -70,7 +70,7 @@ class OrigenController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return Redirect::to('editOrigen/'.$item->id);
+        return Redirect::to('listOrigenes');
     }
 
     protected function newItem()
@@ -92,7 +92,7 @@ class OrigenController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return Redirect::to('editOrigen/'.$item->id);
+        return Redirect::to('listOrigenes');
     }
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //
@@ -112,7 +112,7 @@ class OrigenController extends Controller
     }
 
 
-    
-    
+
+
 
 }

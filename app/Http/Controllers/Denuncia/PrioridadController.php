@@ -69,7 +69,7 @@ class PrioridadController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return Redirect::to('editPrioridad/'.$item->id);
+        return Redirect::to('listPrioridades');
     }
 
     protected function newItem()
@@ -91,7 +91,7 @@ class PrioridadController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return Redirect::to('editPrioridad/'.$item->id);
+        return Redirect::to('listPrioridades');
     }
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //

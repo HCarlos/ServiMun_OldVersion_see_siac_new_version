@@ -72,7 +72,7 @@ class AfiliacionController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return Redirect::to('editAfiliacion/'.$item->id);
+        return Redirect::to('listAfiliaciones');
     }
 
     protected function newItem()
@@ -94,7 +94,7 @@ class AfiliacionController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return Redirect::to('editAfiliacion/'.$item->id);
+        return Redirect::to('listAfiliaciones');
     }
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //
@@ -111,8 +111,8 @@ class AfiliacionController extends Controller
         } else {
             return Response::json(['mensaje' => 'Se ha producido un error.', 'data' => 'Error', 'status' => '200'], 200);
         }
-    }    
-    
-    
-    
+    }
+
+
+
 }

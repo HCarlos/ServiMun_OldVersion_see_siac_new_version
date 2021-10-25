@@ -70,7 +70,7 @@ class CalleController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return Redirect::to('editCalle/'.$item->id);
+        return Redirect::to('listCalles');
     }
 
     protected function newItem()
@@ -92,7 +92,7 @@ class CalleController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return Redirect::to('editCalle/'.$item->id);
+        return Redirect::to('listCalles');
     }
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //

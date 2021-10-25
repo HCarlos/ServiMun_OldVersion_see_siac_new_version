@@ -78,7 +78,7 @@ class DependenciaController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return Redirect::to('editDependencia/'.$item->id);
+        return Redirect::to('listDependencias');
     }
 
     protected function newDependencia()
@@ -104,7 +104,7 @@ class DependenciaController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return Redirect::to('editDependencia/'.$item->id);
+        return Redirect::to('listDependencias');
     }
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //

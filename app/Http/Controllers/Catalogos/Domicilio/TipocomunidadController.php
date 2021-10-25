@@ -70,8 +70,7 @@ class TipocomunidadController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return Redirect::to('editTipocomunidad/'.$item->id);
-
+        return Redirect::to('listTipocomunidades');
     }
 
     protected function newItem()
@@ -93,7 +92,7 @@ class TipocomunidadController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return Redirect::to('editTipocomunidad/'.$item->id);
+        return Redirect::to('listTipocomunidades');
     }
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //

@@ -70,7 +70,7 @@ class CiudadController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return Redirect::to('editCiudad/'.$item->id);
+        return Redirect::to('listCiudades');
     }
 
     protected function newItem()
@@ -92,7 +92,7 @@ class CiudadController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return Redirect::to('editCiudad/'.$item->id);
+        return Redirect::to('listCiudades');
     }
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //
@@ -110,11 +110,11 @@ class CiudadController extends Controller
             return Response::json(['mensaje' => 'Se ha producido un error.', 'data' => 'Error', 'status' => '200'], 200);
         }
     }
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
 }

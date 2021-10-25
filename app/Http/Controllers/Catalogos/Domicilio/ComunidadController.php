@@ -95,7 +95,7 @@ class ComunidadController extends Controller
         if (!isset($item->id)) {
             abort(404);
         }
-        return Redirect::to('editComunidad/'.$item->id);
+        return Redirect::to('listComunidades');
     }
 
     protected function newItem()
@@ -140,7 +140,7 @@ class ComunidadController extends Controller
         if (!isset($item->id)) {
             abort(404);
         }
-        return Redirect::to('editComunidad/'.$item->id);
+        return Redirect::to('listComunidades');
     }
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //

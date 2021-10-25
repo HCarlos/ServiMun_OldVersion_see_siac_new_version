@@ -79,7 +79,7 @@ class AreaController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return Redirect::to('editArea/'.$item->id);
+        return Redirect::to('listAreas');
     }
 
     protected function newArea()
@@ -109,7 +109,7 @@ class AreaController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return Redirect::to('editArea/'.$item->id);
+        return Redirect::to('listAreas');
     }
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //

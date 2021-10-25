@@ -77,7 +77,7 @@ class ColoniaController extends Controller
         if (!isset($item->id)) {
             abort(405);
         }
-        return Redirect::to('editColonia/'.$item->id);
+        return Redirect::to('listColonias');
     }
 
     protected function newItem()
@@ -106,7 +106,7 @@ class ColoniaController extends Controller
         if (!isset($item->id)) {
             abort(404);
         }
-        return Redirect::to('editColonia/'.$item->id);
+        return Redirect::to('listColonias');
     }
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //

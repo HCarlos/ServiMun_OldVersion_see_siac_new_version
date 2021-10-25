@@ -70,8 +70,7 @@ class TipoasentamientoController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return Redirect::to('editTipoasentamiento/'.$item->id);
-
+        return Redirect::to('listTipoasentamientos');
     }
 
     protected function newItem()
@@ -93,7 +92,7 @@ class TipoasentamientoController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return Redirect::to('editTipoasentamiento/'.$item->id);
+        return Redirect::to('listTipoasentamientos');
     }
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //

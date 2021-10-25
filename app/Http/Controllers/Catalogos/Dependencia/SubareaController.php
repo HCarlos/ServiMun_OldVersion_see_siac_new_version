@@ -77,7 +77,7 @@ class SubareaController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return Redirect::to('editSubarea/'.$item->id);
+        return Redirect::to('listSubareas');
     }
 
     protected function newSubarea()
@@ -105,7 +105,7 @@ class SubareaController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return Redirect::to('editSubarea/'.$item->id);
+        return Redirect::to('listSubareas');
     }
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //

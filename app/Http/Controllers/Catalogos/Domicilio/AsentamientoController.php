@@ -70,7 +70,7 @@ class AsentamientoController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return Redirect::to('editAsentamiento/'.$item->id);
+        return Redirect::to('listAsentamientos');
     }
 
     protected function newItem()
@@ -92,7 +92,7 @@ class AsentamientoController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return Redirect::to('editAsentamiento/'.$item->id);
+        return Redirect::to('listAsentamientos');
     }
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //

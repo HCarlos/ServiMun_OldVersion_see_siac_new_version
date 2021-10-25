@@ -70,8 +70,7 @@ class CodigopostalController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return Redirect::to('editCodigopostal/'.$item->id);
-
+        return Redirect::to('listCodigopostales');
     }
 
     protected function newItem()
@@ -93,7 +92,7 @@ class CodigopostalController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return Redirect::to('editCodigopostal/'.$item->id);
+        return Redirect::to('listCodigopostales');
     }
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //

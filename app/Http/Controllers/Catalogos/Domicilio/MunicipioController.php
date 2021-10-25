@@ -69,7 +69,7 @@ class MunicipioController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return Redirect::to('editMunicipio/'.$item->id);
+        return Redirect::to('listMunicipios');
     }
 
     protected function newItem()
@@ -91,7 +91,7 @@ class MunicipioController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return Redirect::to('editMunicipio/'.$item->id);
+        return Redirect::to('listMunicipios');
     }
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //

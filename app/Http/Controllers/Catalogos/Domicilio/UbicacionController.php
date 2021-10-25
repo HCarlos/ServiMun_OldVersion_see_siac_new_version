@@ -88,7 +88,7 @@ class UbicacionController extends Controller
         if (!isset($item->id)) {
             abort(405);
         }
-        return Redirect::to('editUbicacion/'.$item->id);
+        return Redirect::to('listUbicaciones');
     }
 
     protected function newItem()
@@ -118,7 +118,7 @@ class UbicacionController extends Controller
         if (!isset($item->id)) {
             abort(404);
         }
-        return Redirect::to('editUbicacion/'.$item->id);
+        return Redirect::to('listUbicaciones');
     }
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //

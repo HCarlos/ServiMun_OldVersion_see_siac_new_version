@@ -69,7 +69,7 @@ class LocalidadController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return Redirect::to('editLocalidad/'.$item->id);
+        return Redirect::to('listLocalidades');
     }
 
     protected function newItem()
@@ -91,7 +91,7 @@ class LocalidadController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return Redirect::to('editLocalidad/'.$item->id);
+        return Redirect::to('listLocalidades');
     }
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //
@@ -108,10 +108,10 @@ class LocalidadController extends Controller
         } else {
             return Response::json(['mensaje' => 'Se ha producido un error.', 'data' => 'Error', 'status' => '200'], 200);
         }
-    }    
-    
-    
-    
-    
-    
+    }
+
+
+
+
+
 }

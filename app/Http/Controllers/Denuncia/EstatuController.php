@@ -74,7 +74,7 @@ class EstatuController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return Redirect::to('editEstatu/'.$item->id);
+        return Redirect::to('listEstatus');
     }
 
     protected function newItem()
@@ -100,7 +100,7 @@ class EstatuController extends Controller
         if (!isset($item)) {
             abort(404);
         }
-        return Redirect::to('editEstatu/'.$item->id);
+        return Redirect::to('listEstatus');
     }
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //
