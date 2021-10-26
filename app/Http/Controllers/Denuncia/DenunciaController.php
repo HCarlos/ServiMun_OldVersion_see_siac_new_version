@@ -80,10 +80,10 @@ class DenunciaController extends Controller
 
         return view('denuncia.denuncia.denuncia_list',
             [
-                'items' => $items,
-                'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
-                'titulo_header'   => '',
-                'user' => $user,
+                'items'                   => $items,
+                'titulo_catalogo'         => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'           => '',
+                'user'                    => $user,
                 'searchInListDenuncia'    => 'listDenuncias',
                 'newWindow'               => true,
                 'tableName'               => $this->tableName,
@@ -128,7 +128,7 @@ class DenunciaController extends Controller
             });
         }
 
-        $Servicios = $this->getQueryServiciosFromDependencias($item->dependencia_id);
+        $Servicios = Servicio::getQueryServiciosFromDependencias($item->dependencia_id);
         $Estatus      = Estatu::all()->sortBy('estatus');
         $this->msg = "";
         return view('denuncia.denuncia.denuncia_edit',
@@ -332,7 +332,7 @@ class DenunciaController extends Controller
     protected function getServiciosFromDependencias($id= 0)
     {
 
-        $item = $this->getQueryServiciosFromDependencias($id);
+        $item = Servicio::getQueryServiciosFromDependencias($id);
 
         if (isset($item)) {
             return Response::json(['mensaje' => 'OK', 'data' => $item, 'status' => '200'], 200);
@@ -342,18 +342,6 @@ class DenunciaController extends Controller
 
     }
 
-    private function getQueryServiciosFromDependencias($id=0){
-
-        $items =  Servicio::whereHas('subareas', function($p) use ($id) {
-            $p->whereHas("areas", function($q) use ($id){
-                $q->whereHas("dependencias", function ($r) use ($id){
-                    return $r->where("dependencia_id",$id);
-                });
-            });
-        })->get();
-        return $items;
-
-    }
 
 
 

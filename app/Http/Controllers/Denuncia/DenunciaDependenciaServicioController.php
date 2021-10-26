@@ -65,7 +65,7 @@ class DenunciaDependenciaServicioController extends Controller
 //        dd($items->dependencia_id);
         $Dependencias = Dependencia::all()->sortBy('dependencia');
         $Estatus      = Estatu::all()->sortBy('estatus');
-        $Servicios    = $this->getQueryServiciosFromDependencias($items->dependencia_id);
+        $Servicios    = Servicio::getQueryServiciosFromDependencias($items->dependencia_id);
         //dd($Servicios);
         return view('denuncia.denuncia_dependencia_servicio.denuncia_dependencia_servicio_edit',
             [
@@ -139,18 +139,5 @@ class DenunciaDependenciaServicioController extends Controller
                 return Response::json(['mensaje' => 'Se ha producido un error.', 'data' => 'Error', 'status' => '200'], 200);
             }
         }
-
-    private function getQueryServiciosFromDependencias($id=0){
-        return Servicio::whereHas('subareas', function($p) use ($id) {
-            $p->whereHas("areas", function($q) use ($id){
-                $q->whereHas("dependencias", function ($r) use ($id){
-                    return $r->where("dependencia_id",$id);
-                });
-            });
-        })->get();
-    }
-
-
-
 
 }

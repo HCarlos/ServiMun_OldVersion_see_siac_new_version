@@ -11,6 +11,7 @@ return array(
     'App\\Classes\\Items' => $baseDir . '/app/Classes/Items.php',
     'App\\Classes\\MessageAlertClass' => $baseDir . '/app/Classes/MessageAlertClass.php',
     'App\\Classes\\MyTCPDF' => $baseDir . '/app/Classes/MyTCPDF.php',
+    'App\\Classes\\RemoveItemSafe' => $baseDir . '/app/Classes/RemoveItemSafe.php',
     'App\\Classes\\ValidatorPassword' => $baseDir . '/app/Classes/ValidatorPassword.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',

@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'c83ac58e0c4b74768d5c06b4c3be5928886e7d11',
+        'reference' => '101653d69fb0f1bf4b5ccfecdf51725d31e767ac',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -377,8 +377,8 @@
             ),
         ),
         'illuminate/macroable' => array(
-            'pretty_version' => 'v8.67.0',
-            'version' => '8.67.0.0',
+            'pretty_version' => 'v8.68.0',
+            'version' => '8.68.0.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../illuminate/macroable',
             'aliases' => array(),
@@ -508,7 +508,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'c83ac58e0c4b74768d5c06b4c3be5928886e7d11',
+            'reference' => '101653d69fb0f1bf4b5ccfecdf51725d31e767ac',
             'dev_requirement' => false,
         ),
         'laravel/legacy-factories' => array(

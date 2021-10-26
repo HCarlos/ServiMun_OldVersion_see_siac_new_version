@@ -2339,8 +2339,8 @@
         },
         {
             "name": "illuminate/macroable",
-            "version": "v8.67.0",
-            "version_normalized": "8.67.0.0",
+            "version": "v8.68.0",
+            "version_normalized": "8.68.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/macroable.git",

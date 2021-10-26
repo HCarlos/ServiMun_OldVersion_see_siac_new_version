@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Denuncia;
 
+use App\Classes\RemoveItemSafe;
 use App\Http\Requests\Denuncia\ServicioRequest;
 use App\Models\Catalogos\Medida;
 use App\Models\Catalogos\Servicio;
 use App\Models\Catalogos\Subarea;
+use App\Models\Denuncias\Denuncia;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
@@ -110,18 +112,11 @@ class ServicioController extends Controller
     {
         $item = Servicio::withTrashed()->findOrFail($id);
         if (isset($item)) {
-            if (!$item->trashed()) {
-                $item->forceDelete();
-            } else {
-                $item->forceDelete();
-            }
-            return Response::json(['mensaje' => 'Registro eliminado con éxito', 'data' => 'OK', 'status' => '200'], 200);
+            return RemoveItemSafe::RemoveItemObject($item,'servicio_id',$id);
         } else {
             return Response::json(['mensaje' => 'Se ha producido un error.', 'data' => 'Error', 'status' => '200'], 200);
         }
     }
-
-
 
 
 }

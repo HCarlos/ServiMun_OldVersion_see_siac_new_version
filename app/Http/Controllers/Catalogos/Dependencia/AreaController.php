@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Catalogos\Dependencia;
 
+use App\Classes\RemoveItemSafe;
 use App\Http\Requests\Dependencia\AreaRequest;
 use App\Models\Catalogos\Area;
 use App\Models\Catalogos\Dependencia;
@@ -117,12 +118,15 @@ class AreaController extends Controller
     {
         $item = Area::withTrashed()->findOrFail($id);
         if (isset($item)) {
-            if (!$item->trashed()) {
-                $item->forceDelete();
-            } else {
-                $item->forceDelete();
-            }
-            return Response::json(['mensaje' => 'Registro eliminado con éxito', 'data' => 'OK', 'status' => '200'], 200);
+
+//            if (!$item->trashed()) {
+//                $item->forceDelete();
+//            } else {
+//                $item->forceDelete();
+//            }
+//            return Response::json(['mensaje' => 'Registro eliminado con éxito', 'data' => 'OK', 'status' => '200'], 200);
+            return RemoveItemSafe::RemoveItemObject($item,'area_id',$id);
+
         } else {
             return Response::json(['mensaje' => 'Se ha producido un error.', 'data' => 'Error', 'status' => '200'], 200);
         }

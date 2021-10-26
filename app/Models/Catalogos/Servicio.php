@@ -65,6 +65,26 @@ class Servicio extends Model
         return $this->belongsToMany(Estatu::class,'denuncia_dependencia_servicio_estatus','servicio_id','estatu_id');
     }
 
+    static function getQueryServiciosFromDependencias($id=0){
+
+        $items =  static::whereHas('subareas', function($p) use ($id) {
+            $p->whereHas("areas", function($q) use ($id){
+                return $q->where("dependencia_id",$id);
+            });
+        })->orderBy('servicio')->get();
+
+        $data = [];
+        foreach ($items as $item){
+            $suba = trim($item->subarea->subarea) == "GENERAL" ? "" : trim($item->subarea->subarea).' - ';
+            $area = trim($item->subarea->area->area) == "GENERAL" ? "" : trim($item->subarea->area->area).' - ';
+            $depe = trim($item->subarea->area->dependencia->abreviatura) == "GENERAL" ? "" : trim($item->subarea->area->dependencia->abreviatura);
+            $data[]=array('id'=>$item->id,'servicio'=>$item->servicio.' - '.$suba.$area.$depe);
+        }
+        //dd( $data );
+        return $data;
+
+    }
+
 
     public static function findOrImport($servicio,$habilitado,$medida_id,$subarea_id){
         $obj = static::where('servicio', trim($servicio))->first();
@@ -81,7 +101,7 @@ class Servicio extends Model
         }
         return $obj;
     }
-    
-    
-    
+
+
+
 }

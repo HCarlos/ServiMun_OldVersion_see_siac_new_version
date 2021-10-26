@@ -12,13 +12,13 @@
                 </div>
             </div>
             <div class="form-row mb-1">
-                <label for = "fecha_limite" class="col-md-2 col-form-label">F. Límite </label>
-                <div class="col-md-4">
-                    {{ Form::date('fecha_limite', $items->fecha_limite, ['id'=>'fecha_limite','class'=>'form-control','readonly'=>'readonly']) }}
-                </div>
                 <label for = "fecha_ejecucion" class="col-md-2 col-form-label">F. Ejec. </label>
                 <div class="col-md-4">
                     {{ Form::date('fecha_ejecucion', $items->fecha_ejecucion, ['id'=>'fecha_ejecucion','class'=>'form-control','readonly'=>'readonly']) }}
+                </div>
+                <label for = "fecha_limite" class="col-md-2 col-form-label">F. Límite </label>
+                <div class="col-md-4">
+                    {{ Form::date('fecha_limite', $items->fecha_limite, ['id'=>'fecha_limite','class'=>'form-control','readonly'=>'readonly']) }}
                 </div>
             </div>
             <div class="form-row mb-1">
@@ -109,7 +109,7 @@
                 <div class="col-md-9">
                     <select id="servicio_id" name="servicio_id" class="form-control" size="1">
                         @foreach($servicios as $t)
-                            <option value="{{$t->id}}" {{ $t->id == $items->servicio_id  ? 'selected': '' }} >{{ $t->servicio }} </option>
+                            <option value="{{$t['id']}}" {{ $t['id'] == $items->servicio_id  ? 'selected': '' }} >{{ $t['servicio'] }} </option>
                         @endforeach
                     </select>
                 </div>

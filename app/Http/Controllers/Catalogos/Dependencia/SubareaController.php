@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Catalogos\Dependencia;
 
+use App\Classes\RemoveItemSafe;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dependencia\SubareaRequest;
@@ -113,12 +114,14 @@ class SubareaController extends Controller
     {
         $item = Subarea::withTrashed()->findOrFail($id);
         if (isset($item)) {
-            if (!$item->trashed()) {
-                $item->forceDelete();
-            } else {
-                $item->forceDelete();
-            }
-            return Response::json(['mensaje' => 'Registro eliminado con éxito', 'data' => 'OK', 'status' => '200'], 200);
+//            if (!$item->trashed()) {
+//                $item->forceDelete();
+//            } else {
+//                $item->forceDelete();
+//            }
+//            return Response::json(['mensaje' => 'Registro eliminado con éxito', 'data' => 'OK', 'status' => '200'], 200);
+            return RemoveItemSafe::RemoveItemObject($item,'subarea_id',$id);
+
         } else {
             return Response::json(['mensaje' => 'Se ha producido un error.', 'data' => 'Error', 'status' => '200'], 200);
         }
