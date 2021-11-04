@@ -105,7 +105,7 @@ class DenunciaController extends Controller
     }
 
 // ***************** EDITA LOS DATOS  ++++++++++++++++++++ //
-    protected function editItem($Id)
+    protected function editItemV2($Id)
     {
         $item         = Denuncia::find($Id);
         $Prioridades  = Prioridad::all()->sortBy('prioridad');
@@ -120,6 +120,57 @@ class DenunciaController extends Controller
                             })->get()->sortBy(function ($q){
                                 return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
                             });
+
+        }else{
+            $Dependencias = Dependencia::all()->sortBy('dependencia');
+            $Ciudadanos   = User::all()->sortBy(function ($q){
+                return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
+            });
+        }
+
+        $Servicios = Servicio::getQueryServiciosFromDependencias($item->dependencia_id);
+        $Estatus      = Estatu::all()->sortBy('estatus');
+        $this->msg = "";
+        $tabs[] = array('tab'=>'denuncia','active'=>'active','caption'=>'Denuncia','Method'=>'POST','Route'=>'updateDenuncia','items_forms'=>'SIAC.denuncia.denuncia.__denuncia.__denuncia_edit');
+        //$tabs[] = array('tab'=>'domicilio','active'=>'','caption'=>'Domicilio','Method'=>'POST','Route'=>'updateUbicacion','items_forms'=>'shared.catalogo.domicilio.ubicacion.__ubicacion_edit');
+        //$tabs[] = array('tab'=>'usuario','active'=>'','caption'=>'Usuario','Method'=>'POST','Route'=>'EditUser','items_forms'=>'shared.catalogo.user.__user_edit');
+        $tabs = json_decode(json_encode($tabs));
+        //dd( $tabs );
+        return view('SIAC.denuncia.denuncia.denuncia_edit',
+            [
+                'user'            => Auth::user(),
+                'prioridades'     => $Prioridades,
+                'origenes'        => $Origenes,
+                'dependencias'    => $Dependencias,
+                'servicios'       => $Servicios,
+                'ciudadanos'      => $Ciudadanos,
+                'estatus'         => $Estatus,
+                'items'           => $item,
+                'editItemTitle'   => isset($item->denuncia) ? $item->denuncia : 'Nuevo',
+                'putEdit'         => 'updateDenuncia',
+                'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Editando el Folio '.$Id,
+                'msg'             => $this->msg,
+                'tabs'            => $tabs,
+            ]
+        );
+    }
+
+    protected function editItem($Id)
+    {
+        $item         = Denuncia::find($Id);
+        $Prioridades  = Prioridad::all()->sortBy('prioridad');
+        $Origenes     = Origen::all()->sortBy('origen');
+
+        $IsEnlace = Session::get('IsEnlace');
+        if($IsEnlace){
+            $DependenciaArray = explode('|',Session::get('DependenciaArray'));
+            $Dependencias = Dependencia::all()->whereIn('dependencia',$DependenciaArray,true)->sortBy('dependencia');
+            $Ciudadanos   = User::query()->whereHas('dependencias',function ($r) use ($DependenciaArray) {
+                return $r->whereIn('dependencia',$DependenciaArray);
+            })->get()->sortBy(function ($q){
+                return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
+            });
 
         }else{
             $Dependencias = Dependencia::all()->sortBy('dependencia');
@@ -149,6 +200,8 @@ class DenunciaController extends Controller
             ]
         );
     }
+
+
 
 // ***************** GUARDA LOS CAMBIOS ++++++++++++++++++++ //
     protected function updateItem(DenunciaRequest $request)

@@ -89,10 +89,10 @@ class SubareaController extends Controller
         $Areas = Area::all(['id','area','dependencia_id'])->sortBy('area');
         return view('catalogos.catalogo.dependencias.subarea.subarea_new',
             [
-                'editItemTitle' => 'Nuevo',
-                'jefes' => $Jefes,
-                'area' => $Areas,
-                'postNew' => 'createSubarea',
+                'editItemTitle'   => 'Nuevo',
+                'jefes'           => $Jefes,
+                'area'            => $Areas,
+                'postNew'         => 'createSubarea',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
                 'titulo_header'   => 'Nuevo registro ',
             ]

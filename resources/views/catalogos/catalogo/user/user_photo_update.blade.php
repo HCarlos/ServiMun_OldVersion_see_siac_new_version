@@ -22,7 +22,7 @@
                         @csrf
                         @include('shared.catalogo.user.__user_photo_update')
                         <div class="form-group mt-4">
-                            <button type="submit" class="btn btn-primary" id="btnSavePhoto"><i class="mdi mdi-upload mdi-24px"></i>Subir imagen</button>
+                            <button type="submit" class="btn btn-xs btn-rounded btn-primary float-right" id="btnSavePhoto"><i class="mdi mdi-upload mdi-24px"></i>Subir imagen</button>
                             @include('shared.code.__preloader')
                         </div>
                     </form>

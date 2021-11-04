@@ -70,15 +70,19 @@ a, .text-darkred{
 }
 
 .bg-form{
-    background: #56585a;
+    background: #f0ad4e;
 }
 
-.bg-form-body{
-    background: #84878a;
+.bg-form-body > form{
+    background: #f0ddce;
+    margin: 0;
 }
+
+
 .bg-form-body label{
     color: white;
 }
+
 .color-title{
     color: whitesmoke !important;
 }

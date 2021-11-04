@@ -264,6 +264,7 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp|USER_OPERATOR_SIAC|
     // Catálogo de Denuncias
     Route::get('listDenuncias/', 'Denuncia\DenunciaController@index')->name('listDenuncias');
     Route::get('editDenuncia/{Id}', 'Denuncia\DenunciaController@editItem')->name('editDenuncia');
+//    Route::get('editDenuncia/{Id}', 'Denuncia\DenunciaController@editItemV2')->name('editDenuncia');
     Route::put('updateDenuncia', 'Denuncia\DenunciaController@updateItem')->name('updateDenuncia');
     Route::get('newDenuncia', 'Denuncia\DenunciaController@newItem')->name('newDenuncia');
     Route::post('createDenuncia', 'Denuncia\DenunciaController@createItem')->name('createDenuncia');

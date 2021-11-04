@@ -16,7 +16,7 @@
                         {{method_field('PUT')}}
                         @include('shared.denuncia.denuncia.__denuncia_edit')
                         @component('components.tools.buttons-form-denuncia')
-                            @slot('msgLeft',' ')
+                            @slot('msgLeft','')
                         @endcomponent
                     </form>
                 @endslot

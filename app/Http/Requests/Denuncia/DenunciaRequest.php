@@ -94,8 +94,8 @@ class DenunciaRequest extends FormRequest
                 'estado'                       => strtoupper($Ubicacion->estado),
                 'cp'                           => strtoupper($Ubicacion->cp),
 
-                'latitud'                      => $this->latitud,
-                'longitud'                     => $this->longitud,
+                'latitud'                      => $this->latitud ?? 0.0000,
+                'longitud'                     => $this->longitud ?? 0.0000,
 
                 'prioridad_id'                 => $this->prioridad_id,
                 'origen_id'                    => $this->origen_id,
@@ -106,7 +106,7 @@ class DenunciaRequest extends FormRequest
                 'ciudadano_id'                 => $this->ciudadano_id,
                 'creadopor_id'                 => $this->creadopor_id,
                 'modificadopor_id'             => $this->modificadopor_id,
-                'domicilio_ciudadano_internet' => strtoupper(trim($this->domicilio_ciudadano_internet)),
+                'domicilio_ciudadano_internet' => strtoupper(trim($this->domicilio_ciudadano_internet))  ?? '' ,
                 'observaciones'                => strtoupper(trim($this->observaciones)),
 
             ];

@@ -39,16 +39,23 @@
                     <textarea name="referencia" id="referencia" class="form-control">{{ old('referencia') }}</textarea>
                 </div>
             </div>
-            <div class="form-group row mb-1">
-                <label for = "latitud" class="col-md-2 col-form-label">Lat.</label>
-                <div class="col-md-4">
-                    <input type="text" name="latitud" id="latitud" value="{{ old('latitud') }}" class="form-control" />
-                </div>
-                <label for = "longitud" class="col-md-2 col-form-label">Long.</label>
-                <div class="col-md-4">
-                    <input type="text" name="longitud" id="longitud" value="{{ old('longitud') }}" class="form-control" />
+            <div class="form-row mb-1">
+                <label for = "observaciones" class="col-md-2 col-form-label">Observaciones </label>
+                <div class="col-md-10">
+                    <textarea name="observaciones" id="observaciones" class="form-control">{{ old('observaciones') }}</textarea>
                 </div>
             </div>
+
+{{--            <div class="form-group row mb-1">--}}
+{{--                <label for = "latitud" class="col-md-2 col-form-label">Lat.</label>--}}
+{{--                <div class="col-md-4">--}}
+{{--                    <input type="text" name="latitud" id="latitud" value="{{ old('latitud') }}" class="form-control" />--}}
+{{--                </div>--}}
+{{--                <label for = "longitud" class="col-md-2 col-form-label">Long.</label>--}}
+{{--                <div class="col-md-4">--}}
+{{--                    <input type="text" name="longitud" id="longitud" value="{{ old('longitud') }}" class="form-control" />--}}
+{{--                </div>--}}
+{{--            </div>--}}
 
         </div>
     </div>
@@ -148,22 +155,23 @@
 
     </div>
 
-    <div class="col-md-12 ">
-        <div class="grid-container">
-            <div class="form-row mb-1">
-                <label for = "domicilio_ciudadano_internet" class="col-md-2 col-form-label">Domicilio Internet </label>
-                <div class="col-md-10">
-                    <textarea name="domicilio_ciudadano_internet" id="domicilio_ciudadano_internet" class="form-control">{{ old('domicilio_ciudadano_internet') }}</textarea>
-                </div>
-            </div>
-            <div class="form-row mb-1">
-                <label for = "observaciones" class="col-md-2 col-form-label">Observaciones </label>
-                <div class="col-md-10">
-                    <textarea name="observaciones" id="observaciones" class="form-control">{{ old('observaciones') }}</textarea>
-                </div>
-            </div>
-        </div>
-    </div>
+{{--    <div class="col-md-12 ">--}}
+{{--        <div class="grid-container">--}}
+{{--            <div class="form-row mb-1">--}}
+{{--                <label for = "domicilio_ciudadano_internet" class="col-md-2 col-form-label">Ubicación del Problema </label>--}}
+{{--                <div class="col-md-10">--}}
+{{--                    <textarea name="domicilio_ciudadano_internet" id="domicilio_ciudadano_internet" class="form-control">{{ old('domicilio_ciudadano_internet') }}</textarea>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            <div class="form-row mb-1">--}}
+{{--                <label for = "observaciones" class="col-md-2 col-form-label">Observaciones </label>--}}
+{{--                <div class="col-md-10">--}}
+{{--                    <textarea name="observaciones" id="observaciones" class="form-control">{{ old('observaciones') }}</textarea>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+
 </div>
 
 <input type="hidden" name="id" value="0" >
