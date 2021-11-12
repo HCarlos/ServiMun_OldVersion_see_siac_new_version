@@ -56,7 +56,6 @@ class Dependencia extends Model
         return $this->belongsToMany(Estatu::class,'denuncia_dependencia_servicio_estatus','dependencia_id','estatu_id');
     }
 
-
     public function isVisibleInternet(){
         return $this->visible_internet;
     }

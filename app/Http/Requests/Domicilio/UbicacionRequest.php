@@ -15,13 +15,14 @@ use App\Models\Catalogos\Domicilios\Codigopostal;
 use App\Models\Catalogos\Domicilios\Ubicacion;
 use App\Classes\MessageAlertClass;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rule;
 
 class UbicacionRequest extends FormRequest
 {
 
 
-    protected $redirectRoute = 'editUbicacion';
+    protected $redirectRoute = 'editUbicacionV2';
 
     public function authorize()
     {
@@ -34,11 +35,30 @@ class UbicacionRequest extends FormRequest
             'num_ext'         => ['required'],
             'num_int'         => ['present'],
             'calle_id'        => ['required'],
-            'calle_id'        => ['required'],
             'colonia_id'      => ['required'],
             ];
 
     }
+
+    public function messages()
+    {
+        return [
+
+            'num_ext.required'       => 'Se requiere el :attribute',
+            'num_int.required'       => 'Se requiere el :attribute',
+            'calle_id.required'       => 'Se requiere el :attribute',
+            'colonia_id.required'       => 'Se requiere el :attribute',
+
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'num_ext'     => 'Número Exterior',
+        ];
+    }
+
 
     public function manage()
     {
@@ -82,7 +102,7 @@ class UbicacionRequest extends FormRequest
             $this->attaches($item);
         }catch (QueryException $e){
             $Msg = new MessageAlertClass();
-            return $Msg->Message($e);
+            throw new HttpResponseException(response()->json( $Msg->Message($e), 422));
         }
         return $item;
     }
@@ -109,13 +129,12 @@ class UbicacionRequest extends FormRequest
         return $Item;
     }
 
-    protected function getRedirectUrl()
-    {
+    protected function getRedirectUrl(){
         $url = $this->redirector->getUrlGenerator();
         if ($this->id > 0){
             return $url->route($this->redirectRoute,['Id'=>$this->id]);
         }else{
-            return $url->route('newUbicacion');
+            return $url->route('newUbicacionV2');
         }
     }
 

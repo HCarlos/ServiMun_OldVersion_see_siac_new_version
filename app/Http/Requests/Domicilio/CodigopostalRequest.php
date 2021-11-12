@@ -19,6 +19,14 @@ class CodigopostalRequest extends FormRequest
         return true;
     }
 
+    public function validationData(){
+        $attributes = parent::all();
+        $attributes['codigo'] = strtoupper(trim($attributes['codigo']));
+        $attributes['cp'] = strtoupper(trim($attributes['cp']));
+        $this->replace($attributes);
+        return parent::all();
+    }
+
     public function rules()
     {
         return [

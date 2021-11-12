@@ -279,7 +279,7 @@ class CreateDenunciaUbicacionTable extends Migration
 
             $table->foreign('dependencia_id')
                 ->references('id')
-                ->on($tableNamesCatalogos['dependencias'])
+                ->on($tableNamesCatalogos['dependencia'])
                 ->onDelete('cascade');
 
             $table->foreign('ubicacion_id')
@@ -385,7 +385,7 @@ class CreateDenunciaUbicacionTable extends Migration
 
             $table->foreign('dependencia_id')
                 ->references('id')
-                ->on($tableNamesCatalogos['dependencias'])
+                ->on($tableNamesCatalogos['dependencia'])
                 ->onDelete('cascade');
 
             $table->foreign('servicio_id')
@@ -519,7 +519,7 @@ class CreateDenunciaUbicacionTable extends Migration
 
             $table->foreign('dependencia_id')
                 ->references('id')
-                ->on($tableNamesCatalogos['dependencias'])
+                ->on($tableNamesCatalogos['dependencia'])
                 ->onDelete('cascade');
 
         });

@@ -25,7 +25,7 @@ class EstatuFilter extends QueryFilter
         $search = strtoupper($search);
         return $query->where(function ($query) use ($search) {
             $query->whereRaw("UPPER(estatus) like ?", "%{$search}%")
-                ->orWhereHas('dependencias', function ($q) use ($search) {
+                ->orWhereHas('dependencia', function ($q) use ($search) {
                     $q->whereRaw("UPPER(dependencia) like ?", "%{$search}%");
                 })
                 ->orWhere('id', 'like', "%{$search}%");

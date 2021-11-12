@@ -217,7 +217,6 @@ class CatalogosSeeder extends Seeder
         Medida::findOrImport( 'PAQUETES',1);
 
         Origen::findOrImport( 'Atención Directa');
-        Origen::findOrImport( 'Centro en tu Comunidad');
         Origen::findOrImport( 'Telereportaje');
         Origen::findOrImport( 'Página Web');
         Origen::findOrImport( 'TV');
@@ -232,9 +231,6 @@ class CatalogosSeeder extends Seeder
         Origen::findOrImport( 'PRESIDENCIA');
         Origen::findOrImport( 'AUDIENCIA DE RADIO');
         Origen::findOrImport( 'SECRETARIA DE AYUNTAMIENTO');
-        Origen::findOrImport( 'PANORAMA SIN RESERVAS');
-        Origen::findOrImport( 'JORNADA INTEGRAL');
-        Origen::findOrImport( 'SEDESOL');
         Origen::findOrImport( 'COORDINACIÓN DE DELEGADOS');
         Origen::findOrImport( 'Gira de Trabajo');
 

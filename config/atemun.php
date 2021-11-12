@@ -66,7 +66,7 @@ return [
             'prioridades'                           => 'prioridades',
             'estatus'                               => 'estatus',
             'origenes'                              => 'origenes',
-            'dependencias'                          => 'dependencias',
+            'dependencia'                          => 'dependencia',
             'areas'                                 => 'areas',
             'subareas'                              => 'subareas',
             'servicios'                             => 'servicios',

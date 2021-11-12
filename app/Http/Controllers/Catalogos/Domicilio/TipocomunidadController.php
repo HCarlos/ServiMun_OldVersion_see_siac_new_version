@@ -30,22 +30,73 @@ class TipocomunidadController extends Controller
 
         return view('catalogos.catalogo.domicilio.tc.tc_list',
             [
-                'items' => $items,
+                'items'           => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
                 'titulo_header'   => '',
-                'user' => $user,
-                'searchInList' => 'listTipocomunidades',
-                'newWindow' => true,
-                'tableName' => $this->tableName,
-                'showEdit' => 'editTipocomunidad',
-//                'putEdit' => 'updateTipocomunidad',
-                'newItem' => 'newTipocomunidad',
-                'removeItem' => 'removeTipocomunidad',
-//                'showProcess1' => 'showFileListUserExcel1A',
-                'exportModel' => 17,
+                'user'            => $user,
+                'searchInList'    => 'listTipocomunidades',
+                'newWindow'       => true,
+                'tableName'       => $this->tableName,
+                'showEdit'        => 'editTipocomunidadV2',
+                'newItem'         => 'newTipocomunidadV2',
+                'removeItem'      => 'removeTipocomunidad',
+                'IsModal'         => true,
+                'exportModel'     => 17,
             ]
         );
     }
+
+    // ***************** CREAR NUEVO ++++++++++++++++++++ //
+    protected function newItem()
+    {
+        return view('catalogos.catalogo.domicilio.tc.tc_new',
+            [
+                'editItemTitle' => 'Nuevo',
+                'postNew' => 'createTipocomunidad',
+                'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Nuevo registro',
+            ]
+        );
+    }
+
+    protected function createItem(TipocomunidadRequest $request)
+    {
+        $item = $request->manage();
+        if (!isset($item)) {
+            abort(404);
+        }
+        return Redirect::to('listTipocomunidades');
+    }
+
+    // ***************** CREAR NUEVO ++++++++++++++++++++ //
+    protected function newItemV2(){
+        $user = Auth::user();
+        return view('SIAC._comun.__modal_comun_1',
+            [
+                'Titulo'      => 'Nuevo',
+                'Route'       => 'createTipocomunidadV2',
+                'Method'      => 'POST',
+                'items_forms' => 'SIAC.domicilio.tc.__tc.__tc_new',
+                'IsNew'       => true,
+                'user'        => $user,
+            ]
+        );
+    }
+
+    protected function createItemV2(TipocomunidadRequest $request)
+    {
+        $Obj = $request->manage();
+        if (!is_object($Obj)) {
+            $id = 0;
+            return redirect('newTipocomunidadV2')
+                ->withErrors($Obj)
+                ->withInput();
+        }else{
+            $id = $Obj->id;
+        }
+        return Response::json(['mensaje' => 'Dato agregado con éxito', 'data' => 'OK', 'status' => '200'], 200);
+    }
+
 
 // ***************** EDITA LOS DATOS  ++++++++++++++++++++ //
     protected function editItem($Id)
@@ -63,7 +114,6 @@ class TipocomunidadController extends Controller
         );
     }
 
-// ***************** GUARDA LOS CAMBIOS ++++++++++++++++++++ //
     protected function updateItem(TipocomunidadRequest $request)
     {
         $item = $request->manage();
@@ -73,29 +123,40 @@ class TipocomunidadController extends Controller
         return Redirect::to('listTipocomunidades');
     }
 
-    protected function newItem()
+// ***************** EDITA LOS DATOS MODAL ++++++++++++++++++++ //
+    protected function editItemV2($Id)
     {
-        return view('catalogos.catalogo.domicilio.tc.tc_new',
+        $item = Tipocomunidad::find($Id);
+        $user = Auth::user();
+        return view('SIAC._comun.__modal_comun_1',
             [
-                'editItemTitle' => 'Nuevo',
-                'postNew' => 'createTipocomunidad',
-                'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
-                'titulo_header'   => 'Nuevo registro',
+                'Titulo'      => 'Editando el Item. '.$Id,
+                'Route'       => 'updateTipocomunidadV2',
+                'Method'      => 'POST',
+                'items_forms' => 'SIAC.domicilio.tc.__tc.__tc_edit',
+                'IsNew'       => false,
+                'IsModal'     => true,
+                'items'       => $item,
+                'user'        => $user,
             ]
         );
     }
 
-    // ***************** CREAR NUEVO ++++++++++++++++++++ //
-    protected function createItem(TipocomunidadRequest $request)
-    {
-        $item = $request->manage();
-        if (!isset($item)) {
-            abort(404);
+    protected function updateItemV2(TipocomunidadRequest $request){
+        $Obj = $request->manage();
+        if (!is_object($Obj)) {
+            $id = 0;
+            return redirect('editTipocomunidadV2/'.$request->all(['id']))
+                ->withErrors($Obj)
+                ->withInput();
+        }else{
+            $id = $Obj->id;
         }
-        return Redirect::to('listTipocomunidades');
+        return Response::json(['mensaje' => 'Dato agregado con éxito', 'data' => 'OK', 'status' => '200'], 200);
     }
 
-// ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //
+
+    // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //
     protected function removeItem($id = 0)
     {
         $item = Tipocomunidad::withTrashed()->findOrFail($id);

@@ -25,7 +25,7 @@ class MedidaFilter extends QueryFilter
         $search = strtoupper($search);
         return $query->where(function ($query) use ($search) {
             $query->whereRaw("UPPER(medida) like ?", "%{$search}%")
-//                ->orWhereHas('dependencias', function ($q) use ($search) {
+//                ->orWhereHas('dependencia', function ($q) use ($search) {
 //                    $q->whereRaw("UPPER(dependencia) like ?", "%{$search}%");
 //                })
                 ->orWhere('id', 'like', "%{$search}%");

@@ -69,15 +69,16 @@
                     localStorage.Input += localStorage.Input === "" ? $(this).val() : ","+$(this).val();
                 });
             }
+            var Url = event.currentTarget.href;
 
             // Nombre del Modal Form
             $("#modalFull .modal-content").empty();
-            $("#modalFull .modal-content").html('<div class="fa-2x m-2"><i class="fa fa-cog fa-spin"></i> Cargado datos...</div>');
+            $("#modalFull .modal-content").html('<div class="fa-2x m-2"><i class="fa fa-cog fa-spin"></i>Cargando datos...</div>');
             $("#modalFull").modal('show');
-            var Url = event.currentTarget.href;
+
             $(function () {
                 $.ajax({
-                    method: "get",
+                    method: "GET",
                     url: Url
                 })
                 .done(function (response) {
@@ -143,7 +144,6 @@
             }
 
             var Url = '/'+urlAsigna+'/'+y+'/'+x;
-
 
             var formData = {};
             formData['Id'] = y;
@@ -399,23 +399,4 @@
         "#ciudad, #estado, #municipio, #estatus, #codigo, #cp, #search, #num_ext, #num_int," +
         "#search_autocomplete").keyup(function(){
         $(this).val($(this).val().toUpperCase());
-    });
-
-    var WebSocketServer = require('websocket').server;
-    var WebSocketClient = require('websocket').client;
-    var WebSocketFrame  = require('websocket').frame;
-    var WebSocketRouter = require('websocket').router;
-    var W3CWebSocket = require('websocket').w3cwebsocket;
-
-    // Crea una nueva conexión.
-    const socket = new WebSocket('http://localhost:8000');
-
-    // Abre la conexión
-    socket.addEventListener('open', function (event) {
-        socket.send('Hello Server!');
-    });
-
-    // Escucha por mensajes
-    socket.addEventListener('message', function (event) {
-        console.log('Message from server', event.data);
     });

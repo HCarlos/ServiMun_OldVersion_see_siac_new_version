@@ -8,6 +8,7 @@ use App\Rules\Uppercase;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Classes\MessageAlertClass;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class StatuRequest extends FormRequest
 {
@@ -20,15 +21,19 @@ class StatuRequest extends FormRequest
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
+
+    public function validationData(){
+        $attributes = parent::all();
+        $attributes['estatus'] = strtoupper(trim($attributes['estatus']));
+        $this->replace($attributes);
+        return parent::all();
+    }
+
     public function rules()
     {
         return [
             'estatus' => ['required','min:3',new Uppercase,'unique:estatus,estatus,'.$this->id],
+            'dependencia_id' => ['present','not_in:0','gt:0'],
         ];
     }
 
@@ -37,6 +42,8 @@ class StatuRequest extends FormRequest
         return [
             'estatus.required' => 'El :attribute requiere por lo menos de 3 caracter',
             'estatus.unique' => 'El :attribute ya existe',
+            'dependencia_id.not_in' => 'Indique una :attribute',
+            'dependencia_id.gt' => 'El valor de :attribute debe ser mayor a CERO.',
         ];
     }
 
@@ -44,6 +51,7 @@ class StatuRequest extends FormRequest
     {
         return [
             'estatus' => 'Estatus',
+            'dependencia_id' => 'Dependencia',
         ];
     }
 
@@ -83,7 +91,7 @@ class StatuRequest extends FormRequest
             }
         }catch (QueryException $e){
             $Msg = new MessageAlertClass();
-            return $Msg->Message($e);
+            throw new HttpResponseException(response()->json( $Msg->Message($e), 422));
         }
         return $item;
     }

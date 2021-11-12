@@ -8,6 +8,7 @@ use App\Rules\Uppercase;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Classes\MessageAlertClass;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class CalleRequest extends FormRequest
 {
@@ -22,13 +23,14 @@ class CalleRequest extends FormRequest
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-    public function rules()
-    {
+    public function validationData(){
+        $attributes = parent::all();
+        $attributes['calle'] = strtoupper(trim($attributes['calle']));
+        $this->replace($attributes);
+        return parent::all();
+    }
+
+    public function rules(){
         return [
             'calle' => ['required','min:2',new Uppercase,'unique:calles,calle,'.$this->id],
         ];
@@ -67,7 +69,7 @@ class CalleRequest extends FormRequest
             }
         }catch (QueryException $e){
             $Msg = new MessageAlertClass();
-            return $Msg->Message($e);
+            throw new HttpResponseException(response()->json( $Msg->Message($e), 422));
         }
         return $item;
     }

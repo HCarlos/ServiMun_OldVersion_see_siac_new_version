@@ -6,6 +6,9 @@ use App\Classes\FiltersRules;
 use App\Classes\Items;
 use App\Http\Controllers\Funciones\FuncionesController;
 use App\Models\Catalogos\Dependencia;
+use App\Models\Catalogos\Domicilios\Calle;
+use App\Models\Catalogos\Domicilios\Codigopostal;
+use App\Models\Catalogos\Domicilios\Colonia;
 use App\Models\Catalogos\Domicilios\Comunidad;
 use App\Models\Catalogos\Domicilios\Ubicacion;
 use App\Models\Catalogos\Estatu;
@@ -54,7 +57,7 @@ class DenunciaController extends Controller
          IF ($IsEnlace){
              $DependenciaArray = Auth::user()->DependenciaArray;
              //dd( $DependenciaArray );
-             $filters['dependencias'] = $DependenciaArray;
+             $filters['dependencia'] = $DependenciaArray;
          }elseif (Auth::user()->isRole('CIUDADANO|DELEGADO')){
             $filters['ciudadano_id'] = Auth::user()->id;
          }else{
@@ -104,9 +107,8 @@ class DenunciaController extends Controller
         );
     }
 
-// ***************** EDITA LOS DATOS  ++++++++++++++++++++ //
-    protected function editItemV2($Id)
-    {
+    protected function editItem($Id){
+
         $item         = Denuncia::find($Id);
         $Prioridades  = Prioridad::all()->sortBy('prioridad');
         $Origenes     = Origen::all()->sortBy('origen');
@@ -115,58 +117,7 @@ class DenunciaController extends Controller
         if($IsEnlace){
             $DependenciaArray = explode('|',Session::get('DependenciaArray'));
             $Dependencias = Dependencia::all()->whereIn('dependencia',$DependenciaArray,true)->sortBy('dependencia');
-            $Ciudadanos   = User::query()->whereHas('dependencias',function ($r) use ($DependenciaArray) {
-                                return $r->whereIn('dependencia',$DependenciaArray);
-                            })->get()->sortBy(function ($q){
-                                return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
-                            });
-
-        }else{
-            $Dependencias = Dependencia::all()->sortBy('dependencia');
-            $Ciudadanos   = User::all()->sortBy(function ($q){
-                return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
-            });
-        }
-
-        $Servicios = Servicio::getQueryServiciosFromDependencias($item->dependencia_id);
-        $Estatus      = Estatu::all()->sortBy('estatus');
-        $this->msg = "";
-        $tabs[] = array('tab'=>'denuncia','active'=>'active','caption'=>'Denuncia','Method'=>'POST','Route'=>'updateDenuncia','items_forms'=>'SIAC.denuncia.denuncia.__denuncia.__denuncia_edit');
-        //$tabs[] = array('tab'=>'domicilio','active'=>'','caption'=>'Domicilio','Method'=>'POST','Route'=>'updateUbicacion','items_forms'=>'shared.catalogo.domicilio.ubicacion.__ubicacion_edit');
-        //$tabs[] = array('tab'=>'usuario','active'=>'','caption'=>'Usuario','Method'=>'POST','Route'=>'EditUser','items_forms'=>'shared.catalogo.user.__user_edit');
-        $tabs = json_decode(json_encode($tabs));
-        //dd( $tabs );
-        return view('SIAC.denuncia.denuncia.denuncia_edit',
-            [
-                'user'            => Auth::user(),
-                'prioridades'     => $Prioridades,
-                'origenes'        => $Origenes,
-                'dependencias'    => $Dependencias,
-                'servicios'       => $Servicios,
-                'ciudadanos'      => $Ciudadanos,
-                'estatus'         => $Estatus,
-                'items'           => $item,
-                'editItemTitle'   => isset($item->denuncia) ? $item->denuncia : 'Nuevo',
-                'putEdit'         => 'updateDenuncia',
-                'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
-                'titulo_header'   => 'Editando el Folio '.$Id,
-                'msg'             => $this->msg,
-                'tabs'            => $tabs,
-            ]
-        );
-    }
-
-    protected function editItem($Id)
-    {
-        $item         = Denuncia::find($Id);
-        $Prioridades  = Prioridad::all()->sortBy('prioridad');
-        $Origenes     = Origen::all()->sortBy('origen');
-
-        $IsEnlace = Session::get('IsEnlace');
-        if($IsEnlace){
-            $DependenciaArray = explode('|',Session::get('DependenciaArray'));
-            $Dependencias = Dependencia::all()->whereIn('dependencia',$DependenciaArray,true)->sortBy('dependencia');
-            $Ciudadanos   = User::query()->whereHas('dependencias',function ($r) use ($DependenciaArray) {
+            $Ciudadanos   = User::query()->whereHas('dependencia',function ($r) use ($DependenciaArray) {
                 return $r->whereIn('dependencia',$DependenciaArray);
             })->get()->sortBy(function ($q){
                 return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
@@ -187,7 +138,7 @@ class DenunciaController extends Controller
                 'user'            => Auth::user(),
                 'prioridades'     => $Prioridades,
                 'origenes'        => $Origenes,
-                'dependencias'    => $Dependencias,
+                'dependencia'    => $Dependencias,
                 'servicios'       => $Servicios,
                 'ciudadanos'      => $Ciudadanos,
                 'estatus'         => $Estatus,
@@ -201,7 +152,97 @@ class DenunciaController extends Controller
         );
     }
 
+// ***************** EDITA LOS DATOS  ++++++++++++++++++++ //
+    protected function editItemV2($Id){
 
+        // BUSCAMOS LA DENUNCIA CIUDADANA
+
+        $item         = Denuncia::find($Id);
+        $Prioridades  = Prioridad::all()->sortBy('prioridad');
+        $Origenes     = Origen::all()->sortBy('origen');
+
+        $IsEnlace = Session::get('IsEnlace');
+        if($IsEnlace){
+            $DependenciaArray = explode('|',Session::get('DependenciaArray'));
+            $Dependencias = Dependencia::all()->whereIn('dependencia',$DependenciaArray,true)->sortBy('dependencia');
+            $Ciudadanos   = User::query()->whereHas('dependencia',function ($r) use ($DependenciaArray) {
+                return $r->whereIn('dependencia',$DependenciaArray);
+            })->get()->sortBy(function ($q){
+                return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
+            });
+
+        }else{
+            $Dependencias = Dependencia::all()->sortBy('dependencia');
+            $Ciudadanos   = User::all()->sortBy(function ($q){
+                return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
+            });
+        }
+
+        $Servicios = Servicio::getQueryServiciosFromDependencias($item->dependencia_id);
+        $Estatus      = Estatu::all()->sortBy('estatus');
+
+        $this->msg = "";
+
+        $itemsDen = [
+            'prioridades'     => $Prioridades,
+            'origenes'        => $Origenes,
+            'dependencia'    => $Dependencias,
+            'servicios'       => $Servicios,
+            'ciudadanos'      => $Ciudadanos,
+            'estatus'         => $Estatus,
+            'items'           => $item,
+            'editItemTitle'   => isset($item->denuncia) ? $item->denuncia : 'Nuevo',
+            'putEdit'         => 'updateDenuncia',
+        ];
+        $tabs[] = ['tab'=>'denuncia','active'=>'active','caption'=>'Denuncia','Method'=>'POST','Route'=>'updateDenuncia','items_forms'=>'SIAC.denuncia.denuncia.__denuncia.__denuncia_edit','tabIndex'=>0,'params'=>$itemsDen];
+
+        // PREPARAMOS SU DOMICILIO
+
+        $itemUbi         = Ubicacion::find($item->ubicacion_id);
+        $Calles          = Calle::all()->sortBy('calle')->pluck('calle','id');
+        $Colonias        = Colonia::all()->sortBy('colonia')->pluck('colonia','id');
+        $Comunidades     = Comunidad::all()->sortBy('comunidad')->pluck('comunidad','id');
+        $Codigospostales = Codigopostal::all()->sortBy('cp')->pluck('cp','id');
+
+        $itemsDom = [
+            'calles'          => $Calles,
+            'colonias'        => $Colonias,
+            'comunidades'     => $Comunidades,
+            'codigospostales' => $Codigospostales,
+            'items'           => $itemUbi,
+            'putEdit'         => 'updateUbicacion',
+        ];
+        $tabs[] = array('tab'=>'domicilio','active'=>'','caption'=>'Domicilio','Method'=>'POST','Route'=>'updateUbicacionV2','items_forms'=>'shared.catalogo.domicilio.ubicacion.__ubicacion_edit','tabIndex'=>1,'params'=>$itemsDom);
+
+        // PREPARAMOS LOS DATOS DEL CIUDADANO QUE LA INTERPONE
+
+        $itemCiu       = User::find($item->ciudadano_id);
+        $itemCiudadano = ['items' => $itemCiu,];
+        $tabs[]        = array('tab'=>'usuario','active'=>'','caption'=>'Usuario','Method'=>'POST','Route'=>'updateUserV2','items_forms'=>'shared.catalogo.user.__user_edit','tabIndex'=>2,'params'=>$itemCiudadano);
+
+        $tabs = json_decode(json_encode($tabs));
+        foreach( $tabs as $tab){
+            if ($tab->tabIndex == 0) {
+                $tab->params = $itemsDen;
+            }elseif($tab->tabIndex == 1){
+                $tab->params = $itemsDom;
+            }elseif($tab->tabIndex == 2){
+                $tab->params = $itemCiudadano;
+            }
+        }
+
+        // dd( $tabs );
+
+        return view('SIAC.denuncia.denuncia.denuncia_edit',
+            [
+                'user'            => Auth::user(),
+                'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Editando el Folio '.$Id,
+                'msg'             => $this->msg,
+                'tabs'            => $tabs,
+            ]
+        );
+    }
 
 // ***************** GUARDA LOS CAMBIOS ++++++++++++++++++++ //
     protected function updateItem(DenunciaRequest $request)
@@ -227,7 +268,7 @@ class DenunciaController extends Controller
         if($IsEnlace){
             $DependenciaArray = explode('|',Session::get('DependenciaArray'));
             $Dependencias = Dependencia::all()->whereIn('dependencia',$DependenciaArray,true)->sortBy('dependencia');
-            $Ciudadanos   = User::query()->whereHas('dependencias',function ($r) use ($DependenciaArray) {
+            $Ciudadanos   = User::query()->whereHas('dependencia',function ($r) use ($DependenciaArray) {
                 return $r->whereIn('dependencia',$DependenciaArray);
             })->get()->sortBy(function ($q){
                 return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
@@ -248,7 +289,7 @@ class DenunciaController extends Controller
                 'editItemTitle'   => 'Nuevo',
                 'prioridades'     => $Prioridades,
                 'origenes'        => $Origenes,
-                'dependencias'    => $Dependencias,
+                'dependencia'    => $Dependencias,
                 'ciudadanos'      => $Ciudadanos,
                 'estatus'         => $Estatus,
                 'postNew'         => 'createDenuncia',
@@ -330,10 +371,10 @@ class DenunciaController extends Controller
         return view ('denuncia.search.denuncia_search_panel',
             [
                 'findDataInDenuncia' => 'findDataInDenuncia',
-                'dependencias'       => $Dependencias,
+                'dependencia'       => $Dependencias,
                 'servicios'          => $Servicios,
                 'estatus'            => $Estatus,
-                'items' => $user,
+                'items'              => $user,
             ]
         );
     }

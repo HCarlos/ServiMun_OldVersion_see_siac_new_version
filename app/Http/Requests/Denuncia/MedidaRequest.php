@@ -7,6 +7,7 @@ use App\Rules\Uppercase;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Classes\MessageAlertClass;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class MedidaRequest extends FormRequest
 {
@@ -19,11 +20,14 @@ class MedidaRequest extends FormRequest
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
+
+    public function validationData(){
+        $attributes = parent::all();
+        $attributes['medida'] = strtoupper(trim($attributes['medida']));
+        $this->replace($attributes);
+        return parent::all();
+    }
+
     public function rules()
     {
         return [
@@ -63,7 +67,7 @@ class MedidaRequest extends FormRequest
             }
         }catch (QueryException $e){
             $Msg = new MessageAlertClass();
-            return $Msg->Message($e);
+            throw new HttpResponseException(response()->json( $Msg->Message($e), 422));
         }
         return $item;
     }
@@ -77,8 +81,8 @@ class MedidaRequest extends FormRequest
             return $url->route('newMedida');
         }
     }
-    
-    
-    
-    
+
+
+
+
 }

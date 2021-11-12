@@ -9,13 +9,17 @@
         </select>
     </div>
     <div class="col-md-2">
-        <a href="{{route("newCalle")}}" target="_blank" class="btn btn-icon btn-info " > <i class="mdi mdi-plus"></i></a>
+{{--        <a href="{{route("newCalle")}}" target="_blank" class="btn btn-icon btn-info " > <i class="mdi mdi-plus"></i></a>--}}
+                <a href="{{ route("newCalleV2") }}" id="{{ route("newCalleV2") }}" class="btn btn-icon btn-info btnFullModal" data-toggle="modal" data-target="#modalFull" title="Agregar Calle" >
+                    <i class="mdi mdi-plus"></i>
+                </a>
+
     </div>
 </div>
 <div class="form-group row mb-1">
-    <label for = "num_ext" class="col-md-3 col-form-label">Núm. Exterior</label>
+    <label for = "num_ext" class="col-md-3 col-form-label {{$errors->has('num_ext')?'text-danger':''}}">Núm. Exterior</label>
     <div class="col-md-7">
-        <input type="text" name="num_ext" id="num_ext" value="{{ old('num_ext') }}" class="form-control" />
+        <input type="text" name="num_ext" id="num_ext" value="{{ old('num_ext') }}" class="form-control {{$errors->has('num_ext')?'has-error form-error':''}}" />
     </div>
 </div>
 <div class="form-group row mb-1">

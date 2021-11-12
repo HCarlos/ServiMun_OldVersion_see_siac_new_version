@@ -33,22 +33,85 @@ class ServicioController extends Controller
 
         return view('catalogos.catalogo.servicio.servicio_list',
             [
-                'items' => $items,
+                'items'           => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
                 'titulo_header'   => '',
-                'user' => $user,
-                'searchInList' => 'listServicios',
-                'newWindow' => true,
-                'tableName' => $this->tableName,
-                'showEdit' => 'editServicio',
-//                'putEdit' => 'updateServicio',
-                'newItem' => 'newServicio',
-                'removeItem' => 'removeServicio',
-//                'showProcess1' => 'showFileListUserExcel1A',
-                'exportModel' => 2,
+                'user'            => $user,
+                'searchInList'    => 'listServicios',
+                'newWindow'       => true,
+                'tableName'       => $this->tableName,
+                'showEdit'        => 'editServicioV2',
+                'newItem'         => 'newServicioV2',
+                'removeItem'      => 'removeServicio',
+                'IsModal'         => true,
+                'exportModel'     => 2,
             ]
         );
     }
+
+
+    // ***************** CREAR NUEVO ++++++++++++++++++++ //
+    protected function newItem()
+    {
+        $medidas = Medida::all(['id','medida'])->sortBy('medida');
+        $subareas = Subarea::all()->sortBy('subarea');
+        return view('catalogos.catalogo.servicio.servicio_new',
+            [
+                'editItemTitle' => 'Nuevo',
+                'postNew' => 'createServicio',
+                'medidas' => $medidas,
+                'subareas' => $subareas,
+                'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Nuevo registro',
+            ]
+        );
+    }
+
+    protected function createItem(ServicioRequest $request)
+    {
+        $item = $request->manage();
+        if (!isset($item)) {
+            abort(404);
+        }
+        return Redirect::to('listServicios');
+    }
+
+
+    // ***************** CREAR NUEVO MODAL ++++++++++++++++++++ //
+    protected function newItemV2()
+    {
+        $medidas = Medida::all(['id','medida'])->sortBy('medida');
+        $subareas = Subarea::all()->sortBy('subarea');
+        $user = Auth::user();
+        return view('SIAC.estructura.servicio.servicio_modal',
+            [
+                'Titulo'      => 'Nuevo',
+                'Route'       => 'createServicioV2',
+                'Method'      => 'POST',
+                'items_forms' => 'SIAC.estructura.servicio.__servicio.__servicio_new',
+                'IsNew'       => true,
+                'user'        => $user,
+                'medidas'     => $medidas,
+                'subareas'    => $subareas,
+            ]
+        );
+    }
+
+    protected function createItemV2(ServicioRequest $request)
+    {
+        $Obj = $request->manage();
+        if (!is_object($Obj)) {
+            $id = 0;
+            return redirect('newServicioV2')
+                ->withErrors($Obj)
+                ->withInput();
+        }else{
+            $id = $Obj->id;
+        }
+        return Response::json(['mensaje' => 'Dato agregado con éxito', 'data' => 'OK', 'status' => '200'], 200);
+    }
+
+
 
 // ***************** EDITA LOS DATOS  ++++++++++++++++++++ //
     protected function editItem($Id)
@@ -71,7 +134,6 @@ class ServicioController extends Controller
         );
     }
 
-// ***************** GUARDA LOS CAMBIOS ++++++++++++++++++++ //
     protected function updateItem(ServicioRequest $request)
     {
         $item = $request->manage();
@@ -81,31 +143,44 @@ class ServicioController extends Controller
         return Redirect::to('listServicios');
     }
 
-    protected function newItem()
+
+// ***************** EDITA LOS DATOS  ++++++++++++++++++++ //
+    protected function editItemV2($Id)
     {
+        $item = Servicio::find($Id);
         $medidas = Medida::all(['id','medida'])->sortBy('medida');
         $subareas = Subarea::all()->sortBy('subarea');
-        return view('catalogos.catalogo.servicio.servicio_new',
+        $user = Auth::user();
+        return view('SIAC.estructura.servicio.servicio_modal',
             [
-                'editItemTitle' => 'Nuevo',
-                'postNew' => 'createServicio',
-                'medidas' => $medidas,
-                'subareas' => $subareas,
-                'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
-                'titulo_header'   => 'Nuevo registro',
+                'Titulo'      => isset($item->prioridad) ? $item->prioridad : 'Nuevo',
+                'Route'       => 'updateServicioV2',
+                'Method'      => 'POST',
+                'items'       => $item,
+                'items_forms' => 'SIAC.estructura.servicio.__servicio.__servicio_edit',
+                'IsNew'       => false,
+                'IsModal'     => true,
+                'user'        => $user,
+                'medidas'     => $medidas,
+                'subareas'    => $subareas,
             ]
         );
     }
 
-    // ***************** CREAR NUEVO ++++++++++++++++++++ //
-    protected function createItem(ServicioRequest $request)
+    protected function updateItemV2(ServicioRequest $request)
     {
-        $item = $request->manage();
-        if (!isset($item)) {
-            abort(404);
+        $Obj = $request->manage();
+        if (!is_object($Obj)) {
+            $id = 0;
+            return redirect('editServicioV2')
+                ->withErrors($Obj)
+                ->withInput();
+        }else{
+            $id = $Obj->id;
         }
-        return Redirect::to('listServicios');
+        return Response::json(['mensaje' => 'Dato agregado con éxito', 'data' => 'OK', 'status' => '200'], 200);
     }
+
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //
     protected function removeItem($id = 0)

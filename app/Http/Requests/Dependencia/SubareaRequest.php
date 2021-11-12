@@ -6,6 +6,7 @@ use App\Models\Catalogos\Subarea;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Classes\MessageAlertClass;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class SubareaRequest extends FormRequest
 {
@@ -18,11 +19,14 @@ class SubareaRequest extends FormRequest
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
+
+    public function validationData(){
+        $attributes = parent::all();
+        $attributes['subarea'] = strtoupper(trim($attributes['subarea']));
+        $this->replace($attributes);
+        return parent::all();
+    }
+
     public function rules()
     {
         return [
@@ -68,12 +72,11 @@ class SubareaRequest extends FormRequest
                 $item->areas()->attach($this->area_id);
                 $item->jefes()->attach($this->jefe_id);
 
-//                $item->update($Item);
+                $item->update($Item);
             }
         }catch (QueryException $e){
             $Msg = new MessageAlertClass();
-//            dd($Msg->Message($e));
-            return $Msg->Message($e);
+            throw new HttpResponseException(response()->json( $Msg->Message($e), 422));
         }
 //        dd($item);
         return $item;

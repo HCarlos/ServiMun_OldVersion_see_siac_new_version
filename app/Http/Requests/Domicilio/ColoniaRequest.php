@@ -39,16 +39,16 @@ class ColoniaRequest extends FormRequest
 
         try {
 
-            $CPs = Codigopostal::findOrFail($this->codigopostal_id);
+            $CPs       = Codigopostal::findOrFail($this->codigopostal_id);
             $Comunidad = Comunidad::findOrFail($this->comunidad_id);
             $Item = [
-                'colonia' => strtoupper($this->colonia),
-                'altitud' => $this->altitud ?? null,
-                'latitud' => $this->latitud ?? null,
-                'longitud' => $this->longitud ?? null,
-                'codigopostal_id' => $this->codigopostal_id,
-                'cp' => $CPs->cp,
-                'comunidad_id' => $this->comunidad_id,
+                'colonia'          => strtoupper($this->colonia),
+                'altitud'          => $this->altitud ?? null,
+                'latitud'          => $this->latitud ?? null,
+                'longitud'         => $this->longitud ?? null,
+                'codigopostal_id'  => $this->codigopostal_id,
+                'cp'               => $CPs->cp,
+                'comunidad_id'     => $this->comunidad_id,
                 'tipocomunidad_id' => $Comunidad->tipocomunidad_id,
             ];
 

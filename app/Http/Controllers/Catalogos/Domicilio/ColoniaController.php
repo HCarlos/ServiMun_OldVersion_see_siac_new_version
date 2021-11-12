@@ -32,18 +32,16 @@ class ColoniaController extends Controller
 
         return view('catalogos.catalogo.domicilio.colonia.colonia_list',
             [
-                'items' => $items,
+                'items'           => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
                 'titulo_header'   => ' ',
-                'user' => $user,
-                'searchInList' => 'listColonias',
-                'newWindow' => true,
-                'tableName' => $this->tableName,
-                'showEdit' => 'editColonia',
-//                'putEdit' => 'updateColonia',
-                'newItem' => 'newColonia',
-                'removeItem' => 'removeColonia',
-//                'showProcess1' => 'showFileListUserExcel1A',
+                'user'            => $user,
+                'searchInList'    => 'listColonias',
+                'newWindow'       => true,
+                'tableName'       => $this->tableName,
+                'showEdit'        => 'editColonia',
+                'newItem'         => 'newColonia',
+                'removeItem'      => 'removeColonia',
                 'exportModel' => 11,
             ]
         );
@@ -56,9 +54,9 @@ class ColoniaController extends Controller
         $Codigospostales =Codigopostal::all(['id','cp'])->sortBy('cp');
         $Comunidades = Comunidad::all(['id','comunidad'])->sortBy('comunidad');
 
-        return view('catalogos.catalogo.domicilio.colonia.colonia_edit',
+        return view('SIAC.domicilio.colonia.colonia_edit',
             [
-                'user' => Auth::user(),
+                'user'            => Auth::user(),
                 'codigospostales' => $Codigospostales,
                 'comunidades'     => $Comunidades,
                 'items'           => $item,
@@ -85,7 +83,7 @@ class ColoniaController extends Controller
         $Codigospostales =Codigopostal::all(['id','cp'])->sortBy('cp');
         $Comunidades = Comunidad::all(['id','comunidad'])->sortBy('comunidad');
         //dd($Codigospostales);
-        return view('catalogos.catalogo.domicilio.colonia.colonia_new',
+        return view('SIAC.domicilio.colonia.colonia_new',
             [
                 'editItemTitle'   => 'Nuevo',
                 'codigospostales' => $Codigospostales,
@@ -98,8 +96,7 @@ class ColoniaController extends Controller
     }
 
     // ***************** CREAR NUEVO ++++++++++++++++++++ //
-    protected function createItem(ColoniaRequest $request)
-    {
+    protected function createItem(ColoniaRequest $request){
         //dd($request);
         $item = $request->manage();
 //        dd($item);

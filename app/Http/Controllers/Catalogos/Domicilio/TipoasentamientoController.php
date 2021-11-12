@@ -30,21 +30,72 @@ class TipoasentamientoController extends Controller
 
         return view('catalogos.catalogo.domicilio.ta.ta_list',
             [
-                'items' => $items,
+                'items'           => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
                 'titulo_header'   => '',
-                'user' => $user,
-                'searchInList' => 'listTipoasentamientos',
-                'newWindow' => true,
-                'tableName' => $this->tableName,
-                'showEdit' => 'editTipoasentamiento',
-//                'putEdit' => 'updateTipoasentamiento',
-                'newItem' => 'newTipoasentamiento',
-                'removeItem' => 'removeTipoasentamiento',
-//                'showProcess1' => 'showFileListUserExcel1A',
-                'exportModel' => 16,
+                'user'            => $user,
+                'searchInList'    => 'listTipoasentamientos',
+                'newWindow'       => true,
+                'tableName'       => $this->tableName,
+                'showEdit'        => 'editTipoasentamientoV2',
+                'newItem'         => 'newTipoasentamientoV2',
+                'removeItem'      => 'removeTipoasentamiento',
+                'IsModal'         => true,
+                'exportModel'     => 16,
             ]
         );
+    }
+
+    // ***************** CREAR NUEVO ++++++++++++++++++++ //
+    protected function newItem()
+    {
+        return view('catalogos.catalogo.domicilio.ta.ta_new',
+            [
+                'editItemTitle' => 'Nuevo',
+                'postNew' => 'createTipoasentamiento',
+                'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Nuevo registro',
+            ]
+        );
+    }
+
+    protected function createItem(TipoasentamientoRequest $request)
+    {
+        $item = $request->manage();
+        if (!isset($item)) {
+            abort(404);
+        }
+        return Redirect::to('listTipoasentamientos');
+    }
+
+    // ***************** CREAR NUEVO MODAL++++++++++++++++++++ //
+    protected function newItemV2()
+    {
+        $user = Auth::user();
+        return view('SIAC._comun.__modal_comun_1',
+            [
+                'Titulo'      => 'Nuevo',
+                'Route'       => 'createTipoasentamientoV2',
+                'Method'      => 'POST',
+                'items_forms' => 'SIAC.domicilio.ta.__ta.__ta_new',
+                'IsNew'       => true,
+                'user'        => $user,
+            ]
+        );
+    }
+
+    protected function createItemV2(TipoasentamientoRequest $request)
+    {
+        $Obj = $request->manage();
+        if (!is_object($Obj)) {
+            $id = 0;
+            return redirect('newTipoasentamientoV2')
+                ->withErrors($Obj)
+                ->withInput();
+        }else{
+            $id = $Obj->id;
+        }
+        return Response::json(['mensaje' => 'Dato agregado con éxito', 'data' => 'OK', 'status' => '200'], 200);
     }
 
 // ***************** EDITA LOS DATOS  ++++++++++++++++++++ //
@@ -63,7 +114,6 @@ class TipoasentamientoController extends Controller
         );
     }
 
-// ***************** GUARDA LOS CAMBIOS ++++++++++++++++++++ //
     protected function updateItem(TipoasentamientoRequest $request)
     {
         $item = $request->manage();
@@ -73,26 +123,37 @@ class TipoasentamientoController extends Controller
         return Redirect::to('listTipoasentamientos');
     }
 
-    protected function newItem()
+// ***************** EDITA LOS DATOS  MODAL ++++++++++++++++++++ //
+    protected function editItemV2($Id)
     {
-        return view('catalogos.catalogo.domicilio.ta.ta_new',
+        $item = Tipoasentamiento::find($Id);
+        $user = Auth::user();
+        return view('SIAC._comun.__modal_comun_1',
             [
-                'editItemTitle' => 'Nuevo',
-                'postNew' => 'createTipoasentamiento',
-                'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
-                'titulo_header'   => 'Nuevo registro',
+                'Titulo'      => 'Editando el Item. '.$Id,
+                'Route'       => 'updateTipoasentamientoV2',
+                'Method'      => 'POST',
+                'items_forms' => 'SIAC.domicilio.ta.__ta.__ta_edit',
+                'IsNew'       => false,
+                'IsModal'     => true,
+                'items'       => $item,
+                'user'        => $user,
             ]
         );
     }
 
-    // ***************** CREAR NUEVO ++++++++++++++++++++ //
-    protected function createItem(TipoasentamientoRequest $request)
+    protected function updateItemV2(TipoasentamientoRequest $request)
     {
-        $item = $request->manage();
-        if (!isset($item)) {
-            abort(404);
+        $Obj = $request->manage();
+        if (!is_object($Obj)) {
+            $id = 0;
+            return redirect('editTipoasentamientoV2/'.$request->all(['id']))
+                ->withErrors($Obj)
+                ->withInput();
+        }else{
+            $id = $Obj->id;
         }
-        return Redirect::to('listTipoasentamientos');
+        return Response::json(['mensaje' => 'Dato agregado con éxito', 'data' => 'OK', 'status' => '200'], 200);
     }
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //

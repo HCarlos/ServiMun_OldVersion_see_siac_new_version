@@ -33,19 +33,73 @@ class OrigenController extends Controller
                 'items' => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
                 'titulo_header'   => '',
-                'user' => $user,
-                'searchInList' => 'listOrigenes',
-                'newWindow' => true,
-                'tableName' => $this->tableName,
-                'showEdit' => 'editOrigen',
-//                'putEdit' => 'updateOrigen',
-                'newItem' => 'newOrigen',
-                'removeItem' => 'removeOrigen',
-//                'showProcess1' => 'showFileListUserExcel1A',
-                'exportModel' => 26,
+                'user'            => $user,
+                'searchInList'    => 'listOrigenes',
+                'newWindow'       => true,
+                'tableName'       => $this->tableName,
+                'showEdit'        => 'editOrigenV2',
+                'newItem'         => 'newOrigenV2',
+                'removeItem'      => 'removeOrigen',
+                'IsModal'         => true,
+                'exportModel'     => 26,
             ]
         );
     }
+
+
+    // ***************** CREAR NUEVO ++++++++++++++++++++ //
+    protected function newItem()
+    {
+        return view('catalogos.catalogo.origen.origen_new',
+            [
+                'editItemTitle' => 'Nuevo',
+                'postNew' => 'createOrigen',
+                'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Nuevo registro',
+            ]
+        );
+    }
+
+    protected function createItem(OrigenRequest $request)
+    {
+        $item = $request->manage();
+        if (!isset($item)) {
+            abort(404);
+        }
+        return Redirect::to('listOrigenes');
+    }
+
+    // ***************** CREAR NUEVO MODAL ++++++++++++++++++++ //
+    protected function newItemV2()
+    {
+        $user = Auth::user();
+        return view('SIAC._comun.__modal_comun_1',
+            [
+                'Titulo'      => 'Nuevo',
+                'Route'       => 'createOrigenV2',
+                'Method'      => 'POST',
+                'items_forms' => 'SIAC.estructura.origen.__origen.__origen_new',
+                'IsNew'       => true,
+                'user'        => $user,
+
+            ]
+        );
+    }
+
+    protected function createItemV2(OrigenRequest $request)
+    {
+        $Obj = $request->manage();
+        if (!is_object($Obj)) {
+            $id = 0;
+            return redirect('newOrigenV2')
+                ->withErrors($Obj)
+                ->withInput();
+        }else{
+            $id = $Obj->id;
+        }
+        return Response::json(['mensaje' => 'Dato agregado con éxito', 'data' => 'OK', 'status' => '200'], 200);
+    }
+
 
 // ***************** EDITA LOS DATOS  ++++++++++++++++++++ //
     protected function editItem($Id)
@@ -63,7 +117,6 @@ class OrigenController extends Controller
         );
     }
 
-// ***************** GUARDA LOS CAMBIOS ++++++++++++++++++++ //
     protected function updateItem(OrigenRequest $request)
     {
         $item = $request->manage();
@@ -73,27 +126,41 @@ class OrigenController extends Controller
         return Redirect::to('listOrigenes');
     }
 
-    protected function newItem()
+
+// ***************** EDITA LOS DATOS  ++++++++++++++++++++ //
+    protected function editItemV2($Id)
     {
-        return view('catalogos.catalogo.origen.origen_new',
+        $item = Origen::find($Id);
+        $user = Auth::user();
+        return view('SIAC._comun.__modal_comun_1',
             [
-                'editItemTitle' => 'Nuevo',
-                'postNew' => 'createOrigen',
-                'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
-                'titulo_header'   => 'Nuevo registro',
+                'Titulo'      => 'Nuevo',
+                'Route'       => 'updateOrigenV2',
+                'Method'      => 'POST',
+                'items'       => $item,
+                'items_forms' => 'SIAC.estructura.origen.__origen.__origen_edit',
+                'IsNew'       => false,
+                'IsModal'     => true,
+                'user'        => $user,
+
             ]
         );
     }
 
-    // ***************** CREAR NUEVO ++++++++++++++++++++ //
-    protected function createItem(OrigenRequest $request)
+    protected function updateItemV2(OrigenRequest $request)
     {
-        $item = $request->manage();
-        if (!isset($item)) {
-            abort(404);
+        $Obj = $request->manage();
+        if (!is_object($Obj)) {
+            $id = 0;
+            return redirect('editOrigenV2')
+                ->withErrors($Obj)
+                ->withInput();
+        }else{
+            $id = $Obj->id;
         }
-        return Redirect::to('listOrigenes');
+        return Response::json(['mensaje' => 'Dato agregado con éxito', 'data' => 'OK', 'status' => '200'], 200);
     }
+
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //
     protected function removeItem($id = 0)

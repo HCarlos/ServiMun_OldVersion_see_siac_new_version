@@ -29,21 +29,77 @@ class MedidaController extends Controller
 
         return view('catalogos.catalogo.medida.medida_list',
             [
-                'items' => $items,
+                'items'           => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
                 'titulo_header'   => '',
-                'user' => $user,
-                'searchInList' => 'listMedidas',
-                'newWindow' => true,
-                'tableName' => $this->tableName,
-                'showEdit' => 'editMedida',
-//                'putEdit' => 'updateMedida',
-                'newItem' => 'newMedida',
-                'removeItem' => 'removeMedida',
-//                'showProcess1' => 'showFileListUserExcel1A',
-                'exportModel' => 25,
+                'user'            => $user,
+                'searchInList'    => 'listMedidas',
+                'newWindow'       => true,
+                'tableName'       => $this->tableName,
+                'showEdit'        => 'editMedidaV2',
+                'newItem'         => 'newMedidaV2',
+                'removeItem'      => 'removeMedida',
+                'IsModal'         => true,
+                'exportModel'     => 25,
             ]
         );
+    }
+
+
+
+    // ***************** CREAR NUEVO ++++++++++++++++++++ //
+    protected function newItem()
+    {
+        return view('catalogos.catalogo.medida.medida_new',
+            [
+                'editItemTitle' => 'Nuevo',
+                'postNew' => 'createMedida',
+                'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Nuevo registro',
+            ]
+        );
+    }
+
+    protected function createItem(MedidaRequest $request)
+    {
+        $item = $request->manage();
+        if (!isset($item)) {
+            abort(404);
+        }
+        return Redirect::to('listMedidas');
+    }
+
+
+    // ***************** CREAR NUEVO MODAL ++++++++++++++++++++ //
+    protected function newItemV2()
+    {
+        $user = Auth::user();
+        return view('SIAC._comun.__modal_comun_1',
+            [
+                'Titulo'      => 'Nuevo',
+                'Route'       => 'createMedidaV2',
+                'Method'      => 'POST',
+                'items_forms' => 'SIAC.estructura.medida.__medida.__medida_new',
+                'IsNew'       => true,
+                'user'        => $user,
+
+            ]
+        );
+
+    }
+
+    protected function createItemV2(MedidaRequest $request)
+    {
+        $Obj = $request->manage();
+        if (!is_object($Obj)) {
+            $id = 0;
+            return redirect('newMedidaV2')
+                ->withErrors($Obj)
+                ->withInput();
+        }else{
+            $id = $Obj->id;
+        }
+        return Response::json(['mensaje' => 'Dato agregado con éxito', 'data' => 'OK', 'status' => '200'], 200);
     }
 
 // ***************** EDITA LOS DATOS  ++++++++++++++++++++ //
@@ -62,7 +118,6 @@ class MedidaController extends Controller
         );
     }
 
-// ***************** GUARDA LOS CAMBIOS ++++++++++++++++++++ //
     protected function updateItem(MedidaRequest $request)
     {
         $item = $request->manage();
@@ -72,27 +127,42 @@ class MedidaController extends Controller
         return Redirect::to('listMedidas');
     }
 
-    protected function newItem()
+// ***************** EDITA LOS DATOS MODAL ++++++++++++++++++++ //
+    protected function editItemV2($Id)
     {
-        return view('catalogos.catalogo.medida.medida_new',
+        $item = Medida::find($Id);
+        $user = Auth::user();
+        return view('SIAC._comun.__modal_comun_1',
             [
-                'editItemTitle' => 'Nuevo',
-                'postNew' => 'createMedida',
-                'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
-                'titulo_header'   => 'Nuevo registro',
+                'Titulo'      => 'Nuevo',
+                'Route'       => 'updateMedidaV2',
+                'Method'      => 'POST',
+                'items'       => $item,
+                'items_forms' => 'SIAC.estructura.medida.__medida.__medida_edit',
+                'IsNew'       => false,
+                'IsModal'     => true,
+                'user'        => $user,
+
             ]
         );
+
     }
 
-    // ***************** CREAR NUEVO ++++++++++++++++++++ //
-    protected function createItem(MedidaRequest $request)
+    protected function updateItemV2(MedidaRequest $request)
     {
-        $item = $request->manage();
-        if (!isset($item)) {
-            abort(404);
+        $Obj = $request->manage();
+        if (!is_object($Obj)) {
+            $id = 0;
+            return redirect('editMedidaV2')
+                ->withErrors($Obj)
+                ->withInput();
+        }else{
+            $id = $Obj->id;
         }
-        return Redirect::to('listMedidas');
+        return Response::json(['mensaje' => 'Dato agregado con éxito', 'data' => 'OK', 'status' => '200'], 200);
     }
+
+
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //
     protected function removeItem($id = 0)

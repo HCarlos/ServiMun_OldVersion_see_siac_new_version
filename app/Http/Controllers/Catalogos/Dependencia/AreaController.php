@@ -31,59 +31,24 @@ class AreaController extends Controller
 
         return view('catalogos.catalogo.dependencias.area.area_list',
             [
-                'items' => $items,
+                'items'           => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
                 'titulo_header'   => ' ',
-                'user' => $user,
-                'searchInList' => 'listAreas',
-                'newWindow' => true,
-                'tableName' => $this->tableName,
-                'showEdit' => 'editArea',
-//                'putEdit' => 'updateArea',
-                'newItem' => 'newArea',
-                'removeItem' => 'removeArea',
-//                'showProcess1' => 'showFileListUserExcel1A',
-                'exportModel' => 4,
+                'user'            => $user,
+                'searchInList'    => 'listAreas',
+                'newWindow'       => true,
+                'tableName'       => $this->tableName,
+                'showEdit'        => 'editAreaV2',
+                'newItem'         => 'newAreaV2',
+                'removeItem'      => 'removeArea',
+                'IsModal'         => true,
+                'exportModel'     => 4,
             ]
         );
     }
 
-// ***************** EDITA LOS DATOS  ++++++++++++++++++++ //
-    protected function editArea($Id)
-    {
-        $item = Area::find($Id);
-        $Jefes = User::all()->sortBy(function($item) {
-            return $item->ap_paterno.' '.$item->ap_materno.' '.$item->nombre;
-        });
-        $Dependencias = Dependencia::select('id','dependencia')
-            ->orderBy('dependencia')
-            ->get();
-
-        return view('catalogos.catalogo.dependencias.area.area_edit',
-            [
-                'user' => Auth::user(),
-                'jefes' => $Jefes,
-                'dependencia' => $Dependencias,
-                'items' => $item,
-                'editItemTitle' => isset($item->dependencia) ? $item->dependencia : 'Nuevo',
-                'putEdit' => 'updateArea',
-                'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
-                'titulo_header'   => 'Editando el Folio '.$Id,
-            ]
-        );
-    }
-
-// ***************** GUARDA LOS CAMBIOS ++++++++++++++++++++ //
-    protected function updateArea(AreaRequest $request)
-    {
-        $item = $request->manage();
-        if (!isset($item)) {
-            abort(404);
-        }
-        return Redirect::to('listAreas');
-    }
-
-    protected function newArea()
+    // ***************** CREAR NUEVO ++++++++++++++++++++ //
+    protected function newItem()
     {
         $Jefes = User::all()->sortBy(function($item) {
             return $item->ap_paterno.' '.$item->ap_materno.' '.$item->nombre;
@@ -103,8 +68,7 @@ class AreaController extends Controller
         );
     }
 
-    // ***************** CREAR NUEVO ++++++++++++++++++++ //
-    protected function createArea(AreaRequest $request)
+    protected function createItem(AreaRequest $request)
     {
         $item = $request->manage();
         if (!isset($item)) {
@@ -113,8 +77,127 @@ class AreaController extends Controller
         return Redirect::to('listAreas');
     }
 
+
+    // ***************** CREAR NUEVO MODAL ++++++++++++++++++++ //
+    protected function newItemV2()
+    {
+        $Jefes = User::all()->sortBy(function($item) {
+            return $item->ap_paterno.' '.$item->ap_materno.' '.$item->nombre;
+        });
+        $Dependencias = Dependencia::select('id','dependencia')
+            ->orderBy('dependencia')
+            ->get();
+        $user = Auth::user();
+        return view('SIAC.dependencia.area.area_modal',
+            [
+                'Titulo'          => 'Nueva',
+                'Route'           => 'createAreaV2',
+                'Method'          => 'POST',
+                'items_forms'     => 'SIAC.dependencia.area.__area.__area_new',
+                'IsNew'           => true,
+                'user'            => $user,
+                'jefes'           => $Jefes,
+                'dependencia'     => $Dependencias,
+            ]
+        );
+
+
+    }
+
+    protected function createItemV2(AreaRequest $request)
+    {
+        $Obj = $request->manage();
+        if (!is_object($Obj)) {
+            $id = 0;
+            return redirect('newAreaV2')
+                ->withErrors($Obj)
+                ->withInput();
+        }else{
+            $id = $Obj->id;
+        }
+        return Response::json(['mensaje' => 'Dato agregado con éxito', 'data' => 'OK', 'status' => '200'], 200);
+    }
+
+// ***************** EDITA LOS DATOS  ++++++++++++++++++++ //
+    protected function editItem($Id)
+    {
+        $item = Area::find($Id);
+        $Jefes = User::all()->sortBy(function($item) {
+            return $item->ap_paterno.' '.$item->ap_materno.' '.$item->nombre;
+        });
+        $Dependencias = Dependencia::select('id','dependencia')
+            ->orderBy('dependencia')
+            ->get();
+
+        return view('catalogos.catalogo.dependencias.area.area_edit',
+            [
+                'user' => Auth::user(),
+                'jefes' => $Jefes,
+                'dependencia' => $Dependencias,
+                'items' => $item,
+                'editItemTitle' => isset($item->area) ? $item->area : 'Nuevo',
+                'putEdit' => 'updateArea',
+                'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Editando el Folio '.$Id,
+            ]
+        );
+    }
+
+    protected function updateItem(AreaRequest $request)
+    {
+        $item = $request->manage();
+        if (!isset($item)) {
+            abort(404);
+        }
+        return Redirect::to('listAreas');
+    }
+
+// ***************** EDITA LOS DATOS MODAL  ++++++++++++++++++++ //
+    protected function editItemV2($Id)
+    {
+        $item = Area::find($Id);
+        $Jefes = User::all()->sortBy(function($item) {
+            return $item->ap_paterno.' '.$item->ap_materno.' '.$item->nombre;
+        });
+        $Dependencias = Dependencia::select('id','dependencia')
+            ->orderBy('dependencia')
+            ->get();
+
+        $user = Auth::user();
+        return view('SIAC.dependencia.area.area_modal',
+            [
+                'Titulo'          => isset($item->area) ? $item->area : 'Nueva',
+                'Route'           => 'updateAreaV2',
+                'Method'          => 'POST',
+                'items_forms'     => 'SIAC.dependencia.area.__area.__area_edit',
+                'IsNew'           => false,
+                'IsModal'         => true,
+                'items'           => $item,
+                'user'            => $user,
+                'jefes'           => $Jefes,
+                'dependencia'     => $Dependencias,
+            ]
+        );
+
+    }
+
+    protected function updateItemV2(AreaRequest $request)
+    {
+        $Obj = $request->manage();
+        if (!is_object($Obj)) {
+            $id = $request->all(['id']);
+            $redirect = 'editAreaV2/' . $id;
+            return redirect($redirect)
+                ->withErrors($Obj)
+                ->withInput();
+        }else{
+            $id = $Obj->id;
+        }
+        return Response::json(['mensaje' => 'Dato agregado con éxito', 'data' => 'OK', 'status' => '200'], 200);
+    }
+
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //
-    protected function removeArea($id = 0)
+    protected function removeItem($id = 0)
     {
         $item = Area::withTrashed()->findOrFail($id);
         if (isset($item)) {

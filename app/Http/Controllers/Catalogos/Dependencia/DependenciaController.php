@@ -6,8 +6,8 @@ use App\Classes\RemoveItemSafe;
 use App\Http\Requests\Dependencia\DependenciaRequest;
 use App\Models\Catalogos\Dependencia;
 use App\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
@@ -34,25 +34,89 @@ class DependenciaController extends Controller
 
         return view('catalogos.catalogo.dependencias.dependencia.dependencia_list',
             [
-                'items' => $items,
+                'items'           => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
                 'titulo_header'   => '',
-                'user' => $user,
-                'searchInList' => 'listDependencias',
-                'newWindow' => true,
-                'tableName' => $this->tableName,
-                'showEdit' => 'editDependencia',
-//                'putEdit' => 'updateDependencia',
-                'newItem' => 'newDependencia',
-                'removeItem' => 'removeDependencia',
-//                'showProcess1' => 'showFileListUserExcel1A',
-                'exportModel' => 3,
+                'user'            => $user,
+                'searchInList'    => 'listDependencias',
+                'newWindow'       => true,
+                'tableName'       => $this->tableName,
+                'showEdit'        => 'editDependenciaV2',
+                'newItem'         => 'newDependenciaV2',
+                'removeItem'      => 'removeDependencia',
+                'IsModal'         => true,
+                'exportModel'     => 3,
             ]
         );
     }
 
+    // ***************** CREAR NUEVO ++++++++++++++++++++ //
+    protected function newItem()
+    {
+        $Jefes = User::all()->sortBy(function($item) {
+            return $item->ap_paterno.' '.$item->ap_materno.' '.$item->nombre;
+        });
+        return view('catalogos.catalogo.dependencias.dependencia.dependencia_new',
+            [
+                'editItemTitle' => 'Nuevo',
+                'jefes' => $Jefes,
+                'postNew' => 'createDependencia',
+                'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Nuevo registro',
+            ]
+        );
+    }
+
+    protected function createItem(Request $request)
+    {
+        dd( $request->all() );
+
+        $item = $request->manage();
+        if (!isset($item)) {
+            abort(404);
+        }
+        return Redirect::to('listDependencias');
+    }
+
+    // ***************** CREAR NUEVO MODAL++++++++++++++++++++ //
+    protected function newItemV2(){
+
+        $Jefes = User::all()->sortBy(function($item) {
+            return $item->ap_paterno.' '.$item->ap_materno.' '.$item->nombre;
+        });
+        $user = Auth::user();
+        return view('SIAC.dependencia.dependencia.dependencia_modal',
+        [
+            'Titulo'          => 'Nueva',
+            'Route'           => 'createDependenciaV2',
+            'Method'          => 'POST',
+            'items_forms'     => 'SIAC.dependencia.dependencia.__dependencia.__dependencia_new',
+            'IsNew'           => true,
+            'user'            => $user,
+            'jefes'           => $Jefes,
+        ]
+        );
+
+
+    }
+
+    protected function createItemV2(DependenciaRequest $request){
+        $Obj = $request->manage();
+        if (!is_object($Obj)) {
+            $id = 0;
+            return redirect('newDependenciaV2')
+                ->withErrors($Obj)
+                ->withInput();
+        }else{
+            $id = $Obj->id;
+        }
+        return Response::json(['mensaje' => 'Dato agregado con éxito', 'data' => 'OK', 'status' => '200'], 200);
+    }
+
+
+
 // ***************** EDITA LOS DATOS  ++++++++++++++++++++ //
-    protected function editDependencia($Id)
+    protected function editItem($Id)
     {
         $item = Dependencia::find($Id);
         $Jefes = User::all()->sortBy(function($item) {
@@ -72,8 +136,7 @@ class DependenciaController extends Controller
         );
     }
 
-// ***************** GUARDA LOS CAMBIOS ++++++++++++++++++++ //
-    protected function updateDependencia(DependenciaRequest $request)
+    protected function updateItem(DependenciaRequest $request)
     {
         $item = $request->manage();
         if (!isset($item)) {
@@ -82,34 +145,49 @@ class DependenciaController extends Controller
         return Redirect::to('listDependencias');
     }
 
-    protected function newDependencia()
+
+// ***************** EDITA LOS DATOS MODAL ++++++++++++++++++++ //
+    protected function editItemV2($Id)
     {
+        $item = Dependencia::find($Id);
         $Jefes = User::all()->sortBy(function($item) {
             return $item->ap_paterno.' '.$item->ap_materno.' '.$item->nombre;
         });
-        return view('catalogos.catalogo.dependencias.dependencia.dependencia_new',
+
+        $user = Auth::user();
+        return view('SIAC.dependencia.dependencia.dependencia_modal',
             [
-                'editItemTitle' => 'Nuevo',
-                'jefes' => $Jefes,
-                'postNew' => 'createDependencia',
-                'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
-                'titulo_header'   => 'Nuevo registro',
+                'Titulo'          => isset($item->dependencia) ? $item->dependencia : 'Nueva',
+                'Route'           => 'updateDependenciaV2',
+                'Method'          => 'POST',
+                'items_forms'     => 'SIAC.dependencia.dependencia.__dependencia.__dependencia_edit',
+                'IsNew'           => false,
+                'IsModal'         => true,
+                'items'           => $item,
+                'user'            => $user,
+                'jefes'           => $Jefes,
             ]
         );
+
     }
 
-    // ***************** CREAR NUEVO ++++++++++++++++++++ //
-    protected function createDependencia(DependenciaRequest $request)
-    {
-        $item = $request->manage();
-        if (!isset($item)) {
-            abort(404);
+    protected function updateItemV2(DependenciaRequest $request){
+        $Obj = $request->manage();
+        if (!is_object($Obj)) {
+            $id = $request->all(['id']);
+            $redirect = 'editComunidadV2/' . $id;
+            return redirect($redirect)
+                ->withErrors($Obj)
+                ->withInput();
+        }else{
+            $id = $Obj->id;
         }
-        return Redirect::to('listDependencias');
+        return Response::json(['mensaje' => 'Dato agregado con éxito', 'data' => 'OK', 'status' => '200'], 200);
     }
+
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //
-    protected function removeDependencia($id = 0)
+    protected function removeItem($id = 0)
     {
         $item = Dependencia::withTrashed()->findOrFail($id);
         if (isset($item)) {

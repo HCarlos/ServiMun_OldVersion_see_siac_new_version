@@ -31,25 +31,90 @@ class SubareaController extends Controller
 
         return view('catalogos.catalogo.dependencias.subarea.subarea_list',
             [
-                'items' => $items,
+                'items'           => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
                 'titulo_header'   => ' ',
-                'user' => $user,
-                'searchInList' => 'listSubareas',
-                'newWindow' => true,
-                'tableName' => $this->tableName,
-                'showEdit' => 'editSubarea',
-//                'putEdit' => 'updateSubarea',
-                'newItem' => 'newSubarea',
-                'removeItem' => 'removeSubarea',
-//                'showProcess1' => 'showFileListUserExcel1A',
-                'exportModel' => 5,
+                'user'            => $user,
+                'searchInList'    => 'listSubareas',
+                'newWindow'       => true,
+                'tableName'       => $this->tableName,
+                'showEdit'        => 'editSubareaV2',
+                'newItem'         => 'newSubareaV2',
+                'removeItem'      => 'removeSubarea',
+                'IsModal'         => true,
+                'exportModel'     => 5,
             ]
         );
     }
 
+    // ***************** CREAR NUEVO ++++++++++++++++++++ //
+    protected function newItem()
+    {
+        $Jefes = User::all()->sortBy(function($item) {
+            return $item->ap_paterno.' '.$item->ap_materno.' '.$item->nombre;
+        });
+        $Areas = Area::all(['id','area','dependencia_id'])->sortBy('area');
+        return view('catalogos.catalogo.dependencias.subarea.subarea_new',
+            [
+                'editItemTitle'   => 'Nuevo',
+                'jefes'           => $Jefes,
+                'area'            => $Areas,
+                'postNew'         => 'createSubarea',
+                'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Nuevo registro ',
+            ]
+        );
+    }
+
+    protected function createItem(SubareaRequest $request)
+    {
+        $item = $request->manage();
+        if (!isset($item)) {
+            abort(404);
+        }
+        return Redirect::to('listSubareas');
+    }
+
+    // ***************** CREAR NUEVO MODAL ++++++++++++++++++++ //
+    protected function newItemV2()
+    {
+        $Jefes = User::all()->sortBy(function($item) {
+            return $item->ap_paterno.' '.$item->ap_materno.' '.$item->nombre;
+        });
+        $Areas = Area::all(['id','area','dependencia_id'])->sortBy('area');
+        $user = Auth::user();
+        return view('SIAC.dependencia.subarea.subarea_modal',
+            [
+                'Titulo'          => 'Nueva',
+                'Route'           => 'createSubareaV2',
+                'Method'          => 'POST',
+                'items_forms'     => 'SIAC.dependencia.subarea.__subarea.__subarea_new',
+                'IsNew'           => true,
+                'user'            => $user,
+                'jefes'           => $Jefes,
+                'area'            => $Areas,
+            ]
+        );
+
+    }
+
+    protected function createItemV2(SubareaRequest $request)
+    {
+        $Obj = $request->manage();
+        if (!is_object($Obj)) {
+            $id = 0;
+            return redirect('newSubareaV2')
+                ->withErrors($Obj)
+                ->withInput();
+        }else{
+            $id = $Obj->id;
+        }
+        return Response::json(['mensaje' => 'Dato agregado con éxito', 'data' => 'OK', 'status' => '200'], 200);
+    }
+
+
 // ***************** EDITA LOS DATOS  ++++++++++++++++++++ //
-    protected function editSubarea($Id)
+    protected function editItem($Id)
     {
         $item = Subarea::find($Id);
         $Jefes = User::all()->sortBy(function($item) {
@@ -71,8 +136,7 @@ class SubareaController extends Controller
         );
     }
 
-// ***************** GUARDA LOS CAMBIOS ++++++++++++++++++++ //
-    protected function updateSubarea(SubareaRequest $request)
+    protected function updateItem(SubareaRequest $request)
     {
         $item = $request->manage();
         if (!isset($item)) {
@@ -81,36 +145,50 @@ class SubareaController extends Controller
         return Redirect::to('listSubareas');
     }
 
-    protected function newSubarea()
+// ***************** EDITA LOS DATOS  ++++++++++++++++++++ //
+    protected function editItemV2($Id)
     {
+        $item = Subarea::find($Id);
         $Jefes = User::all()->sortBy(function($item) {
             return $item->ap_paterno.' '.$item->ap_materno.' '.$item->nombre;
         });
         $Areas = Area::all(['id','area','dependencia_id'])->sortBy('area');
-        return view('catalogos.catalogo.dependencias.subarea.subarea_new',
+//        dd($Areas);
+        $user = Auth::user();
+        return view('SIAC.dependencia.subarea.subarea_modal',
             [
-                'editItemTitle'   => 'Nuevo',
+                'Titulo'          => isset($item->subarea) ? $item->subarea : 'Nueva',
+                'Route'           => 'updateSubareaV2',
+                'Method'          => 'POST',
+                'items_forms'     => 'SIAC.dependencia.subarea.__subarea.__subarea_edit',
+                'IsNew'           => false,
+                'IsModal'         => true,
+                'items'           => $item,
+                'user'            => $user,
                 'jefes'           => $Jefes,
                 'area'            => $Areas,
-                'postNew'         => 'createSubarea',
-                'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
-                'titulo_header'   => 'Nuevo registro ',
             ]
         );
+
     }
 
-    // ***************** CREAR NUEVO ++++++++++++++++++++ //
-    protected function createSubarea(SubareaRequest $request)
+    protected function updateItemV2(SubareaRequest $request)
     {
-        $item = $request->manage();
-        if (!isset($item)) {
-            abort(404);
+        $Obj = $request->manage();
+        if (!is_object($Obj)) {
+            $id = $request->all(['id']);
+            $redirect = 'editSubareaV2/' . $id;
+            return redirect($redirect)
+                ->withErrors($Obj)
+                ->withInput();
+        }else{
+            $id = $Obj->id;
         }
-        return Redirect::to('listSubareas');
+        return Response::json(['mensaje' => 'Dato agregado con éxito', 'data' => 'OK', 'status' => '200'], 200);
     }
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //
-    protected function removeSubarea($id = 0)
+    protected function removeItem($id = 0)
     {
         $item = Subarea::withTrashed()->findOrFail($id);
         if (isset($item)) {

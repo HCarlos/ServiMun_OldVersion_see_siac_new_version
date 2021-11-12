@@ -29,22 +29,85 @@ class EstatuController extends Controller
 
         return view('catalogos.catalogo.estatu.estatu_list',
             [
-                'items' => $items,
+                'items'           => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
                 'titulo_header'   => '',
-                'user' => $user,
-                'searchInList' => 'listEstatus',
-                'newWindow' => true,
-                'tableName' => $this->tableName,
-                'showEdit' => 'editEstatu',
-//                'putEdit' => 'updateEstatu',
-                'newItem' => 'newEstatu',
-                'removeItem' => 'removeEstatu',
-//                'showProcess1' => 'showFileListUserExcel1A',
-                'exportModel' => 24,
+                'user'            => $user,
+                'searchInList'    => 'listEstatus',
+                'newWindow'       => true,
+                'tableName'       => $this->tableName,
+                'showEdit'        => 'editEstatu',
+                'newItem'         => 'newEstatuV2',
+                'removeItem'      => 'removeEstatu',
+                'IsModal'         => false,
+                'IsModalNew'      => true,
+                'IsModalEdit'     => false,
+                'exportModel'     => 24,
             ]
         );
     }
+
+    // ***************** CREAR NUEVO ++++++++++++++++++++ //
+    protected function newItem()
+    {
+        $Dependencias = Dependencia::select('id','dependencia')
+            ->orderBy('dependencia')
+            ->get();
+        return view('catalogos.catalogo.estatu.estatu_new',
+            [
+                'dependencia' => $Dependencias,
+                'editItemTitle' => 'Nuevo',
+                'postNew' => 'createEstatu',
+                'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Nuevo registro',
+            ]
+        );
+    }
+
+    protected function createItem(StatuRequest $request)
+    {
+        $item = $request->manage();
+        if (!isset($item)) {
+            abort(404);
+        }
+        return Redirect::to('listEstatus');
+    }
+
+    // ***************** CREAR NUEVO MODAL ++++++++++++++++++++ //
+    protected function newItemV2()
+    {
+        $Dependencias = Dependencia::select('id','dependencia')
+            ->orderBy('dependencia')
+            ->get();
+        $user = Auth::user();
+        return view('SIAC.estructura.estatu.estatu_modal',
+            [
+                'Titulo'          => 'Nueva',
+                'Route'           => 'createEstatuV2',
+                'Method'          => 'POST',
+                'items_forms'     => 'SIAC.estructura.estatu.__estatu.__estatu_new',
+                'IsNew'           => true,
+                'user'            => $user,
+                'dependencia'     => $Dependencias,
+            ]
+        );
+
+    }
+
+    protected function createItemV2(StatuRequest $request)
+    {
+        $Obj = $request->manage();
+        if (!is_object($Obj)) {
+            $id = 0;
+            return redirect('newEstatuV2')
+                ->withErrors($Obj)
+                ->withInput();
+        }else{
+            $id = $Obj->id;
+        }
+        return Response::json(['mensaje' => 'Dato agregado con éxito', 'data' => 'OK', 'status' => '200'], 200);
+    }
+
 
 // ***************** EDITA LOS DATOS  ++++++++++++++++++++ //
     protected function editItem($Id)
@@ -66,7 +129,6 @@ class EstatuController extends Controller
         );
     }
 
-// ***************** GUARDA LOS CAMBIOS ++++++++++++++++++++ //
     protected function updateItem(StatuRequest $request)
     {
         $item = $request->manage();
@@ -77,30 +139,44 @@ class EstatuController extends Controller
         return Redirect::to('listEstatus');
     }
 
-    protected function newItem()
+
+// ***************** EDITA LOS DATOS  MODAL ++++++++++++++++++++ //
+    protected function editItemV2($Id)
     {
         $Dependencias = Dependencia::select('id','dependencia')
             ->orderBy('dependencia')
             ->get();
-        return view('catalogos.catalogo.estatu.estatu_new',
+        $item = Estatu::find($Id);
+        $user = Auth::user();
+        return view('SIAC.estructura.estatu.estatu_modal',
             [
-                'dependencia' => $Dependencias,
-                'editItemTitle' => 'Nuevo',
-                'postNew' => 'createEstatu',
-                'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
-                'titulo_header'   => 'Nuevo registro',
+                'Titulo'          => isset($item->subarea) ? $item->subarea : 'Nueva',
+                'Route'           => 'updateEstatuV2',
+                'Method'          => 'POST',
+                'items_forms'     => 'SIAC.estructura.estatu.__estatu.__estatu_edit',
+                'IsNew'           => false,
+                'IsModal'         => true,
+                'items'           => $item,
+                'user'            => $user,
+                'dependencia'     => $Dependencias,
             ]
         );
+
     }
 
-    // ***************** CREAR NUEVO ++++++++++++++++++++ //
-    protected function createItem(StatuRequest $request)
+    protected function updateItemV2(StatuRequest $request)
     {
-        $item = $request->manage();
-        if (!isset($item)) {
-            abort(404);
+        $Obj = $request->manage();
+        if (!is_object($Obj)) {
+            $id = $request->all(['id']);
+            $redirect = 'editEstatuV2/' . $id;
+            return redirect($redirect)
+                ->withErrors($Obj)
+                ->withInput();
+        }else{
+            $id = $Obj->id;
         }
-        return Redirect::to('listEstatus');
+        return Response::json(['mensaje' => 'Dato agregado con éxito', 'data' => 'OK', 'status' => '200'], 200);
     }
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //

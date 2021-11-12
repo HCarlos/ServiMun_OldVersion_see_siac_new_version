@@ -1,6 +1,8 @@
 <script>
-    var strElements = "input, select, checkbox, textarea, radio, file, img";
+
+    var strElements = "label, input, select, checkbox, textarea, radio, file, im, span";
     if( $("#formFullModal") ){
+        $("#alertError").hide();
         $("#formFullModal").unbind("submit");
         $("#formFullModal").on("submit", function (event) {
             event.preventDefault();
@@ -23,13 +25,20 @@
     }
 
     function sayErrors(errors, $form){
+        if (typeof errors === 'string'){
+            $("#alertError").show();
+            $(".Error").html(errors);
+            return false;
+        }
         $form.find(strElements).each(function() {
             $(this).removeClass('has-error form-error');
         });
         $('.text-danger').empty();
-        $.each( errors, function( key, val ) {
+        $.each( errors.errors, function( key, val ) {
             $form.find('#' + key ).addClass('has-error form-error');
             $form.find('.has-' + key ).find('.text-danger').text(val);
+            $form.find('.has-' + key ).addClass('text-danger');
+
         });
     }
 

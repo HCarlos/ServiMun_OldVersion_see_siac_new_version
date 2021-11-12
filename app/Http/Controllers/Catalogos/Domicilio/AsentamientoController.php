@@ -30,21 +30,72 @@ class AsentamientoController extends Controller
 
         return view('catalogos.catalogo.domicilio.asentamiento.asentamiento_list',
             [
-                'items' => $items,
+                'items'           => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
-                'titulo_header'   => ' ',
-                'user' => $user,
-                'searchInList' => 'listAsentamientos',
-                'newWindow' => true,
-                'tableName' => $this->tableName,
-                'showEdit' => 'editAsentamiento',
-//                'putEdit' => 'updateAsentamiento',
-                'newItem' => 'newAsentamiento',
-                'removeItem' => 'removeAsentamiento',
-//                'showProcess1' => 'showFileListUserExcel1A',
-                'exportModel' => 7,
+                'titulo_header'   => '',
+                'user'            => $user,
+                'searchInList'    => 'listAsentamientos',
+                'newWindow'       => true,
+                'tableName'       => $this->tableName,
+                'showEdit'        => 'editAsentamientoV2',
+                'newItem'         => 'newAsentamientoV2',
+                'removeItem'      => 'removeAsentamiento',
+                'IsModal'         => true,
+                'exportModel'     => 7,
             ]
         );
+    }
+
+    // ***************** CREAR NUEVO ++++++++++++++++++++ //
+    protected function newItem()
+    {
+        return view('catalogos.catalogo.domicilio.asentamiento.asentamiento_new',
+            [
+                'editItemTitle'   => 'Nuevo',
+                'postNew'         => 'createAsentamiento',
+                'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Nuevo registro ',
+            ]
+        );
+    }
+
+    protected function createItem(AsentamientoRequest $request)
+    {
+        $item = $request->manage();
+        if (!isset($item)) {
+            abort(404);
+        }
+        return Redirect::to('listAsentamientos');
+    }
+
+    // ***************** CREAR NUEVO MODAL ++++++++++++++++++++ //
+    protected function newItemV2()
+    {
+        $user = Auth::user();
+        return view('SIAC._comun.__modal_comun_1',
+            [
+                'Titulo'      => 'Nueva',
+                'Route'       => 'createAsentamientoV2',
+                'Method'      => 'POST',
+                'items_forms' => 'SIAC.domicilio.asentamiento.__asentamiento.__asentamiento_new',
+                'IsNew'       => true,
+                'user'        => $user,
+            ]
+        );
+    }
+
+    protected function createItemV2(AsentamientoRequest $request)
+    {
+        $Obj = $request->manage();
+        if (!is_object($Obj)) {
+            $id = 0;
+            return redirect('newAsentamientoV2')
+                ->withErrors($Obj)
+                ->withInput();
+        }else{
+            $id = $Obj->id;
+        }
+        return Response::json(['mensaje' => 'Dato agregado con éxito', 'data' => 'OK', 'status' => '200'], 200);
     }
 
 // ***************** EDITA LOS DATOS  ++++++++++++++++++++ //
@@ -63,7 +114,6 @@ class AsentamientoController extends Controller
         );
     }
 
-// ***************** GUARDA LOS CAMBIOS ++++++++++++++++++++ //
     protected function updateItem(AsentamientoRequest $request)
     {
         $item = $request->manage();
@@ -73,27 +123,39 @@ class AsentamientoController extends Controller
         return Redirect::to('listAsentamientos');
     }
 
-    protected function newItem()
+// ***************** EDITA LOS DATOS  MODAL++++++++++++++++++++ //
+    protected function editItemV2($Id)
     {
-        return view('catalogos.catalogo.domicilio.asentamiento.asentamiento_new',
+        $item = Asentamiento::find($Id);
+        $user = Auth::user();
+        return view('SIAC._comun.__modal_comun_1',
             [
-                'editItemTitle' => 'Nuevo',
-                'postNew' => 'createAsentamiento',
-                'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
-                'titulo_header'   => 'Nuevo registro ',
+                'Titulo'      => 'Editando el Item. '.$Id,
+                'Route'       => 'updateAsentamientoV2',
+                'Method'      => 'POST',
+                'items_forms' => 'SIAC.domicilio.asentamiento.__asentamiento.__asentamiento_edit',
+                'IsNew'       => false,
+                'IsModal'     => true,
+                'items'       => $item,
+                'user'        => $user,
             ]
         );
     }
 
-    // ***************** CREAR NUEVO ++++++++++++++++++++ //
-    protected function createItem(AsentamientoRequest $request)
+    protected function updateItemV2(AsentamientoRequest $request)
     {
-        $item = $request->manage();
-        if (!isset($item)) {
-            abort(404);
+        $Obj = $request->manage();
+        if (!is_object($Obj)) {
+            $id = 0;
+            return redirect('editAsentamientoV2')
+                ->withErrors($Obj)
+                ->withInput();
+        }else{
+            $id = $Obj->id;
         }
-        return Redirect::to('listAsentamientos');
+        return Response::json(['mensaje' => 'Dato agregado con éxito', 'data' => 'OK', 'status' => '200'], 200);
     }
+
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //
     protected function removeItem($id = 0)

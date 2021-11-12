@@ -30,49 +30,23 @@ class CodigopostalController extends Controller
 
         return view('catalogos.catalogo.domicilio.cp.cp_list',
             [
-                'items' => $items,
+                'items'           => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
-                'titulo_header'   => ' ',
-                'user' => $user,
-                'searchInList' => 'listCodigopostales',
-                'newWindow' => true,
-                'tableName' => $this->tableName,
-                'showEdit' => 'editCodigopostal',
-//                'putEdit' => 'updateCodigopostal',
-                'newItem' => 'newCodigopostal',
-                'removeItem' => 'removeCodigopostal',
-//                'showProcess1' => 'showFileListUserExcel1A',
-                'exportModel' => 10,
+                'titulo_header'   => '',
+                'user'            => $user,
+                'searchInList'    => 'listCodigopostales',
+                'newWindow'       => true,
+                'tableName'       => $this->tableName,
+                'showEdit'        => 'editCodigopostalV2',
+                'newItem'         => 'newCodigopostalV2',
+                'removeItem'      => 'removeCodigopostal',
+                'IsModal'         => true,
+                'exportModel'     => 10,
             ]
         );
     }
 
-// ***************** EDITA LOS DATOS  ++++++++++++++++++++ //
-    protected function editItem($Id)
-    {
-        $item = Codigopostal::find($Id);
-        return view('catalogos.catalogo.domicilio.cp.cp_edit',
-            [
-                'user' => Auth::user(),
-                'items' => $item,
-                'editItemTitle' => isset($item->categoria) ? $item->categoria : 'Nuevo',
-                'putEdit' => 'updateCodigopostal',
-                'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
-                'titulo_header'   => 'Editando el Folio '.$Id,
-            ]
-        );
-    }
-
-// ***************** GUARDA LOS CAMBIOS ++++++++++++++++++++ //
-    protected function updateItem(CodigopostalRequest $request)
-    {
-        $item = $request->manage();
-        if (!isset($item)) {
-            abort(404);
-        }
-        return Redirect::to('listCodigopostales');
-    }
-
+// ***************** CREA UN NUEVO CÓDIGO POSTAL  ++++++++++++++++++++ //
     protected function newItem()
     {
         return view('catalogos.catalogo.domicilio.cp.cp_new',
@@ -95,7 +69,104 @@ class CodigopostalController extends Controller
         return Redirect::to('listCodigopostales');
     }
 
-// ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //
+// ***************** CREA UN NUEVO CÓDIGO POSTAL MODAL ++++++++++++++++++++ //
+    protected function newItemV2()
+    {
+
+        $user = Auth::user();
+        return view('SIAC._comun.__modal_comun_1',
+            [
+                'Titulo'      => 'Nueva',
+                'Route'       => 'createCodigopostalV2',
+                'Method'      => 'POST',
+                'items_forms' => 'SIAC.domicilio.cp.__cp.__cp_new',
+                'IsNew'       => true,
+                'user'        => $user,
+            ]
+        );
+
+
+    }
+
+    // ***************** CREAR NUEVO ++++++++++++++++++++ //
+    protected function createItemV2(CodigopostalRequest $request)
+    {
+        $Obj = $request->manage();
+        if (!is_object($Obj)) {
+            $id = 0;
+            return redirect('newCodigopostalV2')
+                ->withErrors($Obj)
+                ->withInput();
+        }else{
+            $id = $Obj->id;
+        }
+        return Response::json(['mensaje' => 'Dato agregado con éxito', 'data' => 'OK', 'status' => '200'], 200);
+    }
+
+
+// ***************** EDITA LOS DATOS  ++++++++++++++++++++ //
+    protected function editItem($Id)
+    {
+        $item = Codigopostal::find($Id);
+        return view('catalogos.catalogo.domicilio.cp.cp_edit',
+            [
+                'user' => Auth::user(),
+                'items' => $item,
+                'editItemTitle' => isset($item->categoria) ? $item->categoria : 'Nuevo',
+                'putEdit' => 'updateCodigopostal',
+                'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Editando el Folio '.$Id,
+            ]
+        );
+    }
+
+    protected function updateItem(CodigopostalRequest $request)
+    {
+        $item = $request->manage();
+        if (!isset($item)) {
+            abort(404);
+        }
+        return Redirect::to('listCodigopostales');
+    }
+
+// ***************** EDITA LOS DATOS MODAL ++++++++++++++++++++ //
+    protected function editItemV2($Id)
+    {
+        $item = Codigopostal::find($Id);
+        $user = Auth::user();
+        return view('SIAC._comun.__modal_comun_1',
+            [
+                'Titulo'      => 'Editando el Item. '.$Id,
+                'Route'       => 'updateCodigopostalV2',
+                'Method'      => 'POST',
+                'items_forms' => 'SIAC.domicilio.cp.__cp.__cp_edit',
+                'IsNew'       => false,
+                'IsModal'     => true,
+                'items'       => $item,
+                'user'        => $user,
+            ]
+        );
+
+
+    }
+
+    protected function updateItemV2(CodigopostalRequest $request)
+    {
+        $Obj = $request->manage();
+        if (!is_object($Obj)) {
+            $id = 0;
+            return redirect('editCodigopostalV2')
+                ->withErrors($Obj)
+                ->withInput();
+        }else{
+            $id = $Obj->id;
+        }
+        return Response::json(['mensaje' => 'Dato agregado con éxito', 'data' => 'OK', 'status' => '200'], 200);
+
+    }
+
+
+    // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //
     protected function removeItem($id = 0)
     {
         $item = Codigopostal::withTrashed()->findOrFail($id);

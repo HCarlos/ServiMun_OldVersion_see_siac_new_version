@@ -29,22 +29,75 @@ class PrioridadController extends Controller
 
         return view('catalogos.catalogo.prioridad.prioridad_list',
             [
-                'items' => $items,
+                'items'           => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
                 'titulo_header'   => '',
-                'user' => $user,
-                'searchInList' => 'listPrioridades',
-                'newWindow' => true,
-                'tableName' => $this->tableName,
-                'showEdit' => 'editPrioridad',
-//                'putEdit' => 'updatePrioridad',
-                'newItem' => 'newPrioridad',
-                'removeItem' => 'removePrioridad',
-//                'showProcess1' => 'showFileListUserExcel1A',
-                'exportModel' => 27,
+                'user'            => $user,
+                'searchInList'    => 'listPrioridades',
+                'newWindow'       => true,
+                'tableName'       => $this->tableName,
+                'showEdit'        => 'editPrioridadV2',
+                'newItem'         => 'newPrioridadV2',
+                'removeItem'      => 'removePrioridad',
+                'IsModal'         => true,
+                'exportModel'     => 27,
             ]
         );
     }
+
+    // ***************** CREAR NUEVO ++++++++++++++++++++ //
+    protected function newItem()
+    {
+        return view('catalogos.catalogo.prioridad.prioridad_new',
+            [
+                'editItemTitle' => 'Nuevo',
+                'postNew' => 'createPrioridad',
+                'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Nuevo registro',
+            ]
+        );
+    }
+
+    protected function createItem(PrioridadRequest $request)
+    {
+        $item = $request->manage();
+        if (!isset($item)) {
+            abort(404);
+        }
+        return Redirect::to('listPrioridades');
+    }
+
+    // ***************** CREAR NUEVO MODAL ++++++++++++++++++++ //
+    protected function newItemV2()
+    {
+        $user = Auth::user();
+        return view('SIAC._comun.__modal_comun_1',
+            [
+                'Titulo'      => 'Nuevo',
+                'Route'       => 'createPrioridadV2',
+                'Method'      => 'POST',
+                'items_forms' => 'SIAC.estructura.prioridad.__prioridad.__prioridad_new',
+                'IsNew'       => true,
+                'user'        => $user,
+
+            ]
+        );
+    }
+
+    protected function createItemV2(PrioridadRequest $request)
+    {
+        $Obj = $request->manage();
+        if (!is_object($Obj)) {
+            $id = 0;
+            return redirect('newPrioridadV2')
+                ->withErrors($Obj)
+                ->withInput();
+        }else{
+            $id = $Obj->id;
+        }
+        return Response::json(['mensaje' => 'Dato agregado con éxito', 'data' => 'OK', 'status' => '200'], 200);
+    }
+
 
 // ***************** EDITA LOS DATOS  ++++++++++++++++++++ //
     protected function editItem($Id)
@@ -62,7 +115,6 @@ class PrioridadController extends Controller
         );
     }
 
-// ***************** GUARDA LOS CAMBIOS ++++++++++++++++++++ //
     protected function updateItem(PrioridadRequest $request)
     {
         $item = $request->manage();
@@ -72,27 +124,42 @@ class PrioridadController extends Controller
         return Redirect::to('listPrioridades');
     }
 
-    protected function newItem()
+
+// ***************** EDITA LOS DATOS  ++++++++++++++++++++ //
+    protected function editItemV2($Id)
     {
-        return view('catalogos.catalogo.prioridad.prioridad_new',
+        $item = Prioridad::find($Id);
+        $user = Auth::user();
+        return view('SIAC._comun.__modal_comun_1',
             [
-                'editItemTitle' => 'Nuevo',
-                'postNew' => 'createPrioridad',
-                'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
-                'titulo_header'   => 'Nuevo registro',
+                'Titulo'      => isset($item->prioridad) ? $item->prioridad : 'Nuevo',
+                'Route'       => 'updatePrioridadV2',
+                'Method'      => 'POST',
+                'items'       => $item,
+                'items_forms' => 'SIAC.estructura.prioridad.__prioridad.__prioridad_edit',
+                'IsNew'       => false,
+                'IsModal'     => true,
+                'user'        => $user,
+
             ]
         );
     }
 
-    // ***************** CREAR NUEVO ++++++++++++++++++++ //
-    protected function createItem(PrioridadRequest $request)
+    protected function updateItemV2(PrioridadRequest $request)
     {
-        $item = $request->manage();
-        if (!isset($item)) {
-            abort(404);
+        $Obj = $request->manage();
+        if (!is_object($Obj)) {
+            $id = 0;
+            return redirect('editPrioridadV2')
+                ->withErrors($Obj)
+                ->withInput();
+        }else{
+            $id = $Obj->id;
         }
-        return Redirect::to('listPrioridades');
+        return Response::json(['mensaje' => 'Dato agregado con éxito', 'data' => 'OK', 'status' => '200'], 200);
     }
+
+
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //
     protected function removeItem($id = 0)

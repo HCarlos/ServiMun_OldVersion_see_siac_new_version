@@ -30,7 +30,7 @@ class DenunciaFilter extends QueryFilter
             'servicio_id'    => '',
             'estatus_id'     => '',
             'ciudadano_id'   => '',
-            'dependencias'   => '',
+            'dependencia'   => '',
         ];
     }
 
@@ -50,7 +50,7 @@ class DenunciaFilter extends QueryFilter
                 $query->orWhereHas('ciudadanos', function ($q) use ($search) {
                     return $q->whereRaw("CONCAT(ap_paterno,' ',ap_materno,' ',nombre) like ?", "%{$search}%");
                 })
-                ->orWhereHas('dependencias', function ($q) use ($search) {
+                ->orWhereHas('dependencia', function ($q) use ($search) {
                     if ($this->IsEnlace()){
                         return $q->whereIn('dependencia',$this->getDependencia(),true);
                     }else{
@@ -105,7 +105,7 @@ class DenunciaFilter extends QueryFilter
     public function dependencia_id($query, $search){
         if (is_null($search) || empty ($search) || trim($search) == "0") {return $query;}
 
-        return $query->whereHas('dependencias', function ($q) use ($search) {
+        return $query->whereHas('dependencia', function ($q) use ($search) {
             if ($this->IsEnlace()){
 //                dd( $this->getDependenciaId() );
                 return $q->whereIn('dependencia_id',$this->getDependenciaId());
@@ -136,7 +136,7 @@ class DenunciaFilter extends QueryFilter
     public function dependencias($query, $search){
         if (is_null($search) || empty ($search) || trim($search) == "0") {return $query;}
         $search = explode('|',$search);
-        return $query->orWhereHas('dependencias', function ($q) use ($search) {
+        return $query->orWhereHas('dependencia', function ($q) use ($search) {
             return $q->whereIn('dependencia',$search);
         });
 

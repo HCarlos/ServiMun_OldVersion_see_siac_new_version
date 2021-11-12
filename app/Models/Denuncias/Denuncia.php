@@ -77,7 +77,7 @@ class Denuncia extends Model
         return $this->hasOne(Dependencia::class,'id','dependencia_id');
     }
 
-//    public function dependencias(){
+//    public function dependencia(){
 //        return $this->belongsToMany(Dependencia::class,'denuncia_dependencia','denuncia_id','dependencia_id');
 //    }
 

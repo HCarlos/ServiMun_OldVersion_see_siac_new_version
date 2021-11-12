@@ -7,6 +7,7 @@ use App\Rules\Uppercase;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Classes\MessageAlertClass;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class LocalidadRequest extends FormRequest
 {
@@ -18,6 +19,14 @@ class LocalidadRequest extends FormRequest
     {
         return true;
     }
+
+    public function validationData(){
+        $attributes = parent::all();
+        $attributes['localidad'] = strtoupper(trim($attributes['localidad']));
+        $this->replace($attributes);
+        return parent::all();
+    }
+
 
     public function rules()
     {
@@ -57,7 +66,7 @@ class LocalidadRequest extends FormRequest
             }
         }catch (QueryException $e){
             $Msg = new MessageAlertClass();
-            return $Msg->Message($e);
+            throw new HttpResponseException(response()->json( $Msg->Message($e), 422));
         }
         return $item;
     }

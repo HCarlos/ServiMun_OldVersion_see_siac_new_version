@@ -7,6 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use App\Rules\Uppercase;
 use App\Classes\MessageAlertClass;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class TipocomunidadRequest extends FormRequest
 {
@@ -17,6 +18,13 @@ class TipocomunidadRequest extends FormRequest
     public function authorize()
     {
         return true;
+    }
+
+    public function validationData(){
+        $attributes = parent::all();
+        $attributes['tipocomunidad'] = strtoupper(trim($attributes['tipocomunidad']));
+        $this->replace($attributes);
+        return parent::all();
     }
 
     public function rules()
@@ -41,7 +49,7 @@ class TipocomunidadRequest extends FormRequest
             }
         }catch (QueryException $e){
             $Msg = new MessageAlertClass();
-            return $Msg->Message($e);
+            throw new HttpResponseException(response()->json( $Msg->Message($e), 422));
         }
         return $item;
     }

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Catalogos\Domicilio;
 
+use App\Http\Requests\Domicilio\CiudadRequest;
+use App\Models\Catalogos\Domicilios\Ciudad;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Domicilio\LocalidadRequest;
@@ -29,22 +31,75 @@ class LocalidadController extends Controller
 
         return view('catalogos.catalogo.domicilio.localidad.localidad_list',
             [
-                'items' => $items,
+                'items'           => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
                 'titulo_header'   => '',
-                'user' => $user,
-                'searchInList' => 'listLocalidades',
-                'newWindow' => true,
-                'tableName' => $this->tableName,
-                'showEdit' => 'editLocalidad',
-//                'putEdit' => 'updateLocalidad',
-                'newItem' => 'newLocalidad',
-                'removeItem' => 'removeLocalidad',
-//                'showProcess1' => 'showFileListUserExcel1A',
-                'exportModel' => 14,
+                'user'            => $user,
+                'searchInList'    => 'listLocalidades',
+                'newWindow'       => true,
+                'tableName'       => $this->tableName,
+                'showEdit'        => 'editLocalidadV2',
+                'newItem'         => 'newLocalidadV2',
+                'removeItem'      => 'removeLocalidad',
+                'IsModal'         => true,
+                'exportModel'     => 14,
             ]
         );
     }
+
+    // ***************** CREAR NUEVO ++++++++++++++++++++ //
+    protected function newItem()
+    {
+        return view('catalogos.catalogo.domicilio.localidad.localidad_new',
+            [
+                'editItemTitle' => 'Nuevo',
+                'postNew' => 'createLocalidad',
+                'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Nuevo registro',
+            ]
+        );
+    }
+
+    protected function createItem(LocalidadRequest $request)
+    {
+        $item = $request->manage();
+        if (!isset($item)) {
+            abort(404);
+        }
+        return Redirect::to('listLocalidades');
+    }
+
+    // ***************** CREAR NUEVO VIA MODAL++++++++++++++++++++ //
+    protected function newItemV2()
+    {
+        $user = Auth::user();
+        return view('SIAC._comun.__modal_comun_1',
+            [
+                'Titulo'      => 'Nueva',
+                'Route'       => 'createLocalidadV2',
+                'Method'      => 'POST',
+                'items_forms' => 'SIAC.domicilio.localidad.__localidad.__localidad_new',
+                'IsNew'       => true,
+                'user'        => $user,
+            ]
+        );
+    }
+
+    protected function createItemV2(LocalidadRequest $request)
+    {
+        $Obj = $request->manage();
+        if (!is_object($Obj)) {
+            $id = 0;
+            return redirect('newLocalidadV2')
+                ->withErrors($Obj)
+                ->withInput();
+        }else{
+            $id = $Obj->id;
+        }
+        return Response::json(['mensaje' => 'Dato agregado con éxito', 'data' => 'OK', 'status' => '200'], 200);
+    }
+
+
 
 // ***************** EDITA LOS DATOS  ++++++++++++++++++++ //
     protected function editItem($Id)
@@ -62,7 +117,6 @@ class LocalidadController extends Controller
         );
     }
 
-// ***************** GUARDA LOS CAMBIOS ++++++++++++++++++++ //
     protected function updateItem(LocalidadRequest $request)
     {
         $item = $request->manage();
@@ -72,27 +126,42 @@ class LocalidadController extends Controller
         return Redirect::to('listLocalidades');
     }
 
-    protected function newItem()
+
+// ***************** EDITA LOS DATOS MODAL ++++++++++++++++++++ //
+    protected function editItemV2($Id)
     {
-        return view('catalogos.catalogo.domicilio.localidad.localidad_new',
+        $item = Localidad::find($Id);
+        $user = Auth::user();
+        return view('SIAC._comun.__modal_comun_1',
             [
-                'editItemTitle' => 'Nuevo',
-                'postNew' => 'createLocalidad',
-                'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
-                'titulo_header'   => 'Nuevo registro',
+                'Titulo'      => 'Editando el Item. '.$Id,
+                'Route'       => 'updateLocalidadV2',
+                'Method'      => 'POST',
+                'items_forms' => 'SIAC.domicilio.localidad.__localidad.__localidad_edit',
+                'IsNew'       => false,
+                'IsModal'     => true,
+                'items'       => $item,
+                'user'        => $user,
             ]
         );
     }
 
-    // ***************** CREAR NUEVO ++++++++++++++++++++ //
-    protected function createItem(LocalidadRequest $request)
+    protected function updateItemV2(LocalidadRequest $request)
     {
-        $item = $request->manage();
-        if (!isset($item)) {
-            abort(404);
+        $Obj = $request->manage();
+        if (!is_object($Obj)) {
+            $id = 0;
+            return redirect('editLocalidadV2')
+                ->withErrors($Obj)
+                ->withInput();
+        }else{
+            $id = $Obj->id;
         }
-        return Redirect::to('listLocalidades');
+        return Response::json(['mensaje' => 'Dato agregado con éxito', 'data' => 'OK', 'status' => '200'], 200);
+
     }
+
+
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //
     protected function removeItem($id = 0)

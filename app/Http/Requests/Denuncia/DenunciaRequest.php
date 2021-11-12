@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Classes\MessageAlertClass;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 
 class DenunciaRequest extends FormRequest
@@ -121,7 +122,7 @@ class DenunciaRequest extends FormRequest
             $this->attaches($item);
         }catch (QueryException $e){
             $Msg = new MessageAlertClass();
-            return $Msg->Message($e);
+            throw new HttpResponseException(response()->json( $Msg->Message($e), 422));
         }
         return $item;
 

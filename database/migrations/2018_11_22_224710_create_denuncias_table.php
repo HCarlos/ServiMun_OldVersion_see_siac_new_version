@@ -50,7 +50,7 @@ class CreateDenunciasTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create($tableNames['dependencias'], function (Blueprint $table) use ($tableNames){
+        Schema::create($tableNames['dependencia'], function (Blueprint $table) use ($tableNames){
             $table->increments('id');
             $table->string('dependencia',250)->default('')->nullable();
             $table->string('abreviatura',5)->default('')->nullable();
@@ -78,7 +78,7 @@ class CreateDenunciasTable extends Migration
             $table->unique(['area', 'dependencia_id']);
             $table->foreign('dependencia_id')
                 ->references('id')
-                ->on($tableNames['dependencias'])
+                ->on($tableNames['dependencia'])
                 ->onDelete('cascade');
             $table->foreign('jefe_id')
                 ->references('id')
@@ -141,7 +141,7 @@ class CreateDenunciasTable extends Migration
 
             $table->foreign('dependencia_id')
                 ->references('id')
-                ->on($tableNames['dependencias'])
+                ->on($tableNames['dependencia'])
                 ->onDelete('cascade');
 
         });
@@ -221,7 +221,7 @@ class CreateDenunciasTable extends Migration
 
             $table->foreign('dependencia_id')
                 ->references('id')
-                ->on($tableNames['dependencias'])
+                ->on($tableNames['dependencia'])
                 ->onDelete('cascade');
 
         });
@@ -257,7 +257,7 @@ class CreateDenunciasTable extends Migration
 
             $table->foreign('dependencia_id')
                 ->references('id')
-                ->on($tableNames['dependencias'])
+                ->on($tableNames['dependencia'])
                 ->onDelete('cascade');
 
             $table->foreign('user_id')
@@ -299,7 +299,7 @@ class CreateDenunciasTable extends Migration
         Schema::dropIfExists($tableNames['servicios']);
         Schema::dropIfExists($tableNames['subareas']);
         Schema::dropIfExists($tableNames['areas']);
-        Schema::dropIfExists($tableNames['dependencias']);
+        Schema::dropIfExists($tableNames['dependencia']);
 
         Schema::dropIfExists($tableNames['origenes']);
         Schema::dropIfExists($tableNames['prioridades']);

@@ -10,6 +10,7 @@ use App\Models\Catalogos\Domicilios\Municipio;
 use App\Models\Catalogos\Domicilios\Tipocomunidad;
 use App\Traits\Catalogos\Domicilio\Comunidad\ComunidadTrait;
 use App\Traits\Common\CommonTrait;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -36,77 +37,28 @@ class ComunidadController extends Controller
 
         return view('catalogos.catalogo.domicilio.comunidad.comunidad_list',
             [
-                'items' => $items,
+                'items'           => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
                 'titulo_header'   => '',
-                'user' => $user,
-                'searchInList' => 'listComunidades',
-                'newWindow' => true,
-                'tableName' => $this->tableName,
-                'showEdit' => 'editComunidad',
-//                'putEdit' => 'updateComunidad',
-                'newItem' => 'newComunidad',
-                'removeItem' => 'removeComunidad',
-//                'showProcess1' => 'showFileListUserExcel1A',
-                'exportModel' => 12,
+                'user'            => $user,
+                'searchInList'    => 'listComunidades',
+                'newWindow'       => true,
+                'tableName'       => $this->tableName,
+                'showEdit'        => 'editComunidadV2',
+                'newItem'         => 'newComunidadV2',
+                'removeItem'      => 'removeComunidad',
+                'IsModal'         => true,
+                'exportModel'     => 12,
             ]
         );
     }
 
-// ***************** EDITA LOS DATOS  ++++++++++++++++++++ //
-    protected function editItem($Id)
-    {
-        $item = Comunidad::find($Id);
-        $Ciudades       = Ciudad::all()->sortBy('ciudad');
-        $Municipios     = Municipio::all()->sortBy('municipio');
-        $Estados        = Estado::all()->sortBy('estado');
-
-        $Ciudad_Id      = Ciudad::all()->where('ciudad',config('atemun.ciudad_default'))->first();
-        $Municipio_Id   = Municipio::all()->where('municipio',config('atemun.municipio_default'))->first();
-        $Estado_Id      = Estado::all()->where('estado',config('atemun.estado_default'))->first();
-
-        $Delegados = $this->getUserFromRoles('DELEGADO');
-        $Tipocomunidades = Tipocomunidad::all(['id','tipocomunidad'])->sortBy('tipocomunidad');
-
-        return view('catalogos.catalogo.domicilio.comunidad.comunidad_edit',
-            [
-                'user' => Auth::user(),
-                'delegados' => $Delegados,
-                'tipocomunidades' => $Tipocomunidades,
-                'ciudades' => $Ciudades,
-                'municipios' => $Municipios,
-                'estados' => $Estados,
-                'ciudad_id' => $Ciudad_Id->id,
-                'municipio_id' => $Municipio_Id->id,
-                'estado_id' => $Estado_Id->id,
-                'items' => $item,
-                'editItemTitle' => isset($item->comunidad) ? $item->comunidad : 'Nuevo',
-                'putEdit' => 'updateComunidad',
-                'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
-                'titulo_header'   => 'Editando el Folio '.$Id,
-            ]
-        );
-    }
-
-// ***************** GUARDA LOS CAMBIOS ++++++++++++++++++++ //
-    protected function updateItem(ComunidadRequest $request)
-    {
-        $item = $request->manage();
-        if (!isset($item->id)) {
-            abort(404);
-        }
-        return Redirect::to('listComunidades');
-    }
-
+    // ***************** CREAR NUEVO ++++++++++++++++++++ //
     protected function newItem()
     {
         $Ciudades       = Ciudad::all()->sortBy('ciudad');
         $Municipios     = Municipio::all()->sortBy('municipio');
         $Estados        = Estado::all()->sortBy('estado');
-
-//        $Ciudad_Id      = Ciudad::all()->where('ciudad',env('CIUDAD_DEFAULT'))->first();
-//        $Municipio_Id   = Municipio::all()->where('municipio',env('MUNICIPIO_DEFAULT'))->first();
-//        $Estado_Id      = Estado::all()->where('estado',env('ESTADO_DEFAULT'))->first();
 
         $Ciudad_Id      = Ciudad::all()->where('ciudad',config('atemun.ciudad_default'))->first();
         $Municipio_Id   = Municipio::all()->where('municipio',config('atemun.municipio_default'))->first();
@@ -133,7 +85,6 @@ class ComunidadController extends Controller
         );
     }
 
-    // ***************** CREAR NUEVO ++++++++++++++++++++ //
     protected function createItem(ComunidadRequest $request)
     {
         $item = $request->manage();
@@ -143,9 +94,159 @@ class ComunidadController extends Controller
         return Redirect::to('listComunidades');
     }
 
-// ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //
-    protected function removeItem($id = 0)
+    // ***************** CREAR NUEVO MODAL++++++++++++++++++++ //
+    protected function newItemV2()
     {
+        $Ciudades        = Ciudad::all()->sortBy('ciudad');
+        $Municipios      = Municipio::all()->sortBy('municipio');
+        $Estados         = Estado::all()->sortBy('estado');
+
+        $Ciudad_Id       = Ciudad::all()->where('ciudad',config('atemun.ciudad_default'))->first();
+        $Municipio_Id    = Municipio::all()->where('municipio',config('atemun.municipio_default'))->first();
+        $Estado_Id       = Estado::all()->where('estado',config('atemun.estado_default'))->first();
+
+        $Delegados       = $this->getUserFromRoles('DELEGADO');
+        $Tipocomunidades = Tipocomunidad::all(['id','tipocomunidad'])->sortBy('tipocomunidad');
+
+        // dd($Estado_Id->id);
+
+        $user = Auth::user();
+        return view('SIAC.domicilio.comunidad.comunidad_modal',
+            [
+                'Titulo'          => 'Nueva',
+                'Route'           => 'createComunidadV2',
+                'Method'          => 'POST',
+                'items_forms'     => 'SIAC.domicilio.comunidad.__comunidad.__comunidad_new',
+                'IsNew'           => true,
+                'user'            => $user,
+                'delegados'       => $Delegados,
+                'tipocomunidades' => $Tipocomunidades,
+                'ciudades'        => $Ciudades,
+                'municipios'      => $Municipios,
+                'estados'         => $Estados,
+                'ciudad_id'       => $Ciudad_Id->id,
+                'municipio_id'    => $Municipio_Id->id,
+                'estado_id'       => $Estado_Id->id,
+            ]
+        );
+
+    }
+
+    protected function createItemV2(ComunidadRequest $request)
+    {
+        $Obj = $request->manage();
+        if (!is_object($Obj)) {
+            $id = 0;
+            return redirect('newComunidadV2')
+                ->withErrors($Obj)
+                ->withInput();
+        }else{
+            $id = $Obj->id;
+        }
+        return Response::json(['mensaje' => 'Dato agregado con éxito', 'data' => 'OK', 'status' => '200'], 200);
+    }
+
+
+// ***************** EDITA LOS DATOS  ++++++++++++++++++++ //
+    protected function editItem($Id){
+
+        $item            = Comunidad::find($Id);
+        $Ciudades        = Ciudad::all()->sortBy('ciudad');
+        $Municipios      = Municipio::all()->sortBy('municipio');
+        $Estados         = Estado::all()->sortBy('estado');
+
+        $Ciudad_Id       = Ciudad::all()->where('ciudad',config('atemun.ciudad_default'))->first();
+        $Municipio_Id    = Municipio::all()->where('municipio',config('atemun.municipio_default'))->first();
+        $Estado_Id       = Estado::all()->where('estado',config('atemun.estado_default'))->first();
+
+        $Delegados       = $this->getUserFromRoles('DELEGADO');
+        $Tipocomunidades = Tipocomunidad::all(['id','tipocomunidad'])->sortBy('tipocomunidad');
+
+        return view('catalogos.catalogo.domicilio.comunidad.comunidad_edit',
+            [
+                'user' => Auth::user(),
+                'delegados' => $Delegados,
+                'tipocomunidades' => $Tipocomunidades,
+                'ciudades' => $Ciudades,
+                'municipios' => $Municipios,
+                'estados' => $Estados,
+                'ciudad_id' => $Ciudad_Id->id,
+                'municipio_id' => $Municipio_Id->id,
+                'estado_id' => $Estado_Id->id,
+                'items' => $item,
+                'editItemTitle' => isset($item->comunidad) ? $item->comunidad : 'Nuevo',
+                'putEdit' => 'updateComunidad',
+                'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
+                'titulo_header'   => 'Editando el Folio '.$Id,
+            ]
+        );
+    }
+
+    protected function updateItem(ComunidadRequest $request)
+    {
+        $item = $request->manage();
+        if (!isset($item->id)) {
+            abort(404);
+        }
+        return Redirect::to('listComunidades');
+    }
+
+
+// ***************** EDITA LOS DATOS  ++++++++++++++++++++ //
+    protected function editItemV2($Id){
+
+        $item            = Comunidad::find($Id);
+        $Ciudades        = Ciudad::all()->sortBy('ciudad');
+        $Municipios      = Municipio::all()->sortBy('municipio');
+        $Estados         = Estado::all()->sortBy('estado');
+
+        $Ciudad_Id       = Ciudad::all()->where('ciudad',config('atemun.ciudad_default'))->first();
+        $Municipio_Id    = Municipio::all()->where('municipio',config('atemun.municipio_default'))->first();
+        $Estado_Id       = Estado::all()->where('estado',config('atemun.estado_default'))->first();
+
+        $Delegados       = $this->getUserFromRoles('DELEGADO');
+        $Tipocomunidades = Tipocomunidad::all(['id','tipocomunidad'])->sortBy('tipocomunidad');
+
+        $user = Auth::user();
+        return view('SIAC.domicilio.comunidad.comunidad_modal',
+            [
+                'Titulo'          => 'Nueva',
+                'Route'           => 'updateComunidadV2',
+                'Method'          => 'POST',
+                'items_forms'     => 'SIAC.domicilio.comunidad.__comunidad.__comunidad_edit',
+                'IsNew'           => false,
+                'IsModal'         => true,
+                'items'           => $item,
+                'user'            => $user,
+                'delegados'       => $Delegados,
+                'tipocomunidades' => $Tipocomunidades,
+                'ciudades'        => $Ciudades,
+                'municipios'      => $Municipios,
+                'estados'         => $Estados,
+                'ciudad_id'       => $Ciudad_Id->id,
+                'municipio_id'    => $Municipio_Id->id,
+                'estado_id'       => $Estado_Id->id,
+            ]
+        );
+    }
+
+    protected function updateItemV2(ComunidadRequest $request){
+        $Obj = $request->manage();
+        if (!is_object($Obj)) {
+            $id = $request->all(['id']);
+            $redirect = 'editComunidadV2/' . $id;
+            return redirect($redirect)
+                ->withErrors($Obj)
+                ->withInput();
+        }else{
+            $id = $Obj->id;
+        }
+        return Response::json(['mensaje' => 'Dato agregado con éxito', 'data' => 'OK', 'status' => '200'], 200);
+    }
+
+// ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //
+    protected function removeItem($id = 0){
+
         $item = Comunidad::withTrashed()->findOrFail($id);
         if (isset($item)) {
             if (!$item->trashed()) {
@@ -157,6 +258,7 @@ class ComunidadController extends Controller
         } else {
             return Response::json(['mensaje' => 'Se ha producido un error.', 'data' => 'Error', 'status' => '200'], 200);
         }
+
     }
 
 

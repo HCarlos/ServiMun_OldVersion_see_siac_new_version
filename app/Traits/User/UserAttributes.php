@@ -43,8 +43,8 @@ trait UserAttributes
     }
 
     public function getFullNameAttribute() {
-//        return "{$this->ap_paterno} {$this->ap_materno} {$this->nombre}";
-        return trim($this->ap_paterno).' '.trim($this->ap_materno).' '.trim($this->nombre);
+        return "{$this->ap_paterno} {$this->ap_materno} {$this->nombre}";
+//        return trim($this->ap_paterno).' '.trim($this->ap_materno).' '.trim($this->nombre);
     }
 
     public function getStrGeneroAttribute() {

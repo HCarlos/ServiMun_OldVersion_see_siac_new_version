@@ -123,23 +123,25 @@ class UserDataController extends Controller
             $this->msg = "Registro Guardado con éxito!!!";
         }
         session(['msg' => $this->msg]);
-        /*
-        // dd ($user);
-        $user = is_null($user) || trim($user) == "" ? User::all()->last() : $user;
-
-        return view('catalogos.catalogo.user.user_profile_edit',
-            [
-                'user'            => $user,
-                'items'           => $user,
-                'titulo_catalogo' => $user->Fullname ?? '' ,
-                'titulo_header'   => '',
-                'putEdit'         => 'EditUser',
-                'msg'             => $this->msg,
-            ]
-        );
-        */
 
         return redirect()->route('listUsers');
+
+    }
+
+    protected function updateUserV2(UserRequest $request)
+    {
+        $Data = $request->all(['id']);
+        //dd($UserId);
+        $user = $request->manageUser();
+        if ( !isset($user) || !is_object($user) ) {
+            $this->msg = $user;
+            $user = User::find($Data['id']);
+        }else{
+            $this->msg = "Registro Guardado con éxito!!!";
+        }
+        session(['msg' => $this->msg]);
+
+        return redirect()->route('editUser',['Id'=>$request->all('id')]);
 
     }
 

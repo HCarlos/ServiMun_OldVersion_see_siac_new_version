@@ -7,10 +7,10 @@ use App\Rules\Uppercase;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Classes\MessageAlertClass;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class DependenciaRequest extends FormRequest
 {
-
 
     protected $redirectRoute = 'editDependencia';
 
@@ -19,11 +19,14 @@ class DependenciaRequest extends FormRequest
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
+    public function validationData(){
+        $attributes = parent::all();
+        $attributes['dependencia'] = strtoupper(trim($attributes['dependencia']));
+        $attributes['abreviatura'] = strtoupper(trim($attributes['abreviatura']));
+        $this->replace($attributes);
+        return parent::all();
+    }
+
     public function rules()
     {
         return [
@@ -63,6 +66,8 @@ class DependenciaRequest extends FormRequest
             'user_id' => 1,
         ];
 
+//        dd($Item);
+
         try {
 
             if ($this->id == 0) {
@@ -76,8 +81,7 @@ class DependenciaRequest extends FormRequest
             }
         }catch (QueryException $e){
             $Msg = new MessageAlertClass();
-//            dd($Msg->Message($e));
-            return $Msg->Message($e);
+            throw new HttpResponseException(response()->json( $Msg->Message($e), 422));
         }
 //        dd($item);
         return $item;
@@ -92,9 +96,9 @@ class DependenciaRequest extends FormRequest
             return $url->route('newDependencia');
         }
     }
-    
-    
-    
-    
-    
+
+
+
+
+
 }

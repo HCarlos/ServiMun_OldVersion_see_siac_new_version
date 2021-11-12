@@ -7,6 +7,7 @@ use App\Rules\Uppercase;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Classes\MessageAlertClass;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class CiudadRequest extends FormRequest
 {
@@ -19,11 +20,13 @@ class CiudadRequest extends FormRequest
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
+    public function validationData(){
+        $attributes = parent::all();
+        $attributes['ciudad'] = strtoupper(trim($attributes['ciudad']));
+        $this->replace($attributes);
+        return parent::all();
+    }
+
     public function rules()
     {
         return [
@@ -62,7 +65,7 @@ class CiudadRequest extends FormRequest
             }
         }catch (QueryException $e){
             $Msg = new MessageAlertClass();
-            return $Msg->Message($e);
+            throw new HttpResponseException(response()->json( $Msg->Message($e), 422));
         }
         return $item;
     }
@@ -75,12 +78,12 @@ class CiudadRequest extends FormRequest
         }else{
             return $url->route('newCiudad');
         }
-    } 
-    
-    
-    
-    
-    
-    
-    
+    }
+
+
+
+
+
+
+
 }
