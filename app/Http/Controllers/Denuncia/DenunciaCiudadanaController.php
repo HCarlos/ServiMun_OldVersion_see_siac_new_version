@@ -84,7 +84,7 @@ class DenunciaCiudadanaController extends Controller
                 'editItemTitle'   => 'Nuevo',
                 'prioridades'     => $Prioridades,
                 'origenes'        => $Origenes,
-                'dependencia'    => $Dependencias,
+                'dependencias'    => $Dependencias,
                 'ciudadanos'      => $Ciudadanos,
                 'estatus'         => $Estatus,
                 'postNew'         => 'createDenunciaCiudadana',

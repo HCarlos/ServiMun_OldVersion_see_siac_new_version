@@ -117,7 +117,7 @@ class DenunciaController extends Controller
         if($IsEnlace){
             $DependenciaArray = explode('|',Session::get('DependenciaArray'));
             $Dependencias = Dependencia::all()->whereIn('dependencia',$DependenciaArray,true)->sortBy('dependencia');
-            $Ciudadanos   = User::query()->whereHas('dependencia',function ($r) use ($DependenciaArray) {
+            $Ciudadanos   = User::query()->whereHas('dependencias',function ($r) use ($DependenciaArray) {
                 return $r->whereIn('dependencia',$DependenciaArray);
             })->get()->sortBy(function ($q){
                 return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
@@ -138,7 +138,7 @@ class DenunciaController extends Controller
                 'user'            => Auth::user(),
                 'prioridades'     => $Prioridades,
                 'origenes'        => $Origenes,
-                'dependencia'    => $Dependencias,
+                'dependencias'    => $Dependencias,
                 'servicios'       => $Servicios,
                 'ciudadanos'      => $Ciudadanos,
                 'estatus'         => $Estatus,
@@ -165,7 +165,7 @@ class DenunciaController extends Controller
         if($IsEnlace){
             $DependenciaArray = explode('|',Session::get('DependenciaArray'));
             $Dependencias = Dependencia::all()->whereIn('dependencia',$DependenciaArray,true)->sortBy('dependencia');
-            $Ciudadanos   = User::query()->whereHas('dependencia',function ($r) use ($DependenciaArray) {
+            $Ciudadanos   = User::query()->whereHas('dependencias',function ($r) use ($DependenciaArray) {
                 return $r->whereIn('dependencia',$DependenciaArray);
             })->get()->sortBy(function ($q){
                 return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
@@ -186,7 +186,7 @@ class DenunciaController extends Controller
         $itemsDen = [
             'prioridades'     => $Prioridades,
             'origenes'        => $Origenes,
-            'dependencia'    => $Dependencias,
+            'dependencias'    => $Dependencias,
             'servicios'       => $Servicios,
             'ciudadanos'      => $Ciudadanos,
             'estatus'         => $Estatus,
@@ -268,7 +268,7 @@ class DenunciaController extends Controller
         if($IsEnlace){
             $DependenciaArray = explode('|',Session::get('DependenciaArray'));
             $Dependencias = Dependencia::all()->whereIn('dependencia',$DependenciaArray,true)->sortBy('dependencia');
-            $Ciudadanos   = User::query()->whereHas('dependencia',function ($r) use ($DependenciaArray) {
+            $Ciudadanos   = User::query()->whereHas('dependencias',function ($r) use ($DependenciaArray) {
                 return $r->whereIn('dependencia',$DependenciaArray);
             })->get()->sortBy(function ($q){
                 return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
@@ -289,7 +289,7 @@ class DenunciaController extends Controller
                 'editItemTitle'   => 'Nuevo',
                 'prioridades'     => $Prioridades,
                 'origenes'        => $Origenes,
-                'dependencia'    => $Dependencias,
+                'dependencias'    => $Dependencias,
                 'ciudadanos'      => $Ciudadanos,
                 'estatus'         => $Estatus,
                 'postNew'         => 'createDenuncia',
@@ -371,7 +371,7 @@ class DenunciaController extends Controller
         return view ('denuncia.search.denuncia_search_panel',
             [
                 'findDataInDenuncia' => 'findDataInDenuncia',
-                'dependencia'       => $Dependencias,
+                'dependencias'       => $Dependencias,
                 'servicios'          => $Servicios,
                 'estatus'            => $Estatus,
                 'items'              => $user,
