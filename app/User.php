@@ -4,6 +4,7 @@ namespace App;
 
 use App\Filters\User\UserFilter;
 use App\Models\Catalogos\Dependencia;
+use App\Models\Catalogos\Domicilios\Ubicacion;
 use App\Models\Denuncias\Respuesta;
 use App\Models\Familias\Familia;
 use App\Models\Familias\Parentesco;
@@ -40,7 +41,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'fecha_nacimiento','genero',
         'root','filename','filename_png','filename_thumb',
         'empresa_id','status_user','ip','host',
-        'logged','logged_at','logout_at',
+        'logged','logged_at','logout_at', 'user_mig_id',
     ];
 
     protected $hidden = ['password', 'remember_token',];
@@ -73,6 +74,10 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function respuestas(){
         return $this->belongsToMany(Respuesta::class);
+    }
+
+    public function ubicaciones(){
+        return $this->belongsToMany(Ubicacion::class);
     }
 
     public function isAdmin(){

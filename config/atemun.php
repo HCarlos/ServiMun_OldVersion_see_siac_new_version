@@ -66,7 +66,7 @@ return [
             'prioridades'                           => 'prioridades',
             'estatus'                               => 'estatus',
             'origenes'                              => 'origenes',
-            'dependencia'                          => 'dependencia',
+            'dependencias'                          => 'dependencias',
             'areas'                                 => 'areas',
             'subareas'                              => 'subareas',
             'servicios'                             => 'servicios',
@@ -97,6 +97,7 @@ return [
             'respuesta_user'                        => 'respuesta_user',
             'imagenes'                              => 'imagenes',
             'denuncia_imagene'                      => 'denuncia_imagene',
+            'denuncia_user'                         => 'denuncia_user',
             'imagene_user'                          => 'imagene_user',
             'imagene_parent'                        => 'imagene_parent',
         ],
@@ -128,6 +129,7 @@ return [
             'codigopostal_ubicacion' => 'codigopostal_ubicacion',
 
             'ubicaciones'            => 'ubicaciones',
+            'ubicacion_user'         => 'ubicacion_user',
 
             'colonia_comunidad'      => 'colonia_comunidad',
             'codigopostal_colonia'   => 'codigopostal_colonia',

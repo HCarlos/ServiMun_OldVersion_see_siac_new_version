@@ -15,7 +15,7 @@ class Calle extends Model
     protected $table = 'calles';
 
     protected $fillable = [
-        'id', 'calle',
+        'id', 'calle', 'calle_mig_id',
     ];
 
     public function scopeFilterBy($query, $filters)

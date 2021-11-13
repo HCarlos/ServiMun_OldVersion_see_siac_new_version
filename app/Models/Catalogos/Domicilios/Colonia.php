@@ -16,6 +16,7 @@ class Colonia extends Model
 
     protected $fillable = [
         'id', 'colonia', 'cp','altitud','latitud','longitud','codigopostal_id','comunidad_id','tipocomunidad_id',
+        'colonia_mig_id',
     ];
 
     public function scopeFilterBy($query, $filters){

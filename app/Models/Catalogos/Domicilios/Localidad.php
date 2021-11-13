@@ -15,7 +15,7 @@ class Localidad extends Model
     protected $table = 'localidades';
 
     protected $fillable = [
-        'id', 'localidad',
+        'id', 'localidad','localidad_mig_id',
     ];
 
     public function scopeFilterBy($query, $filters){
@@ -31,6 +31,6 @@ class Localidad extends Model
         }
         return $obj;
     }
-    
+
 
 }

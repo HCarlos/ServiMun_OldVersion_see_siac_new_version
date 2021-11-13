@@ -15,7 +15,7 @@ class Estado extends Model
     protected $table = 'estados';
 
     protected $fillable = [
-        'id', 'estado',
+        'id', 'estado', 'estado_mig_id',
     ];
 
     public function scopeFilterBy($query, $filters){

@@ -15,7 +15,7 @@ class Municipio extends Model
     protected $table = 'municipios';
 
     protected $fillable = [
-        'id', 'municipio',
+        'id', 'municipio', 'estado_id', 'numero_municipio', 'municipio_mig_id',
     ];
 
     public function scopeFilterBy($query, $filters){

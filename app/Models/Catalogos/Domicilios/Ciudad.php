@@ -15,7 +15,7 @@ class Ciudad extends Model
     protected $table = 'ciudades';
 
     protected $fillable = [
-        'id', 'ciudad',
+        'id', 'ciudad', 'ciudad_mig_id', 'municipio_id',
     ];
 
     public function scopeFilterBy($query, $filters){

@@ -7,6 +7,7 @@ namespace App\Models\Catalogos\Domicilios;
 
 use App\Filters\Catalogo\Domicilio\UbicacionFilter;
 use App\Traits\Catalogos\Domicilio\Ubicacion\UbicacionTrait;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -83,6 +84,11 @@ class Ubicacion extends Model
     public function codigospostales(){
         return $this->belongsToMany(Codigopostal::class,'codigopostal_ubicacion','ubicacion_id','codigopostal_id');
     }
+
+    public function users(){
+        return $this->belongsToMany(User::class);
+    }
+
 
     public function getUbicacionAttribute() {
         return trim($this->calle).' '.trim($this->num_ext).' '.trim($this->num_int).', '.trim($this->colonia).', '.trim($this->comunidad).', '.trim($this->ciudad).', '.trim($this->municipio);

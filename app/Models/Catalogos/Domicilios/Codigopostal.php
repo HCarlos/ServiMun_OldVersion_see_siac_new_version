@@ -15,7 +15,7 @@ class Codigopostal extends Model
     protected $table = 'codigospostales';
 
     protected $fillable = [
-        'id', 'codigo', 'cp',
+        'id', 'codigo', 'cp', 'cp_mig_id',
     ];
 
     public function scopeFilterBy($query, $filters){

@@ -18,7 +18,8 @@ class Comunidad extends Model
     protected $table = 'comunidades';
 
     protected $fillable = [
-        'id', 'comunidad','delegado_id','tipocomunidad_id','ciudad_id','municipio_id','estado_id'
+        'id', 'comunidad','delegado_id','tipocomunidad_id','ciudad_id','municipio_id','estado_id',
+        'comunidad_mig_id',
     ];
 
     public function scopeFilterBy($query, $filters){
