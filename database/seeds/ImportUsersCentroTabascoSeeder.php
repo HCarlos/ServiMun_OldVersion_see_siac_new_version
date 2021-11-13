@@ -263,25 +263,6 @@ class ImportUsersCentroTabascoSeeder extends Seeder{
                 }
 
 
-//                dd( $Ubi );
-
-                //
-//                INE::setDataINE(
-//                    $ine->localidad,
-//                    $ine->estado_id,
-//                    $ine->municipio,
-//                    $ine->codigo_postal,
-//                    $ine->calle,
-//                    $ine->num_ext,
-//                    $ine->num_int,
-//                    $ine->nombre,
-//                    $ine->ap_paterno,
-//                    $ine->ap_materno,
-//                    $ine->curp,
-//                    $fnac,
-//                    $ine->genero,
-//                    $ine->nac
-//                );
             }catch (QueryException $e){
                 Log::alert("Error en ".$user_mid_id. ' => '.$e->getMessage());
                 continue;
