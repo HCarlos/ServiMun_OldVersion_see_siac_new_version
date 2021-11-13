@@ -23,69 +23,69 @@ class ImportUsersCentroTabascoSeeder extends Seeder{
         @ini_set( 'post_max_size', '32768M');
         @ini_set( 'max_execution_time', '256000000' );
 
-        Calle::query()->truncate();
-        Colonia::query()->truncate();
-        Localidad::query()->truncate();
-        Ciudad::query()->truncate();
-        Municipio::query()->truncate();
-        Estado::query()->truncate();
-        Codigopostal::query()->truncate();
-        Comunidad::query()->truncate();
-        Ubicacion::query()->truncate();
+//        Calle::query()->truncate();
+//        Colonia::query()->truncate();
+//        Localidad::query()->truncate();
+//        Ciudad::query()->truncate();
+//        Municipio::query()->truncate();
+//        Estado::query()->truncate();
+//        Codigopostal::query()->truncate();
+//        Comunidad::query()->truncate();
+//        Ubicacion::query()->truncate();
 
         // Subimos los Estados
-        $file = 'public/csv/estados.csv';
-        $json_data = file_get_contents($file);
-        $json_data = preg_split( "/\n/", $json_data );
-        for ($x = 0; $x < count($json_data); $x++){
-            try{
-                $dupla = preg_split("/\t/", $json_data[$x], -1, PREG_SPLIT_NO_EMPTY);
-                $arr = str_getcsv($dupla[0]);
-                Estado::create(['id'=>$arr[0],'estado'=>$arr[1],'estado_mig_id'=>$arr[0]]);
-            }catch (QueryException $e){
-                Log::alert($e->getMessage());
-                continue;
-            }catch (Exception $e){
-                Log::alert($e->getMessage());
-                continue;
-            }
-        }
+//        $file = 'public/csv/estados.csv';
+//        $json_data = file_get_contents($file);
+//        $json_data = preg_split( "/\n/", $json_data );
+//        for ($x = 0; $x < count($json_data); $x++){
+//            try{
+//                $dupla = preg_split("/\t/", $json_data[$x], -1, PREG_SPLIT_NO_EMPTY);
+//                $arr = str_getcsv($dupla[0]);
+//                Estado::create(['id'=>$arr[0],'estado'=>$arr[1],'estado_mig_id'=>$arr[0]]);
+//            }catch (QueryException $e){
+//                Log::alert($e->getMessage());
+//                continue;
+//            }catch (Exception $e){
+//                Log::alert($e->getMessage());
+//                continue;
+//            }
+//        }
 
         // Subimos los Municipios
-        $file = 'public/csv/municipios.csv';
-        $json_data = file_get_contents($file);
-        $json_data = preg_split( "/\n/", $json_data );
-        for ($x = 0; $x < count($json_data); $x++){
-            try{
-                $dupla = preg_split("/\t/", $json_data[$x], -1, PREG_SPLIT_NO_EMPTY);
-                $arr = str_getcsv($dupla[0]);
-                Municipio::create(['id'=>$arr[0],'municipio'=>$arr[1],'estado_id'=>$arr[2],'numero_municipio'=>$arr[3],'municipio_mig_id'=>$arr[0]]);
-            }catch (QueryException $e){
-                Log::alert($e->getMessage());
-                continue;
-            }catch (Exception $e){
-                Log::alert($e->getMessage());
-                continue;
-            }
-        }
+//        $file = 'public/csv/municipios.csv';
+//        $json_data = file_get_contents($file);
+//        $json_data = preg_split( "/\n/", $json_data );
+//        for ($x = 0; $x < count($json_data); $x++){
+//            try{
+//                $dupla = preg_split("/\t/", $json_data[$x], -1, PREG_SPLIT_NO_EMPTY);
+//                $arr = str_getcsv($dupla[0]);
+//                Municipio::create(['id'=>$arr[0],'municipio'=>$arr[1],'estado_id'=>$arr[2],'numero_municipio'=>$arr[3],'municipio_mig_id'=>$arr[0]]);
+//            }catch (QueryException $e){
+//                Log::alert($e->getMessage());
+//                continue;
+//            }catch (Exception $e){
+//                Log::alert($e->getMessage());
+//                continue;
+//            }
+//        }
 
         // Subimos los Ciudades
-        $file = 'public/csv/ciudades.csv';
-        $json_data = file_get_contents($file);
-        $json_data = preg_split( "/\n/", $json_data );
-        for ($x = 0; $x < count($json_data); $x++){
-            try{
-                $dupla = preg_split("/\t/", $json_data[$x], -1, PREG_SPLIT_NO_EMPTY);
-                $arr = str_getcsv($dupla[0]);
-                Ciudad::create(['id'=>$arr[0],'ciudad'=>$arr[1],'municipio_id'=>$arr[2],'ciudad_mig_id'=>$arr[0]]);
-            }catch (QueryException $e){
-                Log::alert($e->getMessage());
-                continue;
-            }catch (Exception $e){
-                Log::alert($e->getMessage());
-                continue;
-            }
-        }
+//        $file = 'public/csv/ciudades.csv';
+//        $json_data = file_get_contents($file);
+//        $json_data = preg_split( "/\n/", $json_data );
+//        for ($x = 0; $x < count($json_data); $x++){
+//            try{
+//                $dupla = preg_split("/\t/", $json_data[$x], -1, PREG_SPLIT_NO_EMPTY);
+//                $arr = str_getcsv($dupla[0]);
+//                Ciudad::create(['id'=>$arr[0],'ciudad'=>$arr[1],'municipio_id'=>$arr[2],'ciudad_mig_id'=>$arr[0]]);
+//            }catch (QueryException $e){
+//                Log::alert($e->getMessage());
+//                continue;
+//            }catch (Exception $e){
+//                Log::alert($e->getMessage());
+//                continue;
+//            }
+//        }
 
         $file = 'public/csv/dump_centro_tab.csv';
         $json_data = file_get_contents($file);
