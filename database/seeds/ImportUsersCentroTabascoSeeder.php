@@ -13,6 +13,7 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class ImportUsersCentroTabascoSeeder extends Seeder{
@@ -87,6 +88,9 @@ class ImportUsersCentroTabascoSeeder extends Seeder{
 //            }
 //        }
 
+        DB::raw("DELETE FROM users where id > 13");
+        DB::raw("ALTER SEQUENCE users_id_seq RESTART WITH 14");
+
         $file = 'public/csv/dump_centro_tab.csv';
         $json_data = file_get_contents($file);
         $json_data = preg_split( "/\n/", $json_data );
@@ -133,43 +137,43 @@ class ImportUsersCentroTabascoSeeder extends Seeder{
                 $longitud         = trim($arr[24]) == "" ? 0 : intval($arr[24]);
                 $altitud          = trim($arr[25]) == "" ? 0 : intval($arr[25]);
 
-                $Calle            = Calle::query()->where('calle_mig_id',$arr[7])->get();
+                $Calle = Calle::query()->where('calle_mig_id',$arr[7])->get();
                 if ( $Calle->count() <= 0 ){
                     $Calle = Calle::create(['calle'=>$calle,'calle_mig_id'=>$calle_mig_id]);
                 }
 
-                $CP               = Codigopostal::query()->where('cp_mig_id',$arr[21])->get();
+                $CP = Codigopostal::query()->where('cp_mig_id',$arr[21])->get();
                 if ( $CP->count() <= 0 ){
                     $CP = Codigopostal::create(['codigo'=>'000000','cp'=>$cp,'cp_mig_id'=>$cp_mig_id]);
                 }
 
-                $Localidad        = Localidad::query()->where('localidad_mig_id',$arr[13])->get();
+                $Localidad = Localidad::query()->where('localidad_mig_id',$arr[13])->get();
                 if ( $Localidad->count() <= 0 ){
                     $Localidad = Localidad::create(['localidad'=>$localidad,'localidad_mig_id'=>$localidad_mig_id]);
                 }
 
-                $Comunidad        = Comunidad::query()->where('comunidad_mig_id',$arr[13])->get();
+                $Comunidad = Comunidad::query()->where('comunidad_mig_id',$arr[13])->get();
                 if ( $Comunidad->count() <= 0 ){
                     $Comunidad = Comunidad::create(['comunidad'=>$localidad,'delegado_id'=>1,'tipocomunidad_id'=>1,'ciudad_id'=>1,'municipio_id'=>1,'estado_id'=>1,'comunidad_mig_id'=>$localidad_mig_id]);
                 }
 
-                $Colonia          = Colonia::query()->where('colonia_mig_id',$arr[11])->get();
+                $Colonia = Colonia::query()->where('colonia_mig_id',$arr[11])->get();
                 if ( $Colonia->count() <= 0 ){
                     $col = ['colonia'=>$colonia, 'cp'=>$cp,'altitud'=>$altitud,'latitud'=>$latitud,'longitud'=>$longitud,'codigopostal_id'=> !isset($CP->id) ? 1 : $CP->id,'comunidad_id'=> !isset($Comunidad->id) ? 1 : $Comunidad->id ,'tipocomunidad_id'=>1,'colonia_mig_id'=>$arr[11]];
                     $Colonia = Colonia::create($col);
                 }
 
-                $Estado            = Estado::query()->where('estado_mig_id',$arr[19])->get();
+                $Estado = Estado::query()->where('estado_mig_id',$arr[19])->get();
                 if ( $Estado->count() <= 0 ){
                     $Estado = Estado::create(['estado'=>$estado,'pais_id'=>1,'estado_mig_id'=>$estado_mig_id]);
                 }
 
-                $Municipio            = Municipio::query()->where('municipio_mig_id',$arr[17])->get();
+                $Municipio = Municipio::query()->where('municipio_mig_id',$arr[17])->get();
                 if ( $Municipio->count() <= 0 ){
                     $Municipio = Municipio::create(['municipio'=>$municipio,'estado_id'=>!isset($Estado->id) ? 33 : $Estado->id,'municipio_mig_id'=>$municipio_mig_id]);
                 }
 
-                $Ciudad            = Ciudad::query()->where('ciudad_mig_id',$arr[15])->get();
+                $Ciudad = Ciudad::query()->where('ciudad_mig_id',$arr[15])->get();
                 if ( $Ciudad->count() <= 0 ){
                     $Ciudad = Ciudad::create(['ciudad'=>$ciudad,'municipio_id'=>!isset($Municipio->id) ? 2007 : $Municipio->id,'ciudad_mig_id'=>$ciudad_mig_id]);
                 }
@@ -235,7 +239,7 @@ class ImportUsersCentroTabascoSeeder extends Seeder{
                             'nombre'           => strtoupper(trim($nombre)),
                             'fecha_nacimiento' => $fecha_nacimiento,
                             'genero'           => $genero,
-                            'empresa_id'       => 1,
+                            'empresa_id'       => config('atemun.empresa_id'),
                             'user_mig_id'      => $user_mid_id
                         ];
 
@@ -244,14 +248,22 @@ class ImportUsersCentroTabascoSeeder extends Seeder{
                         if ( $Usr->count() <= 0 ) {
                             $User = User::create($Item);
                             $User->user_adress()->create([
-                                'calle' => $Ubi->calle,
-                                'num_ext' => $Ubi->num_ext,
-                                'num_int' => $Ubi->num_int,
-                                'colonia' => $Ubi->colonia,
+                                'calle'     => $Ubi->calle,
+                                'num_ext'   => $Ubi->num_ext,
+                                'num_int'   => $Ubi->num_int,
+                                'colonia'   => $Ubi->colonia,
                                 'localidad' => $Ubi->comunidad,
-                                'cp' => $Ubi->cp,
+                                'municipio' => $Ubi->municipio,
+                                'estado'    => $Ubi->estado,
+                                'pais'      => $Ubi->pais,
+                                'cp'        => $Ubi->cp,
                             ]);
-                            $User->user_data_extend()->create();
+                            $User->user_data_extend()->create([
+                                'ocupacion'        => "",
+                                'profesion'        => "",
+                                'lugar_trabajo'    => "",
+                                'lugar_nacimiento' => "",
+                            ]);
                             $User->ubicaciones()->attach($Ubi);
                             $User->permissions()->attach(7); // Consultar
                             $User->roles()->attach(11); // Ciudadano
