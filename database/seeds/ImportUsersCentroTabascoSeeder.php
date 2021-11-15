@@ -24,21 +24,23 @@ class ImportUsersCentroTabascoSeeder extends Seeder{
         @ini_set( 'post_max_size', '32768M');
         @ini_set( 'max_execution_time', '256000000' );
         @ini_set('memory_limit', '-1');
-        @ini_set( 'upload_max_size' , '2048M' );
-        @ini_set( 'post_max_size', '2048M');
-        @ini_set( 'max_execution_time', '36000' );
+//        @ini_set( 'upload_max_size' , '2048M' );
+//        @ini_set( 'post_max_size', '2048M');
+//        @ini_set( 'max_execution_time', '36000' );
+
 
         Calle::query()->truncate();
         Colonia::query()->truncate();
         Localidad::query()->truncate();
 
-//        Ciudad::query()->truncate();
-//        Municipio::query()->truncate();
-//        Estado::query()->truncate();
+ //        Ciudad::query()->truncate();
+ //        Municipio::query()->truncate();
+ //        Estado::query()->truncate();
 
         Codigopostal::query()->truncate();
         Comunidad::query()->truncate();
         Ubicacion::query()->truncate();
+
 
         // Subimos los Estados
 //        $file = 'public/csv/estados.csv';

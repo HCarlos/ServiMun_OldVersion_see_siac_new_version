@@ -28,7 +28,7 @@ class UserDataController extends Controller
         $items = User::query()
             ->filterBy($filters)
             ->orderByDesc('id')
-            ->paginate();
+            ->paginate(250);
         $items->appends($filters)->fragment('table');
         $user = Auth::User();
         $roles = Role::all();
