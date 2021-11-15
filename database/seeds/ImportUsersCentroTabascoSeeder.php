@@ -23,16 +23,22 @@ class ImportUsersCentroTabascoSeeder extends Seeder{
         @ini_set( 'upload_max_size' , '32768M' );
         @ini_set( 'post_max_size', '32768M');
         @ini_set( 'max_execution_time', '256000000' );
+        @ini_set('memory_limit', '-1');
+        @ini_set( 'upload_max_size' , '2048M' );
+        @ini_set( 'post_max_size', '2048M');
+        @ini_set( 'max_execution_time', '36000' );
 
-//        Calle::query()->truncate();
-//        Colonia::query()->truncate();
-//        Localidad::query()->truncate();
+        Calle::query()->truncate();
+        Colonia::query()->truncate();
+        Localidad::query()->truncate();
+
 //        Ciudad::query()->truncate();
 //        Municipio::query()->truncate();
 //        Estado::query()->truncate();
-//        Codigopostal::query()->truncate();
-//        Comunidad::query()->truncate();
-//        Ubicacion::query()->truncate();
+
+        Codigopostal::query()->truncate();
+        Comunidad::query()->truncate();
+        Ubicacion::query()->truncate();
 
         // Subimos los Estados
 //        $file = 'public/csv/estados.csv';
@@ -88,12 +94,19 @@ class ImportUsersCentroTabascoSeeder extends Seeder{
 //            }
 //        }
 
-        DB::raw("DELETE FROM users where id > 13");
-        DB::raw("ALTER SEQUENCE users_id_seq RESTART WITH 14");
+        //User::where('id','>',13)->softdelete();
+        $user = User::withTrashed()->where('id','>',13);
+        $user->forceDelete();
+        DB::statement("ALTER SEQUENCE users_id_seq RESTART WITH 14 ");
+
+        //dd(  );
 
         $file = 'public/csv/dump_centro_tab.csv';
         $json_data = file_get_contents($file);
         $json_data = preg_split( "/\n/", $json_data );
+
+//        dd(count($json_data));
+
         for ($x = 0; $x < count($json_data); $x++){
             try{
 
@@ -137,47 +150,61 @@ class ImportUsersCentroTabascoSeeder extends Seeder{
                 $longitud         = trim($arr[24]) == "" ? 0 : intval($arr[24]);
                 $altitud          = trim($arr[25]) == "" ? 0 : intval($arr[25]);
 
-                $Calle = Calle::query()->where('calle_mig_id',$arr[7])->get();
-                if ( $Calle->count() <= 0 ){
+                $Calle = Calle::query()->where('calle',$calle)->first();
+                if ( !$Calle ){
                     $Calle = Calle::create(['calle'=>$calle,'calle_mig_id'=>$calle_mig_id]);
                 }
 
-                $CP = Codigopostal::query()->where('cp_mig_id',$arr[21])->get();
-                if ( $CP->count() <= 0 ){
+                $CP = Codigopostal::query()->where('cp',$cp)->first();
+                if ( !$CP ){
                     $CP = Codigopostal::create(['codigo'=>'000000','cp'=>$cp,'cp_mig_id'=>$cp_mig_id]);
                 }
 
-                $Localidad = Localidad::query()->where('localidad_mig_id',$arr[13])->get();
-                if ( $Localidad->count() <= 0 ){
+                $Localidad = Localidad::query()->where('localidad',$localidad)->first();
+                if ( !$Localidad ){
                     $Localidad = Localidad::create(['localidad'=>$localidad,'localidad_mig_id'=>$localidad_mig_id]);
                 }
 
-                $Comunidad = Comunidad::query()->where('comunidad_mig_id',$arr[13])->get();
-                if ( $Comunidad->count() <= 0 ){
+                $Comunidad = Comunidad::query()->where('comunidad',$localidad)->first();
+                if ( !$Comunidad ){
                     $Comunidad = Comunidad::create(['comunidad'=>$localidad,'delegado_id'=>1,'tipocomunidad_id'=>1,'ciudad_id'=>1,'municipio_id'=>1,'estado_id'=>1,'comunidad_mig_id'=>$localidad_mig_id]);
                 }
 
-                $Colonia = Colonia::query()->where('colonia_mig_id',$arr[11])->get();
-                if ( $Colonia->count() <= 0 ){
-                    $col = ['colonia'=>$colonia, 'cp'=>$cp,'altitud'=>$altitud,'latitud'=>$latitud,'longitud'=>$longitud,'codigopostal_id'=> !isset($CP->id) ? 1 : $CP->id,'comunidad_id'=> !isset($Comunidad->id) ? 1 : $Comunidad->id ,'tipocomunidad_id'=>1,'colonia_mig_id'=>$arr[11]];
+                $Colonia = Colonia::query()->where('colonia',$colonia)->first();
+                if ( !$Colonia ){
+                    $col = ['colonia'=>$colonia, 'cp'=>$cp,'altitud'=>$altitud,'latitud'=>$latitud,'longitud'=>$longitud,'codigopostal_id'=> !isset($CP->id) ? 1 : $CP->id,'comunidad_id'=> !isset($Comunidad->id) ? 1 : $Comunidad->id ,'tipocomunidad_id'=>1,'colonia_mig_id'=>$colonia_mig_id];
                     $Colonia = Colonia::create($col);
                 }
 
-                $Estado = Estado::query()->where('estado_mig_id',$arr[19])->get();
-                if ( $Estado->count() <= 0 ){
+                $Estado = Estado::query()->where('estado',$estado)->first();
+                if ( !$Estado ){
                     $Estado = Estado::create(['estado'=>$estado,'pais_id'=>1,'estado_mig_id'=>$estado_mig_id]);
                 }
 
-                $Municipio = Municipio::query()->where('municipio_mig_id',$arr[17])->get();
-                if ( $Municipio->count() <= 0 ){
+                $Municipio = Municipio::query()->where('municipio',$municipio)->first();
+                if ( !$Municipio ){
                     $Municipio = Municipio::create(['municipio'=>$municipio,'estado_id'=>!isset($Estado->id) ? 33 : $Estado->id,'municipio_mig_id'=>$municipio_mig_id]);
                 }
 
-                $Ciudad = Ciudad::query()->where('ciudad_mig_id',$arr[15])->get();
-                if ( $Ciudad->count() <= 0 ){
+                $Ciudad = Ciudad::query()->where('ciudad',$ciudad)->first();
+                if ( !$Ciudad ){
                     $Ciudad = Ciudad::create(['ciudad'=>$ciudad,'municipio_id'=>!isset($Municipio->id) ? 2007 : $Municipio->id,'ciudad_mig_id'=>$ciudad_mig_id]);
                 }
+                $calle_id        = !isset($Calle->id)  ? 1 : $Calle->id;
+                $colonia_id      = !isset($Colonia->id) ? 1 : $Colonia->id;
+                $comunidad_id    = !isset($Comunidad->id) ? 1 : $Comunidad->id;
+                $ciudad_id       = !isset($Ciudad->id)  ? 1 : $Ciudad->id;
+                $municipio_id    = !isset($Municipio->id)  ? 1 : $Municipio->id;
+                $estado_id       = !isset($Estado->id)  ? 1 : $Estado->id;
+                $codigopostal_id = !isset($CP->id) ? 1 : $CP->id;
 
+                $calle           = !isset($Calle->calle)  ? "" : $Calle->calle;
+                $colonia         = !isset($Colonia->colonia) ? "" : $Colonia->colonia;
+                $comunidad       = !isset($Comunidad->comunidad) ? "" : $Comunidad->comunidad;
+                $ciudad          = !isset($Ciudad->ciudad)  ? "" : $Ciudad->ciudad;
+                $municipio       = !isset($Municipio->municipio)  ? "" : $Municipio->municipio;
+                $estado          = !isset($Estado->estado)  ? "" : $Estado->estado;
+                $cp              = !isset($CP->cp) ? "" : $CP->cp;
 
                 $Item = [
                     'calle'           => $calle,
@@ -186,97 +213,116 @@ class ImportUsersCentroTabascoSeeder extends Seeder{
                     'colonia'         => $colonia,
                     'comunidad'       => $localidad,
                     'ciudad'          => $ciudad,
-                    'municipio'       => 'CENTRO',
-                    'estado'          => 'TABASCO',
+                    'municipio'       => $municipio,
+                    'estado'          => $estado,
                     'pais'            => 'MEXICO',
                     'cp'              => $cp,
                     'latitud'         => $latitud,
                     'longitud'        => $longitud,
-                    'calle_id'        => !isset($Calle->id)  ? 1 : $Calle->id,
-                    'colonia_id'      => !isset($Colonia->id) ? 1 : $Colonia->id,
-                    'comunidad_id'    => !isset($Comunidad->id) ? 1 : $Comunidad->id,
-                    'ciudad_id'       => !isset($Ciudad->id)  ? 1 : $Ciudad->id,
-                    'municipio_id'    => !isset($Municipio->id)  ? 1 : $Municipio->id,
-                    'estado_id'       => !isset($Estado->id)  ? 1 : $Estado->id,
-                    'codigopostal_id' => !isset($CP->id) ? 1 : $CP->id,
+                    'calle_id'        => $calle_id,
+                    'colonia_id'      => $colonia_id,
+                    'comunidad_id'    => $comunidad_id,
+                    'ciudad_id'       => $ciudad_id,
+                    'municipio_id'    => $municipio_id,
+                    'estado_id'       => $estado_id,
+                    'codigopostal_id' => $codigopostal_id,
                 ];
 
                 //dd($Item);
 
                 $Ubi = Ubicacion::query()
-                    ->where('calle_id',$Calle->id)
+                    ->where('calle_id',$calle_id)
                     ->where('num_ext',strtoupper(trim($num_ext)))
                     ->where('num_int',strtoupper(trim($num_int)))
-                    ->where('colonia_id',$Colonia->id)
-                    ->where('comunidad_id',$Comunidad->id)
-                    ->where('ciudad_id',$ciudad_mig_id)
-                    ->where('municipio_id',$municipio_mig_id)
-                    ->where('estado_id',$estado_mig_id)
-                    ->get();
+                    ->where('colonia_id',$colonia_id)
+                    ->where('comunidad_id',$comunidad_id)
+                    ->where('ciudad_id',$ciudad_id)
+                    ->where('municipio_id',$municipio_id)
+                    ->where('estado_id',$estado_id)
+                    ->first();
 
 //                dd( $Ubi->count());
 
-                if ( $Ubi->count() <= 0 ) {
+                if ( !$Ubi ) {
                     $Ubi = Ubicacion::create($Item);
-                    if ( $Ubi ) {
-                        $Ubi->calles()->attach($Ubi->calle_id);
-                        $Ubi->colonias()->attach($Ubi->colonia_id);
-                        $Ubi->comunidades()->attach($Ubi->comunidad_id);
-                        $Ubi->ciudades()->attach($Ubi->ciudad_id);
-                        $Ubi->municipios()->attach($Ubi->municipio_id);
-                        $Ubi->estados()->attach($Ubi->estado_id);
-                        $Ubi->codigospostales()->attach($Ubi->codigopostal_id);
-
-
-                        $curp = strtoupper(trim($curp));
-                        $Item = [
-                            'curp'             => strtoupper(trim($curp)),
-                            'username'         => $curp,
-                            'password'         => bcrypt($curp),
-                            'email'            => strtolower(trim($curp))."@mail.com",
-                            'ap_paterno'       => strtoupper(trim($ap_paterno)),
-                            'ap_materno'       => strtoupper(trim($ap_materno)),
-                            'nombre'           => strtoupper(trim($nombre)),
-                            'fecha_nacimiento' => $fecha_nacimiento,
-                            'genero'           => $genero,
-                            'empresa_id'       => config('atemun.empresa_id'),
-                            'user_mig_id'      => $user_mid_id
-                        ];
-
-                        $Usr = User::query()->where('curp',$curp)->get();
-
-                        if ( $Usr->count() <= 0 ) {
-                            $User = User::create($Item);
-                            $User->user_adress()->create([
-                                'calle'     => $Ubi->calle,
-                                'num_ext'   => $Ubi->num_ext,
-                                'num_int'   => $Ubi->num_int,
-                                'colonia'   => $Ubi->colonia,
-                                'localidad' => $Ubi->comunidad,
-                                'municipio' => $Ubi->municipio,
-                                'estado'    => $Ubi->estado,
-                                'pais'      => $Ubi->pais,
-                                'cp'        => $Ubi->cp,
-                            ]);
-                            $User->user_data_extend()->create([
-                                'ocupacion'        => "",
-                                'profesion'        => "",
-                                'lugar_trabajo'    => "",
-                                'lugar_nacimiento' => "",
-                            ]);
-                            $User->ubicaciones()->attach($Ubi);
-                            $User->permissions()->attach(7); // Consultar
-                            $User->roles()->attach(11); // Ciudadano
-                            $User->roles()->attach(12); // Ciudadano Internet
-                        }
-
-
-                    }
+                    $Ubi->calles()->attach($calle_id);
+                    $Ubi->colonias()->attach($colonia_id);
+                    $Ubi->comunidades()->attach($comunidad_id);
+                    $Ubi->ciudades()->attach($ciudad_id);
+                    $Ubi->municipios()->attach($municipio_id);
+                    $Ubi->estados()->attach($estado_id);
+                    $Ubi->codigospostales()->attach($codigopostal_id);
                 }
 
+                    $curp = strtoupper(trim($curp));
+
+                    $SiEntro = true;
+                    if ($curp != ""){
+                        $Usr = User::query()->where('curp',$curp)->get();
+                        $username = $curp;
+                        $password = bcrypt($username);
+                    }else{
+                        $SiEntro = false;
+                        $arr0 = User::getUsernameNext('CIU');
+                        $username = $arr0['username'];
+                        $password = bcrypt($username);
+                    }
+                    $Item = [
+                        'curp'             => strtoupper(trim($curp)),
+                        'username'         => $username,
+                        'password'         => $password,
+                        'email'            => strtolower(trim($username))."@mail.com",
+                        'ap_paterno'       => strtoupper(trim($ap_paterno)),
+                        'ap_materno'       => strtoupper(trim($ap_materno)),
+                        'nombre'           => strtoupper(trim($nombre)),
+                        'fecha_nacimiento' => $fecha_nacimiento,
+                        'genero'           => $genero,
+                        'empresa_id'       => config('atemun.empresa_id'),
+                        'user_mig_id'      => $user_mid_id,
+                        'email_verified_at'=>now(),
+                    ];
+
+                    if ( is_object($Ubi)  ) {
+                        $User = User::create($Item);
+                        $User->ubicaciones()->attach($Ubi);
+                        $User->permissions()->attach(7); // Consultar
+                        $User->roles()->attach(11); // Ciudadano
+                        $User->roles()->attach(12); // Ciudadano Internet
+                        $User->user_adress()->create([
+                            'calle'     => "",
+                            'num_ext'   => "",
+                            'num_int'   => "",
+                            'colonia'   => "",
+                            'localidad' => "",
+                            'municipio' => "",
+                            'estado'    => "",
+                            'pais'      => "",
+                            'cp'        => "",
+
+                        ]);
+                        $User->user_adress()->update([
+                            'calle'     => is_null($Ubi->calle) ? "" : $Ubi->calle,
+                            'num_ext'   => $Ubi->num_ext ?? "",
+                            'num_int'   => $Ubi->num_int ?? "",
+                            'colonia'   => is_null($Ubi->colonia) ? "" : $Ubi->colonia,
+                            'localidad' => is_null($Ubi->comunidad) ? "" : $Ubi->comunidad,
+                            'municipio' => is_null($Ubi->municipio) ? "" : $Ubi->municipio,
+                            'estado'    => is_null($Ubi->estado) ? "" : $Ubi->estado,
+                            'pais'      => is_null($Ubi->pais) ? "" : $Ubi->pais,
+                            'cp'        => is_null($Ubi->cp) ? "" : $Ubi->cp,
+                        ]);
+                        $User->user_data_extend()->create([
+                            'lugar_nacimiento' => "",
+                            'ocupacion'        => "",
+                            'profesion'        => "",
+                            'lugar_trabajo'    => "",
+                        ]);
+                   }
+
+                    Log::alert('Registro Núm: '.$x);
 
             }catch (QueryException $e){
-                Log::alert("Error en ".$user_mid_id. ' => '.$e->getMessage());
+                Log::alert("Error en :: ".$user_mid_id. ' => '.$e->getMessage());
                 continue;
             }catch (Exception $e){
                 Log::alert("Error en ".$user_mid_id. ' => '.$e->getMessage());

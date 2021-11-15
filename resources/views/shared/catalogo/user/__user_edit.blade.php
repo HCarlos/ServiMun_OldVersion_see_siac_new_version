@@ -31,7 +31,7 @@
 <div class="form-group row mb-3">
     <label for = "calle" class="col-md-3 col-form-label">Calle</label>
     <div class="col-md-9">
-        <input type="text" name="calle" id="calle" value="{{ old('calle',$items->user_adress->calle) }}" class="form-control" />
+        <input type="text" name="calle" id="calle" value="{{ old('calle',$items->Ubicacion->id ?? ''.$items->user_adress->calle ?? "") }}" class="form-control" />
     </div>
     <label for = "num_ext" class="col-md-3 col-form-label">Num Ext</label>
     <div class="col-md-9">
@@ -85,7 +85,7 @@
 <div class="form-group row mb-3">
     <label for = "lugar_nacimiento" class="col-md-3 col-form-label">Lugar Nacimiento</label>
     <div class="col-md-9">
-        <input type="text" name="lugar_nacimiento" id="lugar_nacimiento" value="{{ old('lugar_nacimiento',$items->user_data_extend->lugar_nacimiento) }}" class="form-control" />
+        <input type="text" name="lugar_nacimiento" id="lugar_nacimiento" value="{{ old('lugar_nacimiento',$items->user_data_extend->lugar_nacimiento ?? "") }}" class="form-control" />
     </div>
     <label for = "fecha_nacimiento" class="col-md-3 col-form-label">Fecha Nacimiento</label>
     <div class="col-md-9">
@@ -97,11 +97,11 @@
     </div>
     <label for = "ocupacion" class="col-md-3 col-form-label">Ocupación</label>
     <div class="col-md-9">
-        <input type="text" name="ocupacion" id="ocupacion" value="{{ old('ocupacion',$items->user_data_extend->ocupacion) }}" class="form-control" />
+        <input type="text" name="ocupacion" id="ocupacion" value="{{ old('ocupacion',$items->user_data_extend->ocupacion ?? "") }}" class="form-control" />
     </div>
     <label for = "profesion" class="col-md-3 col-form-label">Profesión</label>
     <div class="col-md-9">
-        <input type="text" name="profesion" id="profesion" value="{{ old('profesion',$items->user_data_extend->profesion) }}" class="form-control" />
+        <input type="text" name="profesion" id="profesion" value="{{ old('profesion',$items->user_data_extend->profesion ?? "") }}" class="form-control" />
     </div>
 </div>
 

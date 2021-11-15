@@ -38,10 +38,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'nombre','ap_paterno','ap_materno',
         'admin','alumno','delegado',
         'curp','emails','celulares','telefonos',
-        'fecha_nacimiento','genero',
+        'fecha_nacimiento','genero', 'lugar_nacimiento',
         'root','filename','filename_png','filename_thumb',
         'empresa_id','status_user','ip','host',
-        'logged','logged_at','logout_at', 'user_mig_id',
+        'logged','logged_at','logout_at', 'user_mig_id','email_verified_at'
     ];
 
     protected $hidden = ['password', 'remember_token',];
@@ -74,6 +74,10 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function respuestas(){
         return $this->belongsToMany(Respuesta::class);
+    }
+
+    public function Ubicacion(){
+        return $this->belongsTo(Ubicacion::class,'ubicacion_id','id');
     }
 
     public function ubicaciones(){
