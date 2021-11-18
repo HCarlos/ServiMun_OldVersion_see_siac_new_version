@@ -17,7 +17,7 @@
                     <select id="servicio_id" name="servicio_id" class="form-control" size="1">
                         @foreach($servicios as $t)
 {{--                            <option value="{{$t->id}}" {{ $t->id == $items->servicio_id  ? 'selected': '' }} >{{ $t->servicio }} </option>--}}
-                            <option value="{{$t['id']}}" {{ $t['id'] == $items->servicio_id  ? 'selected': '' }} >{{ $t['servicio'] }} </option>
+                            <option value="{{$t->id}}" {{ $t->id == $items->servicio_id  ? 'selected': '' }} >{{ $t->servicio }} </option>
                         @endforeach
                     </select>
                 </div>

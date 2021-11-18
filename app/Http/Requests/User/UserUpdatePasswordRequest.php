@@ -3,6 +3,8 @@
 namespace App\Http\Requests\User;
 
 use App\Classes\MessageAlertClass;
+use App\Rules\CurrentPassword;
+use App\Rules\Uppercase;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
@@ -32,8 +34,8 @@ class UserUpdatePasswordRequest extends FormRequest
     public function rules()
     {
         return [
-            'password_actual' => 'required|min:6|current_password',
-            'password' => 'required|confirmed|min:6',
+            'password_actual' => ['required','min:5',new CurrentPassword()],
+            'password' => ['required','confirmed','min:5'],
         ];
     }
 

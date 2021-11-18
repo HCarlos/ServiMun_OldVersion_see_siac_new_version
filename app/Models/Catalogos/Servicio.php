@@ -81,7 +81,9 @@ class Servicio extends Model
             $data[]=array('id'=>$item->id,'servicio'=>$item->servicio.' - '.$suba.$area.$depe);
         }
         //dd( $data );
-        return $data;
+        //return $data;
+
+        return json_decode( json_encode($data));
 
     }
 

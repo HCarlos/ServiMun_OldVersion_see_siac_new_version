@@ -8,7 +8,7 @@
                 @slot('title_card','')
                 @slot('body_card')
                     @include('shared.code.__errors')
-                    <form method="POST" action="{{ route('createDenuncia') }}">
+                    <form method="POST" action="{{ route('createDenuncia') }}" accept-charset="UTF-8" enctype="multipart/form-data" class="formData" id="formData" >
                         @csrf
                         @include('SIAC.denuncia.denuncia.__denuncia.__denuncia_new')
                         @component('components.tools.buttons-form-denuncia')

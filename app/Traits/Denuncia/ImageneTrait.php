@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Storage;
 
 trait ImageneTrait
 {
-    
+
     protected $disk = 'denuncia';
 
     // Get Image
@@ -33,8 +33,8 @@ trait ImageneTrait
     public function getPathImageThumbAttribute(){
         $fl   = explode('.',$this->image);
         $dg   = $fl[count($fl)-1];
-        $envi = config("atemun.videos_type_extension");
-        $rt   = in_array( $dg, $envi ) ? '/images/web/video-icon.png':'/images/web/file-not-found.png';
+        $envi = config("atemun.document_type_extension");
+        $rt   = in_array( $dg, $envi ) ? '/images/web/document-file.png':'/images/web/file-not-found.png';
 
 
 
@@ -43,6 +43,12 @@ trait ImageneTrait
             ? "/storage/".$this->disk."/".$this->image_thumb
             : $rt;
         return $ret;
+//        $exists = Storage::disk($this->disk)->exists($this->image_thumb);
+//        $ret = $exists
+//            ? "/storage/".$this->disk."/".$this->image_thumb
+//            : '/images/web/file-not-found.png';
+//        return $ret;
+
     }
 
 

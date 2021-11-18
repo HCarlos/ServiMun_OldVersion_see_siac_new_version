@@ -27,15 +27,16 @@ class Denuncia extends Model
     protected $table = 'denuncias';
 
     protected $fillable = [
-        'id','cantidad',
-        'fecha_ingreso','oficio_envio','fecha_oficio_dependencia','fecha_limite','fecha_ejecucion',
+        'id','cantidad', 'oficio_envio',
         'descripcion','referencia','domicilio_ciudadano_internet','observaciones',
         'calle','num_ext','num_int','colonia', 'comunidad','ciudad','municipio','estado','pais', 'cp',
-        'latitud','longitud',
+        'fecha_ingreso','fecha_oficio_dependencia','fecha_limite','fecha_ejecucion','latitud','longitud',
         'prioridad_id','origen_id','dependencia_id','ubicacion_id','servicio_id','estatus_id',
         'ciudadano_id','creadopor_id','modificadopor_id',
         'searchtextdenuncia',
     ];
+
+    protected $dates = ['fecha_ingreso','fecha_oficio_dependencia','fecha_limite','fecha_ejecucion'];
 
     public function scopeSearch($query, $search){
         if (!$search || $search == "" || $search == null) return $query;

@@ -2,9 +2,11 @@
 
 namespace App\Http\Requests\Denuncia;
 
+use App\Http\Controllers\Storage\StorageDenunciaController;
 use App\Models\Catalogos\Domicilios\Ubicacion;
 use App\Models\Denuncias\Denuncia;
 use App\Models\Denuncias\DenunciaEstatu;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Classes\MessageAlertClass;
@@ -35,7 +37,7 @@ class DenunciaRequest extends FormRequest
             'origen_id'        => ['required'],
             'dependencia_id'   => ['required'],
             'servicio_id'      => ['required'],
-            'ciudadano_id'     => ['required'],
+            'usuario_id'       => ['required'],
             'ubicacion_id'     => ['required','numeric','min:1'],
             'estatus_id'       => ['required'],
         ];
@@ -43,9 +45,9 @@ class DenunciaRequest extends FormRequest
 
     public function messages(){
         return [
-            'descripcion.required'      => 'La :attribute requiere por lo menos de 4 caracter',
-            'referencia.required'      => 'La :attribute es requerida',
-            'fecha_ingreso.required'      => 'La :attribute es requerida',
+            'descripcion.required'   => 'La :attribute requiere por lo menos de 4 caracter',
+            'referencia.required'    => 'La :attribute es requerida',
+            'fecha_ingreso.required' => 'La :attribute es requerida',
         ];
     }
 
@@ -60,27 +62,25 @@ class DenunciaRequest extends FormRequest
             'origen_id'       => 'Origen',
             'dependencia_id'  => 'Dependencia',
             'servicio_id'     => 'Servicio',
-            'ciudadano_id'    => 'Ciudadano',
+            'usuario_id'      => 'Usuario',
             'ubicacion_id'    => 'Ubicación',
         ];
     }
 
     public function manage(){
-        //dd($this->all());
         try {
-
             $Ubicacion = Ubicacion::findOrFail($this->ubicacion_id);
 
-            $fechaActual    = Carbon::now();
-            $fechaLimite    = Carbon::now();
-            $fechaEjecucion = Carbon::now();
+            //$fechaActual    = Carbon::now();
+            //$fechaLimite    = Carbon::now($this->fecha_limite);
+            //$fechaEjecucion = Carbon::now($this->fecha_ejecucion);
 
             $Item = [
-                'fecha_ingreso'                => $fechaActual,
-                'oficio_envio'                 => strtoupper($this->oficio_envio),
+                'fecha_ingreso'                => $this->fecha_ingreso,
+                'oficio_envio'                 => $this->oficio_envio,
                 'fecha_oficio_dependencia'     => $this->fecha_oficio_dependencia,
-                'fecha_limite'                 => $fechaLimite->addDays(5),
-                'fecha_ejecucion'              => $fechaEjecucion->addDays(3),
+                'fecha_limite'                 => $this->fecha_limite,
+                'fecha_ejecucion'              => $this->fecha_ejecucion,
 
                 'descripcion'                  => strtoupper($this->descripcion),
                 'referencia'                   => strtoupper($this->referencia),
@@ -104,7 +104,7 @@ class DenunciaRequest extends FormRequest
                 'ubicacion_id'                 => $this->ubicacion_id,
                 'servicio_id'                  => $this->servicio_id,
                 'estatus_id'                   => $this->estatus_id,
-                'ciudadano_id'                 => $this->ciudadano_id,
+                'ciudadano_id'                 => $this->usuario_id,
                 'creadopor_id'                 => $this->creadopor_id,
                 'modificadopor_id'             => $this->modificadopor_id,
                 'domicilio_ciudadano_internet' => strtoupper(trim($this->domicilio_ciudadano_internet))  ?? '' ,
@@ -114,12 +114,15 @@ class DenunciaRequest extends FormRequest
 
             if ($this->id == 0) {
                 $item = Denuncia::create($Item);
+
             } else {
                 $item = Denuncia::find($this->id);
                 $this->detaches($item);
                 $item->update($Item);
             }
             $this->attaches($item);
+            $Storage = new StorageDenunciaController();
+            $Storage->subirArchivoDenuncia($this, $item);
         }catch (QueryException $e){
             $Msg = new MessageAlertClass();
             throw new HttpResponseException(response()->json( $Msg->Message($e), 422));

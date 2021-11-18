@@ -352,7 +352,7 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp|USER_OPERATOR_SIAC|
     // Catálogo de Denuncias
     Route::get('listDenuncias/', 'Denuncia\DenunciaController@index')->name('listDenuncias');
     Route::get('editDenuncia/{Id}', 'Denuncia\DenunciaController@editItem')->name('editDenuncia');
-    Route::get('editDenunciaV2/{Id}', 'Denuncia\DenunciaController@editItemV2')->name('editDenunciaV2');
+//    Route::get('editDenunciaV2/{Id}', 'Denuncia\DenunciaController@editItemV2')->name('editDenunciaV2');
     Route::put('updateDenuncia', 'Denuncia\DenunciaController@updateItem')->name('updateDenuncia');
     Route::get('newDenuncia', 'Denuncia\DenunciaController@newItem')->name('newDenuncia');
     Route::post('createDenuncia', 'Denuncia\DenunciaController@createItem')->name('createDenuncia');
@@ -375,6 +375,8 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp|DELEGADO|CIUDADANO'
     Route::put('changePasswordUser/', 'Catalogos\User\UserDataController@changePasswordUser')->name('changePasswordUser/');
     Route::post('subirFotoProfile/', 'Storage\StorageProfileController@subirArchivoProfile')->name('subirArchivoProfile/');
     Route::get('quitarFotoProfile/', 'Storage\StorageProfileController@quitarArchivoProfile')->name('quitarArchivoProfile/');
+    Route::get('searchUser/', 'Catalogos\User\UserDataController@searchUser')->name('searchUser');
+    Route::get('getUser/{Id}', 'Catalogos\User\UserDataController@getUser')->name('getUser');
 
     // PIVOTE DENUNCIA DEPENDENCIA SERVICIO
     Route::get('listDenunciaDependenciaServicio/{Id}', 'Denuncia\DenunciaDependenciaServicioController@index')->name('listDenunciaDependenciaServicio');

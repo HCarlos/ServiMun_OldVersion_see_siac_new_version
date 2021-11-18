@@ -606,10 +606,10 @@ input[readonly] {
 
 #colonia, #comunidad, #calle, #asentamiento, #tipoasentamiento, #tipocomunidad, #localidad,
 #afiliacion, #area, #subarea, #dependencia, #medida, #origen, #prioridad, #servicio, #ubicacon,
-#ciudad, #estado, #municipio, #estatus, #codigo, #cp
+#ciudad, #estado, #municipio, #estatus, #codigo, #cp, .search_autocomplete
 {text-transform: uppercase; background: lightgoldenrodyellow;}
 
-#search_autocomplete{
+.search_autocomplete---{
     text-transform: uppercase;
     background: lightyellow;
     color:black;

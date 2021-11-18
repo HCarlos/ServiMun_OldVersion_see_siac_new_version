@@ -112,4 +112,9 @@ a, .text-darkred{
     box-shadow: 0 0 0 0.2rem rgba(250, 92, 124, 0.5); }
 
 
+.labelDenuncia{
+    color: darkred;
+    font-weight: bold;
+    font-size: large;
+}
 

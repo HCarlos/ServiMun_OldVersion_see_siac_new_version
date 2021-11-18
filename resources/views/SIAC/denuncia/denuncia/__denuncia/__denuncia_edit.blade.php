@@ -1,164 +1,251 @@
-
-<div class="row">
-    <div class="col-md-6 ">
+<div class="grid-structure">
+<div class=" row">
+    <div class="col-lg-6 ">
         <div class="grid-container">
             <div class="form-row mb-1">
-                <label for = "fecha_ingreso" class="col-md-2 col-form-label">Fecha </label>
-                <div class="col-md-4">
-                    {{ Form::datetime('fecha_ingreso', $items->fecha_ingreso, ['id'=>'fecha_ingreso','class'=>'form-control','readonly'=>'readonly']) }}
+                <label for = "search_autocomplete_user" class="col-lg-3 col-form-label labelDenuncia">Buscar Usuario</label>
+                <div class="col-lg-12">
+                    <div class="input-group">
+                        {!! Form::text('search_autocomplete_user', $items->Ciudadano->FullName, array('placeholder' => 'Buscar usuario...','class' => 'form-control search_autocomplete','id'=>'search_autocomplete_user')) !!}
+                        <span class="input-group-append">
+                            <a href="{{route("newUser")}}" target="_blank" class="btn btn-icon btn-info"> <i class="mdi mdi-plus"></i></a>
+                        </span>
+                    </div>
+                    {!! Form::text('usuario', $items->Ciudadano->FullName, array('class' => 'form-control','id'=>'usuario','readonly'=>'readonly')) !!}
+                    {!! Form::text('usuario_domicilio', $items->Ciudadano->ubicaciones->first()->Ubicacion, array('class' => 'form-control','id'=>'usuario_domicilio','readonly'=>'readonly')) !!}
+
                 </div>
-                <label for = "fecha_oficio_dependencia" class="col-md-2 col-form-label">F. Oficio </label>
-                <div class="col-md-4">
-                    {{ Form::date('fecha_oficio_dependencia', $items->fecha_oficio_dependencia, ['id'=>'fecha_oficio_dependencia','class'=>'form-control']) }}
+            </div>
+
+            <div class="form-row mb-1 " >
+                <label class="col-lg-12 col-form-label labelDenuncia">Ubicación del Problema? </label>
+                <div class="col-lg-12 mb-2">
+                    <select id="pregunta1" name="pregunta1" class="form-control pregunta1" size="1">
+                        <option value="0" {{$pregunta1 == 0 ? 'selected': '' }} >La misma ubicación del usuario demandante </option>
+                        <option value="1" {{$pregunta1 == 1 ? 'selected': '' }} >Otra Ubicación </option>
+                    </select>
+
+                </div>
+            </div>
+
+            <div class="form-row panelUbiProblem pb-2" style="background-color: floralwhite">
+                <label for = "search_autocomplete" class="col-lg-12 col-form-label">Buscar ubicación del Problema</label>
+                <div class="col-lg-12">
+                    <div class="input-group">
+                        {!! Form::text('search_autocomplete',  $items->Ubicacion->Ubicacion, array('placeholder' => 'Buscar ubicación...','class' => 'form-control search_autocomplete','id'=>'search_autocomplete')) !!}
+                        <span class="input-group-append">
+                            <a href="{{route("newUbicacion")}}" target="_blank" class="btn btn-icon btn-info"> <i class="mdi mdi-plus"></i></a>
+                        </span>
+                    </div>
+                    <input type="text" name="ubicacion" id="ubicacion" value="{{ old('ubicacion', $items->Ubicacion->Ubicacion) }}" class="form-control" disabled/>
+                </div>
+            </div>
+            <hr>
+            <div class="form-row mb-1 ">
+                <label for = "fecha_ingreso" class="col-lg-2 col-form-label">Fecha </label>
+                <div class="col-lg-4">
+                    {{ Form::date('fecha_ingreso', old('fecha_ingreso',$items->fecha_ingreso), ['id'=>'fecha_ingreso','class'=>'form-control','readonly'=>'readonly']) }}
+                </div>
+                <label for = "fecha_oficio_dependencia" class="col-lg-2 col-form-label">F. Oficio </label>
+                <div class="col-lg-4">
+                    {{ Form::date('fecha_oficio_dependencia', old('fecha_oficio_dependencia',$items->fecha_oficio_dependencia), ['id'=>'fecha_oficio_dependencia','class'=>'form-control']) }}
                 </div>
             </div>
             <div class="form-row mb-1">
-                <label for = "fecha_ejecucion" class="col-md-2 col-form-label">F. Ejec. </label>
-                <div class="col-md-4">
-                    {{ Form::date('fecha_ejecucion', $items->fecha_ejecucion, ['id'=>'fecha_ejecucion','class'=>'form-control','readonly'=>'readonly']) }}
+                <label for = "fecha_ejecucion" class="col-lg-2 col-form-label">F. Ejec. </label>
+                <div class="col-lg-4">
+                    {{ Form::date('fecha_ejecucion', old('fecha_ejecucion',$items->fecha_ejecucion), ['id'=>'fecha_ejecucion','class'=>'form-control','readonly'=>'readonly']) }}
                 </div>
-                <label for = "fecha_limite" class="col-md-2 col-form-label">F. Límite </label>
-                <div class="col-md-4">
-                    {{ Form::date('fecha_limite', $items->fecha_limite, ['id'=>'fecha_limite','class'=>'form-control','readonly'=>'readonly']) }}
-                </div>
-            </div>
-            <div class="form-row mb-1">
-                <label for = "oficio_envio" class="col-md-2 col-form-label">Oficio E. </label>
-                <div class="col-md-10">
-                    <input type="text" name="oficio_envio" id="oficio_envio" value="{{ old('oficio_envio',$items->oficio_envio) }}" class="form-control" />
+                <label for = "fecha_limite" class="col-lg-2 col-form-label">F. Límite </label>
+                <div class="col-lg-4">
+                    {{ Form::date('fecha_limite', old('fecha_limite',$items->fecha_limite), ['id'=>'fecha_limite','class'=>'form-control','readonly'=>'readonly']) }}
                 </div>
             </div>
-            <div class="form-row mb-1">
-                <label for = "descripcion" class="col-md-2 col-form-label">Denuncia</label>
-                <div class="col-md-10">
-                    <textarea name="descripcion" id="descripcion" class="form-control">{{ old('descripcion',$items->descripcion) }}</textarea>
-                </div>
-            </div>
-            <div class="form-row mb-1">
-                <label for = "referencia" class="col-md-2 col-form-label">Referencia</label>
-                <div class="col-md-10">
-                    <textarea name="referencia" id="referencia" class="form-control">{{ old('referencia',$items->referencia) }}</textarea>
-                </div>
-            </div>
-            <div class="form-group row mb-1">
-                <label for = "latitud" class="col-md-2 col-form-label">Lat.</label>
-                <div class="col-md-4">
-                    <input type="text" name="latitud" id="latitud" value="{{ old('latitud',$items->latitud) }}" class="form-control" />
-                </div>
-                <label for = "longitud" class="col-md-2 col-form-label">Long.</label>
-                <div class="col-md-4">
-                    <input type="text" name="longitud" id="longitud" value="{{ old('longitud',$items->longitud) }}" class="form-control" />
-                </div>
-            </div>
+            <hr>
 
         </div>
     </div>
-    <div class="col-md-6 ">
+
+    <div class="col-lg-6 ">
+
         <div class="grid-container">
+
             <div class="form-group row mb-1">
-                <label for = "search_autocomplete" class="col-md-3 col-form-label">Buscar</label>
-                <div class="col-md-9">
-                    <div class="input-group">
-                        {!! Form::text('search_autocomplete', null, array('placeholder' => 'Buscar ubicación...','class' => 'form-control','id'=>'search_autocomplete')) !!}
-                        <span class="input-group-append">
-                            <a href="{{ route("newUbicacionV2") }}" id="{{ route("newUbicacionV2") }}" class="btn btn-icon btn-info btnFullModal" data-toggle="modal" data-target="#modalFull" title="Agregar Ubicación" >
-                                <i class="mdi mdi-plus"></i>
-                            </a>
-                        </span>
-                    </div>
+                <label for = "oficio_envio" class="col-lg-3 col-form-label">Oficio E. </label>
+                <div class="col-lg-9">
+                    <input type="text" name="oficio_envio" id="oficio_envio" value="{{ old('oficio_envio',$items->oficio_envio) }}" class="form-control" />
                 </div>
             </div>
             <div class="form-group row mb-1">
-                <label for = "ubicacion" class="col-md-3 col-form-label">Ubicacion</label>
-                <div class="col-md-9">
-                    <div class="input-group">
-                        <input type="text" name="ubicacion" id="ubicacion" value="{{ old('ubicacion',$items->fullUbication) }}" class="form-control" disabled/>
-                        <span class="input-group-addon bootstrap-touchspin-postfix input-group-append">
-                            <small class="input-group-text " id="ubicacion_id_span">{{ $items->ubicacion_id }}</small>
-                        </span>
-                    </div>
+                <label for = "descripcion" class="col-lg-3 col-form-label has-descripcion labelDenuncia">Denuncia </label>
+                <div class="col-lg-9">
+                    <textarea name="descripcion" id="descripcion" class="form-control">{{ old('descripcion',$items->descripcion) }}</textarea>
+                    <span class="has-descripcion">
+                        <strong class="text-danger"></strong>
+                    </span>
                 </div>
             </div>
             <div class="form-group row mb-1">
-                <label for = "prioridad_id" class="col-md-3 col-form-label">Prioridad</label>
-                <div class="col-md-3">
+                <label for = "referencia" class="col-lg-3 col-form-label labelDenuncia">Referencia </label>
+                <div class="col-lg-9">
+                    <textarea name="referencia" id="referencia" class="form-control">{{ old('referencia',$items->referencia) }}</textarea>
+                </div>
+            </div>
+{{--            <div class="form-group row mb-1">--}}
+{{--                <label for = "latitud" class="col-lg-2 col-form-label">Lat.</label>--}}
+{{--                <div class="col-lg-4">--}}
+{{--                    <input type="text" name="latitud" id="latitud" value="{{ old('latitud') }}" class="form-control" />--}}
+{{--                </div>--}}
+{{--                <label for = "longitud" class="col-lg-2 col-form-label">Long.</label>--}}
+{{--                <div class="col-lg-4">--}}
+{{--                    <input type="text" name="longitud" id="longitud" value="{{ old('longitud') }}" class="form-control" />--}}
+{{--                </div>--}}
+{{--            </div>--}}
+
+            <div class="form-group row mb-1">
+                <label for = "prioridad_id" class="col-lg-3 col-form-label labelDenuncia">Prioridad</label>
+                <div class="col-lg-2">
                     <select id="prioridad_id" name="prioridad_id" class="form-control" size="1">
                         @foreach($prioridades as $t)
                             <option value="{{$t->id}}" {{ $t->id == $items->prioridad_id ? 'selected': '' }} >{{ $t->prioridad }} </option>
                         @endforeach
                     </select>
                 </div>
-                <label for = "origen_id" class="col-md-2 col-form-label">Origen</label>
-                <div class="col-md-4">
-                    <select id="origen_id" name="origen_id" class="form-control" size="1">
+                <label for = "origen_id" class="col-lg-2 col-form-label labelDenuncia">Origen</label>
+                <div class="col-lg-5">
+                    <select id="origen_id" name="origen_id" class="form-control"size="1">
                         @foreach($origenes as $t)
                             <option value="{{$t->id}}" {{ $t->id == $items->origen_id ? 'selected': '' }} >{{ $t->origen }} </option>
                         @endforeach
                     </select>
                 </div>
             </div>
+
             <div class="form-group row mb-1">
-                <label for = "dependencia_id" class="col-md-3 col-form-label">Dependencia</label>
-                <div class="col-md-9">
+                <label for = "dependencia_id" class="col-lg-3 col-form-label labelDenuncia">Dependencia</label>
+                <div class="col-lg-9">
                     <select id="dependencia_id" name="dependencia_id" class="form-control" size="1">
-                    @foreach($dependencias as $t)
-                        <option value="{{$t->id}}" {{ $t->id == $items->dependencia_id  ? 'selected': '' }} >{{ $t->dependencia }} </option>
-                    @endforeach
+                        <option value="0" selected>Seleccione una Dependencia</option>
+                        @foreach($dependencias as $t)
+                            <option value="{{$t->id}}" {{ $t->id == $items->dependencia_id ? 'selected': '' }} >{{ $t->dependencia }} </option>
+                        @endforeach
                     </select>
                 </div>
             </div>
+
             <div class="form-group row mb-1">
-                <label for = "servicio_id" class="col-md-3 col-form-label">Servicio</label>
-                <div class="col-md-9">
+                <label for = "servicio_id" class="col-lg-3 col-form-label labelDenuncia">Servicio</label>
+                <div class="col-lg-9">
                     <select id="servicio_id" name="servicio_id" class="form-control" size="1">
+                        <option value="0" selected>Seleccione un Servicio</option>
                         @foreach($servicios as $t)
-                            <option value="{{$t['id']}}" {{ $t['id'] == $items->servicio_id  ? 'selected': '' }} >{{ $t['servicio'] }} </option>
+                            <option value="{{$t->id}}" {{ $t->id == $items->servicio_id ? 'selected': '' }} >{{ $t->servicio }} </option>
                         @endforeach
                     </select>
                 </div>
             </div>
+
+{{--            <div class="form-group row mb-1">--}}
+{{--                <label for = "ciudadano_id" class="col-lg-3 col-form-label">Ciudadano</label>--}}
+{{--                <div class="col-lg-9">--}}
+{{--                    <select id="ciudadano_id" name="ciudadano_id" class="form-control select2" data-toggle="select2" size="1">--}}
+{{--                        @foreach($ciudadanos as $t)--}}
+{{--                            <option value="{{$t->id}}" >{{$t->fullname}}</option>--}}
+{{--                        @endforeach--}}
+{{--                    </select>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+
             <div class="form-group row mb-1">
-                <label for = "ciudadano_id" class="col-md-3 col-form-label">Ciudadano</label>
-                <div class="col-md-9">
-                    <select id="ciudadano_id" name="ciudadano_id" class="form-control select2" data-toggle="select2" size="1">
-                        @foreach($ciudadanos as $t)
-                            <option value="{{$t->id}}" {{ $t->id == $items->ciudadano_id ? 'selected': '' }}  >{{$t->fullname}}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-            <div class="form-group row mb-1">
-                <label for = "estatus_id" class="col-md-3 col-form-label">Estatus</label>
-                <div class="col-md-5">
+                <label for = "estatus_id" class="col-lg-3 col-form-label labelDenuncia">Estatus</label>
+                <div class="col-lg-9">
                     <select id="estatus_id" name="estatus_id" class="form-control" size="1">
                         @foreach($estatus as $t)
-                            <option value="{{$t->id}}" {{ $t->id == $items->estatus_id  ? 'selected': '' }} >{{ $t->estatus }} </option>
+                            <option value="{{$t->id}}" {{ $t->id == $items->estatus_id ? 'selected': '' }} >{{ $t->estatus }} </option>
                         @endforeach
                     </select>
+                </div>
+            </div>
+{{--            <div class="form-row mb-1">--}}
+{{--                <label for = "domicilio_ciudadano_internet" class="col-lg-3 col-form-label">Domicilio Internet </label>--}}
+{{--                <div class="col-lg-9">--}}
+{{--                    <textarea name="domicilio_ciudadano_internet" id="domicilio_ciudadano_internet" class="form-control">{{ old('domicilio_ciudadano_internet') }}</textarea>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+            <div class="form-row mb-1">
+                <label for = "observaciones" class="col-lg-3 col-form-label">Observaciones </label>
+                <div class="col-lg-9">
+                    <textarea name="observaciones" id="observaciones" class="form-control">{{ old('observaciones',$items->observaciones) }}</textarea>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-md-12 ">
-        <div class="grid-container">
-            <div class="form-row mb-1">
-                <label for = "domicilio_ciudadano_internet" class="col-md-2 col-form-label">Domicilio Internet </label>
-                <div class="col-md-10">
-                    <textarea name="domicilio_ciudadano_internet" id="domicilio_ciudadano_internet" class="form-control">{{ old('domicilio_ciudadano_internet',$items->domicilio_ciudadano_internet) }}</textarea>
+
+</div>
+</div>
+
+<div class="grid-structure">
+    <div class=" row">
+        <div class="col-lg-12 ">
+            <div class="grid-container">
+                <div class="form-group mb-3">
+
+
+
+                    <div class="table-responsive-sm">
+                        <table class="table table-centered mb-0">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th>Imegen</th>
+                                <th>Directorio</th>
+                                <th>Options</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($items->imagenes as $item)
+                            <tr>
+                                <td>
+                                    <a class="pull-left pl-2"  href="{{asset($item->PathImage)}}" target="_blank" >
+                                        <img class="media-object" src="{{asset($item->PathImageThumb)}}" width="64" height="64" >
+                                    </a>
+                                </td>
+                                <td>{{ asset("/storage/denuncia/".$item->image) }}</td>
+                                <td>
+                                    @include('shared.ui_kit.__remove_item')
+                                </td>
+                            </tr>
+                            @endforeach
+                            @for($it=$items->imagenes->count()+1;$it<=3;$it++)
+                                <tr>
+                                    <td colspan="3">
+                                        <div class="form-group mb-1">
+                                            <label for="file{{$it}}"><strong>Archivo {{$it}}</strong>: Subir archivo</label>
+                                            <input type="file" id="file{{$it}}" name="file{{$it}}" class="form-control-file">
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endfor
+                            </tbody>
+                        </table>
+                    </div> <!-- end table-responsive-->
+
                 </div>
-            </div>
-            <div class="form-row mb-1">
-                <label for = "observaciones" class="col-md-2 col-form-label">Observaciones </label>
-                <div class="col-md-10">
-                    <textarea name="observaciones" id="observaciones" class="form-control">{{ old('observaciones',$items->observaciones) }}</textarea>
+
+
+
+
+
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<input type="hidden" name="id" value="{{$items->id}}" >
-<input type="hidden" name="ubicacion_id" id="ubicacion_id" value="{{$items->ubicacion_id}}" >
-<input type="hidden" name="creadopor_id" id="creadopor_id" value="{{$items->creadopor_id}}" >
-<input type="hidden" name="modificadopor_id" id="modificadopor_id" value="{{$user->id}}" >
+
 <hr>
+
+<input type="hidden" name="id" id="id" value="{{$items->id}}" >
+<input type="hidden" name="ubicacion_id" id="ubicacion_id" value="{{$items->Ubicacion->id}}" >
+<input type="hidden" name="creadopor_id" id="creadopor_id" value="{{$user->id}}" >
+<input type="hidden" name="modificadopor_id" id="modificadopor_id" value="{{$user->id}}" >
+<input type="hidden" name="usuario_id" id="usuario_id" value="{{$items->Ciudadano->id}}" >

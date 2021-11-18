@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Catalogos\User;
 
 use App\Classes\FiltersRules;
+use App\Http\Controllers\Funciones\FuncionesController;
 use App\Http\Requests\User\UserAlumnoBecasRequest;
 use App\Http\Requests\User\UserRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\UserUpdatePasswordRequest;
+use App\Models\Catalogos\Domicilios\Ubicacion;
 use App\Role;
 use App\User;
 use Illuminate\Support\Facades\Auth;
@@ -27,7 +29,7 @@ class UserDataController extends Controller
         $filters = $request->all(['search', 'roles', 'palabras_roles']);
         $items = User::query()
             ->filterBy($filters)
-            ->orderByDesc('id')
+            ->orderByDesc('id')->take(1000)
             ->paginate(250);
         $items->appends($filters)->fragment('table');
         $user = Auth::User();
@@ -240,18 +242,44 @@ class UserDataController extends Controller
         }
     }
 
-// ***************** MUESTRA LAS BECAS DEL USUARIO ALUMNO ++++++++++++++++++++ //
-    protected function showEditBecas($Id)
+
+// ***************** MAUTOCOMPLETE DE UBICACIONES ++++++++++++++++++++ //
+    protected function searchUser(Request $request)
     {
-        $user = User::find($Id);
-        $this->msg = "";
-        session(['msg' => $this->msg]);
-        return view('catalogos.catalogo.user.user_becas_edit',
-            [
-                'items' => $user,
-                'msg'   => $this->msg,
-            ]
-        );
+        ini_set('max_execution_time', 300);
+        $filters =$request->input('search');
+        $F           = new FuncionesController();
+        $tsString    = $F->string_to_tsQuery( strtoupper($filters),' & ');
+        $items = User::query()
+            ->search($tsString)
+            ->orderBy('id')->take(50)
+            ->get();
+        $data=array();
+
+        foreach ($items as $item) {
+            $data[]=array(
+                'value'=>$item->fullName.' - '.$item->curp,
+                'domicilio'=>$item->ubicaciones()->first()->Ubicacion,
+                'id'=>$item->id,
+            );
+        }
+        if(count($data))
+            return $data;
+        else
+            return ['value'=>'No se encontraron resultados','id'=>0];
+
+    }
+
+// ***************** MAUTOCOMPLETE DE UBICACIONES ++++++++++++++++++++ //
+    protected function getUser($Id=0)
+    {
+        $items = User::find($Id);
+        $items->domicilio = $items->ubicaciones()->first()->Ubicacion;
+        $items->ubicacion_id = $items->ubicaciones()->first()->id;
+        $items->nombre_completo = $items->FullName;
+        //dd($items);
+        return Response::json(['mensaje' => 'OK', 'data' => json_decode($items), 'status' => '200'], 200);
+
     }
 
 

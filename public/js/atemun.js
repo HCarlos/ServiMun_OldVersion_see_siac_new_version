@@ -397,6 +397,6 @@
     $("#colonia, #comunidad, #calle, #asentamiento, #tipoasentamiento, #tipocomunidad, #localidad," +
         "#afiliacion, #area, #subarea, #dependencia, #medida, #origen, #prioridad, #servicio, #ubicacon," +
         "#ciudad, #estado, #municipio, #estatus, #codigo, #cp, #search, #num_ext, #num_int," +
-        "#search_autocomplete").keyup(function(){
+        "#search_autocomplete, #search_autocomplete_user").keyup(function(){
         $(this).val($(this).val().toUpperCase());
     });

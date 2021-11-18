@@ -40,12 +40,18 @@ class User extends Authenticatable implements MustVerifyEmail
         'curp','emails','celulares','telefonos',
         'fecha_nacimiento','genero', 'lugar_nacimiento',
         'root','filename','filename_png','filename_thumb',
-        'empresa_id','status_user','ip','host',
+        'empresa_id','status_user','ip','host','searchtext',
         'logged','logged_at','logout_at', 'user_mig_id','email_verified_at'
     ];
 
     protected $hidden = ['password', 'remember_token',];
     protected $casts = ['admin'=>'boolean','alumno'=>'boolean','delegado'=>'boolean',];
+
+    public function scopeSearch($query, $search){
+        if (!$search || $search == "" || $search == null) return $query;
+        return $query->whereRaw("searchtext @@ to_tsquery('spanish', ?)", [$search])
+            ->orderByRaw("ts_rank(searchtext, to_tsquery('spanish', ?)) DESC", [$search]);
+    }
 
 
     public function scopeFilterBy($query, $filters){

@@ -32,7 +32,7 @@
 
 <link href="{{ asset('css/dropzone.css') }}" rel="stylesheet">
 
-<link href="{{ asset('css/atemun.css') }}" rel="stylesheet"  type="text/css">
-<link rel="stylesheet"  href="{{ URL::asset('/css/servimun.css') }}"  />
+<link href="{{ asset('css/atemun.css') }}?time()" rel="stylesheet"  type="text/css">
+<link rel="stylesheet"  href="{{ URL::asset('/css/servimun.css') }}?time()"  />
 
 @yield('styles')
