@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Funciones\FuncionesController;
 use App\Models\Catalogos\Domicilios\Calle;
 use App\Models\Catalogos\Domicilios\Ciudad;
 use App\Models\Catalogos\Domicilios\Codigopostal;
@@ -24,6 +25,11 @@ class ImportUsersCentroTabascoSeeder extends Seeder{
         @ini_set( 'post_max_size', '32768M');
         @ini_set( 'max_execution_time', '256000000' );
         @ini_set('memory_limit', '-1');
+        app()['cache']->forget('spatie.permission.cache');
+
+        $F = new FuncionesController();
+
+
 //        @ini_set( 'upload_max_size' , '2048M' );
 //        @ini_set( 'post_max_size', '2048M');
 //        @ini_set( 'max_execution_time', '36000' );
@@ -270,22 +276,23 @@ class ImportUsersCentroTabascoSeeder extends Seeder{
                         $password = bcrypt($username);
                     }
                     $Item = [
-                        'curp'             => strtoupper(trim($curp)),
-                        'username'         => $username,
-                        'password'         => $password,
-                        'email'            => strtolower(trim($username))."@mail.com",
-                        'ap_paterno'       => strtoupper(trim($ap_paterno)),
-                        'ap_materno'       => strtoupper(trim($ap_materno)),
-                        'nombre'           => strtoupper(trim($nombre)),
-                        'fecha_nacimiento' => $fecha_nacimiento,
-                        'genero'           => $genero,
-                        'empresa_id'       => config('atemun.empresa_id'),
-                        'user_mig_id'      => $user_mid_id,
-                        'email_verified_at'=>now(),
+                        'curp'              => strtoupper(trim($curp)),
+                        'username'          => $username,
+                        'password'          => $password,
+                        'email'             => strtolower(trim($username))."@mail.com",
+                        'ap_paterno'        => strtoupper(trim($ap_paterno)),
+                        'ap_materno'        => strtoupper(trim($ap_materno)),
+                        'nombre'            => strtoupper(trim($nombre)),
+                        'fecha_nacimiento'  => $fecha_nacimiento,
+                        'genero'            => $genero,
+                        'empresa_id'        => config('atemun.empresa_id'),
+                        'imagen_id'         => 0,
+                        'email_verified_at' => now(),
                     ];
 
                     if ( is_object($Ubi)  ) {
                         $User = User::create($Item);
+                        $User->update(['ubicacion_id'=>$Ubi->id,'imagen_id'=>0]);
                         $User->ubicaciones()->attach($Ubi);
                         $User->permissions()->attach(7); // Consultar
                         $User->roles()->attach(11); // Ciudadano
@@ -319,7 +326,8 @@ class ImportUsersCentroTabascoSeeder extends Seeder{
                             'profesion'        => "",
                             'lugar_trabajo'    => "",
                         ]);
-                   }
+                        $F->validImage($User,'profile','profile/');
+                    }
 
                     Log::alert('Registro Núm: '.$x);
 

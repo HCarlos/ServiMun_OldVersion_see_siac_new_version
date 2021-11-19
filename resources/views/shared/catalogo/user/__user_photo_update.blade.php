@@ -9,6 +9,7 @@
             </span>
         @endif
     </div>
+
 </div>
 
 <hr>

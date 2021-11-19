@@ -40,11 +40,11 @@ class ImportEstructuraCentroTabascoSeeder extends Seeder
                 $dupla = preg_split("/\t/", $json_data[$x], -1, PREG_SPLIT_NO_EMPTY);
                 $arr = str_getcsv($dupla[0]);
 
-                $area_id = trim($arr[0]) == "" ? 0 : intval($arr[0]);
-                $area    = trim($arr[1]) == "" ? 0 : strtoupper(trim(utf8_encode($arr[1])));
+                $dep_id  = trim($arr[0]) == "" ? 0 : intval($arr[0]);
+                $depend  = trim($arr[1]) == "" ? 0 : strtoupper(trim(utf8_encode($arr[1])));
                 $abre    = trim($arr[2]) == "" ? 0 : strtoupper(trim(utf8_encode($arr[2])));
 
-                Dependencia::create(['id'=>$area_id,'dependencia'=>$area,'abreviatura'=>$abre,'is_areas'=>false,'jefe_id'=>1,'user_id'=>1]);
+                Dependencia::create(['id'=>$dep_id,'dependencia'=>$depend,'abreviatura'=>$abre,'is_areas'=>false,'jefe_id'=>1,'user_id'=>1]);
 
                 Log::alert('Registro Núm: '.$x);
 

@@ -2,7 +2,7 @@
     "private": true,
     "scripts": {
         "dev": "npm run development",
-        "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --config=node_modules/laravel-mix/setup/webpack.config.js",
         "watch": "npm run development -- --watch",
         "watch-poll": "npm run watch -- --watch-poll",
         "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --disable-host-check --config=node_modules/laravel-mix/setup/webpack.config.js",
@@ -13,19 +13,19 @@
         "ansi-regex": "^6.0.1",
         "axios": ">=0.21.2",
         "bootstrap": "^4.5.0",
-        "cross-env": "^7.0.2",
+        "cross-env": "^7.0.3",
         "dns-packet": "^5.3.0",
         "fstream": "^1.0.12",
         "glob-parent": "^6.0.1",
         "jquery": "^3.5.1",
         "js-yaml": "^3.14.0",
-        "laravel-mix": "^5.0.4",
+        "laravel-mix": "^6.0.39",
         "lodash": "^4.17.19",
         "lodash.mergewith": "^4.6.2",
         "mem": "^6.1.0",
         "mixin-deep": "^2.0.1",
         "node-forge": "^0.10.0",
-        "npm": "^6.14.7",
+        "npm": "^7.20.6",
         "popper.js": "^1.16.1",
         "resolve-url-loader": "^3.1.1",
         "sass": "^1.26.11",
@@ -41,7 +41,6 @@
         "ws": "^8.2.3",
         "y18n": "^5.0.8"
     },
-
     "dependencies": {
         "acorn": "^8.0.2",
         "ajv": "^6.12.3",
@@ -54,14 +53,11 @@
         "img-loader": "^4.0.0",
         "jquery": "^3.5.1",
         "kind-of": "^6.0.3",
-        "laravel-mix": "^5.0.4",
         "lodash": "^4.17.19",
         "lodash.mergewith": "^4.6.2",
         "minimist": "^1.2.5",
-        "npm": "^6.14.7",
         "tar": "^6.0.2",
-        "webpack": "^4.44.1",
+        "webpack": "^5.64.1",
         "websocket-extensions": "^0.1.4"
     }
-
 }
