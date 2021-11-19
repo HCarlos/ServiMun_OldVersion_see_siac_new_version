@@ -1,7 +1,7 @@
 @extends(Auth::user()->Home)
 @section('container')
 
-    @component('components.asignaciones')
+    @component('components.asignacionesV2')
 
         @slot('titulo_catalogo', $titulo_catalogo)
         @slot('titulo_header','')
@@ -20,17 +20,15 @@
         @slot('countListEle') {{ $listEle0->count() }} @endslot
         @slot('usuario0')
             @slot('titleUsuario0') {{$titleUsuario0}} @endslot
-            <select class="listTarget form-control select2" data-toggle="select2" name="listTarget" id="{{$urlRegresa}}" size="1">
-                @foreach($listTarget0 as $t)
-                    <option value="{{$t->id}}"{{$Id == $t->id ? ' selected':''}}>{{ $t->FullName.' '.$t->username }}</option>
-                @endforeach
-            </select>
+                {!! Form::text('search_autocomplete_user', $users->fullName.' - '.$users->curp, array('placeholder' => 'Buscar usuario...','class' => 'form-control search_autocomplete_user','id'=> $urlRegresa )) !!}
+                <input type="hidden" id="listTarget" name="listTarget" class="listTarget" value="{{$users->id}}">
+            <input type="hidden" id="getItems" name="getItems" class="getItems" value="{{$getItems}}">
         @endslot
         @slot('Asign0')
             @slot('titleAsign0') {{$titleAsign0}} @endslot
-            {{ Form::select('lstAsigns', $lstAsigns0, '', ['multiple' => 'multiple', 'class'=>'lstAsigns form-control asign-lstAsigns0']) }}
+            {{ Form::select('lstAsigns', $lstAsigns0, '', ['multiple' => 'multiple', 'id' => 'lstAsigns', 'class'=>'lstAsigns form-control asign-lstAsigns0']) }}
         @endslot
-        @slot('countAsign0') {{ $lstAsigns0->count() }} @endslot
+        @slot('countAsign0') 0 @endslot
 
     @endcomponent
 

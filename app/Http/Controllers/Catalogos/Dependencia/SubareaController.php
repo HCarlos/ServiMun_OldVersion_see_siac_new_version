@@ -50,9 +50,10 @@ class SubareaController extends Controller
     // ***************** CREAR NUEVO ++++++++++++++++++++ //
     protected function newItem()
     {
-        $Jefes = User::all()->sortBy(function($item) {
-            return $item->ap_paterno.' '.$item->ap_materno.' '.$item->nombre;
-        });
+        $Jefes = User::query()->whereHas('roles',function($q){
+                    return $q->where('name','JEFE');
+                })->orderByRaw("concat(ap_paterno,' ',ap_materno,' ',nombre) DESC")
+                ->get();
         $Areas = Area::all(['id','area','dependencia_id'])->sortBy('area');
         return view('catalogos.catalogo.dependencias.subarea.subarea_new',
             [
@@ -78,9 +79,10 @@ class SubareaController extends Controller
     // ***************** CREAR NUEVO MODAL ++++++++++++++++++++ //
     protected function newItemV2()
     {
-        $Jefes = User::all()->sortBy(function($item) {
-            return $item->ap_paterno.' '.$item->ap_materno.' '.$item->nombre;
-        });
+        $Jefes = User::query()->whereHas('roles',function($q){
+                    return $q->where('name','JEFE');
+                })->orderByRaw("concat(ap_paterno,' ',ap_materno,' ',nombre) DESC")
+                ->get();
         $Areas = Area::all(['id','area','dependencia_id'])->sortBy('area');
         $user = Auth::user();
         return view('SIAC.dependencia.subarea.subarea_modal',
@@ -117,9 +119,10 @@ class SubareaController extends Controller
     protected function editItem($Id)
     {
         $item = Subarea::find($Id);
-        $Jefes = User::all()->sortBy(function($item) {
-            return $item->ap_paterno.' '.$item->ap_materno.' '.$item->nombre;
-        });
+        $Jefes = User::query()->whereHas('roles',function($q){
+                    return $q->where('name','JEFE');
+                })->orderByRaw("concat(ap_paterno,' ',ap_materno,' ',nombre) DESC")
+                ->get();
         $Areas = Area::all(['id','area','dependencia_id'])->sortBy('area');
 //        dd($Areas);
         return view('catalogos.catalogo.dependencias.subarea.subarea_edit',
@@ -149,9 +152,10 @@ class SubareaController extends Controller
     protected function editItemV2($Id)
     {
         $item = Subarea::find($Id);
-        $Jefes = User::all()->sortBy(function($item) {
-            return $item->ap_paterno.' '.$item->ap_materno.' '.$item->nombre;
-        });
+        $Jefes = User::query()->whereHas('roles',function($q){
+                    return $q->where('name','JEFE');
+                })->orderByRaw("concat(ap_paterno,' ',ap_materno,' ',nombre) DESC")
+                ->get();
         $Areas = Area::all(['id','area','dependencia_id'])->sortBy('area');
 //        dd($Areas);
         $user = Auth::user();

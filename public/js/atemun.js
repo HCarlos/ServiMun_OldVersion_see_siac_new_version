@@ -111,12 +111,12 @@
         });
     }
 
-    if ( $(".listTarget").length > 0  ){
-        $(".listTarget").on('change', function(event) {
-            event.preventDefault();
-            window.location.href = '/'+this.id+'/'+$(this).val();
-        });
-    }
+    // if ( $(".listTarget, .search_autocomplete_user").length > 0  ){
+    //     $(".listTarget, .search_autocomplete_user").on('change', function(event) {
+    //         event.preventDefault();
+    //         //window.location.href = '/'+this.id+'/'+$(this).val();
+    //     });
+    // }
 
     if ( $(".btnAsign0").length > 0  ){
         //alert('btnAsign0');
@@ -128,7 +128,8 @@
             var IdArr  = this.id.split('-');
             var urlAsigna = IdArr[0];
             var x = $('.listEle option:selected').val();
-            var y = $('select[name="listTarget"] option:selected').val();
+            // var y = $('select[name="listTarget"] option:selected').val();
+            var y = $('.listTarget').val();
             if (isUndefined(x)){
                 alert("Seleccione una opción disponible");
                 return false;
@@ -139,7 +140,7 @@
                 });
             }
             if (isUndefined(y) || y <= 0){
-                alert("Seleccione un elemento");
+                alert("Seleccione un elemento-->");
                 return false;
             }
 
@@ -160,7 +161,7 @@
                         window.location.href = response.mensaje;
                     }
                 }).fail(function(response) {
-                    alert("--"+response);
+                    alert(response.data);
                 });
 
             });
@@ -175,7 +176,8 @@
             var urlElimina = IdArr[0];
             var urlRegresa = IdArr[1];
             var z = $('.lstAsigns option:selected').val();
-            var y = $('select[name="listTarget"] option:selected').val();
+            // var y = $('select[name="listTarget"] option:selected').val();
+            var y = $('.listTarget').val();
             if (isUndefined(z)){
                 alert("Seleccione una opción disponible");
                 return false;
@@ -195,7 +197,6 @@
             formData['names'] = z;
 
             $(function() {
-
                 $.ajax({
                     url: '/'+urlElimina,
                     data: formData,
@@ -205,7 +206,7 @@
                         window.location.href = response.mensaje;
                     }
                 }).fail(function(response) {
-                    alert("--"+response);
+                    alert(response.data);
                 });
 
             });
@@ -397,6 +398,6 @@
     $("#colonia, #comunidad, #calle, #asentamiento, #tipoasentamiento, #tipocomunidad, #localidad," +
         "#afiliacion, #area, #subarea, #dependencia, #medida, #origen, #prioridad, #servicio, #ubicacon," +
         "#ciudad, #estado, #municipio, #estatus, #codigo, #cp, #search, #num_ext, #num_int," +
-        "#search_autocomplete, #search_autocomplete_user").keyup(function(){
+        "#search_autocomplete, #search_autocomplete_user, .search_autocomplete_user").keyup(function(){
         $(this).val($(this).val().toUpperCase());
     });

@@ -318,19 +318,22 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp|USER_OPERATOR_SIAC|
     Route::put('updateUbicacionV2', 'Catalogos\Domicilio\UbicacionController@updateItemV2')->name('updateUbicacionV2');
 
     // ROLES
-    Route::get('asignaRoleList/{Id}','Catalogos\User\RoleController@index')->name('asignaRoleList');
+    Route::get('asignaRoleList/{Id}','Catalogos\User\RoleController@indexV2')->name('asignaRoleList');
     Route::post('assignRoleToUser','Catalogos\User\RoleController@asignar')->name('assignRoleToUser');
     Route::post('unAssignRoleToUser','Catalogos\User\RoleController@desasignar')->name('unAssignRoleToUser');
+    Route::get('getRoleUser/{Id}','Catalogos\User\RoleController@getItems')->name('getRoleUser');
 
     // PERMISSIONS
-    Route::get('asignaPermissionList/{Id}','Catalogos\User\PermissionController@index')->name('asignaPermissionList');
+    Route::get('asignaPermissionList/{Id}','Catalogos\User\PermissionController@indexV2')->name('asignaPermissionList');
     Route::post('assignPermissionToUser','Catalogos\User\PermissionController@asignar')->name('assignPermissionToUser');
     Route::post('unAssignPermissionToUser','Catalogos\User\PermissionController@desasignar')->name('unAssignPermissionToUser');
+    Route::get('getPermisionsUser/{Id}','Catalogos\User\PermissionController@getItems')->name('getPermisionsUser');
 
     // USUARIOS DEPENDENCIAS
     Route::get('asignaDependenciaList/{Id}','Catalogos\User\DependenciaController@index')->name('asignaDependenciaList');
     Route::post('assignDepToUser','Catalogos\User\DependenciaController@asignarDep')->name('assignDepToUser');
     Route::post('unAssignDepToUser','Catalogos\User\DependenciaController@desasignarDep')->name('unAssignDepToUser');
+    Route::get('getDependenciasUser/{Id}','Catalogos\User\DependenciaController@getItems')->name('getDependenciasUser');
 
     // EXTERNAL FILES
     Route::get('archivosConfig','Storage\StorageExternalFilesController@archivos_config')->name('archivosConfig');

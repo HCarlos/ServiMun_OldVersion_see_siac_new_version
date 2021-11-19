@@ -53,6 +53,47 @@ class PermissionController extends Controller
 
     }
 
+
+    public function indexV2($Id = 0){
+        $listEle     = Permission::select('id','name as data')->pluck('data','id');
+        $listTarget  = null;
+//        $listTarget  = User::all()->sortBy(function($item) {
+//            return $item->ap_paterno.' '.$item->ap_materno.' '.$item->nombre;
+//        });
+        $Id = $Id == 0 ? 1 : $Id;
+        $users = User::findOrFail($Id);
+        $this->lstAsigns = $users->permissions->pluck('name','id');
+
+        $user = Auth::User();
+        return view ('catalogos.asignaciones.permissions_usuario',
+            [
+                'listEle0'        => $listEle,
+                'listTarget0'     => $listTarget,
+                'lstAsigns0'      => $this->lstAsigns,
+                'titulo_catalogo' => "Asignación de Permisos",
+                'titulo_header'   => '',
+                'user'            => $user,
+                'users'           => $users,
+                'getItems'        => '/getPermisionsUser/',
+                'Id'              => $Id,
+                'titleLeft0'      => "Permisos",
+                'titleUsuario0'   => "Usuario",
+                'titleAsign0'     => "Permisos asignados",
+                'urlAsigna'       => "assignPermissionToUser",
+                'urlRegresa'      => "asignaPermissionList",
+                'urlElimina'      => "unAssignPermissionToUser",
+            ]
+        );
+
+    }
+
+    public function getItems($Id = 0){
+        $Items = User::find($Id);
+        ;
+        return Response::json(['mensaje' => "OK", 'data' => $Items->permissions->pluck('name','id'), 'status' => '200'], 200);
+
+    }
+
     public function asignar(Request $request){
 
         $data            = $request->all(['Id','names']);

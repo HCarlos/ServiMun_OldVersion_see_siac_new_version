@@ -50,9 +50,10 @@ class AreaController extends Controller
     // ***************** CREAR NUEVO ++++++++++++++++++++ //
     protected function newItem()
     {
-        $Jefes = User::all()->sortBy(function($item) {
-            return $item->ap_paterno.' '.$item->ap_materno.' '.$item->nombre;
-        });
+        $Jefes = User::query()->whereHas('roles',function($q){
+                        return $q->where('name','JEFE');
+                    })->orderByRaw("concat(ap_paterno,' ',ap_materno,' ',nombre) DESC")
+                    ->get();
         $Dependencias = Dependencia::select('id','dependencia')
             ->orderBy('dependencia')
             ->get();
@@ -81,9 +82,10 @@ class AreaController extends Controller
     // ***************** CREAR NUEVO MODAL ++++++++++++++++++++ //
     protected function newItemV2()
     {
-        $Jefes = User::all()->sortBy(function($item) {
-            return $item->ap_paterno.' '.$item->ap_materno.' '.$item->nombre;
-        });
+        $Jefes = User::query()->whereHas('roles',function($q){
+                return $q->where('name','JEFE');
+            })->orderByRaw("concat(ap_paterno,' ',ap_materno,' ',nombre) DESC")
+            ->get();
         $Dependencias = Dependencia::select('id','dependencia')
             ->orderBy('dependencia')
             ->get();
@@ -122,9 +124,10 @@ class AreaController extends Controller
     protected function editItem($Id)
     {
         $item = Area::find($Id);
-        $Jefes = User::all()->sortBy(function($item) {
-            return $item->ap_paterno.' '.$item->ap_materno.' '.$item->nombre;
-        });
+        $Jefes = User::query()->whereHas('roles',function($q){
+                    return $q->where('name','JEFE');
+                })->orderByRaw("concat(ap_paterno,' ',ap_materno,' ',nombre) DESC")
+                ->get();
         $Dependencias = Dependencia::select('id','dependencia')
             ->orderBy('dependencia')
             ->get();
@@ -156,9 +159,10 @@ class AreaController extends Controller
     protected function editItemV2($Id)
     {
         $item = Area::find($Id);
-        $Jefes = User::all()->sortBy(function($item) {
-            return $item->ap_paterno.' '.$item->ap_materno.' '.$item->nombre;
-        });
+        $Jefes = User::query()->whereHas('roles',function($q){
+                    return $q->where('name','JEFE');
+                })->orderByRaw("concat(ap_paterno,' ',ap_materno,' ',nombre) DESC")
+                ->get();
         $Dependencias = Dependencia::select('id','dependencia')
             ->orderBy('dependencia')
             ->get();

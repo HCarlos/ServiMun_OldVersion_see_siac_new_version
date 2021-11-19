@@ -6,7 +6,7 @@
                 <label for = "search_autocomplete_user" class="col-lg-3 col-form-label labelDenuncia">Buscar Usuario</label>
                 <div class="col-lg-12">
                     <div class="input-group">
-                        {!! Form::text('search_autocomplete_user', null, array('placeholder' => 'Buscar usuario...','class' => 'form-control search_autocomplete','id'=>'search_autocomplete_user')) !!}
+                        {!! Form::text('search_autocomplete_user', null, array('placeholder' => 'Buscar usuario...','class' => 'form-control','id'=>'search_autocomplete_user')) !!}
                         <span class="input-group-append">
                             <a href="{{route("newUser")}}" target="_blank" class="btn btn-icon btn-info"> <i class="mdi mdi-plus"></i></a>
                         </span>

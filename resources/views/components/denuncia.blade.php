@@ -4,6 +4,7 @@
 @section("script_extra")
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="{{asset('/js/servimun.autocomplete.js')}}?time()"></script>
     <script >
 
         jQuery(function($) {
@@ -11,7 +12,7 @@
 
                 $("#radio1").prop('checked',true);
                 $(".panelUbiProblem").hide();
-
+/*
                 var getParents = "/getItemParent/";
 
                 var Objs = ["#search_autocomplete","#search_autocomplete_user"];
@@ -102,7 +103,7 @@
                     if ( $("#usuario_domicilio") ) $("#usuario_domicilio").val("");
                     if ( $("#usuario_id") )        $("#usuario_id").val(0);
                 }
-
+*/
                 if( $(".pregunta1") ){
                     $(".pregunta1").on('change',function(event){
                         event.preventDefault();

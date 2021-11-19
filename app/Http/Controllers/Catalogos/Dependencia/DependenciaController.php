@@ -81,9 +81,10 @@ class DependenciaController extends Controller
     // ***************** CREAR NUEVO MODAL++++++++++++++++++++ //
     protected function newItemV2(){
 
-        $Jefes = User::all()->sortBy(function($item) {
-            return $item->ap_paterno.' '.$item->ap_materno.' '.$item->nombre;
-        });
+        $Jefes = User::query()->whereHas('roles',function($q){
+                    return $q->where('name','JEFE');
+                })->orderByRaw("concat(ap_paterno,' ',ap_materno,' ',nombre) DESC")
+                ->get();
         $user = Auth::user();
         return view('SIAC.dependencia.dependencia.dependencia_modal',
         [
@@ -150,11 +151,12 @@ class DependenciaController extends Controller
     protected function editItemV2($Id)
     {
         $item = Dependencia::find($Id);
-        $Jefes = User::all()->sortBy(function($item) {
-            return $item->ap_paterno.' '.$item->ap_materno.' '.$item->nombre;
-        });
-
+        $Jefes = User::query()->whereHas('roles',function($q){
+                    return $q->where('name','JEFE');
+                    })->orderByRaw("concat(ap_paterno,' ',ap_materno,' ',nombre) DESC")
+                ->get();
         $user = Auth::user();
+
         return view('SIAC.dependencia.dependencia.dependencia_modal',
             [
                 'Titulo'          => isset($item->dependencia) ? $item->dependencia : 'Nueva',

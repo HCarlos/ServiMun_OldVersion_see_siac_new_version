@@ -26,8 +26,8 @@
 <script src="{{asset('js/responsive.bootstrap4.min.js')}}"></script>
 
 @yield("scripts")
-<script src="{{ '/js/base.js' }}"></script>
-<script src="{{ '/js/atemun.js' }}"></script>
+<script src="{{ '/js/base.js?time()' }}"></script>
+<script src="{{ '/js/atemun.js?time()' }}"></script>
 
 @yield("script_extra")
 @yield("script_extra_modal")

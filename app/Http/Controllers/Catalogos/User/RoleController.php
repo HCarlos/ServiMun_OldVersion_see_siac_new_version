@@ -54,6 +54,47 @@ class RoleController extends Controller
 
     }
 
+
+    public function indexV2($Id = 0){
+        $listEle     = Role::select('id','name as data')->pluck('data','id');
+        $listTarget  = null;
+//        $listTarget  = User::select('id','username','ap_paterno','ap_materno','nombre')->orderBy('ap_paterno','asc')->get();
+        $Id = $Id == 0 ? 1 : $Id;
+        $users = User::findOrFail($Id);
+        $this->lstAsigns = $users->roles->pluck('name','id');
+
+        $user = Auth::User();
+        return view ('catalogos.asignaciones.roles_usuario',
+            [
+                'catalogo_titulo' => '',
+                'listEle0'        => $listEle,
+                'listTarget0'     => $listTarget,
+                'lstAsigns0'      => $this->lstAsigns,
+                'titulo_catalogo' => "Asignación de Roles",
+                'titulo_header'   => '',
+                'user'            => $user,
+                'users'           => $users,
+                'getItems'        => '/getRoleUser/',
+                'Id'              => $Id,
+                'titleLeft0'      => "Roles",
+                'titleUsuario0'   => "Usuario",
+                'titleAsign0'     => "Roles asignados",
+                'urlAsigna'       => "assignRoleToUser",
+                'urlRegresa'      => "asignaRoleList",
+                'urlElimina'      => "unAssignRoleToUser",
+            ]
+        );
+
+    }
+
+    public function getItems($Id = 0){
+        $Items = User::find($Id);
+        ;
+        return Response::json(['mensaje' => "OK", 'data' => $Items->roles->pluck('name','id'), 'status' => '200'], 200);
+
+    }
+
+
     public function asignar(Request $request){
 
         $data     = $request->all(['Id','names']);
@@ -89,6 +130,8 @@ class RoleController extends Controller
         $data     = $request->all(['Id','names']);
         $Id        = $data['Id'];
         $nameRoles = $data['names'];
+
+        //dd($Id);
 
         $user = User::findOrFail($Id);
         $roles = explode('|',$nameRoles);
