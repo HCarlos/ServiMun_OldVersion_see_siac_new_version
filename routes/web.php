@@ -40,7 +40,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('edit', 'Catalogos\User\UserDataController@showEditUserData')->name('edit');
     Route::put('Edit', 'Catalogos\User\UserDataController@update')->name('Edit');
     Route::get('showEditProfilePhoto/', 'Catalogos\User\UserDataController@showEditProfilePhoto')->name('showEditProfilePhoto/');
-    Route::get('editUser/{Id}', 'Catalogos\User\UserDataController@showEditUser')->name('editUser');
+    Route::get('editUser/{Id}', 'Catalogos\User\UserDataController@editItem')->name('editUser');
     Route::put('EditUser', 'Catalogos\User\UserDataController@updateUser')->name('EditUser');
     Route::put('updateUserV2', 'Catalogos\User\UserDataController@updateUserV2')->name('updateUserV2');
 });

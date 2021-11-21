@@ -88,6 +88,8 @@ class UserRequest extends FormRequest
     public function manageUser()
     {
 
+        dd($this->all());
+
         if ($this->id == 0) {
 
             $UN       =  User::getUsernameNext('CIU');

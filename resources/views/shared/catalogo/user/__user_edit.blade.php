@@ -74,8 +74,24 @@
 
     </div>
     <div class="tab-pane" id="Domicilio1">
-
         <div class="form-group row mb-3">
+            <label for = "calle" class="col-md-3 col-form-label">UBICACIONES: </label>
+            <div class="col-md-9">
+                <div class="col-lg-9">
+                    <div class="input-group">
+                        {!! Form::text('search_autocomplete',  $items->Ubicacion, array('placeholder' => 'Buscar ubicación...','class' => 'form-control','id'=>'search_autocomplete')) !!}
+                        <span class="input-group-append">
+                            <a href="{{route("newUbicacion")}}" target="_blank" class="btn btn-icon btn-info"> <i class="mdi mdi-plus"></i></a>
+                        </span>
+                    </div>
+                    <hr>
+                    <input type="text" name="ubicacion" id="ubicacion" value="{{ old('ubicacion', $items->Ubicacion) }}" class="form-control" disabled/>
+                    {{ Form::select('user_address_list', $user_address_list, trim($items->ubicacion_id), ['id' => 'user_address_list','class' => 'form-control']) }}
+                </div>
+            </div>
+        </div>
+
+            <div class="form-group row mb-3">
             <label for = "calle" class="col-md-3 col-form-label">Calle</label>
             <div class="col-md-9">
                 <input type="text" name="calle" id="calle" value="{{ old('calle',$items->Ubicacion->id ?? ''.$items->user_adress->calle ?? "") }}" class="form-control" />
@@ -150,7 +166,8 @@
 <input type="hidden" name="username" id="username" value="{{ $items->username }}"  />
 <input type="hidden" name="email" id="email" value="{{ $items->email }}"  />
 <input type="hidden" name="curp" id="curp" value="{{ $items->curp }}"  />
-
+<input type="hidden" name="ubicacion__id" id="ubicacion__id" value="{{ $items->ubicacion_id }}" >
+<input type="hidden" name="ubicacion_id" id="ubicacion_id" value="0" >
 <input type="hidden" name="id" value="{{$items->id}}" >
 
 <hr>

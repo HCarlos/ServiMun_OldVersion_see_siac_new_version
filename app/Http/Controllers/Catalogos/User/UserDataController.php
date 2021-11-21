@@ -88,17 +88,19 @@ class UserDataController extends Controller
     }
 
 // ***************** EDITA LOS DATOS DEL USUARIO PARA ESCRITURA ++++++++++++++++++++ //
-    protected function showEditUser($Id)
+    protected function editItem($Id)
     {
         $user = User::find($Id);
+        $Ubicaciones_Usuario = $user->ubicaciones->pluck('Ubicacion','id');
         $this->msg = "";
         return view('catalogos.catalogo.user.user_profile_edit',
             [
-                'user' => $user,
-                'items' => $user,
-                'titulo_catalogo' => "Catálogo de Usuarios",
-                'titulo_header'   => 'Editando el Folio '.$Id,
-                'msg'             => $this->msg,
+                'user'              => $user,
+                'items'             => $user,
+                'user_address_list' => $Ubicaciones_Usuario,
+                'titulo_catalogo'   => "Catálogo de Usuarios",
+                'titulo_header'     => 'Editando el Folio '.$Id,
+                'msg'               => $this->msg,
             ]
         );
     }
@@ -182,7 +184,8 @@ class UserDataController extends Controller
         $titulo_catalogo = "";
         $this->msg = "";
         return view('catalogos.catalogo.user.user_photo_update', [
-                "user" => $user,
+                "user"            => $user,
+                "items"           => $user,
                 "titulo_catalogo" => "Catálogo de Usuarios",
                 'titulo_header'   => 'Actualizando avatar',
                 'msg'             => $this->msg,
@@ -198,7 +201,8 @@ class UserDataController extends Controller
         $this->msg = "";
         session(['msg' => $this->msg]);
         return view('catalogos.catalogo.user.user_password_edit', [
-                "user" => $user,
+                "user"            => $user,
+                "items"           => $user,
                 "titulo_catalogo" =>"Catálogo de Usuarios",
                 'titulo_header'   => 'Actualizando password',
                 'msg'             => $this->msg,
@@ -214,8 +218,9 @@ class UserDataController extends Controller
         $this->msg = "";
         session(['msg' => $this->msg]);
         return view('catalogos.catalogo.user.user_password_edit', [
-            "user" => Auth::user(),
-            "msg" => 'Password cambiado con éxito!',
+            "user"            => Auth::user(),
+            "items"           => Auth::user(),
+            "msg"             => 'Password cambiado con éxito!',
             "titulo_catalogo" =>"Catálogo de Usuarios",
             'titulo_header'   => 'Editando password',
             'msg'             => $this->msg,

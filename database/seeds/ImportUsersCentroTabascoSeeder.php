@@ -102,10 +102,13 @@ class ImportUsersCentroTabascoSeeder extends Seeder{
 //            }
 //        }
 
-        //User::where('id','>',13)->softdelete();
+//        $user = User::query()->where('id','>',13)->delete();
+
         $user = User::withTrashed()->where('id','>',13);
         $user->forceDelete();
         DB::statement("ALTER SEQUENCE users_id_seq RESTART WITH 14 ");
+
+        //User::query()->truncate();
 
         //dd(  );
 
@@ -175,7 +178,7 @@ class ImportUsersCentroTabascoSeeder extends Seeder{
 
                 $Comunidad = Comunidad::query()->where('comunidad',$localidad)->first();
                 if ( !$Comunidad ){
-                    $Comunidad = Comunidad::create(['comunidad'=>$localidad,'delegado_id'=>1,'tipocomunidad_id'=>1,'ciudad_id'=>1,'municipio_id'=>1,'estado_id'=>1,'comunidad_mig_id'=>$localidad_mig_id]);
+                    $Comunidad = Comunidad::create(['comunidad'=>$localidad,'delegado_id'=>1,'tipocomunidad_id'=>1,'ciudad_id'=>302,'municipio_id'=>2007,'estado_id'=>27,'comunidad_mig_id'=>$localidad_mig_id]);
                 }
 
                 $Colonia = Colonia::query()->where('colonia',$colonia)->first();
@@ -236,7 +239,7 @@ class ImportUsersCentroTabascoSeeder extends Seeder{
                     'codigopostal_id' => $codigopostal_id,
                 ];
 
-                //dd($Item);
+                // UPDATE comunidades set ciudad_id = 302, municipio_id = 2007, estado_id = 27 where ciudad_id = 1 and municipio_id = 1 and estado_id = 1
 
                 $Ubi = Ubicacion::query()
                     ->where('calle_id',$calle_id)
