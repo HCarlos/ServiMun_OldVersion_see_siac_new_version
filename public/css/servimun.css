@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2021. Realizado por Carlos Hidalgo
+ */
+
+@import url("https://localhost.mx/servimun.css");
+@namespace url(http://www.w3.org/1999/xhtml);
+
+#resultado {
+    background-color: darkred;
+    color: white;
+    font-weight: bold;
+}
+
+#resultado.ok {
+    background-color: green;
+}
 
 .sidebar-atemun-bg {
     background: #9e742b !important;
@@ -8,7 +24,7 @@
 }
 
 .sidebar-right-bg {
-    background-color: white !important;
+    background-image: url( "../images/bg-auth.png" ) !important;
 }
 
 .sidebar-right-image {
@@ -26,11 +42,79 @@
     margin-top: 5em;
     margin-left: 5em;
     height: 80em;
-
 }
 
 .bg-ciudad
 {
     background-color: darkgray ;
-
 }
+
+.text-blanco {
+    color: #ffffff !important;
+}
+
+.bg-registry {
+    background: url("../images/web/bg-registry.png") no-repeat center !important;
+}
+
+.bg-registro-bg {
+    background: url("../images/web/bg-registry.png") no-repeat center !important;
+}
+
+label{
+    color:#56585a;
+}
+
+a, .text-darkred{
+    color: darkred;
+}
+
+.bg-form{
+    background: darkslategray;
+}
+
+.bg-form-body > form{
+    background: #f0ddce;
+    margin: 0;
+}
+
+
+.bg-form-body label{
+    color: white;
+}
+
+.color-title{
+    color: whitesmoke !important;
+}
+.btn-danger-primary{
+    background-color: darkred;
+    border-color: red
+}
+.btn-danger-primary:hover {
+    color: #fff;
+    background-color: #f9375e;
+    border-color: #f82b54; }
+.btn-danger-primary:focus, .btn-danger-primary.focus {
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(250, 92, 124, 0.5);
+    box-shadow: 0 0 0 0.2rem rgba(250, 92, 124, 0.5); }
+.btn-danger-primary.disabled, .btn-danger-primary:disabled {
+    color: #fff;
+    background-color: #fa5c7c;
+    border-color: #fa5c7c; }
+.btn-danger-primary:not(:disabled):not(.disabled):active, .btn-danger-primary:not(:disabled):not(.disabled).active,
+.show > .btn-danger-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #f82b54;
+    border-color: #f81e4a; }
+.btn-danger-primary:not(:disabled):not(.disabled):active:focus, .btn-danger-primary:not(:disabled):not(.disabled).active:focus,
+.show > .btn-danger-primary.dropdown-toggle:focus {
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(250, 92, 124, 0.5);
+    box-shadow: 0 0 0 0.2rem rgba(250, 92, 124, 0.5); }
+
+
+.labelDenuncia{
+    color: darkred;
+    font-weight: bold;
+    font-size: large;
+}
+

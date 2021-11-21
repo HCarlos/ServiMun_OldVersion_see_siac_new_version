@@ -72,7 +72,7 @@ ul.role-list-hrz li a {
 .role-list-hrz li a:hover {
 	background-color: #111111;
 }
-.bolder-lati{
+.bolder_lati{
 	font-weight: bold !important;
 	mso-ansi-font-weight: bold !important;
 	mso-bidi-font-weight: bold !important;
@@ -172,7 +172,6 @@ ul.role-list-hrz li a {
 
 .mi-imagen-bajo-derecha{
 	position:absolute;
-	bottom:10px;
 	right:1em;
 	bottom:1em;
 }
@@ -277,6 +276,7 @@ ul.role-list-hrz li a {
 .card-atemun > .card-boy > form > label {
 	color: darkslategray !important;
 }
+
 .init-atemun{
 	color: whitesmoke !important;
 	font-size: 12px !important;
@@ -605,10 +605,10 @@ input[readonly] {
 
 #colonia, #comunidad, #calle, #asentamiento, #tipoasentamiento, #tipocomunidad, #localidad,
 #afiliacion, #area, #subarea, #dependencia, #medida, #origen, #prioridad, #servicio, #ubicacon,
-#ciudad, #estado, #municipio, #estatus, #codigo, #cp
+#ciudad, #estado, #municipio, #estatus, #codigo, #cp, .search_autocomplete
 {text-transform: uppercase; background: lightgoldenrodyellow;}
 
-#search_autocomplete{
+.search_autocomplete---{
     text-transform: uppercase;
     background: lightyellow;
     color:black;
