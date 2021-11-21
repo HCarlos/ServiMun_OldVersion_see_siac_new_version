@@ -94,7 +94,7 @@
             <div class="form-group row mb-3">
             <label for = "calle" class="col-md-3 col-form-label">Calle</label>
             <div class="col-md-9">
-                <input type="text" name="calle" id="calle" value="{{ old('calle',$items->Ubicacion->id ?? ''.$items->user_adress->calle ?? "") }}" class="form-control" />
+                <input type="text" name="calle" id="calle" value="{{ old('calle',$items->user_adress->calle ?? "") }}" class="form-control" />
             </div>
             <label for = "num_ext" class="col-md-3 col-form-label">Num Ext</label>
             <div class="col-md-9">
