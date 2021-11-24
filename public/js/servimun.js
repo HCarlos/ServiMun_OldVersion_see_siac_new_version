@@ -1,20 +1,38 @@
-var axios = require("axios").default;
-var CURP = $('#curp').val();
-var options = {
-    method: 'POST',
-    url: 'https://curp-renapo.p.rapidapi.com/v1/curp',
-    headers: {
-        'content-type': 'application/json',
-        'x-rapidapi-host': 'curp-renapo.p.rapidapi.com',
-        'x-rapidapi-key': '443ebd50abmsh706bc0616bc2595p1dacbajsn5d699f5df978'
-    },
-    data: {curp: CURP}
-};
 
-axios.request(options).then(function (response) {
-    console.log(response.data);
-}).catch(function (error) {
-    console.error(error);
-});
+var axios = axios.create();// require("axios").default;
 
+
+function getUser(){
+        var CURP = "HIRC711126HTCDZR01";
+        var bodyFormData = new FormData();
+        bodyFormData.append('search', CURP);
+
+
+    axios({
+        method: "get",
+        url: "/getCURP",
+        data: bodyFormData,
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+            'Content-Type': 'application/json;charset=utf-8',
+            'Accept': 'application/json'
+        },
+    })
+        .then(function (response) {
+            // alert( (response.data.data)[10].curp );
+            response.data.data.forEach(function(item) {
+                console.log("found: ", item)
+                console.log("found id: ", item.id)
+                // alert(item.curp);
+            });
+            console.log(response.data.data);
+        })
+        .catch(function (response) {
+            alert("Hola Mundo 2");
+            console.log(response);
+        });
+
+}
+
+//getUser();
 

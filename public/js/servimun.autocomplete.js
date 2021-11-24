@@ -19,6 +19,7 @@ jQuery(function($) {
             $(Obj).autocomplete({
                 source: function(request, response) {
                     // var ta = $("#tipo_asentamiento") ? $("#tipo_asentamiento").val() : "";
+
                     $.ajax({
                         url: Url,
                         dataType: "json",
@@ -29,6 +30,35 @@ jQuery(function($) {
                             response(data);
                         },
                     });
+
+/*
+
+                     axios({
+                        method: "get",
+                        url: Url,
+                        data: {
+                            search  : request.term,
+                        },
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'Content-Type': 'application/json;charset=utf-8',
+                            'Accept': 'application/json',
+                        },  timeout: 30000,
+                    })
+                        .then(function (response) {
+                            //alert( (response.data.data)[10].curp );
+                            response(response.data.data);
+
+                        })
+                        .catch(function (response) {
+                            console.log(response);
+                        });
+
+*/
+
+
+
+
                 },
                 minLength: 3,
             });
@@ -59,15 +89,16 @@ jQuery(function($) {
                     $("#ubicacion_id").val(d.id);
                     $("#ubicacion_id_span").html(d.id);
                     $("#ubicacion").val(d.calle+' '+d.colonia+' '+d.comunidad+' '+d.ciudad+' '+d.municipio+' '+d.estado+' '+d.cp);
-                    // $("#search_autocomplete").val("");
+                    $("#ubicacion_nueva_id").val(d.id);
                     break;
                 case 1:
-                    if ( $("#usuario") )           $("#usuario").val('('+d.id+') '+d.nombre_completo);
-                    if ( $("#usuario_domicilio") ) $("#usuario_domicilio").val(d.domicilio);
-                    if ( $("#usuario_id") )        $("#usuario_id").val(d.id);
-                    if ( $("#ubicacion_id") )      $("#ubicacion_id").val(d.ubicacion_id);
-                    if ( $("#ubicacion_id_span") ) $("#ubicacion_id_span").html(d.ubicacion_id);
-                    if ( $("#ubicacion") )         $("#ubicacion").val(d.domicilio);
+                    if ( $("#usuario") )            $("#usuario").val('('+d.id+') '+d.nombre_completo);
+                    if ( $("#usuario_domicilio") )  $("#usuario_domicilio").val(d.domicilio);
+                    if ( $("#usuario_id") )         $("#usuario_id").val(d.id);
+                    if ( $("#ubicacion_id") )       $("#ubicacion_id").val(d.ubicacion_id);
+                    if ( $("#ubicacion_id_span") )  $("#ubicacion_id_span").html(d.ubicacion_id);
+                    if ( $("#ubicacion") )          $("#ubicacion").val(d.domicilio);
+                    if ( $("#ubicacion_nueva_id") ) $("#ubicacion_nueva_id").val(d.ubicacion_id);
                     break;
                 case 2:
                     if ( $("#lstAsigns") ) $("#lstAsigns").empty();
@@ -83,6 +114,7 @@ jQuery(function($) {
                     $("#ubicacion_id").val(0);
                     $("#ubicacion_id_span").val("");
                     $("#ubicacion").val("");
+                    $("#ubicacion_nueva_id").val(0);
                     break;
                 case 1:
                     $("#usuario").val("");
@@ -98,13 +130,14 @@ jQuery(function($) {
         }
 
         function clearObjAll(){
-            if ( $("#ubicacion_id") )      $("#ubicacion_id").val(0);
-            if ( $("#ubicacion_id_span") ) $("#ubicacion_id_span").val("");
-            if ( $("#ubicacion") )         $("#ubicacion").val("");
-            if ( $("#usuario_domicilio") ) $("#usuario_domicilio").val("");
-            if ( $("#usuario_id") )        $("#usuario_id").val(0);
-            if ( $("#usuario_id") )        $("#lstAsigns").empty();
-            if ( $("#listTarget") )        $("#listTarget").val(0);
+            if ( $("#ubicacion_id") )       $("#ubicacion_id").val(0);
+            if ( $("#ubicacion_id_span") )  $("#ubicacion_id_span").val("");
+            if ( $("#ubicacion_nueva_id") ) $("#ubicacion_nueva_id").val(0);
+            if ( $("#ubicacion") )          $("#ubicacion").val("");
+            if ( $("#usuario_domicilio") )  $("#usuario_domicilio").val("");
+            if ( $("#usuario_id") )         $("#usuario_id").val(0);
+            if ( $("#usuario_id") )         $("#lstAsigns").empty();
+            if ( $("#listTarget") )         $("#listTarget").val(0);
         }
 
         function getRolesFromUser(Obj, Item, data){
@@ -117,6 +150,13 @@ jQuery(function($) {
                 });
             }, "json" );
         }
+
+            $("#user_address_list").on('change',function(event){
+                //event.preventDefault();
+                //alert($(this).val());
+                 $("#ubicacion_nueva_id").val( $(this).val() );
+            });
+
 
     });
 });

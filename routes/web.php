@@ -35,6 +35,9 @@ Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('re
 Route::post('register', 'Auth\RegisterController@register');
 Route::post('registered/{email}/{username}', 'Auth\RegisterController@registered')->name('registered');
 
+//Route::get('getCURP/', 'Catalogos\User\UserDataController@getCURP')->name('getCURP');
+
+
 Route::group(['middleware' => 'auth'], function () {
     // USUARIOS
     Route::get('edit', 'Catalogos\User\UserDataController@showEditUserData')->name('edit');

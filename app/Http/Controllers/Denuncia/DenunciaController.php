@@ -331,7 +331,7 @@ class DenunciaController extends Controller
 // ***************** MAUTOCOMPLETE DE UBICACIONES ++++++++++++++++++++ //
     protected function searchAdress(Request $request)
     {
-        ini_set('max_execution_time', 300);
+        ini_set('max_execution_time', 300000);
         $filters =$request->input('search');
         $F           = new FuncionesController();
         $tsString    = $F->string_to_tsQuery( strtoupper($filters),' & ');
@@ -349,6 +349,7 @@ class DenunciaController extends Controller
             return $data;
         else
             return ['value'=>'No se encontraron resultados','id'=>0];
+//        return Response::json(['mensaje' => 'OK', 'data' => json_decode($data), 'status' => '200'], 200);
 
     }
 

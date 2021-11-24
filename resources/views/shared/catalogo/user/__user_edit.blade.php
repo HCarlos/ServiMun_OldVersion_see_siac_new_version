@@ -25,20 +25,16 @@
 <div class="tab-content">
     <div class="tab-pane active show" id="Profile1">
 
-{{--        <div class="form-group row mb-3">--}}
-{{--            <label for = "username" class="col-md-3 col-form-label">Username</label>--}}
-{{--            <div class="col-md-9">--}}
-{{--                <input type="text" name="username" id="username" value="{{ old('username',$items->username) }}" class="form-control" readonly />--}}
-{{--            </div>--}}
-{{--            <label for = "email" class="col-md-3 col-form-label">Email</label>--}}
-{{--            <div class="col-md-9">--}}
-{{--                <input type="email" name="email" id="email" value="{{ old('email',$items->email) }}" class="form-control" readonly  />--}}
-{{--            </div>--}}
-{{--            <label for = "curp" class="col-md-3 col-form-label">CURP</label>--}}
-{{--            <div class="col-md-9">--}}
-{{--                <input type="text" name="curp" id="curp" value="{{ old('curp',$items->curp) }}" class="form-control" readonly />--}}
-{{--            </div>--}}
-{{--        </div>--}}
+        <div class="form-group row mb-3">
+            <label for = "email" class="col-md-3 col-form-label">Email</label>
+            <div class="col-md-9">
+                <input type="email" name="email" id="email" value="{{ old('email',$items->email) }}" class="form-control"   />
+            </div>
+            <label for = "curp" class="col-md-3 col-form-label">CURP</label>
+            <div class="col-md-9">
+                <input type="text" name="curp" id="curp" value="{{ old('curp',$items->curp) }}" class="form-control"  />
+            </div>
+        </div>
 
         <div class="form-group row mb-3">
             <label for = "ap_paterno" class="col-md-3 col-form-label">Paterno</label>
@@ -76,59 +72,67 @@
     <div class="tab-pane" id="Domicilio1">
         <div class="form-group row mb-3">
             <label for = "calle" class="col-md-3 col-form-label">UBICACIONES: </label>
-            <div class="col-md-9">
-                <div class="col-lg-9">
-                    <div class="input-group">
-                        {!! Form::text('search_autocomplete',  $items->Ubicacion, array('placeholder' => 'Buscar ubicación...','class' => 'form-control','id'=>'search_autocomplete')) !!}
-                        <span class="input-group-append">
-                            <a href="{{route("newUbicacion")}}" target="_blank" class="btn btn-icon btn-info"> <i class="mdi mdi-plus"></i></a>
-                        </span>
-                    </div>
-                    <hr>
-                    <input type="text" name="ubicacion" id="ubicacion" value="{{ old('ubicacion', $items->Ubicacion) }}" class="form-control" disabled/>
-                    {{ Form::select('user_address_list', $user_address_list, trim($items->ubicacion_id), ['id' => 'user_address_list','class' => 'form-control']) }}
+            <div class="col-lg-9">
+                <div class="input-group">
+                    {!! Form::text('search_autocomplete',null, array('placeholder' => 'Buscar ubicación...','class' => 'form-control search_autocomplete','id'=>'search_autocomplete')) !!}
+                    <span class="input-group-append">
+                        <a href="{{route("newUbicacion")}}" target="_blank" class="btn btn-icon btn-info"> <i class="mdi mdi-plus"></i></a>
+                    </span>
                 </div>
+                <input type="text" name="ubicacion" id="ubicacion" value="{{ old('ubicacion') }}" class="form-control" disabled/>
+                </div>
+        </div>
+        <hr>
+        <div class="form-group row mb-3">
+            <label for = "user_address_list" class="col-md-3 col-form-label">Selec. una Ubicación: </label>
+            <div class="col-md-9">
+                <select id="user_address_list" name="user_address_list" class="form-control user_address_list" size="1">
+                @foreach($user_address_list as $t)
+                    <option value="{{$t->id}}" {{ $t->id == $items->ubicacion_id ? 'selected': '' }} >{{ $t->Ubicacion }} </option>
+                @endforeach
+                </select>
             </div>
         </div>
+        <hr>
 
-            <div class="form-group row mb-3">
-            <label for = "calle" class="col-md-3 col-form-label">Calle</label>
-            <div class="col-md-9">
-                <input type="text" name="calle" id="calle" value="{{ old('calle',$items->user_adress->calle) }}" class="form-control" />
-            </div>
-            <label for = "num_ext" class="col-md-3 col-form-label">Num Ext</label>
-            <div class="col-md-9">
-                <input type="text" name="num_ext" id="num_ext" value="{{ old('num_ext',$items->user_adress->num_ext) }}" class="form-control" />
-            </div>
-            <label for = "num_int" class="col-md-3 col-form-label">Num Int</label>
-            <div class="col-md-9">
-                <input type="text" name="num_int" id="num_int" value="{{ old('num_int',$items->user_adress->num_int) }}" class="form-control" />
-            </div>
-            <label for = "colonia" class="col-md-3 col-form-label">Colonia</label>
-            <div class="col-md-9">
-                <input type="text" name="colonia" id="colonia" value="{{ old('colonia',$items->user_adress->colonia) }}" class="form-control" />
-            </div>
-            <label for = "localidad" class="col-md-3 col-form-label">Localidad</label>
-            <div class="col-md-9">
-                <input type="text" name="localidad" id="localidad" value="{{ old('localidad',$items->user_adress->localidad) }}" class="form-control" />
-            </div>
-            <label for = "municipio" class="col-md-3 col-form-label">Municipio</label>
-            <div class="col-md-9">
-                <input type="text" name="municipio" id="municipio" value="{{ old('municipio',$items->user_adress->municipio) }}" class="form-control" />
-            </div>
-            <label for = "estado" class="col-md-3 col-form-label">Estado</label>
-            <div class="col-md-9">
-                <input type="text" name="estado" id="estado" value="{{ old('estado',$items->user_adress->estado) }}" class="form-control" />
-            </div>
-            <label for = "pais" class="col-md-3 col-form-label">País</label>
-            <div class="col-md-9">
-                <input type="text" name="pais" id="pais" value="{{ old('pais',$items->user_adress->pais) }}" class="form-control" />
-            </div>
-            <label for = "cp" class="col-md-3 col-form-label">CP</label>
-            <div class="col-md-9">
-                <input type="text" name="cp" id="cp" value="{{ old('cp',$items->user_adress->cp) }}" class="form-control" />
-            </div>
+        <div class="form-group row mb-3">
+        <label for = "calle" class="col-md-3 col-form-label">Calle</label>
+        <div class="col-md-9">
+            <input type="text" name="calle" id="calle" value="{{ old('calle',$items->user_adress->calle) }}" class="form-control" />
         </div>
+        <label for = "num_ext" class="col-md-3 col-form-label">Num Ext</label>
+        <div class="col-md-9">
+            <input type="text" name="num_ext" id="num_ext" value="{{ old('num_ext',$items->user_adress->num_ext) }}" class="form-control" />
+        </div>
+        <label for = "num_int" class="col-md-3 col-form-label">Num Int</label>
+        <div class="col-md-9">
+            <input type="text" name="num_int" id="num_int" value="{{ old('num_int',$items->user_adress->num_int) }}" class="form-control" />
+        </div>
+        <label for = "colonia" class="col-md-3 col-form-label">Colonia</label>
+        <div class="col-md-9">
+            <input type="text" name="colonia" id="colonia" value="{{ old('colonia',$items->user_adress->colonia) }}" class="form-control" />
+        </div>
+        <label for = "localidad" class="col-md-3 col-form-label">Localidad</label>
+        <div class="col-md-9">
+            <input type="text" name="localidad" id="localidad" value="{{ old('localidad',$items->user_adress->localidad) }}" class="form-control" />
+        </div>
+        <label for = "municipio" class="col-md-3 col-form-label">Municipio</label>
+        <div class="col-md-9">
+            <input type="text" name="municipio" id="municipio" value="{{ old('municipio',$items->user_adress->municipio) }}" class="form-control" />
+        </div>
+        <label for = "estado" class="col-md-3 col-form-label">Estado</label>
+        <div class="col-md-9">
+            <input type="text" name="estado" id="estado" value="{{ old('estado',$items->user_adress->estado) }}" class="form-control" />
+        </div>
+        <label for = "pais" class="col-md-3 col-form-label">País</label>
+        <div class="col-md-9">
+            <input type="text" name="pais" id="pais" value="{{ old('pais',$items->user_adress->pais) }}" class="form-control" />
+        </div>
+        <label for = "cp" class="col-md-3 col-form-label">CP</label>
+        <div class="col-md-9">
+            <input type="text" name="cp" id="cp" value="{{ old('cp',$items->user_adress->cp) }}" class="form-control" />
+        </div>
+    </div>
 
     </div>
     <div class="tab-pane" id="Ocupaciion1">
@@ -164,10 +168,10 @@
 
 
 <input type="hidden" name="username" id="username" value="{{ $items->username }}"  />
-<input type="hidden" name="email" id="email" value="{{ $items->email }}"  />
-<input type="hidden" name="curp" id="curp" value="{{ $items->curp }}"  />
-<input type="hidden" name="ubicacion__id" id="ubicacion__id" value="{{ $items->ubicacion_id }}" >
-<input type="hidden" name="ubicacion_id" id="ubicacion_id" value="0" >
+{{--<input type="hidden" name="email" id="email" value="{{ $items->email }}"  />--}}
+{{--<input type="hidden" name="curp" id="curp" value="{{ $items->curp }}"  />--}}
+<input type="hidden" name="ubicacion_actual_id" id="ubicacion_actual_id" value="{{ $items->ubicacion_id }}" >
+<input type="hidden" name="ubicacion_nueva_id" id="ubicacion_nueva_id" value="{{ $items->ubicacion_id }}" >
 <input type="hidden" name="id" value="{{$items->id}}" >
 
 <hr>

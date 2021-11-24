@@ -91,7 +91,8 @@ class UserDataController extends Controller
     protected function editItem($Id)
     {
         $user = User::find($Id);
-        $Ubicaciones_Usuario = $user->ubicaciones->pluck('Ubicacion','id');
+        $Ubicaciones_Usuario = $user->ubicaciones;
+        //dd( json_decode( json_encode(  $Ubicaciones_Usuario ) ) );
         $this->msg = "";
         return view('catalogos.catalogo.user.user_profile_edit',
             [
@@ -108,7 +109,16 @@ class UserDataController extends Controller
 // ***************** GUARDA LOS CAMBIOS EN EL USUARIO ++++++++++++++++++++ //
     protected function update(UserRequest $request)
     {
-        $request->updateUser();
+        $Obj = $request->updateUser();
+        if (!is_object($Obj)) {
+            $id = 0;
+            return redirect('editUser')
+                ->withErrors($Obj)
+                ->withInput();
+        }else{
+            $id = $Obj->id;
+        }
+
         $this->msg = "Registro Guardado con éxito!";
         session(['msg' => $this->msg]);
         return redirect()->route('listUsers');
@@ -119,13 +129,23 @@ class UserDataController extends Controller
     {
         $Data = $request->all(['id']);
         //dd($UserId);
-        $user = $request->manageUser();
-        if ( !isset($user) || !is_object($user) ) {
-            $this->msg = $user;
-            $user = User::find($Data['id']);
+        $Obj = $request->manageUser();
+//        if ( !isset($user) || !is_object($user) ) {
+//            $this->msg = $user;
+//            $user = User::find($Data['id']);
+//        }else{
+//            $this->msg = "Registro Guardado con éxito!!!";
+//        }
+
+        if (!is_object($Obj)) {
+            $id = 0;
+            return redirect('editUser')
+                ->withErrors($Obj)
+                ->withInput();
         }else{
-            $this->msg = "Registro Guardado con éxito!!!";
+            $id = $Obj->id;
         }
+
         session(['msg' => $this->msg]);
 
         return redirect()->route('listUsers');
@@ -154,25 +174,39 @@ class UserDataController extends Controller
 
         $Data = $request->all(['id']);
         //dd($UserId);
-        $user = $request->manageUser();
-        if ( !isset($user) || !is_object($user) ) {
-            $this->msg = $user;
-            $user = User::find($Data['id']);
+        $Obj = $request->manageUser();
+
+//        if ( !isset($user) || !is_object($user) ) {
+//            $this->msg = $user;
+//            $user = User::find($Data['id']);
+//        }else{
+//            $this->msg = "Registro Guardado con éxito!";
+//        }
+
+        if (!is_object($Obj)) {
+            $id = 0;
+            return redirect('newUser')
+                ->withErrors($Obj)
+                ->withInput();
         }else{
-            $this->msg = "Registro Guardado con éxito!";
+            $id = $Obj->id;
         }
+
+
         session(['msg' => $this->msg]);
         //dd ("Create : ".$user);
-        $user = is_null($user) || trim($user) == "" ? User::all()->last() : $user;
+        $user = is_null($Obj) || trim($Obj) == "" ? User::all()->last() : $Obj;
+        $Ubicaciones_Usuario = $user->ubicaciones;
 
         return view('catalogos.catalogo.user.user_profile_edit',
             [
-                'user'            => $user,
-                'items'           => $user,
-                'titulo_catalogo' => $user->Fullname ?? '' ,
-                'titulo_header'   => 'Editando...',
-                'putEdit'         => 'EditUser',
-                'msg'             => $this->msg,
+                'user'              => $user,
+                'items'             => $user,
+                'titulo_catalogo'   => $user->Fullname ?? '' ,
+                'user_address_list' => $Ubicaciones_Usuario,
+                'titulo_header'     => 'Editando...',
+                'putEdit'           => 'EditUser',
+                'msg'               => $this->msg,
             ]
         );
     }
@@ -260,7 +294,7 @@ class UserDataController extends Controller
             ->orderBy('id')->take(50)
             ->get();
         $data=array();
-
+        //dd($items);
         foreach ($items as $item) {
             $data[]=array(
                 'value'=>$item->fullName.' - '.$item->curp,
@@ -286,6 +320,24 @@ class UserDataController extends Controller
         return Response::json(['mensaje' => 'OK', 'data' => json_decode($items), 'status' => '200'], 200);
 
     }
+
+    protected function getCURP(Request $request)
+    {
+        ini_set('max_execution_time', 300);
+        $filters =$request->input('search');
+        //dd($filters);
+        $F           = new FuncionesController();
+        $tsString    = $F->string_to_tsQuery( strtoupper($filters),' & ');
+        $data =  User::query()
+            ->search($tsString)
+            ->orderBy('id')->take(50)
+            ->get();
+
+        return Response::json(['mensaje' => 'OK', 'data' => json_decode($data), 'status' => '200'], 200);
+
+
+    }
+
 
 
 

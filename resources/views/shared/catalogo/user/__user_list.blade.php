@@ -7,6 +7,7 @@
                         <th class="sorting">Email</th>
                         <th class="sorting">CURP</th>
                         <th class="sorting ">Roles</th>
+                        <th class="sorting ">Ubi</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -23,6 +24,7 @@
                                 <span class="badge badge-primary">{{$role->name}}</span>
                             @endforeach
                         </td>
+                        <td>{{($item->ubicacion_id)}}</td>
                         <td class="table-action w-100">
                             <div class="button-list w-100">
                                 @include('shared.ui_kit.__edit_item')

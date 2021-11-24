@@ -75,7 +75,10 @@ class ImportEstructuraCentroTabascoSeeder extends Seeder
                 $area_id        = trim($arr[1]) == "" ? 0 : intval($arr[1]);
                 $area           = trim($arr[2]) == "" ? 0 : strtoupper(trim(utf8_encode($arr[2])));
 
-                Area::create(['id'=>$area_id,'area'=>$area,'dependencia_id'=>$dependencia_id,'jefe_id'=>1]);
+                $Area = Area::create(['id'=>$area_id,'area'=>$area,'dependencia_id'=>$dependencia_id,'jefe_id'=>1]);
+
+                $Area->dependencias()->attach($dependencia_id);
+                $Area->jefes()->attach(1);
 
                 Log::alert('Registro Núm: '.$x);
 
@@ -107,7 +110,9 @@ class ImportEstructuraCentroTabascoSeeder extends Seeder
                 $subarea_id     = trim($arr[2]) == "" ? 0 : intval($arr[2]);
                 $subarea        = trim($arr[3]) == "" ? 0 : strtoupper(trim(utf8_encode($arr[3])));
 
-                Subarea::create(['id'=>$subarea_id,'subarea'=>$subarea,'area_id'=>$area_id,'jefe_id'=>1]);
+                $Subarea = Subarea::create(['id'=>$subarea_id,'subarea'=>$subarea,'area_id'=>$area_id,'jefe_id'=>1]);
+
+                $Subarea->areas()->attach($area_id);
 
                 Log::alert('Registro Núm: '.$x);
 
@@ -142,8 +147,8 @@ class ImportEstructuraCentroTabascoSeeder extends Seeder
                 $servicio_id    = trim($arr[3]) == "" ? 0 : intval($arr[3]);
                 $servicio       = trim($arr[4]) == "" ? 0 : strtoupper(trim(utf8_encode($arr[4])));
 //                'id', 'servicio','habilitado', 'medida_id', 'subarea_id',
-                Servicio::create(['id'=>$servicio_id,'servicio'=>$servicio,'subarea_id'=>$subarea_id, 'medida_id'=>1]);
-
+                $Servicio = Servicio::create(['id'=>$servicio_id,'servicio'=>$servicio,'subarea_id'=>$subarea_id, 'medida_id'=>1]);
+                $Servicio->subareas()->attach($subarea_id);
                 Log::alert('Registro Núm: '.$x);
 
             }catch (QueryException $e){

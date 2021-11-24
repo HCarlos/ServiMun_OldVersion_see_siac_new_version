@@ -72,11 +72,12 @@ class DenunciaCiudadanaController extends Controller
         $Prioridades  = Prioridad::all()->sortBy('prioridad');
         $Origenes     = Origen::all()->sortBy('origen');
         $Dependencias = Dependencia::all()->sortBy('dependencia');
-        $Ciudadanos   = User::all()->sortBy(function ($q){
-            return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
-        });
+//        $Ciudadanos   = User::all()->sortBy(function ($q){
+//            return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
+//        });
         $Estatus      = Estatu::all()->sortBy('estatus');
         $this->msg = "";
+
 
         return view('denuncia.denuncia_ciudadana.denuncia_ciudadana_new',
             [
@@ -85,7 +86,7 @@ class DenunciaCiudadanaController extends Controller
                 'prioridades'     => $Prioridades,
                 'origenes'        => $Origenes,
                 'dependencias'    => $Dependencias,
-                'ciudadanos'      => $Ciudadanos,
+//                'ciudadanos'      => $Ciudadanos,
                 'estatus'         => $Estatus,
                 'postNew'         => 'createDenunciaCiudadana',
                 'titulo_catalogo' => "Mis " . ucwords($this->tableName),

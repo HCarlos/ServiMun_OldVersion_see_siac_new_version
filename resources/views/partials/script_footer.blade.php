@@ -1,3 +1,4 @@
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 <script src="{{asset('js/app.min.js')}}"></script>
 <script src="{{asset('js/fontawesome.min.js')}}"></script>
@@ -27,8 +28,10 @@
 
 @yield("scripts")
 
-<script src="{{ '/js/base.js?time()' }}"></script>
-<script src="{{ '/js/atemun.js?time()' }}"></script>
+<script src="{{ '/js/base.js?timestamp()' }}"></script>
+<script src="{{ '/js/atemun.js?timestamp()' }}"></script>
+<script src="{{ '/js/servimun.js?timestamp()' }}"></script>
+
 @yield("script_autocomplete")
 
 @yield("script_extra")
