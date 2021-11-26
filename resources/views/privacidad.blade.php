@@ -25,7 +25,7 @@
     <style>
         html, body {
             background-color: #fff;
-            background: url('{{asset("images/bg-auth.png")}}') no-repeat center;
+            background: url('{{asset("images/web/aviso".rand(1,2).".png")}}') no-repeat center;
             background-size: cover;
             min-height: 100vh;
             color: #fff;
