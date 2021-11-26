@@ -17,6 +17,7 @@ class Categoria extends Model
     protected $fillable = [
         'id','categoria',
     ];
+    protected $hidden = ['deleted_at','created_at','updated_at'];
 
     public function scopeFilterBy($query, $filters){
         return (new CategoriaFilter())->applyTo($query, $filters);

@@ -16,7 +16,7 @@ class Prioridad extends Model
     protected $fillable = [
         'id', 'prioridad','predeterminado', 'class_css',
     ];
-
+    protected $hidden = ['deleted_at','created_at','updated_at'];
     protected $casts = ['predeterminado'=>'boolean',];
 
     public function scopeFilterBy($query, $filters){

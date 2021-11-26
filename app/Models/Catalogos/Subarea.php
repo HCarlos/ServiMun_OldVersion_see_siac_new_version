@@ -17,6 +17,7 @@ class Subarea extends Model
     protected $fillable = [
         'id', 'subarea','area_id','jefe_id',
     ];
+    protected $hidden = ['deleted_at','created_at','updated_at'];
 
     public function scopeFilterBy($query, $filters){
         return (new SubareaFilter())->applyTo($query, $filters);

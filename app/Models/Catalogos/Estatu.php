@@ -19,6 +19,7 @@ class Estatu extends Model
     ];
 
     protected $casts = ['predeterminado'=>'boolean',];
+    protected $hidden = ['deleted_at','created_at','updated_at'];
 
     public function isDefault(){
         return $this->predeterminado;

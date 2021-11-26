@@ -17,6 +17,7 @@ class Ciudad extends Model
     protected $fillable = [
         'id', 'ciudad', 'ciudad_mig_id', 'municipio_id',
     ];
+    protected $hidden = ['deleted_at','created_at','updated_at'];
 
     public function scopeFilterBy($query, $filters){
         return (new CiudadFilter())->applyTo($query, $filters);

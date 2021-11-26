@@ -18,6 +18,7 @@ class Area extends Model
         'id',
         'area', 'dependencia_id','jefe_id',
     ];
+    protected $hidden = ['deleted_at','created_at','updated_at'];
 
     public function scopeFilterBy($query, $filters){
         return (new AreaFilter())->applyTo($query, $filters);

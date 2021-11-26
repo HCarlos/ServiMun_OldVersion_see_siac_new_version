@@ -18,6 +18,7 @@ class Colonia extends Model
         'id', 'colonia', 'cp','altitud','latitud','longitud','codigopostal_id','comunidad_id','tipocomunidad_id',
         'colonia_mig_id',
     ];
+    protected $hidden = ['deleted_at','created_at','updated_at'];
 
     public function scopeFilterBy($query, $filters){
         return (new ColoniaFilter())->applyTo($query,$filters);

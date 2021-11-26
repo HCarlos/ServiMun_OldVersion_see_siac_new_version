@@ -19,6 +19,8 @@ class Denuncia_Dependencia_Servicio extends Model
         'id',
         'denuncia_id','dependencia_id','servicio_id','estatu_id','fecha_movimiento','observaciones',
     ];
+    protected $hidden = ['deleted_at','created_at','updated_at'];
+    protected $dates = ['fecha_movimiento'];
 
     public function denuncia(){
         return $this->hasOne(Denuncia::class,'id','denuncia_id');

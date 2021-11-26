@@ -28,7 +28,7 @@ class LogLastLogout
      */
     public function handle(Logout $event){
         if ( Auth::user() ){
-            $fecha = Carbon::now()->toDateTimeString();
+            $fecha = Carbon::now();
             User::find($event->user->id)->update(['logged'=>false,'logout_at'=>$fecha]);
             Log::info("El usuario {$event->user->username} se ha desconectado");
         }

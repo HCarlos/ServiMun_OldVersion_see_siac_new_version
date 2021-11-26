@@ -17,7 +17,7 @@ class Servicio extends Model
     protected $fillable = [
         'id', 'servicio','habilitado', 'medida_id', 'subarea_id',
     ];
-
+    protected $hidden = ['deleted_at','created_at','updated_at'];
     protected $casts = ['habilitado'=>'boolean',];
 
     public function scopeFilterBy($query, $filters){

@@ -17,6 +17,7 @@ class Sepomex extends Model
         'id', 'zona',
         'asentamiento_id','tipoasentamiento_id','codigospostal_id','municipio_id','estado_id','ciudad_id',
     ];
+    protected $hidden = ['deleted_at','created_at','updated_at'];
 
     public function Asentamiento() {
         return $this->hasOne(Asentamiento::class,'asentamiento_id');

@@ -128,7 +128,7 @@ class ListModelXLSXController extends Controller
                 break;
         }
 
-        $C0 = 6;
+        $C0 = 5;
         $C = $C0;
 
         $nameTable = $Model->count() >0 ? ucwords($Model->first()->getTable()) : '(Vacio)';
@@ -146,10 +146,10 @@ class ListModelXLSXController extends Controller
             $spreadsheet = $reader->load($archivo);
             $sh = $spreadsheet->setActiveSheetIndex(0);
 
-            $sh->getStyle('B3')->getFont()->setBold(true);
-            $sh->setCellValue('B3', $nameTable);
-            $sh->getStyle('E3')->getFont()->setBold(true);
-            $sh->setCellValue('E3', Carbon::now()->format('d-m-Y h:m:s'));
+            $sh->getStyle('A2')->getFont()->setBold(true);
+            $sh->setCellValue('A2', $nameTable);
+            $sh->getStyle('N1')->getFont()->setBold(true);
+            $sh->setCellValue('N1', Carbon::now()->format('d-m-Y h:m:s'));
 
             $attributes =$Model[0]->toArray();
             $row = 1;

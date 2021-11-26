@@ -17,6 +17,7 @@ class Municipio extends Model
     protected $fillable = [
         'id', 'municipio', 'estado_id', 'numero_municipio', 'municipio_mig_id',
     ];
+    protected $hidden = ['deleted_at','created_at','updated_at'];
 
     public function scopeFilterBy($query, $filters){
         return (new MunicipioFilter())->applyTo($query, $filters);

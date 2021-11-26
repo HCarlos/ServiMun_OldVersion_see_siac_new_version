@@ -17,6 +17,7 @@ class Localidad extends Model
     protected $fillable = [
         'id', 'localidad','localidad_mig_id',
     ];
+    protected $hidden = ['deleted_at','created_at','updated_at'];
 
     public function scopeFilterBy($query, $filters){
         return (new LocalidadFilter())->applyTo($query, $filters);

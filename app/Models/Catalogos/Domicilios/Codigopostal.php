@@ -17,6 +17,7 @@ class Codigopostal extends Model
     protected $fillable = [
         'id', 'codigo', 'cp', 'cp_mig_id',
     ];
+    protected $hidden = ['deleted_at','created_at','updated_at'];
 
     public function scopeFilterBy($query, $filters){
         return (new CodigopostalFilter())->applyTo($query, $filters);

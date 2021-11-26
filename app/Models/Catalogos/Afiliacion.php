@@ -17,6 +17,7 @@ class Afiliacion extends Model
     protected $fillable = [
         'id', 'afiliacion',
     ];
+    protected $hidden = ['deleted_at','created_at','updated_at'];
 
     public function scopeFilterBy($query, $filters){
         return (new AfiliacionFilter())->applyTo($query, $filters);
@@ -31,6 +32,6 @@ class Afiliacion extends Model
         }
         return $obj;
     }
-    
-    
+
+
 }

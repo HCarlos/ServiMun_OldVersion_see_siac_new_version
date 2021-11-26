@@ -21,6 +21,7 @@ class Comunidad extends Model
         'id', 'comunidad','delegado_id','tipocomunidad_id','ciudad_id','municipio_id','estado_id',
         'comunidad_mig_id',
     ];
+    protected $hidden = ['deleted_at','created_at','updated_at'];
 
     public function scopeFilterBy($query, $filters){
         return (new ComunidadFilter())->applyTo($query, $filters);

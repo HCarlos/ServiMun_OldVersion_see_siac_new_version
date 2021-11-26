@@ -17,6 +17,7 @@ class Tipoasentamiento extends Model
     protected $fillable = [
         'id', 'tipoasentamiento',
     ];
+    protected $hidden = ['deleted_at','created_at','updated_at'];
 
     public function scopeFilterBy($query, $filters){
         return (new TipoasentamientoFilter())->applyTo($query, $filters);
@@ -31,6 +32,6 @@ class Tipoasentamiento extends Model
         }
         return $obj;
     }
-    
-    
+
+
 }

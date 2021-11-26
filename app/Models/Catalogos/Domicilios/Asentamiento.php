@@ -17,6 +17,7 @@ class Asentamiento extends Model
     protected $fillable = [
         'id', 'asentamiento',
     ];
+    protected $hidden = ['deleted_at','created_at','updated_at'];
 
     public function scopeFilterBy($query, $filters){
         return (new AsentamientoFilter())->applyTo($query, $filters);
@@ -31,6 +32,6 @@ class Asentamiento extends Model
         }
         return $obj;
     }
-    
-    
+
+
 }

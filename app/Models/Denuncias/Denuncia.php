@@ -35,7 +35,7 @@ class Denuncia extends Model
         'ciudadano_id','creadopor_id','modificadopor_id',
         'searchtextdenuncia',
     ];
-
+    protected $hidden = ['deleted_at','created_at','updated_at'];
     protected $dates = ['fecha_ingreso', 'fecha_oficio_dependencia' => 'datetime:d-m-Y', 'fecha_limite' => 'datetime:d-m-Y', 'fecha_ejecucion' => 'datetime:d-m-Y'];
 
     public function scopeSearch($query, $search){

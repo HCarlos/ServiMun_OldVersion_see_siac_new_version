@@ -46,10 +46,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'ubicacion_id','imagen_id',
     ];
 
-    protected $hidden = ['password', 'remember_token',];
+    protected $hidden = ['password', 'remember_token','deleted_at','created_at','updated_at'];
     protected $casts = ['admin'=>'boolean','alumno'=>'boolean','delegado'=>'boolean',];
-    protected $dates = ['fecha_nacimiento' => 'datetime:d-m-Y',];
-    protected $dateFormat = [''];
+    protected $dates = ['fecha_nacimiento' => 'datetime:d-m-Y'];
+//    protected $dateFormat = [''];
 
     public function scopeSearch($query, $search){
         if (!$search || $search == "" || $search == null) return $query;

@@ -18,6 +18,7 @@ class UserAdress extends Model
         'calle','num_ext','num_int',
         'colonia','localidad','municipio','estado','pais','cp',
     ];
+    protected $hidden = ['deleted_at','created_at','updated_at'];
 
 //    public function users(){
 //        return $this->hasMany(Users::class);

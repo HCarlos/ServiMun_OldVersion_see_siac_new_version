@@ -25,6 +25,7 @@ class Ubicacion extends Model
         'latitud','longitud','searchtext',
         'calle_id', 'colonia_id','comunidad_id','ciudad_id', 'municipio_id','estado_id', 'codigopostal_id',
     ];
+    protected $hidden = ['deleted_at','created_at','updated_at'];
 
     public function scopeFilterBy($query,$filerts){
         return (new UbicacionFilter())->applyTo($query, $filerts);

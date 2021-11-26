@@ -16,6 +16,7 @@ class Pais extends Model
     protected $fillable = [
         'id', 'pais',
     ];
+    protected $hidden = ['deleted_at','created_at','updated_at'];
 
     public static function findOrImport($pais){
         $obj = static::where('pais', $pais)->first();

@@ -19,6 +19,7 @@ class Imagene extends Model{
     protected $fillable = [
         'id', 'fecha','root','image','image_thumb','titulo','descripcion','momento','denuncia__id','user__id','parent__id'
     ];
+    protected $hidden = ['deleted_at','created_at','updated_at'];
 
     public function user(){
         return $this->hasOne(User::class,'id','user__id');

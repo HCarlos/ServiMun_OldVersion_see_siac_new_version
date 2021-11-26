@@ -17,6 +17,7 @@ class DenunciaEstatu extends Model
         'id',
         'denuncia_id','estatu_id'
     ];
+    protected $hidden = ['deleted_at','created_at','updated_at'];
     protected $casts = ['ultimo'=>'boolean',];
 
     public function isUltimo(){

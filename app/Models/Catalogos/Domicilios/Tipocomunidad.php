@@ -17,6 +17,7 @@ class Tipocomunidad extends Model
     protected $fillable = [
         'id', 'tipocomunidad',
     ];
+    protected $hidden = ['deleted_at','created_at','updated_at'];
 
     public function scopeFilterBy($query,$filters){
         return (new TipocomunidadFilter())->applyTo($query, $filters);
@@ -31,6 +32,6 @@ class Tipocomunidad extends Model
         }
         return $obj;
     }
-    
-    
+
+
 }

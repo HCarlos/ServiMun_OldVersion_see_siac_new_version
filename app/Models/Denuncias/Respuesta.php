@@ -19,6 +19,7 @@ class Respuesta extends Model
     protected $fillable = [
         'id', 'fecha','respuesta','observaciones','denuncia__id','user__id','parent__id'
     ];
+    protected $hidden = ['deleted_at','created_at','updated_at'];
 
 //    public function Denuncia() {
 //        return $this->hasMany(Denuncia::class,'denuncia_id');

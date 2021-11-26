@@ -16,6 +16,7 @@ class Origen extends Model
     protected $fillable = [
         'id', 'origen',
     ];
+    protected $hidden = ['deleted_at','created_at','updated_at'];
 
     protected $casts = ['predeterminado'=>'boolean',];
 

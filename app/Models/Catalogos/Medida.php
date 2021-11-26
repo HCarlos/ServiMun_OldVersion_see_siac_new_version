@@ -20,6 +20,7 @@ class Medida extends Model
     public function scopeFilterBy($query, $filters){
         return ( new MedidaFilter())->applyTo($query, $filters);
     }
+    protected $hidden = ['deleted_at','created_at','updated_at'];
 
     public static function findOrImport($medida){
         $obj = static::where('medida', trim($medida))->first();

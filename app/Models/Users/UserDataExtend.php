@@ -17,6 +17,7 @@ class UserDataExtend extends Model
         'id','user_id',
         'lugar_nacimiento','ocupacion','profesion','lugar_trabajo',
     ];
+    protected $hidden = ['deleted_at','created_at','updated_at'];
 
 //    public function users(){
 //        return $this->hasMany(Users::class);

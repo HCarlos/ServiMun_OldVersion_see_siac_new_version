@@ -17,6 +17,7 @@ class Estado extends Model
     protected $fillable = [
         'id', 'estado', 'estado_mig_id',
     ];
+    protected $hidden = ['deleted_at','created_at','updated_at'];
 
     public function scopeFilterBy($query, $filters){
         return (new EstadoFilter())->applyTo($query, $filters);
