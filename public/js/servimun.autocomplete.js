@@ -94,6 +94,7 @@ jQuery(function($) {
                 case 1:
                     if ( $("#usuario") )            $("#usuario").val('('+d.id+') '+d.nombre_completo);
                     if ( $("#usuario_domicilio") )  $("#usuario_domicilio").val(d.domicilio);
+                    if ( $("#usuario_telefonos") )  $("#usuario_telefonos").val(d.telefonos);
                     if ( $("#usuario_id") )         $("#usuario_id").val(d.id);
                     if ( $("#ubicacion_id") )       $("#ubicacion_id").val(d.ubicacion_id);
                     if ( $("#ubicacion_id_span") )  $("#ubicacion_id_span").html(d.ubicacion_id);
@@ -119,6 +120,7 @@ jQuery(function($) {
                 case 1:
                     $("#usuario").val("");
                     $("#usuario_domicilio").val("");
+                    $("#usuario_telefonos").val("");
                     $("#usuario_id").val(0);
                     break;
                 case 2:
@@ -135,6 +137,7 @@ jQuery(function($) {
             if ( $("#ubicacion_nueva_id") ) $("#ubicacion_nueva_id").val(0);
             if ( $("#ubicacion") )          $("#ubicacion").val("");
             if ( $("#usuario_domicilio") )  $("#usuario_domicilio").val("");
+            if ( $("#usuario_telefonos") )  $("#usuario_telefonos").val("");
             if ( $("#usuario_id") )         $("#usuario_id").val(0);
             if ( $("#usuario_id") )         $("#lstAsigns").empty();
             if ( $("#listTarget") )         $("#listTarget").val(0);

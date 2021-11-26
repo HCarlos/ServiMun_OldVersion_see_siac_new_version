@@ -117,3 +117,15 @@ a, .text-darkred{
     font-size: large;
 }
 
+.help-box2 {
+    border-radius: 5px;
+    padding: 20px;
+    margin: 65px 25px 25px;
+    position: relative;
+    background-color: darkgrey !important;
+}
+.help-box2 .close-btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}

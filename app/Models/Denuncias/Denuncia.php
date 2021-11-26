@@ -30,13 +30,13 @@ class Denuncia extends Model
         'id','cantidad', 'oficio_envio',
         'descripcion','referencia','domicilio_ciudadano_internet','observaciones',
         'calle','num_ext','num_int','colonia', 'comunidad','ciudad','municipio','estado','pais', 'cp',
-        'fecha_ingreso','fecha_oficio_dependencia','fecha_limite','fecha_ejecucion','latitud','longitud',
+        'latitud','longitud',
         'prioridad_id','origen_id','dependencia_id','ubicacion_id','servicio_id','estatus_id',
         'ciudadano_id','creadopor_id','modificadopor_id',
         'searchtextdenuncia',
     ];
 
-    protected $dates = ['fecha_ingreso','fecha_oficio_dependencia','fecha_limite','fecha_ejecucion'];
+    protected $dates = ['fecha_ingreso', 'fecha_oficio_dependencia' => 'datetime:d-m-Y', 'fecha_limite' => 'datetime:d-m-Y', 'fecha_ejecucion' => 'datetime:d-m-Y'];
 
     public function scopeSearch($query, $search){
         if (!$search || $search == "" || $search == null) return $query;

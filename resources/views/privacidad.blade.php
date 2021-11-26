@@ -15,10 +15,12 @@
     <link href="{{ asset('images/favicon/favicon-180-180.png') }}" rel="apple-touch-icon" sizes="180x180">
     <link href="{{ asset('images/favicon/favicon-192-192.png') }}" rel="apple-touch-icon" sizes="192x192">
     <link href="{{ asset('images/favicon/favicon-270-270.png') }}" rel="apple-touch-icon" sizes="270x270">
+    <link href="https://fonts.googleapis.com/css?family=Raleway|PT+Sans+Narrow|Roboto:400,400i,500,500i|Roboto+Mono|Roboto+Condensed|Kaushan+Script&effect=3d-float" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"><!-- third party css -->
+    <link href="{{ asset('css/app.css' )}}" rel="stylesheet" type="text/css" />
+
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Raleway|Roboto+Condensed|Tangerine&effect=3d-float" rel="stylesheet">
-    <link href="{{ asset('css/atemun.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/servimun.css') }}" rel="stylesheet">
 
     <style>
         html, body {
@@ -87,39 +89,26 @@
             background-size: cover !important;
             background-color: transparent !important;
         }
-        .aviso_privacidad {
-            color: floralwhite !important;
-            padding: 0 2px;
-            font-size: 16px;
-            font-weight: 600;
-            letter-spacing: .1rem;
-            text-decoration: none !important;;
-            list-style:none !important;
-            text-transform: uppercase;
-            background-size: cover;
-        }
     </style>
 
 </head>
 
 <body>
-<div class="flex-center position-ref full-height">
-    @if (Route::has('login'))
-        <ul class="navbar navbar-nav">
-            <li class="links top-right " >
-                @auth
-                    <a href="{{ url('/home') }}" class="" ><strong>Entrar</strong></a>
-                @else
-                    <a href="{{ route('login') }}" class="text-blanco "><strong>Iniciar sesión</strong></a>
-                    <a href="{{ route('register') }}" class="text-blanco">Regístrate</a>
-                @endauth
-            </li>
-        </ul>
-    @endif
-    <div class="content" style="margin-top: -15em;">
-        <span class="text-cafe  font-effect-3d-float font_Tangerine_700"></span>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <div class="flex-center position-ref full-height">
+                <div class="card card-body " style="background-color: dimgrey; box-shadow: 4px 4px 8px  floralwhite" >
+                    <h3 class="card-title text-white text-center">Aviso de Privacidad<br><br></h3>
+                    <p class=" text-white text-justify">
+                        Los datos recabados en este formato, serán protegidos, incorporados y tratados en los términos establecidos en la Ley General de Protección de Datos Personales en posesión de Sujetos Obligados y los Lineamientos de la Ley de Protección de Datos Personales y Posesión de Sujetos Obligados del Estado de Tabasco y demás normatividad aplicable.<br><br> Por lo anterior, los datos personales que se recabarán en esta plataforma, son: <strong class="text-black-50 font-weight-bold"><i>nombre, edad, sexo, estado civil, ocupación, escolaridad, CURP, e-mail, teléfono celular</i></strong>. <br><br>En ese sentido, de conformidad con los artículos 20 fracción III, 26 y 27 de la Ley General de Protección de Datos Personales en Posesión de Sujetos Obligados, en relación con los numerales 29, 30, 31, 33, 76 y 77, de la Ley de Protección de Datos Personales en Posesión de Sujetos Obligados del Estado de Tabasco, se hace de su conocimiento que los datos recabados únicamente serán utilizados para el fin de un servicio más eficiente en la gestion de su demanda ciudadana. <br><br>No se realizarán transferencias adicionales, salvo aquellas que sean necesarias para atender requerimientos de información de una autoridad competente, que estén debidamente fundados y motivados. <br><br>Usted podrá ejercitar sus derechos de Acceso, Rectificación, Cancelación, Oposición y de Portabilidad de sus datos personales, directamente a la Unidad de Transparencia de este H. Ayuntamiento de Centro, ubicado en Calle Retorno Vía 5, Edifico 105, 2do. Piso, Tabasco 2000, de la ciudad de Villahermosa, Tabasco, C.P. 86035, con horario de 8:00 a 16:00 horas en días hábiles, bajo la responsabilidad de la Lic. Beatriz Adriana Roja Ysquierdo o en la plataforma nacional de transparencia (PNT) con dirección electrónica: <a href="https://www.plataformadetransparencia.org.mx/" target="_blank" class="text-black-50  font-weight-bold">https://www.plataformadetransparencia.org.mx/ </a>
+                    </p>
+                </div> <!-- end card-->
+            </div>
+        </div>
+        <div class="col-sm-2"></div>
     </div>
-    <p class="wellcome-pos-version font_Open_Sans_Condensed_300">v 1.0   | <a href="/privacidad" class="aviso_privacidad"  target="_blank">Aviso de Privacidad</a></p>
 </div>
 </body>
 </html>

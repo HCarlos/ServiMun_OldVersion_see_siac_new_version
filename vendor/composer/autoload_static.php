@@ -749,6 +749,7 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
 
     public static $classMap = array (
         'ActualizacionUsuarioUbicacionImagenIdSeeder' => __DIR__ . '/../..' . '/database/seeds/ActualizacionUsuarioUbicacionImagenIdSeeder.php',
+        'Agregar_Usuarios_01_Seeder' => __DIR__ . '/../..' . '/database/seeds/Agregar_Usuarios_01_Seeder.php',
         'App\\Classes\\Denuncia\\DenunciaTCPDF' => __DIR__ . '/../..' . '/app/Classes/Denuncia/DenunciaTCPDF.php',
         'App\\Classes\\FiltersRules' => __DIR__ . '/../..' . '/app/Classes/FiltersRules.php',
         'App\\Classes\\Items' => __DIR__ . '/../..' . '/app/Classes/Items.php',

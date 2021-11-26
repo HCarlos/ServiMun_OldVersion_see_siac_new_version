@@ -54,7 +54,7 @@ final class Versions
   'evenement/evenement' => 'v2.1.0@6ba9a777870ab49f417e703229d53931ed40fd7a',
   'ezyang/htmlpurifier' => 'v4.13.0@08e27c97e4c6ed02f37c5b2b20488046c8d90d75',
   'facade/flare-client-php' => '1.9.1@b2adf1512755637d0cef4f7d1b54301325ac78ed',
-  'facade/ignition' => '2.17.0@28d12b473ffcbe326959385772fd5125c73bc974',
+  'facade/ignition' => '2.17.1@317f6110c1977b50e06365bbb155fbe5079035ec',
   'facade/ignition-contracts' => '1.0.2@3c921a1cdba35b68a7f0ccffc6dffc1995b18267',
   'fideloper/proxy' => '4.4.1@c073b2bd04d1c90e04dc1b787662b558dd65ade0',
   'fruitcake/laravel-cors' => 'v2.0.4@a8ccedc7ca95189ead0e407c43b530dc17791d6a',
@@ -73,7 +73,7 @@ final class Versions
   'laravelcollective/html' => 'v6.2.1@ae15b9c4bf918ec3a78f092b8555551dd693fde3',
   'laravelcollective/remote' => 'v6.2.0@f4b200f24f76307b09d7a5af230ea7119cbf9811',
   'league/commonmark' => '1.6.6@c4228d11e30d7493c6836d20872f9582d8ba6dcf',
-  'league/flysystem' => '1.1.6@627be7fcde84c71aa0f15097fcf48fd5f2be5287',
+  'league/flysystem' => '1.1.7@3ca8f158ee21efa4bbd4f74bea5730c9b9261e2d',
   'league/mime-type-detection' => '1.9.0@aa70e813a6ad3d1558fc927863d47309b4c23e69',
   'league/oauth1-client' => 'v1.10.0@88dd16b0cff68eb9167bfc849707d2c40ad91ddc',
   'maatwebsite/excel' => '3.1.33@b2de5ba92c5c1ad9415f0eb7c72838fb3eaaa5b8',
@@ -188,7 +188,7 @@ final class Versions
   'sebastian/version' => '3.0.2@c6c1022351a901512170118436c764e473f6de8c',
   'theseer/tokenizer' => '1.2.1@34a41e998c2183e22995f158c581e7b5e755ab9e',
   'webmozart/assert' => '1.10.0@6964c76c7804814a842473e0c8fd15bab0f18e25',
-  'laravel/laravel' => 'dev-master@83aa2fca9ec4c30feddbaeb6d671979e810e251d',
+  'laravel/laravel' => 'dev-master@1a453dde9ccfd81329e368d0f35b493201868a79',
 );
 
     private function __construct()

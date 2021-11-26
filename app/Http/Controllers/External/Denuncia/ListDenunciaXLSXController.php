@@ -45,7 +45,7 @@ class ListDenunciaXLSXController extends Controller
             $spreadsheet = $reader->load($archivo);
             $sh = $spreadsheet->setActiveSheetIndex(0);
 
-            $sh->setCellValue('K1', Carbon::now()->format('d-m-Y h:m:s'));
+            $sh->setCellValue('N1', Carbon::now()->format('d-m-Y h:m:s'));
             foreach ($Items as $item){
 
                 //dd($item);
@@ -65,29 +65,48 @@ class ListDenunciaXLSXController extends Controller
 
                 $sh
                     ->setCellValue('A'.$C, $item->id)
-                    ->setCellValue('B'.$C, $item->cantidad)
-                    ->setCellValue('C'.$C, $fechaIngreso)
-                    ->setCellValue('D'.$C, $fechaLimite)
-                    ->setCellValue('E'.$C, $fechaEjecucion)
-                    ->setCellValue('F'.$C, $item->descripcion)
-                    ->setCellValue('G'.$C, $item->referencia)
-                    ->setCellValue('H'.$C, $item->calle)
-                    ->setCellValue('I'.$C, $item->num_ext)
-                    ->setCellValue('J'.$C, $item->num_int)
-                    ->setCellValue('K'.$C, $item->colonia)
-                    ->setCellValue('L'.$C, $item->comunidad)
-                    ->setCellValue('M'.$C, $item->ciudad)
-                    ->setCellValue('N'.$C, $item->municipio)
-                    ->setCellValue('O'.$C, $item->estado)
-                    ->setCellValue('P'.$C, $prioridad->prioridad)
-                    ->setCellValue('Q'.$C, $origen->origen)
-                    ->setCellValue('R'.$C, $dependencia->dependencia)
-                    ->setCellValue('S'.$C, $servicio->servicio)
-                    ->setCellValue('T'.$C, $estatus->estatus)
-                    ->setCellValue('U'.$C, $creadopor->fullName)
-                    ->setCellValue('V'.$C, $ubicacion->ubicacion)
+                    ->setCellValue('B'.$C, $ciudadano->ap_paterno)
+                    ->setCellValue('C'.$C, $ciudadano->ap_materno)
+                    ->setCellValue('D'.$C, $ciudadano->nombre)
+                    ->setCellValue('E'.$C, $ubicacion->Ubicacion)
+                    ->setCellValue('F'.$C, $ciudadano->TelefonosCelularesEmails)
+                    ->setCellValue('G'.$C, $fechaIngreso)
+                    ->setCellValue('H'.$C, $dependencia->dependencia)
+                    ->setCellValue('I'.$C, $servicio->servicio)
+                    ->setCellValue('J'.$C, $item->descripcion)
+                    ->setCellValue('K'.$C, $item->referencia)
+                    ->setCellValue('L'.$C, $prioridad->prioridad)
+                    ->setCellValue('M'.$C, $origen->origen)
+                    ->setCellValue('N'.$C, $estatus->estatus);
 
-                    ->setCellValue('Z'.$C, $ciudadano->fullName);
+
+
+
+//                $sh
+//                    ->setCellValue('A'.$C, $item->id)
+//                    ->setCellValue('B'.$C, $item->cantidad)
+//                    ->setCellValue('C'.$C, $fechaIngreso)
+//                    ->setCellValue('D'.$C, $fechaLimite)
+//                    ->setCellValue('E'.$C, $fechaEjecucion)
+//                    ->setCellValue('F'.$C, $item->descripcion)
+//                    ->setCellValue('G'.$C, $item->referencia)
+//                    ->setCellValue('H'.$C, $item->calle)
+//                    ->setCellValue('I'.$C, $item->num_ext)
+//                    ->setCellValue('J'.$C, $item->num_int)
+//                    ->setCellValue('K'.$C, $item->colonia)
+//                    ->setCellValue('L'.$C, $item->comunidad)
+//                    ->setCellValue('M'.$C, $item->ciudad)
+//                    ->setCellValue('N'.$C, $item->municipio)
+//                    ->setCellValue('O'.$C, $item->estado)
+//                    ->setCellValue('P'.$C, $prioridad->prioridad)
+//                    ->setCellValue('Q'.$C, $origen->origen)
+//                    ->setCellValue('R'.$C, $dependencia->dependencia)
+//                    ->setCellValue('S'.$C, $servicio->servicio)
+//                    ->setCellValue('T'.$C, $estatus->estatus)
+//                    ->setCellValue('U'.$C, $creadopor->fullName)
+//                    ->setCellValue('V'.$C, $ubicacion->ubicacion)
+//
+//                    ->setCellValue('Z'.$C, $ciudadano->fullName);
                 $C++;
             }
             $Cx = $C  - 1;

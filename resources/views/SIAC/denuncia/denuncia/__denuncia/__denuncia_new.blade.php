@@ -13,7 +13,7 @@
                     </div>
                     {!! Form::text('usuario', null, array('class' => 'form-control','id'=>'usuario','readonly'=>'readonly')) !!}
                     {!! Form::text('usuario_domicilio', null, array('class' => 'form-control','id'=>'usuario_domicilio','readonly'=>'readonly')) !!}
-
+                    {!! Form::text('usuario_telefonos', null, array('class' => 'form-control','id'=>'usuario_telefonos','readonly'=>'readonly')) !!}
                 </div>
             </div>
 

@@ -417,6 +417,10 @@ ul.role-list-hrz li a {
     position: absolute; top: 94%; left: 3%;
 }
 
+.wellcome-pos-aviso_privacidad{
+    position: absolute; top: 94%; right: 3%;
+}
+
 .form-error {
 	border: 1px solid #e74c3c !important;
 }

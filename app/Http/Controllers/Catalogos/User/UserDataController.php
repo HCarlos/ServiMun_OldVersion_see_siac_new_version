@@ -299,6 +299,7 @@ class UserDataController extends Controller
             $data[]=array(
                 'value'=>$item->fullName.' - '.$item->curp,
                 'domicilio'=>$item->ubicaciones()->first()->Ubicacion,
+                'telefonos'=>$item->TelefonosCelularesEmails,
                 'id'=>$item->id,
             );
         }
@@ -316,6 +317,7 @@ class UserDataController extends Controller
         $items->domicilio = $items->ubicaciones()->first()->Ubicacion;
         $items->ubicacion_id = $items->ubicaciones()->first()->id;
         $items->nombre_completo = $items->FullName;
+        $items->telefonos = $items->TelefonosCelularesEmails;
         //dd($items);
         return Response::json(['mensaje' => 'OK', 'data' => json_decode($items), 'status' => '200'], 200);
 

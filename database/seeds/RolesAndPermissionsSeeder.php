@@ -1,9 +1,6 @@
 <?php
 
 use App\Http\Controllers\Funciones\FuncionesController;
-use App\Models\Catalogos\Afiliacion;
-use App\Models\Catalogos\Domicilios\Codigopostal;
-use App\Models\Catalogos\Domicilios\Comunidad;
 use App\User;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;

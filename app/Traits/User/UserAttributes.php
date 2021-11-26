@@ -131,6 +131,9 @@ trait UserAttributes
         return ['username'=>$role->abreviatura.$Id,'role_id'=>$role->id];
     }
 
+    public function getTelefonosCelularesEmailsAttribute(){
+        return "{$this->celulares}; {$this->telefonos}; {$this->emails}";
+    }
 
 
 
