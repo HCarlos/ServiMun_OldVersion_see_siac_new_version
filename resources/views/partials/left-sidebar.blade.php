@@ -299,14 +299,7 @@
             </li>
 
         </ul>
-        <!-- Help Box -->
-        <div class="help-box2 text-white text-center">
-            <img src="/images/help-icon.svg" height="45" />
-            <h5 class="mt-3">Aviso de Privacidad</h5>
-            <p class="mb-3">Lea nuestro aviso de privacidad</p>
-            <a href="/privacidad" target="_blank" class="btn btn-outline-light btn-sm">Leer</a>
-        </div>
-        <!-- end Help Box -->
+        @include('partials.aviso-privacidad-panel')
         <div class="clearfix"></div>
     @endguest
     </div>
