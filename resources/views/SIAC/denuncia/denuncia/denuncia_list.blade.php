@@ -7,7 +7,7 @@
             @include('shared.ui_kit.__menu_denuncia')
         @endslot
         @slot('body_catalogo')
-            @include('shared.denuncia.denuncia.__denuncia_list')
+            @include('SIAC.denuncia.denuncia.__denuncia.__denuncia_list')
         @endslot
     @endcomponent
 

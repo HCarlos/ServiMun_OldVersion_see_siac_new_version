@@ -18,7 +18,7 @@
         <tr>
             <td class="table-user">{{$item->id}}</td>
             <td>{{$item->ciudadano->FullName}}</td>
-            <td>{{( $item->fecha_ingreso->format('d-m-Y'))}}</td>
+            <td>{{( $item->fecha_ingreso)}}</td>
             <td>{{($item->dependencia->dependencia)}}</td>
             <td>{{($item->Estatu->estatus)}}</td>
             <td>{{($item->creadopor->username)}}</td>

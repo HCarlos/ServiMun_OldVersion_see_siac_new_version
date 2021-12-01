@@ -81,7 +81,7 @@ class DenunciaController extends Controller
 
         $user = Auth::User();
 
-        return view('denuncia.denuncia.denuncia_list',
+        return view('SIAC.denuncia.denuncia.denuncia_list',
             [
                 'items'                   => $items,
                 'titulo_catalogo'         => "Catálogo de " . ucwords($this->tableName),
