@@ -34,12 +34,12 @@
 
     </div>
     <div class="col-md-2">
-        <a href="{{route("newCodigopostal")}}" target="_blank" class="btn btn-icon btn-info " > <i class="mdi mdi-plus"></i></a>
+        <a href="{{route("newCodigopostalV2")}}" id="{{route("newCodigopostalV2")}}" class="btn btn-icon btn-info btnFullModal" data-toggle="modal" data-target="#modalFull"> <i class="mdi mdi-plus"></i></a>
     </div>
 </div>
 
 <div class="form-group row mb-3">
-    <label for = "search_autocomplete_comunidad" class="col-md-3 col-form-label">Comunidad</label>
+    <label for = "search_autocomplete_comunidad" class="col-md-3 col-form-label">Comunidades</label>
     <div class="col-md-7">
 {{--        <select class="comunidad_id form-control select2" data-toggle="select2"  name="comunidad_id" id="comunidad_id" size="1">--}}
 {{--            @foreach($comunidades as $t)--}}
@@ -50,8 +50,9 @@
             {!! Form::text('search_autocomplete_comunidad', null, array('placeholder' => 'Buscar comunidad...','class' => 'form-control search_autocomplete_comunidad','id'=>'search_autocomplete_comunidad')) !!}
         </div>
     </div>
-    <div class="col-md-2">
-        <a href="{{route("newComunidad")}}" target="_blank" class="btn btn-icon btn-info " > <i class="mdi mdi-plus"></i></a>
+    <div class="col-md-22">
+        <a href="{{route("newComunidadV2")}}" id="{{route("newComunidadV2")}}" class="btn btn-icon btn-info btnFullModal" data-toggle="modal" data-target="#modalFull"> <i class="mdi mdi-plus"></i></a>
+
     </div>
 </div>
 

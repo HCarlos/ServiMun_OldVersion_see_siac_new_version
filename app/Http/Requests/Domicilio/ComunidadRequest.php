@@ -39,18 +39,19 @@ class ComunidadRequest extends FormRequest
 
     public function manage()
     {
-//        dd($this->edo_id);
+        //dd($this->all());
 
-        $Item = [
-            'comunidad'        => strtoupper($this->comunidad),
-            'tipocomunidad_id' => $this->tipocomunidad_id,
-            'delegado_id'      => $this->delegado_id,
-            'ciudad_id'        => $this->ciudad_id,
-            'municipio_id'     => $this->municipio_id,
-            'estado_id'        => $this->estado_id,
-        ];
 
         try {
+            //$ciudad_id = $this->ciudad_id;
+            $Item = [
+                'comunidad'        => strtoupper($this->comunidad),
+                'tipocomunidad_id' => $this->tipocomunidad_id,
+                'delegado_id'      => $this->delegado_id,
+                'ciudad_id'        => $this->ciudad_id,
+                'municipio_id'     => $this->municipio_id,
+                'estado_id'        => $this->estado_id,
+            ];
 
             if ($this->id == 0) {
                 $item = Comunidad::create($Item);
