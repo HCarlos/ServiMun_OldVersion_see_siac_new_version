@@ -64,7 +64,7 @@ class UbicacionRequest extends FormRequest
     {
 
         try {
-
+            //dd( $this->all() );
             $Calle   = Calle::find($this->calle_id);
             $Colonia = Colonia::find($this->colonia_id);
             $Comunidad = Comunidad::find($Colonia->comunidad_id);

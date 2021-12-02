@@ -7,12 +7,14 @@ jQuery(function($) {
             }
         });
 
-        var Objs = ["#search_autocomplete","#search_autocomplete_user",".search_autocomplete_user"];
-        var Urls = ["/searchAdress","/searchUser","/searchUser"];
-        var Gets = ["/getUbi/","/getUser/","/getUser/"];
-        var Ids =  ["id","id","id"];
+        var Objs = ["#search_autocomplete","#search_autocomplete_user",".search_autocomplete_user","#search_autocomplete_calle","#search_autocomplete_colonia","#search_autocomplete_cp","#search_autocomplete_comunidad"];
+        var Urls = ["/searchAdress","/searchUser","/searchUser","/buscarCalle","/buscarColonia","/buscarCodigopostal","/buscarComunidad"];
+        var Gets = ["/getUbi/","/getUser/","/getUser/","/getCalle/","/getColonia/","/getCodigopostal/","/getComunidad/"];
+        var Ids =  ["id","id","id","id","id","id","id"];
 
-        for (i=0;i<13;i++)
+        // alert(Ids.length);
+
+        for (i=0;i<Objs.length;i++)
             if ( $(Objs[i]) ) callAjax($(Objs[i]), Urls[i], Gets[i], i, Ids[i]);
 
         function callAjax(Obj, Url, Get, Item, ID, Elem) {
@@ -30,34 +32,6 @@ jQuery(function($) {
                             response(data);
                         },
                     });
-
-/*
-
-                     axios({
-                        method: "get",
-                        url: Url,
-                        data: {
-                            search  : request.term,
-                        },
-                        headers: {
-                            'X-Requested-With': 'XMLHttpRequest',
-                            'Content-Type': 'application/json;charset=utf-8',
-                            'Accept': 'application/json',
-                        },  timeout: 30000,
-                    })
-                        .then(function (response) {
-                            //alert( (response.data.data)[10].curp );
-                            response(response.data.data);
-
-                        })
-                        .catch(function (response) {
-                            console.log(response);
-                        });
-
-*/
-
-
-
 
                 },
                 minLength: 3,
@@ -106,6 +80,22 @@ jQuery(function($) {
                     $("#listTarget").val(d.id);
                     getRolesFromUser(Obj, Item, data);
                     break;
+                case 3:
+                    $("#calle_id").val(d.id);
+                    $("#search_autocomplete_calle").val(d.calle);
+                    break;
+                case 4:
+                    $("#colonia_id").val(d.id);
+                    $("#search_autocomplete_colonia").val(d.colonia);
+                    break;
+                case 5:
+                    $("#codigopostal_id").val(d.id);
+                    $("#search_autocomplete_cp").val(d.cp);
+                    break;
+                case 6:
+                    $("#comunidad_id").val(d.id);
+                    $("#search_autocomplete_comunidad").val(d.comunidad);
+                    break;
             }
         }
 
@@ -127,21 +117,36 @@ jQuery(function($) {
                     if ( $("#lstAsigns") ) $("#lstAsigns").empty();
                     $("#listTarget").val(0);
                     break;
+                case 3:
+                    $("#calle_id").val(0);
+                    break;
+                case 4:
+                    $("#colonia_id").val(0);
+                    break;
+                case 5:
+                    $("#codigopostal_id").val(0);
+                    break;
+                case 6:
+                    $("#comunidad_id").val(0);
+                    break;
 
             }
         }
 
-        function clearObjAll(){
-            if ( $("#ubicacion_id") )       $("#ubicacion_id").val(0);
-            if ( $("#ubicacion_id_span") )  $("#ubicacion_id_span").val("");
-            if ( $("#ubicacion_nueva_id") ) $("#ubicacion_nueva_id").val(0);
-            if ( $("#ubicacion") )          $("#ubicacion").val("");
-            if ( $("#usuario_domicilio") )  $("#usuario_domicilio").val("");
-            if ( $("#usuario_telefonos") )  $("#usuario_telefonos").val("");
-            if ( $("#usuario_id") )         $("#usuario_id").val(0);
-            if ( $("#usuario_id") )         $("#lstAsigns").empty();
-            if ( $("#listTarget") )         $("#listTarget").val(0);
-        }
+        // function clearObjAll(){
+        //     if ( $("#ubicacion_id") )               $("#ubicacion_id").val(0);
+        //     if ( $("#ubicacion_id_span") )          $("#ubicacion_id_span").val("");
+        //     if ( $("#ubicacion_nueva_id") )         $("#ubicacion_nueva_id").val(0);
+        //     if ( $("#ubicacion") )                  $("#ubicacion").val("");
+        //     if ( $("#usuario_domicilio") )          $("#usuario_domicilio").val("");
+        //     if ( $("#usuario_telefonos") )          $("#usuario_telefonos").val("");
+        //     if ( $("#usuario_id") )                 $("#usuario_id").val(0);
+        //     if ( $("#usuario_id") )                 $("#lstAsigns").empty();
+        //     if ( $("#listTarget") )                 $("#listTarget").val(0);
+        //     if ( $("#calle_id") )                   $("#calle_id").val(0);
+        //     if ( $("#colonia_id") )                 $("#colonia_id").val(0);
+        //     //if ( $("#search_autocomplete_calle") )  $("#search_autocomplete_calle").val("");
+        // }
 
         function getRolesFromUser(Obj, Item, data){
             var d = data.data;
@@ -155,8 +160,6 @@ jQuery(function($) {
         }
 
             $("#user_address_list").on('change',function(event){
-                //event.preventDefault();
-                //alert($(this).val());
                  $("#ubicacion_nueva_id").val( $(this).val() );
             });
 

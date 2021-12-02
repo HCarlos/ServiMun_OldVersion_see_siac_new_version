@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Catalogos\Domicilio;
 
+use App\Models\Catalogos\Domicilios\Colonia;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Domicilio\CodigopostalRequest;
@@ -164,6 +165,41 @@ class CodigopostalController extends Controller
         return Response::json(['mensaje' => 'Dato agregado con éxito', 'data' => 'OK', 'status' => '200'], 200);
 
     }
+
+
+
+
+// ***************** MAUTOCOMPLETE DE UBICACIONES ++++++++++++++++++++ //
+    protected function buscarCodigopostal(Request $request)
+    {
+        ini_set('max_execution_time', 300000);
+        $filters = $request->all(['search']);
+        $items = Codigopostal::query()
+            ->filterBy($filters)
+            ->orderBy('id')
+            ->get();
+
+        $data=array();
+
+        foreach ($items as $item) {
+            $data[]=array('value'=>$item->cp,'id'=>$item->id);
+        }
+        if(count($data))
+            return $data;
+        else
+            return ['value'=>'No se encontraron calles','id'=>0];
+
+    }
+
+// ***************** MAUTOCOMPLETE DE UBICACIONES ++++++++++++++++++++ //
+    protected function getCodigopostal($IdCodigopostal=0)
+    {
+        $items = Codigopostal::find($IdCodigopostal);
+        return Response::json(['mensaje' => 'OK', 'data' => json_decode($items), 'status' => '200'], 200);
+
+    }
+
+
 
 
     // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //

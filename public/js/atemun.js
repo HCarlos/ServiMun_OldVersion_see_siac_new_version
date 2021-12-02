@@ -393,6 +393,8 @@
     $("#colonia, #comunidad, #calle, #asentamiento, #tipoasentamiento, #tipocomunidad, #localidad," +
         "#afiliacion, #area, #subarea, #dependencia, #medida, #origen, #prioridad, #servicio, #ubicacon," +
         "#ciudad, #estado, #municipio, #estatus, #codigo, #cp, #search, #num_ext, #num_int," +
-        "#search_autocomplete, #search_autocomplete_user, .search_autocomplete_user").keyup(function(){
+        "#search_autocomplete, #search_autocomplete_user, .search_autocomplete_user, " +
+        "#search_autocomplete_calle, #search_autocomplete_colonia, #search_autocomplete_cp, " +
+        "#search_autocomplete_comunidad").keyup(function(){
         $(this).val($(this).val().toUpperCase());
     });

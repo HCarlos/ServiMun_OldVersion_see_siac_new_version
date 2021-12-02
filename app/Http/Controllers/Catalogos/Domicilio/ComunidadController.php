@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Catalogos\Domicilio;
 
 use App\Http\Requests\Domicilio\ComunidadRequest;
 use App\Models\Catalogos\Domicilios\Ciudad;
+use App\Models\Catalogos\Domicilios\Codigopostal;
 use App\Models\Catalogos\Domicilios\Comunidad;
 use App\Models\Catalogos\Domicilios\Estado;
 use App\Models\Catalogos\Domicilios\Municipio;
@@ -243,6 +244,45 @@ class ComunidadController extends Controller
         }
         return Response::json(['mensaje' => 'Dato agregado con éxito', 'data' => 'OK', 'status' => '200'], 200);
     }
+
+
+
+
+
+
+// ***************** MAUTOCOMPLETE DE UBICACIONES ++++++++++++++++++++ //
+    protected function buscarComunidad(Request $request)
+    {
+        ini_set('max_execution_time', 300000);
+        $filters = $request->all(['search']);
+        $items = Comunidad::query()
+            ->filterBy($filters)
+            ->orderBy('id')
+            ->get();
+
+        $data=array();
+
+        foreach ($items as $item) {
+            $data[]=array('value'=>$item->comunidad,'id'=>$item->id);
+        }
+        if(count($data))
+            return $data;
+        else
+            return ['value'=>'No se encontraron calles','id'=>0];
+
+    }
+
+// ***************** MAUTOCOMPLETE DE UBICACIONES ++++++++++++++++++++ //
+    protected function getComunidad($IdComunidad=0)
+    {
+        $items = Comunidad::find($IdComunidad);
+        return Response::json(['mensaje' => 'OK', 'data' => json_decode($items), 'status' => '200'], 200);
+
+    }
+
+
+
+
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //
     protected function removeItem($id = 0){

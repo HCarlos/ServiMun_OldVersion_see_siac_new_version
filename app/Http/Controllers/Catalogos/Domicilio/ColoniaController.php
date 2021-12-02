@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Catalogos\Domicilio;
 
+use App\Models\Catalogos\Domicilios\Calle;
 use App\Models\Catalogos\Domicilios\Codigopostal;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -105,6 +106,47 @@ class ColoniaController extends Controller
         }
         return Redirect::to('listColonias');
     }
+
+
+
+// ***************** MAUTOCOMPLETE DE UBICACIONES ++++++++++++++++++++ //
+    protected function buscarColonia(Request $request)
+    {
+        ini_set('max_execution_time', 300000);
+        $filters = $request->all(['search']);
+        $items = Colonia::query()
+            ->filterBy($filters)
+            ->orderBy('id')
+            ->get();
+
+        $data=array();
+
+        foreach ($items as $item) {
+            $data[]=array('value'=>$item->colonia,'id'=>$item->id);
+        }
+        if(count($data))
+            return $data;
+        else
+            return ['value'=>'No se encontraron calles','id'=>0];
+
+    }
+
+// ***************** MAUTOCOMPLETE DE UBICACIONES ++++++++++++++++++++ //
+    protected function getColonia($IdColonia=0)
+    {
+        $items = Colonia::find($IdColonia);
+        return Response::json(['mensaje' => 'OK', 'data' => json_decode($items), 'status' => '200'], 200);
+
+    }
+
+
+
+
+
+
+
+
+
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //
     protected function removeItem($id = 0)

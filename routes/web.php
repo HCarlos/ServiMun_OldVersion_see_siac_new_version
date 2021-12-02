@@ -204,6 +204,8 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp|USER_OPERATOR_SIAC|
     Route::post('createCalleV2', 'Catalogos\Domicilio\CalleController@createItemV2')->name('createCalleV2');
     Route::get('editCalleV2/{Id}', 'Catalogos\Domicilio\CalleController@editItemV2')->name('editCalleV2');
     Route::put('updateCalleV2', 'Catalogos\Domicilio\CalleController@updateItemV2')->name('updateCalleV2');
+    Route::get('buscarCalle/', 'Catalogos\Domicilio\CalleController@buscarCalle')->name('buscarCalle');
+    Route::get('getCalle/{IdCalle}', 'Catalogos\Domicilio\CalleController@getCalle')->name('getCalle');
 
     // Catálogo de Ciudades
     Route::get('listCiudades/', 'Catalogos\Domicilio\CiudadController@index')->name('listCiudades');
@@ -253,6 +255,8 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp|USER_OPERATOR_SIAC|
     Route::post('createCodigopostal', 'Catalogos\Domicilio\CodigopostalController@createItem')->name('createCodigopostal');
     Route::get('editCodigopostal/{Id}', 'Catalogos\Domicilio\CodigopostalController@editItem')->name('editCodigopostal');
     Route::put('updateCodigopostal', 'Catalogos\Domicilio\CodigopostalController@updateItem')->name('updateCodigopostal');
+    Route::get('buscarCodigopostal/', 'Catalogos\Domicilio\CodigopostalController@buscarCodigopostal')->name('buscarCodigopostal');
+    Route::get('getCodigopostal/{IdCodigopostal}', 'Catalogos\Domicilio\CodigopostalController@getCodigopostal')->name('getCodigopostal');
     Route::get('removeCodigopostal/{id}', 'Catalogos\Domicilio\CodigopostalController@removeItem')->name('removeCodigopostal');
 
     Route::get('newCodigopostalV2', 'Catalogos\Domicilio\CodigopostalController@newItemV2')->name('newCodigopostalV2');
@@ -292,6 +296,8 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp|USER_OPERATOR_SIAC|
     Route::post('createComunidad', 'Catalogos\Domicilio\ComunidadController@createItem')->name('createComunidad');
     Route::get('editComunidad/{Id}', 'Catalogos\Domicilio\ComunidadController@editItem')->name('editComunidad');
     Route::put('updateComunidad', 'Catalogos\Domicilio\ComunidadController@updateItem')->name('updateComunidad');
+    Route::get('buscarComunidad/', 'Catalogos\Domicilio\ComunidadController@buscarComunidad')->name('buscarComunidad');
+    Route::get('getComunidad/{IdComunidad}', 'Catalogos\Domicilio\ComunidadController@getComunidad')->name('getComunidad');
     Route::get('removeComunidad/{id}', 'Catalogos\Domicilio\ComunidadController@removeItem')->name('removeComunidad');
 
     Route::get('newComunidadV2', 'Catalogos\Domicilio\ComunidadController@newItemV2')->name('newComunidadV2');
@@ -305,6 +311,8 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp|USER_OPERATOR_SIAC|
     Route::put('updateColonia', 'Catalogos\Domicilio\ColoniaController@updateItem')->name('updateColonia');
     Route::get('newColonia', 'Catalogos\Domicilio\ColoniaController@newItem')->name('newColonia');
     Route::post('createColonia', 'Catalogos\Domicilio\ColoniaController@createItem')->name('createColonia');
+    Route::get('buscarColonia/', 'Catalogos\Domicilio\ColoniaController@buscarColonia')->name('buscarColonia');
+    Route::get('getColonia/{IdColonia}', 'Catalogos\Domicilio\ColoniaController@getColonia')->name('getColonia');
     Route::get('removeColonia/{id}', 'Catalogos\Domicilio\ColoniaController@removeItem')->name('removeColonia');
 
     // Catálogo de Ubicaciones
@@ -315,8 +323,8 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp|USER_OPERATOR_SIAC|
     Route::post('createUbicacion', 'Catalogos\Domicilio\UbicacionController@createItem')->name('createUbicacion');
     Route::get('removeUbicacion/{id}', 'Catalogos\Domicilio\UbicacionController@removeItem')->name('removeUbicacion');
 
-//    Route::get('newUbicacionV2', 'Catalogos\Domicilio\UbicacionController@newItemV2')->name('newUbicacionV2');
-//    Route::post('createUbicacionV2', 'Catalogos\Domicilio\UbicacionController@createItemV2')->name('createUbicacionV2');
+    Route::get('newUbicacionV2', 'Catalogos\Domicilio\UbicacionController@newItemV2')->name('newUbicacionV2');
+    Route::post('createUbicacionV2', 'Catalogos\Domicilio\UbicacionController@createItemV2')->name('createUbicacionV2');
     Route::get('editUbicacionV2/{Id}', 'Catalogos\Domicilio\UbicacionController@editItemV2')->name('editUbicacionV2');
     Route::put('updateUbicacionV2', 'Catalogos\Domicilio\UbicacionController@updateItemV2')->name('updateUbicacionV2');
 

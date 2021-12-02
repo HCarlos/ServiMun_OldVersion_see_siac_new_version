@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Catalogos\Domicilio;
 
+use App\Http\Controllers\Funciones\FuncionesController;
+use App\Models\Catalogos\Domicilios\Ubicacion;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -159,6 +161,52 @@ class CalleController extends Controller
         }
         return Response::json(['mensaje' => 'Dato agregado con éxito', 'data' => 'OK', 'status' => '200'], 200);
     }
+
+
+// ***************** MAUTOCOMPLETE DE UBICACIONES ++++++++++++++++++++ //
+    protected function buscarCalle(Request $request)
+    {
+        ini_set('max_execution_time', 300000);
+        //$filters =$request->input('search');
+        $filters = $request->all(['search']);
+        //dd($filters);
+        //$F           = new FuncionesController();
+        //$tsString    = $F->string_to_tsQuery( strtoupper($filters),' & ');
+        $items = Calle::query()
+            ->filterBy($filters)
+            ->orderBy('id')
+            ->get();
+
+        //dd($items);
+
+        $data=array();
+
+        foreach ($items as $item) {
+            $data[]=array('value'=>$item->calle,'id'=>$item->id);
+        }
+        if(count($data))
+            return $data;
+        else
+            return ['value'=>'No se encontraron calles','id'=>0];
+
+    }
+
+// ***************** MAUTOCOMPLETE DE UBICACIONES ++++++++++++++++++++ //
+    protected function getCalle($IdCalle=0)
+    {
+        $items = Calle::find($IdCalle);
+        return Response::json(['mensaje' => 'OK', 'data' => json_decode($items), 'status' => '200'], 200);
+
+    }
+
+
+
+
+
+
+
+
+
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //
     protected function removeItem($id = 0)
     {

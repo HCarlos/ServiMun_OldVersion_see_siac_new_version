@@ -50,7 +50,7 @@ trait UbicacionTrait
 
 
     public static function detachesColonia($colonia_id){
-        $Ubicacion = Ubicacion::all()->where('colonia_id',$colonia_id);
+        $Ubicacion = Ubicacion::query()->where('colonia_id',$colonia_id)->get();
         foreach ($Ubicacion as $ubi){
             $ubi->colonias()->detach($ubi->colonia_id);
             $ubi->comunidades()->detach($ubi->comunidad_id);
@@ -84,7 +84,7 @@ trait UbicacionTrait
             'estado_id' => $Comunidad->estado_id,
             'codigopostal_id' => $CPs->id,
         ];
-        $Ubicacion = Ubicacion::all()->where('colonia_id',$colonia_id);
+        $Ubicacion = Ubicacion::query()->where('colonia_id',$colonia_id)->get();
 
         foreach ($Ubicacion as $ubi){
             $ubi->colonias()->attach($colonia_id);

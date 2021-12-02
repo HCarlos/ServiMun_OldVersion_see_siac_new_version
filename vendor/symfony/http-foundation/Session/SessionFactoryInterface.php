@@ -9,13 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Contracts\HttpClient\Exception;
+namespace Symfony\Component\HttpFoundation\Session;
 
 /**
- * When a 4xx response is returned.
- *
- * @author Nicolas Grekas <p@tchwork.com>
+ * @author Kevin Bond <kevinbond@gmail.com>
  */
-interface ClientExceptionInterface extends HttpExceptionInterface
+interface SessionFactoryInterface
 {
+    public function createSession(): SessionInterface;
 }

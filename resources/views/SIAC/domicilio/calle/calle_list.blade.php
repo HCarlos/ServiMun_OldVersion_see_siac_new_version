@@ -12,5 +12,5 @@
         </div>
     @endslot
 @endcomponent
-
 @endsection
+

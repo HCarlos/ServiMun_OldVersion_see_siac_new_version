@@ -9,13 +9,8 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Contracts\HttpClient\Exception;
+namespace Symfony\Component\Routing\Exception;
 
-/**
- * When any error happens at the transport level.
- *
- * @author Nicolas Grekas <p@tchwork.com>
- */
-interface TransportExceptionInterface extends ExceptionInterface
+class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface
 {
 }

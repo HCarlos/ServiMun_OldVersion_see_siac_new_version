@@ -9,13 +9,8 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Contracts\HttpClient\Exception;
+namespace Symfony\Component\Routing\Exception;
 
-/**
- * When an idle timeout occurs.
- *
- * @author Nicolas Grekas <p@tchwork.com>
- */
-interface TimeoutExceptionInterface extends TransportExceptionInterface
+class RuntimeException extends \RuntimeException implements ExceptionInterface
 {
 }
