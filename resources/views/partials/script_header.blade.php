@@ -17,16 +17,16 @@
 <!-- App css -->
 <link href="{{ asset('css/icons.min.css')}}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('css/app.css' )}}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('css/dataTables.bootstrap4.css') }}" rel="stylesheet">
+{{--<link href="{{ asset('css/dataTables.bootstrap4.css') }}" rel="stylesheet">--}}
 
 <link href="{{ asset('css/ace-fonts.css') }}" rel="stylesheet">
 <link href="{{ asset('css/basic.css') }}" rel="stylesheet">
-<link href="{{ asset('css/buttons.bootstrap4.css') }}" rel="stylesheet">
-<link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
-<link href="{{ asset('css/fontawesome.min.css') }}" rel="stylesheet">
+{{--<link href="{{ asset('css/buttons.bootstrap4.css') }}" rel="stylesheet">--}}
+{{--<link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">--}}
+{{--<link href="{{ asset('css/fontawesome.min.css') }}" rel="stylesheet">--}}
 
-<link href="{{ asset('css/icons.min.css') }}" rel="stylesheet">
-<link href="{{ asset('css/icons.min.css.map') }}" rel="stylesheet">
+{{--<link href="{{ asset('css/icons.min.css') }}" rel="stylesheet">--}}
+{{--<link href="{{ asset('css/icons.min.css.map') }}" rel="stylesheet">--}}
 
 <link href="{{ asset('css/jquery-jvectormap-1.2.2.css') }}" rel="stylesheet">
 <link href="{{ asset('css/responsive.bootstrap4.css') }}" rel="stylesheet">

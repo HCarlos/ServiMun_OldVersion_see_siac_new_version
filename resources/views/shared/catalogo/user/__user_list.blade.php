@@ -1,4 +1,4 @@
-            <table  id="tblCat" class="table table-bordered table-striped dt-responsive dataTable " role="grid" aria-describedby="datatable-buttons_info" style="width: 100%; position: relative; z-index:0;" width="100%">
+            <table id="basic-datatable" class="table table-striped dt-responsive dataTable nowrap" >
                 <thead>
                     <tr role="row">
                         <th class="sorting_asc" aria-sort="ascending" aria-label="Name: activate to sort column descending">ID</th>
@@ -14,7 +14,7 @@
                 <tbody>
                 @foreach($items as $item)
                     <tr>
-                        <td class="table-user">{{$item->id}}</td>
+                        <td >{{$item->id}}</td>
                         <td>{{$item->username}}</td>
                         <td>{{($item->FullName)}}</td>
                         <td>{{($item->email)}}</td>
@@ -29,7 +29,7 @@
                             <div class="button-list w-100">
                                 @include('shared.ui_kit.__edit_item')
                                 @include('shared.ui_kit.__remove_item')
-                                @include('shared.ui_kit.__edit_item_becas')
+{{--                                @include('shared.ui_kit.__edit_item_becas')--}}
                             </div>
                         </td>
                     </tr>

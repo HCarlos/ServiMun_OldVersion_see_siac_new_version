@@ -33,9 +33,9 @@ class StatuRequest extends FormRequest
     {
         return [
             'estatus' => ['required','min:3',new Uppercase,'unique:estatus,estatus,'.$this->id],
-            'dependencia_id' => ['present','not_in:0','gt:0'],
         ];
     }
+//'dependencia_id' => ['present','not_in:0','gt:0'],
 
     public function messages()
     {
@@ -58,12 +58,13 @@ class StatuRequest extends FormRequest
     public function manage()
     {
 
-        $Item = [
-            'estatus' => strtoupper($this->estatus),
-            'predeterminado' => $this->predeterminado==1 ? true : false,
-        ];
-
         try {
+
+            $Item = [
+                'estatus' => strtoupper($this->estatus),
+                'predeterminado' => $this->predeterminado==1 ? true : false,
+            ];
+
             if ( $this->predeterminado == 1) {
                 Estatu::where('predeterminado',true)->update(['predeterminado'=>false]);
             };

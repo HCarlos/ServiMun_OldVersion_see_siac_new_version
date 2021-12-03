@@ -7,16 +7,17 @@
     });
 
     if ( $(".dataTable").length > 0 ){
-
         var nCols = $(".dataTable").find("tbody > tr:first td").length;
         var aCol = [];
-
         aCol[nCols - 1] = {"sorting": false};
         if (aCol.length > 0 ){
             $(".dataTable").DataTable({
                 searching: false,
                 paging: false,
                 info: true,
+                responsive: {
+                    details: true
+                },
                 "pageLength": 50,
                 "order": [[ 0, "desc" ]],
                 "language": {

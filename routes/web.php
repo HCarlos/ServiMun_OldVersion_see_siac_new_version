@@ -381,7 +381,7 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp|USER_OPERATOR_SIAC|
 
 });
 
-Route::group(['middleware' => 'role:auth|Administrator|SysOp|DELEGADO|CIUDADANO'], function () {
+Route::group(['middleware' => 'role:auth|Administrator|SysOp|DELEGADO|CIUDADANO|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN|ENLACE'], function () {
 
     Route::get('/home-ciudadano', 'HomeController@index_ciudadano')->name('home-ciudadano');
 
