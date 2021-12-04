@@ -15,9 +15,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
-class DenunciaCiudadanaController extends Controller
-{
-
+class DenunciaCiudadanaController extends Controller{
 
     protected $tableName = "denuncias";
     protected $msg = "";
@@ -36,13 +34,13 @@ class DenunciaCiudadanaController extends Controller
             ->paginate();
         $items->appends($filters)->fragment('table');
 
-//        dd($items);
+        //dd($items);
 
         $request->session()->put('items', $items);
 
         $user = Auth::User();
 
-        return view('denuncia.denuncia_ciudadana.denuncia_ciudadana_list',
+        return view('SIAC.denuncia.denuncia_ciudadana.denuncia_ciudadana_list',
             [
                 'items'                           => $items,
                 'titulo_catalogo'                 => "Mis " . ucwords($this->tableName),
@@ -53,7 +51,6 @@ class DenunciaCiudadanaController extends Controller
                 'tableName'                       => $this->tableName,
                 'showEdit'                        => 'editDenunciaCiudadana',
                 'showProcess1'                    => 'showDataListDenunciaExcel1A',
-//                'putEdit' => 'updateDenuncia',
                 'newItem'                         => 'newDenunciaCiudadana',
                 'removeItem'                      => 'removeDenunciaCiudadana',
                 'respuestasDenunciaCiudadanaItem' => 'listRespuestasCiudadanas',
@@ -72,14 +69,11 @@ class DenunciaCiudadanaController extends Controller
         $Prioridades  = Prioridad::all()->sortBy('prioridad');
         $Origenes     = Origen::all()->sortBy('origen');
         $Dependencias = Dependencia::all()->sortBy('dependencia');
-//        $Ciudadanos   = User::all()->sortBy(function ($q){
-//            return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
-//        });
         $Estatus      = Estatu::all()->sortBy('estatus');
-        $this->msg = "";
+        $this->msg    = "";
 
 
-        return view('denuncia.denuncia_ciudadana.denuncia_ciudadana_new',
+        return view('SIAC.denuncia.denuncia_ciudadana.denuncia_ciudadana_new',
             [
                 'user'            => Auth::user(),
                 'editItemTitle'   => 'Nuevo',

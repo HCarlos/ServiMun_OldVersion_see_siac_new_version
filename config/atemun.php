@@ -46,6 +46,11 @@ return [
     'estado_default'           => env('ESTADO_DEFAULT',''),
     'empresa_id'               => env('EMPRESA_ID',1),
 
+    'dias_mas_fecha_ingreso'   => env('DIAS_MAS_FECHA_INGRESO',1),
+    'dias_mas_fecha_ejecucion' => env('DIAS_MAS_FECHA_EJECUCION',3),
+    'dias_mas_fecha_limite'    => env('DIAS_MAS_FECHA_LIMITE',5),
+
+
     // -----------------------------------------------------------
     // La mayor parte de los Tablas estan configuradas aquí,
     // es en este mismo sitio donde la debes mantener forerver

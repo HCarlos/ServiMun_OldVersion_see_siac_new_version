@@ -14,7 +14,7 @@
                     <form method="POST" action="{{ route('updateDenuncia') }}">
                         @csrf
                         {{method_field('PUT')}}
-                        @include('shared.denuncia.denuncia.__denuncia_edit')
+                        @include('SIAC.denuncia.denuncia_ciudadana.__denuncia_ciudadana.__denuncia_ciudadana_edit')
                         @component('components.tools.buttons-form-denuncia')
                             @slot('msgLeft',' ')
                         @endcomponent

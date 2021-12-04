@@ -4,17 +4,17 @@
             <div class="form-row mb-1">
                 <label for = "fecha_ingreso" class="col-md-2 col-form-label">Fecha </label>
                 <div class="col-md-4">
-                    {{ Form::date('fecha_ingreso', \Carbon\Carbon::now(), ['id'=>'fecha_ingreso','class'=>'form-control','readonly'=>'readonly']) }}
+                    {{ Form::date('fecha_ingreso', \Carbon\Carbon::now()->addDay( config('atemun.dias_mas_fecha_ingreso') ), ['id'=>'fecha_ingreso','class'=>'form-control','readonly'=>'readonly']) }}
                 </div>
                 <label for = "fecha_ejecucion" class="col-md-2 col-form-label">F. Ejec. </label>
                 <div class="col-md-4">
-                    {{ Form::date('fecha_ejecucion', \Carbon\Carbon::now()->addDay(3), ['id'=>'fecha_ejecucion','class'=>'form-control','readonly'=>'readonly']) }}
+                    {{ Form::date('fecha_ejecucion', \Carbon\Carbon::now()->addDay( config('atemun.dias_mas_fecha_ejecucion') ), ['id'=>'fecha_ejecucion','class'=>'form-control','readonly'=>'readonly']) }}
                 </div>
             </div>
             <div class="form-row mb-1">
                 <label for = "fecha_limite" class="col-md-2 col-form-label">F. Límite </label>
                 <div class="col-md-4">
-                    {{ Form::date('fecha_limite', \Carbon\Carbon::now()->addDay(5), ['id'=>'fecha_limite','class'=>'form-control','readonly'=>'readonly']) }}
+                    {{ Form::date('fecha_limite', \Carbon\Carbon::now()->addDay( config('atemun.dias_mas_fecha_limite') ), ['id'=>'fecha_limite','class'=>'form-control','readonly'=>'readonly']) }}
                 </div>
             </div>
             <div class="form-row mb-1">

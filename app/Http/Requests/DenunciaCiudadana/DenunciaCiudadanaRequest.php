@@ -53,22 +53,22 @@ class DenunciaCiudadanaRequest extends FormRequest
     }
 
     public function manageDC(){
-        //dd($this->all());
+
+        // dd( $this->all() );
+
         try {
 
-            $Ubicacion = Ubicacion::findOrFail(1);
+            $this->ubicacion_id = Auth::user()->Ubicacion->id;
 
-            $fechaActual    = Carbon::now();
-            $fechaLimite    = Carbon::now();
-            $fechaEjecucion = Carbon::now();
+            $Ubicacion = Ubicacion::findOrFail( $this->ubicacion_id );
 
             $Item = [
-                'fecha_ingreso'                => $fechaActual,
-                'fecha_limite'                 => $fechaLimite->addDays(5),
-                'fecha_ejecucion'              => $fechaEjecucion->addDays(3),
+                'fecha_ingreso'                => $this->fecha_ingreso,
+                'fecha_limite'                 => $this->fecha_limite,
+                'fecha_ejecucion'              => $this->fecha_ejecucion,
 
-                'descripcion'                  => strtoupper($this->descripcion),
-                'referencia'                   => strtoupper($this->referencia),
+                'descripcion'                  => strtoupper(trim($this->descripcion)),
+                'referencia'                   => strtoupper(trim($this->referencia)),
 
                 'calle'                        => strtoupper($Ubicacion->calle),
                 'num_ext'                      => strtoupper($Ubicacion->num_ext),
@@ -82,20 +82,20 @@ class DenunciaCiudadanaRequest extends FormRequest
 
                 'prioridad_id'                 => 2,
                 'origen_id'                    => 4,
-                'dependencia_id'               => $this->dependencia_id,
-                'ubicacion_id'                 => 1,
-                'servicio_id'                  => $this->servicio_id,
+                'dependencia_id'               => intval($this->dependencia_id),
+                'ubicacion_id'                 => floatval($this->ubicacion_id),
+                'servicio_id'                  => intval($this->servicio_id),
                 'estatus_id'                   => 8,
                 'ciudadano_id'                 => Auth::id(),
                 'creadopor_id'                 => Auth::id(),
-                'modificadopor_id'             => $this->modificadopor_id,
+                'modificadopor_id'             => floatval($this->modificadopor_id),
                 'domicilio_ciudadano_internet' => strtoupper(trim($this->domicilio_ciudadano_internet)),
 
             ];
 
-           // dd($Item);
+            //dd($Item);
 
-            if ($this->id == 0) {
+            if ( intval($this->id) == 0) {
                 $item = Denuncia::create($Item);
             }
             $item = $this->attaches($item);

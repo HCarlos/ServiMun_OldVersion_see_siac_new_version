@@ -20,17 +20,19 @@ class GetDenunciasItemCustomFilter extends QueryFilter{
     public function filterdata($query, $search){
         $search = isset($search['search']) ? $search['search'] : '';
         $search = strtoupper($search);
-        //dd( $filter );
+        //dd( $search );
         $IsEnlace =Auth::user()->isRole('ENLACE');
         $DependenciaArray = '';
         IF ($IsEnlace){
             $DependenciaArray = Auth::user()->DependenciaArray;
             $filters['dependencia'] = $DependenciaArray;
-        }elseif (Auth::user()->isRole('CIUDADANO|DELEGADO')){
+//            dd('hola 1');
+        }elseif ( Auth::user()->isRole('CIUDADANO|DELEGADO') && !Auth::user()->isRole('Administrator|SysOp') ){
             $filters['ciudadano_id'] = Auth::user()->id;
-
+//            dd('hola 2');
         }else{
             $filters['search'] = $search;
+//            dd('hola 3');
         }
         session(['IsEnlace' => $IsEnlace]);
         session(['DependenciaArray' => $DependenciaArray]);

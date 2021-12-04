@@ -10,7 +10,7 @@
                     @include('shared.code.__errors')
                     <form method="POST" action="{{ route('createDenunciaCiudadana') }}">
                         @csrf
-                        @include('shared.denuncia.denuncia_ciudadana.__denuncia_ciudadana_new')
+                        @include('SIAC.denuncia.denuncia_ciudadana.__denuncia_ciudadana.__denuncia_ciudadana_new')
                         @component('components.tools.buttons-form-denuncia')
                             @slot('msgLeft',' ')
                         @endcomponent
