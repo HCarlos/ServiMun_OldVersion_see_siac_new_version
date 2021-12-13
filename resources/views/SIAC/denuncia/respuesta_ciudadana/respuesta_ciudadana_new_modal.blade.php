@@ -7,6 +7,6 @@
     @endslot
     @slot('titulo_full_modal',"Nueva Respuesta")
     @slot('body_full_modal')
-        @include('shared.denuncia.respuesta_ciudadana.__respuesta_ciudadana_new')
+        @include('SIAC.denuncia.respuesta_ciudadana.__respuesta_ciudadana.__respuesta_ciudadana_new')
     @endslot
 @endcomponent

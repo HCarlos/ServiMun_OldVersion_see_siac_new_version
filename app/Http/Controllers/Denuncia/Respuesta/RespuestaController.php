@@ -37,7 +37,7 @@ class RespuestaController extends Controller
         $user = Auth::User();
 
 
-        return view('denuncia.respuesta.respuesta_list',
+        return view('SIAC.denuncia.respuesta.respuesta_list',
             [
                 'items' => $items,
                 'titulo_catalogo' => ucwords($this->tableName).' de la denuncia: '.$Id,
@@ -79,16 +79,21 @@ class RespuestaController extends Controller
 
     protected function showModalRespuestaNew($denuncia_id){
         $user = Auth::user();
-        $Ciudadanos   = User::all()->sortBy(function ($q){
-            return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
-        });
+        //dd($user);
+//        $Ciudadanos   = User::all()->sortBy(function ($q){
+//            return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
+//        });
 
-        return view ('denuncia.respuesta.respuesta_new_modal',
+        //dd($denuncia_id);
+
+        return view ('SIAC.denuncia.respuesta.respuesta_new_modal',
             [
-                'saveRespuestaDen'=>'saveRespuestaDen',
+                'Route'       => 'saveRespuestaDen',
+                'Method'      => 'POST',
+                'items_forms' => 'SIAC.denuncia.respuesta.__respuesta.__respuesta_new',
+                'IsNew'       => true,
                 'denuncia_id' => $denuncia_id,
-                'ciudadanos' => $Ciudadanos,
-                'user' => $user,
+                'user'        => $user,
             ]
         );
     }
@@ -96,17 +101,17 @@ class RespuestaController extends Controller
     protected function showModalRespuestaEdit($Id){
         $user = Auth::user();
         $resp = Respuesta::find($Id);
-        $Ciudadanos   = User::all()->sortBy(function ($q){
-            return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
-        });
-        return view ('denuncia.respuesta.respuesta_edit_modal',
+        //dd($resp);
+        return view ('SIAC.denuncia.respuesta.respuesta_edit_modal',
             [
-                'saveRespuestaDen'=>'saveRespuestaDen',
-                'denuncia_id' => $resp->denuncia->id,
-                'ciudadanos' => $Ciudadanos,
-                'id' => $Id,
-                'user' => $user,
-                'item' => $resp,
+                'Route'           => 'saveRespuestaDen',
+                'Method'          => 'PUT',
+                'items_forms'     => 'SIAC.denuncia.respuesta.__respuesta.__respuesta_edit',
+                'IsNew'           => false,
+                'id'              => $Id,
+                'denuncia_id'     => $resp->denuncia->id,
+                'user'            => $user,
+                'items'           => $resp,
             ]
         );
     }
@@ -125,17 +130,17 @@ class RespuestaController extends Controller
 
     protected function RespuestaARespuestaNew($denuncia_id,$respuesta_id){
         $user = Auth::user();
-        $Ciudadanos   = User::all()->sortBy(function ($q){
-            return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
-        });
 
-        return view ('denuncia.respuesta_a_respuesta.respuesta_a_respuesta_new_modal',
+        return view ('SIAC.denuncia.respuesta_a_respuesta.respuesta_a_respuesta_new_modal',
             [
-                'saveRespuestaARespuestaDen'=>'saveRespuestaARespuestaDen',
-                'denuncia_id' => $denuncia_id,
-                'respuesta_id' => $respuesta_id,
-                'ciudadanos' => $Ciudadanos,
-                'user' => $user,
+                'Route'           => 'saveRespuestaARespuestaDen',
+                'Method'          => 'PUT',
+                'items_forms'     => 'SIAC.denuncia.respuesta_a_respuesta.__respuesta_a_respuesta.__respuesta_a_respuesta_new',
+                'IsNew'           => true,
+                'denuncia_id'     => $denuncia_id,
+                'respuesta_id'    => $respuesta_id,
+                'user'            => $user,
+
             ]
         );
     }

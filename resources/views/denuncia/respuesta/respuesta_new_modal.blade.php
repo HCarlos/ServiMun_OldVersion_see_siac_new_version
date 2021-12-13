@@ -1,12 +1,13 @@
 @component('components.form.form-modal')
-    @slot('metodo','POST')
-    @slot('action','saveRespuestaDen')
-    @slot('_csrf')
-        @csrf
-        {{--{{method_field('PUT')}}--}}
-    @endslot
-    @slot('titulo_full_modal',"Nueva Respuesta")
-    @slot('body_full_modal')
-        @include('shared.denuncia.respuesta.__respuesta_new')
-    @endslot
+    @slot('Method', $Method ?? 'GET')
+    @slot('Titulo', $Titulo ?? '')
+    @slot('Route', $Route ?? '#')
+    @slot('IsUpload', $IsUpload ?? false)
+    @slot('IsNew', $IsNew ?? false)
+    @slot('IsModal', $IsModal ?? false )
+    @slot('items_forms', $items_forms ?? '')
+    @slot('items', $items ?? null)
+    @slot('formData', 'formFullModal')
+    @slot('user',$user ?? null)
+    @slot('denuncia_id',$denuncia_id ?? null)
 @endcomponent

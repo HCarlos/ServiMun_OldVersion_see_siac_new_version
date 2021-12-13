@@ -10,6 +10,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class RespuestaRequest extends FormRequest
@@ -36,7 +37,7 @@ class RespuestaRequest extends FormRequest
     public function manage()
     {
         try {
-
+            $this->user__id = Auth::id();
             $fechaActual = Carbon::parse($this->fecha)->format('Y-m-d h:m:s');
             $horaActual = Carbon::now()->format('hh:mm:ss');
             $Item = [

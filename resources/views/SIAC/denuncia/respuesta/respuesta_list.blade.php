@@ -8,7 +8,7 @@
             @include('shared.ui_kit.__menu_respuesta')
         @endslot
         @slot('body_catalogo')
-            @include('shared.denuncia.respuesta.__respuesta_list')
+            @include('SIAC.denuncia.respuesta.__respuesta.__respuesta_list')
         @endslot
 
     @endcomponent
