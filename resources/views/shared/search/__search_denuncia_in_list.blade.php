@@ -1,5 +1,12 @@
 <div class="form-row mb-1">
-    <label for = "ciudadano" class="col-md-2 col-form-label">Ciudadano</label>
+    <label for = "ciudadano" class="col-md-2 col-form-label">CURP</label>
+    <div class="col-md-10">
+        <input type="text" name="ciudadano" id="ciudadano" value="{{ old('ciudadano') }}" class="form-control" />
+    </div>
+</div>
+
+<div class="form-row mb-1">
+    <label for = "ciudadano" class="col-md-2 col-form-label">Nombre Completo</label>
     <div class="col-md-10">
         <input type="text" name="ciudadano" id="ciudadano" value="{{ old('ciudadano') }}" class="form-control" />
     </div>

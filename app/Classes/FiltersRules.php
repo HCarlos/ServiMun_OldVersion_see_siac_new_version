@@ -29,7 +29,8 @@ class FiltersRules
 //    }
 
     public function filterRulesDenuncia(Request $request){
-        $data = $request->all(['ciudadano','id','desde','hasta','dependencia_id','servicio_id','estatus_id']);
+        $data = $request->all(['curp','ciudadano','id','desde','hasta','dependencia_id','servicio_id','estatus_id']);
+        $data['curp'] = $data['curp']==null ? "" : $data['curp'];
         $data['ciudadano'] = $data['ciudadano']==null ? "" : $data['ciudadano'];
         $data['id'] = $data['id']==null ? "" : $data['id'];
         $data['desde'] = $data['desde']==null ? "" : $data['desde'];
@@ -38,6 +39,7 @@ class FiltersRules
         $data['servicio_id'] = $data['servicio_id']==null ? "" : $data['servicio_id'];
         $data['estatus_id'] = $data['estatus_id']==null ? "" : $data['estatus_id'];
         $filters = [
+            'curp'           => $data['curp'],
             'ciudadano'      => $data['ciudadano'],
             'id'             => $data['id'],
             'desde'          => $data['desde'],

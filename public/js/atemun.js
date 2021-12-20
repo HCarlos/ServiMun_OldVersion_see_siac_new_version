@@ -256,8 +256,9 @@
     if ( $(".btnGetItems").length > 0  ){
         $(".btnGetItems").on('click', function(event) {
             event.preventDefault();
-            if ( $(".frmGetItems").length > 0  ){
+            if ( $(".btnGetItems").length > 0  ){
                 var hRef = event.currentTarget.href;
+                // alert("hRef")
                 var token = $("meta[name='csrf-token']").attr('content');
                 var oSearch    = $("input[name='search']").length > 0 ? $("input[name='search']").val() : "";
                 var oItems     = $("input[name='items']").length > 0 ? $("input[name='items']").val() : "";

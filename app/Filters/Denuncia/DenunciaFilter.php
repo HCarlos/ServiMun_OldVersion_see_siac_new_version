@@ -22,6 +22,7 @@ class DenunciaFilter extends QueryFilter
     public function rules(): array{
         return [
             'search'         => '',
+            'curp'           => '',
             'ciudadano'      => '',
             'id'             => '',
             'desde'          => '',
@@ -72,6 +73,14 @@ class DenunciaFilter extends QueryFilter
                 ->orWhere('id', 'like', "%{$search}%");
         });
 
+    }
+
+    public function curp($query, $search){
+        if (is_null($search) || empty ($search) || trim($search) == "") {return $query;}
+        $search = strtoupper($search);
+        return $query->orWhereHas('ciudadanos', function ($q) use ($search) {
+            return $q->where("curp",trim($search));
+        });
     }
 
     public function ciudadano($query, $search){
