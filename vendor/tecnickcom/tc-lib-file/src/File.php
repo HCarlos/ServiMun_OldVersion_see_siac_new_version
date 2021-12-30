@@ -29,6 +29,8 @@ use \Com\Tecnick\File\Exception as FileException;
  * @copyright   2015-2015 Nicola Asuni - Tecnick.com LTD
  * @license     http://www.gnu.org/copyleft/lesser.html GNU-LGPL v3 (see LICENSE.TXT)
  * @link        https://github.com/tecnickcom/tc-lib-file
+ *
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
  */
 class File
 {
@@ -168,6 +170,10 @@ class File
         curl_setopt($crs, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($crs, CURLOPT_SSL_VERIFYHOST, false);
         curl_setopt($crs, CURLOPT_USERAGENT, 'tc-lib-file');
+        curl_setopt($crs, CURLOPT_MAXREDIRS, 5);
+        if (defined('CURLOPT_PROTOCOLS')) {
+            curl_setopt($crs, CURLOPT_PROTOCOLS, CURLPROTO_HTTPS | CURLPROTO_HTTP |  CURLPROTO_FTP | CURLPROTO_FTPS);
+        }
         $ret = curl_exec($crs);
         curl_close($crs);
         return $ret;

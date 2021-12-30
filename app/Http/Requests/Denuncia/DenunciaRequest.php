@@ -12,6 +12,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use App\Classes\MessageAlertClass;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Support\Facades\Auth;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 
 class DenunciaRequest extends FormRequest
@@ -19,6 +20,19 @@ class DenunciaRequest extends FormRequest
 
 
     protected $redirectRoute = 'editDenuncia';
+
+    public function validationData(){
+        $attributes = parent::all();
+        $IsEnlace =Auth::user()->isRole('ENLACE');
+        $DependenciaArray = '';
+        IF ($IsEnlace) {
+            $DependenciaIdArray = Auth::user()->DependenciaIdArray;
+            $attributes['dependencia_id'] = $DependenciaIdArray;
+        }
+        $this->replace($attributes);
+        return parent::all();
+    }
+
 
     public function authorize(){
         return true;
@@ -132,6 +146,7 @@ class DenunciaRequest extends FormRequest
     }
 
     public function attaches($Item){
+
         $Item->prioridades()->attach($this->prioridad_id);
         $Item->origenes()->attach($this->origen_id);
         $Item->dependencias()->attach($this->dependencia_id,['servicio_id'=>$this->servicio_id,'estatu_id'=>$this->estatus_id,'fecha_movimiento' => now() ]);

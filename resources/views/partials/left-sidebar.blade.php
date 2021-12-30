@@ -19,7 +19,8 @@
             <li class="side-nav-item">
                 <a href="{{route('listDenuncias')}}" class="side-nav-link">
                     <i class="mdi dripicons-archive"></i>
-                    <span class="badge badge-light float-right">{{\App\Models\Denuncias\Denuncia::count()}}</span>
+                    @php $filters['filterdata']=""; @endphp
+                    <span class="badge badge-light float-right">{{\App\Models\Denuncias\Denuncia::query()->GetDenunciasFilterCount($filters)->count()}}</span>
                     <span>Denuncias</span>
                 </a>
             </li>

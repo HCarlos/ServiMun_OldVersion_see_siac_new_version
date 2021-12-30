@@ -112,7 +112,7 @@ class UserRequest extends FormRequest
 
         if ($this->id == 0) {
 
-            $CURP     = strtolower(trim($this->curp));
+            $CURP     = strtoupper(trim($this->curp));
 
             if ( $CURP  != "" ){
                 $Username = $CURP;

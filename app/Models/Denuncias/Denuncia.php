@@ -6,6 +6,7 @@
 namespace App\Models\Denuncias;
 
 use App\Filters\Denuncia\DenunciaFilter;
+use App\Filters\Denuncia\GetDenunciasFilterCount;
 use App\Filters\Denuncia\GetDenunciasItemCustomFilter;
 use App\Models\Catalogos\Dependencia;
 use App\Models\Catalogos\Domicilios\Ubicacion;
@@ -51,6 +52,10 @@ class Denuncia extends Model
 
     public function scopeGetDenunciasItemCustomFilter($query, $filters){
         return (new GetDenunciasItemCustomFilter())->applyTo($query, $filters);
+    }
+
+    public function scopeGetDenunciasFilterCount($query, $filters){
+        return (new GetDenunciasFilterCount())->applyTo($query, $filters);
     }
 
     public function prioridad(){

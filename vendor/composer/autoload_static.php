@@ -35,11 +35,11 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         'e39a8b23c42d4e1452234d762b03835a' => __DIR__ . '/..' . '/ramsey/uuid/src/functions.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
-        '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
         '9cdd7b9056abc3081735233ba9dd9c7f' => __DIR__ . '/..' . '/facade/flare-client-php/src/helpers.php',
-        'ed962a97bd972bc82007176b647d4e36' => __DIR__ . '/..' . '/facade/ignition/src/helpers.php',
+        '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
         'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
         '3be16222a6efa6dd226a219eaaff823b' => __DIR__ . '/..' . '/ratchet/pawl/src/functions_include.php',
+        'ed962a97bd972bc82007176b647d4e36' => __DIR__ . '/..' . '/facade/ignition/src/helpers.php',
         'a1af1fc0cffb5f61cbaf64dbe030fdb9' => __DIR__ . '/..' . '/laravel/legacy-factories/helpers.php',
         'f18cc91337d49233e5754e93f3ed9ec3' => __DIR__ . '/..' . '/laravelcollective/html/src/helpers.php',
         '377b22b161c09ed6e5152de788ca020a' => __DIR__ . '/..' . '/spatie/laravel-permission/src/helpers.php',
@@ -660,9 +660,9 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         ),
         'Doctrine\\Common\\' => 
         array (
-            0 => __DIR__ . '/..' . '/doctrine/common/lib/Doctrine/Common',
-            1 => __DIR__ . '/..' . '/doctrine/event-manager/lib/Doctrine/Common',
-            2 => __DIR__ . '/..' . '/doctrine/persistence/lib/Doctrine/Common',
+            0 => __DIR__ . '/..' . '/doctrine/event-manager/lib/Doctrine/Common',
+            1 => __DIR__ . '/..' . '/doctrine/persistence/lib/Doctrine/Common',
+            2 => __DIR__ . '/..' . '/doctrine/common/lib/Doctrine/Common',
         ),
         'DeepCopy\\' => 
         array (
@@ -777,6 +777,7 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         'App\\Filters\\Catalogo\\ServicioFilter' => __DIR__ . '/../..' . '/app/Filters/Catalogo/ServicioFilter.php',
         'App\\Filters\\Common\\QueryFilter' => __DIR__ . '/../..' . '/app/Filters/Common/QueryFilter.php',
         'App\\Filters\\Denuncia\\DenunciaFilter' => __DIR__ . '/../..' . '/app/Filters/Denuncia/DenunciaFilter.php',
+        'App\\Filters\\Denuncia\\GetDenunciasFilterCount' => __DIR__ . '/../..' . '/app/Filters/Denuncia/GetDenunciasFilterCount.php',
         'App\\Filters\\Denuncia\\GetDenunciasItemCustomFilter' => __DIR__ . '/../..' . '/app/Filters/Denuncia/GetDenunciasItemCustomFilter.php',
         'App\\Filters\\User\\CategoriaFilter' => __DIR__ . '/../..' . '/app/Filters/User/CategoriaFilter.php',
         'App\\Filters\\User\\UserFilter' => __DIR__ . '/../..' . '/app/Filters/User/UserFilter.php',
