@@ -111,7 +111,7 @@
                     <a href="{{ url('/home') }}" class="" ><strong>Entrar</strong></a>
                 @else
                     <a href="{{ route('login') }}" class="text-blanco "><strong>Iniciar sesión</strong></a>
-                    <a href="{{ route('register') }}" class="text-blanco">Regístrate</a>
+{{--                    <a href="{{ route('register') }}" class="text-blanco">Regístrate</a>--}}
                 @endauth
             </li>
         </ul>

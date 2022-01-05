@@ -51,7 +51,7 @@
                         </div>
                         <div class="clearfix"></div>
                         <div class="form-group  mt-2">
-                            <a href="{{ route('register') }}" class="text-danger-light float-right  text-danger"><strong>Me quiero registrar</strong></a>
+{{--                            <a href="{{ route('register') }}" class="text-danger-light float-right  text-danger"><strong>Me quiero registrar</strong></a>--}}
                         </div>
 
                     </form>

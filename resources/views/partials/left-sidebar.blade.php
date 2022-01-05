@@ -242,7 +242,7 @@
                 </a>
 
                 <ul class="side-nav-second-level" aria-expanded="false">
-                    @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_SIAC'))
+                    @if (Auth::user()->hasRole('Administrator|SysOp'))
                     <li>
                         <a href="{{route('listCategorias')}}">
                             <i class="fas fa-user-tag"></i>
@@ -287,7 +287,7 @@
                             </a>
                         </li>
                     @endif
-                    @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_ADMIN'))
+                    @if (Auth::user()->hasRole('Administrator|SysOp'))
                     <li>
                         <a href="{{route('archivosConfig')}}">
                             <i class="fas fa-file-excel"></i>

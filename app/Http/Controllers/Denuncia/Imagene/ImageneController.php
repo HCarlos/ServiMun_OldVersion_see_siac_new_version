@@ -14,6 +14,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use App\Http\Controllers\Funciones\FuncionesController;
+use Symfony\Component\Console\Input\Input;
 
 class ImageneController extends Controller{
 
@@ -134,10 +135,14 @@ class ImageneController extends Controller{
         $user = Auth::user();
         return view ('denuncia.images.imagene_upload',
             [
-                'saveImageneDen'=>'saveImageneDen',
+                'Route'       => 'saveImageneDen',
+                'Method'      => 'POST',
+                'items_forms' => 'SIAC.denuncia.images.imagene_upload',
+                'IsNew'       => true,
                 'denuncia_id' => $denuncia_id,
+                'user'        => $user,
                 'removeItem' => 'removeImagene',
-                'user' => $user,
+
             ]
         );
     }
@@ -148,11 +153,15 @@ class ImageneController extends Controller{
         //dd();
         //dd( Input::get('images') );
 
-        return view ('denuncia.images.imagene_edit_data',
+        return view ('SIAC.denuncia.images.imagene_edit_data',
             [
-                'saveImageneDen'=>'saveImageneDen',
-                'item' => $item,
-                'user' => $user,
+                'Route'       => 'saveImageneDen',
+                'Method'      => 'POST',
+                'items_forms' => 'SIAC.denuncia.images.__images.__imagene_edit_data',
+                'IsNew'       => false,
+                'item'        => $item,
+                'user'        => $user,
+                'removeItem'  => 'removeImagene',
             ]
         );
     }

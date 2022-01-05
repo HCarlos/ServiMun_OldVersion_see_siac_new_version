@@ -8,7 +8,6 @@
         @slot('action','saveImageneDen')
         @slot('_csrf')
             @csrf
-            {{--{{method_field('PUT')}}--}}
         @endslot
         @slot('titulo_dropzone',"Subir Imágenes")
         @slot('body_full_modal')
@@ -19,3 +18,4 @@
     @endcomponent
 
     @endsection
+
