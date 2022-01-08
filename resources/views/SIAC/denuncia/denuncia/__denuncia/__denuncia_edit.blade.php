@@ -269,6 +269,6 @@
 
 <input type="hidden" name="id" id="id" value="{{$items->id}}" >
 <input type="hidden" name="ubicacion_id" id="ubicacion_id" value="{{$items->Ubicacion->id}}" >
-<input type="hidden" name="creadopor_id" id="creadopor_id" value="{{$user->id}}" >
+<input type="hidden" name="creadopor_id" id="creadopor_id" value="{{$items->creadopor_id}}" >
 <input type="hidden" name="modificadopor_id" id="modificadopor_id" value="{{$user->id}}" >
 <input type="hidden" name="usuario_id" id="usuario_id" value="{{$items->Ciudadano->id}}" >

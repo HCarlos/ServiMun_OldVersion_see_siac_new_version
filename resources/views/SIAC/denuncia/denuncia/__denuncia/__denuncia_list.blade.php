@@ -1,4 +1,4 @@
-<table  id="tblCat" class="table table-bordered table-striped dt-responsive dataTable " role="grid" aria-describedby="datatable-buttons_info" style="width: 100%; position: relative; z-index:0;" width="100%">
+<table  id="tblCat" class="table table-bordered table-striped dt-responsive dataTable " role="grid" aria-describedby="datatable-buttons_info"  width="100%">
     <thead>
     <tr role="row">
         <th class="sorting_asc" aria-sort="ascending" aria-label="Name: activate to sort column descending">ID</th>
@@ -18,7 +18,7 @@
             <td class="table-user">{{$item->id}}</td>
             <td>{{$item->ciudadano->FullName}}</td>
             <td>{{($item->fecha_ingreso)}}</td>
-            <td>{{($item->dependencia->dependencia)}}</td>
+            <td><a title="{{($item->dependencia->dependencia)}}">{{($item->dependencia->abreviatura)}}</a></td>
             <td>{{($item->Estatu->estatus)}}</td>
             <td>{{($item->creadopor->username)}}</td>
             <td class="w-75">{{$item->fullUbication}}</td>

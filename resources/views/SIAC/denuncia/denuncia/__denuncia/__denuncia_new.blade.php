@@ -213,5 +213,5 @@
 <input type="hidden" name="id" value="0" >
 <input type="hidden" name="ubicacion_id" id="ubicacion_id" value="0" >
 <input type="hidden" name="creadopor_id" id="creadopor_id" value="{{$user->id}}" >
-<input type="hidden" name="modificadopor_id" id="modificadopor_id" value="1" >
+<input type="hidden" name="modificadopor_id" id="modificadopor_id" value="{{$user->id}}" >
 <input type="hidden" name="usuario_id" id="usuario_id" value="0" >

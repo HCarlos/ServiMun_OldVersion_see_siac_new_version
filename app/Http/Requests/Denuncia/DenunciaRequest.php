@@ -85,10 +85,6 @@ class DenunciaRequest extends FormRequest
         try {
             $Ubicacion = Ubicacion::findOrFail($this->ubicacion_id);
 
-            //$fechaActual    = Carbon::now();
-            //$fechaLimite    = Carbon::now($this->fecha_limite);
-            //$fechaEjecucion = Carbon::now($this->fecha_ejecucion);
-
             $Item = [
                 'fecha_ingreso'                => Carbon::now(), //Carbon::now($this->fecha_ingreso)->format('Y-m-d hh:mm:ss'),
                 'oficio_envio'                 => $this->oficio_envio,
@@ -128,7 +124,6 @@ class DenunciaRequest extends FormRequest
 
             if ($this->id == 0) {
                 $item = Denuncia::create($Item);
-
             } else {
                 $item = Denuncia::find($this->id);
                 $this->detaches($item);
