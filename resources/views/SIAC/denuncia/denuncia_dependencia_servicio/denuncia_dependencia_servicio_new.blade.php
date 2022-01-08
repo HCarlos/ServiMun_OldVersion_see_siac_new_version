@@ -10,7 +10,7 @@
                     @include('shared.code.__errors')
                     <form method="POST" action="{{ route($postNew) }}">
                         @csrf
-                        @include('shared.denuncia.denuncia_dependencia_servicio.__denuncia_dependencia_servicio_new')
+                        @include('SIAC.denuncia.denuncia_dependencia_servicio.__denuncia_dependencia_servicio.__denuncia_dependencia_servicio_new')
                         @component('components.tools.buttons-form-denuncia')
                             @slot('msgLeft',' ')
                         @endcomponent

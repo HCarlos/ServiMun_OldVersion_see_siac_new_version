@@ -28,7 +28,9 @@
                         <td class="table-action w-100">
                             <div class="button-list w-100">
                                 @include('shared.ui_kit.__edit_item')
-                                @include('shared.ui_kit.__remove_item')
+                                @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN'))
+                                    @include('shared.ui_kit.__remove_item')
+                                @endif
 {{--                                @include('shared.ui_kit.__edit_item_becas')--}}
                             </div>
                         </td>

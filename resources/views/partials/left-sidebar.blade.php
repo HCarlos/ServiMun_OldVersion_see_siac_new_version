@@ -24,7 +24,7 @@
                     <span>Denuncias</span>
                 </a>
             </li>
-
+            @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN'))
             <li class="side-nav-item">
                 <a href="javascript: void(0);" class="side-nav-link">
                     <i class="dripicons-browser"></i>
@@ -133,8 +133,8 @@
                     @endif
 
                 </ul>
-
             </li>
+            @endif
             <li class="side-nav-item">
                 <a href="javascript: void(0);" class="side-nav-link">
                     <i class="fa fa-folder"></i>

@@ -76,7 +76,7 @@ class SubareaRequest extends FormRequest
             }
         }catch (QueryException $e){
             $Msg = new MessageAlertClass();
-            throw new HttpResponseException(response()->json( $Msg->Message($e), 422));
+            throw new HttpResponseException(response()->json( $e, 422));
         }
 //        dd($item);
         return $item;

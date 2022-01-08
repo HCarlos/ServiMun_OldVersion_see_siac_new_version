@@ -54,11 +54,11 @@
             <div class="form-row mb-1">
                 <label for = "fecha_ejecucion" class="col-lg-2 col-form-label">F. Ejec. </label>
                 <div class="col-lg-4">
-                    {{ Form::date('fecha_ejecucion', old('fecha_ejecucion',$items->fecha_ejecucion), ['id'=>'fecha_ejecucion','class'=>'form-control','readonly'=>'readonly']) }}
+                    {{ Form::date('fecha_ejecucion', old('fecha_ejecucion',$items->fecha_ejecucion), ['id'=>'fecha_ejecucion','class'=>'form-control']) }}
                 </div>
                 <label for = "fecha_limite" class="col-lg-2 col-form-label">F. Límite </label>
                 <div class="col-lg-4">
-                    {{ Form::date('fecha_limite', old('fecha_limite',$items->fecha_limite), ['id'=>'fecha_limite','class'=>'form-control','readonly'=>'readonly']) }}
+                    {{ Form::date('fecha_limite', old('fecha_limite',$items->fecha_limite), ['id'=>'fecha_limite','class'=>'form-control']) }}
                 </div>
             </div>
             <hr>

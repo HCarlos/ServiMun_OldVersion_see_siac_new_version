@@ -57,11 +57,11 @@
             <div class="form-row mb-1">
                 <label for = "fecha_ejecucion" class="col-lg-2 col-form-label">F. Ejec. </label>
                 <div class="col-lg-4">
-                    {{ Form::date('fecha_ejecucion', \Carbon\Carbon::now()->addDay(3), ['id'=>'fecha_ejecucion','class'=>'form-control','readonly'=>'readonly']) }}
+                    {{ Form::date('fecha_ejecucion', \Carbon\Carbon::now()->addDay(3), ['id'=>'fecha_ejecucion','class'=>'form-control']) }}
                 </div>
                 <label for = "fecha_limite" class="col-lg-2 col-form-label">F. Límite </label>
                 <div class="col-lg-4">
-                    {{ Form::date('fecha_limite', \Carbon\Carbon::now()->addDay(5), ['id'=>'fecha_limite','class'=>'form-control','readonly'=>'readonly']) }}
+                    {{ Form::date('fecha_limite', \Carbon\Carbon::now()->addDay(5), ['id'=>'fecha_limite','class'=>'form-control']) }}
                 </div>
             </div>
             <hr>

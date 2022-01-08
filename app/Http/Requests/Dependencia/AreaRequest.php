@@ -14,8 +14,7 @@ class AreaRequest extends FormRequest
 
     protected $redirectRoute = 'editArea';
 
-    public function authorize()
-    {
+    public function authorize(){
         return true;
     }
 

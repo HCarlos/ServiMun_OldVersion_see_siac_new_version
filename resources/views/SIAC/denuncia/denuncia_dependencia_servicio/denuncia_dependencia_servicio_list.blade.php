@@ -8,7 +8,7 @@
             @include('shared.ui_kit.__menu_denuncia_dependencia_servicio')
         @endslot
         @slot('body_catalogo')
-            @include('shared.denuncia.denuncia_dependencia_servicio.__denuncia_dependencia_servicio_list')
+            @include('SIAC.denuncia.denuncia_dependencia_servicio.__denuncia_dependencia_servicio.__denuncia_dependencia_servicio_list')
         @endslot
 
     @endcomponent

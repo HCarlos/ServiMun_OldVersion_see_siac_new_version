@@ -114,8 +114,10 @@ class DenunciaController extends Controller
 
         $IsEnlace = Session::get('IsEnlace');
         if($IsEnlace){
-            $DependenciaArray = explode('|',Session::get('DependenciaArray'));
-            $Dependencias = Dependencia::all()->whereIn('dependencia',$DependenciaArray,true)->sortBy('dependencia');
+            $DependenciaIdArray = explode('|',Session::get('DependenciaIdArray'));
+            //dd($DependenciaArray);
+            $Dependencias = Dependencia::all()->whereIn('id',$DependenciaIdArray,false)->sortBy('dependencia');
+            //dd($Dependencias);
 
         }else{
             $Dependencias = Dependencia::all()->sortBy('dependencia');
@@ -161,8 +163,9 @@ class DenunciaController extends Controller
 
         $IsEnlace = Session::get('IsEnlace');
         if($IsEnlace){
-            $DependenciaArray = explode('|',Session::get('DependenciaArray'));
-            $Dependencias = Dependencia::all()->whereIn('dependencia',$DependenciaArray,true)->sortBy('dependencia');
+            $DependenciaIdArray = explode('|',Session::get('DependenciaIdArray'));
+//            $Dependencias = Dependencia::all()->whereIn('dependencia',$DependenciaArray,true)->sortBy('dependencia');
+            $Dependencias = Dependencia::all()->whereIn('id',$DependenciaIdArray,false)->sortBy('dependencia');
 
         }else{
             $Dependencias = Dependencia::all()->sortBy('dependencia');

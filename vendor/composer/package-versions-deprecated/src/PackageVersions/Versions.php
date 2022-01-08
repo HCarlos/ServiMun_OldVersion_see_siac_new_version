@@ -40,7 +40,7 @@ final class Versions
   'doctrine/cache' => '2.1.1@331b4d5dbaeab3827976273e9356b3b453c300ce',
   'doctrine/collections' => '1.6.8@1958a744696c6bb3bb0d28db2611dc11610e78af',
   'doctrine/common' => '3.2.1@e927fc2410c8723d053b8032e591cdff76587cdb',
-  'doctrine/dbal' => '2.13.6@67ef6d0327ccbab1202b39e0222977a47ed3ef2f',
+  'doctrine/dbal' => '2.13.7@6e22f6012b42d7932674857989fcf184e9e9b1c3',
   'doctrine/deprecations' => 'v0.5.3@9504165960a1f83cc1480e2be1dd0a0478561314',
   'doctrine/event-manager' => '1.1.1@41370af6a30faa9dc0368c4a6814d596e81aba7f',
   'doctrine/inflector' => '2.0.4@8b7ff3e4b7de6b2c84da85637b59fd2880ecaa89',
@@ -88,7 +88,7 @@ final class Versions
   'opsway/doctrine-dbal-postgresql' => 'v0.8.1@fda403a60653c09637403384485f6db3c2e4ff73',
   'php-parallel-lint/php-console-color' => 'v0.3@b6af326b2088f1ad3b264696c9fd590ec395b49e',
   'php-parallel-lint/php-console-highlighter' => 'v0.5@21bf002f077b177f056d8cb455c5ed573adfdbb8',
-  'phpoffice/phpspreadsheet' => '1.20.0@44436f270bb134b4a94670f3d020a85dfa0a3c02',
+  'phpoffice/phpspreadsheet' => '1.21.0@1a359d2ccbb89c05f5dffb32711a95f4afc67964',
   'phpoption/phpoption' => '1.8.1@eab7a0df01fe2344d172bff4cd6dbd3f8b84ad15',
   'phpseclib/phpseclib' => '2.0.35@4e16cf3f5f927a7d3f5317820af795c0366c0420',
   'picqer/php-barcode-generator' => 'v2.2.0@7df93b40099e5fefad055543320a36b80dccda05',
@@ -154,7 +154,7 @@ final class Versions
   'vlucas/phpdotenv' => 'v4.2.2@77e974614d2ead521f18069dccc571696f52b8dc',
   'voku/portable-ascii' => '1.5.6@80953678b19901e5165c56752d087fc11526017c',
   'yajra/laravel-datatables-oracle' => 'v9.18.2@f4eebc1dc2b067058dfb91e7c067de862353c40f',
-  'filp/whoops' => '2.14.4@f056f1fe935d9ed86e698905a957334029899895',
+  'filp/whoops' => '2.14.5@a63e5e8f26ebbebf8ed3c5c691637325512eb0dc',
   'myclabs/deep-copy' => '1.10.2@776f831124e9c62e1a2c601ecc52e776d8bb7220',
   'nunomaduro/collision' => 'v4.3.0@7c125dc2463f3e144ddc7e05e63077109508c94e',
   'phar-io/manifest' => '2.0.3@97803eca37d319dfa7826cc2437fc020857acb53',
@@ -187,7 +187,7 @@ final class Versions
   'sebastian/version' => '3.0.2@c6c1022351a901512170118436c764e473f6de8c',
   'theseer/tokenizer' => '1.2.1@34a41e998c2183e22995f158c581e7b5e755ab9e',
   'webmozart/assert' => '1.10.0@6964c76c7804814a842473e0c8fd15bab0f18e25',
-  'laravel/laravel' => 'dev-master@a79a89a1035ef2e520630b1a1c7b3953e5bd231a',
+  'laravel/laravel' => 'dev-master@5afae9aa4d5a95aa7866447b9a7e3d28e4bf54aa',
 );
 
     private function __construct()
