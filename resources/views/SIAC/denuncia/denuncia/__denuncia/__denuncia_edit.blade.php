@@ -239,8 +239,31 @@
             </div>
         </div>
     </div>
+
+<div class="row mt-4">
+    <div class="col-sm-4">
+        <h6>CREADO</h6>
+        <address>
+            <strong>POR:</strong>  {{ $items->creadopor->Fullname }}<br>
+            <strong>FECHA:</strong>  {{ date('d-m-Y H:i:s', strtotime($items->created_at)) }}<br>
+        </address>
+    </div> <!-- end col-->
+    <div class="col-sm-4">
+        <h6>MODIFICADO</h6>
+        <address>
+            <strong>POR:</strong>  {{ $items->modificadopor->Fullname }}<br>
+            <strong>FECHA:</strong>  {{ date('d-m-Y H:i:s', strtotime($items->updated_at)) }}<br>
+        </address>
+    </div> <!-- end col-->
+    <div class="col-sm-4">
+{{--        <div class="text-sm-right">--}}
+{{--            <img src="assets/images/barcode.png" alt="barcode-image" class="img-fluid mr-2">--}}
+{{--        </div>--}}
+    </div> <!-- end col-->
 </div>
 
+
+</div>
 
 <hr>
 

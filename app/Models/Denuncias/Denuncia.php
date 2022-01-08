@@ -34,11 +34,12 @@ class Denuncia extends Model
         'latitud','longitud',
         'prioridad_id','origen_id','dependencia_id','ubicacion_id','servicio_id','estatus_id',
         'fecha_ingreso', 'fecha_oficio_dependencia', 'fecha_limite', 'fecha_ejecucion',
-        'ciudadano_id','creadopor_id','modificadopor_id',
+        'ciudadano_id','creadopor_id','created_at','modificadopor_id','updated_at','deleted_at',
         'searchtextdenuncia',
+
     ];
-    protected $hidden = ['deleted_at','created_at','updated_at'];
-    protected $dates = ['fecha_ingreso', 'fecha_oficio_dependencia' => 'datetime:d-m-Y', 'fecha_limite' => 'datetime:d-m-Y', 'fecha_ejecucion' => 'datetime:d-m-Y'];
+//    protected $hidden = ['deleted_at','created_at','updated_at'];
+    protected $dates = ['fecha_ingreso', 'fecha_oficio_dependencia' => 'datetime:d-m-Y', 'fecha_limite' => 'datetime:d-m-Y', 'fecha_ejecucion' => 'datetime:d-m-Y', 'created_at' => 'datetime:d-m-Y H:mm:ss', 'updated_at' => 'datetime:d-m-Y H:mm:ss'];
 
     public function scopeSearch($query, $search){
         if (!$search || $search == "" || $search == null) return $query;

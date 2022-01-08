@@ -44,9 +44,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'empresa_id','status_user','ip','host','searchtext',
         'logged','logged_at','logout_at', 'user_mig_id','email_verified_at',
         'ubicacion_id','imagen_id',
+        'creadopor_id','created_at','modipor_id','updated_at'
     ];
 
-    protected $hidden = ['password', 'remember_token','deleted_at','created_at','updated_at'];
+    protected $hidden = ['password', 'remember_token','deleted_at'];
     protected $casts = ['admin'=>'boolean','alumno'=>'boolean','delegado'=>'boolean',];
     protected $dates = ['fecha_nacimiento' => 'datetime:d-m-Y'];
 //    protected $dateFormat = [''];
