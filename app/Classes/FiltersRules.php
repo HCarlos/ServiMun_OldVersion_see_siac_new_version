@@ -15,29 +15,17 @@ use App\Role;
 class FiltersRules
 {
 
-//    public function filterRulesBecasAlumno(Request $request, string $role_user ){
-//        $data = $request->all(['becas','search']);
-//        $data['becas'] = $data['becas']==null ? "" : $data['becas'];
-//        $data['search'] = $data['search']==null ? "" : $data['search'];
-//        $role = Role::all()->where('name',$role_user)->first();
-//        $filters = [
-//            'search' => $data['search'],
-//            'roles'  => [$role->id],
-//            'becas'  => $data['becas'],
-//        ];
-//        return $filters;
-//    }
-
     public function filterRulesDenuncia(Request $request){
-        $data = $request->all(['curp','ciudadano','id','desde','hasta','dependencia_id','servicio_id','estatus_id']);
-        $data['curp'] = $data['curp']==null ? "" : $data['curp'];
-        $data['ciudadano'] = $data['ciudadano']==null ? "" : $data['ciudadano'];
-        $data['id'] = $data['id']==null ? "" : $data['id'];
-        $data['desde'] = $data['desde']==null ? "" : $data['desde'];
-        $data['hasta'] = $data['hasta']==null ? "" : $data['hasta'];
-        $data['dependencia_id'] = $data['dependencia_id']==null ? "" : $data['dependencia_id'];
-        $data['servicio_id'] = $data['servicio_id']==null ? "" : $data['servicio_id'];
-        $data['estatus_id'] = $data['estatus_id']==null ? "" : $data['estatus_id'];
+        $data = $request->all(['curp','ciudadano','id','desde','hasta','dependencia_id','servicio_id','estatus_id','creadopor_id']);
+        $data['curp']           = $data['curp']           == null ? "" : $data['curp'];
+        $data['ciudadano']      = $data['ciudadano']      == null ? "" : $data['ciudadano'];
+        $data['id']             = $data['id']             == null ? "" : $data['id'];
+        $data['desde']          = $data['desde']          == null ? "" : $data['desde'];
+        $data['hasta']          = $data['hasta']          == null ? "" : $data['hasta'];
+        $data['dependencia_id'] = $data['dependencia_id'] == null ? "" : $data['dependencia_id'];
+        $data['servicio_id']    = $data['servicio_id']    == null ? "" : $data['servicio_id'];
+        $data['estatus_id']     = $data['estatus_id']     == null ? "" : $data['estatus_id'];
+        $data['creadopor_id']   = $data['creadopor_id']   == null ? "" : $data['creadopor_id'];
         $filters = [
             'curp'           => $data['curp'],
             'ciudadano'      => $data['ciudadano'],
@@ -47,6 +35,7 @@ class FiltersRules
             'dependencia_id' => $data['dependencia_id'],
             'servicio_id'    => $data['servicio_id'],
             'estatus_id'     => $data['estatus_id'],
+            'creadopor_id'   => $data['creadopor_id'],
         ];
         //dd($filters);
         return $filters;

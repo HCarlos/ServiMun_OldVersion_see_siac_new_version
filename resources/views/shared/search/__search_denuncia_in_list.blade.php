@@ -65,3 +65,15 @@
         </select>
     </div>
 </div>
+
+<div class="form-row mb-1">
+    <label for = "creadopor_id" class="col-md-2 col-form-label">Creado Por:</label>
+    <div class="col-md-10">
+        <select id="creadopor_id" name="creadopor_id" class="form-control" size="1">
+            <option value="0" selected >Seleccione un Usuario</option>
+            @foreach($capturistas as $id => $valor)
+                <option value="{{ $id }}">{{ $valor }}</option>
+            @endforeach
+        </select>
+    </div>
+</div>

@@ -27,22 +27,15 @@ class GetDenunciasItemCustomFilter extends QueryFilter{
         IF ($IsEnlace){
             $DependenciaIdArray = Auth::user()->DependenciaIdArray;
             $filters['dependencia_id'] = $DependenciaIdArray;
-
-//            dd( $filters['dependencia_id']  );
-
-            //            dd('hola 1');
-
         }elseif ( Auth::user()->isRole('CIUDADANO|DELEGADO') && !Auth::user()->isRole('Administrator|SysOp') ){
             $filters['ciudadano_id'] = Auth::user()->id;
-//            dd('hola 2');
         }else{
             $filters['search'] = $search;
-//            dd('hola 3');
         }
         session(['IsEnlace' => $IsEnlace]);
         session(['DependenciaArray' => $DependenciaArray]);
         session(['DependenciaIdArray' => $DependenciaIdArray]);
-        //dd($filters);
+//        dd($filters);
         return $query->filterBy($filters);
 
     }

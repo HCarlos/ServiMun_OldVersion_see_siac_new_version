@@ -22,6 +22,9 @@
                         <td>
                             @foreach($item->roles as $role)
                                 <span class="badge badge-primary">{{$role->name}}</span>
+                                @if($role->name=="ENLACE")
+                                    <b>{{$item->dependencias->first()->abreviatura}}</b>
+                                @endif
                             @endforeach
                         </td>
                         <td>{{($item->ubicacion_id)}}</td>

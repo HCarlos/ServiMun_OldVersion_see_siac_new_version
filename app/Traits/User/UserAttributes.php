@@ -38,13 +38,24 @@ trait UserAttributes
         return $this->dependencias()->pluck('dependencia')->implode('|','name');
     }
 
+    public function getDependenciaAbreviaturaArrayAttribute(){
+        return $this->dependencias()->pluck('abreviatura')->implode('|','name');
+    }
+
     public function getDependenciaIdArrayAttribute(){
         return $this->dependencias()->pluck('dependencia_id')->implode('|','name');
     }
 
     public function getFullNameAttribute() {
         return "{$this->ap_paterno} {$this->ap_materno} {$this->nombre}";
-//        return trim($this->ap_paterno).' '.trim($this->ap_materno).' '.trim($this->nombre);
+    }
+
+    public function getFullNameWithUsernameAttribute() {
+        return "{$this->ap_paterno} {$this->ap_materno} {$this->nombre} - {$this->username}";
+    }
+
+    public function getFullNameWithUsernameDependenciaAttribute() {
+        return "{$this->ap_paterno} {$this->ap_materno} {$this->nombre} - {$this->id} - {$this->username} - {$this->dependencia_abreviatura_array}";
     }
 
     public function getStrGeneroAttribute() {
