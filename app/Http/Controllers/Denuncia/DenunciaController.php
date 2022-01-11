@@ -199,7 +199,7 @@ class DenunciaController extends Controller
         $item = $request->manage();
         //dd($item);
         if (!isset($item->id)) {
-            abort(405);
+            abort(422);
         }
         $this->msg = "Registro Guardado con éxito!";
         session(['msg' => $this->msg]);

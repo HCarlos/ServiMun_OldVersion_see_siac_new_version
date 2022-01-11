@@ -79,12 +79,6 @@ class RespuestaController extends Controller
 
     protected function showModalRespuestaNew($denuncia_id){
         $user = Auth::user();
-        //dd($user);
-//        $Ciudadanos   = User::all()->sortBy(function ($q){
-//            return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
-//        });
-
-        //dd($denuncia_id);
 
         return view ('SIAC.denuncia.respuesta.respuesta_new_modal',
             [

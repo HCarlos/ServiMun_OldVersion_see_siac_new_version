@@ -122,16 +122,20 @@ class DenunciaRequest extends FormRequest
 
             ];
 
-            if ($this->id == 0) {
-                $item = Denuncia::create($Item);
-            } else {
-                $item = Denuncia::find($this->id);
-                $this->detaches($item);
-                $item->update($Item);
+            if (Auth::user()->isRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN')){
+                if ($this->id == 0) {
+                    $item = Denuncia::create($Item);
+                } else {
+                    $item = Denuncia::find($this->id);
+                    $this->detaches($item);
+                    $item->update($Item);
+                }
+                $this->attaches($item);
+                $Storage = new StorageDenunciaController();
+                $Storage->subirArchivoDenuncia($this, $item);
+            }else{
+                return null;
             }
-            $this->attaches($item);
-            $Storage = new StorageDenunciaController();
-            $Storage->subirArchivoDenuncia($this, $item);
         }catch (QueryException $e){
             $Msg = new MessageAlertClass();
             throw new HttpResponseException(response()->json( $Msg->Message($e), 422));

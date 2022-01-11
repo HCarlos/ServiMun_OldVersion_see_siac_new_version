@@ -73,36 +73,39 @@ class RespuestaCiudadanaController extends Controller
 
     protected function showModalRespuestaCiudadanaNew($denuncia_id){
         $user = Auth::user();
-        $Ciudadanos   = User::all()->sortBy(function ($q){
-            return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
-        });
-        //dd($Ciudadanos);
-        return view ('denuncia.respuesta_ciudadana.respuesta_ciudadana_new_modal',
+        return view ('SIAC.denuncia.respuesta_ciudadana.respuesta_ciudadana_new_modal',
             [
-                'saveRespuestaDen'=>'saveRespuestaDen',
+                'Route'       => 'saveRespuestaDen',
+                'Method'      => 'POST',
+                'items_forms' => 'SIAC.denuncia.respuesta_ciudadana.__respuesta_ciudadana.__respuesta_ciudadana_new',
+                'IsNew'       => true,
                 'denuncia_id' => $denuncia_id,
-                'ciudadanos' => $Ciudadanos,
-                'user' => $user,
+                'user'        => $user,
             ]
         );
+
+
     }
 
     protected function showModalRespuestaCiudadanaEdit($Id){
         $user = Auth::user();
         $resp = Respuesta::find($Id);
-        $Ciudadanos   = User::all()->sortBy(function ($q){
-            return trim($q->ap_paterno).' '.trim($q->ap_materno).' '.trim($q->nombre);
-        });
-        return view ('denuncia.respuesta_ciudadana.respuesta_ciudadana_edit_modal',
+
+        return view ('SIAC.denuncia.respuesta_ciudadana.respuesta_ciudadana_edit_modal',
             [
-                'saveRespuestaDen'=>'saveRespuestaDen',
-                'denuncia_id' => $resp->denuncia->id,
-                'ciudadanos' => $Ciudadanos,
-                'id' => $Id,
-                'user' => $user,
-                'item' => $resp,
+                'Route'           => 'saveRespuestaDen',
+                'Method'          => 'PUT',
+                'items_forms'     => 'SIAC.denuncia.respuesta_ciudadana.__respuesta_ciudadana.__respuesta_ciudadana_edit',
+                'IsNew'           => false,
+                'id'              => $Id,
+                'denuncia_id'     => $resp->denuncia->id,
+                'user'            => $user,
+                'item'            => $resp,
             ]
         );
+
+
+
     }
 
     protected function saveRespuestaDen(RespuestaRequest $request){
