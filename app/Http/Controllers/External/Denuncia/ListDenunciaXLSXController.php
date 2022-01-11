@@ -142,7 +142,7 @@ class ListDenunciaXLSXController extends Controller
                 $servicio_id      = $item->servicio_id;
                 $estatu_id        = $item->estatu_id;
                 $fecha_movimiento = $item->fecha_movimiento;
-                $respuesta        = $item->respuesta;
+                $respuesta        = $item->observaciones;
 
                 $Denuncia    = Denuncia::find($denuncia_id);
                 $Dependencia = Dependencia::find($dependencia_id);
