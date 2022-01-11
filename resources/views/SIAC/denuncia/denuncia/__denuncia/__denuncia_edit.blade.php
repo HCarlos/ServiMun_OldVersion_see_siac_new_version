@@ -91,16 +91,6 @@
                     <textarea name="referencia" id="referencia" class="form-control">{{ old('referencia',$items->referencia) }}</textarea>
                 </div>
             </div>
-{{--            <div class="form-group row mb-1">--}}
-{{--                <label for = "latitud" class="col-lg-2 col-form-label">Lat.</label>--}}
-{{--                <div class="col-lg-4">--}}
-{{--                    <input type="text" name="latitud" id="latitud" value="{{ old('latitud') }}" class="form-control" />--}}
-{{--                </div>--}}
-{{--                <label for = "longitud" class="col-lg-2 col-form-label">Long.</label>--}}
-{{--                <div class="col-lg-4">--}}
-{{--                    <input type="text" name="longitud" id="longitud" value="{{ old('longitud') }}" class="form-control" />--}}
-{{--                </div>--}}
-{{--            </div>--}}
 
             <div class="form-group row mb-1">
                 <label for = "prioridad_id" class="col-lg-3 col-form-label labelDenuncia">Prioridad</label>
@@ -145,17 +135,6 @@
                 </div>
             </div>
 
-{{--            <div class="form-group row mb-1">--}}
-{{--                <label for = "ciudadano_id" class="col-lg-3 col-form-label">Ciudadano</label>--}}
-{{--                <div class="col-lg-9">--}}
-{{--                    <select id="ciudadano_id" name="ciudadano_id" class="form-control select2" data-toggle="select2" size="1">--}}
-{{--                        @foreach($ciudadanos as $t)--}}
-{{--                            <option value="{{$t->id}}" >{{$t->fullname}}</option>--}}
-{{--                        @endforeach--}}
-{{--                    </select>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-
             <div class="form-group row mb-1">
                 <label for = "estatus_id" class="col-lg-3 col-form-label labelDenuncia">Estatus</label>
                 <div class="col-lg-9">
@@ -166,12 +145,7 @@
                     </select>
                 </div>
             </div>
-{{--            <div class="form-row mb-1">--}}
-{{--                <label for = "domicilio_ciudadano_internet" class="col-lg-3 col-form-label">Domicilio Internet </label>--}}
-{{--                <div class="col-lg-9">--}}
-{{--                    <textarea name="domicilio_ciudadano_internet" id="domicilio_ciudadano_internet" class="form-control">{{ old('domicilio_ciudadano_internet') }}</textarea>--}}
-{{--                </div>--}}
-{{--            </div>--}}
+
             <div class="form-row mb-1">
                 <label for = "observaciones" class="col-lg-3 col-form-label">Observaciones </label>
                 <div class="col-lg-9">
@@ -230,9 +204,6 @@
                     </div> <!-- end table-responsive-->
 
                 </div>
-
-
-
 
 
                 </div>

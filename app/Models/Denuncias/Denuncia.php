@@ -85,14 +85,6 @@ class Denuncia extends Model
         return $this->hasOne(Dependencia::class,'id','dependencia_id');
     }
 
-//    public function dependencia(){
-//        return $this->belongsToMany(Dependencia::class,'denuncia_dependencia','denuncia_id','dependencia_id');
-//    }
-
-//    public function denuncia_dependencias(){
-//        return $this->belongsToMany(Dependencia::class,'denuncia_dependencia_servicio_estatus','denuncia_id','dependencia_id');
-//    }
-
     public function dependencias(){
         return $this->belongsToMany(Dependencia::class,'denuncia_dependencia_servicio_estatus','denuncia_id','dependencia_id')
             ->withPivot('fecha_movimiento');
@@ -159,6 +151,10 @@ class Denuncia extends Model
         return $this->belongsToMany(Imagene::class,'denuncia_imagene','denuncia_id','imagene_id');
     }
 
+    public function getTotalRespuestasAttribute(){
+        $r = $this->denuncia_estatus()->count();
+        return $r == 1 ? '' : $r-1;
+    }
 
 
 }

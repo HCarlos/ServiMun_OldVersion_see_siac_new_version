@@ -376,6 +376,7 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp|USER_OPERATOR_SIAC|
     Route::get('showModalSearchDenuncia/', 'Denuncia\DenunciaController@showModalSearchDenuncia')->name('showModalSearchDenuncia');
     Route::put('findDataInDenuncia/', 'Denuncia\DenunciaController@findDataInDenuncia')->name('findDataInDenuncia');
     Route::post('showDataListDenunciaExcel1A/', 'External\Denuncia\ListDenunciaXLSXController@getListDenunciaXLSX')->name('showDataListDenunciaExcel1A');
+    Route::post('showDataListDenunciaRespuestaExcel1A/', 'External\Denuncia\ListDenunciaXLSXController@showDataListDenunciaRespuestaExcel1A')->name('showDataListDenunciaRespuestaExcel1A');
     Route::get('/imprimir_denuncia/{Id}', 'External\Denuncia\HojaDenunciaController@imprimirDenuncia')->name('imprimirDenuncia/');
 
 

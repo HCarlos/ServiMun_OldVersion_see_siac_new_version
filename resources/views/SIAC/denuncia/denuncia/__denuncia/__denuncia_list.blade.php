@@ -1,39 +1,46 @@
-<table  id="tblCat" class="table table-bordered table-striped dt-responsive dataTable " role="grid" aria-describedby="datatable-buttons_info"  width="100%">
-    <thead>
-    <tr role="row">
-        <th class="sorting_asc" aria-sort="ascending" aria-label="Name: activate to sort column descending">ID</th>
-        <th class="sorting" >Ciudadano</th>
-        <th class="sorting">Fecha</th>
-        <th class="sorting">Dependencia</th>
-        <th class="sorting">Estatus</th>
-        <th class="sorting">USERNAME</th>
-        <th class="sorting ">Ubicación</th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
+<div class="row" style="width: 100% !important;">
+    <div class="col-lg-12">
 
-    @foreach($items as $item)
-        <tr>
-            <td class="table-user">{{$item->id}}</td>
-            <td>{{$item->ciudadano->FullName}}</td>
-            <td>{{($item->fecha_ingreso)}}</td>
-            <td><a title="{{($item->dependencia->dependencia)}}">{{($item->dependencia->abreviatura)}}</a></td>
-            <td>{{($item->Estatu->estatus)}}</td>
-            <td>{{($item->creadopor->username)}}</td>
-            <td class="w-75">{{$item->fullUbication}}</td>
-            <td class="table-action w-25">
-                <div class="button-list">
-                    @include('shared.ui_kit.__edit_item')
-                    @include('shared.ui_kit.__remove_item')
-{{--                    @include('shared.ui_kit.__respuestas_list_item')--}}
-                    @include('shared.ui_kit.__imagenes_list_item')
-                    @include('shared.ui_kit.__print_denuncia_item')
-                    @include('shared.ui_kit.__edit_denuncia_dependencia_servicio_item')
-                </div>
-            </td>
-        </tr>
-    @endforeach
+        <table  id="tblCat" class="table table-bordered table-striped dt-responsive dataTable " role="grid" aria-describedby="datatable-buttons_info"  width="100%">
+            <thead>
+            <tr role="row">
+                <th class="sorting_asc" aria-sort="ascending" aria-label="Name: activate to sort column descending">ID</th>
+                <th class="sorting" >Ciudadano</th>
+                <th class="sorting">Fecha</th>
+                <th class="sorting">Área</th>
+                <th class="sorting">Resp.</th>
+                <th class="sorting">Estatus</th>
+                <th class="sorting">Creado por</th>
+                <th class="sorting ">Ubicación</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
 
-    </tbody>
-</table>
+            @foreach($items as $item)
+                <tr>
+                    <td class="table-user">{{$item->id}}</td>
+                    <td>{{$item->ciudadano->FullName}}</td>
+                    <td>{{($item->fecha_ingreso)}}</td>
+                    <td><a title="{{($item->dependencia->dependencia)}}">{{($item->dependencia->abreviatura)}}</a></td>
+                    <td>{{($item->TotalRespuestas)}}</td>
+                    <td>{{($item->Estatu->estatus)}}</td>
+                    <td>{{($item->creadopor->username)}}</td>
+                    <td class="w-75">{{$item->fullUbication}}</td>
+                    <td class="table-action w-25">
+                        <div class="button-list">
+                            @include('shared.ui_kit.__edit_item')
+                            @include('shared.ui_kit.__remove_item')
+        {{--                    @include('shared.ui_kit.__respuestas_list_item')--}}
+                            @include('shared.ui_kit.__imagenes_list_item')
+                            @include('shared.ui_kit.__print_denuncia_item')
+                            @include('shared.ui_kit.__edit_denuncia_dependencia_servicio_item')
+                        </div>
+                    </td>
+                </tr>
+            @endforeach
+
+            </tbody>
+        </table>
+    </div>
+</div>

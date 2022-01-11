@@ -9,6 +9,7 @@ use App\Models\Catalogos\Servicio;
 use App\Models\Denuncias\Denuncia;
 use App\Http\Controllers\Controller;
 use App\Models\Denuncias\Denuncia_Dependencia_Servicio;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
@@ -25,12 +26,19 @@ class DenunciaDependenciaServicioController extends Controller
     protected $msg = "";
 
 // ***************** MUESTRA EL LISTADO DE USUARIOS ++++++++++++++++++++ //
-    protected function index($Id)
+    protected function index(Request $request, $Id)
     {
         ini_set('max_execution_time', 300);
 
         $items = Denuncia_Dependencia_Servicio::query()->where('denuncia_id',$Id)->orderBy('id')->paginate();
         $items->appends('id')->fragment('table');
+
+        $Denuncia = Denuncia::find($Id);
+
+        $request->session()->put('items', $items);
+
+        session(['msg' => '']);
+
 
         $user = Auth::User();
         $this->Id = $Id;
@@ -39,6 +47,7 @@ class DenunciaDependenciaServicioController extends Controller
             [
                 'items'                               => $items,
                 'Id'                                  => $this->Id,
+                'Denuncia'                            => $Denuncia,
                 'titulo_catalogo'                     => "Cronología de cambios de estatus de la orden: " . $this->Id,
                 'titulo_header'                       => '',
                 'user'                                => $user,
@@ -46,7 +55,7 @@ class DenunciaDependenciaServicioController extends Controller
                 'newItem'                             => 'addDenunciaDependenciaServicio',
                 'tableName'                           => $this->tableName,
                 'showEdit'                            => 'editDenunciaDependenciaServicio',
-                'showProcess1'                        => 'showDataListDenunciaExcel1A',
+                'showProcess1'                        => 'showDataListDenunciaRespuestaExcel1A',
                 'postNew'                             => 'postAddDenunciaDependenciaServicio',
 //                'putEdit' => 'updateDenuncia',
                 'addItem'                             => 'addDenunciaDependenciaServicio',

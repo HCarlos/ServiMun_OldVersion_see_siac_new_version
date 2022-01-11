@@ -42,8 +42,8 @@ class RespuestaRequest extends FormRequest
             $horaActual = Carbon::now()->format('hh:mm:ss');
             $Item = [
                 'fecha'         => $fechaActual, //.' '.$horaActual,
-                'respuesta'     => $this->respuesta,
-                'observaciones' => $this->observaciones,
+                'respuesta'     => strtoupper(trim($this->respuesta)),
+                'observaciones' => strtoupper(trim($this->observaciones)),
                 'user__id'      => $this->user__id,
                 'denuncia__id'  => $this->denuncia__id,
             ];

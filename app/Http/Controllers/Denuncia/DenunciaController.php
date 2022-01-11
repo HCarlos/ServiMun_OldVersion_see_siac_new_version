@@ -31,6 +31,7 @@ class DenunciaController extends Controller
 
     protected $tableName = "denuncias";
     protected $msg = "";
+    protected $max_item_for_query = 250;
 
 
 
@@ -46,30 +47,15 @@ class DenunciaController extends Controller
     protected function index(Request $request)
     {
         ini_set('max_execution_time', 300);
-//        $filters = [
-//                    'ciudadano_id'=>Auth::user()->id,
-//                     $request->only(['search'])
-//                    ];
+
         $search = $request->only(['search']);
-        /*
-        $IsEnlace =Auth::user()->isRole('ENLACE');
-        $DependenciaArray = '';
-         IF ($IsEnlace){
-             $DependenciaArray = Auth::user()->DependenciaArray;
-             //dd( $DependenciaArray );
-             $filters['dependencia'] = $DependenciaArray;
-         }elseif (Auth::user()->isRole('CIUDADANO|DELEGADO')){
-            $filters['ciudadano_id'] = Auth::user()->id;
-         }else{
-             $filters = $request->only(['search']);
-        }
-*/
-         $filters['filterdata'] = $request->only(['search']);;
+
+        $filters['filterdata'] = $request->only(['search']);;
          //dd( $filter );
         $items = Denuncia::query()
             ->getDenunciasItemCustomFilter($filters)
             ->orderByDesc('id')
-            ->paginate();
+            ->paginate($this->max_item_for_query);
         $items->appends($filters)->fragment('table');
 
         //dd($items);
@@ -77,7 +63,6 @@ class DenunciaController extends Controller
         $request->session()->put('items', $items);
 
         session(['msg' => '']);
-
 
         $user = Auth::User();
 
@@ -392,7 +377,7 @@ class DenunciaController extends Controller
         $items = Denuncia::query()
             ->filterBy($filters->filterRulesDenuncia($request))
             ->orderByDesc('id')
-            ->paginate();
+            ->paginate($this->max_item_for_query);
         $items->fragment('table');
         $user = Auth::User();
 
