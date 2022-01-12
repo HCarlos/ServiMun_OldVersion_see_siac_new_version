@@ -17,6 +17,13 @@
         <!--- Sidemenu -->
         <ul class="metismenu side-nav">
             <li class="side-nav-item">
+                <a href="{{ url('dashboard') }}" class="side-nav-link">
+                    <i class="mdi dripicons-meter"></i>
+                    <span class="badge badge-light float-right"></span>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="side-nav-item">
                 <a href="{{route('listDenuncias')}}" class="side-nav-link">
                     <i class="mdi dripicons-archive"></i>
                     @php $filters['filterdata']=""; @endphp

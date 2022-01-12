@@ -12,6 +12,7 @@
 */
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +40,28 @@ Route::post('registered/{email}/{username}', 'Auth\RegisterController@registered
 
 
 Route::group(['middleware' => 'auth'], function () {
+
+    Route::get('dashboard', function () {
+
+        $dep = DB::table('denuncias as den')
+            ->leftJoin('dependencias as dep', 'den.dependencia_id','=', 'dep.id')
+            ->select(DB::raw('COUNT(den.dependencia_id) as total'), 'dep.abreviatura','dep.dependencia','dep.class_css')
+            ->groupByRaw('den.dependencia_id, dep.abreviatura, dep.dependencia, dep.class_css')
+            ->orderBy('total')
+            ->get();
+
+//        $dependencias = DB::raw('SELECT COUNT(den.dependencia_id), dep.dependencia
+//FROM denuncias as den
+//LEFT JOIN dependencias as dep
+//ON den.dependencia_id = dep.id
+//GROUP BY den.dependencia_id, dep.dependencia;');
+
+//        dd($dep);
+
+        $cls = ['text-primary','text-secondary','text-success','text-danger','text-warning','text-info','text-light','text-dark'];
+        return view('partials.dashboard', ['totales' => $dep, 'arrCls' => $cls]);
+    });
+
     // USUARIOS
     Route::get('edit', 'Catalogos\User\UserDataController@showEditUserData')->name('edit');
     Route::put('Edit', 'Catalogos\User\UserDataController@update')->name('Edit');

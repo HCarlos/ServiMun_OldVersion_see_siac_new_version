@@ -134,7 +134,6 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
             'PhpParser\\' => 10,
             'PhpOption\\' => 10,
             'PhpOffice\\PhpSpreadsheet\\' => 25,
-            'PackageVersions\\' => 16,
         ),
         'O' => 
         array (
@@ -480,10 +479,6 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         'PhpOffice\\PhpSpreadsheet\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpoffice/phpspreadsheet/src/PhpSpreadsheet',
-        ),
-        'PackageVersions\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/composer/package-versions-deprecated/src/PackageVersions',
         ),
         'Opsway\\' => 
         array (
@@ -932,6 +927,7 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         'App\\View\\Components\\Home' => __DIR__ . '/../..' . '/app/View/Components/Home.php',
         'App\\View\\Components\\Tools\\ButtonsFormDenuncia' => __DIR__ . '/../..' . '/app/View/Components/Tools/ButtonsFormDenuncia.php',
         'App\\View\\Components\\Tools\\FormFullModalSearch' => __DIR__ . '/../..' . '/app/View/Components/Tools/FormFullModalSearch.php',
+        'App\\View\\Components\\dashboard' => __DIR__ . '/../..' . '/app/View/Components/dashboard.php',
         'Asm89\\Stack\\Cors' => __DIR__ . '/..' . '/asm89/stack-cors/src/Cors.php',
         'Asm89\\Stack\\CorsService' => __DIR__ . '/..' . '/asm89/stack-cors/src/CorsService.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
@@ -1728,6 +1724,8 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         'Doctrine\\ORM\\Mapping\\PreUpdate' => __DIR__ . '/..' . '/doctrine/orm/lib/Doctrine/ORM/Mapping/PreUpdate.php',
         'Doctrine\\ORM\\Mapping\\QuoteStrategy' => __DIR__ . '/..' . '/doctrine/orm/lib/Doctrine/ORM/Mapping/QuoteStrategy.php',
         'Doctrine\\ORM\\Mapping\\ReflectionEmbeddedProperty' => __DIR__ . '/..' . '/doctrine/orm/lib/Doctrine/ORM/Mapping/ReflectionEmbeddedProperty.php',
+        'Doctrine\\ORM\\Mapping\\ReflectionEnumProperty' => __DIR__ . '/..' . '/doctrine/orm/lib/Doctrine/ORM/Mapping/ReflectionEnumProperty.php',
+        'Doctrine\\ORM\\Mapping\\ReflectionReadonlyProperty' => __DIR__ . '/..' . '/doctrine/orm/lib/Doctrine/ORM/Mapping/ReflectionReadonlyProperty.php',
         'Doctrine\\ORM\\Mapping\\Reflection\\ReflectionPropertiesGetter' => __DIR__ . '/..' . '/doctrine/orm/lib/Doctrine/ORM/Mapping/Reflection/ReflectionPropertiesGetter.php',
         'Doctrine\\ORM\\Mapping\\SequenceGenerator' => __DIR__ . '/..' . '/doctrine/orm/lib/Doctrine/ORM/Mapping/SequenceGenerator.php',
         'Doctrine\\ORM\\Mapping\\SqlResultSetMapping' => __DIR__ . '/..' . '/doctrine/orm/lib/Doctrine/ORM/Mapping/SqlResultSetMapping.php',
@@ -5038,9 +5036,6 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         'PHPUnit\\Util\\Xml\\SuccessfulSchemaDetectionResult' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Xml/SuccessfulSchemaDetectionResult.php',
         'PHPUnit\\Util\\Xml\\ValidationResult' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Xml/ValidationResult.php',
         'PHPUnit\\Util\\Xml\\Validator' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Xml/Validator.php',
-        'PackageVersions\\FallbackVersions' => __DIR__ . '/..' . '/composer/package-versions-deprecated/src/PackageVersions/FallbackVersions.php',
-        'PackageVersions\\Installer' => __DIR__ . '/..' . '/composer/package-versions-deprecated/src/PackageVersions/Installer.php',
-        'PackageVersions\\Versions' => __DIR__ . '/..' . '/composer/package-versions-deprecated/src/PackageVersions/Versions.php',
         'PharIo\\Manifest\\Application' => __DIR__ . '/..' . '/phar-io/manifest/src/values/Application.php',
         'PharIo\\Manifest\\ApplicationName' => __DIR__ . '/..' . '/phar-io/manifest/src/values/ApplicationName.php',
         'PharIo\\Manifest\\Author' => __DIR__ . '/..' . '/phar-io/manifest/src/values/Author.php',
@@ -6279,7 +6274,6 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         'Psy\\CodeCleaner\\StrictTypesPass' => __DIR__ . '/..' . '/psy/psysh/src/CodeCleaner/StrictTypesPass.php',
         'Psy\\CodeCleaner\\UseStatementPass' => __DIR__ . '/..' . '/psy/psysh/src/CodeCleaner/UseStatementPass.php',
         'Psy\\CodeCleaner\\ValidClassNamePass' => __DIR__ . '/..' . '/psy/psysh/src/CodeCleaner/ValidClassNamePass.php',
-        'Psy\\CodeCleaner\\ValidConstantPass' => __DIR__ . '/..' . '/psy/psysh/src/CodeCleaner/ValidConstantPass.php',
         'Psy\\CodeCleaner\\ValidConstructorPass' => __DIR__ . '/..' . '/psy/psysh/src/CodeCleaner/ValidConstructorPass.php',
         'Psy\\CodeCleaner\\ValidFunctionNamePass' => __DIR__ . '/..' . '/psy/psysh/src/CodeCleaner/ValidFunctionNamePass.php',
         'Psy\\Command\\BufferCommand' => __DIR__ . '/..' . '/psy/psysh/src/Command/BufferCommand.php',
