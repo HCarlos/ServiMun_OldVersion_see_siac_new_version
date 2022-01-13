@@ -47,7 +47,7 @@ Route::group(['middleware' => 'auth'], function () {
             ->leftJoin('dependencias as dep', 'den.dependencia_id','=', 'dep.id')
             ->select(DB::raw('COUNT(den.dependencia_id) as total'), 'dep.abreviatura','dep.dependencia','dep.class_css')
             ->groupByRaw('den.dependencia_id, dep.abreviatura, dep.dependencia, dep.class_css')
-            ->orderBy('total')
+            ->orderByDesc('total')
             ->get();
 
 //        $dependencias = DB::raw('SELECT COUNT(den.dependencia_id), dep.dependencia
