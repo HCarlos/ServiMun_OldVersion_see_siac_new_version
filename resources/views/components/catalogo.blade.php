@@ -1,14 +1,16 @@
 <div class="row">
-    <div class="col-12">
+    <div class="col-lg-12">
         <div class="page-title-box">
             {{$buttons}}
         </div>
     </div>
 </div>
 
+<div class="col-lg-12 mt-2">
+    <div class="row">
+        {{$body_catalogo}}
+    </div>
 <div class="row">
-    {{$body_catalogo}}
-</div>
 
 @section('scripts')
 <script src="{{ asset('js/jquery.dataTables.js') }}"></script>
@@ -22,4 +24,5 @@
 {{--<script src="{{ asset('js/buttons.print.min.js') }}"></script>--}}
 {{--<script src="{{ asset('js/dataTables.keyTable.min.js') }}"></script>--}}
 <script src="{{ asset('js/dataTables.select.min.js') }}"></script>
+<script src="{{ asset('js/datatables.js') }}"></script>
 @endsection

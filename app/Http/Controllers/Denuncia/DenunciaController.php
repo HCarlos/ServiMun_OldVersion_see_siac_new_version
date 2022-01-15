@@ -32,7 +32,7 @@ class DenunciaController extends Controller
 
     protected $tableName = "denuncias";
     protected $msg = "";
-    protected $max_item_for_query = 250;
+    protected $max_item_for_query = 150;
 
 
 
@@ -59,7 +59,7 @@ class DenunciaController extends Controller
             ->paginate($this->max_item_for_query);
         $items->appends($filters)->fragment('table');
 
-        //dd($items);
+        // dd($items);
 
         $request->session()->put('items', $items);
 

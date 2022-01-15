@@ -73,12 +73,17 @@
 
     @include('shared.search.__search_word_in_list')
 
-    @if (Auth::user()->isRole('Administrator|SysOp|ENLACE') )
+    @if (Auth::user()->isRole('Administrator|SysOp|ENLACE|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN') )
+
         @include('shared.search.__search_denuncia_adress_list')
+
     @elseif (Auth::user()->isRole('CIUDADANO|CIUDADANO_INTERNET|DELEGADO') )
+
         @include('shared.search.__title_denuncia_ciudadana_sin_busqueda')
+
     @endif
-    @include('shared.search.__search_alumno_baca_list')
+
+{{--    @include('shared.search.__search_alumno_baca_list')--}}
     @include('shared.search.__search_empty_tool_list')
 </div>
 

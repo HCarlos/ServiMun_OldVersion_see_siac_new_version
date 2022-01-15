@@ -1,8 +1,9 @@
 
-<div class="row mt-4">
-    {{$contenido}}
+<div class="col-lg-12">
+    <div class="row mt-4">
+        {{$contenido}}
+    </div>
 </div>
-
 @include('shared.code.__submit_form')
 
 @section("script_autocomplete")

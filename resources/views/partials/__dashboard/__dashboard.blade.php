@@ -9,7 +9,7 @@
                     <div class="chart-widget-list">
                         @foreach($totales as $d)
                         <p>
-                            <i class="mdi mdi-square {{ $arrCls[rand(0,7)] }}"></i> {{ $d->dependencia}}
+                            <i class="mdi mdi-square-outline " style="background: {{ strtoupper(trim($d->class_css)) }} !important;"></i> {{ $d->dependencia}}
                             <span class="float-right">{{ $d->total }}</span>
                         </p>
                         @endforeach

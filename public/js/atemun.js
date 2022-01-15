@@ -11,22 +11,33 @@
         var aCol = [];
         aCol[nCols - 1] = {"sorting": false};
         if (aCol.length > 0 ){
+            // alert(aCol);
             $(".dataTable").DataTable({
-                searching: false,
-                paging: false,
+                searching: true,
+                paging: true,
                 info: true,
-                responsive: {
-                    details: true
-                },
-                "pageLength": 50,
+                "pageLength": 25,
                 "order": [[ 0, "desc" ]],
                 "language": {
-                    "info": "Mostrando página _PAGE_ de _PAGES_"
+                    "lengthMenu":  "Mostrando _MENU_ entradas",
+                    "sInfo":       "del _START_ al _END_ de un total de _TOTAL_ entradas",
+                    "sInfoFiltered":  "(filtrado de un total de _MAX_ registros)",
+                    "sInfoEmpty":  "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "zeroRecords": "Busqueda sin resultados",
+                    "sSearch":     "Buscar:",
+                    "oPaginate": {
+                        "sFirst":    "Primero",
+                        "sLast":     "Último",
+                        "sNext":     "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "info":        "Mostrando página _PAGE_ de _PAGES_"
                 },
                 "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
                 "aoColumns": aCol
             });
         }
+
     }
 
     if ( $(".removeItemList").length > 0  ){
