@@ -11,7 +11,6 @@
         var aCol = [];
         aCol[nCols - 1] = {"sorting": false};
         if (aCol.length > 0 ){
-            // alert(aCol);
             $(".dataTable").DataTable({
                 searching: true,
                 paging: true,

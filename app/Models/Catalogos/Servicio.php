@@ -80,8 +80,6 @@ class Servicio extends Model
             $depe = trim($item->subarea->area->dependencia->abreviatura) == "GENERAL" ? "" : trim($item->subarea->area->dependencia->abreviatura);
             $data[]=array('id'=>$item->id,'servicio'=>$item->servicio.' - '.$suba.$area.$depe);
         }
-        //dd( $data );
-        //return $data;
 
         return json_decode( json_encode($data));
 

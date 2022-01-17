@@ -257,8 +257,18 @@ class DenunciaController extends Controller
     }
 
     protected function showModalSearchDenuncia(){
-        $Dependencias = Dependencia::all()->sortBy('dependencia')->pluck('dependencia','id');
-        $Servicios    = Servicio::all()->sortBy('servicio')->pluck('servicio','id');
+        if (Auth::user()->isRole('ENLACE')){
+            $dep_id = intval(Auth::user()->IsEnlaceDependencia);
+            $Dependencias = Dependencia::all()->where('id',$dep_id)->sortBy('dependencia')->pluck('dependencia','id');
+            $Servicios = Servicio::whereHas('subareas', function($p) use ($dep_id) {
+                $p->whereHas("areas", function($q) use ($dep_id){
+                    return $q->where("dependencia_id",$dep_id);
+                });
+            })->orderBy('servicio')->get()->pluck('servicio','id');
+        }else{
+            $Dependencias = Dependencia::all()->sortBy('dependencia')->pluck('dependencia','id');
+            $Servicios    = Servicio::all()->where('')->sortBy('servicio')->pluck('servicio','id');
+        }
         $Estatus      = Estatu::all()->sortBy('estatus');
 
         $Capturistas  = User::query()->whereHas('roles', function ($q) {

@@ -24,7 +24,7 @@
                     <td>{{($item->fecha_ingreso)}}</td>
                     <td><a title="{{($item->dependencia->dependencia)}}">{{($item->dependencia->abreviatura)}}</a></td>
                     <td>{{($item->TotalRespuestas)}}</td>
-                    <td>{{($item->Estatu->estatus)}}</td>
+                    <td>{{($item->denuncia_estatus->first()->estatus)}}</td>
                     <td>{{($item->creadopor->username)}}</td>
                     <td class="w-75">{{$item->fullUbication}}</td>
                     <td class="table-action w-25">

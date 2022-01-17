@@ -81,6 +81,7 @@ class DenunciaFilter extends QueryFilter
         if (is_null($search) || empty ($search) || trim($search) == "") {return $query;}
         $search = strtoupper($search);
         return $query->orWhereHas('ciudadanos', function ($q) use ($search) {
+            dd($q->whereRaw("CONCAT(ap_paterno,' ',ap_materno,' ',nombre) like ?", "%{$search}%"));
             return $q->whereRaw("CONCAT(ap_paterno,' ',ap_materno,' ',nombre) like ?", "%{$search}%");
         });
     }
@@ -108,24 +109,33 @@ class DenunciaFilter extends QueryFilter
         if (is_null($search) || empty ($search) || trim($search) == "0") {return $query;}
 
         return $query->whereHas('dependencias', function ($q) use ($query, $search) {
-            if ($this->IsEnlace()){
-                return $q->whereIn('dependencia_id',$this->getDependenciaId());
-            }else{
-                return $q->where('dependencia_id', $search);
-            }
+                return $q->where('dependencia_id', intval($search));
         });
 
     }
 
     public function servicio_id($query, $search){
         if (is_null($search) || empty ($search) || trim($search) == "0") {return $query;}
-        return $query->where('servicio_id', $search);
+//        return $query->where('servicio_id', $search);
+        return $query->whereHas('denuncia_servicios', function ($q) use ($query, $search) {
+            return $q->where('servicio_id', intval($search));
+        });
+
     }
 
     public function estatus_id($query, $search){
         if (is_null($search) || empty ($search) || trim($search) == "0") {return $query;}
-//        $search = strtoupper($search);
-        return $query->where('estatus_id', $search);
+
+//        return $query->where('estatus_id', intval($search));
+
+//        return $query->whereHas('estatus', function ($q) use ($query, $search) {
+//            return $q->where('estatus_id', intval($search));
+//        });
+
+        return $query->whereHas('denuncia_estatus', function ($q) use ($query, $search) {
+            return $q->where('estatu_id', intval($search));
+        });
+
     }
 
     public function ciudadano_id($query, $search){
@@ -142,7 +152,6 @@ class DenunciaFilter extends QueryFilter
         if (is_null($search) || empty ($search) || trim($search) == "0") {return $query;}
         $search = explode('|',$search);
         return $query->orWhereHas('dependencia', function ($q) use ($search) {
-            dd($search);
             return $q->whereIn('dependencia',$search);
         });
 
@@ -154,11 +163,6 @@ class DenunciaFilter extends QueryFilter
 
     function getDependencia(){
             return $DependenciaArray = explode('|',Session::get('DependenciaArray'));
-    }
-
-    function getDependenciaId(){
-        $depId = Auth::user()->DependenciaIdArray;
-        return $DependenciaIdArray = explode('|',$depId);
     }
 
 
