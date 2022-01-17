@@ -147,5 +147,18 @@ trait UserAttributes
     }
 
 
+    public function getIsEnlaceDependenciaAttribute(){
+        $IsEnlace =$this->isRole('ENLACE');
+        $attributes['dependencia_id'] = ["0"];
+        $DependenciaArray = '';
+        IF ($IsEnlace) {
+            $DependenciaIdArray = $this->DependenciaIdArray;
+            $attributes['dependencia_id'] = $DependenciaIdArray;
+        }
+//        dd($attributes['dependencia_id']);
+        return $attributes['dependencia_id'];
+
+    }
+
 
 }

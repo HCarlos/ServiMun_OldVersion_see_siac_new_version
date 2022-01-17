@@ -2,11 +2,11 @@
                 <thead>
                     <tr role="row">
                         <th class="sorting_asc" aria-sort="ascending" aria-label="Name: activate to sort column descending">ID</th>
-                        <th class="sorting" >Username</th>
+                        <th class="sorting">Username</th>
                         <th class="sorting">Nombre Completo</th>
                         <th class="sorting">CURP</th>
-                        <th class="sorting ">Roles</th>
-                        <th class="sorting ">Uicaciones</th>
+                        <th class="sorting">Roles</th>
+                        <th class="sorting">Ubicaciones</th>
                         <th></th>
                     </tr>
                 </thead>

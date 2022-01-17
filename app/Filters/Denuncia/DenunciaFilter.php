@@ -64,7 +64,7 @@ class DenunciaFilter extends QueryFilter
                 ->orWhereRaw("UPPER(ciudad) like ?", "%{$search}%")
                 ->orWhereRaw("UPPER(municipio) like ?", "%{$search}%")
                 ->orWhereRaw("UPPER(estado) like ?", "%{$search}%")
-                ->orWhere('id', 'like', "%{$search}%");
+                ->orWhere('id', $search);
         });
 
     }

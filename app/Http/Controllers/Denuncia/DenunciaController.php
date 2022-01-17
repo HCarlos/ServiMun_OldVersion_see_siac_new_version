@@ -269,7 +269,7 @@ class DenunciaController extends Controller
             ->pluck('full_name_with_username_dependencia','id');
 
         $user = Auth::user();
-        return view ('denuncia.search.denuncia_search_panel',
+        return view ('SIAC.denuncia.search.denuncia_search_panel',
             [
                 'findDataInDenuncia' => 'findDataInDenuncia',
                 'dependencias'       => $Dependencias,
@@ -300,7 +300,7 @@ class DenunciaController extends Controller
 
         $request->session()->put('items', $items);
 
-        return view('denuncia.denuncia.denuncia_list',
+        return view('SIAC.denuncia.denuncia.denuncia_list',
             [
                 'items'                               => $items,
                 'titulo_catalogo'                     => "Catálogo de " . ucwords($this->tableName),

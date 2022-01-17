@@ -20,11 +20,17 @@
 </div>
 
 <div class="form-row mb-1">
-        <label for="desde" class="col-md-2 col-form-label">Desde</label>
+        <label for="desde" class="col-md-1 col-form-label">Desde</label>
+        <div class="col-md-2 ">
+            <div class="custom-control custom-checkbox mt-1 float-right">
+                <input type="checkbox" class="custom-control-input" id="incluirFecha" name="incluirFecha">
+                <label class="custom-control-label" for="incluirFecha">Incluir</label>
+            </div>
+        </div>
         <div class="col-md-4">
             {{ Form::date('desde', \Carbon\Carbon::now(), ['id'=>'desde','class'=>'form-control']) }}
         </div>
-        <label for="hasta" class="col-md-2 col-form-label">Hasta</label>
+        <label for="hasta" class="col-md-1 col-form-label">Hasta</label>
         <div class="col-md-4">
             {{ Form::date('hasta', \Carbon\Carbon::now(), ['id'=>'hasta','class'=>'form-control']) }}
         </div>
