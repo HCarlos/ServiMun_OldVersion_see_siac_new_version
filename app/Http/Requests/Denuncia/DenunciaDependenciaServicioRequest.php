@@ -36,6 +36,8 @@ class DenunciaDependenciaServicioRequest extends FormRequest
         try {
 
             if ( $this->id <= 0 ){
+
+               //dd( $this->denuncia_id );
                 $item = Denuncia::find($this->denuncia_id);
                 $this->attaches($item);
             }else{
@@ -58,6 +60,7 @@ class DenunciaDependenciaServicioRequest extends FormRequest
     }
 
     public function attaches($Item){
+        //dd($Item);
         $Item->dependencias()->attach(
             $this->dependencia_id,
             [

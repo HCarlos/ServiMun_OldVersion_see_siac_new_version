@@ -36,11 +36,15 @@
                     <td>{{$item->fecha_movimiento}}</td>
                     <td class="table-action  w-25">
                         <div class="button-list">
-                            @include('shared.ui_kit.__edit_item')
-                            @include('shared.ui_kit.__remove_item')
+                            @if ( \Illuminate\Support\Facades\Auth::user()->isRole('ENLACE') == false )
+                                @include('shared.ui_kit.__edit_item')
+                                @include('shared.ui_kit.__remove_item')
+                            @endif
+
         {{--                    @include('shared.ui_kit.__respuestas_list_item')--}}
         {{--                    @include('shared.ui_kit.__imagenes_list_item')--}}
         {{--                    @include('shared.ui_kit.__print_denuncia_item')--}}
+
                         </div>
                     </td>
         </tr>

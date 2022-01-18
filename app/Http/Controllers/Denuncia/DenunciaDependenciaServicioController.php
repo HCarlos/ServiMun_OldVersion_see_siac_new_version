@@ -72,17 +72,17 @@ class DenunciaDependenciaServicioController extends Controller
         $items        = Denuncia_Dependencia_Servicio::find($Id);
         $Denuncia     = Denuncia::find($items->denuncia_id);
 
-//        $Dependencias = Dependencia::all()->sortBy('dependencia');
-        $IsEnlace = Session::get('IsEnlace');
+        $IsEnlace = Auth::user()->isRole('ENLACE');
         if($IsEnlace){
-            $DependenciaIdArray = explode('|',Session::get('DependenciaIdArray'));
-            $Dependencias = Dependencia::all()->whereIn('id',$DependenciaIdArray,false)->sortBy('dependencia');
+            $dep_id = intval(Auth::user()->IsEnlaceDependencia);
+            $Dependencias = Dependencia::all()->whereI('id',$dep_id);
+            $Servicios    = Servicio::getQueryServiciosFromDependencias($dep_id);
         }else{
             $Dependencias = Dependencia::all()->sortBy('dependencia');
+            $Servicios    = Servicio::getQueryServiciosFromDependencias($items->dependencia_id);
         }
 
         $Estatus      = Estatu::all()->sortBy('estatus');
-        $Servicios    = Servicio::getQueryServiciosFromDependencias($items->dependencia_id);
         //dd($Servicios);
         return view('SIAC.denuncia.denuncia_dependencia_servicio.denuncia_dependencia_servicio_edit',
             [
@@ -113,16 +113,46 @@ class DenunciaDependenciaServicioController extends Controller
 
 
     protected function addItem($Id){
+//        $items        = Denuncia_Dependencia_Servicio::all()->where('denuncia_id',$Id)->first();
+
+//        dd($items);
+
+//        $Denuncia     = Denuncia::find($items->denuncia_id);
+
+//        dd($Denuncia);
+
+
         $items         = Denuncia::find($Id);
 
-//        $Dependencias = Dependencia::all()->sortBy('dependencia');
-        $IsEnlace = Session::get('IsEnlace');
+//        $IsEnlace = Session::get('IsEnlace');
+//        if($IsEnlace){
+//            $DependenciaIdArray = explode('|',Session::get('DependenciaIdArray'));
+//            $Dependencias = Dependencia::all()->whereIn('id',$DependenciaIdArray,false)->sortBy('dependencia');
+//        }else{
+//            $Dependencias = Dependencia::all()->sortBy('dependencia');
+//        }
+
+        $IsEnlace = Auth::user()->isRole('ENLACE');
         if($IsEnlace){
-            $DependenciaIdArray = explode('|',Session::get('DependenciaIdArray'));
-            $Dependencias = Dependencia::all()->whereIn('id',$DependenciaIdArray,false)->sortBy('dependencia');
+            $dep_id = intval(Auth::user()->IsEnlaceDependencia);
+            $Dependencias = Dependencia::all()->whereI('id',$dep_id);
+            $Servicios = Servicio::whereHas('subareas', function($p) use ($dep_id) {
+                $p->whereHas("areas", function($q) use ($dep_id){
+                    return $q->where("dependencia_id",$dep_id);
+                });
+            })->orderBy('servicio')->get()->pluck('servicio','id');
+
         }else{
+            $dep_id = $items->dependencia_id;
             $Dependencias = Dependencia::all()->sortBy('dependencia');
+            $Servicios = Servicio::whereHas('subareas', function($p) use ($dep_id) {
+                $p->whereHas("areas", function($q) use ($dep_id){
+                    return $q->where("dependencia_id",$dep_id);
+                });
+            })->orderBy('servicio')->get();
         }
+
+        //dd(json_encode(json_decode($Servicios)));
 
         $Estatus      = Estatu::all()->sortBy('estatus');
         return view('SIAC.denuncia.denuncia_dependencia_servicio.denuncia_dependencia_servicio_new',
@@ -132,6 +162,7 @@ class DenunciaDependenciaServicioController extends Controller
                 'Id' => $Id,
                 'editItemTitle'     => 'Nuevo',
                 'dependencias'      => $Dependencias,
+                'servicios'         => $Servicios,
                 'estatus'           => $Estatus,
                 'postNew'           => 'postAddDenunciaDependenciaServicio',
                 'titulo_catalogo'   => "Nuevo cambio de estatus de la orden: " . $Id,
