@@ -1,7 +1,7 @@
 <div class="form-row mb-1">
-    <label for = "ciudadano" class="col-md-2 col-form-label">CURP</label>
+    <label for = "curp" class="col-md-2 col-form-label">CURP</label>
     <div class="col-md-10">
-        <input type="text" name="ciudadano" id="ciudadano" value="{{ old('ciudadano') }}" class="form-control" />
+        <input type="text" name="curp" id="curp" value="{{ old('curp') }}" class="form-control" />
     </div>
 </div>
 

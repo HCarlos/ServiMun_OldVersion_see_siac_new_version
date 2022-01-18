@@ -73,7 +73,8 @@ class DenunciaFilter extends QueryFilter
         if (is_null($search) || empty ($search) || trim($search) == "") {return $query;}
         $search = strtoupper($search);
         return $query->orWhereHas('ciudadanos', function ($q) use ($search) {
-            return $q->where("curp",trim($search));
+//            dd($search);
+            return $q->where("curp",strtoupper(trim($search)));
         });
     }
 
@@ -81,7 +82,7 @@ class DenunciaFilter extends QueryFilter
         if (is_null($search) || empty ($search) || trim($search) == "") {return $query;}
         $search = strtoupper($search);
         return $query->orWhereHas('ciudadanos', function ($q) use ($search) {
-            dd($q->whereRaw("CONCAT(ap_paterno,' ',ap_materno,' ',nombre) like ?", "%{$search}%"));
+//            dd($q->whereRaw("CONCAT(ap_paterno,' ',ap_materno,' ',nombre) like ?", "%{$search}%"));
             return $q->whereRaw("CONCAT(ap_paterno,' ',ap_materno,' ',nombre) like ?", "%{$search}%");
         });
     }

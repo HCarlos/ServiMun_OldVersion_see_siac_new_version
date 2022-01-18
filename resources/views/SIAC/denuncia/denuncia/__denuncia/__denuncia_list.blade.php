@@ -10,7 +10,7 @@
                 <th class="sorting">Área</th>
                 <th class="sorting">Resp.</th>
                 <th class="sorting">Estatus</th>
-                <th class="sorting">Creado por</th>
+                <th class="sorting">CURP Ciudadano</th>
                 <th class="sorting ">Ubicación</th>
                 <th></th>
             </tr>
@@ -20,12 +20,12 @@
             @foreach($items as $item)
                 <tr>
                     <td class="table-user">{{$item->id}}</td>
-                    <td>{{$item->ciudadano->FullName}}</td>
+                    <td>{{$item->ciudadano->FullName}} </td>
                     <td>{{($item->fecha_ingreso)}}</td>
                     <td><a title="{{($item->dependencia->dependencia)}}">{{($item->dependencia->abreviatura)}}</a></td>
                     <td>{{($item->TotalRespuestas)}}</td>
                     <td>{{($item->denuncia_estatus->first()->estatus)}}</td>
-                    <td>{{($item->creadopor->username)}}</td>
+                    <td>{{($item->ciudadano->curp)}}</td>
                     <td class="w-75">{{$item->fullUbication}}</td>
                     <td class="table-action w-25">
                         <div class="button-list">
