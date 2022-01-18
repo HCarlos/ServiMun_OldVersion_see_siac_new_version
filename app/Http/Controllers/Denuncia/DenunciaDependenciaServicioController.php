@@ -135,13 +135,14 @@ class DenunciaDependenciaServicioController extends Controller
         $IsEnlace = Auth::user()->isRole('ENLACE');
         if($IsEnlace){
             $dep_id = intval(Auth::user()->IsEnlaceDependencia);
-            $Dependencias = Dependencia::all()->whereI('id',$dep_id);
+            $Dependencias = Dependencia::all()->where('id',$dep_id);
             $Servicios = Servicio::whereHas('subareas', function($p) use ($dep_id) {
                 $p->whereHas("areas", function($q) use ($dep_id){
                     return $q->where("dependencia_id",$dep_id);
                 });
-            })->orderBy('servicio')->get()->pluck('servicio','id');
-
+            })->orderBy('servicio')->get();
+            $DDS = Denuncia_Dependencia_Servicio::all()->where('denuncia_id',$Id)->where('dependencia_id',$dep_id)->first();
+            $servicio_id = $DDS->servicio_id;
         }else{
             $dep_id = $items->dependencia_id;
             $Dependencias = Dependencia::all()->sortBy('dependencia');
@@ -150,7 +151,12 @@ class DenunciaDependenciaServicioController extends Controller
                     return $q->where("dependencia_id",$dep_id);
                 });
             })->orderBy('servicio')->get();
+            $servicio_id = $items->servicio_id;
         }
+
+//        dd($items);
+
+
 
         //dd(json_encode(json_decode($Servicios)));
 
@@ -158,10 +164,12 @@ class DenunciaDependenciaServicioController extends Controller
         return view('SIAC.denuncia.denuncia_dependencia_servicio.denuncia_dependencia_servicio_new',
             [
                 'user'              => Auth::user(),
-                'items' => $items,
-                'Id' => $Id,
+                'items'             => $items,
+                'Id'                => $Id,
                 'editItemTitle'     => 'Nuevo',
                 'dependencias'      => $Dependencias,
+                'dependencia_id'    => $dep_id,
+                'servicio_id'      => $servicio_id,
                 'servicios'         => $Servicios,
                 'estatus'           => $Estatus,
                 'postNew'           => 'postAddDenunciaDependenciaServicio',

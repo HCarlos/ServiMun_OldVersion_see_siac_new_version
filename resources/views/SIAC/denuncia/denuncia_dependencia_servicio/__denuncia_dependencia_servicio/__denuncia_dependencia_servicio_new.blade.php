@@ -5,9 +5,9 @@
                 <label for = "dependencia_id" class="col-md-3 col-form-label">Dependencia</label>
                 <div class="col-md-9">
                     <select id="dependencia_id" name="dependencia_id" class="form-control" size="1">
-                        <option value="0" selected>Seleccione una Dependencia</option>
+                        <option value="0" selected >Seleccione una Dependencia</option>
                         @foreach($dependencias as $t)
-                            <option value="{{$t->id}}" @if($t->id==$items->dependencia_id) selected @endif >{{ $t->dependencia }} </option>
+                            <option value="{{$t->id}}" @if($t->id == $dependencia_id) selected @endif >{{ $t->dependencia }} </option>
                         @endforeach
                     </select>
                 </div>
@@ -16,9 +16,9 @@
                 <label for = "servicio_id" class="col-md-3 col-form-label">Servicio</label>
                 <div class="col-md-9">
                     <select id="servicio_id" name="servicio_id" class="form-control" size="1">
-                        <option value="0" selected>Seleccione un Servicio</option>
+                        <option value="0" selected >Seleccione un Servicio</option>
                         @foreach($servicios as $t)
-                            <option value="{{$t->id}}" @if($t->id==$items->servicio_id) selected @endif >{{ $t->servicio }} </option>
+                            <option value="{{$t->id}}" @if($t->id==$servicio_id) selected @endif >{{ $t->servicio }} </option>
                         @endforeach
                     </select>
 
