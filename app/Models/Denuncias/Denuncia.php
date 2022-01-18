@@ -62,6 +62,7 @@ class Denuncia extends Model
     public function prioridad(){
         return $this->hasOne(Prioridad::class,'id','prioridad_id');
     }
+
     public function prioridades(){
         return $this->belongsToMany(Prioridad::class,'denuncia_prioridad','denuncia_id','prioridad_id');
     }
@@ -69,6 +70,7 @@ class Denuncia extends Model
     public function origen(){
         return $this->hasOne(Origen::class,'id','origen_id');
     }
+
     public function origenes(){
         return $this->belongsToMany(Origen::class,'denuncia_origen','denuncia_id','origen_id');
     }

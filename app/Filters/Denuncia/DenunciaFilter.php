@@ -10,7 +10,9 @@ namespace App\Filters\Denuncia;
 
 
 use App\Filters\Common\QueryFilter;
+use App\Http\Controllers\Funciones\FuncionesController;
 use App\Models\Catalogos\Dependencia;
+use App\Models\Catalogos\Domicilios\Ubicacion;
 use App\Models\Denuncias\Denuncia_Dependencia_Servicio;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -40,10 +42,16 @@ class DenunciaFilter extends QueryFilter
     public function search($query, $search){
         if (is_null($search) || empty ($search) || trim($search) == "") {return $query;}
         $search = strtoupper($search);
+        $filters  = $search;
+        $F        = new FuncionesController();
+        $tsString = $F->string_to_tsQuery( strtoupper($filters),' & ');
 
-        return $query->where(function ($query) use ($search) {
+//        dd($tsString);
+
+        return $query->where(function ($query) use ($search, $tsString) {
                 $query->orWhereHas('ciudadanos', function ($q) use ($search) {
-                    return $q->whereRaw("CONCAT(ap_paterno,' ',ap_materno,' ',nombre) like ?", "%{$search}%");
+                    return $q->whereRaw("CONCAT( UPPER(TRIM(ap_paterno)),' ',UPPER(TRIM(ap_materno)),' ',UPPER(TRIM(nombre)) ) like ?", "%{$search}%")
+                        ->orWhereRaw("UPPER(curp) like ?", "%{$search}%");
                 })
                 ->orWhereHas('dependencias', function ($q) use ($search) {
                     if ($this->IsEnlace()){
@@ -56,18 +64,31 @@ class DenunciaFilter extends QueryFilter
                     return $q->whereRaw("UPPER(estatus) like ?", "%{$search}%")
                         ->where('ultimo',true);
                 })
-                ->orWhereRaw("UPPER(descripcion) like ?", "%{$search}%")
-                ->orWhereRaw("UPPER(referencia) like ?", "%{$search}%")
-                ->orWhereRaw("UPPER(calle) like ?", "%{$search}%")
-                ->orWhereRaw("UPPER(colonia) like ?", "%{$search}%")
-                ->orWhereRaw("UPPER(comunidad) like ?", "%{$search}%")
-                ->orWhereRaw("UPPER(ciudad) like ?", "%{$search}%")
-                ->orWhereRaw("UPPER(municipio) like ?", "%{$search}%")
-                ->orWhereRaw("UPPER(estado) like ?", "%{$search}%")
-                ->orWhere('id', $search);
+                ->orWhereRaw("searchtextdenuncia @@ to_tsquery('spanish', ?)", [$tsString])
+                ->orWhere('id', intval($search));
         });
 
     }
+
+//->orWhereRaw("UPPER(descripcion) like ?", "%{$search}%")
+//->orWhereRaw("UPPER(referencia) like ?", "%{$search}%")
+//    ->orWhereRaw("UPPER(calle) like ?", "%{$search}%")
+//    ->orWhereRaw("UPPER(colonia) like ?", "%{$search}%")
+//    ->orWhereRaw("UPPER(comunidad) like ?", "%{$search}%")
+//    ->orWhereRaw("UPPER(ciudad) like ?", "%{$search}%")
+//    ->orWhereRaw("UPPER(municipio) like ?", "%{$search}%")
+//    ->orWhereRaw("UPPER(estado) like ?", "%{$search}%")
+
+
+//    public function searchToo($query, $search){
+//        if (is_null($search) || empty ($search) || trim($search) == "") {return $query;}
+//        $search = strtoupper($search);
+//
+//        $items = $query
+//            ->search($tsString);
+//
+//    }
+
 
     public function curp($query, $search){
         if (is_null($search) || empty ($search) || trim($search) == "") {return $query;}
