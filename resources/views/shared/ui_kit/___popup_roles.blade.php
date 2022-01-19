@@ -1,4 +1,4 @@
-@if ( Auth::user()->hasRole('Administrator|SysOp') && isset($roles) )
+@if ( Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_ADMIN') && isset($roles) )
     <div class="app-search roles-position-pagination">
         <div class="btn-group">
             <button class="btn btn-xs btn-info ml-2 dropdown-toggle "

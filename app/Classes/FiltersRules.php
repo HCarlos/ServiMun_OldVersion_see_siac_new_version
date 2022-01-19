@@ -18,19 +18,21 @@ class FiltersRules
 {
 
     public function filterRulesDenuncia(Request $request){
-        $data = $request->all(['curp','ciudadano','id','desde','hasta','dependencia_id','servicio_id','estatus_id','creadopor_id','incluirFecha']);
+        $data = $request->all(['curp','ciudadano','id','desde','hasta','dependencia_id','servicio_id','estatus_id','creadopor_id','incluirFecha','conRespuesta']);
         $data['curp']           = $data['curp']           == null ? "" : $data['curp'];
         $data['ciudadano']      = $data['ciudadano']      == null ? "" : $data['ciudadano'];
         $data['id']             = $data['id']             == null ? "" : $data['id'];
         $data['desde']          = $data['desde']          == null ? "" : $data['desde'];
         $data['hasta']          = $data['hasta']          == null ? "" : $data['hasta'];
         $data['incluirFecha']   = $data['incluirFecha']   == null ? "" : $data['incluirFecha'];
+        $data['conRespuesta']   = $data['conRespuesta']   == null ? "" : $data['conRespuesta'];
 
         if ( Auth::user()->isRole('ENLACE') ) {
             $data['dependencia_id'] = Auth::user()->IsEnlaceDependencia;
         }else{
             $data['dependencia_id'] = $data['dependencia_id'] == null ? "" : $data['dependencia_id'];
         }
+
         $data['servicio_id']    = $data['servicio_id']    == null ? "" : $data['servicio_id'];
         $data['estatus_id']     = $data['estatus_id']     == null ? "" : $data['estatus_id'];
         $data['creadopor_id']   = $data['creadopor_id']   == null ? "" : $data['creadopor_id'];
@@ -47,6 +49,7 @@ class FiltersRules
             'servicio_id'    => $data['servicio_id'],
             'estatus_id'     => $data['estatus_id'],
             'creadopor_id'   => $data['creadopor_id'],
+            'conrespuesta'   => $data['conRespuesta'],
         ]);
 
 //        dd($filters);

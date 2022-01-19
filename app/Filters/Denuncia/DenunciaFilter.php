@@ -36,6 +36,7 @@ class DenunciaFilter extends QueryFilter
             'ciudadano_id'   => '',
             'creadopor_id'   => '',
             'dependencia'    => '',
+            'conrespuesta'   => '',
         ];
     }
 
@@ -178,6 +179,15 @@ class DenunciaFilter extends QueryFilter
         });
 
     }
+
+    public function conrespuesta($query, $search){
+        if (is_null($search) || empty ($search) || trim($search) == "0") {return $query;}
+        $search = explode('|',$search);
+        if ($search==true)
+            return $query->has('denuncia_estatus','>',1)->withCount('denuncia_estatus');
+    }
+
+
 
     function IsEnlace(){
         return Session::get('IsEnlace');

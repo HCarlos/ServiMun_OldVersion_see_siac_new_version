@@ -25,6 +25,30 @@ class HojaDenunciaController extends Controller
         $pdf->folio = $folio;
         $pdf->timex = $timex;
 
+        $certificate =  'file://' . getcwd() . "/signature/tcpdf.crt";
+
+
+        //$certificate =  'file://' . getcwd() . "/signature/hirc711126jt0.cer";
+        $clave = "CH50Dev";
+
+        if ( file_exists($certificate) ) {
+            //echo $certificate;
+            //return false;
+        }else{
+            echo $certificate;
+            echo "No Existe";
+            return false;
+        }
+
+        $info = array(
+            'Name' => 'TCPDF',
+            'Location' => 'Office',
+            'Reason' => 'H. Ayuntamiento Constitucional del Municipio de Centro',
+            'ContactInfo' => 'https://villahermosa.gob.mx',
+        );
+
+        $pdf->setSignature($certificate, $certificate, $clave, '', 3, $info);
+
         $pdf->Init();
         $pdf->AddPage();
 
@@ -58,7 +82,35 @@ class HojaDenunciaController extends Controller
         $html .= "<a href='".env('INFO_FOUR')."'>".env('INFO_FOUR'). "</a>";
         $html .= "</pCentrado>";
 
-        $pdf->WriteHTMLCell(120,$alto,$pdf->getX(),$pdf->getY(),$html,0,1);
+        // $certificate = public_path() . '/signature/hirc711126jt0.cer';
+
+        //$certificate = 'file://' .getcwd() . "/signature/hirc711126jt0.cer";
+
+
+//        $xxxx = openssl_pkcs7_sign(realpath("msg.txt"), "signed.txt",
+//            'file://'.realpath('/home/zarsamco/public_html/eghtesad/certs/zarsamhonar.pem'),
+//            array ('file://'.realpath('/home/zarsamco/public_html/eghtesad/certs/zarsamhonar.pem'), "secretPass"),
+//            array (), PKCS7_NOSIGS
+//        );
+
+// set document signature
+
+        $pdf->WriteHTMLCell(120,$alto,$pdf->getX(),$pdf->getY(),$html,0,0);
+
+        $pdf->SetFont(FONT_AEALARABIYA,'B',6);
+        $pdf->WriteHTMLCell(120,$alto,5,132,"Este documento está firmado digitalmente",0,0);
+
+
+
+// define active area for signature appearance
+        $pdf->setSignatureAppearance($pdf->getX(),$pdf->getY(), 120, $alto);
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// *** set an empty signature appearance ***
+//$pdf->addEmptySignatureAppearance(180, 80, 15, 15);
+
+
         $pdf->Output();
 
     }

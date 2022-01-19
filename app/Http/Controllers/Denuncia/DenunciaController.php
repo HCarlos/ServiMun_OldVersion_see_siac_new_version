@@ -305,6 +305,9 @@ class DenunciaController extends Controller
             ->orderByDesc('id')
             ->paginate($this->max_item_for_query);
         $items->fragment('table');
+
+
+
         $user = Auth::User();
 
 
