@@ -15,10 +15,10 @@ class HojaDenunciaController extends Controller
 
     public function imprimirDenuncia($Id=0){
 
+        $den = Denuncia::find($Id);
         $folio  = $Id;
-        $timex  = Carbon::now()->format('d-m-Y H:i:s');
-        $date = new Carbon( $timex );
-        $FOLIO = "DAC-".str_pad($folio,6,'0',STR_PAD_LEFT)."-".$date->format('y');
+        $timex  = $den->fecha_ingreso->format('d-m-Y H:i:s');
+        $FOLIO = "DAC-".str_pad($folio,6,'0',STR_PAD_LEFT)."-".$den->fecha_ingreso->format('y');
         $alto   = 6;
 
         $pdf = new DenunciaTCPDF('','mm',array(215.9, 139.7), true, 'UTF-8', false);
@@ -45,7 +45,6 @@ class HojaDenunciaController extends Controller
         $pdf->SetTextColor(64,64,64);
         $pdf->SetFillColor(255,255,255);
 
-        $den = Denuncia::find($Id);
         $roles = $den->ciudadano->RoleNameStrArray;
         $username = $den->ciudadano->username;
         $html = ATEMUN['style']['denuncia'];
