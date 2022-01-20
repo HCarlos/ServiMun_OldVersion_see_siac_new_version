@@ -18,8 +18,6 @@ namespace App\Classes\Denuncia;
 
 
 use App\Traits\TCPDF\InitTrait;
-use Carbon\Carbon;
-use http\Env\Request;
 use TCPDF;
 use TCPDF_COLORS;
 use TCPDF_STATIC;

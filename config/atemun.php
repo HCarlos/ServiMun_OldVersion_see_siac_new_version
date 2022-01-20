@@ -153,6 +153,7 @@ return [
                             bVerde { font-family: arial, sans-serif; color:green; }
                             bChocolate { font-family: arial, sans-serif; color:chocolate; }
                             bOrange { font-family: arial, sans-serif; color:orangered; }
+                            bSelloBold { font-family: arial, sans-serif; font-weight: bold; }
                             span { font-family: arial, sans-serif; text-align: center; }
                        </style>",
     ],

@@ -33,7 +33,6 @@ define('FONT_PDFAHELVETICA', TCPDF_FONTS::addTTFfont(public_path().'/fonts/pdfah
 define('FONT_PDFATIMES', TCPDF_FONTS::addTTFfont(public_path().'/fonts/pdfatimes.php', 'TrueTypeUnicode', '', 32));
 define('FONT_TIMES', TCPDF_FONTS::addTTFfont(public_path().'/fonts/times.php', 'TrueTypeUnicode', '', 32));
 
-
 define('ATEMUN',config('atemun'));
 
 trait InitTrait
