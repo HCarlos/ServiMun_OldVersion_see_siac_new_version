@@ -5,7 +5,6 @@ namespace App\Http\Controllers\External\Denuncia;
 use App\Classes\Denuncia\DenunciaTCPDF;
 use App\Http\Controllers\Controller;
 use App\Models\Denuncias\Denuncia;
-use BaconQrCode\Encoder\QrCode;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
