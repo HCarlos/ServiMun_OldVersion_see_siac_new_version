@@ -60,18 +60,19 @@ class HojaDenunciaController extends Controller
         $html .= "<a href='".env('INFO_FOUR')."'>".env('INFO_FOUR'). "</a>";
         $html .= "</pCentrado>";
 
-        $cadena_original = $den->id.'|'.$pdf->FOLIO.'|'.$pdf->timex.'|'.$den->ciudadano->id.'|'.$den->ciudadano->username.'|'.$den->ciudadano->FullName.'|'.$den->creadopor->id.'|'.$den->creadopor->username.'|'.$den->creadopor->FullName.'|'.$den->dependencia_id.'|'.$den->dependencia_id.'|'.$den->servicio_id.'|'.$den->estatu_id;
-
         $pdf->WriteHTMLCell(195,$alto,10,$pdf->getY(),$html,0,0);
 
-// guardar el mensaje en un archivo
+        // Inicia proceso de Sellado
+
         $mensaje = public_path() . "/signature/mensaje.txt";
         $firmado = public_path() . "/signature/firmado.txt";
         $key_pem = public_path() . "/signature/Claveprivada_FIEL_HIRC711126JT0_20211206_140329.pem";
         $pem     = public_path() . "/signature/hirc711126jt0.pem";
         $fp = fopen(public_path() . "/signature/mensaje.txt", "w");
 
+        $cadena_original = $den->id.'|'.$pdf->FOLIO.'|'.$pdf->timex.'|'.$den->ciudadano->id.'|'.$den->ciudadano->username.'|'.$den->ciudadano->FullName.'|'.$den->creadopor->id.'|'.$den->creadopor->username.'|'.$den->creadopor->FullName.'|'.$den->dependencia_id.'|'.$den->ubicacion_id.'|'.$den->servicio_id.'|'.$den->estatus_id;
         $hash = sha1($cadena_original);
+
         fwrite($fp, $hash);
         fclose($fp);
 
@@ -93,14 +94,16 @@ class HojaDenunciaController extends Controller
         $pdf->WriteHTMLCell(200,$alto,5,110, $cadena_original,0,0);
 
         $pdf->SetFont(FONT_DEJAVUSANSMONO,'B',7);
-        $pdf->WriteHTMLCell(200,$alto,5,114, "<bSelloBold>HASH:</bSelloBold>",0,0);
+        $pdf->WriteHTMLCell(200,$alto,5,117, "<bSelloBold>HASH:</bSelloBold>",0,0);
         $pdf->SetFont(FONT_AEALARABIYA,'',6);
-        $pdf->WriteHTMLCell(200,$alto,5,117, $hash,0,0);
+        $pdf->WriteHTMLCell(200,$alto,5,120, $hash,0,0);
 
         $pdf->SetFont(FONT_DEJAVUSANSMONO,'B',7);
-        $pdf->WriteHTMLCell(200,$alto,5,121, "<bSelloBold>SELLO DIGITAL:</bSelloBold>",0,0);
+        $pdf->WriteHTMLCell(200,$alto,5,124, "<bSelloBold>SELLO DIGITAL:</bSelloBold>",0,0);
         $pdf->SetFont(FONT_AEALARABIYA,'',6);
-        $pdf->WriteHTMLCell(200,$alto,5,124, $sello,0,0);
+        $pdf->WriteHTMLCell(200,$alto,5,127, $sello,0,0);
+
+        // Finaliza proceso de Sellado
 
         $pdf->Output($pdf->FOLIO . '.pdf');
 
