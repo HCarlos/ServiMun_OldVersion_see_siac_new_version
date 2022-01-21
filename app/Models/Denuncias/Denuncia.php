@@ -37,6 +37,7 @@ class Denuncia extends Model
         'ciudadano_id','creadopor_id','created_at','modificadopor_id','updated_at','deleted_at',
         'searchtextdenuncia',
         'cerrado','fecha_cerrado','cerradopor_id','firmado',
+        'uuid',
 
 
     ];

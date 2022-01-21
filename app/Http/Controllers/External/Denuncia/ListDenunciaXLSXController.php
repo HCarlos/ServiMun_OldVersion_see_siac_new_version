@@ -9,6 +9,7 @@ use App\Models\Catalogos\Origen;
 use App\Models\Catalogos\Prioridad;
 use App\Models\Catalogos\Servicio;
 use App\Models\Denuncias\Denuncia;
+use App\Models\Denuncias\Denuncia_Dependencia_Servicio;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -64,6 +65,16 @@ class ListDenunciaXLSXController extends Controller
                 $fechaLimite    = Carbon::parse($item->fecha_limite)->format('d-m-Y'); //Carbon::createFromFormat('d-m-Y', $item->fecha_nacimiento);
                 $fechaEjecucion = Carbon::parse($item->fecha_ejecucion)->format('d-m-Y'); //Carbon::createFromFormat('d-m-Y', $item->fecha_nacimiento);
 
+                $resp = Denuncia_Dependencia_Servicio::query()->where('denuncia_id',$item->id)->orderByDesc('id')->get();
+                $respuesta = "";
+                foreach ($resp as $r){
+                    $res = trim($r->observaciones);
+                    if ( $res != ""){
+                        $dep = Dependencia::find($r->dependencia_id);
+                        $respuesta.=$dep->abreviatura.' - '.$res.'\n';
+                    }
+                }
+
                 $sh
                     ->setCellValue('A'.$C, $item->id)
                     ->setCellValue('B'.$C, $ciudadano->ap_paterno)
@@ -80,7 +91,8 @@ class ListDenunciaXLSXController extends Controller
                     ->setCellValue('M'.$C, $item->referencia)
                     ->setCellValue('N'.$C, $prioridad->prioridad)
                     ->setCellValue('O'.$C, $origen->origen)
-                    ->setCellValue('P'.$C, $estatus->estatus);
+                    ->setCellValue('P'.$C, $estatus->estatus)
+                    ->setCellValue('Q'.$C,$respuesta);
 
                 $C++;
             }

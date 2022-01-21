@@ -13,10 +13,10 @@ class HojaDenunciaController extends Controller
 {
 
 
-    public function imprimirDenuncia($Id=0){
+    public function imprimirDenuncia($UUID=""){
 
-        $den = Denuncia::find($Id);
-        $folio  = $Id;
+        $den = Denuncia::all()->where('uuid',$UUID)->first();
+        $folio  = $den->id;
         $timex  = $den->fecha_ingreso->format('d-m-Y H:i:s');
         $FOLIO = "DAC-".str_pad($folio,6,'0',STR_PAD_LEFT)."-".$den->fecha_ingreso->format('y');
         $alto   = 6;
