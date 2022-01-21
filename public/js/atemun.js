@@ -410,3 +410,32 @@
         "#search_autocomplete_comunidad").keyup(function(){
         $(this).val($(this).val().toUpperCase());
     });
+
+    if ( $(".operDenuncia").length > 0  ){
+        $('.operDenuncia').on('click', function(event) {
+            event.preventDefault();
+            var id = event.currentTarget.id.split('.');
+            var x = confirm("Desea "+id[0]+" este documento? \n\nNo se podrá deshacer esta acción.");
+
+            if (!x){
+                return false;
+            }
+
+            var Url = '/'+id[1];
+
+            $(function() {
+                $.ajax({
+                    method: "GET",
+                    url: Url
+                })
+                    .done(function( response ) {
+                        if (response.data == 'OK'){
+                            alert(response.mensaje);
+                            window.location.reload();
+                        }else{
+                            alert(response.mensaje);
+                        }
+                    })
+            });
+        });
+    }

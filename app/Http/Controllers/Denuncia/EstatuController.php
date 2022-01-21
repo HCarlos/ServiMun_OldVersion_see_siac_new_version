@@ -183,16 +183,23 @@ class EstatuController extends Controller
     protected function removeItem($id = 0)
     {
         $item = Estatu::withTrashed()->findOrFail($id);
-        if (isset($item)) {
-            if (!$item->trashed()) {
-                $item->forceDelete();
+        if ( strtoupper(trim($item->estatus)) == "CERRADO"){
+            return Response::json(['mensaje' => 'No se puede eliminar ese Estatus', 'data' => 'Error', 'status' => '200'], 200);
+        }else{
+
+            if (isset($item)) {
+                if (!$item->trashed()) {
+                    $item->forceDelete();
+                } else {
+                    $item->forceDelete();
+                }
+                return Response::json(['mensaje' => 'Registro eliminado con éxito', 'data' => 'OK', 'status' => '200'], 200);
             } else {
-                $item->forceDelete();
+                return Response::json(['mensaje' => 'Se ha producido un error.', 'data' => 'Error', 'status' => '200'], 200);
             }
-            return Response::json(['mensaje' => 'Registro eliminado con éxito', 'data' => 'OK', 'status' => '200'], 200);
-        } else {
-            return Response::json(['mensaje' => 'Se ha producido un error.', 'data' => 'Error', 'status' => '200'], 200);
+
         }
+
     }
 
     protected function addDepEstatu($Id,$IdDep)

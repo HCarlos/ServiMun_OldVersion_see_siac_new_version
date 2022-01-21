@@ -114,6 +114,24 @@ ul.role-list-hrz li a {
 	padding: 0.3em !important;
 }
 
+.bg-coral-denuncia-cerrada{
+    background-color: lightcoral !important;
+    color: darkslategray !important;
+    font-weight: bold !important;
+    padding: 0.3em !important;
+    opacity: 0.5 !important;
+
+}
+
+.bg-coral-denuncia-firmada{
+    background-color: lightcoral !important;
+    color: ghostwhite !important;
+    font-weight: bold !important;
+    padding: 0.3em !important;
+    opacity: 0.75 !important;
+
+}
+
 .bg-seagreen-atemun-bib{
 	background-color: seagreen !important;
 	color: ghostwhite !important;

@@ -107,6 +107,8 @@ return [
             'denuncia_user'                         => 'denuncia_user',
             'imagene_user'                          => 'imagene_user',
             'imagene_parent'                        => 'imagene_parent',
+            'firmas'                                => 'firmas',
+            'denuncia_firma'                        => 'denuncia_firma',
         ],
         'domicilios' => [
             'users'             => 'users',

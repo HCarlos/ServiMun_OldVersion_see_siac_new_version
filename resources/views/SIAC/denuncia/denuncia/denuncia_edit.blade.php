@@ -14,6 +14,7 @@
                         @include('SIAC.denuncia.denuncia.__denuncia.__denuncia_edit')
                         @component('components.tools.buttons-form-denuncia')
                             @slot('msgLeft',' ')
+                            @slot('item',$items)
                         @endcomponent
                     </form>
                 @endslot

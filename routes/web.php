@@ -71,7 +71,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('updateUserV2', 'Catalogos\User\UserDataController@updateUserV2')->name('updateUserV2');
 });
 
-Route::group(['middleware' => 'role:auth|Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN|ENLACE'], function () {
+Route::group(['middleware' => 'role:auth|Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN|ENLACE|USER_ARCHIVO_CAP|USER_ARCHIVO_ADMIN'], function () {
 
     Route::get('/home', 'HomeController@index')->name('home');
 
@@ -400,11 +400,13 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp|USER_OPERATOR_SIAC|
     Route::put('findDataInDenuncia/', 'Denuncia\DenunciaController@findDataInDenuncia')->name('findDataInDenuncia');
     Route::post('showDataListDenunciaExcel1A/', 'External\Denuncia\ListDenunciaXLSXController@getListDenunciaXLSX')->name('showDataListDenunciaExcel1A');
     Route::post('showDataListDenunciaRespuestaExcel1A/', 'External\Denuncia\ListDenunciaXLSXController@showDataListDenunciaRespuestaExcel1A')->name('showDataListDenunciaRespuestaExcel1A');
+    Route::get('cerrarDenuncia/{id}', 'Denuncia\DenunciaController@closeItem')->name('cerrarDenuncia');
+    Route::get('firmarDenuncia/{id}', 'Denuncia\DenunciaController@signItem')->name('firmarDenuncia');
 
 
 });
 
-Route::group(['middleware' => 'role:auth|Administrator|SysOp|DELEGADO|CIUDADANO|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN|ENLACE'], function () {
+Route::group(['middleware' => 'role:auth|Administrator|SysOp|DELEGADO|CIUDADANO|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN|ENLACE|USER_ARCHIVO_CAP|USER_ARCHIVO_ADMIN'], function () {
 
     Route::get('/home-ciudadano', 'HomeController@index_ciudadano')->name('home-ciudadano');
 

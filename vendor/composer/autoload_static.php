@@ -4352,6 +4352,7 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         'League\\OAuth1\\Client\\Signature\\Signature' => __DIR__ . '/..' . '/league/oauth1-client/src/Signature/Signature.php',
         'League\\OAuth1\\Client\\Signature\\SignatureInterface' => __DIR__ . '/..' . '/league/oauth1-client/src/Signature/SignatureInterface.php',
         'Llenado_de_Catalogo_01_Seeder' => __DIR__ . '/../..' . '/database/seeds/Llenado_de_Catalogo_01_Seeder.php',
+        'Llenado_de_Catalogo_02_Seeder' => __DIR__ . '/../..' . '/database/seeds/Llenado_de_Catalogo_02_Seeder.php',
         'Maatwebsite\\Excel\\Cache\\BatchCache' => __DIR__ . '/..' . '/maatwebsite/excel/src/Cache/BatchCache.php',
         'Maatwebsite\\Excel\\Cache\\CacheManager' => __DIR__ . '/..' . '/maatwebsite/excel/src/Cache/CacheManager.php',
         'Maatwebsite\\Excel\\Cache\\MemoryCache' => __DIR__ . '/..' . '/maatwebsite/excel/src/Cache/MemoryCache.php',

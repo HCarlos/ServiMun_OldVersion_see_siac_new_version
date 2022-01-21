@@ -48,11 +48,12 @@ class LoginController extends Controller
             'username' => 'required',
             'password' => 'required',
         ]);
+
         $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
         if(auth()->attempt(array($fieldType => $input['username'], 'password' => $input['password']))) {
-
-            $role1 = Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN|ENLACE');
+            $role1 = Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN|ENLACE|USER_ARCHIVO_CAP|USER_ARCHIVO_ADMIN');
             $role2 = Auth::user()->hasRole('CIUDADANO|DELEGADO');
+
             if ($role1) {
                 return redirect()->route('home');
             } elseif($role2) {

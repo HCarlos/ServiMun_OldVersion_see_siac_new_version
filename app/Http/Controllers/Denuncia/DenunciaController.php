@@ -16,6 +16,7 @@ use App\Models\Catalogos\Origen;
 use App\Models\Catalogos\Prioridad;
 use App\Models\Catalogos\Servicio;
 use App\Models\Denuncias\Denuncia;
+use App\Models\Denuncias\Firma;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -349,6 +350,81 @@ class DenunciaController extends Controller
             return Response::json(['mensaje' => 'OK', 'data' => $item, 'status' => '200'], 200);
         } else {
             return Response::json(['mensaje' => 'Error', 'data' => dd($item), 'status' => '200'], 200);
+        }
+
+    }
+
+    protected function closeItem($id){
+        $item    = Denuncia::find($id);
+        $estatus = Estatu::all()->where('estatus','CERRADO')->first();
+        if (isset($item)) {
+            $item->estatus_id = $estatus->id;
+            $item->cerrado = true;
+            $item->fecha_cerrado = now();
+            $item->cerradopor_id = Auth::user()->id;
+            $item->save();
+
+            $item->estatus()->attach($estatus);
+            $item->dependencias()->attach($item->dependencia_id,['servicio_id'=>$item->servicio_id,'estatu_id'=>$estatus->id,'fecha_movimiento' => now(),'observaciones' => 'CERRADO CON ÉXITO!' ]);
+
+            return Response::json(['mensaje' => 'Documento cerrado con éxito', 'data' => 'OK', 'status' => '200'], 200);
+        } else {
+            return Response::json(['mensaje' => 'No se pudo cerrar el documento.', 'data' => 'Error', 'status' => '200'], 200);
+        }
+
+    }
+
+    protected function signItem($id){
+        $den    = Denuncia::find($id);
+        if (isset($den)) {
+
+            $FOLIO = "DAC-".str_pad($id,6,'0',STR_PAD_LEFT)."-".$den->fecha_ingreso->format('y');
+            $timex  = $den->fecha_ingreso->format('d-m-Y H:i:s');
+
+            $archivo_cer = "hirc711126jt0.pem";
+            $archivo_key = "Claveprivada_FIEL_HIRC711126JT0_20211206_140329.pem";
+            $mensaje     = public_path() . "/signature/mensaje.txt";
+            $firmado     = public_path() . "/signature/firmado.txt";
+            $pem         = public_path() . "/signature/".$archivo_cer;
+            $key_pem     = public_path() . "/signature/".$archivo_key;
+            $phrase      = 'NxsWry2K_';
+            $fp          = fopen(public_path() . "/signature/mensaje.txt", "w");
+
+            $cadena_original = $den->id . '|' . $FOLIO . '|' . $timex . '|' . $den->ciudadano->id . '|' . $den->ciudadano->username . '|' . $den->ciudadano->FullName . '|' . $den->creadopor->id . '|' . $den->creadopor->username . '|' . $den->creadopor->FullName . '|' . $den->dependencia_id . '|' . $den->ubicacion_id . '|' . $den->servicio_id . '|' . $den->estatus_id;
+            $hash = sha1($cadena_original);
+
+            fwrite($fp, $hash);
+            fclose($fp);
+
+            $key = $key_pem;
+            $fp = fopen($key, "r");
+            $priv_key = fread($fp, 8192);
+
+            $pkeyid = openssl_get_privatekey($priv_key);
+
+            if (openssl_sign($mensaje, $firmado, $pkeyid, OPENSSL_ALGO_SHA1)) {
+                $sello = base64_encode($firmado);
+            }
+
+            $firma = Firma::create([
+                'archivo_cer'     => $archivo_cer,
+                'sello_cer'       => $pem,
+                'archivo_key'     => $archivo_key,
+                'sello_key'       => $key_pem,
+                'password'        => $phrase,
+                'cadena_original' => $cadena_original,
+                'hash'            => $hash,
+                'sello'           => $sello,
+                'valido'          => true,
+                'fecha_firmado'   => now(),
+                'firmadopor_id'   => Auth::user()->id,
+            ]);
+            $den->firmado = true;
+            $den->save();
+            $den->firmas()->attach($firma);
+
+            return Response::json(['mensaje' => 'Documento firmado con éxito', 'data' => 'OK', 'status' => '200'], 200);
+
         }
 
     }

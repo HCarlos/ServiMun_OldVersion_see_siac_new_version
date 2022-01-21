@@ -37,6 +37,7 @@ class DenunciaFilter extends QueryFilter
             'creadopor_id'   => '',
             'dependencia'    => '',
             'conrespuesta'   => '',
+            'cerrado'        => '',
         ];
     }
 
@@ -66,6 +67,7 @@ class DenunciaFilter extends QueryFilter
                         ->where('ultimo',true);
                 })
                 ->orWhereRaw("searchtextdenuncia @@ to_tsquery('spanish', ?)", [$tsString])
+                ->orWhere('cerrado', settype($search, 'boolean'))
                 ->orWhere('id', intval($search));
         });
 
@@ -149,12 +151,6 @@ class DenunciaFilter extends QueryFilter
     public function estatus_id($query, $search){
         if (is_null($search) || empty ($search) || trim($search) == "0") {return $query;}
 
-//        return $query->where('estatus_id', intval($search));
-
-//        return $query->whereHas('estatus', function ($q) use ($query, $search) {
-//            return $q->where('estatus_id', intval($search));
-//        });
-
         return $query->whereHas('denuncia_estatus', function ($q) use ($query, $search) {
             return $q->where('estatu_id', intval($search));
         });
@@ -185,6 +181,11 @@ class DenunciaFilter extends QueryFilter
         $search = explode('|',$search);
         if ($search==true)
             return $query->has('denuncia_estatus','>',1)->withCount('denuncia_estatus');
+    }
+
+    public function cerrado($query, $search){
+        if (is_null($search) || empty ($search) || trim($search) == "0") {return $query;}
+        return $query->orWhere('cerrado',settype($search, 'boolean'));
     }
 
 

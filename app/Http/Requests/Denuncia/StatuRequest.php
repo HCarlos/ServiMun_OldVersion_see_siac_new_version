@@ -25,7 +25,8 @@ class StatuRequest extends FormRequest
     public function validationData(){
         $attributes = parent::all();
         $attributes['estatus'] = strtoupper(trim($attributes['estatus']));
-        $this->replace($attributes);
+        $attributes['estatus'] = $attributes['estatus'] == "CERRADO" ? "CERRADO_XXXXXX" : $attributes['estatus'];
+            $this->replace($attributes);
         return parent::all();
     }
 

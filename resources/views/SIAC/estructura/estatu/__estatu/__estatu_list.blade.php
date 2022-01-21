@@ -26,8 +26,10 @@
                         </td>
                         <td class="table-action w-100">
                             <div class="button-list">
-                                @include('shared.ui_kit.__edit_item')
-                                @include('shared.ui_kit.__remove_item')
+                                @if( strtoupper(trim($item->estatus)) != 'CERRADO' )
+                                    @include('shared.ui_kit.__edit_item')
+                                    @include('shared.ui_kit.__remove_item')
+                                @endif
                             </div>
                         </td>
                     </tr>

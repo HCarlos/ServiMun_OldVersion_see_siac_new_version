@@ -32,7 +32,8 @@
         "setasign/fpdf": "^1.8.4",
         "spatie/laravel-permission": "^3.18",
         "tecnickcom/tc-lib-pdf-font": "^1.9.3",
-        "yajra/laravel-datatables-oracle": "^9.18.2"
+        "yajra/laravel-datatables-oracle": "^9.18.2",
+        "ext-openssl": "*"
     },
     "require-dev": {
         "nunomaduro/collision": "^4.3",

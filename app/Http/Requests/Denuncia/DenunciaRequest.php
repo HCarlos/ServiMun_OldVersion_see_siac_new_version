@@ -127,12 +127,16 @@ class DenunciaRequest extends FormRequest
                     $item = Denuncia::create($Item);
                 } else {
                     $item = Denuncia::find($this->id);
-                    $this->detaches($item);
-                    $item->update($Item);
+                    if ($item->cerrado == false){
+                        $this->detaches($item);
+                        $item->update($Item);
+                    }
                 }
-                $this->attaches($item);
-                $Storage = new StorageDenunciaController();
-                $Storage->subirArchivoDenuncia($this, $item);
+                if ($item->cerrado == false) {
+                    $this->attaches($item);
+                    $Storage = new StorageDenunciaController();
+                    $Storage->subirArchivoDenuncia($this, $item);
+                }
             }else{
                 return null;
             }

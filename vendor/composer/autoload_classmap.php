@@ -3625,6 +3625,7 @@ return array(
     'League\\OAuth1\\Client\\Signature\\Signature' => $vendorDir . '/league/oauth1-client/src/Signature/Signature.php',
     'League\\OAuth1\\Client\\Signature\\SignatureInterface' => $vendorDir . '/league/oauth1-client/src/Signature/SignatureInterface.php',
     'Llenado_de_Catalogo_01_Seeder' => $baseDir . '/database/seeds/Llenado_de_Catalogo_01_Seeder.php',
+    'Llenado_de_Catalogo_02_Seeder' => $baseDir . '/database/seeds/Llenado_de_Catalogo_02_Seeder.php',
     'Maatwebsite\\Excel\\Cache\\BatchCache' => $vendorDir . '/maatwebsite/excel/src/Cache/BatchCache.php',
     'Maatwebsite\\Excel\\Cache\\CacheManager' => $vendorDir . '/maatwebsite/excel/src/Cache/CacheManager.php',
     'Maatwebsite\\Excel\\Cache\\MemoryCache' => $vendorDir . '/maatwebsite/excel/src/Cache/MemoryCache.php',

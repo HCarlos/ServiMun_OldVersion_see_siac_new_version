@@ -18,23 +18,25 @@
             <tbody>
 
             @foreach($items as $item)
-                <tr>
+                <tr class="@if($item->cerrado) bg-coral-denuncia-cerrada @endif">
                     <td class="table-user">{{$item->id}}</td>
                     <td>{{$item->ciudadano->FullName}} </td>
                     <td>{{($item->fecha_ingreso)}}</td>
                     <td><a title="{{($item->dependencia->dependencia)}}">{{($item->dependencia->abreviatura)}}</a></td>
                     <td>{{($item->TotalRespuestas)}}</td>
-                    <td>{{($item->denuncia_estatus->first()->estatus)}}</td>
+                    <td>{{( $item->denuncia_estatus->last()->estatus ?? 'Error: Edite y guarde el documento nuevamente.' )}}</td>
                     <td>{{($item->ciudadano->curp)}}</td>
                     <td class="w-75">{{$item->fullUbication}}</td>
                     <td class="table-action w-25">
                         <div class="button-list">
+                            @if($item->cerrado == false && $item->firmado == false)
+                                @include('shared.ui_kit.__remove_item')
+            {{--                    @include('shared.ui_kit.__respuestas_list_item')--}}
+                                @include('shared.ui_kit.__imagenes_list_item')
+                                @include('shared.ui_kit.__edit_denuncia_dependencia_servicio_item')
+                            @endif
                             @include('shared.ui_kit.__edit_item')
-                            @include('shared.ui_kit.__remove_item')
-        {{--                    @include('shared.ui_kit.__respuestas_list_item')--}}
-                            @include('shared.ui_kit.__imagenes_list_item')
                             @include('shared.ui_kit.__print_denuncia_item')
-                            @include('shared.ui_kit.__edit_denuncia_dependencia_servicio_item')
                         </div>
                     </td>
                 </tr>

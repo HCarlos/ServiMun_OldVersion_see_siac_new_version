@@ -36,10 +36,13 @@ class Denuncia extends Model
         'fecha_ingreso', 'fecha_oficio_dependencia', 'fecha_limite', 'fecha_ejecucion',
         'ciudadano_id','creadopor_id','created_at','modificadopor_id','updated_at','deleted_at',
         'searchtextdenuncia',
+        'cerrado','fecha_cerrado','cerradopor_id','firmado',
+
 
     ];
 //    protected $hidden = ['deleted_at','created_at','updated_at'];
-    protected $dates = ['fecha_ingreso', 'fecha_oficio_dependencia' => 'datetime:d-m-Y', 'fecha_limite' => 'datetime:d-m-Y', 'fecha_ejecucion' => 'datetime:d-m-Y', 'created_at' => 'datetime:d-m-Y H:mm:ss', 'updated_at' => 'datetime:d-m-Y H:mm:ss'];
+    protected $dates = ['fecha_ingreso', 'fecha_oficio_dependencia' => 'datetime:d-m-Y', 'fecha_limite' => 'datetime:d-m-Y', 'fecha_ejecucion' => 'datetime:d-m-Y', 'created_at' => 'datetime:d-m-Y H:mm:ss', 'updated_at' => 'datetime:d-m-Y H:mm:ss','fecha_cerrado'];
+    protected $casts = ['cerrado'=>'boolean','firmado'=>'boolean',];
 
     public function scopeSearch($query, $search){
         if (!$search || $search == "" || $search == null) return $query;
@@ -151,6 +154,18 @@ class Denuncia extends Model
 
     public function imagenes(){
         return $this->belongsToMany(Imagene::class,'denuncia_imagene','denuncia_id','imagene_id');
+    }
+
+    public function firma(){
+        return $this->hasOne(Firma::class,'id','firma_id');
+    }
+
+    public function firmas(){
+        return $this->belongsToMany(Firma::class,'denuncia_firma','denuncia_id','firma_id');
+    }
+
+    public function cerradopor(){
+        return $this->hasOne(User::class,'id','cerradopor_id');
     }
 
     public function getTotalRespuestasAttribute(){

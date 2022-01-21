@@ -62,7 +62,7 @@ class HojaDenunciaController extends Controller
         $pdf->WriteHTMLCell(195,$alto,10,$pdf->getY(),$html,0,0);
 
         // Inicia proceso de Sellado
-
+/*
         $mensaje = public_path() . "/signature/mensaje.txt";
         $firmado = public_path() . "/signature/firmado.txt";
         $key_pem = public_path() . "/signature/Claveprivada_FIEL_HIRC711126JT0_20211206_140329.pem";
@@ -84,23 +84,29 @@ class HojaDenunciaController extends Controller
         if (openssl_sign($mensaje, $firmado, $pkeyid,OPENSSL_ALGO_SHA1)) {
             $sello = base64_encode($firmado);
         }
-        $pdf->SetTextColor(64,64,64);
-        $pdf->SetFillColor(255,255,255);
+*/
+        $firma = $den->firmas->last();
+        if ($firma){
 
-        $pdf->SetFont(FONT_DEJAVUSANSMONO,'B',7);
-        $pdf->WriteHTMLCell(200,$alto,5,107, "<p><bSelloBold>CADENA ORIGINAL:</bSelloBold></p>",0,0);
-        $pdf->SetFont(FONT_AEALARABIYA,'',6);
-        $pdf->WriteHTMLCell(200,$alto,5,110, $cadena_original,0,0);
+            $pdf->SetTextColor(64,64,64);
+            $pdf->SetFillColor(255,255,255);
 
-        $pdf->SetFont(FONT_DEJAVUSANSMONO,'B',7);
-        $pdf->WriteHTMLCell(200,$alto,5,117, "<bSelloBold>HASH:</bSelloBold>",0,0);
-        $pdf->SetFont(FONT_AEALARABIYA,'',6);
-        $pdf->WriteHTMLCell(200,$alto,5,120, $hash,0,0);
+            $pdf->SetFont(FONT_DEJAVUSANSMONO,'B',7);
+            $pdf->WriteHTMLCell(200,$alto,5,107, "<p><bSelloBold>CADENA ORIGINAL:</bSelloBold></p>",0,0);
+            $pdf->SetFont(FONT_AEALARABIYA,'',6);
+            $pdf->WriteHTMLCell(200,$alto,5,110, $firma->cadena_original,0,0);
 
-        $pdf->SetFont(FONT_DEJAVUSANSMONO,'B',7);
-        $pdf->WriteHTMLCell(200,$alto,5,124, "<bSelloBold>SELLO DIGITAL:</bSelloBold>",0,0);
-        $pdf->SetFont(FONT_AEALARABIYA,'',6);
-        $pdf->WriteHTMLCell(200,$alto,5,127, $sello,0,0);
+            $pdf->SetFont(FONT_DEJAVUSANSMONO,'B',7);
+            $pdf->WriteHTMLCell(200,$alto,5,117, "<bSelloBold>HASH:</bSelloBold>",0,0);
+            $pdf->SetFont(FONT_AEALARABIYA,'',6);
+            $pdf->WriteHTMLCell(200,$alto,5,120, $firma->hash,0,0);
+
+            $pdf->SetFont(FONT_DEJAVUSANSMONO,'B',7);
+            $pdf->WriteHTMLCell(200,$alto,5,124, "<bSelloBold>SELLO DIGITAL:</bSelloBold>",0,0);
+            $pdf->SetFont(FONT_AEALARABIYA,'',6);
+            $pdf->WriteHTMLCell(200,$alto,5,127, $firma->sello,0,0);
+
+        }
 
         // Finaliza proceso de Sellado
 
