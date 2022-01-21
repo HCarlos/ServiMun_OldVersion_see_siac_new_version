@@ -85,11 +85,12 @@ class HojaDenunciaController extends Controller
             $sello = base64_encode($firmado);
         }
 */
-        $firma = $den->firmas->last();
-        if ($firma){
+        $pdf->SetTextColor(64,64,64);
+        $pdf->SetFillColor(255,255,255);
 
-            $pdf->SetTextColor(64,64,64);
-            $pdf->SetFillColor(255,255,255);
+        $firma = $den->firmas->last();
+
+        if ($firma){
 
             $pdf->SetFont(FONT_DEJAVUSANSMONO,'B',7);
             $pdf->WriteHTMLCell(200,$alto,5,107, "<p><bSelloBold>CADENA ORIGINAL:</bSelloBold></p>",0,0);
@@ -105,6 +106,13 @@ class HojaDenunciaController extends Controller
             $pdf->WriteHTMLCell(200,$alto,5,124, "<bSelloBold>SELLO DIGITAL:</bSelloBold>",0,0);
             $pdf->SetFont(FONT_AEALARABIYA,'',6);
             $pdf->WriteHTMLCell(200,$alto,5,127, $firma->sello,0,0);
+
+        } else {
+
+            $pdf->SetFont(FONT_DEJAVUSANSMONO,'B',7);
+            $pdf->WriteHTMLCell(200,$alto,5,107, "",0,0);
+            $pdf->SetFont(FONT_AEALARABIYA,'',6);
+            $pdf->WriteHTMLCell(200,$alto,5,110, "* Escanee la imagen QR para ver el avance en la gestión de su solicitud.",0,0);
 
         }
 

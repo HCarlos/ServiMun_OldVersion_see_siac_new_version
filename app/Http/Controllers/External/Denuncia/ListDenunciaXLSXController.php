@@ -71,7 +71,7 @@ class ListDenunciaXLSXController extends Controller
                     $res = trim($r->observaciones);
                     if ( $res != ""){
                         $dep = Dependencia::find($r->dependencia_id);
-                        $respuesta.=$dep->abreviatura.' - '.$res.'\n';
+                        $respuesta.=$dep->abreviatura.' - '.$res.'. ';
                     }
                 }
 
