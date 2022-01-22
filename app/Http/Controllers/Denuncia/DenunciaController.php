@@ -87,7 +87,7 @@ class DenunciaController extends Controller
                 'searchAdressDenuncia'    => 'listDenuncias',
                 'showModalSearchDenuncia' => 'showModalSearchDenuncia',
                 'findDataInDenuncia'      => 'findDataInDenuncia',
-                'imprimirDenuncia'        => "imprimirDenuncia/",
+                'imprimirDenuncia'        => "imprimir_denuncia_archivo/",
                 'IsEnlace'                => session('IsEnlace'),
                 'DependenciaArray'        => session('DependenciaArray'),
             ]
@@ -332,7 +332,6 @@ class DenunciaController extends Controller
                 'findDataInDenuncia'                  => 'findDataInDenuncia',
                 'showEditDenunciaDependenciaServicio' => 'listDenunciaDependenciaServicio',
                 'imagenesDenunciaItem'                => 'listImagenes',
-                'imprimirDenuncia'                    => "imprimirDenuncia/",
 
 
             ]

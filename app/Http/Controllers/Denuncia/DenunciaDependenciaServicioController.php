@@ -18,14 +18,22 @@ use Illuminate\Support\Facades\Session;
 class DenunciaDependenciaServicioController extends Controller
 {
 
-
-
-
     protected $tableName = "denuncia_dependencia_servicio";
     protected $Id = 0;
     protected $msg = "";
 
+
+
 // ***************** MUESTRA EL LISTADO DE USUARIOS ++++++++++++++++++++ //
+
+    /**
+     * @param string $tableName
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     protected function index(Request $request, $Id)
     {
         ini_set('max_execution_time', 300);

@@ -12,30 +12,24 @@ define('NOMBRE_EMPRESA',config('atemun.nombre_empresa',''));
 class HojaDenunciaController extends Controller
 {
 
-
     public function imprimirDenuncia($UUID=""){
 
         $den = Denuncia::all()->where('uuid',$UUID)->first();
-        $folio  = $den->id;
-        $timex  = $den->fecha_ingreso->format('d-m-Y H:i:s');
-        $FOLIO = "DAC-".str_pad($folio,6,'0',STR_PAD_LEFT)."-".$den->fecha_ingreso->format('y');
+
         $alto   = 6;
 
         $pdf = new DenunciaTCPDF('','mm',array(215.9, 139.7), true, 'UTF-8', false);
-        $pdf->FOLIO = $FOLIO;
-        $pdf->folio = $folio;
-        $pdf->timex = $timex;
+        $pdf->FOLIO = $den->folio_dac;
+        $pdf->folio = $den->id;
+        $pdf->timex = $den->fecha_ingreso_solicitud;
 
         $pdf->Init();
         $pdf->AddPage();
 
         $pdf->setCellPaddings(1, 1, 1, 1);
 
-// set image scale factor
         $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 
-
-// Linea 1
         $pdf->setX(5);
         $pdf->Ln(40);
         $pdf->SetLeftMargin(50);
@@ -61,30 +55,6 @@ class HojaDenunciaController extends Controller
 
         $pdf->WriteHTMLCell(195,$alto,10,$pdf->getY(),$html,0,0);
 
-        // Inicia proceso de Sellado
-/*
-        $mensaje = public_path() . "/signature/mensaje.txt";
-        $firmado = public_path() . "/signature/firmado.txt";
-        $key_pem = public_path() . "/signature/Claveprivada_FIEL_HIRC711126JT0_20211206_140329.pem";
-        $pem     = public_path() . "/signature/hirc711126jt0.pem";
-        $fp = fopen(public_path() . "/signature/mensaje.txt", "w");
-
-        $cadena_original = $den->id.'|'.$pdf->FOLIO.'|'.$pdf->timex.'|'.$den->ciudadano->id.'|'.$den->ciudadano->username.'|'.$den->ciudadano->FullName.'|'.$den->creadopor->id.'|'.$den->creadopor->username.'|'.$den->creadopor->FullName.'|'.$den->dependencia_id.'|'.$den->ubicacion_id.'|'.$den->servicio_id.'|'.$den->estatus_id;
-        $hash = sha1($cadena_original);
-
-        fwrite($fp, $hash);
-        fclose($fp);
-
-        $key=$key_pem;
-        $fp = fopen($key, "r");
-        $priv_key = fread($fp, 8192);
-
-        $pkeyid = openssl_get_privatekey($priv_key);
-
-        if (openssl_sign($mensaje, $firmado, $pkeyid,OPENSSL_ALGO_SHA1)) {
-            $sello = base64_encode($firmado);
-        }
-*/
         $pdf->SetTextColor(64,64,64);
         $pdf->SetFillColor(255,255,255);
 
@@ -116,9 +86,9 @@ class HojaDenunciaController extends Controller
 
         }
 
-        // Finaliza proceso de Sellado
-
         $pdf->Output($pdf->FOLIO . '.pdf');
 
     }
+
+
 }

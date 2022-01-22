@@ -43,7 +43,7 @@ trait InitTrait
         $this->SetAutoPageBreak(TRUE, 0.1);
         $this->SetLeftMargin(5);
         $this->SetCreator(PDF_CREATOR);
-        $this->SetAuthor('@Ch50Dev');
+        $this->SetAuthor('@CH50Dev');
         $this->SetTitle('Denuncia');
         $this->SetSubject('Ciudadana');
         $this->SetKeywords('SIAC, SIACGOB, ATENCION CIUDADANA');

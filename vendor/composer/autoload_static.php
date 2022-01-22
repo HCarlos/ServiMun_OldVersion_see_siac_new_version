@@ -735,6 +735,7 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
     public static $classMap = array (
         'ActualizacionUsuarioUbicacionImagenIdSeeder' => __DIR__ . '/../..' . '/database/seeds/ActualizacionUsuarioUbicacionImagenIdSeeder.php',
         'Agregar_Usuarios_01_Seeder' => __DIR__ . '/../..' . '/database/seeds/Agregar_Usuarios_01_Seeder.php',
+        'App\\Classes\\Denuncia\\DenunciaArchivoTCPDF' => __DIR__ . '/../..' . '/app/Classes/Denuncia/DenunciaArchivoTCPDF.php',
         'App\\Classes\\Denuncia\\DenunciaTCPDF' => __DIR__ . '/../..' . '/app/Classes/Denuncia/DenunciaTCPDF.php',
         'App\\Classes\\FiltersRules' => __DIR__ . '/../..' . '/app/Classes/FiltersRules.php',
         'App\\Classes\\Items' => __DIR__ . '/../..' . '/app/Classes/Items.php',
@@ -809,6 +810,7 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         'App\\Http\\Controllers\\Denuncia\\Respuesta\\RespuestaCiudadanaController' => __DIR__ . '/../..' . '/app/Http/Controllers/Denuncia/Respuesta/RespuestaCiudadanaController.php',
         'App\\Http\\Controllers\\Denuncia\\Respuesta\\RespuestaController' => __DIR__ . '/../..' . '/app/Http/Controllers/Denuncia/Respuesta/RespuestaController.php',
         'App\\Http\\Controllers\\Denuncia\\ServicioController' => __DIR__ . '/../..' . '/app/Http/Controllers/Denuncia/ServicioController.php',
+        'App\\Http\\Controllers\\External\\Denuncia\\HojaDenunciaArchivoController' => __DIR__ . '/../..' . '/app/Http/Controllers/External/Denuncia/HojaDenunciaArchivoController.php',
         'App\\Http\\Controllers\\External\\Denuncia\\HojaDenunciaController' => __DIR__ . '/../..' . '/app/Http/Controllers/External/Denuncia/HojaDenunciaController.php',
         'App\\Http\\Controllers\\External\\Denuncia\\ListDenunciaXLSXController' => __DIR__ . '/../..' . '/app/Http/Controllers/External/Denuncia/ListDenunciaXLSXController.php',
         'App\\Http\\Controllers\\External\\ListModelXLSXController' => __DIR__ . '/../..' . '/app/Http/Controllers/External/ListModelXLSXController.php',
@@ -4354,6 +4356,7 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         'League\\OAuth1\\Client\\Signature\\SignatureInterface' => __DIR__ . '/..' . '/league/oauth1-client/src/Signature/SignatureInterface.php',
         'Llenado_de_Catalogo_01_Seeder' => __DIR__ . '/../..' . '/database/seeds/Llenado_de_Catalogo_01_Seeder.php',
         'Llenado_de_Catalogo_02_Seeder' => __DIR__ . '/../..' . '/database/seeds/Llenado_de_Catalogo_02_Seeder.php',
+        'Llenado_de_Catalogo_03_Seeder' => __DIR__ . '/../..' . '/database/seeds/Llenado_de_Catalogo_03_Seeder.php',
         'Maatwebsite\\Excel\\Cache\\BatchCache' => __DIR__ . '/..' . '/maatwebsite/excel/src/Cache/BatchCache.php',
         'Maatwebsite\\Excel\\Cache\\CacheManager' => __DIR__ . '/..' . '/maatwebsite/excel/src/Cache/CacheManager.php',
         'Maatwebsite\\Excel\\Cache\\MemoryCache' => __DIR__ . '/..' . '/maatwebsite/excel/src/Cache/MemoryCache.php',

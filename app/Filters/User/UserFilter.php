@@ -9,6 +9,7 @@
 namespace App\Filters\User;
 
 use App\Filters\Common\QueryFilter;
+use App\Http\Controllers\Funciones\FuncionesController;
 
 class UserFilter extends QueryFilter {
 
@@ -22,15 +23,24 @@ class UserFilter extends QueryFilter {
 
     public function search($query, $search){
         if (is_null($search) || empty ($search) || trim($search) == "") {return $query;}
-        $search = strtoupper($search);
-        return $query->where(function ($query) use ($search) {
-            $query->whereRaw("CONCAT(ap_paterno,' ',ap_materno,' ',nombre) like ?", "%{$search}%")
-                ->orWhereRaw("UPPER(username) like ?", "%{$search}%")
-                ->orWhereHas('roles', function ($q) use ($search) {
-                    $q->whereRaw("UPPER(name) like ?", "%{$search}%");
-                })
-                ->orWhere('id', 'like', "%{$search}%");
-        });
+        $search   = strtoupper($search);
+        $filters  = $search;
+        $F        = new FuncionesController();
+        $tsString = $F->string_to_tsQuery( strtoupper($filters),' & ');
+        return $query->whereRaw("searchtext @@ to_tsquery('spanish', ?)", [$tsString]);
+//            ->orderByRaw("ts_rank(searchtext, to_tsquery('spanish', ?)) DESC", [$tsString]);
+
+//        ->orWhereHas('roles', function ($q) use ($search) {
+//            return $q->whereRaw("UPPER(name) like ?", "%{$search}%");
+//        })
+//        ->orWhereHas('user_adress', function ($q) use ($search) {
+//            return $q->whereRaw("UPPER(calle) like ?", "%{$search}%")
+//                ->orWhereRaw("UPPER(colonia) like ?", "%{$search}%")
+//                ->orWhereRaw("UPPER(localidad) like ?", "%{$search}%");
+//        })
+//        ->orWhere('id', 'like', "%{$search}%")
+
+
     }
 
     public function roles($query, $roles){

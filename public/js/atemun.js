@@ -15,7 +15,7 @@
                 searching: true,
                 paging: true,
                 info: true,
-                "pageLength": 25,
+                "pageLength": 50,
                 "order": [[ 0, "desc" ]],
                 "language": {
                     "lengthMenu":  "Mostrando _MENU_ entradas",

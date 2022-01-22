@@ -20,9 +20,20 @@ class UserDataController extends Controller
 
     protected $tableName = "users";
     protected $msg = "";
-    protected $max_item_for_query = 150;
+    protected $max_item_for_query = 250;
+
+
 
 // ***************** MUESTRA EL LISTADO DE USUARIOS ++++++++++++++++++++ //
+
+    /**
+     * @param string $tableName
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     protected function showListUser(Request $request)
     {
         ini_set('max_execution_time', 300);
@@ -30,7 +41,7 @@ class UserDataController extends Controller
         $filters = $request->all(['search', 'roles', 'palabras_roles']);
         $items = User::query()
             ->filterBy($filters)
-            ->orderByDesc('id')->take(1000)
+            ->orderByDesc('id')
             ->paginate($this->max_item_for_query);
         $items->appends($filters)->fragment('table');
         $user = Auth::User();

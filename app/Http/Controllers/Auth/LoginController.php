@@ -35,9 +35,18 @@ class LoginController extends Controller
      *
      * @return void
      */
+
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+        if (Auth::check()){
+            $previous_session = Auth::User()->session_id;
+            if ($previous_session) {
+                Session::getHandler()->destroy($previous_session);
+                Auth::logout();
+                redirect('/');
+            }
+        }
     }
 
     public function login(Request $request){
@@ -89,6 +98,7 @@ class LoginController extends Controller
 
     public function authenticated(Request $request, $user)
     {
+        Auth::logoutOtherDevices(request('password'));
         if ($user->session_id){
             Session::getHandler()->destroy($user->session_id);
         }
@@ -97,6 +107,29 @@ class LoginController extends Controller
         return redirect()->intended($this->redirectPath());
     }
 
+    protected function sendLoginResponse(Request $request)
+    {
+        $request->session()->regenerate();
+        $previous_session = Auth::User()->session_id;
+        if ($previous_session) {
+            Session::getHandler()->destroy($previous_session);
+        }
+
+        Auth::user()->session_id = Session::getId();
+        Auth::user()->save();
+        $this->clearLoginAttempts($request);
+
+        return $this->authenticated($request, $this->guard()->user())
+            ?: redirect()->intended($this->redirectPath());
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('login');
+    }
 
 
 }

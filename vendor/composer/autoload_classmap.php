@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'ActualizacionUsuarioUbicacionImagenIdSeeder' => $baseDir . '/database/seeds/ActualizacionUsuarioUbicacionImagenIdSeeder.php',
     'Agregar_Usuarios_01_Seeder' => $baseDir . '/database/seeds/Agregar_Usuarios_01_Seeder.php',
+    'App\\Classes\\Denuncia\\DenunciaArchivoTCPDF' => $baseDir . '/app/Classes/Denuncia/DenunciaArchivoTCPDF.php',
     'App\\Classes\\Denuncia\\DenunciaTCPDF' => $baseDir . '/app/Classes/Denuncia/DenunciaTCPDF.php',
     'App\\Classes\\FiltersRules' => $baseDir . '/app/Classes/FiltersRules.php',
     'App\\Classes\\Items' => $baseDir . '/app/Classes/Items.php',
@@ -82,6 +83,7 @@ return array(
     'App\\Http\\Controllers\\Denuncia\\Respuesta\\RespuestaCiudadanaController' => $baseDir . '/app/Http/Controllers/Denuncia/Respuesta/RespuestaCiudadanaController.php',
     'App\\Http\\Controllers\\Denuncia\\Respuesta\\RespuestaController' => $baseDir . '/app/Http/Controllers/Denuncia/Respuesta/RespuestaController.php',
     'App\\Http\\Controllers\\Denuncia\\ServicioController' => $baseDir . '/app/Http/Controllers/Denuncia/ServicioController.php',
+    'App\\Http\\Controllers\\External\\Denuncia\\HojaDenunciaArchivoController' => $baseDir . '/app/Http/Controllers/External/Denuncia/HojaDenunciaArchivoController.php',
     'App\\Http\\Controllers\\External\\Denuncia\\HojaDenunciaController' => $baseDir . '/app/Http/Controllers/External/Denuncia/HojaDenunciaController.php',
     'App\\Http\\Controllers\\External\\Denuncia\\ListDenunciaXLSXController' => $baseDir . '/app/Http/Controllers/External/Denuncia/ListDenunciaXLSXController.php',
     'App\\Http\\Controllers\\External\\ListModelXLSXController' => $baseDir . '/app/Http/Controllers/External/ListModelXLSXController.php',
@@ -3627,6 +3629,7 @@ return array(
     'League\\OAuth1\\Client\\Signature\\SignatureInterface' => $vendorDir . '/league/oauth1-client/src/Signature/SignatureInterface.php',
     'Llenado_de_Catalogo_01_Seeder' => $baseDir . '/database/seeds/Llenado_de_Catalogo_01_Seeder.php',
     'Llenado_de_Catalogo_02_Seeder' => $baseDir . '/database/seeds/Llenado_de_Catalogo_02_Seeder.php',
+    'Llenado_de_Catalogo_03_Seeder' => $baseDir . '/database/seeds/Llenado_de_Catalogo_03_Seeder.php',
     'Maatwebsite\\Excel\\Cache\\BatchCache' => $vendorDir . '/maatwebsite/excel/src/Cache/BatchCache.php',
     'Maatwebsite\\Excel\\Cache\\CacheManager' => $vendorDir . '/maatwebsite/excel/src/Cache/CacheManager.php',
     'Maatwebsite\\Excel\\Cache\\MemoryCache' => $vendorDir . '/maatwebsite/excel/src/Cache/MemoryCache.php',

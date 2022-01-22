@@ -107,7 +107,15 @@ class DenunciaFilter extends QueryFilter
         $search = strtoupper($search);
         return $query->orWhereHas('ciudadanos', function ($q) use ($search) {
 //            dd($q->whereRaw("CONCAT(ap_paterno,' ',ap_materno,' ',nombre) like ?", "%{$search}%"));
-            return $q->whereRaw("CONCAT(ap_paterno,' ',ap_materno,' ',nombre) like ?", "%{$search}%");
+//            dd($search);
+
+//            return $q->whereRaw("CONCAT(ap_paterno,' ',ap_materno,' ',nombre) like ?", "%{$search}%");
+
+            $filters  = $search;
+            $F        = new FuncionesController();
+            $tsString = $F->string_to_tsQuery( strtoupper($filters),' & ');
+            $q->whereRaw("searchtext @@ to_tsquery('spanish', ?)", [$tsString]);
+
         });
     }
 

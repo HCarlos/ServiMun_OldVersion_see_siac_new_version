@@ -481,6 +481,7 @@ Route::get('enviar', ['as' => 'enviar', function () {
     return "Se envío el email";
 }]);
 
-Route::get('/imprimir_denuncia/{uuid}', 'External\Denuncia\HojaDenunciaController@imprimirDenuncia')->name('imprimirDenuncia/');
+Route::get('/imprimir_denuncia/{uuid}', 'External\Denuncia\HojaDenunciaController@imprimirDenuncia')->name('imprimir_denuncia/');
+Route::get('/imprimir_denuncia_archivo/{uuid}', 'External\Denuncia\HojaDenunciaArchivoController@imprimirDenuncia')->name('imprimir_denuncia_archivo/');
 
 //Route::get('/home-original', 'HomeController@index')->name('home-original');
