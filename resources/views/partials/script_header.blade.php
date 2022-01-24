@@ -42,6 +42,6 @@
 <link href="{{ asset('css/servimun.css') }}?timestamp()" rel="stylesheet" type="text/css"/>
 
 {{--<link href="{{ asset('css/all.css') }}?time()" rel="stylesheet"  type="text/css">--}}
-
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 @yield('styles')

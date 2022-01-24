@@ -58,6 +58,19 @@ trait UserAttributes
         return "{$this->ap_paterno} {$this->ap_materno} {$this->nombre} - {$this->id} - {$this->username} - {$this->dependencia_abreviatura_array}";
     }
 
+    public function getFullUbicationAttribute(){
+        return $this->user_adress->calle.' '.
+            $this->user_adress->num_ext.' '.
+            $this->user_adress->num_int.' '.
+            $this->user_adress->colonia.' '.
+            $this->user_adress->comunidad.' '.
+            $this->user_adress->ciudad.' '.
+            $this->user_adress->municipio.' '.
+            $this->user_adress->estado.' '.
+            $this->user_adress->cp;
+    }
+
+
     public function getStrGeneroAttribute() {
         $Gen = "Desconocido";
         switch ($this->genero){

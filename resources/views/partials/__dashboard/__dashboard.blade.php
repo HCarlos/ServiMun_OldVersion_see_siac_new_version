@@ -17,6 +17,7 @@
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
         </div> <!-- end col-->
+
         <div class="col-lg-6" style="width: 100% !important;">
             <div class="card">
                 <div class="card-body">
@@ -24,24 +25,91 @@
                 </div>
             </div>
         </div>
+
+        <div class="col-lg-12" style="width: 100% !important;">
+            <div class="card " style="width: 100% !important;">
+                <div class="card-header">
+                    <h4 class="header-title">Relación de Dependencia y Estatus</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table mb-0">
+                            <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Abreviatura</th>
+                                <th scope="col">Rec</th>
+                                <th scope="col">Ges</th>
+                                <th scope="col">EnP</th>
+                                <th scope="col">NoP</th>
+                                <th scope="col">Tur</th>
+                                <th scope="col">Ord</th>
+                                <th scope="col">Ana</th>
+                                <th scope="col">Est</th>
+                                <th scope="col">Amp</th>
+                                <th scope="col">Sup</th>
+                                <th scope="col">Res</th>
+                                <th scope="col">Cer</th>
+                                <th scope="col">Total</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+
+                            @foreach($totalestatus as $d)
+                                <tr>
+                                    <td scope="row">{{ $d->dependencia_id }}</td>
+                                    <td>{{ $d->abreviatura }}</td>
+                                    <td>{{ $d->ocho ?? '' }}</td>
+                                    <td>{{ $d->dos ?? ''  }}</td>
+                                    <td>{{ $d->uno ?? ''  }}</td>
+                                    <td>{{ $d->tres ?? ''  }}</td>
+                                    <td>{{ $d->cuatro ?? ''  }}</td>
+                                    <td>{{ $d->siete ?? ''  }}</td>
+                                    <td>{{ $d->nueve ?? ''  }}</td>
+                                    <td>{{ $d->once ?? ''  }}</td>
+                                    <td>{{ $d->diez ?? ''  }}</td>
+                                    <td>{{ $d->cinco ?? ''  }}</td>
+                                    <td>{{ $d->seis ?? ''  }}</td>
+                                    <td>{{ $d->doce ?? ''  }}</td>
+                                    <td>{{ intval($d->ocho) + intval($d->dos) + intval($d->uno) + intval($d->tres) + intval($d->cuatro) + intval($d->siete) + intval($d->nueve) + intval($d->once) + intval($d->diez) + intval($d->cinco) + intval($d->seis) + intval($d->doce)  ?? ''  }}</td>
+                                </tr>
+                            @endforeach
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div  id="chart_div" style="width: 100% !important; height: 1600px;"></div>
+                </div>
+        </div>
     </div>
 </div>
 
+
+
 @section('script_interno')
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" >
 
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
 
-    google.charts.load('current', {'packages':['bar']});
-    google.charts.setOnLoadCallback(drawChart);
+
+
+    google.charts.load('current', {packages: ['corechart', 'bar']});
+    google.load('visualization', '1', {packages: ['corechart', 'bar']});
+    google.setOnLoadCallback(drawChart);
+    google.setOnLoadCallback(drawChartMatrix);
+
+        // google.charts.setOnLoadCallback(drawBasic);
+
+    //google.charts.setOnLoadCallback(drawChart);
+
+//    google.charts.setOnLoadCallback(drawChartMatrix);
+
+    // google.charts.setOnLoadCallback(Stacked);
+
 
     function drawChart() {
-        {{--var data = google.visualization.arrayToDataTable([--}}
-        {{--    ['Dependencia', 'Total', { role: 'style' } ],--}}
-        {{--    @foreach($totales as $d)--}}
-        {{--          ['{{$d->abreviatura}}', {{ $d->total }}, '{{ strtoupper(trim($d->class_css)) == '' ? '#FFCC00' : strtoupper(trim($d->class_css)) }}'],--}}
-        {{--    @endforeach--}}
-        {{--]);--}}
+
 
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Dependencia');
@@ -52,6 +120,14 @@
                       ['{{$d->abreviatura}}', {{ $d->total }}, 'color: {{ strtoupper(trim($d->class_css)) }}'],
                 @endforeach
         ]);
+
+        var view = new google.visualization.DataView(data);
+        view.setColumns([0, 1,
+            { calc: "stringify",
+                sourceColumn: 1,
+                type: "string",
+                role: "annotation" },
+            2]);
 
         var options = {
             chart: {
@@ -71,9 +147,74 @@
         var chart = new google.charts.Bar(document.getElementById('bar1'));
         chart.draw(data, options);
 
+    }
 
+    function drawChartMatrix() {
+
+        var leyendas = new Array();
+            leyendas[0] = "Estatus";
+             var i = 1;
+            @foreach($estatus as $d)
+                leyendas[i] = "{{ strtoupper(trim(substr($d->estatus,0,3))) }}";
+                i = i + 1;
+            @endforeach
+                leyendas[i] = { role: 'annotation' };
+                // alert(leyendas.length);
+        var data = new google.visualization.arrayToDataTable([
+                ['Estatus','Rec','Ges','EnP','NoP','Tur','Ord','Ana','Est','Amp','Sup','Res','Cer',{ role: 'annotation' }],
+            @foreach($totalestatus as $d)
+                [
+                '{{ $d->abreviatura }}',
+                parseInt({{ intval( $d->ocho ) ?? 0}},0),
+                parseInt({{ intval( $d->dos ) ?? 0 }},0),
+                parseInt({{ intval( $d->uno ) ?? 0 }},0),
+                parseInt({{ intval( $d->tres ) ?? 0 }},0),
+                parseInt({{ intval( $d->cuatro ) ?? 0 }},0),
+                parseInt({{ intval( $d->siete ) ?? 0 }},0),
+                parseInt({{ intval( $d->nueve ) ?? 0 }},0),
+                parseInt({{ intval( $d->once ) ?? 0 }},0),
+                parseInt({{ intval( $d->diez ) ?? 0 }},0),
+                parseInt({{ intval( $d->cinco ) ?? 0 }},0),
+                parseInt({{ intval( $d->seis ) ?? 0 }},0),
+                parseInt({{ intval( $d->doce ) ?? 0 }},0),
+                    '{{$d->ocho + $d->dos + $d->uno + $d->tres + $d->cuatro + $d->siete + $d->nueve + $d->once + $d->diez + $d->cinco + $d->seis + $d->doce}}'
+            ],
+        @endforeach
+
+        ]);
+
+        // alert(data[0]);
+
+        // ['SAS', 10, 24, 20, 32, 18, 5, 10, 24, 20, 32, 18, 5,''],
+        //     ['DOTSM', 5, 18, 32, 20, 24, 10, 5, 18, 32, 31, 45, 3,''],
+
+        var i = 0;
+
+
+        var options = {
+            chart: {
+                title: 'Gráfica de Captura de Solicitudes',
+                subtitle: 'Corte al : @php echo date('d-m-Y H:i:s') @endphp',
+            },
+            hwidth: 1400,
+            height: 1600,
+            legend: { position: 'top', maxLines: 3 },
+            bar: { groupWidth: '75%' },
+            isStacked: true,
+            is3D:true,
+            'allowHtml' : true,
+            bars: 'horizontal'
+
+        };
+
+        //alert(options);
+
+        var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+        // alert(chart);
 
     }
-</script>
+
+    </script>
 
 @endsection()

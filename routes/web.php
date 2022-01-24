@@ -11,6 +11,7 @@
 |
 */
 
+use App\Models\Catalogos\Estatu;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -50,6 +51,38 @@ Route::group(['middleware' => 'auth'], function () {
             ->orderByDesc('total')
             ->get();
 
+        DB::statement("CREATE EXTENSION IF NOT EXISTS tablefunc;");
+
+        $estatusdep = DB::select("SELECT split_part(key,'-',1) AS dependencia_id, split_part(key,'-',2) AS dependencia, split_part(key,'-',3) AS abreviatura,  Uno, Dos, Tres, Cuatro, Cinco, Seis, Siete, Ocho, Nueve, Diez, Once, Doce
+        FROM crosstab(
+              'SELECT CONCAT(dd.dependencia_id,''-'',d.dependencia,''-'',d.abreviatura) AS key, dd.estatu_id, COUNT(dd.estatu_id)
+                FROM denuncia_dependencia_servicio_estatus as dd
+                LEFT JOIN  dependencias as d
+                    ON dd.dependencia_id = d.id
+                GROUP BY key, estatu_id ORDER BY 1,2',
+              'SELECT estatu_id FROM generate_series(1,12) AS estatu_id'
+        ) AS (
+            key text,
+            Uno NUMERIC(10),
+            Dos NUMERIC(10),
+            Tres NUMERIC(10),
+            Cuatro NUMERIC(10),
+            Cinco NUMERIC(10),
+            Seis NUMERIC(10),
+            Siete NUMERIC(10),
+            Ocho NUMERIC(10),
+            Nueve NUMERIC(10),
+            Diez NUMERIC(10),
+            Once NUMERIC(10),
+            Doce NUMERIC(10)
+        )
+        order by dependencia_id");
+
+
+        $estatus = Estatu::all()->sortBy('id');
+
+        // dd($estatusdep);
+
 //        $dependencias = DB::raw('SELECT COUNT(den.dependencia_id), dep.dependencia
 //FROM denuncias as den
 //LEFT JOIN dependencias as dep
@@ -59,7 +92,7 @@ Route::group(['middleware' => 'auth'], function () {
 //        dd($dep);
 
         $cls = ['text-primary','text-secondary','text-success','text-danger','text-warning','text-info','text-light','text-dark'];
-        return view('partials.dashboard', ['totales' => $dep, 'arrCls' => $cls]);
+        return view('partials.dashboard', ['totales' => $dep, 'arrCls' => $cls,'totalestatus' => $estatusdep, 'estatus' => $estatus ]);
     });
 
     // USUARIOS
