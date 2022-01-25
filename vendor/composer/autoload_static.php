@@ -743,6 +743,7 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         'App\\Classes\\MyTCPDF' => __DIR__ . '/../..' . '/app/Classes/MyTCPDF.php',
         'App\\Classes\\RemoveItemSafe' => __DIR__ . '/../..' . '/app/Classes/RemoveItemSafe.php',
         'App\\Classes\\ValidatorPassword' => __DIR__ . '/../..' . '/app/Classes/ValidatorPassword.php',
+        'App\\Classes\\sector' => __DIR__ . '/../..' . '/app/Classes/sector.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Filters\\Catalogo\\AfiliacionFilter' => __DIR__ . '/../..' . '/app/Filters/Catalogo/AfiliacionFilter.php',

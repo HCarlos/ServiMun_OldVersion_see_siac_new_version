@@ -27,13 +27,16 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
 
+
 class DenunciaController extends Controller
 {
 
 
     protected $tableName = "denuncias";
+
+    protected $paginationTheme = 'bootstrap';
     protected $msg = "";
-    protected $max_item_for_query = 150;
+    protected $max_item_for_query = 250;
 
 
 
@@ -305,8 +308,8 @@ class DenunciaController extends Controller
             ->filterBy($queryFilters)
             ->orderByDesc('id')
             ->paginate($this->max_item_for_query);
-        $items->fragment('table');
 
+        $items->appends($queryFilters)->fragment('table');
 
 
         $user = Auth::User();

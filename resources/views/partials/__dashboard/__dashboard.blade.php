@@ -151,15 +151,6 @@
 
     function drawChartMatrix() {
 
-        var leyendas = new Array();
-            leyendas[0] = "Estatus";
-             var i = 1;
-            @foreach($estatus as $d)
-                leyendas[i] = "{{ strtoupper(trim(substr($d->estatus,0,3))) }}";
-                i = i + 1;
-            @endforeach
-                leyendas[i] = { role: 'annotation' };
-                // alert(leyendas.length);
         var data = new google.visualization.arrayToDataTable([
                 ['Estatus','Rec','Ges','EnP','NoP','Tur','Ord','Ana','Est','Amp','Sup','Res','Cer',{ role: 'annotation' }],
             @foreach($totalestatus as $d)
@@ -182,28 +173,28 @@
         @endforeach
 
         ]);
-
-        // alert(data[0]);
-
-        // ['SAS', 10, 24, 20, 32, 18, 5, 10, 24, 20, 32, 18, 5,''],
-        //     ['DOTSM', 5, 18, 32, 20, 24, 10, 5, 18, 32, 31, 45, 3,''],
-
-        var i = 0;
+        var view = new google.visualization.DataView(data);
+        view.setColumns([0, 1,
+            { calc: "stringify",
+                sourceColumn: 1,
+                type: "string",
+                role: "annotation" },
+            2]);
 
 
         var options = {
-            chart: {
-                title: 'Gráfica de Captura de Solicitudes',
-                subtitle: 'Corte al : @php echo date('d-m-Y H:i:s') @endphp',
-            },
+            title: 'Gráfico de Estatus por Dependencia',
+            subtitle: 'Chess opening moves',
+
             hwidth: 1400,
             height: 1600,
-            legend: { position: 'top', maxLines: 3 },
-            bar: { groupWidth: '75%' },
             isStacked: true,
-            is3D:true,
-            'allowHtml' : true,
-            bars: 'horizontal'
+            axes: {
+                x: {
+                    0: { side: 'top', label: 'Percentage'} // Top x-axis.
+                }
+            },
+            bar: { groupWidth: "90%" }
 
         };
 

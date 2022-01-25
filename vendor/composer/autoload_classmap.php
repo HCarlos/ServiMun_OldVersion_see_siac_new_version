@@ -16,6 +16,7 @@ return array(
     'App\\Classes\\MyTCPDF' => $baseDir . '/app/Classes/MyTCPDF.php',
     'App\\Classes\\RemoveItemSafe' => $baseDir . '/app/Classes/RemoveItemSafe.php',
     'App\\Classes\\ValidatorPassword' => $baseDir . '/app/Classes/ValidatorPassword.php',
+    'App\\Classes\\sector' => $baseDir . '/app/Classes/sector.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Filters\\Catalogo\\AfiliacionFilter' => $baseDir . '/app/Filters/Catalogo/AfiliacionFilter.php',
