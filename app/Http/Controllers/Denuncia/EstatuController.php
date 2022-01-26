@@ -27,7 +27,7 @@ class EstatuController extends Controller
         $items->appends($filters)->fragment('table');
         $user = Auth::User();
 
-        return view('catalogos.catalogo.estatu.estatu_list',
+        return view('SIAC.estructura.estatu.estatu_list',
             [
                 'items'           => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
@@ -36,12 +36,12 @@ class EstatuController extends Controller
                 'searchInList'    => 'listEstatus',
                 'newWindow'       => true,
                 'tableName'       => $this->tableName,
-                'showEdit'        => 'editEstatu',
+                'showEdit'        => 'editEstatuV2',
                 'newItem'         => 'newEstatuV2',
                 'removeItem'      => 'removeEstatu',
-                'IsModal'         => false,
+                'IsModal'         => true,
                 'IsModalNew'      => true,
-                'IsModalEdit'     => false,
+                'IsModalEdit'     => true,
                 'exportModel'     => 24,
             ]
         );
@@ -53,7 +53,7 @@ class EstatuController extends Controller
         $Dependencias = Dependencia::select('id','dependencia')
             ->orderBy('dependencia')
             ->get();
-        return view('catalogos.catalogo.estatu.estatu_new',
+        return view('SIAC.estructura.estatu.estatu_modal',
             [
                 'dependencia' => $Dependencias,
                 'editItemTitle' => 'Nuevo',
@@ -150,12 +150,14 @@ class EstatuController extends Controller
         $user = Auth::user();
         return view('SIAC.estructura.estatu.estatu_modal',
             [
+
                 'Titulo'          => isset($item->subarea) ? $item->subarea : 'Nueva',
                 'Route'           => 'updateEstatuV2',
                 'Method'          => 'POST',
                 'items_forms'     => 'SIAC.estructura.estatu.__estatu.__estatu_edit',
                 'IsNew'           => false,
                 'IsModal'         => true,
+                'IsModalEdit'     => true,
                 'items'           => $item,
                 'user'            => $user,
                 'dependencia'     => $Dependencias,

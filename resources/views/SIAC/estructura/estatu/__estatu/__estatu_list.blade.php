@@ -6,6 +6,8 @@
                     <tr role="row">
                         <th class="sorting_asc" aria-sort="ascending" aria-label="Name: activate to sort column descending">ID</th>
                         <th class="sorting" >Status</th>
+                        <th class="sorting" >Abreviatura</th>
+                        <th class="sorting" >Orden de Impresión</th>
                         <th class="sorting" >Dependencia</th>
                         <th class="sorting" >Predeterminado</th>
                         <th style="width: 100vw"></th>
@@ -16,9 +18,11 @@
                     <tr>
                         <td class="table-user">{{$item->id}}</td>
                         <td>{{$item->estatus}}</td>
+                        <td>{{$item->abreviatura}}</td>
+                        <td>{{$item->orden_impresion}}</td>
                         <td class="w-30vh">
                             @foreach($item->dependencias as $dep)
-                            <b class="badge badge-warning"> {{$dep->dependencia}} </b><br>
+                            <b class="badge badge-warning"> {{$dep->abreviatura}} </b><br>
                             @endforeach
                         </td>
                         <td class="text-center">
@@ -26,7 +30,7 @@
                         </td>
                         <td class="table-action w-100">
                             <div class="button-list">
-                                @if( strtoupper(trim($item->estatus)) != 'CERRADO' )
+                                @if( strtoupper(trim($item->estatus)) != 'CERRADO' || Auth::user()->isRole('Administrator') )
                                     @include('shared.ui_kit.__edit_item')
                                     @include('shared.ui_kit.__remove_item')
                                 @endif

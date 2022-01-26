@@ -15,7 +15,7 @@ class Servicio extends Model
     protected $table = 'servicios';
 
     protected $fillable = [
-        'id', 'servicio','habilitado', 'medida_id', 'subarea_id',
+        'id', 'servicio','habilitado', 'medida_id', 'subarea_id','orden_impresion',
     ];
     protected $hidden = ['deleted_at','created_at','updated_at'];
     protected $casts = ['habilitado'=>'boolean',];

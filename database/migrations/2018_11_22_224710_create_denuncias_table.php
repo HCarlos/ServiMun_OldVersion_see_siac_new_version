@@ -53,7 +53,7 @@ class CreateDenunciasTable extends Migration
         Schema::create($tableNames['dependencia'], function (Blueprint $table) use ($tableNames){
             $table->increments('id');
             $table->string('dependencia',250)->default('')->nullable();
-            $table->string('abreviatura',5)->default('')->nullable();
+            $table->string('abreviatura',10)->default('')->nullable();
             $table->string('class_css',50)->default('')->nullable();
             $table->boolean('visible_internet')->default(true)->nullable();
             $table->boolean('is_areas')->default(false)->nullable();

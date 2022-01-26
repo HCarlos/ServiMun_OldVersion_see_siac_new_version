@@ -8,6 +8,24 @@
     </div>
 </div>
 <div class="form-group row mb-1">
+    <label for = "abreviatura" class="col-md-3 col-form-label has-abreviatura">Abreviatura</label>
+    <div class="col-md-9">
+        <input type="text" name="abreviatura" id="abreviatura" value="{{ old('abreviatura') }}" class="form-control" />
+        <span class="has-abreviatura">
+            <strong class="text-danger"></strong>
+        </span>
+    </div>
+</div>
+<div class="form-group row mb-1">
+    <label for = "orden_impresion" class="col-md-3 col-form-label has-orden_impresion">Orden Impresión</label>
+    <div class="col-md-9">
+        <input type="number" name="orden_impresion" id="orden_impresion" value="{{ old('orden_impresion') }}" class="form-control" />
+        <span class="has-orden_impresion">
+            <strong class="text-danger"></strong>
+        </span>
+    </div>
+</div>
+<div class="form-group row mb-1">
     <label for = "dependencia_id" class="col-md-3 col-form-label has-dependencia_id">Dependencia</label>
     <div class="col-md-9">
         <select class="dependencia_id form-control select2" data-toggle="select2"  name="dependencia_id" id="dependencia_id" size="1">

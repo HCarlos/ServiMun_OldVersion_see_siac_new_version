@@ -3,14 +3,52 @@
         <div class="col-lg-6">
             <div class="card " style="width: 100% !important;">
                 <div class="card-header">
+                    <h4 class="header-title">Parámetros de Consulta</h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{{ route('dashboard') }}">
+                        @csrf
+                        <div class="form-row mb-1">
+                            <label for="desde" class="col-md-2 col-form-label text-right">Desde</label>
+                            <div class="col-md-4">
+                                {{ Form::date('desde', $FI, ['id'=>'desde','class'=>'form-control']) }}
+                            </div>
+                            <label for="hasta" class="col-md-2 col-form-label text-right">Hasta</label>
+                            <div class="col-md-4">
+                                {{ Form::date('hasta', $FF, ['id'=>'hasta','class'=>'form-control']) }}
+                            </div>
+                        </div>
+                        <div class="form-row mt-3">
+                            <div class="col-md-8">
+                            </div>
+                            <div class="col-md-4  text-right">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-search"></i> Buscar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col-->
+        <div class="col-lg-6">
+        </div> <!-- end col-->
+    </div>
+</div>
+
+<div class="col-lg-12">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card " style="width: 100% !important;">
+                <div class="card-header">
                     <h4 class="header-title">Total de Solicitudes</h4>
                 </div>
                 <div class="card-body">
                     <div class="chart-widget-list">
                         @foreach($totales as $d)
                         <p>
-                            <i class="mdi mdi-square-outline " style="background: {{ strtoupper(trim($d->class_css)) }} !important;"></i> {{ $d->dependencia}}
-                            <span class="float-right">{{ $d->total }}</span>
+                            <i class="mdi mdi-square-outline " style="background: {{ strtoupper(trim( $d[ 3 ])) }} !important;"></i> {{ $d[ 1 ] }}
+                            <span class="float-right"></span> {{ $d[ 16 ] }}
                         </p>
                         @endforeach
                     </div>
@@ -58,21 +96,21 @@
 
                             @foreach($totalestatus as $d)
                                 <tr>
-                                    <td scope="row">{{ $d->dependencia_id }}</td>
-                                    <td>{{ $d->abreviatura }}</td>
-                                    <td>{{ $d->ocho ?? '' }}</td>
-                                    <td>{{ $d->dos ?? ''  }}</td>
-                                    <td>{{ $d->uno ?? ''  }}</td>
-                                    <td>{{ $d->tres ?? ''  }}</td>
-                                    <td>{{ $d->cuatro ?? ''  }}</td>
-                                    <td>{{ $d->siete ?? ''  }}</td>
-                                    <td>{{ $d->nueve ?? ''  }}</td>
-                                    <td>{{ $d->once ?? ''  }}</td>
-                                    <td>{{ $d->diez ?? ''  }}</td>
-                                    <td>{{ $d->cinco ?? ''  }}</td>
-                                    <td>{{ $d->seis ?? ''  }}</td>
-                                    <td>{{ $d->doce ?? ''  }}</td>
-                                    <td>{{ intval($d->ocho) + intval($d->dos) + intval($d->uno) + intval($d->tres) + intval($d->cuatro) + intval($d->siete) + intval($d->nueve) + intval($d->once) + intval($d->diez) + intval($d->cinco) + intval($d->seis) + intval($d->doce)  ?? ''  }}</td>
+                                    <td scope="row">{{ $d[ 0 ] }}</td>
+                                    <td scope="row">{{ $d[ 2 ] }}</td>
+                                    <td scope="row">{{ $d[ 4 ] }}</td>
+                                    <td scope="row">{{ $d[ 5 ] }}</td>
+                                    <td scope="row">{{ $d[ 6 ] }}</td>
+                                    <td scope="row">{{ $d[ 7 ] }}</td>
+                                    <td scope="row">{{ $d[ 8 ] }}</td>
+                                    <td scope="row">{{ $d[ 9 ] }}</td>
+                                    <td scope="row">{{ $d[ 10 ] }}</td>
+                                    <td scope="row">{{ $d[ 11 ] }}</td>
+                                    <td scope="row">{{ $d[ 12 ] }}</td>
+                                    <td scope="row">{{ $d[ 13 ] }}</td>
+                                    <td scope="row">{{ $d[ 14 ] }}</td>
+                                    <td scope="row">{{ $d[ 15 ] }}</td>
+                                    <td scope="row">{{ $d[ 16 ] }}</td>
                                 </tr>
                             @endforeach
 
@@ -117,7 +155,7 @@
         data.addColumn({type: 'string', role: 'style'});
         data.addRows([
                 @foreach($totales as $d)
-                      ['{{$d->abreviatura}}', {{ $d->total }}, 'color: {{ strtoupper(trim($d->class_css)) }}'],
+                      ['{{ $d[ 2 ] }}', {{ $d[ 16 ] }}, 'color: {{ strtoupper(trim( $d[ 3 ] )) }}'],
                 @endforeach
         ]);
 
@@ -136,7 +174,7 @@
             },
             colors: [
                 @foreach($totales as $d)
-                     '{{ strtoupper(trim($d->class_css))  }}',
+                     '{{ strtoupper(trim(  $d[ 3 ]  ))  }}',
                 @endforeach
             ],
             is3D:true,
@@ -155,20 +193,20 @@
                 ['Estatus','Rec','Ges','EnP','NoP','Tur','Ord','Ana','Est','Amp','Sup','Res','Cer',{ role: 'annotation' }],
             @foreach($totalestatus as $d)
                 [
-                '{{ $d->abreviatura }}',
-                parseInt({{ intval( $d->ocho ) ?? 0}},0),
-                parseInt({{ intval( $d->dos ) ?? 0 }},0),
-                parseInt({{ intval( $d->uno ) ?? 0 }},0),
-                parseInt({{ intval( $d->tres ) ?? 0 }},0),
-                parseInt({{ intval( $d->cuatro ) ?? 0 }},0),
-                parseInt({{ intval( $d->siete ) ?? 0 }},0),
-                parseInt({{ intval( $d->nueve ) ?? 0 }},0),
-                parseInt({{ intval( $d->once ) ?? 0 }},0),
-                parseInt({{ intval( $d->diez ) ?? 0 }},0),
-                parseInt({{ intval( $d->cinco ) ?? 0 }},0),
-                parseInt({{ intval( $d->seis ) ?? 0 }},0),
-                parseInt({{ intval( $d->doce ) ?? 0 }},0),
-                    '{{$d->ocho + $d->dos + $d->uno + $d->tres + $d->cuatro + $d->siete + $d->nueve + $d->once + $d->diez + $d->cinco + $d->seis + $d->doce}}'
+                '{{  $d[2 ]  }}',
+                parseInt( {{ intval( $d[4] ) ?? 0 }},0),
+                parseInt({{ intval( $d[ 5 ] ) ?? 0 }},0),
+                parseInt({{ intval( $d[ 6 ] ) ?? 0 }},0),
+                parseInt({{ intval( $d[ 7 ] ) ?? 0 }},0),
+                parseInt({{ intval( $d[ 8 ] ) ?? 0 }},0),
+                parseInt({{ intval( $d[ 9 ] ) ?? 0 }},0),
+                parseInt({{ intval( $d[ 10 ] ) ?? 0 }},0),
+                parseInt({{ intval( $d[ 11 ] ) ?? 0 }},0),
+                parseInt({{ intval( $d[ 12 ] ) ?? 0 }},0),
+                parseInt({{ intval( $d[ 13 ] ) ?? 0 }},0),
+                parseInt({{ intval( $d[ 14 ] ) ?? 0 }},0),
+                parseInt({{ intval( $d[ 15 ] ) ?? 0 }},0),
+                    '{{ intval( $d[ 16 ] ) ?? 0 }}'
             ],
         @endforeach
 

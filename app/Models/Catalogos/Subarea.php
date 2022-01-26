@@ -15,7 +15,7 @@ class Subarea extends Model
     protected $table = 'subareas';
 
     protected $fillable = [
-        'id', 'subarea','area_id','jefe_id',
+        'id', 'subarea','area_id','jefe_id','abreviatura','orden_impresion',
     ];
     protected $hidden = ['deleted_at','created_at','updated_at'];
 

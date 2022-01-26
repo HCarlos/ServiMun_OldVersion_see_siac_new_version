@@ -18,7 +18,7 @@ class Dependencia extends Model
     protected $table = 'dependencias';
 
     protected $fillable = [
-        'id', 'dependencia', 'abreviatura','class_css','visible_internet','is_areas','jefe_id','user_id',
+        'id', 'dependencia', 'abreviatura','class_css','visible_internet','is_areas','jefe_id','user_id','orden_impresion',
     ];
     protected $hidden = ['deleted_at','created_at','updated_at'];
     protected $casts = ['visible_internet'=>'boolean','is_areas'=>'boolean',];
@@ -42,6 +42,9 @@ class Dependencia extends Model
 
     public function enlaces(){
         return $this->belongsToMany(User::class);
+    }
+    public function denuncia(){
+        return $this->hasOne(Denuncia::class,'id','denuncia_id');
     }
 
     public function denuncias(){

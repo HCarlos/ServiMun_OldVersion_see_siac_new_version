@@ -9,6 +9,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use App\Classes\MessageAlertClass;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Support\Facades\Auth;
 
 class StatuRequest extends FormRequest
 {
@@ -25,8 +26,10 @@ class StatuRequest extends FormRequest
     public function validationData(){
         $attributes = parent::all();
         $attributes['estatus'] = strtoupper(trim($attributes['estatus']));
-        $attributes['estatus'] = $attributes['estatus'] == "CERRADO" ? "CERRADO_XXXXXX" : $attributes['estatus'];
+        if (!Auth::user()->isRole('Administrator')){
+            $attributes['estatus'] = $attributes['estatus'] == "CERRADO" ? "CERRADO_XXXXXX" : $attributes['estatus'];
             $this->replace($attributes);
+        }
         return parent::all();
     }
 
@@ -64,6 +67,8 @@ class StatuRequest extends FormRequest
             $Item = [
                 'estatus' => strtoupper($this->estatus),
                 'predeterminado' => $this->predeterminado==1 ? true : false,
+                'abreviatura' => strtoupper($this->abreviatura),
+                'orden_impresion' => strtoupper($this->orden_impresion),
             ];
 
             if ( $this->predeterminado == 1) {

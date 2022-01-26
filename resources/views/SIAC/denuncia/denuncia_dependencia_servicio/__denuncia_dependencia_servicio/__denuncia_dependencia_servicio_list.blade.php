@@ -7,6 +7,8 @@
             <div class="card-body">
                 <p><strong>DESCRIPCIÓN:</strong></p>
                 <p>{{$Denuncia->descripcion}}</p>
+                <p><strong>REFERENCIA / OBSERVACIONES:</strong></p>
+                <p>{{$Denuncia->referencia.'  '.$Denuncia->observaciones}}</p>
             </div>
         </div>
     </div>
