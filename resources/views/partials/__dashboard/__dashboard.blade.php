@@ -11,11 +11,11 @@
                         <div class="form-row mb-1">
                             <label for="desde" class="col-md-2 col-form-label text-right">Desde</label>
                             <div class="col-md-4">
-                                {{ Form::date('desde', $FI, ['id'=>'desde','class'=>'form-control']) }}
+                                {{ Form::date('desde', date('Y-m-d', strtotime($FI)), ['id'=>'desde','class'=>'form-control']) }}
                             </div>
                             <label for="hasta" class="col-md-2 col-form-label text-right">Hasta</label>
                             <div class="col-md-4">
-                                {{ Form::date('hasta', $FF, ['id'=>'hasta','class'=>'form-control']) }}
+                                {{ Form::date('hasta', date('Y-m-d', strtotime($FF)), ['id'=>'hasta','class'=>'form-control']) }}
                             </div>
                         </div>
                         <div class="form-row mt-3">
@@ -41,7 +41,7 @@
         <div class="col-lg-6">
             <div class="card " style="width: 100% !important;">
                 <div class="card-header">
-                    <h4 class="header-title">Total de Solicitudes</h4>
+                    <h4 class="header-title">Total de Solicitudes ( {{ $FI.' - '.$FF }} )</h4>
                 </div>
                 <div class="card-body">
                     <div class="chart-widget-list">
@@ -59,7 +59,11 @@
         <div class="col-lg-6" style="width: 100% !important;">
             <div class="card">
                 <div class="card-body">
-                    <div class="mb-5 mt-4" id="bar1" style="width: 100%; height: 500px;"></div>
+{{--                    <div class="mb-5 mt-4" id="bar1" style="width: 100%; height: 500px;"></div>--}}
+                    <h4 class="header-title">Total de Solicitudes ( 19-01-2022 - 26-01-2022 )</h4>
+                    <p>&nbsp;</p>
+                    <div class="step-container" style="width: 100% !important;"></div>
+{{--                    <div class="bar-container-horizontal" style="width: 100%;height: 1000px;"></div>--}}
                 </div>
             </div>
         </div>
@@ -67,7 +71,7 @@
         <div class="col-lg-12" style="width: 100% !important;">
             <div class="card " style="width: 100% !important;">
                 <div class="card-header">
-                    <h4 class="header-title">Relación de Dependencia y Estatus</h4>
+                    <h4 class="header-title">Relación de Dependencia y Estatus ( {{ $FI.' - '.$FF }} ) </h4>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -76,18 +80,9 @@
                             <tr>
                                 <th scope="col">ID</th>
                                 <th scope="col">Abreviatura</th>
-                                <th scope="col">Rec</th>
-                                <th scope="col">Ges</th>
-                                <th scope="col">EnP</th>
-                                <th scope="col">NoP</th>
-                                <th scope="col">Tur</th>
-                                <th scope="col">Ord</th>
-                                <th scope="col">Ana</th>
-                                <th scope="col">Est</th>
-                                <th scope="col">Amp</th>
-                                <th scope="col">Sup</th>
-                                <th scope="col">Res</th>
-                                <th scope="col">Cer</th>
+                                @foreach($estatus as $d => $value)
+                                    <th scope="col">{{ $value }}</th>
+                                @endforeach
                                 <th scope="col">Total</th>
                             </tr>
                             </thead>
@@ -98,19 +93,19 @@
                                 <tr>
                                     <td scope="row">{{ $d[ 0 ] }}</td>
                                     <td scope="row">{{ $d[ 2 ] }}</td>
-                                    <td scope="row">{{ $d[ 4 ] }}</td>
-                                    <td scope="row">{{ $d[ 5 ] }}</td>
-                                    <td scope="row">{{ $d[ 6 ] }}</td>
-                                    <td scope="row">{{ $d[ 7 ] }}</td>
-                                    <td scope="row">{{ $d[ 8 ] }}</td>
-                                    <td scope="row">{{ $d[ 9 ] }}</td>
-                                    <td scope="row">{{ $d[ 10 ] }}</td>
-                                    <td scope="row">{{ $d[ 11 ] }}</td>
-                                    <td scope="row">{{ $d[ 12 ] }}</td>
-                                    <td scope="row">{{ $d[ 13 ] }}</td>
-                                    <td scope="row">{{ $d[ 14 ] }}</td>
-                                    <td scope="row">{{ $d[ 15 ] }}</td>
-                                    <td scope="row">{{ $d[ 16 ] }}</td>
+                                    <td scope="row">{{ $d[ 4 ] == '0' ? '' : $d[ 4 ] }}</td>
+                                    <td scope="row">{{ $d[ 5 ] == '0' ? '' : $d[ 5 ] }}</td>
+                                    <td scope="row">{{ $d[ 6 ] == '0' ? '' : $d[ 6 ] }}</td>
+                                    <td scope="row">{{ $d[ 7 ] == '0' ? '' : $d[ 7 ] }}</td>
+                                    <td scope="row">{{ $d[ 8 ] == '0' ? '' : $d[ 8 ] }}</td>
+                                    <td scope="row">{{ $d[ 9 ] == '0' ? '' : $d[ 9 ] }}</td>
+                                    <td scope="row">{{ $d[ 10 ] == '0' ? '' : $d[ 10 ] }}</td>
+                                    <td scope="row">{{ $d[ 11 ] == '0' ? '' : $d[ 11 ] }}</td>
+                                    <td scope="row">{{ $d[ 12 ] == '0' ? '' : $d[ 12 ] }}</td>
+                                    <td scope="row">{{ $d[ 13 ] == '0' ? '' : $d[ 13 ] }}</td>
+                                    <td scope="row">{{ $d[ 14 ] == '0' ? '' : $d[ 14 ] }}</td>
+                                    <td scope="row">{{ $d[ 15 ] == '0' ? '' : $d[ 15 ] }}</td>
+                                    <td scope="row">{{ $d[ 16 ] == '0' ? '' : $d[ 16 ] }}</td>
                                 </tr>
                             @endforeach
 
@@ -123,10 +118,19 @@
     </div>
 </div>
 
+@section("styles")
+
+        <link href="{{ asset('css/vendor/britecharts.min.css')}}?timestamp()" rel="stylesheet" />
+
+@endsection
 
 
-@section('script_interno')
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+@section("script_interno")
+
+    <script src="{{asset("js/vendor/d3.min.js")}}"></script>
+    <script src="{{asset("js/demo.dashboard.js")}}"></script>
+    <script src="{{asset("js/demo.vector-maps.js")}}"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript" >
 
 
@@ -134,9 +138,11 @@
 
     google.charts.load('current', {packages: ['corechart', 'bar']});
     google.load('visualization', '1', {packages: ['corechart', 'bar']});
-    google.setOnLoadCallback(drawChart);
+    // google.setOnLoadCallback(drawChart);
     google.setOnLoadCallback(drawChartMatrix);
+    //google.charts.setOnLoadCallback(drawChart);
 
+    // google.charts.setOnLoadCallback(drawChartMatrix);
         // google.charts.setOnLoadCallback(drawBasic);
 
     //google.charts.setOnLoadCallback(drawChart);
@@ -149,40 +155,31 @@
     function drawChart() {
 
 
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Dependencia');
-        data.addColumn('number', 'Total');
-        data.addColumn({type: 'string', role: 'style'});
-        data.addRows([
+        var data = google.visualization.arrayToDataTable([
+            ["Dependencias", "Total", { role: 'style' } ],
                 @foreach($totales as $d)
-                      ['{{ $d[ 2 ] }}', {{ $d[ 16 ] }}, 'color: {{ strtoupper(trim( $d[ 3 ] )) }}'],
+                      ['{{ $d[ 2 ] }}', {{ $d[ 16 ] }}, 'color: {{ $d[ 3 ] }}' ],
                 @endforeach
         ]);
 
-        var view = new google.visualization.DataView(data);
-        view.setColumns([0, 1,
-            { calc: "stringify",
-                sourceColumn: 1,
-                type: "string",
-                role: "annotation" },
-            2]);
+        // var xx = JSON.stringify(data);
+
+        //alert(xx);
 
         var options = {
-            chart: {
-                title: 'Gráfica de Captura de Solicitudes',
-                subtitle: 'Corte al : @php echo date('d-m-Y H:i:s') @endphp',
-            },
+            title: 'Gráfica de Captura de Solicitudes ( {{ $FI.' - '.$FF }} )',
+            subtitle: 'Consulta el : @php echo date('d-m-Y H:i:s') @endphp',
+            chartArea: {width: '90%'},
             colors: [
                 @foreach($totales as $d)
                      '{{ strtoupper(trim(  $d[ 3 ]  ))  }}',
                 @endforeach
             ],
-            is3D:true,
-            'allowHtml' : true,
-            bars: 'horizontal'
+            bars: 'horizontal',
+            theme: 'material',
         };
 
-        var chart = new google.charts.Bar(document.getElementById('bar1'));
+        var chart = new google.visualization.BarChart(document.getElementById('bar1'));
         chart.draw(data, options);
 
     }
@@ -194,34 +191,26 @@
             @foreach($totalestatus as $d)
                 [
                 '{{  $d[2 ]  }}',
-                parseInt( {{ intval( $d[4] ) ?? 0 }},0),
-                parseInt({{ intval( $d[ 5 ] ) ?? 0 }},0),
-                parseInt({{ intval( $d[ 6 ] ) ?? 0 }},0),
-                parseInt({{ intval( $d[ 7 ] ) ?? 0 }},0),
-                parseInt({{ intval( $d[ 8 ] ) ?? 0 }},0),
-                parseInt({{ intval( $d[ 9 ] ) ?? 0 }},0),
-                parseInt({{ intval( $d[ 10 ] ) ?? 0 }},0),
-                parseInt({{ intval( $d[ 11 ] ) ?? 0 }},0),
-                parseInt({{ intval( $d[ 12 ] ) ?? 0 }},0),
-                parseInt({{ intval( $d[ 13 ] ) ?? 0 }},0),
-                parseInt({{ intval( $d[ 14 ] ) ?? 0 }},0),
-                parseInt({{ intval( $d[ 15 ] ) ?? 0 }},0),
+                {{ intval( $d[4] ) ?? '' }},
+                {{ intval( $d[ 5 ] ) ?? 0 }},
+                {{ intval( $d[ 6 ] ) ?? 0 }},
+                {{ intval( $d[ 7 ] ) ?? 0 }},
+                {{ intval( $d[ 8 ] ) ?? 0 }},
+                {{ intval( $d[ 9 ] ) ?? 0 }},
+                {{ intval( $d[ 10 ] ) ?? 0 }},
+                {{ intval( $d[ 11 ] ) ?? 0 }},
+                {{ intval( $d[ 12 ] ) ?? 0 }},
+                {{ intval( $d[ 13 ] ) ?? 0 }},
+                {{ intval( $d[ 14 ] ) ?? 0 }},
+                {{ intval( $d[ 15 ] ) ?? 0 }},
                     '{{ intval( $d[ 16 ] ) ?? 0 }}'
             ],
         @endforeach
 
         ]);
-        var view = new google.visualization.DataView(data);
-        view.setColumns([0, 1,
-            { calc: "stringify",
-                sourceColumn: 1,
-                type: "string",
-                role: "annotation" },
-            2]);
-
 
         var options = {
-            title: 'Gráfico de Estatus por Dependencia',
+            title: 'Gráfico de Estatus por Dependencia ( {{ $FI.' - '.$FF }} )',
             subtitle: 'Chess opening moves',
 
             hwidth: 1400,
@@ -232,7 +221,8 @@
                     0: { side: 'top', label: 'Percentage'} // Top x-axis.
                 }
             },
-            bar: { groupWidth: "90%" }
+            bar: { groupWidth: "90%" },
+            theme: 'material'
 
         };
 
@@ -244,6 +234,18 @@
 
     }
 
+    var stepData = [
+            @foreach($totales as $d)
+        { key: "{{ strtoupper(trim(  $d[ 2 ]  ))  }}", value: {{ $d[ 16 ] }} },
+        @endforeach
+
+    ];
+
+
     </script>
+
+        <script src="{{asset('js/demo.chartjs.js')}}"></script>
+        <script src="{{asset('js/vendor/britecharts.min.js')}}"></script>
+        <script src="{{asset('js/demo.britechart.js')}}"></script>
 
 @endsection()

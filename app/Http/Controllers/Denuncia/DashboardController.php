@@ -43,11 +43,13 @@ class DashboardController extends Controller{
             $FF = Carbon::now()->format('Y-m-d');
             $inicio = true;
         }
+        $fi = $FI;
+        $ff = $FF;
         $FI = $FI.' 00:00:00';
         $FF = $FF.' 23:59:59';
 
         $estatusdep = null;
-        $estatus = Estatu::all()->sortBy('orden_impresion')->pluck('id','orden_impresion')->toArray();
+        $estatus = Estatu::all()->sortBy('orden_impresion')->pluck('abreviatura','orden_impresion')->toArray();
 //        dd($estatus);
         $arr = array();
         $i = 0; $j = 0;
@@ -112,7 +114,15 @@ class DashboardController extends Controller{
         $estatusdep = $arr;
 
         $cls = ['text-primary','text-secondary','text-success','text-danger','text-warning','text-info','text-light','text-dark'];
-        return view('partials.dashboard', ['totales' => $estatusdep, 'arrCls' => $cls,'totalestatus' => $estatusdep, 'estatus' => $estatus, 'FI' =>  $FI, 'FF' =>  $FF ]);
+        return view('partials.dashboard',
+            [
+                'totales' => $estatusdep,
+                'arrCls' => $cls,
+                'totalestatus' => $estatusdep,
+                'estatus' => $estatus,
+                'FI' =>  date('d-m-Y', strtotime($fi)),
+                'FF' =>  date('d-m-Y', strtotime($ff)),
+            ]);
 
     }
 
