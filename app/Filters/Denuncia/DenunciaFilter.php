@@ -32,6 +32,7 @@ class DenunciaFilter extends QueryFilter
             'hasta'          => '',
             'dependencia_id' => '',
             'servicio_id'    => '',
+            'origen_id'      => '',
             'estatus_id'     => '',
             'ciudadano_id'   => '',
             'creadopor_id'   => '',
@@ -163,6 +164,11 @@ class DenunciaFilter extends QueryFilter
             return $q->where('estatu_id', intval($search));
         });
 
+    }
+
+    public function origen_id($query, $search){
+        if (is_null($search) || empty ($search) || trim($search) == "0") {return $query;}
+        return $query->where('origen_id', $search);
     }
 
     public function ciudadano_id($query, $search){

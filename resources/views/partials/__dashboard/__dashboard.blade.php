@@ -60,7 +60,7 @@
             <div class="card">
                 <div class="card-body">
 {{--                    <div class="mb-5 mt-4" id="bar1" style="width: 100%; height: 500px;"></div>--}}
-                    <h4 class="header-title">Total de Solicitudes ( 19-01-2022 - 26-01-2022 )</h4>
+                    <h4 class="header-title">Total de Solicitudes  ( {{ $FI.' - '.$FF }} )</h4>
                     <p>&nbsp;</p>
                     <div class="step-container" style="width: 100% !important;"></div>
 {{--                    <div class="bar-container-horizontal" style="width: 100%;height: 1000px;"></div>--}}

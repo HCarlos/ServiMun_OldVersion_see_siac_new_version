@@ -102,7 +102,8 @@ class Denuncia extends Model
     }
 
     public function denuncia_estatus(){
-        return $this->belongsToMany(Estatu::class,'denuncia_dependencia_servicio_estatus','denuncia_id','estatu_id');
+        return $this->belongsToMany(Estatu::class,'denuncia_dependencia_servicio_estatus','denuncia_id','estatu_id')
+            ->withPivot('fecha_movimiento');
     }
 
     public function ubicacion(){

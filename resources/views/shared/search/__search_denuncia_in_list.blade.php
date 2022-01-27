@@ -67,6 +67,18 @@
 </div>
 
 <div class="form-row mb-1">
+    <label for = "origen_id" class="col-md-2 col-form-label">Origen</label>
+    <div class="col-md-10">
+        <select id="origen_id" name="estatus_id" class="form-control" size="1">
+            <option value="0" selected >Seleccione un Origen</option>
+            @foreach($origenes as $t)
+                <option value="{{ $t->id }}">{{ $t->origen }} </option>
+            @endforeach
+        </select>
+    </div>
+</div>
+
+<div class="form-row mb-1">
     <label for = "estatus_id" class="col-md-2 col-form-label">Estatus</label>
     <div class="col-md-10">
         <select id="estatus_id" name="estatus_id" class="form-control" size="1">

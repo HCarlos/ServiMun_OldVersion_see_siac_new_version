@@ -6,6 +6,7 @@ use App\Classes\Denuncia\DenunciaArchivoTCPDF;
 use App\Classes\Denuncia\DenunciaTCPDF;
 use App\Http\Controllers\Controller;
 use App\Models\Denuncias\Denuncia;
+use App\Models\Denuncias\Denuncia_Dependencia_Servicio;
 use Illuminate\Http\Request;
 use App\Classes\sector;
 
@@ -137,6 +138,48 @@ class HojaDenunciaArchivoController extends Controller{
         $pdf->SetFont(FONT_FREEMONO,'B',8);
         $pdf->Cell(185,$pdf->alto,$den->servicio->servicio,"L",1,"L");
 
+        // DENUNCIA
+        $y = $pdf->GetY();
+        $pdf->setY( $pdf->getY() + 5 );
+        $y = $pdf->GetY();
+        $pdf->SetFillColor(192);
+        $pdf->RoundedRect(5,$y,205,26,2,'1111','');
+
+        $pdf->SetFont(FONT_ARIALN,'B',10);
+        $pdf->Cell(205,$pdf->alto,"  DESCRIPCIÓN DE LA SOLICITUD : ","B",1,"L");
+        $pdf->SetFont(FONT_FREEMONO,'B',8);
+//        $pdf->WriteHTMLCell(160,$pdf->alto,$den->descripcion.' '.$den->referencia,"L",1,"L");
+        $pdf->WriteHTMLCell(200,$pdf->alto,8,$pdf->getY(),$den->descripcion.' '.$den->referencia,0,1);
+
+        $dds = Denuncia_Dependencia_Servicio::query()->where('denuncia_id',$den->id)->orderByDesc('id')->get();
+
+        $y = $pdf->GetY()+15;
+
+        foreach ($dds as $res){
+
+            $pdf->setY( $y  );
+            $y = $pdf->GetY();
+
+            $pdf->SetFillColor(192);
+            $pdf->RoundedRect(5,$y,205,26,2,'1111','');
+
+            $pdf->SetFont(FONT_ARIALN,'B',10);
+            $pdf->Cell(100,$pdf->alto,"  R  E  S  P  U  E  S  T  A: ","B",0,"L");
+            $pdf->Cell(50,$pdf->alto,"FECHA: ".date('d-m-Y', strtotime($res->fecha_movimiento)),"B",0,"L");
+//            $pdf->Cell(50,$pdf->alto,"FECHA: ".$res->dependencia_id,"B",0,"L");
+            $pdf->Cell(55,$pdf->alto,"ESTATUS: ".$res->estatu->estatus,"B",1,"L");
+            $pdf->SetFont(FONT_FREEMONO,'B',8);
+
+            $obs = trim($res->observaciones);
+            $pdf->WriteHTMLCell(200,$pdf->alto,8,$y+7,$obs==""?'NO HUBO RESPUESTA':$obs,'0',1);
+
+            $y = $y + 30;
+
+        }
+
+
+
+
 
 //        $html = ATEMUN['style']['denuncia'];
 //        $html .= "<p>Estimado <bAzul>C. {$den->ciudadano->FullName}</bAzul> (<bChocolate>{$den->ciudadano->id}</bChocolate>, <bOrange>$username</bOrange>), su petición ha sido recibida y se iniciará el trámite pertinente. <br><br>";
@@ -152,6 +195,13 @@ class HojaDenunciaArchivoController extends Controller{
 
 //        $pdf->WriteHTMLCell(195,$alto,10,$pdf->getY(),$html,0,0);
 
+        $pdf->Init();
+        $pdf->AddPage();
+
+        $y = $pdf->GetY();
+        $pdf->setY( $pdf->getY() + 15 );
+        $y = $pdf->GetY();
+
         $pdf->SetTextColor(64,64,64);
         $pdf->SetFillColor(255,255,255);
 
@@ -160,26 +210,26 @@ class HojaDenunciaArchivoController extends Controller{
         if ($firma){
 
             $pdf->SetFont(FONT_DEJAVUSANSMONO,'B',7);
-            $pdf->WriteHTMLCell(200,$pdf->alto,5,107, "<p><bSelloBold>CADENA ORIGINAL:</bSelloBold></p>",0,0);
+            $pdf->WriteHTMLCell(200,$pdf->alto,5,37, "<p><bSelloBold>CADENA ORIGINAL:</bSelloBold></p>",0,0);
             $pdf->SetFont(FONT_AEALARABIYA,'',6);
-            $pdf->WriteHTMLCell(200,$pdf->alto,5,110, $firma->cadena_original,0,0);
+            $pdf->WriteHTMLCell(200,$pdf->alto,5,40, $firma->cadena_original,0,0);
 
             $pdf->SetFont(FONT_DEJAVUSANSMONO,'B',7);
-            $pdf->WriteHTMLCell(200,$pdf->alto,5,117, "<bSelloBold>HASH:</bSelloBold>",0,0);
+            $pdf->WriteHTMLCell(200,$pdf->alto,5,47, "<bSelloBold>HASH:</bSelloBold>",0,0);
             $pdf->SetFont(FONT_AEALARABIYA,'',6);
-            $pdf->WriteHTMLCell(200,$pdf->alto,5,120, $firma->hash,0,0);
+            $pdf->WriteHTMLCell(200,$pdf->alto,5,50, $firma->hash,0,0);
 
             $pdf->SetFont(FONT_DEJAVUSANSMONO,'B',7);
-            $pdf->WriteHTMLCell(200,$pdf->alto,5,124, "<bSelloBold>SELLO DIGITAL:</bSelloBold>",0,0);
+            $pdf->WriteHTMLCell(200,$pdf->alto,5,57, "<bSelloBold>SELLO DIGITAL:</bSelloBold>",0,0);
             $pdf->SetFont(FONT_AEALARABIYA,'',6);
-            $pdf->WriteHTMLCell(200,$pdf->alto,5,127, $firma->sello,0,0);
+            $pdf->WriteHTMLCell(200,$pdf->alto,5,60, $firma->sello,0,0);
 
         } else {
 
-//            $pdf->SetFont(FONT_DEJAVUSANSMONO,'B',7);
-//            $pdf->WriteHTMLCell(200,$pdf->alto,5,107, "",0,0);
-//            $pdf->SetFont(FONT_AEALARABIYA,'',6);
-//            $pdf->WriteHTMLCell(200,$pdf->alto,5,110, "* Escanee la imagen QR para ver el avance en la gestión de su solicitud.",0,0);
+            $pdf->SetFont(FONT_DEJAVUSANSMONO,'B',7);
+            $pdf->WriteHTMLCell(200,$pdf->alto,5,37, "",0,0);
+            $pdf->SetFont(FONT_AEALARABIYA,'',6);
+            $pdf->WriteHTMLCell(200,$pdf->alto,5,40, "* Escanee la imagen QR para ver el avance en la gestión de su solicitud.",0,0);
 
         }
 

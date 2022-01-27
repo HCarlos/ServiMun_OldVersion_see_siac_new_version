@@ -16,13 +16,15 @@
     @else()
         <!--- Sidemenu -->
         <ul class="metismenu side-nav">
-            <li class="side-nav-item">
-                <a href="{{ url('dashboard') }}" class="side-nav-link">
-                    <i class="mdi dripicons-meter"></i>
-                    <span class="badge badge-light float-right"></span>
-                    <span>Dashboard</span>
-                </a>
-            </li>
+            @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_ADMIN'))
+                <li class="side-nav-item">
+                    <a href="{{ url('dashboard') }}" class="side-nav-link">
+                        <i class="mdi dripicons-meter"></i>
+                        <span class="badge badge-light float-right"></span>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+            @endif
             <li class="side-nav-item">
                 <a href="{{route('listDenuncias')}}" class="side-nav-link">
                     <i class="mdi dripicons-archive"></i>

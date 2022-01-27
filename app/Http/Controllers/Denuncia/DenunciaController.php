@@ -274,6 +274,7 @@ class DenunciaController extends Controller
             $Servicios    = Servicio::all()->where('')->sortBy('servicio')->pluck('servicio','id');
         }
         $Estatus      = Estatu::all()->sortBy('estatus');
+        $Origenes     = Origen::all()->sortBy('origen');
 
         $Capturistas  = User::query()->whereHas('roles', function ($q) {
             return $q->whereIn('name',array('ENLACE','USER_OPERATOR_SIAC','USER_OPERATOR_ADMIN') );
@@ -290,6 +291,7 @@ class DenunciaController extends Controller
                 'capturistas'        => $Capturistas,
                 'servicios'          => $Servicios,
                 'estatus'            => $Estatus,
+                'origenes'           => $Origenes,
                 'items'              => $user,
             ]
         );
