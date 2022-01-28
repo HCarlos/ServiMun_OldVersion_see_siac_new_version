@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\External\Denuncia;
 
 use App\Classes\Denuncia\DenunciaArchivoTCPDF;
-use App\Classes\Denuncia\DenunciaTCPDF;
 use App\Http\Controllers\Controller;
 use App\Models\Denuncias\Denuncia;
 use App\Models\Denuncias\Denuncia_Dependencia_Servicio;
-use Illuminate\Http\Request;
 use App\Classes\sector;
 
 define('NOMBRE_EMPRESA',config('atemun.nombre_empresa',''));
@@ -29,6 +27,10 @@ class HojaDenunciaArchivoController extends Controller{
         $pdf->timex = $den->fecha_ingreso_solicitud;
         $pdf->alto   = 6;
 
+        $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+        if (is_callable(array($pdf, 'AliasNbPages'))) {
+            $pdf->AliasNbPages();
+        }
         $pdf->Init();
         $pdf->AddPage();
 
@@ -151,7 +153,7 @@ class HojaDenunciaArchivoController extends Controller{
 //        $pdf->WriteHTMLCell(160,$pdf->alto,$den->descripcion.' '.$den->referencia,"L",1,"L");
         $pdf->WriteHTMLCell(200,$pdf->alto,8,$pdf->getY(),$den->descripcion.' '.$den->referencia,0,1);
 
-        $dds = Denuncia_Dependencia_Servicio::query()->where('denuncia_id',$den->id)->orderByDesc('id')->get();
+        $dds = Denuncia_Dependencia_Servicio::query()->where('denuncia_id',$den->id)->orderBy('id')->get();
 
         $y = $pdf->GetY()+15;
 
@@ -164,7 +166,8 @@ class HojaDenunciaArchivoController extends Controller{
             $pdf->RoundedRect(5,$y,205,26,2,'1111','');
 
             $pdf->SetFont(FONT_ARIALN,'B',10);
-            $pdf->Cell(100,$pdf->alto,"  R  E  S  P  U  E  S  T  A: ","B",0,"L");
+            $pdf->Cell(35,$pdf->alto,"  R  E  S  P  U  E  S  T  A: ","B",0,"L");
+            $pdf->Cell(65,$pdf->alto, $res->dependencia->abreviatura,"B",0,"L");
             $pdf->Cell(50,$pdf->alto,"FECHA: ".date('d-m-Y', strtotime($res->fecha_movimiento)),"B",0,"L");
 //            $pdf->Cell(50,$pdf->alto,"FECHA: ".$res->dependencia_id,"B",0,"L");
             $pdf->Cell(55,$pdf->alto,"ESTATUS: ".$res->estatu->estatus,"B",1,"L");
@@ -232,6 +235,7 @@ class HojaDenunciaArchivoController extends Controller{
             $pdf->WriteHTMLCell(200,$pdf->alto,5,40, "* Escanee la imagen QR para ver el avance en la gestión de su solicitud.",0,0);
 
         }
+// set auto page breaks
 
         $pdf->Output($pdf->FOLIO . '.pdf');
 

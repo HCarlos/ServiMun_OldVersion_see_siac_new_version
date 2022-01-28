@@ -58,13 +58,11 @@ class Factory implements ArrayAccess
      * Create a new factory container.
      *
      * @param  \Faker\Generator  $faker
-     * @param  string|null  $pathToFactories
+     * @param  string  $pathToFactories
      * @return static
      */
-    public static function construct(Faker $faker, $pathToFactories = null)
+    public static function construct(Faker $faker, $pathToFactories)
     {
-        $pathToFactories = $pathToFactories ?: database_path('factories');
-
         return (new static($faker))->load($pathToFactories);
     }
 
@@ -217,11 +215,24 @@ class Factory implements ArrayAccess
 
         if (is_dir($path)) {
             foreach (Finder::create()->files()->name('*.php')->in($path) as $file) {
-                require $file->getRealPath();
+                if ($this->isLegacyFactory($file->getRealPath())) {
+                    require $file->getRealPath();
+                }
             }
         }
 
         return $factory;
+    }
+
+    /**
+     * Determine if a file contains legacy factory.
+     *
+     * @param  string  $path
+     * @return bool
+     */
+    protected function isLegacyFactory(string $path)
+    {
+        return ! preg_match("/class\s[A-Z+a-z]+ extends Factory/", file_get_contents($path));
     }
 
     /**
@@ -230,6 +241,7 @@ class Factory implements ArrayAccess
      * @param  string  $offset
      * @return bool
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->definitions[$offset]);
@@ -241,6 +253,7 @@ class Factory implements ArrayAccess
      * @param  string  $offset
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->make($offset);
@@ -253,6 +266,7 @@ class Factory implements ArrayAccess
      * @param  callable  $value
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         $this->define($offset, $value);
@@ -264,6 +278,7 @@ class Factory implements ArrayAccess
      * @param  string  $offset
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->definitions[$offset]);

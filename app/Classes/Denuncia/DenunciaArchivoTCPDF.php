@@ -72,6 +72,17 @@ class DenunciaArchivoTCPDF extends TCPDF{
         $this->line(10,$this->getY(),205,$this->getY());
     }
 
+    function Footer(){
+
+        $this->SetY(-7);
+        //Arial italic 8
+        $this->SetFont(FONT_DEJAVUSANSMONO,'',6);
+
+//        Page number
+//        $this->Cell(0,10,utf8_decode('PlatSource © '.date('Y'),0,0,'L');
+        $this->Cell(0,10,'Página '.$this->PageNo().' de '.$this->getAliasNbPages(),0,0,'R');
+
+    }
 
 
 }
