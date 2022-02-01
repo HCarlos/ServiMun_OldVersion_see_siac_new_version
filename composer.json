@@ -6,6 +6,7 @@
     "type": "project",
     "require": {
         "php": "^7.3",
+        "ext-openssl": "*",
         "doctrine/dbal": "^2.13.5",
         "elibyy/tcpdf-laravel": "^7.0.0",
         "facade/ignition": "^2.16.0",
@@ -30,10 +31,10 @@
         "predis/predis": "^1.1.9",
         "rapidapi/rapidapi-connect": "^0.0.2",
         "setasign/fpdf": "^1.8.4",
+        "spatie/laravel-backup": "^6.16",
         "spatie/laravel-permission": "^3.18",
         "tecnickcom/tc-lib-pdf-font": "^1.9.3",
-        "yajra/laravel-datatables-oracle": "^9.18.2",
-        "ext-openssl": "*"
+        "yajra/laravel-datatables-oracle": "^9.18.2"
     },
     "require-dev": {
         "nunomaduro/collision": "^4.3",

@@ -68,6 +68,7 @@ return [
             'prefix_indexes' => true,
             'schema' => 'public',
             'sslmode' => 'prefer',
+            'add_extra_option' => '--jobs=2',
         ],
 
         'sqlsrv' => [
