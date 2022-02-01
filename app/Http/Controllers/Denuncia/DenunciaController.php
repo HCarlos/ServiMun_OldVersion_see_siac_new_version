@@ -31,16 +31,13 @@ use Illuminate\Support\Facades\Session;
 class DenunciaController extends Controller
 {
 
-
     protected $tableName = "denuncias";
 
     protected $paginationTheme = 'bootstrap';
     protected $msg = "";
     protected $max_item_for_query = 250;
 
-
-
-// ***************** MUESTRA EL LISTADO DE USUARIOS ++++++++++++++++++++ //
+    // ***************** MUESTRA EL LISTADO DE USUARIOS ++++++++++++++++++++ //
 
     /**
      * @param string $tableName
@@ -113,7 +110,12 @@ class DenunciaController extends Controller
             $Dependencias = Dependencia::all()->sortBy('dependencia');
         }
 
-        $Estatus      = Estatu::all()->sortBy('estatus');
+        if (Auth::user()->isRole('Administrator|SysOp|USER_OPERATOR_ADMIN|USER_ARCHIVO_ADMIN') ) {
+            $Estatus      = Estatu::all()->sortBy('estatus');
+        }else{
+            $Estatus      = Estatu::all()->where('estatus_cve',1)->sortBy('estatus');
+        }
+
         $this->msg = "";
         return view('SIAC.denuncia.denuncia.denuncia_new',
             [
@@ -172,10 +174,12 @@ class DenunciaController extends Controller
             $pregunta1 = 1;
         }
 
-        //$pregunta1
-        //dd( $Servicios );
+        if (Auth::user()->isRole('Administrator|SysOp|USER_OPERATOR_ADMIN|USER_ARCHIVO_ADMIN') ) {
+            $Estatus      = Estatu::all()->sortBy('estatus');
+        }else{
+            $Estatus      = Estatu::all()->where('estatus_cve',1)->sortBy('estatus');
+        }
 
-        $Estatus      = Estatu::all()->sortBy('estatus');
         $this->msg = "";
         return view('SIAC.denuncia.denuncia.denuncia_edit',
             [
@@ -261,7 +265,9 @@ class DenunciaController extends Controller
     }
 
     protected function showModalSearchDenuncia(){
+
         if (Auth::user()->isRole('ENLACE')){
+
             $dep_id = intval(Auth::user()->IsEnlaceDependencia);
             $Dependencias = Dependencia::all()->where('id',$dep_id)->sortBy('dependencia')->pluck('dependencia','id');
             $Servicios = Servicio::whereHas('subareas', function($p) use ($dep_id) {
@@ -269,11 +275,18 @@ class DenunciaController extends Controller
                     return $q->where("dependencia_id",$dep_id);
                 });
             })->orderBy('servicio')->get()->pluck('servicio','id');
+
         }else{
             $Dependencias = Dependencia::all()->sortBy('dependencia')->pluck('dependencia','id');
             $Servicios    = Servicio::all()->where('')->sortBy('servicio')->pluck('servicio','id');
         }
-        $Estatus      = Estatu::all()->sortBy('estatus');
+
+        if(Auth::user()->isRole('Administrator|SysOp|USER_OPERATOR_ADMIN|USER_ARCHIVO_ADMIN')){
+            $Estatus      = Estatu::all()->sortBy('estatus');
+        }else{
+            $Estatus      = Estatu::all()->where('estatus_cve',1)->sortBy('estatus');
+        }
+
         $Origenes     = Origen::all()->sortBy('origen');
 
         $Capturistas  = User::query()->whereHas('roles', function ($q) {
@@ -432,8 +445,5 @@ class DenunciaController extends Controller
         }
 
     }
-
-
-
 
 }

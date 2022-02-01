@@ -15,7 +15,7 @@ class Estatu extends Model
     protected $table = 'estatus';
 
     protected $fillable = [
-        'id', 'estatus','predeterminado','abreviatura','orden_impresion'
+        'id', 'estatus','predeterminado','abreviatura','orden_impresion','estatus_cve'
     ];
 
     protected $casts = ['predeterminado'=>'boolean',];

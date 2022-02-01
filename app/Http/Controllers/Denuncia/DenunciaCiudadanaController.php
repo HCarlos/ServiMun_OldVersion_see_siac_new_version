@@ -69,7 +69,11 @@ class DenunciaCiudadanaController extends Controller{
         $Prioridades  = Prioridad::all()->sortBy('prioridad');
         $Origenes     = Origen::all()->sortBy('origen');
         $Dependencias = Dependencia::all()->sortBy('dependencia');
-        $Estatus      = Estatu::all()->sortBy('estatus');
+        if (Auth::user()->isRole('Administrator|SysOp|USER_OPERATOR_ADMIN|USER_ARCHIVO_ADMIN') ) {
+            $Estatus      = Estatu::all()->sortBy('estatus');
+        }else{
+            $Estatus      = Estatu::all()->where('estatus_cve',1)->sortBy('estatus');
+        }
         $this->msg    = "";
 
 
@@ -80,7 +84,6 @@ class DenunciaCiudadanaController extends Controller{
                 'prioridades'     => $Prioridades,
                 'origenes'        => $Origenes,
                 'dependencias'    => $Dependencias,
-//                'ciudadanos'      => $Ciudadanos,
                 'estatus'         => $Estatus,
                 'postNew'         => 'createDenunciaCiudadana',
                 'titulo_catalogo' => "Mis " . ucwords($this->tableName),

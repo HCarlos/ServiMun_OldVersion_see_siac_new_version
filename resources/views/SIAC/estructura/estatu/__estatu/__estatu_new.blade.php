@@ -47,6 +47,18 @@
             <option value="1">Si</option>
         </select>
     </div>
-
 </div>
+
+<div class="form-group row mb-1">
+    <label for = "estatus_cve" class="col-md-3 col-form-label">Clave Estatus</label>
+    <div class="col-md-9">
+        <select class="estatus_cve form-control select2" name="estatus_cve" id="estatus_cve" size="1">
+            <option value="0">Inactivo</option>
+            <option value="1" selected>Activo</option>
+            <option value="2">Suspendido</option>
+            <option value="3">Cancelado</option>
+        </select>
+    </div>
+</div>
+
 <input type="hidden" name="id" value="0" >

@@ -69,6 +69,7 @@ class StatuRequest extends FormRequest
                 'predeterminado' => $this->predeterminado==1 ? true : false,
                 'abreviatura' => strtoupper($this->abreviatura),
                 'orden_impresion' => strtoupper($this->orden_impresion),
+                'estatus_cve' => (int) ($this->estatus_cve),
             ];
 
             if ( $this->predeterminado == 1) {

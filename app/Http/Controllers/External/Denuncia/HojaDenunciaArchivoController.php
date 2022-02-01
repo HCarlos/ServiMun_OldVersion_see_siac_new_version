@@ -167,8 +167,10 @@ class HojaDenunciaArchivoController extends Controller{
 
             $pdf->SetFont(FONT_ARIALN,'B',10);
             $pdf->Cell(35,$pdf->alto,"  R  E  S  P  U  E  S  T  A: ","B",0,"L");
+            $pdf->SetFont(FONT_FREEMONO,'B',10);
             $pdf->Cell(65,$pdf->alto, $res->dependencia->abreviatura,"B",0,"L");
-            $pdf->Cell(50,$pdf->alto,"FECHA: ".date('d-m-Y', strtotime($res->fecha_movimiento)),"B",0,"L");
+            $pdf->SetFont(FONT_ARIALN,'B',10);
+            $pdf->Cell(50,$pdf->alto,"FECHA: ".date('d-m-Y H:i:s', strtotime($res->fecha_movimiento)),"B",0,"L");
 //            $pdf->Cell(50,$pdf->alto,"FECHA: ".$res->dependencia_id,"B",0,"L");
             $pdf->Cell(55,$pdf->alto,"ESTATUS: ".$res->estatu->estatus,"B",1,"L");
             $pdf->SetFont(FONT_FREEMONO,'B',8);

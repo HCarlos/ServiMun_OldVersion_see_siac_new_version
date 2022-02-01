@@ -66,6 +66,18 @@
     </div>
 </div>
 
+<div class="form-group row mb-1">
+    <label for = "estatus_cve" class="col-md-3 col-form-label">Clave Estatus</label>
+    <div class="col-md-9">
+        <select class="estatus_cve form-control select2" name="estatus_cve" id="estatus_cve" size="1">
+            <option value="0" @if($items->estatus_cve==0) selected @endif >Inactivo</option>
+            <option value="1" @if($items->estatus_cve==1) selected @endif >Activo</option>
+            <option value="2" @if($items->estatus_cve==2) selected @endif >Suspendido</option>
+            <option value="3" @if($items->estatus_cve==3) selected @endif >Cancelado</option>
+        </select>
+    </div>
+</div>
+
 <input type="hidden" name="id" value="{{$items->id}}" >
 
     <script type="text/javascript">

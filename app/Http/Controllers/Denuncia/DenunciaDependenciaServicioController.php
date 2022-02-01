@@ -90,8 +90,12 @@ class DenunciaDependenciaServicioController extends Controller
             $Servicios    = Servicio::getQueryServiciosFromDependencias($items->dependencia_id);
         }
 
-        $Estatus      = Estatu::all()->sortBy('estatus');
-        //dd($Servicios);
+        if (Auth::user()->isRole('Administrator|SysOp|USER_OPERATOR_ADMIN|USER_ARCHIVO_ADMIN') ) {
+            $Estatus      = Estatu::all()->sortBy('estatus');
+        }else{
+            $Estatus      = Estatu::all()->where('estatus_cve',1)->sortBy('estatus');
+        }
+
         return view('SIAC.denuncia.denuncia_dependencia_servicio.denuncia_dependencia_servicio_edit',
             [
                 'user'            => Auth::user(),
@@ -121,24 +125,8 @@ class DenunciaDependenciaServicioController extends Controller
 
 
     protected function addItem($Id){
-//        $items        = Denuncia_Dependencia_Servicio::all()->where('denuncia_id',$Id)->first();
-
-//        dd($items);
-
-//        $Denuncia     = Denuncia::find($items->denuncia_id);
-
-//        dd($Denuncia);
-
 
         $items         = Denuncia::find($Id);
-
-//        $IsEnlace = Session::get('IsEnlace');
-//        if($IsEnlace){
-//            $DependenciaIdArray = explode('|',Session::get('DependenciaIdArray'));
-//            $Dependencias = Dependencia::all()->whereIn('id',$DependenciaIdArray,false)->sortBy('dependencia');
-//        }else{
-//            $Dependencias = Dependencia::all()->sortBy('dependencia');
-//        }
 
         $IsEnlace = Auth::user()->isRole('ENLACE');
         if($IsEnlace){
@@ -162,13 +150,12 @@ class DenunciaDependenciaServicioController extends Controller
             $servicio_id = $items->servicio_id;
         }
 
-//        dd($items);
+        if (Auth::user()->isRole('Administrator|SysOp|USER_OPERATOR_ADMIN|USER_ARCHIVO_ADMIN') ) {
+            $Estatus      = Estatu::all()->sortBy('estatus');
+        }else{
+            $Estatus      = Estatu::all()->where('estatus_cve',1)->sortBy('estatus');
+        }
 
-
-
-        //dd(json_encode(json_decode($Servicios)));
-
-        $Estatus      = Estatu::all()->sortBy('estatus');
         return view('SIAC.denuncia.denuncia_dependencia_servicio.denuncia_dependencia_servicio_new',
             [
                 'user'              => Auth::user(),
