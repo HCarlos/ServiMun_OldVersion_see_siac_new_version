@@ -176,14 +176,14 @@ return [
         ],
 
         'slack' => [
-            'webhook_url' => '',
+            'webhook_url' => 'cmi2124.slack.com',
 
             /*
              * If this is set to null the default channel of the webhook will be used.
              */
-            'channel' => null,
+            'channel' => 'soporte_tecnico',
 
-            'username' => null,
+            'username' => 'Carlos Hidalgo',
 
             'icon' => null,
 
