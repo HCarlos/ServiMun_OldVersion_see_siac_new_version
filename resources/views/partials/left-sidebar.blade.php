@@ -17,7 +17,7 @@
         <!--- Sidemenu -->
         <ul class="metismenu side-nav">
 {{--            |USER_OPERATOR_ADMIN--}}
-            @if (Auth::user()->hasRole('Administrator|SysOp') )
+            @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_ADMIN|USER_SAS_CAP|USER_SAS_ADMIN') )
                 <li class="side-nav-item">
                     <a href="{{ url('dashboard') }}" class="side-nav-link">
                         <i class="mdi dripicons-meter"></i>

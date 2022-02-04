@@ -121,31 +121,38 @@ class DenunciaRequest extends FormRequest
                 'observaciones'                => strtoupper(trim($this->observaciones)),
 
             ];
-
             if (Auth::user()->isRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN')){
-                if ($this->id == 0) {
-                    $item = Denuncia::create($Item);
-                } else {
-                    $item = Denuncia::find($this->id);
-                    if ($item->cerrado == false){
-                        $this->detaches($item);
-                        $item->update($Item);
-                    }
-                }
-                if ($item->cerrado == false) {
-                    $this->attaches($item);
-                    $Storage = new StorageDenunciaController();
-                    $Storage->subirArchivoDenuncia($this, $item);
-                }
+                $item = $this->guardar($Item);
+            }elseif ( Auth::user()->isRole('USER_SAS_SIAC|USER_SAS_ADMIN') && Auth::user()->id == $this->creadopor_id ){
+                $item = $this->guardar($Item);
             }else{
                 return null;
             }
+
         }catch (QueryException $e){
             $Msg = new MessageAlertClass();
             throw new HttpResponseException(response()->json( $Msg->Message($e), 422));
         }
         return $item;
 
+    }
+
+    protected function guardar($Item){
+        if ($this->id == 0) {
+            $item = Denuncia::create($Item);
+        } else {
+            $item = Denuncia::find($this->id);
+            if ($item->cerrado == false){
+                $this->detaches($item);
+                $item->update($Item);
+            }
+        }
+        if ($item->cerrado == false) {
+            $this->attaches($item);
+            $Storage = new StorageDenunciaController();
+            $Storage->subirArchivoDenuncia($this, $item);
+        }
+        return $item;
     }
 
     public function attaches($Item){

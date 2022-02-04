@@ -216,8 +216,8 @@ class DenunciaController extends Controller
     }
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //
-    protected function removeItem($id = 0)
-    {
+
+    protected function remove($id = 0){
         $item = Denuncia::withTrashed()->findOrFail($id);
         if (isset($item)) {
             if (!$item->trashed()) {
@@ -229,6 +229,19 @@ class DenunciaController extends Controller
         } else {
             return Response::json(['mensaje' => 'Se ha producido un error.', 'data' => 'Error', 'status' => '200'], 200);
         }
+    }
+
+    protected function removeItem($id = 0)
+    {
+        $item = Denuncia::withTrashed()->findOrFail($id);
+        if (Auth::user()->isRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN')){
+            return $this->remove($id);
+        }elseif ( Auth::user()->isRole('USER_SAS_SIAC|USER_SAS_ADMIN') && Auth::user()->id == $item->creadopor_id ){
+            return $this->remove($id);
+        }else{
+            return Response::json(['mensaje' => 'Acceso Denegado', 'data' => 'Error', 'status' => '200'], 200);
+        }
+
     }
 
 // ***************** MAUTOCOMPLETE DE UBICACIONES ++++++++++++++++++++ //
