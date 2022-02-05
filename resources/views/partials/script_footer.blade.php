@@ -23,6 +23,8 @@
 <script src="{{ '/js/atemun.js?timestamp()' }}"></script>
 <script src="{{ '/js/servimun.js?timestamp()' }}"></script>
 
+<script src="/socket.io/socket.io.js"></script>
+
 @yield("script_autocomplete")
 
 @yield("script_extra")

@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '04872d78276ed1d9b88b169d12b938db8786f639',
+        'reference' => 'a7122d2046b3bff1e873219bc6988d64b608cd5d',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -490,7 +490,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '04872d78276ed1d9b88b169d12b938db8786f639',
+            'reference' => 'a7122d2046b3bff1e873219bc6988d64b608cd5d',
             'dev_requirement' => false,
         ),
         'laravel/legacy-factories' => array(
