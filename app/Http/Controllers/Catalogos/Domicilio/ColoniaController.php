@@ -31,7 +31,7 @@ class ColoniaController extends Controller
         $items->appends($filters)->fragment('table');
         $user = Auth::User();
 
-        return view('catalogos.catalogo.domicilio.colonia.colonia_list',
+        return view('SIAC.domicilio.colonia.colonia_list',
             [
                 'items'           => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
@@ -100,9 +100,9 @@ class ColoniaController extends Controller
     protected function createItem(ColoniaRequest $request){
         //dd($request);
         $item = $request->manage();
-//        dd($item);
+        //dd($item);
         if (!isset($item->id)) {
-            abort(404);
+            //abort(404);
         }
         return Redirect::to('listColonias');
     }

@@ -28,7 +28,7 @@ class TipocomunidadController extends Controller
         $items->appends($filters)->fragment('table');
         $user = Auth::User();
 
-        return view('catalogos.catalogo.domicilio.tc.tc_list',
+        return view('SIAC.domicilio.tc.tc_list',
             [
                 'items'           => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),

@@ -38,6 +38,7 @@ class TipocomunidadRequest extends FormRequest
     {
         $Item = [
             'tipocomunidad' => strtoupper($this->tipocomunidad),
+            'nomenclatura'  => strtoupper($this->nomenclatura),
         ];
 
         try {

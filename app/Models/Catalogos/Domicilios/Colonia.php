@@ -15,8 +15,8 @@ class Colonia extends Model
     protected $table = 'colonias';
 
     protected $fillable = [
-        'id', 'colonia', 'cp','altitud','latitud','longitud','codigopostal_id','comunidad_id','tipocomunidad_id',
-        'colonia_mig_id',
+        'id', 'colonia', 'cp','altitud','latitud','longitud','nomenclatura',
+        'codigopostal_id','comunidad_id','tipocomunidad_id', 'colonia_mig_id',
     ];
     protected $hidden = ['deleted_at','created_at','updated_at'];
 

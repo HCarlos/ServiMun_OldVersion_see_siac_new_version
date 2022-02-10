@@ -10,6 +10,7 @@ use App\Models\Catalogos\Domicilios\Colonia;
 use App\Rules\Uppercase;
 use App\Classes\MessageAlertClass;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class ColoniaRequest extends FormRequest
 {
@@ -22,6 +23,13 @@ class ColoniaRequest extends FormRequest
         return true;
     }
 
+    public function validationData(){
+        $attributes = parent::all();
+        $attributes['colonia'] = strtoupper(trim($attributes['colonia']));
+        $this->replace($attributes);
+        return parent::all();
+    }
+
     public function rules()
     {
         return [
@@ -29,8 +37,8 @@ class ColoniaRequest extends FormRequest
             'latitud'         => ['present'],
             'longitud'        => ['present'],
             'altitud'         => ['present'],
-            'codigopostal_id' => ['required'],
-            'comunidad_id'    => ['required'],
+            'codigopostal_id' => ['required','numeric','min:1'],
+            'comunidad_id'    => ['required','numeric','min:1'],
         ];
     }
 
@@ -42,7 +50,8 @@ class ColoniaRequest extends FormRequest
             $CPs       = Codigopostal::findOrFail($this->codigopostal_id);
             $Comunidad = Comunidad::findOrFail($this->comunidad_id);
             $Item = [
-                'colonia'          => strtoupper($this->colonia),
+                'colonia'          => strtoupper(trim($this->colonia)),
+                'nomenclatura'     => strtoupper(trim($this->nomenclatura)),
                 'altitud'          => $this->altitud ?? null,
                 'latitud'          => $this->latitud ?? null,
                 'longitud'         => $this->longitud ?? null,
@@ -51,6 +60,8 @@ class ColoniaRequest extends FormRequest
                 'comunidad_id'     => $this->comunidad_id,
                 'tipocomunidad_id' => $Comunidad->tipocomunidad_id,
             ];
+
+            //dd($Item);
 
 
             if ($this->id == 0) {
@@ -65,7 +76,7 @@ class ColoniaRequest extends FormRequest
             Ubicacion::attachesColonia($this->id);
         }catch (QueryException $e){
             $Msg = new MessageAlertClass();
-            return $Msg->Message($e);
+            throw new HttpResponseException(response()->json( $Msg->Message($e), 422));
         }
         return $item;
     }

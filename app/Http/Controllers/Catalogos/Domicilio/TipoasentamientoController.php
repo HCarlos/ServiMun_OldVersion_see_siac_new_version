@@ -28,7 +28,7 @@ class TipoasentamientoController extends Controller
         $items->appends($filters)->fragment('table');
         $user = Auth::User();
 
-        return view('catalogos.catalogo.domicilio.ta.ta_list',
+        return view('SIAC.domicilio.ta.ta_list',
             [
                 'items'           => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),

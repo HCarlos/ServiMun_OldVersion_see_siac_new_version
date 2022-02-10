@@ -15,7 +15,7 @@ class Tipoasentamiento extends Model
     protected $table = 'tipoasentamientos';
 
     protected $fillable = [
-        'id', 'tipoasentamiento',
+        'id', 'tipoasentamiento','nomenclatura',
     ];
     protected $hidden = ['deleted_at','created_at','updated_at'];
 

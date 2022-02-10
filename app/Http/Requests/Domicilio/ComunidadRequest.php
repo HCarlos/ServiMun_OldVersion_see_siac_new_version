@@ -46,6 +46,7 @@ class ComunidadRequest extends FormRequest
             //$ciudad_id = $this->ciudad_id;
             $Item = [
                 'comunidad'        => strtoupper($this->comunidad),
+                'nomenclatura'     => strtoupper($this->nomenclatura),
                 'tipocomunidad_id' => $this->tipocomunidad_id,
                 'delegado_id'      => $this->delegado_id,
                 'ciudad_id'        => $this->ciudad_id,

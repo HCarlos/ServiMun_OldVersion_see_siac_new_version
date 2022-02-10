@@ -15,7 +15,7 @@ class Asentamiento extends Model
     protected $table = 'asentamientos';
 
     protected $fillable = [
-        'id', 'asentamiento',
+        'id', 'asentamiento','nomenclatura',
     ];
     protected $hidden = ['deleted_at','created_at','updated_at'];
 

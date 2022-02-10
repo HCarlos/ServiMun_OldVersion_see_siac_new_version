@@ -8,6 +8,7 @@
                         <th class="sorting" >Comunidad</th>
                         <th class="sorting" >Delegado</th>
                         <th class="sorting" >Tipocomunidad</th>
+                        <th class="sorting" >Nomenclatura</th>
                         <th style="width: 100vw"></th>
                     </tr>
                 </thead>
@@ -15,9 +16,10 @@
                 @foreach($items as $item)
                     <tr>
                         <td class="table-user">{{$item->id}}</td>
-                        <td>{{$item->comunidad}}</td>
+                        <td>{{ $item->comunidad }}</td>
                         <td>{{ $item->delegado->FullName }}</td>
                         <td>{{ $item->tipoComunidad->tipocomunidad }}</td>
+                        <td>{{ $item->nomenclatura }}</td>
                         <td class="table-action w-100">
                             <div class="button-list">
                                 @include('shared.ui_kit.__edit_item')

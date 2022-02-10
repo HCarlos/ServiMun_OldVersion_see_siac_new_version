@@ -24,11 +24,20 @@
             </div>
             <div class="form-group row mb-1">
                 <label for = "estatus_id" class="col-md-3 col-form-label">Estatus</label>
-                <div class="col-md-9">
+                <div class="col-md-5">
                     <select id="estatus_id" name="estatus_id" class="form-control" size="1">
                         @foreach($estatus as $t)
                             <option value="{{$t->id}}" {{ $t->id == $items->estatu_id  ? 'selected': '' }} >{{ $t->estatus }} </option>
                         @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row mb-1">
+                <label for = "favorable" class="col-md-3 col-form-label">Favorable</label>
+                <div class="col-md-5">
+                    <select id="favorable" name="favorable" class="form-control" size="1">
+                        <option value="0" @if($items->favorable == false) selected @endif>NO</option>
+                        <option value="1" @if($items->favorable == true) selected @endif>SI</option>
                     </select>
                 </div>
             </div>

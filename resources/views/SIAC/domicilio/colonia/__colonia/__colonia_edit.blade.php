@@ -7,6 +7,16 @@
     <div class="col-md-2"></div>
 </div>
 <div class="form-group row mb-1">
+    <label for = "nomenclatura" class="col-md-3 col-form-label has-nomenclatura">Nomenclatura</label>
+    <div class="col-md-7">
+        <input type="text" name="nomenclatura" id="nomenclatura" value="{{ old('nomenclatura',$items->nomenclatura) }}" class="form-control" />
+        <span class="has-nomenclatura">
+            <strong class="text-danger"></strong>
+        </span>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+<div class="form-group row mb-1">
     <label for = "latitud" class="col-md-3 col-form-label">Latitud</label>
     <div class="col-md-7">
         <input type="text" name="latitud" id="latitud" value="{{ old('latitud',$items->latitud) }}" class="form-control" pattern="^-?\d{1,3}\.\d+"/>

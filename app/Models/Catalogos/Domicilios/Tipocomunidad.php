@@ -15,7 +15,7 @@ class Tipocomunidad extends Model
     protected $table = 'tipocomunidades';
 
     protected $fillable = [
-        'id', 'tipocomunidad',
+        'id', 'tipocomunidad','nomenclatura',
     ];
     protected $hidden = ['deleted_at','created_at','updated_at'];
 

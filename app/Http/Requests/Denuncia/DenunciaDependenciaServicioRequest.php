@@ -47,6 +47,7 @@ class DenunciaDependenciaServicioRequest extends FormRequest
                     'estatu_id'        => $this->estatus_id,
                     'fecha_movimiento' => now(),
                     'observaciones'    => $this->observaciones,
+                    'favorable'        => !(intval($this->favorable) == 0),
                 ];
                 $item = Denuncia_Dependencia_Servicio::findOrFail($this->id);
                 $item->update($Item);

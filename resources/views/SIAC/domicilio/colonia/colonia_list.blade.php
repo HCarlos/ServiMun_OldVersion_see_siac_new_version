@@ -8,7 +8,7 @@
     @endslot
     @slot('body_catalogo')
         <div class="col-md-12">
-            @include('shared.catalogo.domicilio.colonia.__colonia_list')
+            @include('SIAC.domicilio.colonia.__colonia.__colonia_list')
         </div>
     @endslot
 @endcomponent

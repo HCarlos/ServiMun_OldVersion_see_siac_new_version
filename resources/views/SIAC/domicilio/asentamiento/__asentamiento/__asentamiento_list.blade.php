@@ -6,6 +6,7 @@
                     <tr role="row">
                         <th class="sorting_asc" aria-sort="ascending" aria-label="Name: activate to sort column descending">ID</th>
                         <th class="sorting" >Asentamiento</th>
+                        <th class="sorting" >Nomenclatura</th>
                         <th style="width: 100vw"></th>
                     </tr>
                 </thead>
@@ -14,6 +15,7 @@
                     <tr>
                         <td class="table-user">{{$item->id}}</td>
                         <td>{{$item->asentamiento}}</td>
+                        <td>{{$item->nomenclatura}}</td>
                         <td class="table-action w-100">
                             <div class="button-list">
                                 @include('shared.ui_kit.__edit_item')

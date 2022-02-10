@@ -36,7 +36,7 @@ class ComunidadController extends Controller
         $items->appends($filters)->fragment('table');
         $user = Auth::User();
 
-        return view('catalogos.catalogo.domicilio.comunidad.comunidad_list',
+        return view('SIAC.domicilio.comunidad.comunidad_list',
             [
                 'items'           => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),

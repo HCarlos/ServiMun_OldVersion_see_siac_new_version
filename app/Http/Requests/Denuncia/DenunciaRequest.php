@@ -88,6 +88,7 @@ class DenunciaRequest extends FormRequest
             $Item = [
                 'fecha_ingreso'                => Carbon::now(), //Carbon::now($this->fecha_ingreso)->format('Y-m-d hh:mm:ss'),
                 'oficio_envio'                 => $this->oficio_envio,
+                'folio_sas'                    => $this->folio_sas,
                 'fecha_oficio_dependencia'     => $this->fecha_oficio_dependencia,
                 'fecha_limite'                 => $this->fecha_limite,
                 'fecha_ejecucion'              => $this->fecha_ejecucion,

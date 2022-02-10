@@ -28,7 +28,7 @@ class AsentamientoController extends Controller
         $items->appends($filters)->fragment('table');
         $user = Auth::User();
 
-        return view('catalogos.catalogo.domicilio.asentamiento.asentamiento_list',
+        return view('SIAC.domicilio.asentamiento.asentamiento_list',
             [
                 'items'           => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),

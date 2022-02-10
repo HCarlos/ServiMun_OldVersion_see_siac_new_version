@@ -75,8 +75,12 @@
 
             <div class="form-group row mb-1">
                 <label for = "oficio_envio" class="col-lg-3 col-form-label">Oficio E. </label>
-                <div class="col-lg-9">
+                <div class="col-lg-3">
                     <input type="text" name="oficio_envio" id="oficio_envio" value="{{ old('oficio_envio') }}" class="form-control" />
+                </div>
+                <label for = "folio_sas" class="col-lg-2 col-form-label">Folio SAS</label>
+                <div class="col-lg-4">
+                    <input type="text" name="folio_sas" id="folio_sas" value="{{ old('folio_sas') }}" class="form-control" />
                 </div>
             </div>
             <div class="form-group row mb-1">

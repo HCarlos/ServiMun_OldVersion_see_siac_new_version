@@ -38,6 +38,7 @@ class TipoasentamientoRequest extends FormRequest
     {
         $Item = [
             'tipoasentamiento' => strtoupper($this->tipoasentamiento),
+            'nomenclatura'     => strtoupper($this->nomenclatura),
         ];
 
         try {

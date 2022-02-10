@@ -72,8 +72,12 @@
 
             <div class="form-group row mb-1">
                 <label for = "oficio_envio" class="col-lg-3 col-form-label">Oficio E. </label>
-                <div class="col-lg-9">
+                <div class="col-lg-3">
                     <input type="text" name="oficio_envio" id="oficio_envio" value="{{ old('oficio_envio',$items->oficio_envio) }}" class="form-control" />
+                </div>
+                <label for = "folio_sas" class="col-lg-2 col-form-label">Folio SAS</label>
+                <div class="col-lg-4">
+                    <input type="text" name="folio_sas" id="folio_sas" value="{{ old('folio_sas',$items->folio_sas) }}" class="form-control" />
                 </div>
             </div>
             <div class="form-group row mb-1">
@@ -212,24 +216,30 @@
     </div>
 
 <div class="row mt-4">
-    <div class="col-sm-4">
+    <div class="col-sm-3">
         <h6>CREADO</h6>
         <address>
-            <strong>POR:</strong>  {{ $items->creadopor->Fullname }}<br>
-            <strong>FECHA:</strong>  {{ date('d-m-Y H:i:s', strtotime($items->created_at)) }}<br>
+            <strong class="orange">POR:</strong>  {{ $items->creadopor->Fullname }}<br>
+            <strong class="purple">FECHA:</strong>  {{ date('d-m-Y H:i:s', strtotime($items->created_at)) }}<br>
         </address>
     </div> <!-- end col-->
-    <div class="col-sm-4">
+    <div class="col-sm-3">
         <h6>MODIFICADO</h6>
         <address>
-            <strong>POR:</strong>  {{ $items->modificadopor->Fullname }}<br>
-            <strong>FECHA:</strong>  {{ date('d-m-Y H:i:s', strtotime($items->updated_at)) }}<br>
+            <strong class="orange">POR:</strong>  {{ $items->modificadopor->Fullname }}<br>
+            <strong class="purple">FECHA:</strong>  {{ date('d-m-Y H:i:s', strtotime($items->updated_at)) }}<br>
         </address>
     </div> <!-- end col-->
-    <div class="col-sm-4">
-{{--        <div class="text-sm-right">--}}
-{{--            <img src="assets/images/barcode.png" alt="barcode-image" class="img-fluid mr-2">--}}
-{{--        </div>--}}
+    <div class="col-sm-6">
+        <h6>ÚLTIMA RESPUESTA</h6>
+        <address>
+            <strong class="orange">POR:</strong>  {{ $items->dependencias->first()->dependencia }}<br>
+            <strong class="seagreen">ESTATUS:</strong>  {{ $items->denuncia_estatus->first()->estatus }}<br>
+            <strong class="red">FAVORABLE:</strong>  {{ $items->denuncia_estatus->first()->pivot->favorable == true ? 'SI' : 'NO' }}<br>
+            <strong class="purple">FECHA:</strong>  {{ date('d-m-Y H:i:s', strtotime($items->denuncia_estatus->first()->pivot->fecha_movimiento)) }}<br>
+            <strong class="coral">RESPUESTA:</strong> <small> {{ $items->denuncia_estatus->first()->pivot->observaciones }} </small><br>
+
+        </address>
     </div> <!-- end col-->
 </div>
 

@@ -56,6 +56,7 @@ class AsentamientoRequest extends FormRequest
 
         $Item = [
             'asentamiento' => strtoupper($this->asentamiento),
+            'nomenclatura' => strtoupper($this->nomenclatura),
         ];
 
         try {

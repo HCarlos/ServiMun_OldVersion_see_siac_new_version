@@ -1,8 +1,18 @@
 <div class="form-group row mb-3">
     <label for = "comunidad" class="col-md-3 col-form-label has-comunidad">Comunidad</label>
-    <div class="col-md-7">
+    <div class="col-md-9">
         <input type="text" name="comunidad" id="comunidad" value="{{ old('comunidad') }}" class="form-control" />
         <span class="has-comunidad">
+            <strong class="text-danger"></strong>
+        </span>
+    </div>
+</div>
+
+<div class="form-group row mb-3">
+    <label for = "nomenclatura" class="col-md-3 col-form-label has-nomenclatura">Nomenclatura</label>
+    <div class="col-md-9">
+        <input type="text" name="nomenclatura" id="nomenclatura" value="{{ old('nomenclatura') }}" class="form-control" />
+        <span class="has-nomenclatura">
             <strong class="text-danger"></strong>
         </span>
     </div>

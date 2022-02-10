@@ -36,14 +36,14 @@ class Denuncia extends Model
         'fecha_ingreso', 'fecha_oficio_dependencia', 'fecha_limite', 'fecha_ejecucion',
         'ciudadano_id','creadopor_id','created_at','modificadopor_id','updated_at','deleted_at',
         'searchtextdenuncia',
-        'cerrado','fecha_cerrado','cerradopor_id','firmado',
-        'uuid',
+        'folio_sas','favorable',
+        'cerrado','fecha_cerrado','cerradopor_id','firmado','uuid',
 
 
     ];
 //    protected $hidden = ['deleted_at','created_at','updated_at'];
     protected $dates = ['fecha_ingreso', 'fecha_oficio_dependencia' => 'datetime:d-m-Y', 'fecha_limite' => 'datetime:d-m-Y', 'fecha_ejecucion' => 'datetime:d-m-Y', 'created_at' => 'datetime:d-m-Y H:mm:ss', 'updated_at' => 'datetime:d-m-Y H:mm:ss','fecha_cerrado'];
-    protected $casts = ['cerrado'=>'boolean','firmado'=>'boolean',];
+    protected $casts = ['cerrado'=>'boolean','firmado'=>'boolean','favorable'=>'boolean',];
 
     public function scopeSearch($query, $search){
         if (!$search || $search == "" || $search == null) return $query;
@@ -93,17 +93,17 @@ class Denuncia extends Model
 
     public function dependencias(){
         return $this->belongsToMany(Dependencia::class,'denuncia_dependencia_servicio_estatus','denuncia_id','dependencia_id')
-            ->withPivot('fecha_movimiento');
+            ->withPivot('fecha_movimiento','observaciones','favorable');
     }
 
     public function denuncia_servicios(){
         return $this->belongsToMany(Servicio::class,'denuncia_dependencia_servicio_estatus','denuncia_id','servicio_id')
-        ->withPivot('fecha_movimiento');
+        ->withPivot('fecha_movimiento','observaciones','favorable');
     }
 
     public function denuncia_estatus(){
         return $this->belongsToMany(Estatu::class,'denuncia_dependencia_servicio_estatus','denuncia_id','estatu_id')
-            ->withPivot('fecha_movimiento');
+            ->withPivot('fecha_movimiento','observaciones','favorable');
     }
 
     public function ubicacion(){

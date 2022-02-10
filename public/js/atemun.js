@@ -439,3 +439,26 @@
             });
         });
     }
+
+
+    let Url = document.URL;
+    let position = Url.search("listDenuncias");
+    let identificadorDeTemporizador;
+
+    function temporizadorDeRetraso(position) {
+        if (position > 0){
+            identificadorDeTemporizador = setInterval(funcionConRetraso, 300000);
+        }
+    }
+
+    function funcionConRetraso() {
+        location.reload();
+    }
+
+    function borrarAlerta() {
+        clearTimeout(identificadorDeTemporizador);
+    }
+
+    temporizadorDeRetraso(position);
+
+

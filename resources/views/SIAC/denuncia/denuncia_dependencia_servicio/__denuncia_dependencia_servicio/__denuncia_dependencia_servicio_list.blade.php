@@ -22,6 +22,7 @@
         <th class="sorting">SERVICIO</th>
         <th class="sorting">RESPUESTA</th>
         <th class="sorting">ESTATUS</th>
+        <th class="sorting">FAVORABLE</th>
         <th class="sorting">FECHA</th>
         <th></th>
     </tr>
@@ -35,6 +36,7 @@
                 <td class="w-75">{{$item->servicio->servicio}}</td>
                     <td>{{$item->observaciones}}</td>
                     <td>{{$item->estatu->estatus}}</td>
+                    <td class="text-center">@if($item->favorable==true)<i class="fas fa-check seagreen"></i> @else <i class="mdi mdi-close-box red mdi-18px"></i> @endif </td>
                     <td>{{$item->fecha_movimiento}}</td>
                     <td class="table-action  w-25">
                         <div class="button-list">

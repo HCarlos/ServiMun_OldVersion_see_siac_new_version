@@ -35,6 +35,15 @@
                 </div>
             </div>
             <div class="form-group row mb-1">
+                <label for = "favorable" class="col-md-3 col-form-label">Favorable</label>
+                <div class="col-md-5">
+                    <select id="favorable" name="favorable" class="form-control" size="1">
+                        <option value="0" selected >NO</option>
+                        <option value="1">SI</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row mb-1">
                 <label for = "observaciones" class="col-md-3 col-form-label">Argumentos</label>
                 <div class="col-md-9">
                     <textarea id="estatus_id" name="observaciones" class="form-control" cols="10" rows="4" ></textarea>
