@@ -92,10 +92,8 @@ class DenunciaRequest extends FormRequest
                 'fecha_oficio_dependencia'     => $this->fecha_oficio_dependencia,
                 'fecha_limite'                 => $this->fecha_limite,
                 'fecha_ejecucion'              => $this->fecha_ejecucion,
-
                 'descripcion'                  => strtoupper($this->descripcion),
                 'referencia'                   => strtoupper($this->referencia),
-
                 'calle'                        => strtoupper($Ubicacion->calle),
                 'num_ext'                      => strtoupper($Ubicacion->num_ext),
                 'num_int'                      => strtoupper($Ubicacion->num_int),

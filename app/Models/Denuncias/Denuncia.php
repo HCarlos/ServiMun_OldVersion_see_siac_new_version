@@ -170,6 +170,10 @@ class Denuncia extends Model
         return $this->hasOne(User::class,'id','cerradopor_id');
     }
 
+    public function ultimo_estatu(){
+        return $this->hasMany(Denuncia_Dependencia_Servicio::class,'denuncia_id','id');
+    }
+
     public function getTotalRespuestasAttribute(){
         $r = $this->denuncia_estatus()->count();
         return $r == 1 ? '' : $r-1;

@@ -41,10 +41,10 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         '3be16222a6efa6dd226a219eaaff823b' => __DIR__ . '/..' . '/ratchet/pawl/src/functions_include.php',
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
         'a1af1fc0cffb5f61cbaf64dbe030fdb9' => __DIR__ . '/..' . '/laravel/legacy-factories/helpers.php',
+        'f18cc91337d49233e5754e93f3ed9ec3' => __DIR__ . '/..' . '/laravelcollective/html/src/helpers.php',
         '0c3c22e27afa83be19b4c938f4c6e9ea' => __DIR__ . '/..' . '/spatie/laravel-backup/src/Helpers/functions.php',
         '377b22b161c09ed6e5152de788ca020a' => __DIR__ . '/..' . '/spatie/laravel-permission/src/helpers.php',
         '0b47d6d4a00ca9112ba3953b49e7c9a4' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/helper.php',
-        'f18cc91337d49233e5754e93f3ed9ec3' => __DIR__ . '/..' . '/laravelcollective/html/src/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (

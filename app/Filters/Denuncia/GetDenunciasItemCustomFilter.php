@@ -42,8 +42,6 @@ class GetDenunciasItemCustomFilter extends QueryFilter{
         session(['DependenciaArray' => $DependenciaArray]);
         session(['DependenciaIdArray' => $DependenciaIdArray]);
 
-//        dd($filters);
-
         return $query->filterBy($filters);
 
     }

@@ -358,16 +358,13 @@ class DenunciaController extends Controller
                 'findDataInDenuncia'                  => 'findDataInDenuncia',
                 'showEditDenunciaDependenciaServicio' => 'listDenunciaDependenciaServicio',
                 'imagenesDenunciaItem'                => 'listImagenes',
-
-
             ]
         );
 
     }
 
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //
-    protected function getServiciosFromDependencias($id= 0)
-    {
+    protected function getServiciosFromDependencias($id= 0){
 
         $item = Servicio::getQueryServiciosFromDependencias($id);
 

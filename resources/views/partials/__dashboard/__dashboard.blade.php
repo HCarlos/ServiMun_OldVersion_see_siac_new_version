@@ -211,7 +211,7 @@
 
         var options = {
             title: 'Gráfico de Estatus por Dependencia ( {{ $FI.' - '.$FF }} )',
-            subtitle: 'Chess opening moves',
+            subtitle: 'SIAC',
 
             hwidth: 1400,
             height: 1600,

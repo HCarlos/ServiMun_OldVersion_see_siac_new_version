@@ -40,8 +40,8 @@ return array(
     '3be16222a6efa6dd226a219eaaff823b' => $vendorDir . '/ratchet/pawl/src/functions_include.php',
     'b6b991a57620e2fb6b2f66f03fe9ddc2' => $vendorDir . '/symfony/string/Resources/functions.php',
     'a1af1fc0cffb5f61cbaf64dbe030fdb9' => $vendorDir . '/laravel/legacy-factories/helpers.php',
+    'f18cc91337d49233e5754e93f3ed9ec3' => $vendorDir . '/laravelcollective/html/src/helpers.php',
     '0c3c22e27afa83be19b4c938f4c6e9ea' => $vendorDir . '/spatie/laravel-backup/src/Helpers/functions.php',
     '377b22b161c09ed6e5152de788ca020a' => $vendorDir . '/spatie/laravel-permission/src/helpers.php',
     '0b47d6d4a00ca9112ba3953b49e7c9a4' => $vendorDir . '/yajra/laravel-datatables-oracle/src/helper.php',
-    'f18cc91337d49233e5754e93f3ed9ec3' => $vendorDir . '/laravelcollective/html/src/helpers.php',
 );
