@@ -76,23 +76,24 @@ class ListDenunciaXLSXController extends Controller
                 }
 
                 $sh
-                    ->setCellValue('A'.$C, $item->id)
-                    ->setCellValue('B'.$C, $ciudadano->ap_paterno)
-                    ->setCellValue('C'.$C, $ciudadano->ap_materno)
-                    ->setCellValue('D'.$C, $ciudadano->nombre)
-                    ->setCellValue('E'.$C, $ubicacion->Ubicacion)
-                    ->setCellValue('F'.$C, $ciudadano->TelefonosCelularesEmails)
-                    ->setCellValue('G'.$C, $fechaIngreso)
-                    ->setCellValue('H'.$C, $servicio->subarea->area->dependencia->dependencia)
-                    ->setCellValue('I'.$C, $servicio->subarea->area->area)
-                    ->setCellValue('J'.$C, $servicio->subarea->subarea)
-                    ->setCellValue('K'.$C, $servicio->servicio)
-                    ->setCellValue('L'.$C, $item->descripcion)
-                    ->setCellValue('M'.$C, $item->referencia)
-                    ->setCellValue('N'.$C, $prioridad->prioridad)
-                    ->setCellValue('O'.$C, $origen->origen)
-                    ->setCellValue('P'.$C, $estatus->estatus)
-                    ->setCellValue('Q'.$C,$respuesta);
+                    ->setCellValue('A'.$C, $item->id ?? 0)
+                    ->setCellValue('B'.$C, $ciudadano->curp ?? '')
+                    ->setCellValue('C'.$C, $ciudadano->ap_materno ?? '')
+                    ->setCellValue('D'.$C, $ciudadano->ap_materno ?? '')
+                    ->setCellValue('E'.$C, $ciudadano->nombre ?? '')
+                    ->setCellValue('F'.$C, $ubicacion->Ubicacion ?? '')
+                    ->setCellValue('G'.$C, $ciudadano->TelefonosCelularesEmails ?? '')
+                    ->setCellValue('H'.$C, $fechaIngreso ?? '')
+                    ->setCellValue('I'.$C, $servicio->subarea->area->dependencia->dependencia ?? '')
+                    ->setCellValue('J'.$C, $servicio->subarea->area->area ?? '')
+                    ->setCellValue('K'.$C, $servicio->subarea->subarea ?? '')
+                    ->setCellValue('L'.$C, $servicio->servicio ?? '')
+                    ->setCellValue('M'.$C, $item->descripcion ?? '')
+                    ->setCellValue('N'.$C, $item->referencia ?? '')
+                    ->setCellValue('O'.$C, $prioridad->prioridad ?? '')
+                    ->setCellValue('P'.$C, $origen->origen ?? '')
+                    ->setCellValue('Q'.$C, $item->ultimo_estatus ?? '')
+                    ->setCellValue('R'.$C, $respuesta );
 
                 $C++;
             }
