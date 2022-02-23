@@ -7,7 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace SebastianBergmann\CodeCoverage;
+namespace SebastianBergmann\CodeCoverage\Data;
 
 use function array_key_exists;
 use function array_keys;
@@ -130,18 +130,6 @@ final class ProcessedCodeCoverageData
         }
 
         unset($this->lineCoverage[$oldFile], $this->functionCoverage[$oldFile]);
-    }
-
-    public function removeFilesWithNoCoverage(): void
-    {
-        foreach ($this->lineCoverage as $file => $lines) {
-            foreach ($lines as $line) {
-                if (is_array($line) && !empty($line)) {
-                    continue 2;
-                }
-            }
-            unset($file);
-        }
     }
 
     public function merge(self $newData): void

@@ -68,6 +68,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return (new UserFilter())->applyTo($query, $filters);
     }
 
+    public function permisos() {
+        return $this->belongsToMany(Permission::class);
+    }
+
     public function permissions() {
         return $this->belongsToMany(Permission::class);
     }

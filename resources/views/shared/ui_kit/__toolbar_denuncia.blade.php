@@ -1,8 +1,10 @@
 <div class="button-list pt-2 pb-0">
     @isset($newItem)
-        <a href="{{route($newItem)}}" class="btn btn-outline-warning btn-rounded btn-sm ml-1" data-toggle="tooltip" data-placement="top" data-original-title="Nueva Denuncia">
-            <i class="fas fa-plus"></i>
-        </a>
+        @if( \Illuminate\Support\Facades\Auth::user()->isPermission('csd_sas|consultar|all') )
+            <a href="{{route($newItem)}}" class="btn btn-outline-warning btn-rounded btn-sm ml-1" data-toggle="tooltip" data-placement="top" data-original-title="Nueva Denuncia">
+                <i class="fas fa-plus"></i>
+            </a>
+        @endif
     @endisset
     @isset($showProcess1)
         <a href="{{ route($showProcess1)}} " class="btn btn-icon btn-outline-success ml-1 btn-rounded btnGetItems" data-toggle="tooltip" data-placement="top" data-original-title="Exportar a MS Excel">

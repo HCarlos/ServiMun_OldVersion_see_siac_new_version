@@ -21,7 +21,8 @@ class ListUserXLSXController extends Controller
 
 
     public function getListUserXLSX(Request $request){
-        ini_set('max_execution_time', 900);
+        ini_set('max_execution_time', 3600);
+
         $data = $request->all(['search','roles']);
         $data['search'] = $data['search']==null ? "" : $data['search'];
         $data['roles']  = $data['roles']==null ? [] : explode(",",$data['roles']);
@@ -116,7 +117,7 @@ class ListUserXLSXController extends Controller
 
 
     public function getUserByRoleToXLSX(Request $request){
-        ini_set('max_execution_time', 900);
+        ini_set('max_execution_time', 3600);
         $data = $request->all(['role_user',]);
         $data['role_user'] = $data['role_user']==null ? 'ALUMNO' : $data['role_user'];
         $filters = new FiltersRules();

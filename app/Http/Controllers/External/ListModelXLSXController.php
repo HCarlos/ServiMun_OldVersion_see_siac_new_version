@@ -42,7 +42,7 @@ class ListModelXLSXController extends Controller
 {
 
     public function getListModelXLSX($nModel){
-        ini_set('max_execution_time', 900);
+        ini_set('max_execution_time', 3600);
         $Model = null;
         switch ($nModel){
             case 1:

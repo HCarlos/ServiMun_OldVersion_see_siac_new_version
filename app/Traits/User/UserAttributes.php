@@ -22,6 +22,24 @@ trait UserAttributes
         return $this->hasRole($role);
     }
 
+    public function isPermission($permissions, string $guard = null): bool{
+
+        $ar = explode("|", $permissions);
+//        if (is_string($permissions) && false !== strpos($permissions, '|')) {
+//            $permissions = $this->convertPipeToArray($permissions);
+//        }
+
+        $IsExist = false;
+        foreach ($this->permissions as $p){
+            if ( array_search($p->name,$ar,true) ){
+                $IsExist = true;
+            }
+        }
+        return $IsExist;
+
+    }
+
+
     public function getRoleIdStrArrayAttribute(){
         return $this->roles()->allRelatedIds('id')->implode('|','id');
     }

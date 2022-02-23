@@ -78,7 +78,7 @@ class ListDenunciaXLSXController extends Controller
                 $sh
                     ->setCellValue('A'.$C, $item->id ?? 0)
                     ->setCellValue('B'.$C, $ciudadano->curp ?? '')
-                    ->setCellValue('C'.$C, $ciudadano->ap_materno ?? '')
+                    ->setCellValue('C'.$C, $ciudadano->ap_paterno ?? '')
                     ->setCellValue('D'.$C, $ciudadano->ap_materno ?? '')
                     ->setCellValue('E'.$C, $ciudadano->nombre ?? '')
                     ->setCellValue('F'.$C, $ubicacion->Ubicacion ?? '')

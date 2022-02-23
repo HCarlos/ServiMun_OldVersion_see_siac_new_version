@@ -23,11 +23,9 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
 
 
-class DenunciaController extends Controller
-{
+class DenunciaController extends Controller{
 
     protected $tableName = "denuncias";
-
     protected $paginationTheme = 'bootstrap';
     protected $msg = "";
     protected $max_item_for_query = 250;
@@ -37,6 +35,7 @@ class DenunciaController extends Controller
     /**
      * @param string $tableName
      */
+
     public function __construct(){
         $this->middleware('auth');
     }
@@ -89,8 +88,7 @@ class DenunciaController extends Controller
         );
     }
 
-    protected function newItem()
-    {
+    protected function newItem(){
         $Prioridades  = Prioridad::all()->sortBy('prioridad');
         $Origenes     = Origen::all()->sortBy('origen');
 
