@@ -11,9 +11,14 @@
                             <a href="{{route("newUser")}}" target="_blank" class="btn btn-icon btn-info"> <i class="mdi mdi-plus"></i></a>
                         </span>
                     </div>
+                    <div class="input-group btn-group-xs">
                     {!! Form::text('usuario', $items->Ciudadano->FullName, array('class' => 'form-control','id'=>'usuario','readonly'=>'readonly')) !!}
+                        <span class="input-group-append">
+                            <a  href="{{route("editUser",['Id'=>$items->Ciudadano->id])}}" target="_blank" class="btn btn-xs btn-icon btn-primary editUser" id="editUser" name="editUser"> <i class="mdi mdi-account-edit "></i></a>
+                        </span>
+                    </div>
                     {!! Form::text('usuario_domicilio', $items->Ciudadano->ubicaciones->first()->Ubicacion, array('class' => 'form-control','id'=>'usuario_domicilio','readonly'=>'readonly')) !!}
-                    {!! Form::text('usuario_telefonos', $items->telefonosCelularesEmails, array('class' => 'form-control','id'=>'usuario_telefonos','readonly'=>'readonly')) !!}
+                    {!! Form::text('usuario_telefonos', $items->Ciudadano->TelefonosCelularesEmails, array('class' => 'form-control','id'=>'usuario_telefonos','readonly'=>'readonly')) !!}
                 </div>
             </div>
 
@@ -243,8 +248,8 @@
     </div> <!-- end col-->
 </div>
 
-
 </div>
+
 
 <hr>
 

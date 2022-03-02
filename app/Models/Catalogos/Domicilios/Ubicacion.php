@@ -34,8 +34,9 @@ class Ubicacion extends Model
     public function scopeSearch($query, $search){
         if (!$search || $search == "" || $search == null) return $query;
         return $query->whereRaw("searchtext @@ to_tsquery('spanish', ?)", [$search])
-            ->orderByRaw("ts_rank(searchtext, to_tsquery('spanish', ?)) ASC", [$search]);
+            ->orderByRaw("calle, num_int, num_ext, colonia ASC");
     }
+//->orderByRaw("ts_rank(searchtext, to_tsquery('spanish', ?)) DESC", [$search]);
 
     public function calle() {
         return $this->hasOne(Calle::class,'id','calle_id');

@@ -58,7 +58,12 @@ class User extends Authenticatable implements MustVerifyEmail
         return $query->whereRaw("searchtext @@ to_tsquery('spanish', ?)", [$search])
             ->orderByRaw("ts_rank(searchtext, to_tsquery('spanish', ?)) DESC", [$search]);
     }
-//->orHas('user_adress', function ($q) use ($search) {     return $q->whereRaw("UPPER(calle) like ?", "%{$search}%")
+
+//->orderByRaw("ap_paterno, ap_materno, nombre, curp, username ASC");
+
+
+
+    //->orHas('user_adress', function ($q) use ($search) {     return $q->whereRaw("UPPER(calle) like ?", "%{$search}%")
 //->orWhereRaw("UPPER(colonia) like ?", "%{$search}%")
 //    ->orWhereRaw("UPPER(localidad) like ?", "%{$search}%");
 //})

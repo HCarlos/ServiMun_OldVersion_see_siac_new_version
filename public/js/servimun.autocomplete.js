@@ -7,6 +7,8 @@ jQuery(function($) {
             }
         });
 
+        $("#editUser").prop('readonly',true);
+
         var Objs = ["#search_autocomplete","#search_autocomplete_user",".search_autocomplete_user","#search_autocomplete_calle","#search_autocomplete_colonia","#search_autocomplete_cp","#search_autocomplete_comunidad"];
         var Urls = ["/searchAdress","/searchUser","/searchUser","/buscarCalle","/buscarColonia","/buscarCodigopostal","/buscarComunidad"];
         var Gets = ["/getUbi/","/getUser/","/getUser/","/getCalle/","/getColonia/","/getCodigopostal/","/getComunidad/"];
@@ -74,6 +76,9 @@ jQuery(function($) {
                     if ( $("#ubicacion_id_span") )  $("#ubicacion_id_span").html(d.ubicacion_id);
                     if ( $("#ubicacion") )          $("#ubicacion").val(d.domicilio);
                     if ( $("#ubicacion_nueva_id") ) $("#ubicacion_nueva_id").val(d.ubicacion_id);
+                    $("#editUser").prop('readonly',false);
+                    $("#editUser").attr('href',"/editUser/"+d.id);
+
                     break;
                 case 2:
                     if ( $("#lstAsigns") ) $("#lstAsigns").empty();

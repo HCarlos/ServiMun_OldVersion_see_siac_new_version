@@ -11,7 +11,13 @@
                             <a href="{{route("newUser")}}" target="_blank" class="btn btn-icon btn-info"> <i class="mdi mdi-plus"></i></a>
                         </span>
                     </div>
-                    {!! Form::text('usuario', null, array('class' => 'form-control','id'=>'usuario','readonly'=>'readonly')) !!}
+                    <div class="input-group btn-group-xs">
+                        {!! Form::text('usuario', null, array('class' => 'form-control','id'=>'usuario','readonly'=>'readonly')) !!}
+                        <span class="input-group-append">
+                            <a  target="_blank" class="btn btn-xs btn-icon btn-primary editUser" id="editUser" name="editUser"> <i class="mdi mdi-account-edit "></i></a>
+                        </span>
+                    </div>
+
                     {!! Form::text('usuario_domicilio', null, array('class' => 'form-control','id'=>'usuario_domicilio','readonly'=>'readonly')) !!}
                     {!! Form::text('usuario_telefonos', null, array('class' => 'form-control','id'=>'usuario_telefonos','readonly'=>'readonly')) !!}
                 </div>
