@@ -47,7 +47,7 @@ class ListDenunciaXLSXController extends Controller
             $spreadsheet = $reader->load($archivo);
             $sh = $spreadsheet->setActiveSheetIndex(0);
 
-            $sh->setCellValue('N1', Carbon::now()->format('d-m-Y h:m:s'));
+            $sh->setCellValue('S1', Carbon::now()->format('d-m-Y h:m:s'));
             foreach ($Items as $item){
 
                 //dd($item);
