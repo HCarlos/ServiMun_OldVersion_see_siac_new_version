@@ -76,8 +76,8 @@ jQuery(function($) {
                     if ( $("#ubicacion_id_span") )  $("#ubicacion_id_span").html(d.ubicacion_id);
                     if ( $("#ubicacion") )          $("#ubicacion").val(d.domicilio);
                     if ( $("#ubicacion_nueva_id") ) $("#ubicacion_nueva_id").val(d.ubicacion_id);
-                    $("#editUser").prop('readonly',false);
-                    $("#editUser").attr('href',"/editUser/"+d.id);
+                    if ( $("#editUser") ) $("#editUser").prop('readonly',false);
+                    if ( $("#editUser") ) $("#editUser").attr('href','/editUser/'+d.id);
 
                     break;
                 case 2:
@@ -117,6 +117,8 @@ jQuery(function($) {
                     $("#usuario_domicilio").val("");
                     $("#usuario_telefonos").val("");
                     $("#usuario_id").val(0);
+                    $("#editUser").prop('readonly',true);
+                    $("#editUser").prop('href',null);
                     break;
                 case 2:
                     if ( $("#lstAsigns") ) $("#lstAsigns").empty();
