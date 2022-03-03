@@ -28,8 +28,11 @@ class GetDenunciasItemCustomFilter extends QueryFilter{
         IF ($IsEnlace) {
             $DependenciaIdArray = Auth::user()->DependenciaIdArray;
             $filters['dependencia_id'] = $DependenciaIdArray;
+            $filters['search'] = $search;
         }elseif ($IsAdminArchivo){
                 $filters['cerrado'] = 'true';
+//        }elseif ($IsEnlace && Auth::user()->isRole('USER_SAS_CAP|USER_SAS_ADMIN') && !Auth::user()->isRole('Administrator|SysOp') ){
+//            $filters['search'] = $search;
         }elseif ( Auth::user()->isRole('CIUDADANO|DELEGADO') && !Auth::user()->isRole('Administrator|SysOp') ){
             $filters['ciudadano_id'] = Auth::user()->id;
             //dd("2");
@@ -41,6 +44,8 @@ class GetDenunciasItemCustomFilter extends QueryFilter{
         session(['IsAdminArchivo' => $IsAdminArchivo]);
         session(['DependenciaArray' => $DependenciaArray]);
         session(['DependenciaIdArray' => $DependenciaIdArray]);
+
+//        dd( $filters );
 
         return $query->filterBy($filters);
 

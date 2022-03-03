@@ -49,30 +49,34 @@ class DenunciaFilter extends QueryFilter
         $F        = new FuncionesController();
         $tsString = $F->string_to_tsQuery( strtoupper($filters),' & ');
 
-//        dd($tsString);
+        return $query->whereRaw("searchtextdenuncia @@ to_tsquery('spanish', ?)", [$tsString])
+            ->orderByRaw("calle, num_ext, num_int, colonia, descripcion, referencia ASC");
 
-        return $query->where(function ($query) use ($search, $tsString) {
-                $query->orWhereHas('ciudadanos', function ($q) use ($search) {
-                    return $q->whereRaw("CONCAT( UPPER(TRIM(ap_paterno)),' ',UPPER(TRIM(ap_materno)),' ',UPPER(TRIM(nombre)) ) like ?", "%{$search}%")
-                        ->orWhereRaw("UPPER(curp) like ?", "%{$search}%");
-                })
-                ->orWhereHas('dependencias', function ($q) use ($search) {
-                    if ($this->IsEnlace()){
-                        return $q->whereIn('dependencia',$this->getDependencia(),true);
-                    }else{
-                        return $q->whereRaw("UPPER(dependencia) like ?", "%{$search}%");
-                    }
-                })
-                ->orWhereHas('estatus', function ($q) use ($search) {
-                    return $q->whereRaw("UPPER(estatus) like ?", "%{$search}%")
-                        ->where('ultimo',true);
-                })
-                ->orWhereRaw("searchtextdenuncia @@ to_tsquery('spanish', ?)", [$tsString])
-                ->orWhere('cerrado', settype($search, 'boolean'))
-                ->orWhere('id', intval($search));
-        });
+
+//        return $query->where(function ($query) use ($search, $tsString) {
+//                $query->orWhereHas('ciudadanos', function ($q) use ($search) {
+//                    return $q->whereRaw("CONCAT( UPPER(TRIM(ap_paterno)),' ',UPPER(TRIM(ap_materno)),' ',UPPER(TRIM(nombre)) ) like ?", "%{$search}%")
+//                        ->orWhereRaw("UPPER(curp) like ?", "%{$search}%");
+//                })
+//                ->orWhereHas('estatus', function ($q) use ($search) {
+//                    return $q->whereRaw("UPPER(estatus) like ?", "%{$search}%")
+//                        ->where('ultimo',true);
+//                })
+//                ->orWhereRaw("searchtextdenuncia @@ to_tsquery('spanish', ?)", [$tsString])
+//                ->orWhere('id', intval($search));
+//        });
 
     }
+
+//->orWhereHas('dependencias', function ($q) use ($search) {
+//                    if ($this->IsEnlace()){
+//                        return $q->whereIn('dependencia_id',$this->getDependenciaId(),true);
+//                    }else{
+//    return $q->whereRaw("UPPER(dependencia) like ?", "%{$search}%");
+//}
+//})
+
+//->orWhere('cerrado', settype($search, 'boolean'))
 
 //->orWhereRaw("UPPER(descripcion) like ?", "%{$search}%")
 //->orWhereRaw("UPPER(referencia) like ?", "%{$search}%")
@@ -210,6 +214,10 @@ class DenunciaFilter extends QueryFilter
 
     function getDependencia(){
             return $DependenciaArray = explode('|',Session::get('DependenciaArray'));
+    }
+
+    function getDependenciaId(){
+        return $DependenciaIdArray = explode('|',Session::get('DependenciaIdArray'));
     }
 
 
