@@ -39,6 +39,10 @@
                                     @include('shared.ui_kit.__edit_denuncia_dependencia_servicio_item')
                                 @endif
                             @endif
+                            @if( ($item->cerrado == false && $item->firmado == false) &&
+                                 auth()->user()->can('elimina_denuncia_general') )
+                                @include('shared.ui_kit.__remove_item')
+                            @endif
                             @include('shared.ui_kit.__edit_item')
                             @include('shared.ui_kit.__print_denuncia_item')
                         </div>

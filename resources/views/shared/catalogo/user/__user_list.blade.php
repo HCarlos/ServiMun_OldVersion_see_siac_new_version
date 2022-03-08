@@ -19,9 +19,11 @@
                         <td>{{($item->curp)}}</td>
                         <td>
                             @foreach($item->roles as $role)
-                                <span class="badge badge-primary">{{$role->name}}</span>
+                                <span class="badge badge-primary">{{$role->name ?? 'none'}}</span>
                                 @if($role->name=="ENLACE")
-                                    <b>{{$item->dependencias->first()->abreviatura}}</b>
+                                    <b class="{{ isset($item->dependencias->first()->abreviatura) ? '' : 'badge badge-danger' }}">
+                                        {{$item->dependencias->first()->abreviatura ?? 'none'}}
+                                    </b>
                                 @endif
                             @endforeach
                         </td>

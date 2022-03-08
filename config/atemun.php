@@ -52,6 +52,8 @@ return [
     'dias_mas_fecha_limite'    => env('DIAS_MAS_FECHA_LIMITE',5),
 
 
+    'consulta_500_items_general' => 500,
+
     // -----------------------------------------------------------
     // La mayor parte de los Tablas estan configuradas aquí,
     // es en este mismo sitio donde la debes mantener forerver

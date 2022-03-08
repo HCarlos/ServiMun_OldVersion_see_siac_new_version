@@ -44,6 +44,10 @@ class DenunciaController extends Controller{
     {
         ini_set('max_execution_time', 300);
 
+        if ( Auth::user()->can('consulta_500_items_general') ){
+            $this->max_item_for_query = config("atemun.consulta_500_items_general");
+        }
+
         $search = $request->only(['search']);
 
         $filters['filterdata'] = $request->only(['search']);;
