@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
+use function React\Promise\all;
 
 
 class DenunciaController extends Controller{
@@ -44,9 +45,9 @@ class DenunciaController extends Controller{
     {
         ini_set('max_execution_time', 300);
 
-        if ( Auth::user()->can('consulta_500_items_general') ){
-            $this->max_item_for_query = config("atemun.consulta_500_items_general");
-        }
+//        if ( Auth::user()->can('consulta_500_items_general') ){
+//            $this->max_item_for_query = config("atemun.consulta_500_items_general");
+//        }
 
         $search = $request->only(['search']);
 
@@ -330,9 +331,18 @@ class DenunciaController extends Controller{
         $queryFilters = $filters->filterRulesDenuncia($request);
 //        dd($queryFilters);
 
-        if ( Auth::user()->can('consulta_500_items_general') ){
-            $this->max_item_for_query = config("atemun.consulta_500_items_general");
+//        if ( Auth::user()->can('consulta_500_items_general') ){
+//            $this->max_item_for_query = config("atemun.consulta_500_items_general");
+//        }
+//
+        $req = $request->only(['items_for_query']);
+        if ( isset($req['items_for_query'])){
+            $this->max_item_for_query = $req['items_for_query'];
+            session(['items_for_query' => $this->max_item_for_query]);
+        }else{
+            $this->max_item_for_query = session::get('items_for_query');
         }
+//        dd($items_for_query);
 
         $items = Denuncia::query()
             ->filterBy($queryFilters)
