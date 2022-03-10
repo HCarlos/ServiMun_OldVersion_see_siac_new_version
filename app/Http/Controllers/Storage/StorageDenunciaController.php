@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Validator;
 
 class StorageDenunciaController extends Controller{
 
-
     protected $redirectTo = 'editDenuncia/';
     protected $disk = 'denuncia';
     protected $F;
@@ -79,7 +78,6 @@ class StorageDenunciaController extends Controller{
     public function saveFile($Item,$file,$DenunciaObject){
 
         if ( $file ) {
-
             $ext = $file->extension();
             $name = sha1(date('YmdHis') . time()).'-'.$Item->user__id.'-'.$DenunciaObject->id;
             $fileName = $name.'.' . $ext;

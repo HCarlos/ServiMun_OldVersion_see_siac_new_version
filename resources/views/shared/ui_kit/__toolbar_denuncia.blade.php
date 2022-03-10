@@ -1,5 +1,6 @@
 <div class="button-list pt-2 pb-0">
     @isset($newItem)
+{{--        @php dd(\Illuminate\Support\Facades\Auth::user()->isPermission('csd_sas|consultar|all')) @endphp--}}
         @if( \Illuminate\Support\Facades\Auth::user()->isPermission('csd_sas|consultar|all') )
             <a href="{{route($newItem)}}" class="btn btn-outline-warning btn-rounded btn-sm ml-1" data-toggle="tooltip" data-placement="top" data-original-title="Nueva Denuncia">
                 <i class="fas fa-plus"></i>

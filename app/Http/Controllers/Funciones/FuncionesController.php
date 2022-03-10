@@ -154,7 +154,9 @@ class FuncionesController extends Controller
                 $filePath = public_path(env($profile_root)).'/'.$filename;
                 $image->save($filePath);
                 Storage::disk($disk)->put($filename, $image);
-                //$image->delete($filePath);
+                if (File::exists($filePath)) {
+                    unlink($filePath);
+                }
             }else{
                 Storage::disk($disk)->put($filename, $image);
             }

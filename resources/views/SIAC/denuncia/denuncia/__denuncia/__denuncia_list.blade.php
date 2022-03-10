@@ -33,9 +33,7 @@
                                 @include('shared.ui_kit.__remove_item')
             {{--                    @include('shared.ui_kit.__respuestas_list_item')--}}
                                 @include('shared.ui_kit.__imagenes_list_item')
-                                @if( auth()->user()->can('rsd_sas') ||
-                                     auth()->user()->can('consultar') ||
-                                     auth()->user()->can('all') )
+                                @if( \Illuminate\Support\Facades\Auth::user()->isPermission('rsd_sas|consultar|all') )
                                     @include('shared.ui_kit.__edit_denuncia_dependencia_servicio_item')
                                 @endif
                             @endif
