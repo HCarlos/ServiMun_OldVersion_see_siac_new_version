@@ -232,9 +232,9 @@ class DenunciaController extends Controller{
     protected function removeItem($id = 0)
     {
         $item = Denuncia::withTrashed()->findOrFail($id);
-        if (Auth::user()->isRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN')){
+        if (Auth::user()->isRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN|USER_SAS_ADMIN')){
             return $this->remove($id);
-        }elseif ( Auth::user()->isRole('USER_SAS_SIAC|USER_SAS_ADMIN') && Auth::user()->id == $item->creadopor_id ){
+        }elseif ( Auth::user()->isRole('ENLACE') && Auth::user()->id == $item->creadopor_id ){
             return $this->remove($id);
         }else{
             return Response::json(['mensaje' => 'Acceso Denegado', 'data' => 'Error', 'status' => '200'], 200);
@@ -329,6 +329,10 @@ class DenunciaController extends Controller{
 
         $queryFilters = $filters->filterRulesDenuncia($request);
 //        dd($queryFilters);
+
+        if ( Auth::user()->can('consulta_500_items_general') ){
+            $this->max_item_for_query = config("atemun.consulta_500_items_general");
+        }
 
         $items = Denuncia::query()
             ->filterBy($queryFilters)
