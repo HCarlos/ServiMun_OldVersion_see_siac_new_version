@@ -111,7 +111,7 @@
             <option value="2250">2250</option>
             <option value="2500">2500</option>
         </select>
-        <small class="text-muted">La cantidad de registro es directamente proporcional al tiempo que tarda la consulta.</small>
+        <small class="text-muted">La cantidad de registros, es directamente proporcional al tiempo que tarda la consulta.</small>
     </div>
 </div>
 

@@ -676,3 +676,6 @@ input[readonly] {
     border-width: 2px;
 }
 
+.text-warning-reload {
+    color: coral !important;
+}
