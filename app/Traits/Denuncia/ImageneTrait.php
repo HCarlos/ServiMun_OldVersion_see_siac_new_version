@@ -33,21 +33,22 @@ trait ImageneTrait
     public function getPathImageThumbAttribute(){
         $fl   = explode('.',$this->image);
         $dg   = $fl[count($fl)-1];
-        $envi = config("atemun.document_type_extension");
-        $rt   = in_array( $dg, $envi ) ? '/images/web/document-file.png':'/images/web/file-not-found.png';
+        $flDoc = config("atemun.document_type_extension");
+        $flImg = config("atemun.images_type_extension");
+//        $rt   = in_array( $dg, $envi ) ? '/images/web/document-file.png': '/images/web/file-not-found.png';
+        if ( in_array( $dg, $flDoc ) ) {
+            $rt = '/images/web/document-file.png';
+        }elseif (in_array( $dg, $flImg ) ) {
+//            $rt =  "/storage/".$this->disk."/".$this->image_thumb;
+            $exists = Storage::disk($this->disk)->exists($this->image_thumb);
+            $rt = $exists
+                ? "/storage/".$this->disk."/".$this->image_thumb
+                : '/images/web/file-not-found.png';
+        }else{
+            $rt = '/images/web/file-not-found.png';
+        }
 
-
-
-        $exists = Storage::disk($this->disk)->exists($this->image_thumb);
-        $ret = $exists
-            ? "/storage/".$this->disk."/".$this->image_thumb
-            : $rt;
-        return $ret;
-//        $exists = Storage::disk($this->disk)->exists($this->image_thumb);
-//        $ret = $exists
-//            ? "/storage/".$this->disk."/".$this->image_thumb
-//            : '/images/web/file-not-found.png';
-//        return $ret;
+        return $rt;
 
     }
 
