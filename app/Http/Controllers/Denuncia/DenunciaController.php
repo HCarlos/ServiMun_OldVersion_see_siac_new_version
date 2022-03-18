@@ -233,7 +233,7 @@ class DenunciaController extends Controller{
     protected function removeItem($id = 0)
     {
         $item = Denuncia::withTrashed()->findOrFail($id);
-        if (Auth::user()->isRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN|USER_SAS_ADMIN')){
+        if (Auth::user()->isRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN|USER_SAS_ADMIN|USER_DIF_ADMIN')){
             return $this->remove($id);
         }elseif ( Auth::user()->isRole('ENLACE') && Auth::user()->id == $item->creadopor_id ){
             return $this->remove($id);

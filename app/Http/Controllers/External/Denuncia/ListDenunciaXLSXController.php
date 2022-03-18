@@ -61,7 +61,8 @@ class ListDenunciaXLSXController extends Controller
                 $estatus     = Estatu::find($item->estatus_id);
                 $creadopor   = User::find($item->creadopor_id);
 
-                $fechaIngreso   = Carbon::parse($item->fecha_ingreso)->format('d-m-Y'); //Carbon::createFromFormat('d-m-Y', $item->fecha_nacimiento);
+//                $fechaIngreso   = Carbon::parse($item->fecha_ingreso)->format('d-m-Y');
+                $fechaIngreso   = date_format($item->fecha_ingreso,'d-m-Y');
                 $fechaLimite    = Carbon::parse($item->fecha_limite)->format('d-m-Y'); //Carbon::createFromFormat('d-m-Y', $item->fecha_nacimiento);
                 $fechaEjecucion = Carbon::parse($item->fecha_ejecucion)->format('d-m-Y'); //Carbon::createFromFormat('d-m-Y', $item->fecha_nacimiento);
 
@@ -100,9 +101,10 @@ class ListDenunciaXLSXController extends Controller
                     ->setCellValue('T'.$C, $prioridad->prioridad ?? '')
                     ->setCellValue('U'.$C, $origen->origen ?? '')
                     ->setCellValue('V'.$C, $item->ultimo_estatus ?? '')
-                    ->setCellValue('W'.$C, $respuesta )
-                    ->setCellValue('X'.$C, $item->observaciones )
-                    ->setCellValue('Y'.$C, $item->creadopor->username );
+                    ->setCellValue('W'.$C, $item->ultima_fecha_estatus ?? '')
+                    ->setCellValue('X'.$C, $respuesta )
+                    ->setCellValue('Y'.$C, $item->observaciones )
+                    ->setCellValue('Z'.$C, $item->creadopor->username );
 
                 $C++;
             }

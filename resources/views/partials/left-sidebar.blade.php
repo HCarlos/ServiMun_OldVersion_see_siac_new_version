@@ -17,7 +17,7 @@
         <!--- Sidemenu -->
         <ul class="metismenu side-nav">
 {{--            |USER_OPERATOR_ADMIN--}}
-            @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_ADMIN|USER_SAS_CAP|USER_SAS_ADMIN') )
+            @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_ADMIN|USER_SAS_CAP|USER_SAS_ADMIN|USER_DIF_CAP|USER_DIF_ADMIN') )
                 <li class="side-nav-item">
                     <a href="{{ url('dashboard') }}" class="side-nav-link">
                         <i class="mdi dripicons-meter"></i>
@@ -34,7 +34,7 @@
                     <span>Denuncias</span>
                 </a>
             </li>
-            @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_ADMIN'))
+            @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_ADMIN|USER_SAS_ADMIN|USER_DIF_ADMIN'))
             <li class="side-nav-item">
                 <a href="javascript: void(0);" class="side-nav-link">
                     <i class="dripicons-browser"></i>
@@ -51,7 +51,7 @@
                         </a>
                     </li>
                     @endif
-                    @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_ADMIN'))
+                    @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_ADMIN|USER_SAS_ADMIN|USER_DIF_ADMIN'))
                     <li>
                         <a href="{{route('listAreas')}}">
                             <i class="mdi mdi-account-group"></i>
@@ -60,7 +60,7 @@
                         </a>
                     </li>
                     @endif
-                    @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_ADMIN'))
+                    @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_ADMIN|USER_SAS_ADMIN|USER_DIF_ADMIN'))
                     <li>
                         <a href="{{route('listSubareas')}}">
                             <i class="fas fa-money-check-alt"></i>
@@ -105,7 +105,7 @@
                         </a>
                     </li>
                     @endif
-                    @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_ADMIN'))
+                    @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_ADMIN|USER_SAS_ADMIN|USER_DIF_ADMIN'))
                     <li>
                         <a href="{{route('listServicios')}}">
                             <i class="fas fa-money-check-alt"></i>

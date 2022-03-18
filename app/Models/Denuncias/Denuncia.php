@@ -183,6 +183,15 @@ class Denuncia extends Model
         }
     }
 
+    public function getUltimaFechaEstatusAttribute(){
+        if ( $this->ultimo_estatu_denuncia_dependencia_servicio->count() > 0){
+            $FechaMovto =  $this->ultimo_estatu_denuncia_dependencia_servicio->sortByDesc('id')->first()->fecha_movimiento;
+            return date_format($FechaMovto,'d-m-Y h:m:s');
+        }else{
+            return 'Error en Denuncia -> Estatus';
+        }
+    }
+
     public function getTotalRespuestasAttribute(){
         $r = $this->denuncia_estatus()->count();
         return $r == 1 ? '' : $r-1;

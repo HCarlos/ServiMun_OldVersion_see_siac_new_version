@@ -121,9 +121,9 @@ class DenunciaRequest extends FormRequest
 
             ];
             //dd($Item);
-            if (Auth::user()->isRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN|USER_SAS_ADMIN')){
+            if (Auth::user()->isRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN|USER_SAS_ADMIN|USER_DIF_ADMIN')){
                 $item = $this->guardar($Item);
-            }elseif ( Auth::user()->isRole('ENLACE|USER_SAS_CAP') ){
+            }elseif ( Auth::user()->isRole('ENLACE|USER_SAS_CAP|USER_DIF_CAP') ){
                 if (Auth::user()->id == $this->creadopor_id ) {
                     $item = $this->guardar($Item);
                 }else {
