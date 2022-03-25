@@ -46,4 +46,30 @@ trait DenunciaTrait
         return "DAC-".str_pad($this->id,6,'0',STR_PAD_LEFT)."-".$this->fecha_ingreso->format('y');
     }
 
+
+    public function getUltimoEstatusAttribute(){
+        if ( $this->ultimo_estatu_denuncia_dependencia_servicio->count() > 0){
+            return $this->ultimo_estatu_denuncia_dependencia_servicio->sortByDesc('id')->first()->estatu->estatus;
+        }else{
+            return 'Error en Denuncia -> Estatus';
+        }
+    }
+
+    public function getUltimaFechaEstatusAttribute(){
+        if ( $this->ultimo_estatu_denuncia_dependencia_servicio->count() > 0){
+            $FechaMovto =  $this->ultimo_estatu_denuncia_dependencia_servicio->sortByDesc('id')->first()->fecha_movimiento;
+            return date_format($FechaMovto,'d-m-Y');
+        }else{
+            return 'Error en Denuncia -> Estatus';
+        }
+    }
+
+    public function getTotalRespuestasAttribute(){
+        $r = $this->denuncia_estatus()->count();
+        return $r == 1 ? '' : $r-1;
+    }
+
+
+
+
 }
