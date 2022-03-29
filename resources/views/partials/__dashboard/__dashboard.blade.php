@@ -48,7 +48,7 @@
                         @foreach($totales as $d)
                         <p>
                             <i class="mdi mdi-square-outline " style="background: {{ strtoupper(trim( $d[ 3 ])) }} !important;"></i> {{ $d[ 1 ] }}
-                            <span class="float-right"></span> {{ $d[ 16 ] }}
+                            <span class="float-right"></span> {{ $d[ 17 ] }}
                         </p>
                         @endforeach
                     </div>
@@ -106,6 +106,7 @@
                                     <td scope="row">{{ $d[ 14 ] == '0' ? '' : $d[ 14 ] }}</td>
                                     <td scope="row">{{ $d[ 15 ] == '0' ? '' : $d[ 15 ] }}</td>
                                     <td scope="row">{{ $d[ 16 ] == '0' ? '' : $d[ 16 ] }}</td>
+                                    <td scope="row">{{ $d[ 17 ] == '0' ? '' : $d[ 17 ] }}</td>
                                 </tr>
                             @endforeach
 
@@ -158,7 +159,7 @@
         var data = google.visualization.arrayToDataTable([
             ["Dependencias", "Total", { role: 'style' } ],
                 @foreach($totales as $d)
-                      ['{{ $d[ 2 ] }}', {{ $d[ 16 ] }}, 'color: {{ $d[ 3 ] }}' ],
+                      ['{{ $d[ 2 ] }}', {{ $d[ 17 ] }}, 'color: {{ $d[ 3 ] }}' ],
                 @endforeach
         ]);
 
@@ -187,7 +188,7 @@
     function drawChartMatrix() {
 
         var data = new google.visualization.arrayToDataTable([
-                ['Estatus','Rec','Ges','EnP','NoP','Tur','Ord','Ana','Est','Amp','Sup','Res','Cer',{ role: 'annotation' }],
+                ['Estatus','Rec','Ges','EnP','NoP','Tur','Ord','Ana','Est','Amp','Sup','Res','Cer','RyT',{ role: 'annotation' }],
             @foreach($totalestatus as $d)
                 [
                 '{{  $d[2 ]  }}',
@@ -203,7 +204,8 @@
                 {{ intval( $d[ 13 ] ) ?? 0 }},
                 {{ intval( $d[ 14 ] ) ?? 0 }},
                 {{ intval( $d[ 15 ] ) ?? 0 }},
-                    '{{ intval( $d[ 16 ] ) ?? 0 }}'
+                {{ intval( $d[ 16 ] ) ?? 0 }},
+                '{{ intval( $d[ 17 ] ) ?? 0 }}'
             ],
         @endforeach
 
@@ -236,7 +238,7 @@
 
     var stepData = [
             @foreach($totales as $d)
-        { key: "{{ strtoupper(trim(  $d[ 2 ]  ))  }}", value: {{ $d[ 16 ] }} },
+        { key: "{{ strtoupper(trim(  $d[ 2 ]  ))  }}", value: {{ $d[ 17 ] }} },
         @endforeach
 
     ];

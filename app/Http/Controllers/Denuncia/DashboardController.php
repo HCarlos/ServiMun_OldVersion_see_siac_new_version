@@ -71,7 +71,7 @@ class DashboardController extends Controller{
 
         }
 
-       // dd($arr);
+//       dd($arr);
 
         foreach ($arr as $i => $value){
 
