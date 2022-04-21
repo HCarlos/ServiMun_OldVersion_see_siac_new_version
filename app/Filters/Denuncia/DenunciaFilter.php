@@ -24,21 +24,23 @@ class DenunciaFilter extends QueryFilter
 
     public function rules(): array{
         return [
-            'search'         => '',
-            'curp'           => '',
-            'ciudadano'      => '',
-            'id'             => '',
-            'desde'          => '',
-            'hasta'          => '',
-            'dependencia_id' => '',
-            'servicio_id'    => '',
-            'origen_id'      => '',
-            'estatus_id'     => '',
-            'ciudadano_id'   => '',
-            'creadopor_id'   => '',
-            'dependencia'    => '',
-            'conrespuesta'   => '',
-            'cerrado'        => '',
+            'search'                => '',
+            'curp'                  => '',
+            'ciudadano'             => '',
+            'id'                    => '',
+            'desde'                 => '',
+            'hasta'                 => '',
+            'dependencia_id'        => '',
+            'servicio_id'           => '',
+            'origen_id'             => '',
+            'estatus_id'            => '',
+            'ciudadano_id'          => '',
+            'creadopor_id'          => '',
+            'dependencia'           => '',
+            'conrespuesta'          => '',
+            'cerrado'               => '',
+            'clave_identificadora'  => '',
+            'uuid'                  => '',
         ];
     }
 
@@ -204,6 +206,17 @@ class DenunciaFilter extends QueryFilter
     public function cerrado($query, $search){
         if (is_null($search) || empty ($search) || trim($search) == "0") {return $query;}
         return $query->orWhere('cerrado',settype($search, 'boolean'));
+    }
+
+    public function clave_identificadora($query, $search){
+        if (is_null($search) || empty ($search) || trim($search) == "0") {return $query;}
+        return $query->orWhere('clave_identificadora',$search);
+    }
+
+    public function uuid($query, $search){
+        if (is_null($search) || empty ($search) || trim($search) == "0") {return $query;}
+        $search = strtolower(trim($search));
+        return $query->orWhere('uuid',trim($search));
     }
 
 

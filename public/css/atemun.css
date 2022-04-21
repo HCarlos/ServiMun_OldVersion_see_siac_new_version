@@ -628,7 +628,7 @@ input[readonly] {
 
 #colonia, #comunidad, #calle, #asentamiento, #tipoasentamiento, #tipocomunidad, #localidad,
 #afiliacion, #area, #subarea, #dependencia, #medida, #origen, #prioridad, #servicio, #ubicacon,
-#ciudad, #estado, #municipio, #estatus, #codigo, #cp, .search_autocomplete
+#ciudad, #estado, #municipio, #estatus, #codigo, #cp, #clave_identificadora, .search_autocomplete
 {text-transform: uppercase; background: lightgoldenrodyellow;}
 
 .search_autocomplete---{

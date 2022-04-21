@@ -104,7 +104,8 @@ class ListDenunciaXLSXController extends Controller
                     ->setCellValue('W'.$C, $item->ultima_fecha_estatus ?? '')
                     ->setCellValue('X'.$C, $respuesta )
                     ->setCellValue('Y'.$C, $item->observaciones )
-                    ->setCellValue('Z'.$C, $item->creadopor->username );
+                    ->setCellValue('Z'.$C, $item->creadopor->username )
+                    ->setCellValue('AA'.$C, $item->uuid );
 
                 $C++;
             }

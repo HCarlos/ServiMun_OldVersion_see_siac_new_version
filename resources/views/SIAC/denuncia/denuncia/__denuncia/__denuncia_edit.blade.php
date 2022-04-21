@@ -14,7 +14,7 @@
                     <div class="input-group btn-group-xs">
                     {!! Form::text('usuario', $items->Ciudadano->FullName, array('class' => 'form-control','id'=>'usuario','readonly'=>'readonly')) !!}
                         <span class="input-group-append">
-                            <a  href="{{route("editUser",['Id'=>$items->Ciudadano->id])}}" target="_blank" class="btn btn-xs btn-icon btn-primary editUser" id="editUser" name="editUser"> <i class="mdi mdi-account-edit "></i></a>
+                            <a  href="{{route("editUser",['Id'=>$items->Ciudadano->id])}}" target="_blank" class="btn btn-xs btn-icon btn-primary editUser" id="editUser" name="editUser"> <i class="mdi mdi-account-edit text-white "></i></a>
                         </span>
                     </div>
                     {!! Form::text('usuario_domicilio', $items->Ciudadano->ubicaciones->first()->Ubicacion, array('class' => 'form-control','id'=>'usuario_domicilio','readonly'=>'readonly')) !!}
@@ -49,7 +49,7 @@
             <div class="form-row mb-1 ">
                 <label for = "fecha_ingreso" class="col-lg-2 col-form-label">Fecha </label>
                 <div class="col-lg-4">
-                    {{ Form::date('fecha_ingreso', old('fecha_ingreso',$items->fecha_ingreso), ['id'=>'fecha_ingreso','class'=>'form-control','readonly'=>'readonly']) }}
+                    {{ Form::date('fecha_ingreso', old('fecha_ingreso',$items->fecha_ingreso), ['id'=>'fecha_ingreso','class'=>'form-control']) }}
                 </div>
                 <label for = "fecha_oficio_dependencia" class="col-lg-2 col-form-label">F. Oficio </label>
                 <div class="col-lg-4">
@@ -94,10 +94,18 @@
                     </span>
                 </div>
             </div>
+
             <div class="form-group row mb-1">
                 <label for = "referencia" class="col-lg-3 col-form-label labelDenuncia">Referencia </label>
                 <div class="col-lg-9">
                     <textarea name="referencia" id="referencia" class="form-control">{{ old('referencia',$items->referencia) }}</textarea>
+                </div>
+            </div>
+
+            <div class="form-group row mb-1">
+                <label for = "clave_identificadora" class="col-lg-3 col-form-label labelDenuncia">Cve Identific</label>
+                <div class="col-lg-9">
+                    <input type="text" name="clave_identificadora" id="clave_identificadora" value="{{ old('clave_identificadora',$items->clave_identificadora) }}"  class="form-control" />
                 </div>
             </div>
 

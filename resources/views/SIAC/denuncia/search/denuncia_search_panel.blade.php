@@ -7,6 +7,6 @@
     @endslot
     @slot('titulo_full_modal',"Busqueda de denuncia")
     @slot('body_full_modal')
-        @include('shared.search.__search_denuncia_in_list')
+        @include('SIAC.denuncia.search.__search.__search_denuncia_in_list')
     @endslot
 @endcomponent

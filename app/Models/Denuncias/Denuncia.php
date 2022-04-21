@@ -29,7 +29,7 @@ class Denuncia extends Model
 
     protected $fillable = [
         'id','cantidad', 'oficio_envio',
-        'descripcion','referencia','domicilio_ciudadano_internet','observaciones',
+        'descripcion', 'referencia', 'clave_identificadora', 'domicilio_ciudadano_internet', 'observaciones',
         'calle','num_ext','num_int','colonia', 'comunidad','ciudad','municipio','estado','pais', 'cp',
         'latitud','longitud',
         'prioridad_id','origen_id','dependencia_id','ubicacion_id','servicio_id','estatus_id',

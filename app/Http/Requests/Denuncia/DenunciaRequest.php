@@ -85,8 +85,23 @@ class DenunciaRequest extends FormRequest
         try {
             $Ubicacion = Ubicacion::findOrFail($this->ubicacion_id);
 
+//            $this->fecha_ingreso
+
+            $fecha_i = date('Y-m-d',strtotime($this->fecha_ingreso));
+            $fecha_f = date('H:i:s');
+
+            $fi = $fecha_i.' '.$fecha_f;
+
+            //dd( strtotime($fi) );
+
+            //$fecha_ingreso = Carbon::createFromFormat('Y-m-d H:i:s', $fi)->format('Y-m-d H:i:s');
+
+            //            $fecha_i = Carbon::createFromFormat('Y-m-d H:i:s', $this->fecha_ingreso)->format('Y-m-d H:i:s');
+
+            // $fecha_i = $this->fecha_ingreso->format()
+
             $Item = [
-                'fecha_ingreso'                => Carbon::now(), //Carbon::now($this->fecha_ingreso)->format('Y-m-d hh:mm:ss'),
+                'fecha_ingreso'                => $fi, // Carbon::now(), //Carbon::now($this->fecha_ingreso)->format('Y-m-d hh:mm:ss'),
                 'oficio_envio'                 => is_null($this->oficio_envio) ? "" : strtoupper($this->oficio_envio),
                 'folio_sas'                    => is_null($this->folio_sas) ? "" : strtoupper($this->folio_sas),
                 'fecha_oficio_dependencia'     => $this->fecha_oficio_dependencia,
@@ -94,6 +109,7 @@ class DenunciaRequest extends FormRequest
                 'fecha_ejecucion'              => $this->fecha_ejecucion,
                 'descripcion'                  => strtoupper($this->descripcion),
                 'referencia'                   => strtoupper($this->referencia),
+                'clave_identificadora'         => strtoupper($this->clave_identificadora),
                 'calle'                        => strtoupper($Ubicacion->calle),
                 'num_ext'                      => strtoupper($Ubicacion->num_ext),
                 'num_int'                      => strtoupper($Ubicacion->num_int),
