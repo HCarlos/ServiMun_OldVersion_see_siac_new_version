@@ -124,6 +124,10 @@
             <option value="2000">2000</option>
             <option value="2250">2250</option>
             <option value="2500">2500</option>
+            <option value="2750">2750</option>
+            <option value="3000">3000</option>
+            <option value="3250">3250</option>
+            <option value="3500">3500</option>
         </select>
         <small class="text-muted">La cantidad de registros, es directamente proporcional al tiempo que tarda la consulta.</small>
     </div>

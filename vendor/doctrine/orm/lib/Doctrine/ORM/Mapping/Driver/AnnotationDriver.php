@@ -10,11 +10,10 @@ use Doctrine\Deprecations\Deprecation;
 use Doctrine\ORM\Events;
 use Doctrine\ORM\Mapping;
 use Doctrine\ORM\Mapping\Builder\EntityListenerBuilder;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\MappingException;
-use Doctrine\Persistence\Mapping\ClassMetadata;
+use Doctrine\Persistence\Mapping\ClassMetadata as PersistenceClassMetadata;
 use Doctrine\Persistence\Mapping\Driver\ColocatedMappingDriver;
-use Doctrine\Persistence\Mapping\Driver\MappingDriver;
 use ReflectionClass;
 use ReflectionMethod;
 use ReflectionProperty;
@@ -32,7 +31,7 @@ use function is_numeric;
 /**
  * The AnnotationDriver reads the mapping metadata from docblock annotations.
  */
-class AnnotationDriver implements MappingDriver
+class AnnotationDriver extends CompatibilityAnnotationDriver
 {
     use ColocatedMappingDriver;
 
@@ -70,10 +69,14 @@ class AnnotationDriver implements MappingDriver
 
     /**
      * {@inheritDoc}
+     *
+     * @psalm-param class-string<T> $className
+     * @psalm-param ClassMetadata<T> $metadata
+     *
+     * @template T of object
      */
-    public function loadMetadataForClass($className, ClassMetadata $metadata)
+    public function loadMetadataForClass($className, PersistenceClassMetadata $metadata)
     {
-        assert($metadata instanceof Mapping\ClassMetadata);
         $class = $metadata->getReflectionClass()
             // this happens when running annotation driver in combination with
             // static reflection services. This is not the nicest fix
@@ -299,7 +302,7 @@ class AnnotationDriver implements MappingDriver
                 constant('Doctrine\ORM\Mapping\ClassMetadata::INHERITANCE_TYPE_' . $inheritanceTypeAnnot->value)
             );
 
-            if ($metadata->inheritanceType !== ClassMetadataInfo::INHERITANCE_TYPE_NONE) {
+            if ($metadata->inheritanceType !== ClassMetadata::INHERITANCE_TYPE_NONE) {
                 // Evaluate DiscriminatorColumn annotation
                 if (isset($classAnnotations[Mapping\DiscriminatorColumn::class])) {
                     $discrColumnAnnot = $classAnnotations[Mapping\DiscriminatorColumn::class];
@@ -544,7 +547,7 @@ class AnnotationDriver implements MappingDriver
     private function loadRelationShipMapping(
         ReflectionProperty $property,
         array &$mapping,
-        ClassMetadata $metadata,
+        PersistenceClassMetadata $metadata,
         array $joinColumns,
         string $className
     ): void {
@@ -648,7 +651,7 @@ class AnnotationDriver implements MappingDriver
     /**
      * Attempts to resolve the fetch mode.
      *
-     * @psalm-return \Doctrine\ORM\Mapping\ClassMetadata::FETCH_* The fetch mode as defined in ClassMetadata.
+     * @psalm-return ClassMetadata::FETCH_* The fetch mode as defined in ClassMetadata.
      *
      * @throws MappingException If the fetch mode is not valid.
      */
@@ -664,7 +667,7 @@ class AnnotationDriver implements MappingDriver
     /**
      * Attempts to resolve the generated mode.
      *
-     * @psalm-return ClassMetadataInfo::GENERATED_*
+     * @psalm-return ClassMetadata::GENERATED_*
      *
      * @throws MappingException If the fetch mode is not valid.
      */
@@ -764,7 +767,7 @@ class AnnotationDriver implements MappingDriver
      *                   precision: int,
      *                   notInsertable?: bool,
      *                   notUpdateble?: bool,
-     *                   generated?: ClassMetadataInfo::GENERATED_*,
+     *                   generated?: ClassMetadata::GENERATED_*,
      *                   enumType?: class-string,
      *                   options?: mixed[],
      *                   columnName?: string,
