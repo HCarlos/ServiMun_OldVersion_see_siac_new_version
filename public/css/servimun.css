@@ -4,6 +4,12 @@
 
 @namespace url(http://www.w3.org/1999/xhtml);
 
+.ui-autocomplete-loading {
+    background: white url('/images/web/ui-anim_basic_16x16.gif') right center no-repeat;
+}
+
+
+
 #resultado {
     background-color: darkred;
     color: white;
