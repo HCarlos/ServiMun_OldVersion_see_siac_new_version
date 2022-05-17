@@ -101,7 +101,7 @@
 </div>
 
 <div class="form-row mb-1">
-    <label for = "clave_identificadora" class="col-md-2 col-form-label text-left">Cve Unific.</label>
+    <label for = "clave_identificadora" class="col-md-2 col-form-label text-left">Cve Identificadora</label>
     <div class="col-md-10">
         <input type="text" name="clave_identificadora" id="clave_identificadora" value="{{ old('clave_identificadora') }}" class="form-control" />
     </div>

@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'cbeea14de3bf0994eb2cac81da792be81452274c',
+        'reference' => '7e8b9d14deb3a2da5b589950581704f175e57464',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -359,8 +359,8 @@
             ),
         ),
         'illuminate/macroable' => array(
-            'pretty_version' => 'v8.83.11',
-            'version' => '8.83.11.0',
+            'pretty_version' => 'v8.83.13',
+            'version' => '8.83.13.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../illuminate/macroable',
             'aliases' => array(),
@@ -490,7 +490,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'cbeea14de3bf0994eb2cac81da792be81452274c',
+            'reference' => '7e8b9d14deb3a2da5b589950581704f175e57464',
             'dev_requirement' => false,
         ),
         'laravel/legacy-factories' => array(
@@ -622,12 +622,12 @@
             'dev_requirement' => false,
         ),
         'monolog/monolog' => array(
-            'pretty_version' => '2.5.0',
-            'version' => '2.5.0.0',
+            'pretty_version' => '2.6.0',
+            'version' => '2.6.0.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../monolog/monolog',
             'aliases' => array(),
-            'reference' => '4192345e260f1d51b365536199744b987e160edc',
+            'reference' => '247918972acd74356b0a91dfaa5adcaec069b6c0',
             'dev_requirement' => false,
         ),
         'myclabs/deep-copy' => array(
@@ -954,8 +954,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0.0 || 2.0.0 || 3.0.0',
-                1 => '1.0|2.0',
+                0 => '1.0|2.0',
+                1 => '1.0.0 || 2.0.0 || 3.0.0',
             ),
         ),
         'psr/simple-cache' => array(
@@ -1643,12 +1643,12 @@
             'dev_requirement' => true,
         ),
         'yajra/laravel-datatables-oracle' => array(
-            'pretty_version' => 'v9.19.2',
-            'version' => '9.19.2.0',
+            'pretty_version' => 'v9.20.0',
+            'version' => '9.20.0.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../yajra/laravel-datatables-oracle',
             'aliases' => array(),
-            'reference' => 'c0d7b1ff493ae7391050e392262579aa700f9241',
+            'reference' => '4c22b09c8c664df5aad9f17d99c3823c0f2d84e2',
             'dev_requirement' => false,
         ),
     ),
