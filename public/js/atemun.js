@@ -440,6 +440,9 @@
         });
     }
 
+    $(".btnGuardarDenuncia, .operDenuncia").on('click',function(event){
+        $(this).prop('disabled', true);
+    });
 
     let Url = document.URL;
     let position = Url.search("listDenuncias");
