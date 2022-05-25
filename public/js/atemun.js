@@ -440,7 +440,11 @@
         });
     }
 
-    $(".btnGuardarDenuncia, .operDenuncia").on('click',function(event){
+    // $(".btnGuardarDenuncia, .operDenuncia").on('click',function(event){
+    //     $(this).prop('disabled', true);
+    // });
+
+    $(".btnGuardarDenuncia").on('click',function(event){
         $(this).prop('disabled', true);
     });
 
