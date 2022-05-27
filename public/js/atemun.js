@@ -445,7 +445,7 @@
     // });
 
     $(".btnGuardarDenuncia").on('click',function(event){
-        $(this).prop('disabled', true);
+        // $(this).prop('disabled', true);
     });
 
     let Url = document.URL;

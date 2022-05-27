@@ -31,20 +31,16 @@ trait ImageneTrait
         return $ret;
     }
 
-   // Get Image Thumbnail
     public function getPathImageThumbAttribute(){
         $fl   = explode('.',$this->image);
         $dg   = $fl[count($fl)-1];
         $flDoc = config("atemun.document_type_extension");
         $flImg = config("atemun.images_type_extension");
-//        $rt   = in_array( $dg, $envi ) ? '/images/web/document-file.png': '/images/web/file-not-found.png';
         if ( in_array( $dg, $flDoc ) ) {
             $rt = '/images/web/document-file.png';
         }elseif (in_array( $dg, $flImg ) ) {
-//            $rt =  "/storage/".$this->disk."/".$this->image_thumb;
             $exists = Storage::disk($this->disk)->exists($this->image);
             $file = "/storage/".$this->disk."/".$this->image;
-//            $exists = file_exists($file);
             $rt = $exists
                 ? $file
                 : '/images/web/file-not-found.png';
