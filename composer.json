@@ -34,7 +34,8 @@
         "spatie/laravel-backup": "^6.16.5",
         "spatie/laravel-permission": "^3.18.0",
         "tecnickcom/tc-lib-pdf-font": "^1.9.6",
-        "yajra/laravel-datatables-oracle": "^9.19.1"
+        "yajra/laravel-datatables-oracle": "^9.19.1",
+        "ext-http": "*"
     },
     "require-dev": {
         "nunomaduro/collision": "^4.3",

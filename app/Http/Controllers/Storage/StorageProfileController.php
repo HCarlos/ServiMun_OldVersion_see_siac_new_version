@@ -45,8 +45,8 @@ class StorageProfileController extends Controller
             $fileName2 = '_'.$user->id.'.png';
             $thumbnail = '_thumb_'.$user->id.'.png';
             Storage::disk($this->disk)->put($fileName, File::get($file));
-            $this->F->fitImage( $file,$fileName2,300,300,true );
-            $this->F->fitImage( $file,$thumbnail,128,128,true );
+            $this->F->fitImage( $file, $fileName2, 300, 300, true, "profile","PROFILE_ROOT" );
+            $this->F->fitImage( $file, $thumbnail, 128, 128, true, "profile","PROFILE_ROOT", $ext );
 
             $user->root = 'profile/';
             $user->filename = $fileName;

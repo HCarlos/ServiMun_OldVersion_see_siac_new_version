@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Funciones;
 use App\Classes\MessageAlertClass;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
+use Exception;
 use http\Exception\InvalidArgumentException;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -137,13 +138,12 @@ class FuncionesController extends Controller
         }
     }
 
-    public function fitImage($imagePath,$filename,$W,$H,$IsRounded,$disk="profile",$profile_root="PROFILE_ROOT")
-    {
+    public function fitImage($imagePath, $filename, $W, $H, $IsRounded, $disk="profile", $profile_root="PROFILE_ROOT", $extension="png"){
         try{
             $image = Image::make($imagePath)
                 ->fit($W,$H);
             if ($IsRounded){
-                $image->encode('png');
+                $image->encode($extension);
                 $width = $image->getWidth();
                 $height = $image->getHeight();
                 $mask = Image::canvas($width, $height);
@@ -155,13 +155,13 @@ class FuncionesController extends Controller
                 $image->save($filePath);
                 Storage::disk($disk)->put($filename, $image);
                 if (File::exists($filePath)) {
-                    unlink($filePath);
+//                    unlink($filePath);
                 }
             }else{
-                Storage::disk($disk)->put($filename, $image);
+                $image = Storage::disk($disk)->put($filename, $image);
             }
-        }catch (NotWritableException $e){
-            return "Error ";
+        }catch (Exception $e){
+            return "Error: " . $e->getMessage();
         }
         return $image;
     }
