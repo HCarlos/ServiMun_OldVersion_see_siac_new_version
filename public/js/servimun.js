@@ -1,4 +1,5 @@
 
+/*
 var axios = axios.create();// require("axios").default;
 
 
@@ -33,6 +34,6 @@ function getUser(){
         });
 
 }
-
+*/
 //getUser();
 

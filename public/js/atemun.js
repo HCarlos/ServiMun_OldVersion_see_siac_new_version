@@ -1,3 +1,5 @@
+jQuery(function($) {
+    $(document).ready(function() {
 
 
     $.ajaxSetup({
@@ -5,6 +7,7 @@
             'X-CSRF-Token': $("meta[name='csrf-token']").attr("content")
         }
     });
+
 
     if ( $(".dataTable").length > 0 ){
         var nCols = $(".dataTable").find("tbody > tr:first td").length;
@@ -122,6 +125,8 @@
         });
     }
 
+
+
     // if ( $(".listTarget, .search_autocomplete_user").length > 0  ){
     //     $(".listTarget, .search_autocomplete_user").on('change', function(event) {
     //         event.preventDefault();
@@ -180,6 +185,7 @@
         });
     }
 
+
     if ( $(".btnUnasign0").length > 0  ){
         $(".btnUnasign0").on('click', function(event) {
             event.preventDefault();
@@ -225,6 +231,7 @@
         });
     }
 
+
     if ( $(".btnFilters").length > 0  ){
         $(".btnFilters").on('click', function(event) {
             event.preventDefault();
@@ -263,6 +270,7 @@
         });
     }
 
+
     if ( $(".btnGetItems").length > 0  ){
         $(".btnGetItems").on('click', function(event) {
             event.preventDefault();
@@ -295,6 +303,8 @@
         });
 
     }
+
+
 
     // Activa o desactiva los checkbox desde el encabezado de la tabla
     $('#lblcheckbox').on("change",function(event){
@@ -340,9 +350,11 @@
         });
     }
 
+
     if ( $(".home").html().length == 37 ){
         $(".home").html("<div class='img_bg_home' ></div>");
     }
+
 
     function IsCURP(curp) {
         var re = /^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/,
@@ -382,6 +394,7 @@
 
         resultado.innerText = "CURP: " + curp + "\nFormato: " + valido;
     }
+
 
     function IsRFC(rfc) {
 
@@ -440,23 +453,21 @@
         });
     }
 
-    // $(".btnGuardarDenuncia, .operDenuncia").on('click',function(event){
-    //     $(this).prop('disabled', true);
-    // });
-
-    $(".btnGuardarDenuncia").on('click',function(event){
-        $(this).prop('disabled', true);
+    $(".formData").on('submit',function(event){
+        $(".btnGuardarDenuncia").prop('disabled', true);
     });
 
     let Url = document.URL;
     let position = Url.search("listDenuncias");
     let identificadorDeTemporizador;
 
+
     function temporizadorDeRetraso(position) {
         if (position > 0){
             identificadorDeTemporizador = setInterval(funcionConRetraso, 300000);
         }
     }
+
 
     function funcionConRetraso() {
         location.reload();
@@ -468,4 +479,7 @@
 
     temporizadorDeRetraso(position);
 
+        // alert("Cargado...2...");
 
+    });
+});
