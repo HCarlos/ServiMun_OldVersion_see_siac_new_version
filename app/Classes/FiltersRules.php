@@ -54,6 +54,7 @@ class FiltersRules
             'conrespuesta'         => $data['conRespuesta'],
             'clave_identificadora' => $data['clave_identificadora'],
             'uuid'                 => $data['uuid'],
+            'incluirFecha'         => $data['incluirFecha'],
         ]);
 
 //        dd($filters);

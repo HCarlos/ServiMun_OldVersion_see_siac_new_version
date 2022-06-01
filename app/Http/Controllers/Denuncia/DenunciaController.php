@@ -349,6 +349,14 @@ class DenunciaController extends Controller{
             ->orderByDesc('id')
             ->paginate($this->max_item_for_query);
 
+//        $items = Denuncia::query()
+//            ->getDenunciasItemCustomFilter($queryFilters)
+//            ->orderByDesc('id')
+//            ->paginate($this->max_item_for_query);
+
+//        $items->appends($queryFilters)->fragment('table');
+
+
         $items->appends($queryFilters)->fragment('table');
 
 
