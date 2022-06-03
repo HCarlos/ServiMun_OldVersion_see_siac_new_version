@@ -29,7 +29,7 @@ class ListDenunciaXLSXController extends Controller
 
 
     public function getListDenunciaXLSX(Request $request){
-        ini_set('max_execution_time', 900);
+        ini_set('max_execution_time', 90000);
 //        $data = $request->only(['search','items']);
         $Items = $request->session()->get('items');
 
@@ -140,7 +140,7 @@ class ListDenunciaXLSXController extends Controller
     }
 
     public function showDataListDenunciaRespuestaExcel1A(Request $request){
-        ini_set('max_execution_time', 900);
+        ini_set('max_execution_time', 72000);
 //        $data = $request->only(['search','items']);
         $Items = $request->session()->get('items');
 

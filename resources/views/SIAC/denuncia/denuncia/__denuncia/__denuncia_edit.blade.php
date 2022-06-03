@@ -49,7 +49,7 @@
             <div class="form-row mb-1 ">
                 <label for = "fecha_ingreso" class="col-lg-2 col-form-label">Fecha </label>
                 <div class="col-lg-4">
-                    {{ Form::date('fecha_ingreso', old('fecha_ingreso',$items->fecha_ingreso), ['id'=>'fecha_ingreso','class'=>'form-control']) }}
+                    {{ Form::date('fecha_ingreso', old('fecha_ingreso',$items->fecha_ingreso), ['id'=>'fecha_ingreso','class'=>'form-control','readonly'=>'readonly']) }}
                 </div>
                 <label for = "fecha_oficio_dependencia" class="col-lg-2 col-form-label">F. Oficio </label>
                 <div class="col-lg-4">

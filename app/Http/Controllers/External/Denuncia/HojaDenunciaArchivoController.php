@@ -15,7 +15,7 @@ class HojaDenunciaArchivoController extends Controller{
 
 
     public function imprimirDenuncia($UUID=""){
-        ini_set('max_execution_time', 900);
+        ini_set('max_execution_time', 72000);
 
         $den = Denuncia::all()->where('uuid',$UUID)->first();
 
