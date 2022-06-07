@@ -1,3 +1,4 @@
+
 jQuery(function($) {
     $(document).ready(function() {
 
@@ -456,6 +457,11 @@ jQuery(function($) {
     $(".formData").on('submit',function(event){
         $(".btnGuardarDenuncia").prop('disabled', true);
     });
+
+    if ( $(".fecha_ingreso") ){
+        var isFechaIngresoView = $("#isFechaIngresoView").val() !== "SI";
+        $(".fecha_ingreso").prop('readonly', isFechaIngresoView);
+    }
 
     let Url = document.URL;
     let position = Url.search("listDenuncias");
