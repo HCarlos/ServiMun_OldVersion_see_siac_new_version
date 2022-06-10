@@ -13,6 +13,7 @@
 namespace App\Traits\Denuncia;
 
 
+use App\Http\Controllers\Funciones\FuncionesController;
 use Illuminate\Support\Facades\Storage;
 
 trait ImageneTrait
@@ -25,10 +26,9 @@ trait ImageneTrait
         $path = config('atemun.public_url');
         $root = trim($this->root) == "" || trim($this->root) == "NULL" || is_null($this->root) ? $path : $this->root;
 
-        $exists = Storage::disk($this->disk)->exists($this->image);
         $file = $root."/storage/".$this->disk."/".$this->image;
-//        $exists = file_exists($file);
-        $ret = $exists
+
+        $ret =  FuncionesController::remoteFileExists($root)
             ? $file
             : $root.'/images/web/file-not-found.png';
         return $ret;
@@ -45,9 +45,8 @@ trait ImageneTrait
         if ( in_array( $dg, $flDoc ) ) {
             $rt = $root.'/images/web/document-file.png';
         }elseif (in_array( $dg, $flImg ) ) {
-            $exists = Storage::disk($this->disk)->exists($this->image);
             $file = $root."/storage/".$this->disk."/".$this->image;
-            $rt = $exists
+            $rt =  FuncionesController::remoteFileExists($root)
                 ? $file
                 : $root.'/images/web/file-not-found.png';
         }else{

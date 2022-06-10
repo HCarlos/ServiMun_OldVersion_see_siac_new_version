@@ -173,86 +173,24 @@ class FuncionesController extends Controller
         }
     }
 
-/*
-
-    public function getDatosFromCURPRENAPO($value){
-
-        $curl = curl_init();
-
-        curl_setopt_array($curl, [
-            CURLOPT_URL => "https://curp-renapo.p.rapidapi.com/v1/curp/".$value,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET",
-            CURLOPT_HTTPHEADER => [
-                "x-rapidapi-host: curp-renapo.p.rapidapi.com",
-                "x-rapidapi-key: 443ebd50abmsh706bc0616bc2595p1dacbajsn5d699f5df978"
-            ],
-        ]);
-
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
-
-        curl_close($curl);
-
-        if ($err) {
-            return "cURL Error #:" . $err;
-        } else {
-            return $response;
-        }
-
-    }
-
-
-    public function getCURPFromRENAPO($value){
-        try {
-
-            $ch = curl_init();
-            $skipper = "luxury assault recreational vehicle";
-            $header1 = ['Accept' => 'text/html; charset=iso-8859-1', 'Content-Type' => 'text/html;charset=iso-8859-1'];
-            $parametros = ['curp' => 'HIRC711126HTCDZR01'];
-            $postvars = '';
-            foreach ($parametros as $key => $value) {
-                $postvars .= $key . "=" . $value . "&";
+    public static function remoteFileExists($url) {
+        if (str_contains($url, "localhost")){
+            $curl = curl_init($url);
+            curl_setopt($curl, CURLOPT_NOBODY, true);
+            $result = curl_exec($curl);
+            $ret = false;
+            if ($result !== false) {
+                $statusCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+                if ($statusCode == 200) {
+                    $ret = true;
+                }
             }
-
-            // dd( $postvars );
-
-            // $url = "http://api_cloud.factorumweb.com/ApiTimbrado/Timbrado/FactorumGenYaSelladoConArchivoTest/";
-            $url = "http://www.renapo.sep.gob.mx/wsrenapo/MainControllerParam";
-
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($parametros));
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_HTTPHEADER,
-                array(
-                    'Content-Type:text/html',
-                    'Content-Length: ' . strlen(json_encode($parametros)),
-                    'Accept: text/html'
-                )
-            );
-
-            $result = curl_exec($ch);
-            curl_close($ch);
-
-        } catch (curl_error $E) {
-            echo $E->faultstring;
-            return false;
+            curl_close($curl);
+            return $ret;
+        }else{
+            return file_get_contents($url,0,null,0,1);
         }
-
-        return $result;
-
-//        $result = json_decode($result, true);
-//        $data = $result["returnStringXML"];
-//        $img  = base64_decode( $result["returnFileQRCode"] );
-
     }
-*/
 
 
 }
