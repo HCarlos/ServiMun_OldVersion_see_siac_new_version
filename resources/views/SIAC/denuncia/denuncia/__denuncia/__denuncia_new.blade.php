@@ -234,4 +234,4 @@
 <input type="hidden" name="creadopor_id" id="creadopor_id" value="{{$user->id}}" >
 <input type="hidden" name="modificadopor_id" id="modificadopor_id" value="{{$user->id}}" >
 <input type="hidden" name="usuario_id" id="usuario_id" value="0" >
-<input type="hidden" name="isFechaIngresoView" id="isFechaIngresoView" value="{{ env('MODIFICAR_FECHA_INGRESO') }}" >
+<input type="hidden" name="isFechaIngresoView" id="isFechaIngresoView" value="{{ config('atemun.modificar_fecha_ingreso') }}" >

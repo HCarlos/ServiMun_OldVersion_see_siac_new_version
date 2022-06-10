@@ -4,7 +4,7 @@ var axios = axios.create();// require("axios").default;
 
 
 function getUser(){
-        var CURP = "HIRC711126HTCDZR01";
+        var CURP = "";
         var bodyFormData = new FormData();
         bodyFormData.append('search', CURP);
 

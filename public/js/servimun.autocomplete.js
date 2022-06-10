@@ -22,8 +22,6 @@ jQuery(function($) {
         function callAjax(Obj, Url, Get, Item, ID, Elem) {
             $(Obj).autocomplete({
                 source: function(request, response) {
-                    // var ta = $("#tipo_asentamiento") ? $("#tipo_asentamiento").val() : "";
-
                     $.ajax({
                         url: Url,
                         dataType: "json",
