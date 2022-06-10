@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Denuncia;
 
+use App\Http\Controllers\Funciones\FuncionesController;
 use App\Http\Controllers\Storage\StorageDenunciaController;
 use App\Models\Catalogos\Domicilios\Ubicacion;
 use App\Models\Denuncias\Denuncia;
@@ -134,6 +135,8 @@ class DenunciaRequest extends FormRequest
                 'modificadopor_id'             => $this->modificadopor_id,
                 'domicilio_ciudadano_internet' => strtoupper(trim($this->domicilio_ciudadano_internet))  ?? '' ,
                 'observaciones'                => strtoupper(trim($this->observaciones)),
+                'ip'                           => FuncionesController::getIp(),
+                'host'                         => config('atemun.public_url'),
 
             ];
             //dd($Item);
