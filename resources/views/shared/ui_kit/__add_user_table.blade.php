@@ -25,7 +25,11 @@
                         <td data-th="Age"><span class="bt-content">{{$item->fullname}}</span></td>
                         <td data-th="Height"><span class="bt-content">{{$item->curp}}</span></td>
                         <td data-th="Sport"><span class="bt-content">{{$item->Ubicacion->Ubicacion}}</span></td>
-                        <td data-th="Actions">@include('shared.ui_kit.__remove_item_two')</td>
+                        <td data-th="Actions">
+                            @if($items->ciudadanos->count()>1)
+                                @include('shared.ui_kit.__remove_item_two')
+                            @endif
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>
