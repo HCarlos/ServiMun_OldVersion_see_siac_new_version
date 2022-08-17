@@ -5,6 +5,7 @@ namespace App;
 use App\Filters\User\UserFilter;
 use App\Models\Catalogos\Dependencia;
 use App\Models\Catalogos\Domicilios\Ubicacion;
+use App\Models\Denuncias\Denuncia;
 use App\Models\Denuncias\Imagene;
 use App\Models\Denuncias\Respuesta;
 use App\Models\Familias\Familia;
@@ -95,6 +96,14 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function imagenes(){
         return $this->belongsToMany(Imagene::class,'imagene_user','imagene_id','user_id');
+    }
+
+    public function Denuncia(){
+        return $this->hasOne(Denuncia::class,'id','denuncia_id');
+    }
+
+    public function denuncias(){
+        return $this->belongsToMany(Denuncia::class,'denuncia_user','denuncia_id','user_id');
     }
 
     public function user_adress(){

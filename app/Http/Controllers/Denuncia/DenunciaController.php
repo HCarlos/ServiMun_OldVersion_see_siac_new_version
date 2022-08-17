@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Denuncia\DenunciaRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
@@ -77,6 +78,7 @@ class DenunciaController extends Controller{
                 'newWindow'               => true,
                 'tableName'               => $this->tableName,
                 'showEdit'                => 'editDenuncia',
+                'showAddUser'             => 'addUserDenuncia',
                 'showEditDenunciaDependenciaServicio'=>'listDenunciaDependenciaServicio',
                 'showProcess1'            => 'showDataListDenunciaExcel1A',
                 'newItem'                 => 'newDenuncia',
@@ -200,8 +202,8 @@ class DenunciaController extends Controller{
     }
 
 // ***************** GUARDA LOS CAMBIOS ++++++++++++++++++++ //
-    protected function updateItem(DenunciaRequest $request)
-    {
+    protected function updateItem(DenunciaRequest $request){
+
         $item = $request->manage();
 //        dd($item);
         if (!isset($item->id)) {
@@ -375,6 +377,7 @@ class DenunciaController extends Controller{
                 'newWindow'                           => true,
                 'tableName'                           => $this->tableName,
                 'showEdit'                            => 'editDenuncia',
+                'showAddUser'                         => 'addUserDenuncia',
                 'newItem'                             => 'newDenuncia',
                 'removeItem'                          => 'removeDenuncia',
                 'showProcess1'                        => 'showDataListDenunciaExcel1A',
@@ -475,5 +478,55 @@ class DenunciaController extends Controller{
         }
 
     }
+
+
+    protected function addUserItem($Id){
+
+        $item         = Denuncia::find($Id);
+
+        $this->msg = "";
+        return view('SIAC.denuncia.denuncia.denuncia_add_user',
+            [
+                'user'            => Auth::user(),
+                'items'           => $item,
+                'putAddUserEdit'  => 'updateAddUserDenuncia',
+                'removeItem'      => 'removeAddUserDenuncia',
+                'titulo_catalogo' => "Agregando usuario al folio " .$Id,
+                'titulo_header'   => '',
+                'msg'             => $this->msg,
+            ]
+        );
+    }
+
+// ***************** GUARDA LOS CAMBIOS ++++++++++++++++++++ //
+    protected function updateAddUserDenuncia(Request $request){
+//        dd("Ok");
+        $item = Denuncia::find($request['id']);
+        if ($item->cerrado == false){
+            $item->ciudadanos()->detach($request['usuario_id']);
+            $item->ciudadanos()->attach($request['usuario_id']);
+        }
+        return Redirect::back();
+    }
+
+    protected function removeAddUserDenuncia($id0 = 0, $id1 = 0){
+
+//        dd($id);
+
+//        $DenUser = DB::table("ciudadano_denuncia")->where("id",$id)->get();
+//        $DenUser = DB::select('SELECT * FROM ciudadano_denuncia WHERE id = 78244' );
+
+//        dd($DenUser);
+
+//        $denuncia_id = $DenUser->denuncia_id;
+//        $ciudadano_id = $DenUser->ciudadano_id;
+
+        $item = Denuncia::find($id0);
+        $item->ciudadanos()->detach($id1);
+        return Response::json(['mensaje' => 'Eliminado', 'data' => 'OK', 'status' => '200'], 200);
+
+    }
+
+
 
 }

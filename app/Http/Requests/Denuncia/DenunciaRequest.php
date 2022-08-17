@@ -187,7 +187,6 @@ class DenunciaRequest extends FormRequest
         $Item->ubicaciones()->attach($this->ubicacion_id);
         $Item->servicios()->attach($this->servicio_id);
 
-//        DenunciaEstatu::where('denuncia_id',$this->id)->update(['ultimo'=>false]);
         $Item->estatus()->attach($this->estatus_id,['ultimo'=>true]);
         $Item->ciudadanos()->attach($this->usuario_id);
         $Item->creadospor()->attach($this->creadopor_id);
@@ -210,7 +209,20 @@ class DenunciaRequest extends FormRequest
         return $Item;
     }
 
-    protected function getRedirectUrl()
+    protected function addUserDenuncia($Item){
+        dd($this->id);
+        $item = Denuncia::find($this->id);
+        if ($item->cerrado == false){
+            $Item->ciudadanos()->detach($this->usuario_id);
+            $Item->ciudadanos()->attach($this->usuario_id);
+        }
+        return $item;
+    }
+
+
+
+
+    public function getRedirectUrl()
     {
         $url = $this->redirector->getUrlGenerator();
         if ($this->id > 0){
