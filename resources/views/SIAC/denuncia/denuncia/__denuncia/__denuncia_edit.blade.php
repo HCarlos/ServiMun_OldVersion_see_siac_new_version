@@ -17,7 +17,7 @@
                             <a  href="{{route("editUser",['Id'=>$items->Ciudadano->id])}}" target="_blank" class="btn btn-xs btn-icon btn-primary editUser" id="editUser" name="editUser"> <i class="mdi mdi-account-edit text-white "></i></a>
                         </span>
                     </div>
-                    {!! Form::text('usuario_domicilio', $items->Ciudadano->ubicaciones->first()->Ubicacion, array('class' => 'form-control','id'=>'usuario_domicilio','readonly'=>'readonly')) !!}
+{{--                    {!! Form::text('usuario_domicilio', $items->Ciudadano->ubicaciones->first()->Ubicacion, array('class' => 'form-control','id'=>'usuario_domicilio','readonly'=>'readonly')) !!}--}}
                     {!! Form::text('usuario_telefonos', $items->Ciudadano->TelefonosCelularesEmails, array('class' => 'form-control','id'=>'usuario_telefonos','readonly'=>'readonly')) !!}
                 </div>
             </div>

@@ -20,6 +20,7 @@
                 </thead>
                 <tbody class="bg-success-d2">
                 @foreach($items->ciudadanos as $item)
+{{--                    @php $user = $item @endphp--}}
                     <tr class="bg-success-d2 text-primary">
                         <td data-th="Name"><span class="bt-content">{{$item->id}}</span></td>
                         <td data-th="Age"><span class="bt-content">{{$item->fullname}}</span></td>
