@@ -31,7 +31,7 @@
                         $("#servicio_id").empty();
                         if ( data.data.length > 0 ){
                             $.each(data.data, function(i, item) {
-                                $("#servicio_id").append('<option value="'+item.id+'" > '+item.servicio+'</option>');
+                                $("#servicio_id").append('<option value="'+item.id+'" > '+item.id+' - '+item.servicio+'</option>');
                             });
                         }
                     }, "json" );

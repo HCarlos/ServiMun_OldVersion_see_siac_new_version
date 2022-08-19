@@ -162,7 +162,7 @@ jQuery(function($) {
                                 if ( data.data.length > 0 ){
                                     $("#servicio_id").append("<option value=0'>Seleccione un Servicio</option>");
                                     $.each(data.data, function(i, item) {
-                                        $("#servicio_id").append('<option value="'+item.id+'" > '+item.servicio+'</option>');
+                                        $("#servicio_id").append('<option value="'+item.id+'" >'+item.id+' - '+item.servicio+'</option>');
                                     });
                                 }
                             }, "json" );
