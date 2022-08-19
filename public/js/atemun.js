@@ -121,6 +121,8 @@ jQuery(function($) {
             $("#modalFull .modal-content").html('<div class="fa-2x m-2"><i class="fa fa-cog fa-spin"></i>Cargando datos...</div>');
             $("#modalFull").modal('show');
 
+            // alert(Url);
+
             $(function () {
                 $.ajax({
                     method: "GET",
@@ -128,6 +130,9 @@ jQuery(function($) {
                 })
                 .done(function (response) {
                     $("#modalFull .modal-content").html(response);
+
+
+                    // alert("Hola");
 
                     // Aplica para los Select2
                     $form = $("#modalFull .modal-content");
@@ -142,14 +147,36 @@ jQuery(function($) {
                         $("#var2").val(localStorage.Input);
                     }
 
+
                     // Cuando se ejecuta un cambio en el Checkbox
                     $('.custom-control-input').on("change",function(e){
                         $(this).val( $(this).is(':checked') );
                     });
+
+                    if ( $("#dependencia_id")){
+                        $("#dependencia_id").on("change",function (event) {
+                            var Id = event.currentTarget.value;
+                            $("#servicio_id").empty();
+                            $.get( "/getServiciosFromDependencias/"+Id, function( data ) {
+                                $("#servicio_id").empty();
+                                if ( data.data.length > 0 ){
+                                    $("#servicio_id").append("<option value=0'>Seleccione un Servicio</option>");
+                                    $.each(data.data, function(i, item) {
+                                        $("#servicio_id").append('<option value="'+item.id+'" > '+item.servicio+'</option>');
+                                    });
+                                }
+                            }, "json" );
+                        });
+                    }
+
+                    // alert("Hola 1");
+
                     // Aplica para el Dropzone
-                    if ( $('.dropzone')){
+                    if ( $('.dropzone') && Dropzone ){
                         Dropzone.discover();
                     }
+
+                    // alert("Hola 2");
 
                 });
             });
@@ -483,6 +510,9 @@ jQuery(function($) {
             });
         });
     }
+
+
+    // alert("Hola mundo");
 
     $(".formData").on('submit',function(event){
         $(".btnGuardarDenuncia").prop('disabled', true);

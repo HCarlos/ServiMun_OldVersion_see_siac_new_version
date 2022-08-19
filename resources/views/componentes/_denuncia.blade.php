@@ -60,11 +60,14 @@
                             });
                         }
                     }, "json" );
-
                 });
+
+                // alert("Hola");
 
             });
         });
+
+        // alert("Init");
 
     </script>
 
