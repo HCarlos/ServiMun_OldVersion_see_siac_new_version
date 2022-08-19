@@ -8,9 +8,10 @@
                     <th class="sorting">Ciudadano</th>
                     <th class="sorting">Fecha</th>
                     <th class="sorting">Área</th>
-                    <th class="sorting">Resp.</th>
-                    <th class="sorting">Estatus</th>
-                    <th class="sorting">CURP Ciudadano</th>
+{{--                    <th class="sorting">Resp.</th>--}}
+{{--                    <th class="sorting">Estatus</th>--}}
+{{--                    <th class="sorting">CURP Ciudadano</th>--}}
+                    <th class="sorting">Servicio</th>
                     <th class="sorting ">Ubicación</th>
                     <th></th>
                 </tr>
@@ -20,15 +21,27 @@
             @foreach($items as $item)
                 <tr class="@if($item->cerrado) bg-coral-denuncia-cerrada @endif">
                     <td class="table-user">{{$item->id}}</td>
-                    <td>{{$item->ciudadano->FullName}} </td>
-                    <td>{{($item->fecha_ingreso)}}</td>
-                    <td><a title="{{($item->dependencia->dependencia)}}">{{($item->dependencia->abreviatura)}}</a></td>
-                    <td>{{($item->TotalRespuestas)}}</td>
-                    <td>{{( $item->ultimo_estatus )}}</td>
-                    <td>{{($item->ciudadano->curp)}}</td>
-                    <td class="w-75">{{$item->fullUbication}} @if($item->ciudadanos->count() > 1)<span class="text-danger">( <i class="fas fa-users"></i> <strong>  {{$item->ciudadanos->count()}} </strong> )</span> @endif
+                    <td class="w-25">
+                        {{$item->ciudadano->FullName}} <br>
+                        <small>{{$item->ciudadano->curp}}</small>
                     </td>
-                    <td class="table-action w-25">
+                    <td  class="w-15">{{($item->fecha_ingreso)}}</td>
+                    <td><a title="{{($item->dependencia->dependencia)}}">{{($item->dependencia->abreviatura)}}</a></td>
+{{--                    <td>{{($item->TotalRespuestas)}}</td>--}}
+{{--                    <td>{{( $item->ultimo_estatus )}}</td>--}}
+{{--                    <td>{{($item->ciudadano->curp)}}</td>--}}
+
+                    <td class="w-25">
+                        {{($item->servicio->servicio)}}<br>
+                        <small class="text-gray-lighter">{{( $item->ultimo_estatus )}}</small>
+                        @if( $item->TotalRespuestas>0 )
+                            > <small class="text-danger"><strong> {{( $item->TotalRespuestas )}}</strong></small>
+                        @endif
+                    </td>
+
+                    <td class="w-25">{{$item->fullUbication}} @if($item->ciudadanos->count() > 1)<span class="text-danger">( <i class="fas fa-users"></i> <strong>  {{$item->ciudadanos->count()}} </strong> )</span> @endif
+                    </td>
+                    <td class="table-action w-15">
                         <div class="button-list">
                             @if($item->cerrado == false && $item->firmado == false)
                                 @include('shared.ui_kit.__remove_item')
