@@ -59,7 +59,7 @@
     <label for = "servicio_id" class="col-md-2 col-form-label">Servicio</label>
     <div class="col-md-10">
         <select id="servicio_id" name="servicio_id" class="form-control" size="1">
-            <option value="0" selected >Seleccione un Servicio</option>
+            <option value="" selected >Seleccione un Servicio</option>
             @foreach($servicios as $id => $valor)
                 <option value="{{ $id }}">{{ $valor }}</option>
             @endforeach

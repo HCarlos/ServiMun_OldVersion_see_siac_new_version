@@ -32,12 +32,12 @@ class FiltersRules
         if ( Auth::user()->isRole('ENLACE') ) {
             $data['dependencia_id'] = Auth::user()->IsEnlaceDependencia;
         }else{
-            $data['dependencia_id'] = $data['dependencia_id'] == null ? "" : $data['dependencia_id'];
+            $data['dependencia_id'] = $data['dependencia_id'] == "0" ? "" : $data['dependencia_id'];
         }
 
-        $data['servicio_id']    = $data['servicio_id']    == null ? "" : $data['servicio_id'];
-        $data['estatus_id']     = $data['estatus_id']     == null ? "" : $data['estatus_id'];
-        $data['creadopor_id']   = $data['creadopor_id']   == null ? "" : $data['creadopor_id'];
+        $data['servicio_id']    = $data['servicio_id']    == "" || $data['servicio_id']    == "0'" ? "" : $data['servicio_id'];
+        $data['estatus_id']     = $data['estatus_id']     == "0" ? "" : $data['estatus_id'];
+        $data['creadopor_id']   = $data['creadopor_id']   == "0" ? "" : $data['creadopor_id'];
         $filters = [
             'curp'           => $data['curp'],
             'ciudadano'      => $data['ciudadano'],
@@ -60,6 +60,7 @@ class FiltersRules
 //        dd($filters);
 
         return $filters;
+
     }
 
 }

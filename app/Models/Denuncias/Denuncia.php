@@ -98,6 +98,11 @@ class Denuncia extends Model
             ->withPivot('fecha_movimiento','observaciones','favorable');
     }
 
+    public function denuncia_dependencias(){
+        return $this->belongsToMany(Dependencia::class,'denuncia_dependencia_servicio_estatus','denuncia_id','dependencia_id')
+            ->withPivot('fecha_movimiento','observaciones','favorable');
+    }
+
     public function denuncia_servicios(){
         return $this->belongsToMany(Servicio::class,'denuncia_dependencia_servicio_estatus','denuncia_id','servicio_id')
         ->withPivot('fecha_movimiento','observaciones','favorable');

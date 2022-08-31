@@ -326,17 +326,11 @@ class DenunciaController extends Controller{
 
 
  // ***************** MUESTRA EL MENU DE BUSQUEDA ++++++++++++++++++++ //
-    protected function findDataInDenuncia(Request $request)
-    {
+    protected function findDataInDenuncia(Request $request){
         $filters = new FiltersRules();
 
         $queryFilters = $filters->filterRulesDenuncia($request);
-//        dd($queryFilters);
 
-//        if ( Auth::user()->can('consulta_500_items_general') ){
-//            $this->max_item_for_query = config("atemun.consulta_500_items_general");
-//        }
-//
         $req = $request->only(['items_for_query']);
         if ( isset($req['items_for_query'])){
             $this->max_item_for_query = $req['items_for_query'];
@@ -344,26 +338,15 @@ class DenunciaController extends Controller{
         }else{
             $this->max_item_for_query = session::get('items_for_query');
         }
-//        dd($items_for_query);
 
         $items = Denuncia::query()
             ->filterBy($queryFilters)
             ->orderByDesc('id')
             ->paginate($this->max_item_for_query);
 
-//        $items = Denuncia::query()
-//            ->getDenunciasItemCustomFilter($queryFilters)
-//            ->orderByDesc('id')
-//            ->paginate($this->max_item_for_query);
-
-//        $items->appends($queryFilters)->fragment('table');
-
-
         $items->appends($queryFilters)->fragment('table');
 
-
         $user = Auth::User();
-
 
         $request->session()->put('items', $items);
 
