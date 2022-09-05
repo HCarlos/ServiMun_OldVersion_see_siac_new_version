@@ -46,8 +46,12 @@
                             <a href="{{route("newUbicacion")}}" target="_blank" class="btn btn-icon btn-info"> <i class="mdi mdi-plus"></i></a>
                         </span>
                     </div>
-                    <input type="text" name="ubicacion" id="ubicacion" value="{{ old('ubicacion') }}" class="form-control" disabled/>
+{{--                    <input type="text" name="ubicacion" id="ubicacion" value="{{ old('ubicacion') }}" class="form-control" disabled/>--}}
                 </div>
+            </div>
+
+            <div class="form-row pb-2">
+                <input type="text" name="ubicacion" id="ubicacion" value="{{ old('ubicacion') }}" class="form-control" disabled/>
             </div>
             <hr>
             <div class="form-row mb-1 ">

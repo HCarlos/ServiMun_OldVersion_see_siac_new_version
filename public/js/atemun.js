@@ -543,6 +543,7 @@ jQuery(function($) {
                         }
                         Tbl += "<tr class='bgc-h-yellow-l3'>";
                         Tbl += "<td>"+
+                                value.id+"<br>"+
                                 "<strong>"+value.descripcion+"</strong><br>"+
                                 "<small>"+value.fecha+"</small><br>"+
                                 "<strong class='text-green'>"+value.ciudadano+"</strong><br>"+
