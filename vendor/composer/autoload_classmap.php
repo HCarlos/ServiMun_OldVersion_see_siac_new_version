@@ -116,6 +116,7 @@ return array(
     'App\\Http\\Requests\\Denuncia\\PrioridadRequest' => $baseDir . '/app/Http/Requests/Denuncia/PrioridadRequest.php',
     'App\\Http\\Requests\\Denuncia\\Respuesta\\RespuestARespuestaRequest' => $baseDir . '/app/Http/Requests/Denuncia/Respuesta/RespuestARespuestaRequest.php',
     'App\\Http\\Requests\\Denuncia\\Respuesta\\RespuestaRequest' => $baseDir . '/app/Http/Requests/Denuncia/Respuesta/RespuestaRequest.php',
+    'App\\Http\\Requests\\Denuncia\\SearchIdenticalRequest' => $baseDir . '/app/Http/Requests/Denuncia/SearchIdenticalRequest.php',
     'App\\Http\\Requests\\Denuncia\\ServicioRequest' => $baseDir . '/app/Http/Requests/Denuncia/ServicioRequest.php',
     'App\\Http\\Requests\\Denuncia\\StatuRequest' => $baseDir . '/app/Http/Requests/Denuncia/StatuRequest.php',
     'App\\Http\\Requests\\Dependencia\\AreaRequest' => $baseDir . '/app/Http/Requests/Dependencia/AreaRequest.php',

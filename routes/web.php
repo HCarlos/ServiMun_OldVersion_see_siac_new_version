@@ -372,6 +372,7 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp|USER_OPERATOR_SIAC|
     Route::put('updateDenuncia', 'Denuncia\DenunciaController@updateItem')->name('updateDenuncia');
     Route::get('addUserDenuncia/{Id}', 'Denuncia\DenunciaController@addUserItem')->name('addUserDenuncia');
     Route::put('updateAddUserDenuncia', 'Denuncia\DenunciaController@updateAddUserDenuncia')->name('updateAddUserDenuncia');
+    Route::get('updateAddUserDenunciaGet/{id}/{usuario_id}', 'Denuncia\DenunciaController@updateAddUserDenunciaGet')->name('updateAddUserDenunciaGet');
     Route::get('removeAddUserDenuncia/{id0}/{id1}', 'Denuncia\DenunciaController@removeAddUserDenuncia')->name('removeAddUserDenuncia');
     Route::get('newDenuncia', 'Denuncia\DenunciaController@newItem')->name('newDenuncia');
     Route::post('createDenuncia', 'Denuncia\DenunciaController@createItem')->name('createDenuncia');
@@ -447,6 +448,8 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp|DELEGADO|CIUDADANO|
     Route::get('removeImagenParent/{id}', 'Denuncia\Imagene\ImageneController@removeImagenParent')->name('removeImagenParent');
 
     Route::get('getServiciosFromDependencias/{id}', 'Denuncia\DenunciaController@getServiciosFromDependencias')->name('getServiciosFromDependencias');
+
+    Route::post('searchIdentical', 'Denuncia\DenunciaController@searchIdentical')->name('searchIdentical');
 
 });
 

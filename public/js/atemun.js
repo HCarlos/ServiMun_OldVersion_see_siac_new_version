@@ -512,7 +512,58 @@ jQuery(function($) {
     }
 
 
-    // alert("Hola mundo");
+    $(".searchIdentical").on('click',function (event){
+       event.preventDefault();
+       var formData = {};
+        formData['descripcion']  = $("#descripcion").val();
+        formData['referencia']   = $("#referencia").val();
+        formData['ubicacion']    = $("#ubicacion").val();
+        formData['ubicacion_id'] = $("#ubicacion_id").val();
+        formData['usuario_id']   = $("#usuario_id").val();
+        formData['servicio_id']  = $("#servicio_id").val();
+        formData['id']           = $("#id").val();
+
+        var ciudadano_id = $("#usuario_id").val();
+
+        $.ajax({
+            method: "POST",
+            data: formData,
+            url: '/searchIdentical'
+        })
+            .done(function( response ) {
+                var Tbl = "";
+                if (response.result_msg == 'OK'){
+
+                    $("#tblBody").empty();
+
+                    $.each(response.data, function( index, value ) {
+                        var TC = "";
+                        if (value.total_ciudadanos !== ""){
+                            TC = "(<strong class='text-danger'> <i class='fas fa-users'></i> "+value.total_ciudadanos+"</strong>)<br>";
+                        }
+                        Tbl += "<tr class='bgc-h-yellow-l3'>";
+                        Tbl += "<td>"+
+                                "<strong>"+value.descripcion+"</strong><br>"+
+                                "<small>"+value.fecha+"</small><br>"+
+                                "<strong class='text-green'>"+value.ciudadano+"</strong><br>"+
+                                "<small>"+value.ubicacion+"</small><br>"+
+                                "<strong class='text-primary-dark'>"+value.ultimo_estatus+"</strong> " + TC +
+                            "</td>"+
+                            "<td>"+
+                                "<a href='/updateAddUserDenunciaGet/"+value.id+"/"+ciudadano_id+"' class='btn btn-danger'>Vincular</a>"+
+                            "</td>";
+                        Tbl += "</tr>";
+                    });
+
+                    $("#tblBody").append(Tbl);
+
+                }else{
+                    alert(response.mensaje);
+                }
+            })
+    });
+
+    // alert("Hola mun2");
 
     $(".formData").on('submit',function(event){
         $(".btnGuardarDenuncia").prop('disabled', true);

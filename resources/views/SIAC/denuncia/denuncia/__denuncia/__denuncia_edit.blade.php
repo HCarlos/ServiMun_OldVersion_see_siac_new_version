@@ -173,6 +173,7 @@
     </div>
 
 </div>
+
 </div>
 
 <div class="grid-structure">
@@ -180,9 +181,6 @@
         <div class="col-lg-12 ">
             <div class="grid-container">
                 <div class="form-group mb-3">
-
-
-
                     <div class="table-responsive-sm">
                         <table class="table table-centered mb-0">
                             <thead class="thead-dark">
@@ -219,14 +217,45 @@
                             </tbody>
                         </table>
                     </div> <!-- end table-responsive-->
-
-                </div>
-
-
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+<hr>
+
+<div class="grid-structure">
+    <div class=" row">
+        <div class="col-lg-12 ">
+            <div class="col-lg-10">
+            </div>
+            <div class="col-lg-2">
+                <a href="#" class="btn btn-block btn-danger-primary btn-rounded text-white searchIdentical"><i class="fas fa-search"></i> Buscar coincidencias  </a>
+            </div>
+            <div class="grid-container">
+                <div class="form-group mb-3">
+                    <div class="table-responsive-sm">
+                        <table class="table table-centered mb-0">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th>Demandas similares</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody id="tblBody">
+                            </tbody>
+                        </table>
+                    </div> <!-- end table-responsive-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<hr>
+
 
 <div class="row mt-4">
     <div class="col-sm-3">
@@ -251,12 +280,10 @@
             <strong class="red">FAVORABLE:</strong>  {{ $items->denuncia_estatus->first()->pivot->favorable == true ? 'SI' : 'NO' }}<br>
             <strong class="purple">FECHA:</strong>  {{ date('d-m-Y H:i:s', strtotime($items->denuncia_estatus->first()->pivot->fecha_movimiento)) }}<br>
             <strong class="coral">RESPUESTA:</strong> <small> {{ $items->denuncia_estatus->first()->pivot->observaciones }} </small><br>
-
         </address>
     </div> <!-- end col-->
 </div>
 
-</div>
 
 
 <hr>

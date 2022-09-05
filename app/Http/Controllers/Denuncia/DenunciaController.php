@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Denuncia;
 use App\Classes\FiltersRules;
 use App\Classes\Items;
 use App\Http\Controllers\Funciones\FuncionesController;
+use App\Http\Requests\Denuncia\SearchIdenticalRequest;
 use App\Models\Catalogos\Dependencia;
 use App\Models\Catalogos\Domicilios\Ubicacion;
 use App\Models\Catalogos\Estatu;
@@ -52,7 +53,7 @@ class DenunciaController extends Controller{
 
         $search = $request->only(['search']);
 
-        $filters['filterdata'] = $request->only(['search']);;
+        $filters['filterdata'] = $request->only(['search']);
          //dd( $filter );
         $items = Denuncia::query()
             ->getDenunciasItemCustomFilter($filters)
@@ -485,27 +486,42 @@ class DenunciaController extends Controller{
     }
 
 // ***************** GUARDA LOS CAMBIOS ++++++++++++++++++++ //
+
+    protected function updateAddUserDenunciaGet($id,$usuario_id){
+        return $this->addUserToDemanda($id, $usuario_id);
+    }
+
     protected function updateAddUserDenuncia(Request $request){
-//        dd("Ok");
-        $item = Denuncia::find($request['id']);
+
+//        $item = Denuncia::find($request['id']);
+//        if ($item->cerrado == false){
+//            $item->ciudadanos()->detach($request['usuario_id']);
+//            $item->ciudadanos()->attach($request['usuario_id']);
+//        }
+
+        return $this->addUserToDemanda($request['id'], $request['usuario_id']);
+    }
+
+    private function addUserToDemanda($id, $usuario_id){
+        $item = Denuncia::find($id);
         if ($item->cerrado == false){
-            $item->ciudadanos()->detach($request['usuario_id']);
-            $item->ciudadanos()->attach($request['usuario_id']);
+            $item->ciudadanos()->detach($usuario_id);
+            $item->ciudadanos()->attach($usuario_id);
         }
         return Redirect::back();
     }
 
+
+    protected function searchIdentical(SearchIdenticalRequest $request){
+        $items = $request->manage();
+        if ( $items == [] ) {
+            return Response::json(['mensaje' => 'No hay datos', 'result_msg' => 'Error', 'data' => null, 'status' => '200'], 200);
+        }
+        return Response::json(['mensaje' => count($items).' registros(s).', 'result_msg' => 'OK', 'data' => $items, 'status' => '200'], 200);
+    }
+
+
     protected function removeAddUserDenuncia($id0 = 0, $id1 = 0){
-
-//        dd($id);
-
-//        $DenUser = DB::table("ciudadano_denuncia")->where("id",$id)->get();
-//        $DenUser = DB::select('SELECT * FROM ciudadano_denuncia WHERE id = 78244' );
-
-//        dd($DenUser);
-
-//        $denuncia_id = $DenUser->denuncia_id;
-//        $ciudadano_id = $DenUser->ciudadano_id;
 
         $item = Denuncia::find($id0);
         $item->ciudadanos()->detach($id1);

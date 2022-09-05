@@ -135,7 +135,7 @@
                 </div>
                 <label for = "origen_id" class="col-lg-2 col-form-label labelDenuncia">Origen</label>
                 <div class="col-lg-5">
-                    <select id="origen_id" name="origen_id" class="form-control"size="1">
+                    <select id="origen_id" name="origen_id" class="form-control" size="1">
                         @foreach($origenes as $t)
                             <option value="{{$t->id}}" {{ $t->isDefault() ? 'selected': '' }} >{{ $t->origen }} </option>
                         @endforeach
@@ -199,7 +199,6 @@
             </div>
         </div>
     </div>
-
 </div>
 </div>
 
@@ -220,6 +219,37 @@
                 <div class="form-group mb-1">
                     <label for="file3"><strong>Archivo 3</strong>: Subir archivo</label>
                     <input type="file" id="file3" name="file3" class="form-control-file">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<hr>
+
+<div class="grid-structure">
+    <div class=" row">
+        <div class="col-lg-12 ">
+            <div class="col-lg-10">
+            </div>
+            <div class="col-lg-2">
+                <a href="#" class="btn btn-block btn-danger-primary btn-rounded text-white searchIdentical"><i class="fas fa-search"></i> Buscar coincidencias  </a>
+            </div>
+            <div class="grid-container">
+                <div class="form-group mb-3">
+                    <div class="table-responsive-sm">
+                        <table class="table table-centered mb-0">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th>Demandas similares</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody id="tblBody">
+                            </tbody>
+                        </table>
+                    </div> <!-- end table-responsive-->
                 </div>
             </div>
         </div>

@@ -39,6 +39,9 @@ class FuncionesController extends Controller
     }
 
     public function string_to_tsQuery(String $string, String $type){
+        $string = str_replace(', ',' ', $string);
+        $string = str_replace(',',' ', $string);
+
         $str = explode(' ',$string);
         //dd($str);
         $string = '';
@@ -49,12 +52,16 @@ class FuncionesController extends Controller
                 if ($string!=''){
                     $vector = $type;
                 }
-                $string = $string.$vector.$value;
+                if ( ! str_contains($string,$vector.$value) ){
+//                if ( strpos($string, $vector.$value) == false)  {
+                    $string = $string.$vector.$value;
+                }
             }
             ++$i;
         }
         return $string;
     }
+
     // get IP, Host or IdEmp
     public function getIHE($type=0){
         switch ($type){
