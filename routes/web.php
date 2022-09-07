@@ -308,6 +308,9 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp|USER_OPERATOR_SIAC|
     Route::get('editComunidadV2/{Id}', 'Catalogos\Domicilio\ComunidadController@editItemV2')->name('editComunidadV2');
     Route::put('updateComunidadV2', 'Catalogos\Domicilio\ComunidadController@updateItemV2')->name('updateComunidadV2');
 
+    Route::get('unicomunidad/', 'Catalogos\Domicilio\ComunidadUnificarController@indexV2')->name('unicomunidad');
+    Route::post('unificacomunidad/', 'Catalogos\Domicilio\ComunidadUnificarController@unificacomunidad')->name('unificacomunidad');
+
     // Catálogo de Colonias
     Route::get('listColonias/', 'Catalogos\Domicilio\ColoniaController@index')->name('listColonias');
     Route::get('editColonia/{Id}', 'Catalogos\Domicilio\ColoniaController@editItem')->name('editColonia');
@@ -317,6 +320,9 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp|USER_OPERATOR_SIAC|
     Route::get('buscarColonia/', 'Catalogos\Domicilio\ColoniaController@buscarColonia')->name('buscarColonia');
     Route::get('getColonia/{IdColonia}', 'Catalogos\Domicilio\ColoniaController@getColonia')->name('getColonia');
     Route::get('removeColonia/{id}', 'Catalogos\Domicilio\ColoniaController@removeItem')->name('removeColonia');
+
+    Route::get('unicolonia/', 'Catalogos\Domicilio\ColoniaUnificarController@indexV2')->name('unicolonia');
+    Route::post('unificacolonia/', 'Catalogos\Domicilio\ColoniaUnificarController@unificacolonia')->name('unificacolonia');
 
     // Catálogo de Ubicaciones
     Route::get('listUbicaciones/', 'Catalogos\Domicilio\UbicacionController@index')->name('listUbicaciones');

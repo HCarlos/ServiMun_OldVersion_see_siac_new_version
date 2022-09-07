@@ -18,16 +18,18 @@ class ColoniaController extends Controller
 
 
     protected $tableName = "colonias";
+    protected $max_item_for_query = 250;
 
 // ***************** MUESTRA EL LISTADO DE USUARIOS ++++++++++++++++++++ //
     protected function index(Request $request)
     {
         ini_set('max_execution_time', 300);
+
         $filters = $request->all(['search']);
         $items = Colonia::query()
             ->filterBy($filters)
             ->orderByDesc('id')
-            ->paginate();
+            ->paginate($this->max_item_for_query);
         $items->appends($filters)->fragment('table');
         $user = Auth::User();
 
