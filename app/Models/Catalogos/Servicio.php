@@ -3,6 +3,7 @@
 namespace App\Models\Catalogos;
 
 use App\Filters\Catalogo\ServicioFilter;
+use App\Http\Controllers\Funciones\FuncionesController;
 use App\Models\Denuncias\Denuncia;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -19,6 +20,16 @@ class Servicio extends Model
     ];
     protected $hidden = ['deleted_at','created_at','updated_at'];
     protected $casts = ['habilitado'=>'boolean',];
+
+    public function scopeSearch($query, $search){
+        if (!$search || $search == "" || $search == null) return $query;
+        $search = strtoupper($search);
+        $filters  = $search;
+        $F        = new FuncionesController();
+        $tsString = $F->string_to_tsQuery( strtoupper($filters),' & ');
+        return $query->whereRaw("searchtextservicio @@ to_tsquery('spanish', ?)", [$tsString])
+            ->orderByRaw("ts_rank(searchtextservicio, to_tsquery('spanish', ?)) ASC", [$tsString]);
+    }
 
     public function scopeFilterBy($query, $filters){
         return (new ServicioFilter())->applyTo($query, $filters);

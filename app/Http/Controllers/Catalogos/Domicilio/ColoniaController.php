@@ -26,12 +26,15 @@ class ColoniaController extends Controller
         ini_set('max_execution_time', 300);
 
         $filters = $request->all(['search']);
+        $search = $filters['search'];
         $items = Colonia::query()
-            ->filterBy($filters)
+            ->search($search)
             ->orderByDesc('id')
             ->paginate($this->max_item_for_query);
         $items->appends($filters)->fragment('table');
         $user = Auth::User();
+
+//        ->filterBy($filters)
 
         return view('SIAC.domicilio.colonia.colonia_list',
             [
@@ -116,10 +119,12 @@ class ColoniaController extends Controller
     {
         ini_set('max_execution_time', 300000);
         $filters = $request->all(['search']);
+        $search = $filters['search'];
         $items = Colonia::query()
-            ->filterBy($filters)
+            ->search($search)
             ->orderBy('id')
             ->get();
+//        ->filterBy($filters)
 
         $data=array();
 

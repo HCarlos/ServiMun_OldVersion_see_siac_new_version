@@ -16,6 +16,7 @@ class AddColumnSearchtextFieldTables extends Migration
 
         // Tabla de Calles
         DB::statement("ALTER DATABASE dbatemun set default_text_search_config = 'spanish'");
+        DB::statement("ALTER TABLE calles DROP COLUMN IF EXISTS searchtextcalle");
         DB::statement("ALTER TABLE calles ADD COLUMN searchtextcalle TSVECTOR");
         DB::statement("UPDATE calles SET searchtextcalle = to_tsvector('spanish', coalesce(trim(calle), '')  )");
         DB::statement("CREATE INDEX searchtextcalle ON calles USING GIN(searchtextcalle)");
@@ -23,6 +24,7 @@ class AddColumnSearchtextFieldTables extends Migration
 
         // Tabla de Colonias
         DB::statement("ALTER DATABASE dbatemun set default_text_search_config = 'spanish'");
+        DB::statement("ALTER TABLE colonias DROP COLUMN IF EXISTS searchtextcolonia");
         DB::statement("ALTER TABLE colonias ADD COLUMN searchtextcolonia TSVECTOR");
         DB::statement("UPDATE colonias SET searchtextcolonia = to_tsvector('spanish', coalesce(trim(colonia), '')  )");
         DB::statement("CREATE INDEX searchtextcolonia ON colonias USING GIN(searchtextcolonia)");
@@ -30,6 +32,7 @@ class AddColumnSearchtextFieldTables extends Migration
 
         // Tabla de Comunidades
         DB::statement("ALTER DATABASE dbatemun set default_text_search_config = 'spanish'");
+        DB::statement("ALTER TABLE comunidades DROP COLUMN IF EXISTS searchtextcomunidad");
         DB::statement("ALTER TABLE comunidades ADD COLUMN searchtextcomunidad TSVECTOR");
         DB::statement("UPDATE comunidades SET searchtextcomunidad = to_tsvector('spanish', coalesce(trim(comunidad), '')  )");
         DB::statement("CREATE INDEX searchtextcomunidad ON comunidades USING GIN(searchtextcomunidad)");
@@ -38,7 +41,7 @@ class AddColumnSearchtextFieldTables extends Migration
 
         // Tabla de Municipios
         DB::statement("ALTER DATABASE dbatemun set default_text_search_config = 'spanish'");
-        DB::statement("ALTER TABLE municipios DROP COLUMN searchtextmunicipio");
+        DB::statement("ALTER TABLE municipios DROP COLUMN IF EXISTS searchtextmunicipio");
         DB::statement("ALTER TABLE municipios ADD COLUMN searchtextmunicipio TSVECTOR");
         DB::statement("UPDATE municipios SET searchtextmunicipio = to_tsvector('spanish', coalesce(trim(municipio), '')  )");
         DB::statement("CREATE INDEX searchtextmunicipio ON municipios USING GIN(searchtextmunicipio)");
@@ -47,7 +50,7 @@ class AddColumnSearchtextFieldTables extends Migration
 
         // Tabla de Estados
         DB::statement("ALTER DATABASE dbatemun set default_text_search_config = 'spanish'");
-        DB::statement("ALTER TABLE estados DROP COLUMN searchtextestado");
+        DB::statement("ALTER TABLE estados DROP COLUMN IF EXISTS searchtextestado");
         DB::statement("ALTER TABLE estados ADD COLUMN searchtextestado TSVECTOR");
         DB::statement("UPDATE estados SET searchtextestado = to_tsvector('spanish', coalesce(trim(estado), '')  )");
         DB::statement("CREATE INDEX searchtextestado ON estados USING GIN(searchtextestado)");
@@ -56,7 +59,7 @@ class AddColumnSearchtextFieldTables extends Migration
 
         // Tabla de Localidades
         DB::statement("ALTER DATABASE dbatemun set default_text_search_config = 'spanish'");
-//        DB::statement("ALTER TABLE localidades DROP COLUMN searchtextlocalidad");
+        DB::statement("ALTER TABLE localidades DROP COLUMN IF EXISTS searchtextlocalidad");
         DB::statement("ALTER TABLE localidades ADD COLUMN searchtextlocalidad TSVECTOR");
         DB::statement("UPDATE localidades SET searchtextlocalidad = to_tsvector('spanish', coalesce(trim(localidad), '')  )");
         DB::statement("CREATE INDEX searchtextlocalidad ON localidades USING GIN(searchtextlocalidad)");
@@ -65,7 +68,7 @@ class AddColumnSearchtextFieldTables extends Migration
 
         // Tabla de Servicios
         DB::statement("ALTER DATABASE dbatemun set default_text_search_config = 'spanish'");
-//        DB::statement("ALTER TABLE servicios DROP COLUMN searchtextservicio");
+        DB::statement("ALTER TABLE servicios DROP COLUMN IF EXISTS searchtextservicio");
         DB::statement("ALTER TABLE servicios ADD COLUMN searchtextservicio TSVECTOR");
         DB::statement("UPDATE servicios SET searchtextservicio = to_tsvector('spanish', coalesce(trim(servicio), '')  )");
         DB::statement("CREATE INDEX searchtextservicio ON servicios USING GIN(searchtextservicio)");

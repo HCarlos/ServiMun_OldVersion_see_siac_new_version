@@ -24,12 +24,15 @@ class ServicioController extends Controller
     {
         ini_set('max_execution_time', 300);
         $filters = $request->all(['search']);
+        $search = $filters['search'];
         $items = Servicio::query()
-            ->filterBy($filters)
+            ->search($filters)
             ->orderByDesc('id')
             ->paginate();
         $items->appends($filters)->fragment('table');
         $user = Auth::User();
+
+//        ->filterBy($filters)
 
         return view('catalogos.catalogo.servicio.servicio_list',
             [

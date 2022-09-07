@@ -19,6 +19,12 @@ class Ciudad extends Model
     ];
     protected $hidden = ['deleted_at','created_at','updated_at'];
 
+    public function scopeSearch($query, $search){
+        if (!$search || $search == "" || $search == null) return $query;
+        return $query->whereRaw("searchtextciudad @@ to_tsquery('spanish', ?)", [$search])
+            ->orderByRaw("ts_rank(searchtextciudad, to_tsquery('spanish', ?)) ASC", [$search]);
+    }
+
     public function scopeFilterBy($query, $filters){
         return (new CiudadFilter())->applyTo($query, $filters);
     }

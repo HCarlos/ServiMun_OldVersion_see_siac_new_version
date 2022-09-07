@@ -3,6 +3,7 @@
 namespace App\Models\Catalogos\Domicilios;
 
 use App\Filters\Catalogo\Domicilio\ColoniaFilter;
+use App\Http\Controllers\Funciones\FuncionesController;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -19,6 +20,16 @@ class Colonia extends Model
         'codigopostal_id','comunidad_id','tipocomunidad_id', 'colonia_mig_id',
     ];
     protected $hidden = ['deleted_at','created_at','updated_at'];
+
+    public function scopeSearch($query, $search){
+        if (!$search || $search == "" || $search == null) return $query;
+            $search = strtoupper($search);
+            $filters  = $search;
+            $F        = new FuncionesController();
+            $tsString = $F->string_to_tsQuery( strtoupper($filters),' & ');
+            return $query->whereRaw("searchtextcolonia @@ to_tsquery('spanish', ?)", [$tsString])
+                ->orderByRaw("ts_rank(searchtextcolonia, to_tsquery('spanish', ?)) ASC", [$tsString]);
+    }
 
     public function scopeFilterBy($query, $filters){
         return (new ColoniaFilter())->applyTo($query,$filters);

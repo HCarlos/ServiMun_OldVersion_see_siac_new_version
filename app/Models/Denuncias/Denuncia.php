@@ -8,6 +8,7 @@ namespace App\Models\Denuncias;
 use App\Filters\Denuncia\DenunciaFilter;
 use App\Filters\Denuncia\GetDenunciasFilterCount;
 use App\Filters\Denuncia\GetDenunciasItemCustomFilter;
+use App\Http\Controllers\Funciones\FuncionesController;
 use App\Models\Catalogos\Dependencia;
 use App\Models\Catalogos\Domicilios\Ubicacion;
 use App\Models\Catalogos\Estatu;
@@ -48,8 +49,13 @@ class Denuncia extends Model
 
     public function scopeSearch($query, $search){
         if (!$search || $search == "" || $search == null) return $query;
-        return $query->whereRaw("searchtextdenuncia @@ to_tsquery('spanish', ?)", [$search])
-            ->orderByRaw("calle, num_ext, num_int, colonia, descripcion, referencia ASC");
+
+            $search = strtoupper($search);
+            $filters  = $search;
+            $F        = new FuncionesController();
+            $tsString = $F->string_to_tsQuery( strtoupper($filters),' & ');
+            return $query->whereRaw("searchtextdenuncia @@ to_tsquery('spanish', ?)", [$tsString])
+                ->orderByRaw("calle, num_ext, num_int, colonia, descripcion, referencia ASC");
     }
 //->orderByRaw("ts_rank(searchtextdenuncia, to_tsquery('spanish', ?)) DESC", [$search]);
 

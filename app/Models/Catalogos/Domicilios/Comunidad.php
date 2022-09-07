@@ -3,6 +3,7 @@
 namespace App\Models\Catalogos\Domicilios;
 
 use App\Filters\Catalogo\Domicilio\ComunidadFilter;
+use App\Http\Controllers\Funciones\FuncionesController;
 use App\Traits\Catalogos\Domicilio\Comunidad\ComunidadTrait;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
@@ -22,6 +23,17 @@ class Comunidad extends Model
         'comunidad_mig_id',
     ];
     protected $hidden = ['deleted_at','created_at','updated_at'];
+
+    public function scopeSearch($query, $search){
+        if (!$search || $search == "" || $search == null) return $query;
+
+            $search = strtoupper($search);
+            $filters  = $search;
+            $F        = new FuncionesController();
+            $tsString = $F->string_to_tsQuery( strtoupper($filters),' & ');
+            return $query->whereRaw("searchtextcomunidad @@ to_tsquery('spanish', ?)", [$tsString])
+                ->orderByRaw("ts_rank(searchtextcomunidad, to_tsquery('spanish', ?)) ASC", [$tsString]);
+    }
 
     public function scopeFilterBy($query, $filters){
         return (new ComunidadFilter())->applyTo($query, $filters);

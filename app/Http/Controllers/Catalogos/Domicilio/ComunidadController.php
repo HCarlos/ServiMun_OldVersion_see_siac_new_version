@@ -29,12 +29,14 @@ class ComunidadController extends Controller
     {
         ini_set('max_execution_time', 300);
         $filters = $request->all(['search']);
+        $search = $filters['search'];
         $items = Comunidad::query()
-            ->filterBy($filters)
+            ->search($search)
             ->orderByDesc('id')
             ->paginate();
         $items->appends($filters)->fragment('table');
         $user = Auth::User();
+//        ->filterBy($filters)
 
         return view('SIAC.domicilio.comunidad.comunidad_list',
             [
@@ -251,14 +253,16 @@ class ComunidadController extends Controller
 
 
 // ***************** MAUTOCOMPLETE DE UBICACIONES ++++++++++++++++++++ //
-    protected function buscarComunidad(Request $request)
-    {
+    protected function buscarComunidad(Request $request){
         ini_set('max_execution_time', 300000);
         $filters = $request->all(['search']);
+        $search = $filters['search'];
         $items = Comunidad::query()
-            ->filterBy($filters)
+            ->search($search)
             ->orderBy('id')
             ->get();
+
+//        ->filterBy($filters)
 
         $data=array();
 

@@ -24,12 +24,15 @@ class CalleController extends Controller
     {
         ini_set('max_execution_time', 300);
         $filters = $request->all(['search']);
+        $search = $filters['search'];
         $items = Calle::query()
-            ->filterBy($filters)
+            ->search($search)
             ->orderByDesc('id')
             ->paginate();
         $items->appends($filters)->fragment('table');
         $user = Auth::User();
+
+//        ->filterBy($filters)
 
         return view('catalogos.catalogo.domicilio.calle.calle_list',
             [
@@ -172,10 +175,14 @@ class CalleController extends Controller
         //dd($filters);
         //$F           = new FuncionesController();
         //$tsString    = $F->string_to_tsQuery( strtoupper($filters),' & ');
+
+        $search = $filters['search'];
         $items = Calle::query()
-            ->filterBy($filters)
+            ->search($search)
             ->orderBy('id')
             ->get();
+
+//        ->filterBy($filters)
 
         //dd($items);
 

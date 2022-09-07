@@ -19,6 +19,12 @@ class Municipio extends Model
     ];
     protected $hidden = ['deleted_at','created_at','updated_at'];
 
+    public function scopeSearch($query, $search){
+        if (!$search || $search == "" || $search == null) return $query;
+        return $query->whereRaw("searchtextmunicipio @@ to_tsquery('spanish', ?)", [$search])
+            ->orderByRaw("ts_rank(searchtextmunicipio, to_tsquery('spanish', ?)) ASC", [$search]);
+    }
+
     public function scopeFilterBy($query, $filters){
         return (new MunicipioFilter())->applyTo($query, $filters);
     }

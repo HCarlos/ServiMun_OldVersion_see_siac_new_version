@@ -19,6 +19,12 @@ class Estado extends Model
     ];
     protected $hidden = ['deleted_at','created_at','updated_at'];
 
+    public function scopeSearch($query, $search){
+        if (!$search || $search == "" || $search == null) return $query;
+        return $query->whereRaw("searchtextestado @@ to_tsquery('spanish', ?)", [$search])
+            ->orderByRaw("ts_rank(searchtextestado, to_tsquery('spanish', ?)) ASC", [$search]);
+    }
+
     public function scopeFilterBy($query, $filters){
         return (new EstadoFilter())->applyTo($query, $filters);
     }

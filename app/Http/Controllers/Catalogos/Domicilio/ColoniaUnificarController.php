@@ -72,7 +72,6 @@ class ColoniaUnificarController extends Controller{
                         $UbiOrigins = Ubicacion::where('colonia_id', $colonia_origin_id)->first();
                         $UbiDestino = Ubicacion::where('colonia_id', $destino_id)->first();
 
-
                         //Buscamos en las tablas involucradas y hacemos los cambios
 
                         $Ubicacion = Ubicacion::where('colonia_id', $colonia_origin_id)
