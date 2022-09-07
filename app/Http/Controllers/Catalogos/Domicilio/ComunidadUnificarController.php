@@ -54,6 +54,7 @@ class ComunidadUnificarController extends Controller{
                 'titleAsign0'     => 'Comunidad asignada',
                 'urlUnifica'      => 'unificacomunidad',
                 'urlRegresa'      => 'asignaRoleList',
+                'catalogo_id'     => 0,
             ]
         );
 

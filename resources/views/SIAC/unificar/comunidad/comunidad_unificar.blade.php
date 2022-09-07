@@ -9,10 +9,11 @@
         @slot('altoPanelCen','asign-pnl-center')
         @slot('altoPanelDer','asign-pnl-right')
 
-        @slot('titleLeft0') {{$titleLeft0 }} @endslot
-        @slot('urlUnifica') {{$urlUnifica}} @endslot
+        @slot('titleLeft0') {{ $titleLeft0 }} @endslot
+        @slot('urlUnifica') {{ $urlUnifica }} @endslot
 {{--        @slot('urlElimina') {{$urlElimina}} @endslot--}}
-        @slot('urlRegresa') {{$urlRegresa}} @endslot
+        @slot('urlRegresa') {{ $urlRegresa }} @endslot
+        @slot('catalogo_id') {{ $catalogo_id ?? 0 }} @endslot
 
         @slot('list0')
 {{--            {{ Form::select('listEle', null, '', ['multiple' => 'multiple','class'=>'listEle form-control asign-lstEle0']) }}  --}}
