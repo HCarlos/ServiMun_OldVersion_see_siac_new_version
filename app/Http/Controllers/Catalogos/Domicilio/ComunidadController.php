@@ -23,6 +23,7 @@ class ComunidadController extends Controller
     use ComunidadTrait, CommonTrait;
 
     protected $tableName = "comunidades";
+    protected $max_item_for_query = 1000;
 
 // ***************** MUESTRA EL LISTADO DE USUARIOS ++++++++++++++++++++ //
     protected function index(Request $request)
@@ -33,7 +34,7 @@ class ComunidadController extends Controller
         $items = Comunidad::query()
             ->search($search)
             ->orderByDesc('id')
-            ->paginate();
+            ->paginate($this->max_item_for_query);
         $items->appends($filters)->fragment('table');
         $user = Auth::User();
 //        ->filterBy($filters)

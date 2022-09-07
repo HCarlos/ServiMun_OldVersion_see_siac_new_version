@@ -18,7 +18,7 @@ class ColoniaController extends Controller
 
 
     protected $tableName = "colonias";
-    protected $max_item_for_query = 250;
+    protected $max_item_for_query = 1000;
 
 // ***************** MUESTRA EL LISTADO DE USUARIOS ++++++++++++++++++++ //
     protected function index(Request $request)
