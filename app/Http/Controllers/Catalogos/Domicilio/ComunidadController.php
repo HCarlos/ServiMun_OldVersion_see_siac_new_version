@@ -268,7 +268,7 @@ class ComunidadController extends Controller
         $data=array();
 
         foreach ($items as $item) {
-            $data[]=array('value'=>$item->comunidad,'id'=>$item->id);
+            $data[]=array('value'=>$item->comunidad,'id'=>$item->id, 'is_unificadora' => $item->is_unificadora);
         }
         if(count($data))
             return $data;

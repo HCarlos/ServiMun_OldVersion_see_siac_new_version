@@ -18,8 +18,10 @@ class Colonia extends Model
     protected $fillable = [
         'id', 'colonia', 'cp','altitud','latitud','longitud','nomenclatura',
         'codigopostal_id','comunidad_id','tipocomunidad_id', 'colonia_mig_id',
+        'is_unificadora',
     ];
     protected $hidden = ['deleted_at','created_at','updated_at'];
+    protected $casts = ['is_unificadora'=>'boolean',];
 
     public function scopeSearch($query, $search){
         if (!$search || $search == "" || $search == null) return $query;

@@ -85,6 +85,7 @@ class ColoniaUnificarController extends Controller{
                         if ($UbiOrigins != null){
                             $Comunidad = Colonia::find($colonia_origin_id);
                             $Comunidad->forceDelete();
+                            $Colonia_Destino->update(['is_unificadora' => true]);
                         }
                         $registros_eliminados = $registros_eliminados + 1;
 
@@ -92,7 +93,7 @@ class ColoniaUnificarController extends Controller{
                 }
             }
 
-            return Response::json(['mensaje' => "/unicolonia", 'data' => 'OK', 'registros_eliminados' => $registros_eliminados,  'status' => '200'], 200);
+            return Response::json(['mensaje' => "/unicolonia", 'data' => 'OK', 'registros_eliminados' => 'Registros unificados: '.$registros_eliminados,  'status' => '200'], 200);
 
         }catch (QueryException $e){
             $Msg = new MessageAlertClass();

@@ -45,13 +45,14 @@ jQuery(function($) {
                         search  : Inps.val(),
                     },
                     success: function(data) {
-
+                        $("#totalItemsUnificar").html(data.length);
                         $.each(data, function( index, value ) {
-                            // alert(value.value);
+
+                            var unif = value.is_unificadora ? value.id+" " : "";
                             switch (Indx) {
                                 case 0:
-                                    $(".listEle").append("<option value='" + value.id + "'>" + value.value + "</option>");
-                                    $(".lstAsigns").append("<option value='" + value.id + "'>" + value.value + "</option>");
+                                    $(".listEle").append("<option value='" + value.id + "'>" + unif+value.value + "</option>");
+                                    $(".lstAsigns").append("<option value='" + value.id + "'>" + unif+value.value + "</option>");
                                     break;
                                 case 1:
                                     $(".lstAsigns").append("<option value='" + value.id + "'>" + value.value + "</option>");

@@ -20,9 +20,11 @@ class Comunidad extends Model
 
     protected $fillable = [
         'id', 'comunidad','delegado_id','tipocomunidad_id','ciudad_id','municipio_id','estado_id','nomenclatura',
-        'comunidad_mig_id',
+        'comunidad_mig_id', 'is_unificadora',
     ];
+
     protected $hidden = ['deleted_at','created_at','updated_at'];
+    protected $casts = ['is_unificadora'=>'boolean',];
 
     public function scopeSearch($query, $search){
         if (!$search || $search == "" || $search == null) return $query;

@@ -99,6 +99,7 @@ class ComunidadUnificarController extends Controller{
                     if ($UbiOrigins != null){
                         $Comunidad = Comunidad::find($comunidad_origin_id);
                         $Comunidad->forceDelete();
+                        $Comunidad_Destino->update(['is_unificadora' => true]);
                     }
                     $registros_eliminados = $registros_eliminados + 1;
 
@@ -106,7 +107,7 @@ class ComunidadUnificarController extends Controller{
             }
         }
 
-        return Response::json(['mensaje' => "/unicomunidad", 'data' => 'OK', 'registros_eliminados' => $registros_eliminados,  'status' => '200'], 200);
+        return Response::json(['mensaje' => "/unicomunidad", 'data' => 'OK', 'registros_eliminados' => 'Registros unificados: '.$registros_eliminados,  'status' => '200'], 200);
 
         }catch (QueryException $e){
             $Msg = new MessageAlertClass();

@@ -17,7 +17,7 @@
 
                 <strong class="panel-title">@isset($titleLeft0) {{ $titleLeft0 }} @endisset</strong>
                 @isset($list0) {{ $list0 }} @endisset
-                <span class="text-dark">Lista de Elementos <strong> @isset($countListEle) {{ $countListEle  }} @endisset </strong></span>
+                <span class="text-dark">Lista de Elementos: <strong id="totalItemsUnificar" class="text-primary-dark"></strong></span>
             </div>
         </div> <!-- end card-->
     </div><!-- end col -->

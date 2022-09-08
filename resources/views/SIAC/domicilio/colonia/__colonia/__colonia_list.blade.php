@@ -8,7 +8,7 @@
                         <th class="sorting" >Colonia</th>
                         <th class="sorting" >Comunidad</th>
                         <th class="sorting" >CP</th>
-                        <th class="sorting" >Nomenclatura</th>
+                        <th class="sorting" >Unificadora</th>
                         <th style="width: 100vw"></th>
                     </tr>
                 </thead>
@@ -19,7 +19,7 @@
                         <td>{{$item->colonia}}</td>
                         <td>{{ $item->comunidad->comunidad }}</td>
                         <td>{{ $item->codigoPostal->cp }}</td>
-                        <td>{{$item->nomenclatura}}</td>
+                        <td class="text-center">@if( $item->is_unificadora )<i class="fa fa-arrow-up text-success"></i>@endif</td>
                         <td class="table-action w-100">
                             <div class="button-list">
                                 @include('shared.ui_kit.__edit_item')
