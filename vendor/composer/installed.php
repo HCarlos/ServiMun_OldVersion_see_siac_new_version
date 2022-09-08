@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '6b682267144177e7934a7271de4f85f9cda81eea',
+        'reference' => '96b06a620716f8f56da2fed1240cf85220ee8637',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -83,12 +83,12 @@
             'dev_requirement' => false,
         ),
         'doctrine/inflector' => array(
-            'pretty_version' => '2.0.4',
-            'version' => '2.0.4.0',
+            'pretty_version' => '2.0.5',
+            'version' => '2.0.5.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../doctrine/inflector',
             'aliases' => array(),
-            'reference' => '8b7ff3e4b7de6b2c84da85637b59fd2880ecaa89',
+            'reference' => 'ade2b3bbfb776f27f0558e26eed43b5d9fe1b392',
             'dev_requirement' => false,
         ),
         'doctrine/instantiator' => array(
@@ -490,7 +490,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '6b682267144177e7934a7271de4f85f9cda81eea',
+            'reference' => '96b06a620716f8f56da2fed1240cf85220ee8637',
             'dev_requirement' => false,
         ),
         'laravel/legacy-factories' => array(

@@ -27,7 +27,7 @@
         <div class="card bg-default text-white {{$altoPanelCen}} " >
             <div class="card-body">
                 <div class="position-ref full-height" style="padding-top: 30vh">
-                    @if (Auth::User()->hasRole('Administrator|SysOp'))
+                    @if (Auth::user()->hasAnyPermission(['all', 'unificar']) )
                         @isset($urlUnifica)
                             <button type="button" class="btn btn-block btn-primary btn-rounded btnUnifica" id="{{$urlUnifica.'-'.$urlRegresa}}">
                                 Unificar <i class="fas fa-chevron-right"></i>
