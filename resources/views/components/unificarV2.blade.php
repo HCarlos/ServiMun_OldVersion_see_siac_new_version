@@ -8,8 +8,8 @@
             <div class="card-body">
                 <div class="form-group row">
                     <div class="col-sm-12">
-                        <input type="text" id="buscar_dato_a_unificar" name="buscar_dato_a_unificar" value="" class="form-control col-md-10 d-inline-block" placeholder="Buscar dato">
-                        <span class="form-text d-inline-block ml-1 col-md-1">
+                        <input type="text" id="buscar_dato_a_unificar" name="buscar_dato_a_unificar" value="" class="form-control col-md-10 d-inline-block" placeholder="Buscar dato...">
+                        <span class="form-text d-inline-block ml-0 col-md-1">
                         <a href="#" class="btn btn-sm btn-info btn-bold brc-white-tp3 shadow-sm radius-round text-125 px-25 buscarDatoDom" ><i class="fa fa-search"></i> </a>
                     </span>
                     </div>
@@ -50,8 +50,8 @@
             <div class="card-body">
                 <div class="form-group row">
                     <div class="col-sm-12">
-                        <input type="text" id="buscar_dato_a_unificar_otro" name="buscar_dato_a_unificar_otro" value="" class="form-control col-md-10 d-inline-block" placeholder="Buscar dato">
-                        <span class="form-text d-inline-block ml-1 col-md-1">
+                        <input type="text" id="buscar_dato_a_unificar_otro" name="buscar_dato_a_unificar_otro" value="" class="form-control col-md-10 d-inline-block" placeholder="Buscar dato...">
+                        <span class="form-text d-inline-block ml-0 col-md-1">
                         <a href="#" class="btn btn-sm btn-info btn-bold brc-white-tp3 shadow-sm radius-round text-125 px-25 buscarDatoDomOtro" ><i class="fa fa-search"></i> </a>
                     </span>
                     </div>

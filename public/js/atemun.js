@@ -478,7 +478,8 @@ jQuery(function($) {
         "#ciudad, #estado, #municipio, #estatus, #codigo, #cp, #search, #num_ext, #num_int," +
         "#search_autocomplete, #search_autocomplete_user, .search_autocomplete_user, " +
         "#search_autocomplete_calle, #search_autocomplete_colonia, #search_autocomplete_cp, " +
-        "#search_autocomplete_comunidad, #clave_identificadora, #buscar_dato_a_unificar").keyup(function(){
+        "#search_autocomplete_comunidad, #clave_identificadora, #buscar_dato_a_unificar, " +
+        "#buscar_dato_a_unificar_otro").keyup(function(){
         $(this).val($(this).val().toUpperCase());
     });
 
