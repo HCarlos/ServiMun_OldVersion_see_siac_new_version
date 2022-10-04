@@ -69,6 +69,7 @@ class DenunciaDependenciaServicioController extends Controller
                 'addItem'                             => 'addDenunciaDependenciaServicio',
                 'removeItem'                          => 'removeDenunciaDependenciaServicio',
                 'imprimirDenuncia'                    => "imprimirDenuncia/",
+                'imprimirDenunciaConRespuesta'        => "imprimir_denuncia_respuesta/",
                 'showEditDenunciaDependenciaServicio' =>'listDenunciaDependenciaServicio',
                 'imagenesDenunciaItem'                => 'listImagenes',
             ]

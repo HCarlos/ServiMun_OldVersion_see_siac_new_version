@@ -473,6 +473,7 @@ Route::get('enviar', ['as' => 'enviar', function () {
 }]);
 
 Route::get('/imprimir_denuncia/{uuid}', 'External\Denuncia\HojaDenunciaController@imprimirDenuncia')->name('imprimir_denuncia/');
+Route::get('/imprimir_denuncia_respuesta/{uuid}', 'External\Denuncia\HojaDenunciaController@imprimirDenunciaConRespuestas')->name('imprimir_denuncia_respuesta/');
 Route::get('/imprimir_denuncia_archivo/{uuid}', 'External\Denuncia\HojaDenunciaArchivoController@imprimirDenuncia')->name('imprimir_denuncia_archivo/');
 
 //Route::get('/home-original', 'HomeController@index')->name('home-original');

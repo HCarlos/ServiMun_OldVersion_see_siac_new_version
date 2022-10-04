@@ -1,7 +1,7 @@
 
 <div class="button-list mt-md-2">
     @isset($newItem)
-        <a href="{{route($newItem,['Id'=>$Id])}}"  @isset($newWindow) @endisset class="btn btn-outline-light btn-rounded btn-sm ml-3" data-toggle="tooltip" data-placement="top" data-original-title="Agregar dependencia a Denuncia">
+        <a href="{{route($newItem,['Id'=>$Id])}}"  @isset($newWindow) @endisset class="btn btn-outline-light btn-rounded btn-sm ml-3" data-toggle="tooltip" data-placement="top" data-original-title="Agregar dependencia / respuesta a Denuncia">
             <i class="fas fa-plus"></i>
         </a>
     @endisset
@@ -10,6 +10,12 @@
             <i class="fas fa-file-excel text-white"></i>
         </a>
     @endisset
+    @isset($imprimirDenunciaConRespuesta)
+        <a href="{{route($imprimirDenunciaConRespuesta,['uuid' => $Denuncia->uuid])}}" @isset($newWindow)  @endisset class="btn btn-icon btn-outline-dark btn-rounded" data-toggle="tooltip" data-placement="top" data-original-title="Imprimir hoja de seguimiento">
+            <i class="fas fa-print text-white"></i>
+        </a>
+    @endisset
+
     @isset($showModalSearchDenuncia)
         <span data-toggle="modal" data-target="#modalFull" >
             <a href="{{route($showModalSearchDenuncia)}}" id="{{$showModalSearchDenuncia}}" class="btn btn-icon btn-outline-light btn-rounded  btnFullModal" data-toggle="tooltip" data-placement="top" title="" data-original-title="Búsqueda Avanzada">
