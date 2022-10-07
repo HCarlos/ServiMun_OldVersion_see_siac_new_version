@@ -141,7 +141,7 @@ class DenunciaRequest extends FormRequest
             }else{
                 return null;
             }
-            event(new IUQDenunciaEvent($item->id,Auth::user()->id));
+//            event(new IUQDenunciaEvent($item->id,Auth::user()->id));
         }catch (QueryException $e){
             $Msg = new MessageAlertClass();
 //            dd($Msg->Message());
