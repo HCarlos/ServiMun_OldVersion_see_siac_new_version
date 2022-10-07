@@ -9,6 +9,7 @@ jQuery(function($) {
         }
     });
 
+    // var Tabla;
 
     if ( $(".dataTable").length > 0 ){
         var nCols = $(".dataTable").find("tbody > tr:first td").length;
@@ -39,6 +40,7 @@ jQuery(function($) {
                 "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
                 "aoColumns": aCol
             });
+            // Tabla = tbl;
         }
 
     }
@@ -589,7 +591,7 @@ jQuery(function($) {
 
 
     function funcionConRetraso() {
-        location.reload();
+        //location.reload();
     }
 
     function borrarAlerta() {
@@ -601,4 +603,35 @@ jQuery(function($) {
         // alert("Cargado...2...");
 
     });
+
+    // var socket = io('http://test.dev:3000', {
+
+        // var socket = io('http://test.dev:3000', {
+        //     withCredentials: false,
+        //     extraHeaders: {
+        //         "my-custom-header": "abcd"
+        //     }
+        // });
+        // socket.on("test-channel:App\\Events\\InserUpdateDeleteEvent", function(message) {
+        //     console.log('here');
+        //     alert("Entró");
+        //     $('#power').text(parseInt($('#power').text()) + parseInt(message.data.power));
+        // });
+
+
+    var i = 0;
+    window.Echo.channel('test-channel')
+        .listen('.InserUpdateDeleteEvent', (data) => {
+            i++;
+            $('#power').html(parseInt(data.power) * i);
+            console.log(data.power)
+        })
+        .listen('.IUQDenunciaEvent', (data) => {
+            if ( $("#tblCatDenuncias") ){
+                location.reload();
+                // $(".dataTable").DataTable().reload();
+                console.log(data.denuncia_id+" :: "+data.user_id);
+            }
+        })
+
 });

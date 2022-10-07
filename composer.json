@@ -28,7 +28,7 @@
         "php-parallel-lint/php-console-highlighter": "^0.5",
         "phpoffice/phpspreadsheet": "^1.23.0",
         "picqer/php-barcode-generator": "^2.2.2",
-        "predis/predis": "^1.1.10",
+        "predis/predis": "^2.0",
         "rapidapi/rapidapi-connect": "^0.0.2",
         "setasign/fpdf": "^1.8.4",
         "spatie/laravel-backup": "^6.16.5",

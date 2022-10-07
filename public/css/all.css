@@ -1,13 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway');
-@namespace url(http://www.w3.org/1999/xhtml);
 
 /*@import url('https://fonts.googleapis.com/css?family=Varela+Round');*/
 
-/*
-.font{
-    font-weight: bold;
-}
-*/
+
+.dataTable { max-width: 1200px !important; }
 
 .full-height {
 	height: 100vh;
@@ -118,6 +114,24 @@ ul.role-list-hrz li a {
 	padding: 0.3em !important;
 }
 
+.bg-coral-denuncia-cerrada{
+    background-color: lightcoral !important;
+    color: darkslategray !important;
+    font-weight: bold !important;
+    padding: 0.3em !important;
+    opacity: 0.5 !important;
+
+}
+
+.bg-coral-denuncia-firmada{
+    background-color: lightcoral !important;
+    color: ghostwhite !important;
+    font-weight: bold !important;
+    padding: 0.3em !important;
+    opacity: 0.75 !important;
+
+}
+
 .bg-seagreen-atemun-bib{
 	background-color: seagreen !important;
 	color: ghostwhite !important;
@@ -188,7 +202,7 @@ ul.role-list-hrz li a {
 
 .menu-principal-atemun{
 	height: 40px !important;
-	padding-top: 0 !important;
+	padding-top: 0px !important;
 	color: whitesmoke !important;
 	font-weight: bolder !important;
 }
@@ -422,6 +436,10 @@ ul.role-list-hrz li a {
     position: absolute; top: 94%; left: 3%;
 }
 
+.wellcome-pos-aviso_privacidad{
+    position: absolute; top: 94%; right: 3%;
+}
+
 .form-error {
 	border: 1px solid #e74c3c !important;
 }
@@ -610,7 +628,7 @@ input[readonly] {
 
 #colonia, #comunidad, #calle, #asentamiento, #tipoasentamiento, #tipocomunidad, #localidad,
 #afiliacion, #area, #subarea, #dependencia, #medida, #origen, #prioridad, #servicio, #ubicacon,
-#ciudad, #estado, #municipio, #estatus, #codigo, #cp, .search_autocomplete
+#ciudad, #estado, #municipio, #estatus, #codigo, #cp, #clave_identificadora, .search_autocomplete
 {text-transform: uppercase; background: lightgoldenrodyellow;}
 
 .search_autocomplete---{
@@ -626,7 +644,7 @@ input[readonly] {
     border-radius: 6px;
     cursor: pointer;
     min-height: 150px;
-    padding: 0;
+    padding: 0px;
 }
 
 .ellipsis-span {
@@ -658,10 +676,20 @@ input[readonly] {
     border-width: 2px;
 }
 
+.text-warning-reload {
+    color: coral !important;
+}
 
 /*
  * Copyright (c) 2021. Realizado por Carlos Hidalgo
  */
+
+@namespace url(http://www.w3.org/1999/xhtml);
+
+.ui-autocomplete-loading {
+    background: white url('/images/web/ui-anim_basic_16x16.gif') right center no-repeat;
+}
+
 
 
 #resultado {
@@ -777,3 +805,23 @@ a, .text-darkred{
     font-size: large;
 }
 
+.help-box2 {
+    border-radius: 5px;
+    padding: 20px;
+    margin: 65px 25px 25px;
+    position: relative;
+    background-color: darkgrey !important;
+    opacity: 0.5;
+}
+
+div.help-box2  p  {
+    margin: 5%;
+    font-weight: bold;
+    color: #000000 !important;
+}
+
+.help-box2 .close-btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}

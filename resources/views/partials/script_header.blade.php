@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=yes">
 
 <meta name="csrf-token" content="{{ csrf_token() }}">
+{{--<meta name="Access-Control-Allow-Origin" content="*" />--}}
 <title>{{ config('app.name') }}</title>
 
 <link href="{{ asset('images/favicon/favicon.png') }}" rel="shortcut icon">
@@ -28,20 +29,12 @@
 
 <link href="{{ asset('css/ace-fonts.css') }}" rel="stylesheet">
 <link href="{{ asset('css/basic.css') }}" rel="stylesheet">
-{{--<link href="{{ asset('css/buttons.bootstrap4.css') }}" rel="stylesheet">--}}
-{{--<link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">--}}
-{{--<link href="{{ asset('css/fontawesome.min.css') }}" rel="stylesheet">--}}
-
-{{--<link href="{{ asset('css/icons.min.css') }}" rel="stylesheet">--}}
-{{--<link href="{{ asset('css/icons.min.css.map') }}" rel="stylesheet">--}}
 
 <link href="{{ asset('css/jquery-jvectormap-1.2.2.css') }}" rel="stylesheet">
 <link href="{{ asset('css/responsive.bootstrap4.css') }}" rel="stylesheet">
 <link href="{{ asset('css/select.bootstrap4.css') }}" rel="stylesheet">
 
-
 <link href="{{ asset('css/dropzone.css') }}" rel="stylesheet">
-
 
 <link href="{{ asset('css/atemun.css') }}?timestamp()" rel="stylesheet" type="text/css">
 <link href="{{ asset('css/servimun.css') }}?timestamp()" rel="stylesheet" type="text/css"/>

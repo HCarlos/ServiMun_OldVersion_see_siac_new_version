@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Denuncia;
 
+use App\Events\IUQDenunciaEvent;
 use App\Http\Controllers\Funciones\FuncionesController;
 use App\Http\Controllers\Storage\StorageDenunciaController;
 use App\Models\Catalogos\Domicilios\Ubicacion;
@@ -93,14 +94,6 @@ class DenunciaRequest extends FormRequest
 
             $fi = $fecha_i.' '.$fecha_f;
 
-            //dd( strtotime($fi) );
-
-            //$fecha_ingreso = Carbon::createFromFormat('Y-m-d H:i:s', $fi)->format('Y-m-d H:i:s');
-
-            //            $fecha_i = Carbon::createFromFormat('Y-m-d H:i:s', $this->fecha_ingreso)->format('Y-m-d H:i:s');
-
-            // $fecha_i = $this->fecha_ingreso->format()
-
             $Item = [
                 'fecha_ingreso'                => $fi, // Carbon::now(), //Carbon::now($this->fecha_ingreso)->format('Y-m-d hh:mm:ss'),
                 'oficio_envio'                 => is_null($this->oficio_envio) ? "" : strtoupper($this->oficio_envio),
@@ -120,10 +113,8 @@ class DenunciaRequest extends FormRequest
                 'municipio'                    => strtoupper($Ubicacion->municipio),
                 'estado'                       => strtoupper($Ubicacion->estado),
                 'cp'                           => strtoupper($Ubicacion->cp),
-
                 'latitud'                      => $this->latitud ?? 0.0000,
                 'longitud'                     => $this->longitud ?? 0.0000,
-
                 'prioridad_id'                 => $this->prioridad_id,
                 'origen_id'                    => $this->origen_id,
                 'dependencia_id'               => $this->dependencia_id,
@@ -137,7 +128,6 @@ class DenunciaRequest extends FormRequest
                 'observaciones'                => strtoupper(trim($this->observaciones)),
                 'ip'                           => FuncionesController::getIp(),
                 'host'                         => config('atemun.public_url'),
-
             ];
             //dd($Item);
             if (Auth::user()->isRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN|USER_SAS_ADMIN|USER_DIF_ADMIN')){
@@ -151,7 +141,7 @@ class DenunciaRequest extends FormRequest
             }else{
                 return null;
             }
-
+            event(new IUQDenunciaEvent($item->id,Auth::user()->id));
         }catch (QueryException $e){
             $Msg = new MessageAlertClass();
 //            dd($Msg->Message());

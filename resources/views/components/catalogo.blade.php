@@ -21,8 +21,6 @@
 <script src="{{ asset('js/buttons.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('js/buttons.html5.min.js') }}"></script>
 <script src="{{ asset('js/buttons.flash.min.js') }}"></script>
-{{--<script src="{{ asset('js/buttons.print.min.js') }}"></script>--}}
-{{--<script src="{{ asset('js/dataTables.keyTable.min.js') }}"></script>--}}
 <script src="{{ asset('js/dataTables.select.min.js') }}"></script>
-<script src="{{ asset('js/datatables.js') }}"></script>
+<script src="{{ asset('js/datatable.js') }}"></script>
 @endsection

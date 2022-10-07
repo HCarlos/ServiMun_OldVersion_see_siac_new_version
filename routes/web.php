@@ -476,4 +476,15 @@ Route::get('/imprimir_denuncia/{uuid}', 'External\Denuncia\HojaDenunciaControlle
 Route::get('/imprimir_denuncia_respuesta/{uuid}', 'External\Denuncia\HojaDenunciaController@imprimirDenunciaConRespuestas')->name('imprimir_denuncia_respuesta/');
 Route::get('/imprimir_denuncia_archivo/{uuid}', 'External\Denuncia\HojaDenunciaArchivoController@imprimirDenuncia')->name('imprimir_denuncia_archivo/');
 
-//Route::get('/home-original', 'HomeController@index')->name('home-original');
+Route::group(['middleware' => 'cors'], function(){
+    Route::get('fire', function () {
+        // this fires the event
+        event(new App\Events\InserUpdateDeleteEvent());
+        return "event fired";
+    });
+
+    Route::get('test', function () {
+        // this checks for the event
+        return "event test";
+    });
+});
