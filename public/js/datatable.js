@@ -6,6 +6,9 @@ $(document).ready(function() {
             'X-CSRF-Token': $("meta[name='csrf-token']").attr("content")
         }
     });
+
+
+
     //
     // if ( $(".table").length > 0 ){
     //
