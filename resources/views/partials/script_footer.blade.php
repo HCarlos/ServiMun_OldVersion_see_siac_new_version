@@ -17,8 +17,6 @@
 <script src="{{asset('js/dataTables.responsive.min.js')}}"></script>
 <script src="{{asset('js/responsive.bootstrap4.min.js')}}"></script>
 
-{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.js"></script>--}}
-
 <script>
     window.laravel_echo_port='{{env("LARAVEL_ECHO_PORT")}}';
 </script>
@@ -26,13 +24,11 @@
 <script src="http://{{ Request::getHost() }}:{{env('LARAVEL_ECHO_PORT')}}/socket.io/socket.io.js"></script>
 <script src="{{ url('/js/laravel-echo-setup.js') }}" type="text/javascript" crossorigin="*"></script>
 
-
 @yield("scripts")
 
 <script src="{{ '/js/base.js?timestamp()' }}"></script>
 <script src="{{ '/js/atemun.js?timestamp()' }}"></script>
 <script src="{{ '/js/servimun.js?timestamp()' }}"></script>
-
 
 @yield("script_autocomplete")
 
