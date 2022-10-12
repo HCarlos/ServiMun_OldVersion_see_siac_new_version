@@ -21,7 +21,7 @@
     window.laravel_echo_port='{{env("LARAVEL_ECHO_PORT")}}';
 </script>
 
-<script src="http://{{ Request::getHost() }}:{{env('LARAVEL_ECHO_PORT')}}/socket.io/socket.io.js"></script>
+<script src="https://{{ Request::getHost() }}:{{env('LARAVEL_ECHO_PORT')}}/socket.io/socket.io.js"></script>
 <script src="{{ url('/js/laravel-echo-setup.js') }}" type="text/javascript" crossorigin="*"></script>
 
 @yield("scripts")
