@@ -132,7 +132,7 @@ class DenunciaDependenciaServicioController extends Controller
             $Dependencias = Dependencia::all()->whereIn('id',$dep_id);
             $Servicios = Servicio::whereHas('subareas', function($p) use ($items) {
                 $p->whereHas("areas", function($q) use ($items){
-                    return $q->where("dependencia_id",$items->servicio_id);
+                    return $q->where("dependencia_id",$items->dependencia_id);
                 });
             })->orderBy('servicio')->get();
 //            $DDS = Denuncia_Dependencia_Servicio::all()->where('denuncia_id',$Id)->whereIn('dependencia_id',$dep_id);
@@ -161,7 +161,7 @@ class DenunciaDependenciaServicioController extends Controller
                 'Id'                => $Id,
                 'editItemTitle'     => 'Nuevo',
                 'dependencias'      => $Dependencias,
-                'dependencia_id'    => $dep_id,
+                'dependencia_id'    => $items->dependencia_id,
                 'servicio_id'       => $servicio_id,
                 'servicios'         => $Servicios,
                 'estatus'           => $Estatus,
