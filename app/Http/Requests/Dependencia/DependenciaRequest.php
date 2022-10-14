@@ -31,7 +31,7 @@ class DependenciaRequest extends FormRequest
     {
         return [
             'dependencia' => ['required','min:2',new Uppercase,'unique:dependencias,dependencia,'.$this->id],
-            'abreviatura' => ['required','min:2',new Uppercase,'max:5','unique:dependencias,abreviatura,'.$this->id],
+            'abreviatura' => ['required','min:2',new Uppercase,'max:10','unique:dependencias,abreviatura,'.$this->id],
         ];
     }
 

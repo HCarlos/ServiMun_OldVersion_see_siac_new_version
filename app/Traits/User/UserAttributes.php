@@ -58,7 +58,9 @@ trait UserAttributes
     }
 
     public function getDependenciaIdArrayAttribute(){
-        return $this->dependencias()->pluck('dependencia_id')->implode('|','name');
+//        dd($this->dependencias()->pluck('dependencia_id')->toArray());
+//        return $this->dependencias()->pluck('dependencia_id')->implode(',','name');
+        return $this->dependencias()->pluck('dependencia_id')->toArray();
     }
 
     public function getFullNameAttribute() {

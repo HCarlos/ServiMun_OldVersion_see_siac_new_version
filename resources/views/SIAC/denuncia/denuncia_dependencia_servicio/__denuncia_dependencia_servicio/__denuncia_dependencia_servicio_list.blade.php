@@ -40,7 +40,7 @@
                     <td>{{$item->fecha_movimiento}}</td>
                     <td class="table-action  w-25">
                         <div class="button-list">
-                            @if ( \Illuminate\Support\Facades\Auth::user()->isRole('ENLACE') == false )
+                            @if(Gate::check('all') || Gate::check('eliminar_respuesta'))
                                 @include('shared.ui_kit.__edit_item')
                                 @include('shared.ui_kit.__remove_item')
                             @endif

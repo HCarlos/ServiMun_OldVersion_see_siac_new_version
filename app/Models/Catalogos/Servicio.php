@@ -22,13 +22,13 @@ class Servicio extends Model
     protected $casts = ['habilitado'=>'boolean',];
 
     public function scopeSearch($query, $search){
-        if (!$search || $search == "" || $search == null) return $query;
+        if ( !$search || $search == "" || is_null($search) ) return $query;
         $search = strtoupper($search);
-        $filters  = $search;
-        $F        = new FuncionesController();
-        $tsString = $F->string_to_tsQuery( strtoupper($filters),' & ');
-        return $query->whereRaw("searchtextservicio @@ to_tsquery('spanish', ?)", [$tsString])
-            ->orderByRaw("ts_rank(searchtextservicio, to_tsquery('spanish', ?)) ASC", [$tsString]);
+//        $filters  = $search;
+//        $F        = new FuncionesController();
+//        $tsString = $F->string_to_tsQuery( strtoupper($filters),' & ');
+        return $query->whereRaw("searchtextservicio @@ to_tsquery('spanish', ?)", [$search])
+            ->orderByRaw("ts_rank(searchtextservicio, to_tsquery('spanish', ?)) ASC", [$search]);
     }
 
     public function scopeFilterBy($query, $filters){

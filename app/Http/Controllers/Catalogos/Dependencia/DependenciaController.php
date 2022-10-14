@@ -25,7 +25,7 @@ class DependenciaController extends Controller
         $items = Dependencia::query()
             ->filterBy($filters)
             ->orderByDesc('id')
-            ->paginate();
+            ->paginate(10000);
 //        dd($items);
         $items->appends($filters)->fragment('table');
         $user = Auth::User();

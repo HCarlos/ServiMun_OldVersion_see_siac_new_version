@@ -244,6 +244,7 @@
                     @endif
                 </ul>
             </li>
+            @if(Gate::check('all') || Gate::check('unificar'))
             <li class="side-nav-item">
                 <a href="javascript: void(0);" class="side-nav-link">
                     <i class="fa fa-folder"></i>
@@ -251,7 +252,7 @@
                     <span class="menu-arrow"></span>
                 </a>
                 <ul class="side-nav-second-level" aria-expanded="false">
-                    @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN'))
+{{--                    @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN'))--}}
                         <li>
                             <a href="{{route('unicomunidad')}}">
                                 <i class="fas fa-money-check-alt"></i>
@@ -259,8 +260,8 @@
                                 <span>Comunidad</span>
                             </a>
                         </li>
-                    @endif
-                    @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN'))
+{{--                    @endif--}}
+{{--                    @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN'))--}}
                         <li>
                             <a href="{{route('unicolonia')}}">
                                 <i class="fas fa-money-check-alt"></i>
@@ -268,9 +269,10 @@
                                 <span>Colonia</span>
                             </a>
                         </li>
-                    @endif
+{{--                    @endif--}}
                 </ul>
             </li>
+            @endif
             <li class="side-nav-item">
                 <a href="javascript: void(0);" class="side-nav-link">
                     <i class="fas fa-cog"></i>

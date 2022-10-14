@@ -102,7 +102,8 @@ class DenunciaController extends Controller{
 
         $IsEnlace = Session::get('IsEnlace');
         if($IsEnlace){
-            $DependenciaIdArray = explode('|',Session::get('DependenciaIdArray'));
+//            $DependenciaIdArray = explode('|',Session::get('DependenciaIdArray'));
+            $DependenciaIdArray = Session::get('DependenciaIdArray');
             //dd($DependenciaArray);
             $Dependencias = Dependencia::all()->whereIn('id',$DependenciaIdArray,false)->sortBy('dependencia');
             //dd($Dependencias);
@@ -283,8 +284,12 @@ class DenunciaController extends Controller{
 
         if (Auth::user()->isRole('ENLACE')){
 
-            $dep_id = intval(Auth::user()->IsEnlaceDependencia);
-            $Dependencias = Dependencia::all()->where('id',$dep_id)->sortBy('dependencia')->pluck('dependencia','id');
+//            $dep_id = intval(Auth::user()->IsEnlaceDependencia);
+            $DependenciaIdArray = Auth::user()->DependenciaIdArray;
+//            $dependencia_id_array = explode('|',$DependenciaIdArray);
+            $dependencia_id_array = $DependenciaIdArray;
+            $Dependencias = Dependencia::all()->whereIn('id',$dependencia_id_array)->sortBy('dependencia')->pluck('dependencia','id');
+            $dep_id = $dependencia_id_array[0];
             $Servicios = Servicio::whereHas('subareas', function($p) use ($dep_id) {
                 $p->whereHas("areas", function($q) use ($dep_id){
                     return $q->where("dependencia_id",$dep_id);

@@ -25,7 +25,7 @@ class AreaController extends Controller
         $items = Area::query()
             ->filterBy($filters)
             ->orderByDesc('id')
-            ->paginate();
+            ->paginate(10000);
         $items->appends($filters)->fragment('table');
         $user = Auth::User();
 

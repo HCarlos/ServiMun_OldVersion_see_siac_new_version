@@ -1,11 +1,25 @@
 @isset($item)
-    @if($item->cerrado==false )
-        <button type="submit" class="btn btn-lg btn-rounded btn-primary float-right btnGuardarDenuncia">
-            <i class="fas fa-check-circle"></i> Guardar
-        </button>
+    @if ($item->id == 0)
+        @if($item->cerrado==false )
+            @can('guardar_expediente')
+                <button type="submit" class="btn btn-lg btn-rounded btn-primary float-right btnGuardarDenuncia">
+                    <i class="fas fa-check-circle"></i> Guardar
+                </button>
+            @endcan
+        @endif
+     @else
+        @if($item->cerrado==false )
+            @can('modificar_expediente')
+                <button type="submit" class="btn btn-lg btn-rounded btn-primary float-right btnGuardarDenuncia">
+                    <i class="fas fa-check-circle"></i> Guardar
+                </button>
+            @endcan
+        @endif
     @endif
 @else
-    <button type="submit" class="btn btn-lg btn-rounded btn-primary float-right btnGuardarDenuncia">
-        <i class="fas fa-check-circle"></i> Guardar
-    </button>
+        @can('guardar_expediente')
+            <button type="submit" class="btn btn-lg btn-rounded btn-primary float-right btnGuardarDenuncia">
+                <i class="fas fa-check-circle"></i> Guardar
+            </button>
+        @endcan
 @endisset

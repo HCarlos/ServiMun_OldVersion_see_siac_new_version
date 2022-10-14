@@ -24,7 +24,7 @@ class CiudadController extends Controller
         $items = Ciudad::query()
             ->filterBy($filters)
             ->orderByDesc('id')
-            ->paginate();
+            ->paginate(10000);
         $items->appends($filters)->fragment('table');
         $user = Auth::User();
 

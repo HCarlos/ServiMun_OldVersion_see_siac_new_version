@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Denuncia;
 
 use App\Classes\RemoveItemSafe;
+use App\Http\Controllers\Funciones\FuncionesController;
 use App\Http\Requests\Denuncia\ServicioRequest;
 use App\Models\Catalogos\Medida;
 use App\Models\Catalogos\Servicio;
@@ -23,12 +24,18 @@ class ServicioController extends Controller
     protected function index(Request $request)
     {
         ini_set('max_execution_time', 300);
-        $filters = $request->all(['search']);
-        $search = $filters['search'];
+
+//        $filters = $request->all(['search']);
+//        $search = $filters['search'];
+
+        $filters =$request->input('search');
+        $F           = new FuncionesController();
+        $tsString    = $F->string_to_tsQuery( strtoupper($filters),' & ');
+
         $items = Servicio::query()
-            ->search($filters)
+            ->search($tsString)
             ->orderByDesc('id')
-            ->paginate();
+            ->paginate(10000);
         $items->appends($filters)->fragment('table');
         $user = Auth::User();
 

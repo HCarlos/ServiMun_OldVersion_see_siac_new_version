@@ -29,11 +29,13 @@ class FiltersRules
         $data['clave_identificadora'] = $data['clave_identificadora'] == null ? "" : $data['clave_identificadora'];
         $data['uuid']                 = $data['uuid']                 == null ? "" : $data['uuid'];
 
-        if ( Auth::user()->isRole('ENLACE') ) {
-            $data['dependencia_id'] = Auth::user()->IsEnlaceDependencia;
-        }else{
-            $data['dependencia_id'] = $data['dependencia_id'] == "0" ? "" : $data['dependencia_id'];
-        }
+//        if ( Auth::user()->isRole('ENLACE') ) {
+//            $data['dependencia_id'] = Auth::user()->IsEnlaceDependencia;
+//        }else{
+//            $data['dependencia_id'] = $data['dependencia_id'] == "0" ? "" : $data['dependencia_id'];
+//        }
+
+        $data['dependencia_id'] = $data['dependencia_id'] == "0" ? "" : $data['dependencia_id'];
 
         $data['servicio_id']    = $data['servicio_id']    == "" || $data['servicio_id']    == "0'" ? "" : $data['servicio_id'];
         $data['estatus_id']     = $data['estatus_id']     == "0" ? "" : $data['estatus_id'];

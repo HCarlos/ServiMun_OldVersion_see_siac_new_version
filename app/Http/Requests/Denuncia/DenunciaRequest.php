@@ -29,7 +29,7 @@ class DenunciaRequest extends FormRequest
         $DependenciaArray = '';
         IF ($IsEnlace) {
             $DependenciaIdArray = Auth::user()->DependenciaIdArray;
-            $attributes['dependencia_id'] = $DependenciaIdArray;
+//            $attributes['dependencia_id'] = $DependenciaIdArray;
         }
         $this->replace($attributes);
         return parent::all();
@@ -87,7 +87,7 @@ class DenunciaRequest extends FormRequest
         try {
             $Ubicacion = Ubicacion::findOrFail($this->ubicacion_id);
 
-//            $this->fecha_ingreso
+//            dd($this->dependencia_id);
 
             $fecha_i = date('Y-m-d',strtotime($this->fecha_ingreso));
             $fecha_f = date('H:i:s');
@@ -130,18 +130,20 @@ class DenunciaRequest extends FormRequest
                 'host'                         => config('atemun.public_url'),
             ];
             //dd($Item);
-            if (Auth::user()->isRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN|USER_SAS_ADMIN|USER_DIF_ADMIN')){
+//            if (Auth::user()->isRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN|USER_SAS_ADMIN|USER_DIF_ADMIN')){
+            if (Auth::user()->isRole('Administrator|SysOp')){
                 $item = $this->guardar($Item);
-            }elseif ( Auth::user()->isRole('ENLACE|USER_SAS_CAP|USER_DIF_CAP') ){
-                if (Auth::user()->id == $this->creadopor_id ) {
-                    $item = $this->guardar($Item);
-                }else {
-                    return null;
-                }
+            }elseif ( Auth::user()->isRole('ENLACE') ){
+//                if (Auth::user()->id == $this->creadopor_id ) {
+                    if (auth()->user()->hasAnyPermission(['all','guardar_expediente'])) {
+                        $item = $this->guardar($Item);
+                    }else {
+                        return null;
+                    }
             }else{
                 return null;
             }
-//            event(new IUQDenunciaEvent($item->id,Auth::user()->id));
+            event(new IUQDenunciaEvent($item->id,Auth::user()->id));
         }catch (QueryException $e){
             $Msg = new MessageAlertClass();
 //            dd($Msg->Message());

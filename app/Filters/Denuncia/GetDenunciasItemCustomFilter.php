@@ -24,7 +24,7 @@ class GetDenunciasItemCustomFilter extends QueryFilter{
         $IsEnlace =Auth::user()->isRole('ENLACE');
         $IsAdminArchivo =Auth::user()->isRole('USER_ARCHIVO_ADMIN');
         $DependenciaArray = '';
-        $DependenciaIdArray = 0;
+        $DependenciaIdArray = [];
         IF ($IsEnlace) {
             $DependenciaIdArray = Auth::user()->DependenciaIdArray;
             $filters['dependencia_id'] = $DependenciaIdArray;

@@ -233,7 +233,7 @@
         <div class="col-lg-12 ">
             <div class="col-lg-10">
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-3">
                 <a href="#" class="btn btn-block btn-danger-primary btn-rounded text-white searchIdentical"><i class="fas fa-search"></i> Buscar coincidencias  </a>
             </div>
             <div class="grid-container">
