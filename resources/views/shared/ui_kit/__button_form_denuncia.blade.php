@@ -17,9 +17,11 @@
         @endif
     @endif
 @else
-        @can('guardar_expediente')
-            <button type="submit" class="btn btn-lg btn-rounded btn-primary float-right btnGuardarDenuncia">
-                <i class="fas fa-check-circle"></i> Guardar
-            </button>
-        @endcan
+
+    @canany(['all','guardar_respuesta'])
+        <button type="submit" class="btn btn-lg btn-rounded btn-primary float-right btnGuardarDenuncia">
+            <i class="fas fa-check-circle"></i> Guardar
+        </button>
+    @endcanany
+
 @endisset

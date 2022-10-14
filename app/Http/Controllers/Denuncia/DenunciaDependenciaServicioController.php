@@ -22,8 +22,6 @@ class DenunciaDependenciaServicioController extends Controller
     protected $Id = 0;
     protected $msg = "";
 
-
-
 // ***************** MUESTRA EL LISTADO DE USUARIOS ++++++++++++++++++++ //
 
     /**
@@ -65,7 +63,6 @@ class DenunciaDependenciaServicioController extends Controller
                 'showEdit'                            => 'editDenunciaDependenciaServicio',
                 'showProcess1'                        => 'showDataListDenunciaRespuestaExcel1A',
                 'postNew'                             => 'postAddDenunciaDependenciaServicio',
-//                'putEdit' => 'updateDenuncia',
                 'addItem'                             => 'addDenunciaDependenciaServicio',
                 'removeItem'                          => 'removeDenunciaDependenciaServicio',
                 'imprimirDenuncia'                    => "imprimirDenuncia/",
@@ -84,8 +81,8 @@ class DenunciaDependenciaServicioController extends Controller
         $IsEnlace = Auth::user()->isRole('ENLACE');
         if($IsEnlace){
             $dep_id = intval(Auth::user()->IsEnlaceDependencia);
-            $Dependencias = Dependencia::all()->whereI('id',$dep_id);
-            $Servicios    = Servicio::getQueryServiciosFromDependencias($dep_id);
+            $Dependencias = Dependencia::all()->whereIn('id',$dep_id);
+            $Servicios    = Servicio::getQueryServiciosFromDependencias($items->dependencia_id);
         }else{
             $Dependencias = Dependencia::all()->sortBy('dependencia');
             $Servicios    = Servicio::getQueryServiciosFromDependencias($items->dependencia_id);
@@ -131,15 +128,15 @@ class DenunciaDependenciaServicioController extends Controller
 
         $IsEnlace = Auth::user()->isRole('ENLACE');
         if($IsEnlace){
-            $dep_id = intval(Auth::user()->IsEnlaceDependencia);
-            $Dependencias = Dependencia::all()->where('id',$dep_id);
-            $Servicios = Servicio::whereHas('subareas', function($p) use ($dep_id) {
-                $p->whereHas("areas", function($q) use ($dep_id){
-                    return $q->where("dependencia_id",$dep_id);
+            $dep_id = Auth::user()->IsEnlaceDependencia;
+            $Dependencias = Dependencia::all()->whereIn('id',$dep_id);
+            $Servicios = Servicio::whereHas('subareas', function($p) use ($items) {
+                $p->whereHas("areas", function($q) use ($items){
+                    return $q->where("dependencia_id",$items->servicio_id);
                 });
             })->orderBy('servicio')->get();
-            $DDS = Denuncia_Dependencia_Servicio::all()->where('denuncia_id',$Id)->where('dependencia_id',$dep_id)->first();
-            $servicio_id = $DDS->servicio_id;
+//            $DDS = Denuncia_Dependencia_Servicio::all()->where('denuncia_id',$Id)->whereIn('dependencia_id',$dep_id);
+            $servicio_id = $items->servicio_id;
         }else{
             $dep_id = $items->dependencia_id;
             $Dependencias = Dependencia::all()->sortBy('dependencia');
@@ -165,13 +162,13 @@ class DenunciaDependenciaServicioController extends Controller
                 'editItemTitle'     => 'Nuevo',
                 'dependencias'      => $Dependencias,
                 'dependencia_id'    => $dep_id,
-                'servicio_id'      => $servicio_id,
+                'servicio_id'       => $servicio_id,
                 'servicios'         => $Servicios,
                 'estatus'           => $Estatus,
                 'postNew'           => 'postAddDenunciaDependenciaServicio',
                 'titulo_catalogo'   => "Nuevo cambio de estatus de la orden: " . $Id,
                 'titulo_header'     => 'Agregar dependencia',
-                'exportModel' => 23,
+                'exportModel'       => 23,
             ]
         );
     }

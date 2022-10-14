@@ -129,13 +129,16 @@ class DenunciaRequest extends FormRequest
                 'ip'                           => FuncionesController::getIp(),
                 'host'                         => config('atemun.public_url'),
             ];
-            //dd($Item);
-//            if (Auth::user()->isRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN|USER_SAS_ADMIN|USER_DIF_ADMIN')){
+
+//            dd($Item);
+
+            //            if (Auth::user()->isRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN|USER_SAS_ADMIN|USER_DIF_ADMIN')){
             if (Auth::user()->isRole('Administrator|SysOp')){
                 $item = $this->guardar($Item);
-            }elseif ( Auth::user()->isRole('ENLACE') ){
+            }elseif ( Auth::user()->isRole('ENLACE|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN') ){
+//                dd("Hola");
 //                if (Auth::user()->id == $this->creadopor_id ) {
-                    if (auth()->user()->hasAnyPermission(['all','guardar_expediente'])) {
+                    if (auth()->user()->hasAnyPermission(['all','guardar_expediente','modificar_expediente'])) {
                         $item = $this->guardar($Item);
                     }else {
                         return null;
@@ -143,7 +146,7 @@ class DenunciaRequest extends FormRequest
             }else{
                 return null;
             }
-//            event(new IUQDenunciaEvent($item->id,Auth::user()->id));
+            event(new IUQDenunciaEvent($item->id,Auth::user()->id));
         }catch (QueryException $e){
             $Msg = new MessageAlertClass();
 //            dd($Msg->Message());

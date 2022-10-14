@@ -3703,6 +3703,7 @@ return array(
     'Llenado_de_Catalogo_06_Seeder' => $baseDir . '/database/seeds/Llenado_de_Catalogo_06_Seeder.php',
     'Llenado_de_Catalogo_07_Seeder' => $baseDir . '/database/seeds/Llenado_de_Catalogo_07_Seeder.php',
     'Llenado_de_Catalogo_08_Seeder' => $baseDir . '/database/seeds/Llenado_de_Catalogo_08_Seeder.php',
+    'Llenado_de_Catalogo_09_Seeder' => $baseDir . '/database/seeds/Llenado_de_Catalogo_09_Seeder.php',
     'Maatwebsite\\Excel\\Cache\\BatchCache' => $vendorDir . '/maatwebsite/excel/src/Cache/BatchCache.php',
     'Maatwebsite\\Excel\\Cache\\CacheManager' => $vendorDir . '/maatwebsite/excel/src/Cache/CacheManager.php',
     'Maatwebsite\\Excel\\Cache\\MemoryCache' => $vendorDir . '/maatwebsite/excel/src/Cache/MemoryCache.php',
