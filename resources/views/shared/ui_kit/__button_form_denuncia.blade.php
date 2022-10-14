@@ -18,7 +18,7 @@
     @endif
 @else
 
-    @canany(['all','guardar_respuesta'])
+    @canany(['all','guardar_expediente','guardar_respuesta'])
         <button type="submit" class="btn btn-lg btn-rounded btn-primary float-right btnGuardarDenuncia">
             <i class="fas fa-check-circle"></i> Guardar
         </button>
