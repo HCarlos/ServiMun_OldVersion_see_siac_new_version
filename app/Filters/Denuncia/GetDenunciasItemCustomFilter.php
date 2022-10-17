@@ -13,7 +13,7 @@ class GetDenunciasItemCustomFilter extends QueryFilter{
 
     public function rules(): array{
         return [
-            'filterdata' => ''
+            'filterdata' => '',
         ];
     }
 

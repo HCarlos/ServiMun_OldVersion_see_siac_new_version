@@ -146,19 +146,20 @@ class DenunciaFilter extends QueryFilter
     }
 
     public function dependencia_id($query, $search){
-        if (is_null($search) || empty ($search) ) {return $query;}
-
+        if (is_null($search) || empty($search) || (isset($search) == false) ) {return $query;}
+        if ( !is_array($search) ){
+            if (intval($search) == 0){
+                $search = Auth::user()->DependenciaIdArray;
+//                return $query;
+            }
+        }
         return $query->whereHas('dependencias', function ($q) use ($query, $search) {
-//                $dependencia_id_array = explode('|',$search);
-//                dd($dependencia_id_array);
-//            dd($search);
                 if ( is_array($search) ){
                     return $q->whereIn('dependencia_id', $search);
                 }else{
-                    return $q->where('dependencia_id', $search);
+                    return $q->where('dependencia_id', intval($search) );
                 }
         });
-
     }
 
     public function servicio_id($query, $search){

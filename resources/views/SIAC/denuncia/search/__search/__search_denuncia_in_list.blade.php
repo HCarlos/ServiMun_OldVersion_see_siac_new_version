@@ -41,9 +41,9 @@
     <label for = "dependencia_id" class="col-md-2 col-form-label">Dependencia</label>
     <div class="col-md-8">
         <select id="dependencia_id" name="dependencia_id" class="form-control" size="1">
-            @if ( !Auth::user()->isRole('ENLACE') )
+{{--            @if ( !Auth::user()->isRole('ENLACE') )--}}
                 <option value="0" selected >Seleccione una Dependencia</option>
-            @endif
+{{--            @endif--}}
             @foreach($dependencias as $id => $valor)
                 <option value="{{ $id }}">{{ $valor }}</option>
             @endforeach
