@@ -146,7 +146,11 @@ class DenunciaFilter extends QueryFilter
     }
 
     public function dependencia_id($query, $search){
-        if (is_null($search) || empty($search) || (isset($search) == false) ) {return $query;}
+        if (!auth()->user()->hasAnyPermission(['buscar_solo_en_su_ámbito'])) {
+            if (is_null($search) || empty($search) || (isset($search) == false)) {
+                return $query;
+            }
+        }
         if ( !is_array($search) ){
             if (intval($search) == 0){
                 $search = Auth::user()->DependenciaIdArray;
@@ -155,6 +159,7 @@ class DenunciaFilter extends QueryFilter
         }
         return $query->whereHas('dependencias', function ($q) use ($query, $search) {
                 if ( is_array($search) ){
+//                    dd($search);
                     return $q->whereIn('dependencia_id', $search);
                 }else{
                     return $q->where('dependencia_id', intval($search) );

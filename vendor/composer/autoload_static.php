@@ -4429,6 +4429,7 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         'Llenado_de_Catalogo_07_Seeder' => __DIR__ . '/../..' . '/database/seeds/Llenado_de_Catalogo_07_Seeder.php',
         'Llenado_de_Catalogo_08_Seeder' => __DIR__ . '/../..' . '/database/seeds/Llenado_de_Catalogo_08_Seeder.php',
         'Llenado_de_Catalogo_09_Seeder' => __DIR__ . '/../..' . '/database/seeds/Llenado_de_Catalogo_09_Seeder.php',
+        'Llenado_de_Catalogo_10_Seeder' => __DIR__ . '/../..' . '/database/seeds/Llenado_de_Catalogo_10_Seeder.php',
         'Maatwebsite\\Excel\\Cache\\BatchCache' => __DIR__ . '/..' . '/maatwebsite/excel/src/Cache/BatchCache.php',
         'Maatwebsite\\Excel\\Cache\\CacheManager' => __DIR__ . '/..' . '/maatwebsite/excel/src/Cache/CacheManager.php',
         'Maatwebsite\\Excel\\Cache\\MemoryCache' => __DIR__ . '/..' . '/maatwebsite/excel/src/Cache/MemoryCache.php',
