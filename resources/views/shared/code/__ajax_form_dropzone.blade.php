@@ -11,7 +11,7 @@
                 dictRemoveFile: 'Quitar archivo',
                 dictFileTooBig: 'Archivo demasiado grande: 32MB',
                 timeout: 60000,
-                acceptedFiles: ".jpeg,.jpg,.png,.gif,.svg,.bmp,.mp4,.3gp,.bin",
+                acceptedFiles: ".jpeg,.jpg,.png,.gif,.svg,.bmp,.mp4,.3gp,.bin,.pdf,.mp4,.mp3,.doc,.docx,.xls,.xlsx,.ppt,.pptx",
                 parallelUploads: 20,
                 success: function (file, response) {
                     if (file.previewElement) {

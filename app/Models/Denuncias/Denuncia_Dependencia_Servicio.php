@@ -2,6 +2,7 @@
 
 namespace App\Models\Denuncias;
 
+use App\Filters\Denuncia\DenunciaFilter;
 use App\Models\Catalogos\Dependencia;
 use App\Models\Catalogos\Estatu;
 use App\Models\Catalogos\Servicio;
@@ -24,6 +25,10 @@ class Denuncia_Dependencia_Servicio extends Model
     protected $dates = ['fecha_movimiento'];
     protected $casts = ['favorable' => 'boolean'];
 
+//    public function scopeFilterBy($query, $filters){
+//        return (new DenunciaFilter())->applyTo($query, $filters);
+//    }
+//
     public function denuncia(){
         return $this->hasOne(Denuncia::class,'id','denuncia_id');
     }

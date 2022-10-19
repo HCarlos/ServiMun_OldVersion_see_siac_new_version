@@ -117,15 +117,19 @@ class ImageneRequest extends FormRequest
         $ext = $file->extension();
         $name = sha1(date('YmdHis') . time()).'-'.$this->denuncia__id.'-'.$Item->id;
         $fileName = $name.'.' . $ext;
-        $thumbnail = '_thumb_'.$name.'.png';
+        $thumbnail = '_thumb_'.$name.'.' . $ext;
+//        dd($fileName);
         $Item->update([
             'root'          => config('atemun.public_url'),
             'image'         => $fileName,
             'image_thumb'   => $thumbnail,
         ]);
         Storage::disk($this->disk)->put($fileName, File::get($file));
-        // $img_thmb =
-        $this->F->fitImage( $file,$thumbnail,128,128,true,$this->disk,"DENUNCIA_ROOT" );
+
+        if ( in_array($ext, array('JPG', 'PNG', 'GIF', 'BMP', 'jpg', 'png', 'gif', 'bmp'), true )  ) {
+            $IsFile = $this->F->fitImage($file, $thumbnail, 128, 128, true, $this->disk, "DENUNCIA_ROOT");
+//            dd($IsFile);
+        }
         return true;
     }
 

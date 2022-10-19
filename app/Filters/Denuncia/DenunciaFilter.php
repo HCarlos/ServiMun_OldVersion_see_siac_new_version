@@ -24,25 +24,29 @@ class DenunciaFilter extends QueryFilter
 
     public function rules(): array{
         return [
-            'search'                => '',
-            'curp'                  => '',
-            'ciudadano'             => '',
-            'id'                    => '',
-            'desde'                 => '',
-            'hasta'                 => '',
-            'dependencia_id'        => '',
-            'servicio_id'           => '',
-            'origen_id'             => '',
-            'estatus_id'            => '',
-            'ciudadano_id'          => '',
-            'creadopor_id'          => '',
-            'dependencia'           => '',
-            'conrespuesta'          => '',
-            'cerrado'               => '',
-            'clave_identificadora'  => '',
-            'uuid'                  => '',
+            'search'                 => '',
+            'curp'                   => '',
+            'ciudadano'              => '',
+            'id'                     => '',
+            'desde'                  => '',
+            'hasta'                  => '',
+            'dependencia_id'         => '',
+            'servicio_id'            => '',
+            'origen_id'              => '',
+            'estatus_id'             => '',
+            'fecha_movimiento'       => '',
+            'ciudadano_id'           => '',
+            'creadopor_id'           => '',
+            'dependencia'            => '',
+            'conrespuesta'           => '',
+            'cerrado'                => '',
+            'clave_identificadora'   => '',
+            'uuid'                   => '',
         ];
     }
+
+//'fecha_movimiento_desde' => '',
+//'fecha_movimiento_hasta' => '',
 
     public function search($query, $search){
         if (is_null($search) || empty ($search) || trim($search) == "") {return $query;}
@@ -136,6 +140,9 @@ class DenunciaFilter extends QueryFilter
         $date = Carbon::createFromFormat('Y-m-d', $search)->toDateString();
         $date = $date.' 00:00:00';
         return $query->whereDate('fecha_ingreso', '>=', $date);
+//        return $query->whereHas('ultimo_estatu_denuncia_dependencia_servicio', function ($q) use ($date) {
+//            return $q->whereDate('fecha_movimiento', '>=', $date);
+//        });
     }
 
     public function hasta($query, $search){
@@ -143,6 +150,9 @@ class DenunciaFilter extends QueryFilter
         $date = Carbon::createFromFormat('Y-m-d', $search)->toDateString();
         $date = $date.' 23:59:59';
         return $query->whereDate('fecha_ingreso', '<=', $date);
+//        return $query->whereHas('ultimo_estatu_denuncia_dependencia_servicio', function ($q) use ($date) {
+//            return $q->whereDate('fecha_movimiento', '<=', $date);
+//        });
     }
 
     public function dependencia_id($query, $search){
@@ -181,6 +191,30 @@ class DenunciaFilter extends QueryFilter
             return $q->where('estatu_id', intval($search));
         });
 
+    }
+
+    public function fecha_movimiento($query, $search){
+        if (is_null($search) || empty ($search) || trim($search) == "0") {return $query;}
+//        return $query->whereHas('denuncia_servicios', function ($q) use ($search) {
+            $cad = explode('|',$search);
+            $fdesde = $cad[0];
+            $fhasta = $cad[1];
+            $estatu = intval($cad[2]);
+            $date1 = Carbon::createFromFormat('Y-m-d', $fdesde)->toDateString();
+            $date1 = $date1.' 00:00:00';
+            $date2 = Carbon::createFromFormat('Y-m-d', $fhasta)->toDateString();
+            $date2 = $date2.' 23:59:59';
+
+            //            return $q->whereDate('fecha_movimiento', '<=', $date);
+            return $query->whereHas('ultimo_estatu_denuncia_dependencia_servicio', function ($q) use ($date1, $date2, $estatu) {
+                if ($estatu > 0){
+                    return $q->where('estatu_id', $estatu)->whereDate('fecha_movimiento', '>=', $date1)->whereDate('fecha_movimiento', '<=', $date2);
+                }else{
+                    return $q->whereDate('fecha_movimiento', '>=', $date1)->whereDate('fecha_movimiento', '<=', $date2);
+                }
+            });
+
+//        });
     }
 
     public function origen_id($query, $search){

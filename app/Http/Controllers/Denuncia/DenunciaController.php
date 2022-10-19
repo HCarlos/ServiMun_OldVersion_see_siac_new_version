@@ -13,6 +13,7 @@ use App\Models\Catalogos\Origen;
 use App\Models\Catalogos\Prioridad;
 use App\Models\Catalogos\Servicio;
 use App\Models\Denuncias\Denuncia;
+use App\Models\Denuncias\Denuncia_Dependencia_Servicio;
 use App\Models\Denuncias\Firma;
 use App\User;
 use Illuminate\Http\Request;
@@ -349,6 +350,9 @@ class DenunciaController extends Controller{
             ->filterBy($queryFilters)
             ->orderByDesc('id')
             ->paginate($this->max_item_for_query);
+
+//        Denuncia_Dependencia_Servicio::query()
+//            Denuncia_Dependencia_Servicio
 
         $items->appends($queryFilters)->fragment('table');
 

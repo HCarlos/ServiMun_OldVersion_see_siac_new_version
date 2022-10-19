@@ -13,11 +13,11 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'images_type_validate'    => 'jpg,jpeg,gif,png,svg,bmp,JPG,JPEG,GIF,PNG,SVG,BMP',
-    'images_type_extension'   => ['jpg','jpeg','gif','png','svg','bmp','JPG','JPEG','GIF','PNG','SVG','BMP'],
+    'images_type_validate'    => 'jpg,jpeg,gif,png,svg,bmp,JPG,JPEG,GIF,PNG,SVG,BMP,XLSX,XLS,MP4,3GP,BIN,PDF,DOC,DOCX,PPTX,PPT,TXT',
+    'images_type_extension'   => ['jpg','jpeg','gif','png','svg','bmp','JPG','JPEG','GIF','PNG','SVG','BMP','xlsx','xls','mp4','3gp','bin','pdf','doc','docx','pptx','ppt','txt'],
     'videos_type_extension'   => ['mp4','3gp','bin'],
     'excel_type_extension'    => ['xlsx','xls'],
-    'document_type_extension' => ['xlsx','xls','mp4','3gp','bin','pdf','doc','docx','pptx','ppt','txt','txt'],
+    'document_type_extension' => ['xlsx','xls','mp4','3gp','bin','pdf','doc','docx','pptx','ppt','txt','PDF'],
     'file_dropzone_mimetype'  => 'image/jpg,image/jpeg,image/gif,image/png,image/JPG,image/JPEG,image/GIF,image/PNG,video/mp4,video/3gp,image/svg+xml',
 
     // -----------------------------------------------------------
