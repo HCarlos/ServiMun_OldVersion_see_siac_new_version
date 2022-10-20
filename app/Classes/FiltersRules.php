@@ -51,7 +51,7 @@ class FiltersRules
         }
         if ($data['incluirFechaMovto'] != null){
 //            $filters = array_merge($filters, ['fecha_movimiento_desde' => $data['desde'], 'fecha_movimiento_hasta' => $data['hasta'] ] );
-            $filters = array_merge($filters, ['fecha_movimiento' => $data['desde'].'|'.$data['hasta'].'|'.$data['estatus_id'] ] );
+            $filters = array_merge($filters, ['fecha_movimiento' => $data['desde'].'|'.$data['hasta'].'|'.$data['estatus_id'].'|'.$data['dependencia_id'] ] );
         }
         $filters = array_merge($filters, [
             'dependencia_id'       => $data['dependencia_id'],

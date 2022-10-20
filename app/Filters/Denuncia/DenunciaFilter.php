@@ -200,17 +200,30 @@ class DenunciaFilter extends QueryFilter
             $fdesde = $cad[0];
             $fhasta = $cad[1];
             $estatu = intval($cad[2]);
+            $depend = intval($cad[3]);
             $date1 = Carbon::createFromFormat('Y-m-d', $fdesde)->toDateString();
             $date1 = $date1.' 00:00:00';
             $date2 = Carbon::createFromFormat('Y-m-d', $fhasta)->toDateString();
             $date2 = $date2.' 23:59:59';
 
-            //            return $q->whereDate('fecha_movimiento', '<=', $date);
-            return $query->whereHas('ultimo_estatu_denuncia_dependencia_servicio', function ($q) use ($date1, $date2, $estatu) {
-                if ($estatu > 0){
-                    return $q->where('estatu_id', $estatu)->whereDate('fecha_movimiento', '>=', $date1)->whereDate('fecha_movimiento', '<=', $date2);
+            return $query->whereHas('ultimo_estatu_denuncia_dependencia_servicio', function ($q) use ($search, $date1, $date2, $estatu, $depend) {
+                $arr = Auth::user()->DependenciaIdArray;
+                if (auth()->user()->hasAnyPermission(['buscar_solo_en_su_ámbito'])) {
+                    if ($estatu > 0){
+                        if ( is_array($arr) ) return $q->whereIn('dependencia_id',$arr)->where('estatu_id', $estatu)->whereDate('fecha_movimiento', '>=', $date1)->whereDate('fecha_movimiento', '<=', $date2);
+                        else {
+                            if ($arr > 0) return $q->where('dependencia_id', $arr)->where('estatu_id', $estatu)->whereDate('fecha_movimiento', '>=', $date1)->whereDate('fecha_movimiento', '<=', $date2);
+                            else return $q->where('estatu_id', $estatu)->whereDate('fecha_movimiento', '>=', $date1)->whereDate('fecha_movimiento', '<=', $date2);
+                        }
+                    }
                 }else{
-                    return $q->whereDate('fecha_movimiento', '>=', $date1)->whereDate('fecha_movimiento', '<=', $date2);
+                    if ($estatu > 0){
+                        if ($depend > 0) return $q->where('dependencia_id', $depend)->where('estatu_id', $estatu)->whereDate('fecha_movimiento', '>=', $date1)->whereDate('fecha_movimiento', '<=', $date2);
+                        else return $q->where('estatu_id', $estatu)->whereDate('fecha_movimiento', '>=', $date1)->whereDate('fecha_movimiento', '<=', $date2);
+                    }else{
+                        if ($depend > 0) return $q->where('dependencia_id', $depend)->whereDate('fecha_movimiento', '>=', $date1)->whereDate('fecha_movimiento', '<=', $date2);
+                        else return $q->whereDate('fecha_movimiento', '>=', $date1)->whereDate('fecha_movimiento', '<=', $date2);
+                    }
                 }
             });
 

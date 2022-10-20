@@ -649,8 +649,8 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         ),
         'Doctrine\\Common\\' => 
         array (
-            0 => __DIR__ . '/..' . '/doctrine/common/src',
-            1 => __DIR__ . '/..' . '/doctrine/event-manager/lib/Doctrine/Common',
+            0 => __DIR__ . '/..' . '/doctrine/event-manager/src',
+            1 => __DIR__ . '/..' . '/doctrine/common/src',
         ),
         'DeepCopy\\' => 
         array (
@@ -1166,9 +1166,9 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         'Doctrine\\Common\\Collections\\Selectable' => __DIR__ . '/..' . '/doctrine/collections/lib/Doctrine/Common/Collections/Selectable.php',
         'Doctrine\\Common\\CommonException' => __DIR__ . '/..' . '/doctrine/common/src/CommonException.php',
         'Doctrine\\Common\\Comparable' => __DIR__ . '/..' . '/doctrine/common/src/Comparable.php',
-        'Doctrine\\Common\\EventArgs' => __DIR__ . '/..' . '/doctrine/event-manager/lib/Doctrine/Common/EventArgs.php',
-        'Doctrine\\Common\\EventManager' => __DIR__ . '/..' . '/doctrine/event-manager/lib/Doctrine/Common/EventManager.php',
-        'Doctrine\\Common\\EventSubscriber' => __DIR__ . '/..' . '/doctrine/event-manager/lib/Doctrine/Common/EventSubscriber.php',
+        'Doctrine\\Common\\EventArgs' => __DIR__ . '/..' . '/doctrine/event-manager/src/EventArgs.php',
+        'Doctrine\\Common\\EventManager' => __DIR__ . '/..' . '/doctrine/event-manager/src/EventManager.php',
+        'Doctrine\\Common\\EventSubscriber' => __DIR__ . '/..' . '/doctrine/event-manager/src/EventSubscriber.php',
         'Doctrine\\Common\\Lexer\\AbstractLexer' => __DIR__ . '/..' . '/doctrine/lexer/lib/Doctrine/Common/Lexer/AbstractLexer.php',
         'Doctrine\\Common\\Proxy\\AbstractProxyFactory' => __DIR__ . '/..' . '/doctrine/common/src/Proxy/AbstractProxyFactory.php',
         'Doctrine\\Common\\Proxy\\Autoloader' => __DIR__ . '/..' . '/doctrine/common/src/Proxy/Autoloader.php',
@@ -6148,6 +6148,12 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         'Predis\\Command\\Redis\\UNSUBSCRIBE' => __DIR__ . '/..' . '/predis/predis/src/Command/Redis/UNSUBSCRIBE.php',
         'Predis\\Command\\Redis\\UNWATCH' => __DIR__ . '/..' . '/predis/predis/src/Command/Redis/UNWATCH.php',
         'Predis\\Command\\Redis\\WATCH' => __DIR__ . '/..' . '/predis/predis/src/Command/Redis/WATCH.php',
+        'Predis\\Command\\Redis\\XADD' => __DIR__ . '/..' . '/predis/predis/src/Command/Redis/XADD.php',
+        'Predis\\Command\\Redis\\XDEL' => __DIR__ . '/..' . '/predis/predis/src/Command/Redis/XDEL.php',
+        'Predis\\Command\\Redis\\XLEN' => __DIR__ . '/..' . '/predis/predis/src/Command/Redis/XLEN.php',
+        'Predis\\Command\\Redis\\XRANGE' => __DIR__ . '/..' . '/predis/predis/src/Command/Redis/XRANGE.php',
+        'Predis\\Command\\Redis\\XREVRANGE' => __DIR__ . '/..' . '/predis/predis/src/Command/Redis/XREVRANGE.php',
+        'Predis\\Command\\Redis\\XTRIM' => __DIR__ . '/..' . '/predis/predis/src/Command/Redis/XTRIM.php',
         'Predis\\Command\\Redis\\ZADD' => __DIR__ . '/..' . '/predis/predis/src/Command/Redis/ZADD.php',
         'Predis\\Command\\Redis\\ZCARD' => __DIR__ . '/..' . '/predis/predis/src/Command/Redis/ZCARD.php',
         'Predis\\Command\\Redis\\ZCOUNT' => __DIR__ . '/..' . '/predis/predis/src/Command/Redis/ZCOUNT.php',
