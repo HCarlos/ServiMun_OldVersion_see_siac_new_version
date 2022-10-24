@@ -159,6 +159,7 @@ class DenunciaRequest extends FormRequest
     protected function guardar($Item){
         if ($this->id == 0) {
             $item = Denuncia::create($Item);
+            $this->attaches($item);
         } else {
             $item = Denuncia::find($this->id);
             if ($item->cerrado == false){
@@ -167,7 +168,6 @@ class DenunciaRequest extends FormRequest
             }
         }
         if ($item->cerrado == false) {
-            $this->attaches($item);
             $Storage = new StorageDenunciaController();
             $Storage->subirArchivoDenuncia($this, $item);
         }
