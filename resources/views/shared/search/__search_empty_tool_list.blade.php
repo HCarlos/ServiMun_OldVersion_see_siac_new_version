@@ -5,7 +5,7 @@
             <input type="search" name="search" id="search" value="{{ request('search') }}" class="form-control" placeholder="Buscar...">
             <span class="mdi mdi-magnify"></span>
             <div class="input-group-append">
-                <button class="btn btn-sm btn-primary" type="submit">Buscar</button>
+                <button class="btn btn-sm btn-primary" type="submit">Buscar--</button>
             </div>
             <input type="hidden" name="role_user" id="role_user" value="{{ $role_user }}"/>
         </div>

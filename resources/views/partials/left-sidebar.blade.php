@@ -290,7 +290,7 @@
                         </a>
                     </li>
                     @endif
-                    @if (Auth::user()->hasRole('Administrator|SysOp||USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN|ENLACE'))
+                    @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN|ENLACE'))
                     <li>
                         <a href="{{route('listUsers')}}">
                             <i class="fas fa-users"></i>
