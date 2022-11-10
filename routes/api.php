@@ -1,6 +1,14 @@
 <?php
 
+use App\Http\Controllers\API\UserAPIController;
+use App\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +21,25 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+
+
+Route::group(['prefix' => 'v1'], function () {
+
+    Route::post('/login', [UserAPIController::class, 'userLogin']);
+
+//    Route::middleware('auth:sanctum')->get('/user', function(Request $request){
+//        return $request->user();
+//    });
+//
+    Route::group(['middleware' => 'auth:sanctum'], function () {
+
+        Route::get('/users', [UserAPIController::class, 'users'])->name('users');
+        Route::get('/user/{user}', [UserAPIController::class, 'userId']);
+
+    });
+
+
 });

@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '1f7ea1258686b51b492e27cf89aa7c141a0a290d',
+        'reference' => '6d23b6036cc36b05fb0a4737da91650e037a089d',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -487,7 +487,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '1f7ea1258686b51b492e27cf89aa7c141a0a290d',
+            'reference' => '6d23b6036cc36b05fb0a4737da91650e037a089d',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -502,6 +502,15 @@
             'aliases' => array(
                 0 => '1.x-dev',
             ),
+            'dev_requirement' => false,
+        ),
+        'laravel/sanctum' => array(
+            'pretty_version' => 'v2.15.1',
+            'version' => '2.15.1.0',
+            'reference' => '31fbe6f85aee080c4dc2f9b03dc6dd5d0ee72473',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../laravel/sanctum',
+            'aliases' => array(),
             'dev_requirement' => false,
         ),
         'laravel/socialite' => array(

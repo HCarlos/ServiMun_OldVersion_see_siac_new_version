@@ -18,7 +18,8 @@ use App\Traits\User\UserImport;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Passport\HasApiTokens;
+//use Laravel\Passport\HasApiTokens;
+use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
@@ -27,6 +28,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
+    use HasApiTokens;
     use SoftDeletes, Notifiable;
     use HasRoles;
     use UserImport, UserAttributes;
