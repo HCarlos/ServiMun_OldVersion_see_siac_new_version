@@ -37,7 +37,7 @@ class InserUpdateDeleteEvent implements ShouldBroadcast{
      */
     public function broadcastOn(){
         $retorno = ['test-channel'];
-        Log::alert("Valor de Retorno del Evento: tc");
+        Log::alert("Valor de Retorno del Evento: remi...");
         return $retorno;
    }
 
@@ -46,8 +46,7 @@ class InserUpdateDeleteEvent implements ShouldBroadcast{
         return 'InserUpdateDeleteEvent';
     }
 
-    public function broadcastWith()
-    {
+    public function broadcastWith(){
         return [
             'title' => 'This notification from www.codecheef.org',
             'power'=> '10'

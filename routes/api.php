@@ -29,16 +29,15 @@ use Illuminate\Support\Facades\Session;
 Route::group(['prefix' => 'v1'], function () {
 
     Route::post('/login', [UserAPIController::class, 'userLogin']);
+    Route::post('/mobile/token', [UserAPIController::class, 'userMobileToken']);
+    Route::post('/register', [UserAPIController::class, 'register']);
 
     Route::middleware('auth:sanctum')->get('/user', function(Request $request){
         return $request->user();
     });
-//
     Route::group(['middleware' => 'auth:sanctum'], function () {
-
         Route::get('/users', [UserAPIController::class, 'users'])->name('users');
         Route::get('/user/{user}', [UserAPIController::class, 'userId']);
-
     });
 
 

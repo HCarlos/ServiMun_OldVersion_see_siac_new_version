@@ -628,8 +628,8 @@ jQuery(function($) {
         })
         .listen('.IUQDenunciaEvent', (data) => {
             if ( $("#tblCatDenuncias") ){
-                location.reload();
-                // $(".dataTable").DataTable().reload();
+                // location.reload();
+                $(".dataTable").DataTable().reload();
                 console.log(data.denuncia_id+" :: "+data.user_id);
             }
         })
