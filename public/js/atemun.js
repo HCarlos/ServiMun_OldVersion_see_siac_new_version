@@ -631,8 +631,9 @@ jQuery(function($) {
                 $.toast({
                     heading: 'SIAC',
                     text: data.msg,
-                    icon: 'info',
+                    icon: data.icon,
                     loader: true,
+                    hideAfter: false,
                     loaderBg: '#9EC600',
                     position: 'top-right',
                 })

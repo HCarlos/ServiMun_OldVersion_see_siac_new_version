@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Denuncia;
 
 use App\Classes\FiltersRules;
 use App\Classes\Items;
+use App\Events\IUQDenunciaEvent;
 use App\Http\Controllers\Funciones\FuncionesController;
 use App\Http\Requests\Denuncia\SearchIdenticalRequest;
 use App\Models\Catalogos\Dependencia;
@@ -222,6 +223,7 @@ class DenunciaController extends Controller{
 // ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //
 
     protected function remove($id = 0){
+        $trigger_type = 2;
         $item = Denuncia::withTrashed()->findOrFail($id);
         if (isset($item)) {
             if (!$item->trashed()) {
@@ -229,14 +231,14 @@ class DenunciaController extends Controller{
             } else {
                 $item->forceDelete();
             }
+            event(new IUQDenunciaEvent($id,Auth::user()->id,$trigger_type));
             return Response::json(['mensaje' => 'Registro eliminado con éxito', 'data' => 'OK', 'status' => '200'], 200);
         } else {
             return Response::json(['mensaje' => 'Se ha producido un error.', 'data' => 'Error', 'status' => '200'], 200);
         }
     }
 
-    protected function removeItem($id = 0)
-    {
+    protected function removeItem($id = 0){
         $item = Denuncia::withTrashed()->findOrFail($id);
         if (Auth::user()->isRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN|USER_SAS_ADMIN|USER_DIF_ADMIN')){
             return $this->remove($id);

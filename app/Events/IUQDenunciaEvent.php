@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Auth;
 class IUQDenunciaEvent implements ShouldBroadcast{
 
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    public $denuncia_id, $user_id, $trigger_type, $msg;
+    public $denuncia_id, $user_id, $trigger_type, $msg, $icon;
     /**
      * Create a new event instance.
      *
@@ -47,11 +47,17 @@ class IUQDenunciaEvent implements ShouldBroadcast{
     public function broadcastWith(){
 
         if ($this->trigger_type==0){
-            $this->msg =  strtoupper(Auth::user()->FullName)." ha creado una nueva denuncia: ".$this->denuncia_id;
+            $this->msg =  strtoupper(Auth::user()->FullName)." ha CREADO una nueva denuncia: ".$this->denuncia_id;
+            $this->icon = "success";
         }else if ($this->trigger_type==1){
-            $this->msg = strtoupper(Auth::user()->fullname)." ha modificado la denuncia: ".$this->denuncia_id;
+            $this->msg = strtoupper(Auth::user()->fullname)." ha MODIFICADO la denuncia: ".$this->denuncia_id;
+            $this->icon = "info";
+        }else if ($this->trigger_type==2){
+            $this->msg = strtoupper(Auth::user()->fullname)." ha ELIMINADO la denuncia: ".$this->denuncia_id;
+            $this->icon = "warning";
         }else{
-            $this->msg = "Hubo un cambio";
+            $this->msg = "Hubo un Problema";
+            $this->icon = "error";
         }
 
         Log::alert("Evento: ".$this->msg);
@@ -61,6 +67,7 @@ class IUQDenunciaEvent implements ShouldBroadcast{
             'user_id'=> $this->user_id,
             'trigger_type'=> $this->trigger_type,
             'msg' => $this->msg,
+            'icon' => $this->icon,
         ];
     }
 

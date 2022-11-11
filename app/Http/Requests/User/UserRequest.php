@@ -97,7 +97,7 @@ class UserRequest extends FormRequest
     {
 
         // dd($this->all());
-
+        $this->ubicacion_nueva_id = $this->ubicacion_nueva_id ?? 1;
         $ubicacion_actual_id = $this->ubicacion_actual_id;
         If ( $ubicacion_actual_id != $this->ubicacion_nueva_id ){
             $ubicacion_actual_id = $this->ubicacion_nueva_id;
@@ -107,6 +107,11 @@ class UserRequest extends FormRequest
             throw new HttpResponseException(response()->json( 'Falta la Ubicación', 422));
         }
         $Ubi = Ubicacion::findOrFail($ubicacion_actual_id);
+
+        if (!$Ubi){
+            $ubicacion_actual_id = 1;
+            $Ubi = Ubicacion::findOrFail($ubicacion_actual_id);
+        }
 
         //dd($Ubi->id);
 
