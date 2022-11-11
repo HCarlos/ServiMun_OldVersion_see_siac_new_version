@@ -1,7 +1,7 @@
 <div class="row" style="width: 100% !important;">
     <div class="col-lg-12">
 
-        <table  id="tblCat" class="table table-bordered table-striped dt-responsive dataTable " role="grid" aria-describedby="datatable-buttons_info"  width="100%">
+        <table  id="tblCat" class="table table-bordered table-striped dt-responsive dataTable tblCatDenuncias" role="grid" aria-describedby="datatable-buttons_info"  width="100%">
             <thead>
                 <tr role="row">
                     <th class="sorting_asc" aria-sort="ascending" aria-label="Name: activate to sort column descending">ID</th>

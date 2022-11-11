@@ -146,7 +146,6 @@ class DenunciaRequest extends FormRequest
             }else{
                 return null;
             }
-            event(new IUQDenunciaEvent($item->id,Auth::user()->id));
         }catch (QueryException $e){
             $Msg = new MessageAlertClass();
 //            dd($Msg->Message());
@@ -157,6 +156,7 @@ class DenunciaRequest extends FormRequest
     }
 
     protected function guardar($Item){
+        $trigger_type = 0;
         if ($this->id == 0) {
             $item = Denuncia::create($Item);
             $this->attaches($item);
@@ -165,12 +165,14 @@ class DenunciaRequest extends FormRequest
             if ($item->cerrado == false){
                 $this->detaches($item);
                 $item->update($Item);
+                $trigger_type = 1;
             }
         }
         if ($item->cerrado == false) {
             $Storage = new StorageDenunciaController();
             $Storage->subirArchivoDenuncia($this, $item);
         }
+        event(new IUQDenunciaEvent($item->id,Auth::user()->id,$trigger_type));
         return $item;
     }
 

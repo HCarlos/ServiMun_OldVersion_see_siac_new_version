@@ -37,7 +37,7 @@ class InserUpdateDeleteEvent implements ShouldBroadcast{
      */
     public function broadcastOn(){
         $retorno = ['test-channel'];
-        Log::alert("Valor de Retorno del Evento: remi...");
+        Log::alert("Valor de Retorno del Evento: ".json_encode($retorno));
         return $retorno;
    }
 

@@ -627,9 +627,15 @@ jQuery(function($) {
             console.log(data.power)
         })
         .listen('.IUQDenunciaEvent', (data) => {
-            if ( $("#tblCatDenuncias") ){
-                // location.reload();
-                $(".dataTable").DataTable().reload();
+            if ( $(".tblCatDenuncias") ){
+                $.toast({
+                    heading: 'SIAC',
+                    text: data.msg,
+                    icon: 'info',
+                    loader: true,
+                    loaderBg: '#9EC600',
+                    position: 'top-right',
+                })
                 console.log(data.denuncia_id+" :: "+data.user_id);
             }
         })

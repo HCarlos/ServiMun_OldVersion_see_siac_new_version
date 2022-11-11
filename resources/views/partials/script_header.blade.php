@@ -35,6 +35,7 @@
 <link href="{{ asset('css/select.bootstrap4.css') }}" rel="stylesheet">
 
 <link href="{{ asset('css/dropzone.css') }}" rel="stylesheet">
+<link href="{{ asset('css/jquery.toast.min.css') }}" rel="stylesheet">
 
 <link href="{{ asset('css/atemun.css') }}?timestamp()" rel="stylesheet" type="text/css">
 <link href="{{ asset('css/servimun.css') }}?timestamp()" rel="stylesheet" type="text/css"/>
