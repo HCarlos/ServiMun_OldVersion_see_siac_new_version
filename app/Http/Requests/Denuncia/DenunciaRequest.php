@@ -258,6 +258,7 @@ class DenunciaRequest extends FormRequest
         $Item->prioridades()->detach($this->prioridad_id);
         $Item->origenes()->detach($this->origen_id);
 //        $Item->dependencias()->detach($this->dependencia_id);
+
         $Item->ubicaciones()->detach($this->ubicacion_id);
 //        $Item->servicios()->detach($this->servicio_id);
 
@@ -270,7 +271,6 @@ class DenunciaRequest extends FormRequest
     }
 
     protected function addUserDenuncia($Item){
-//        dd($this->id);
         $item = Denuncia::find($this->id);
         if ($item->cerrado == false){
             $Item->ciudadanos()->detach($this->usuario_id);
