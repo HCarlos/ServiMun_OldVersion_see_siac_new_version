@@ -10,11 +10,13 @@ use App\Models\Denuncias\Denuncia;
 use App\Models\Denuncias\DenunciaEstatu;
 use App\User;
 use Carbon\Carbon;
+use Doctrine\DBAL\Driver\Exception;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Classes\MessageAlertClass;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 
 class DenunciaRequest extends FormRequest
@@ -165,6 +167,7 @@ class DenunciaRequest extends FormRequest
             if ($item->cerrado == false){
                 $this->detaches($item);
                 $item->update($Item);
+                $this->attaches($item);
                 $trigger_type = 1;
             }
         }
@@ -177,17 +180,77 @@ class DenunciaRequest extends FormRequest
     }
 
     public function attaches($Item){
+        try {
+            $Obj = DB::table('denuncia_prioridad')
+                ->where('denuncia_id','=',$Item->id)
+                ->where('prioridad_id','=',$this->prioridad_id)
+                ->get();
+            if ($Obj->count() <= 0 )
+                $Obj = $Item->prioridades()->attach($this->prioridad_id);
 
-        $Item->prioridades()->attach($this->prioridad_id);
-        $Item->origenes()->attach($this->origen_id);
-        $Item->dependencias()->attach($this->dependencia_id,['servicio_id'=>$this->servicio_id,'estatu_id'=>$this->estatus_id,'fecha_movimiento' => now() ]);
-        $Item->ubicaciones()->attach($this->ubicacion_id);
-        $Item->servicios()->attach($this->servicio_id);
+            $Obj = DB::table('denuncia_origen')
+                ->where('denuncia_id','=',$Item->id)
+                ->where('origen_id','=',$this->origen_id)
+                ->get();
+            if ($Obj->count() <= 0 )
+                $Obj = $Item->origenes()->attach($this->origen_id);
 
-        $Item->estatus()->attach($this->estatus_id,['ultimo'=>true]);
-        $Item->ciudadanos()->attach($this->usuario_id);
-        $Item->creadospor()->attach($this->creadopor_id);
-        $Item->modificadospor()->attach($this->modificadopor_id);
+            $Obj = DB::table('denuncia_dependencia_servicio_estatus')
+                ->where('denuncia_id','=',$Item->id)
+                ->where('dependencia_id','=',$this->dependencia_id)
+                ->where('servicio_id','=',$this->servicio_id)
+                ->where('estatu_id','=',$this->estatus_id)
+                ->get();
+            if ($Obj->count() <= 0 )
+                $Obj = $Item->dependencias()->attach($this->dependencia_id,['servicio_id'=>$this->servicio_id,'estatu_id'=>$this->estatus_id,'fecha_movimiento' => now() ]);
+
+            $Obj = DB::table('denuncia_ubicacion')
+                ->where('denuncia_id','=',$Item->id)
+                ->where('ubicacion_id','=',$this->ubicacion_id)
+                ->get();
+            if ($Obj->count() <= 0 )
+                $Obj = $Item->ubicaciones()->attach($this->ubicacion_id);
+
+            $Obj = DB::table('denuncia_servicio')
+                ->where('denuncia_id','=',$Item->id)
+                ->where('servicio_id','=',$this->servicio_id)
+                ->get();
+            if ($Obj->count() <= 0 )
+                $Obj = $Item->servicios()->attach($this->servicio_id);
+
+            $Obj = DB::table('denuncia_dependencia_servicio_estatus')
+                ->where('denuncia_id','=',$Item->id)
+                ->where('dependencia_id','=',$this->dependencia_id)
+                ->where('servicio_id','=',$this->servicio_id)
+                ->where('estatu_id','=',$this->estatus_id)
+                ->get();
+            if ($Obj->count() <= 0 )
+                $Obj = $Item->estatus()->attach($this->estatus_id,['ultimo'=>true]);
+
+            $Obj = DB::table('ciudadano_denuncia')
+                ->where('denuncia_id','=',$Item->id)
+                ->where('ciudadano_id','=',$this->usuario_id)
+                ->get();
+            if ($Obj->count() <= 0 )
+                $Obj = $Item->ciudadanos()->attach($this->usuario_id);
+
+            $Obj = DB::table('creadopor_denuncia')
+                ->where('denuncia_id','=',$Item->id)
+                ->where('creadopor_id','=',$this->creadopor_id)
+                ->get();
+            if ($Obj->count() <= 0 )
+                $Obj = $Item->creadospor()->attach($this->creadopor_id);
+
+            $Obj = DB::table('denuncia_modificadopor')
+                ->where('denuncia_id','=',$Item->id)
+                ->where('modificadopor_id','=',$this->modificadopor_id)
+                ->get();
+            if ($Obj->count() <= 0 )
+                $Obj = $Item->modificadospor()->attach($this->modificadopor_id);
+
+        }catch (Exception $e){
+
+        }
         return $Item;
     }
 
@@ -207,7 +270,7 @@ class DenunciaRequest extends FormRequest
     }
 
     protected function addUserDenuncia($Item){
-        dd($this->id);
+//        dd($this->id);
         $item = Denuncia::find($this->id);
         if ($item->cerrado == false){
             $Item->ciudadanos()->detach($this->usuario_id);
