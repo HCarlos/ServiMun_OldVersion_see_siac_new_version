@@ -16,7 +16,7 @@ jQuery(function($) {
                 console.log(data.power)
             })
             .listen('.IUQDenunciaEvent', (data) => {
-                if ( $(".tblCatDenuncias") && parseInt(data.status) === 200 ){
+                if ( parseInt(data.status) === 200 ){
                     $.toast({
                         heading: 'SIAC',
                         text: data.msg,
