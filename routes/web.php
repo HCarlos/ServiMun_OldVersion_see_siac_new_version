@@ -22,7 +22,7 @@ Route::get('newUbicacionV2', 'Catalogos\Domicilio\UbicacionController@newItemV2'
 Route::post('createUbicacionV2', 'Catalogos\Domicilio\UbicacionController@createItemV2')->name('createUbicacionV2');
 
 Auth::routes();
-Auth::routes(['verify' => true]);
+Auth::routes(['verify' => false]);
 
 // Authentication Routes...
 // $this
@@ -35,8 +35,9 @@ Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('re
 Route::post('register', 'Auth\RegisterController@register');
 Route::post('registered/{email}/{username}', 'Auth\RegisterController@registered')->name('registered');
 
-//Route::get('getCURP/', 'Catalogos\User\UserDataController@getCURP')->name('getCURP');
+Route::get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify');
 
+//Route::get('getCURP/', 'Catalogos\User\UserDataController@getCURP')->name('getCURP');
 
 Route::group(['middleware' => 'auth'], function () {
 

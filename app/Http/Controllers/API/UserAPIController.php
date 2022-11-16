@@ -71,7 +71,9 @@ class UserAPIController extends Controller{
         if ($user){
             $Token = $user->createToken($request->device_name);
             $token = $Token->plainTextToken;
+
 //            $user->sendPasswordResetNotification($token);
+
             $user->sendEmailVerificationNotification();
 
             $response["status"] = 1;

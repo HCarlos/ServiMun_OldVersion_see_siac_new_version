@@ -34,6 +34,7 @@ return [
 
     // ARCHIVOS DE IMAGENES DEL SISTEMA
     'logo_reportes_encabezado' => public_path().'/images/web/logo-0-reporte.png',
+    'app_name_short'           => env('APP_NAME_SHORT',''),
     'nombre_empresa'           => env('NOMBRE_EMPRESA',''),
     'lema_empresa'             => env('LEMA_CAMPANA',''),
     'periodo_empresa'          => env('INFO_ONE',''),

@@ -13,6 +13,7 @@ use App\Models\Familias\Parentesco;
 use App\Models\Users\UserAdress;
 use App\Models\Users\UserDataExtend;
 use App\Notifications\MyResetPassword;
+use App\Notifications\SendEmailAPIVerificationNotification;
 use App\Traits\User\UserAttributes;
 use App\Traits\User\UserImport;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -160,7 +161,9 @@ class User extends Authenticatable implements MustVerifyEmail
         $this->notify(new MyResetPassword($token));
     }
 
-
+    public function sendEmailVerificationNotification(){
+        $this->notify(new SendEmailAPIVerificationNotification());
+    }
 
 
 

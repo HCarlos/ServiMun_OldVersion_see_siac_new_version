@@ -30,6 +30,7 @@
 
 <script src="{{ '/js/base.js?timestamp()' }}"></script>
 <script src="{{ '/js/atemun.js?timestamp()' }}"></script>
+<script src="{{ '/js/node.notifications.js?timestamp()' }}"></script>
 <script src="{{ '/js/servimun.js?timestamp()' }}"></script>
 
 @yield("script_autocomplete")

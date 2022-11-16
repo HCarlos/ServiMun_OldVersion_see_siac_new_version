@@ -7,7 +7,7 @@
         <title>@yield('title')</title>
 
         <!-- Fonts -->
-        <link rel="dns-prefetch" href="//fonts.gstatic.com">
+{{--        <link rel="dns-prefetch" href="//fonts.gstatic.com">--}}
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
         <!-- Styles -->
@@ -21,19 +21,19 @@
                 margin: 0;
             }
 
-            .full-height {
-                height: 100vh;
-            }
+            /*.full-height {*/
+            /*    height: 100vh;*/
+            /*}*/
 
             .height-50 {
                 height: 50vh;
             }
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+            /*.flex-center {*/
+            /*    align-items: center;*/
+            /*    display: flex;*/
+            /*    justify-content: center;*/
+            /*}*/
 
             .flex-bottom {
                 align-items: end;
@@ -41,22 +41,22 @@
                 justify-content: center;
             }
 
-            .flex-top {
-                align-items: start;
-                display: flex;
-                justify-content: center;
-            }
+            /*.flex-top {*/
+            /*    align-items: start;*/
+            /*    display: flex;*/
+            /*    justify-content: center;*/
+            /*}*/
 
             .position-ref {
                 position: relative;
             }
 
-            .code {
-                border-right: 2px solid;
-                font-size: 26px;
-                padding: 0 15px 0 15px;
-                text-align: center;
-            }
+            /*.code {*/
+            /*    border-right: 2px solid;*/
+            /*    font-size: 26px;*/
+            /*    padding: 0 15px 0 15px;*/
+            /*    text-align: center;*/
+            /*}*/
 
             .message {
                 font-size: 18px;
@@ -75,20 +75,12 @@
     </head>
     <body>
         <div class="flex-bottom position-ref height-50">
-
             <div class="message" style="padding: 10px;">
                 @yield('message')
                 <div class="link1">
                     <a href="/" style="text-decoration: none">Inicio</a>
                 </div>
             </div>
-        </div>
-
-            <p>
-            <br>
-            <br>
-
-            </p>
         </div>
     </body>
 </html>

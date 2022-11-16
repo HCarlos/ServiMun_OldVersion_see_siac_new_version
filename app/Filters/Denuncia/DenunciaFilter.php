@@ -125,7 +125,7 @@ class DenunciaFilter extends QueryFilter
             $filters  = $search;
             $F        = new FuncionesController();
             $tsString = $F->string_to_tsQuery( strtoupper($filters),' & ');
-            $q->whereRaw("searchtext @@ to_tsquery('spanish', ?)", [$tsString]);
+            return $q->whereRaw("searchtext @@ to_tsquery('spanish', ?)", [$tsString]);
 
         });
     }

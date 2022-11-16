@@ -86,13 +86,14 @@ class RegisterController extends Controller
         $Username = $UN['username'];
         $Email =  $data["email"] == "" ? strtolower($Username) . '@example.com' : $data["email"];
         $user =  User::create([
-            'username'   => $Username,
-            'email'      => $Email ,
-            'password'   => Hash::make($Username),
-            'curp'       => strtoupper(trim( $data["curp"] )),
-            'ap_paterno' => strtoupper(trim( $data["ap_paterno"] )),
-            'ap_materno' => strtoupper(trim( $data["ap_materno"] )),
-            'nombre'     => strtoupper(trim( $data["nombre"] )),
+            'username'     => $Username,
+            'email'        => $Email ,
+            'password'     => Hash::make($Username),
+            'curp'         => strtoupper(trim( $data["curp"] )),
+            'ap_paterno'   => strtoupper(trim( $data["ap_paterno"] )),
+            'ap_materno'   => strtoupper(trim( $data["ap_materno"] )),
+            'nombre'       => strtoupper(trim( $data["nombre"] )),
+            'ubicacion_id' => 1,
         ]);
         $role_invitado = Role::findByName('Invitado');
         $user->roles()->attach($role_invitado);
@@ -100,6 +101,7 @@ class RegisterController extends Controller
         $user->roles()->attach($role_ciudadano);
         $role_ciudadano_internet = Role::findByName('CIUDADANO_INTERNET');
         $user->roles()->attach($role_ciudadano_internet);
+        $user->ubicaciones()->attach(1);
         $user->admin = false;
         $user->empresa_id = $idemp;
         $user->ip = $ip;
@@ -147,6 +149,7 @@ class RegisterController extends Controller
         );
 
     }
+
 
 
 }
