@@ -5,6 +5,7 @@ namespace App\Events;
 use App\Http\Controllers\Funciones\FuncionesController;
 use App\Models\Denuncias\Denuncia;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -50,17 +51,17 @@ class IUQDenunciaEvent implements ShouldBroadcast{
 
     public function broadcastWith(){
         $this->status = 200;
-
+        $fecha = Carbon::now()->format('d-m-Y H:i:s');
         if ($this->trigger_type==0){
-            $this->msg    =  strtoupper(Auth::user()->FullName)." ha CREADO una nueva denuncia: ".$this->denuncia_id;
+            $this->msg    =  strtoupper(Auth::user()->FullName)." ha CREADO una nueva denuncia: ".$this->denuncia_id."  ".$fecha;
             $this->icon   = "success";
             $triger_status = "CREAR";
         }else if ($this->trigger_type==1){
-            $this->msg    = strtoupper(Auth::user()->fullname)." ha MODIFICADO la denuncia: ".$this->denuncia_id;
+            $this->msg    = strtoupper(Auth::user()->fullname)." ha MODIFICADO la denuncia: ".$this->denuncia_id."  ".$fecha;
             $this->icon   = "info";
             $triger_status = "MODIFICAR";
         }else if ($this->trigger_type==2){
-            $this->msg    = strtoupper(Auth::user()->fullname)." ha ELIMINADO la denuncia: ".$this->denuncia_id;
+            $this->msg    = strtoupper(Auth::user()->fullname)." ha ELIMINADO la denuncia: ".$this->denuncia_id."  ".$fecha;
             $this->icon   = "warning";
             $triger_status = "ELIMINAR";
         }else{
