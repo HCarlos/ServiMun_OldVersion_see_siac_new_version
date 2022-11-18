@@ -2016,6 +2016,7 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         'Doctrine\\Persistence\\Proxy' => __DIR__ . '/..' . '/doctrine/persistence/src/Persistence/Proxy.php',
         'Doctrine\\Persistence\\Reflection\\EnumReflectionProperty' => __DIR__ . '/..' . '/doctrine/persistence/src/Persistence/Reflection/EnumReflectionProperty.php',
         'Doctrine\\Persistence\\Reflection\\RuntimePublicReflectionProperty' => __DIR__ . '/..' . '/doctrine/persistence/src/Persistence/Reflection/RuntimePublicReflectionProperty.php',
+        'Doctrine\\Persistence\\Reflection\\RuntimeReflectionProperty' => __DIR__ . '/..' . '/doctrine/persistence/src/Persistence/Reflection/RuntimeReflectionProperty.php',
         'Doctrine\\Persistence\\Reflection\\TypedNoDefaultReflectionProperty' => __DIR__ . '/..' . '/doctrine/persistence/src/Persistence/Reflection/TypedNoDefaultReflectionProperty.php',
         'Doctrine\\Persistence\\Reflection\\TypedNoDefaultReflectionPropertyBase' => __DIR__ . '/..' . '/doctrine/persistence/src/Persistence/Reflection/TypedNoDefaultReflectionPropertyBase.php',
         'Doctrine\\Persistence\\Reflection\\TypedNoDefaultRuntimePublicReflectionProperty' => __DIR__ . '/..' . '/doctrine/persistence/src/Persistence/Reflection/TypedNoDefaultRuntimePublicReflectionProperty.php',

@@ -231,7 +231,7 @@ class DenunciaController extends Controller{
             } else {
                 $item->forceDelete();
             }
-            event(new IUQDenunciaEvent($id,Auth::user()->id,$trigger_type));
+            event(new IUQDenunciaEvent($item->id,Auth::user()->id,$trigger_type));
             return Response::json(['mensaje' => 'Registro eliminado con éxito', 'data' => 'OK', 'status' => '200'], 200);
         } else {
             return Response::json(['mensaje' => 'Se ha producido un error.', 'data' => 'Error', 'status' => '200'], 200);
@@ -280,7 +280,6 @@ class DenunciaController extends Controller{
     {
         $items = Ubicacion::find($IdUbi);
         return Response::json(['mensaje' => 'OK', 'data' => json_decode($items), 'status' => '200'], 200);
-
     }
 
     protected function showModalSearchDenuncia(){

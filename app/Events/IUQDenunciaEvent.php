@@ -96,6 +96,7 @@ class IUQDenunciaEvent implements ShouldBroadcast{
 
         $filtrar_estas_curps = array('SAGA841106MTCLRL03', 'HERI791215MTCRZS05', 'SAAD761205MCSNLN06', 'DIHC990213HTCZRR02', 'VAOB880906MTCLPN04', 'JITM700108HTCMRN02', 'CAHC711129MTCRR08', 'CUOS740301HTCRLR04', 'MARN781030MTCRMT01', 'ROLD790608MTCDNY07', 'LOHE841013HTCP0003', 'HEMG881219HTCRRR09', 'CAHA730610MDFLRN06');
         $User = User::find($this->user_id);
+//        if (in_array(trim(strtoupper(Auth::user()->curp)), $filtrar_estas_curps)){
         if (in_array(trim(strtoupper($User->curp)), $filtrar_estas_curps)){
             $this->status = 204;
         }

@@ -1286,6 +1286,7 @@ return array(
     'Doctrine\\Persistence\\Proxy' => $vendorDir . '/doctrine/persistence/src/Persistence/Proxy.php',
     'Doctrine\\Persistence\\Reflection\\EnumReflectionProperty' => $vendorDir . '/doctrine/persistence/src/Persistence/Reflection/EnumReflectionProperty.php',
     'Doctrine\\Persistence\\Reflection\\RuntimePublicReflectionProperty' => $vendorDir . '/doctrine/persistence/src/Persistence/Reflection/RuntimePublicReflectionProperty.php',
+    'Doctrine\\Persistence\\Reflection\\RuntimeReflectionProperty' => $vendorDir . '/doctrine/persistence/src/Persistence/Reflection/RuntimeReflectionProperty.php',
     'Doctrine\\Persistence\\Reflection\\TypedNoDefaultReflectionProperty' => $vendorDir . '/doctrine/persistence/src/Persistence/Reflection/TypedNoDefaultReflectionProperty.php',
     'Doctrine\\Persistence\\Reflection\\TypedNoDefaultReflectionPropertyBase' => $vendorDir . '/doctrine/persistence/src/Persistence/Reflection/TypedNoDefaultReflectionPropertyBase.php',
     'Doctrine\\Persistence\\Reflection\\TypedNoDefaultRuntimePublicReflectionProperty' => $vendorDir . '/doctrine/persistence/src/Persistence/Reflection/TypedNoDefaultRuntimePublicReflectionProperty.php',
