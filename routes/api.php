@@ -38,6 +38,7 @@ Route::group(['prefix' => 'v1'], function () {
     Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::get('/users', [UserAPIController::class, 'users'])->name('users');
         Route::get('/user/{user}', [UserAPIController::class, 'userId']);
+        Route::get('/user/curp/{curp}', [UserAPIController::class, 'userCURP']);
     });
 
 

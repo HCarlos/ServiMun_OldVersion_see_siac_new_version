@@ -5,22 +5,28 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\UserAPIRegistryRequest;
 use App\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class UserAPIController extends Controller{
 
-    public function users(){
+    public function users():JsonResponse {
         $Users = User::query()->take(10)->get();
         return response()->json($Users);
     }
 
-    public function userId($id){
+    public function userId($id):JsonResponse {
         $Users = User::find($id);
         return response()->json($Users);
     }
 
-    public function userLogin(Request $request){
+    public function userCURP($curp):JsonResponse {
+        $Users = User::where('curp',$curp)->get();
+        return response()->json($Users);
+    }
+
+    public function userLogin(Request $request):JsonResponse {
         $response = ["status"=>0, "msg"=>""];
         $data = (object) $request->all();
         $user = User::where("username",$data->username)->first();
@@ -40,7 +46,7 @@ class UserAPIController extends Controller{
         return response()->json($response);
     }
 
-    public function userMobileToken(Request $request){
+    public function userMobileToken(Request $request):JsonResponse {
         $response = ["status"=>0, "msg"=>""];
         $data = [
             "username" => "required",
@@ -65,7 +71,7 @@ class UserAPIController extends Controller{
         return response()->json($response);
     }
 
-    public function register(UserAPIRegistryRequest $request){
+    public function register(UserAPIRegistryRequest $request):JsonResponse {
         $response = ["status"=>0, "msg"=>""];
         $user = $request->manage();
         if ($user){
