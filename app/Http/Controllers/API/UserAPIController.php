@@ -37,6 +37,7 @@ class UserAPIController extends Controller{
                 $response["access_token"] = $token->plainTextToken;
                 $response["token_type"] = 'Bearer';
                 $response["msg"] = $token->plainTextToken;
+                $response["user"] = $user;
             }else{
                 $response["msg"] = "Password incorrecto";
             }
