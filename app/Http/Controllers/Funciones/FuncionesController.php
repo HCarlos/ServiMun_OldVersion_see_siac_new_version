@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Exception;
 use http\Exception\InvalidArgumentException;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Exception\NotWritableException;
@@ -210,6 +211,18 @@ class FuncionesController extends Controller
             return $ret;
         }else{
             return file_get_contents($url,0,null,0,1);
+        }
+    }
+
+    private function getRedirect(Request $request){
+        $role1 = $request->user()->hasRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN|ENLACE|USER_ARCHIVO_CAP|USER_ARCHIVO_ADMIN');
+        $role2 = $request->user()->hasRole('CIUDADANO|DELEGADO');
+        if ($role1) {
+            return 'home';
+        } elseif($role2) {
+            return 'home-ciudadano';
+        } else {
+            return 'home';
         }
     }
 

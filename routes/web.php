@@ -37,6 +37,10 @@ Route::post('registered/{email}/{username}', 'Auth\RegisterController@registered
 
 Route::get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify');
 
+//TRabajar con el Registry
+Route::get('verificationAPIUrl/{id}/{hash}', 'App\Notifications\SendEmailAPIVerificationNotification@verificationapiUrl')->name('verificationAPIUrl');
+Route::get('sendVerificationAPIUrl/{id}/{hash}/{notifiable}', 'Catalogos\User\UserDataController@sendVerificationAPIUrl')->name('sendVerificationAPIUrl');
+
 //Route::get('getCURP/', 'Catalogos\User\UserDataController@getCURP')->name('getCURP');
 
 Route::group(['middleware' => 'auth'], function () {

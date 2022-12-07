@@ -9,6 +9,7 @@ use App\Http\Requests\User\UserRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\UserUpdatePasswordRequest;
 use App\Models\Catalogos\Domicilios\Ubicacion;
+use App\Notifications\SendEmailAPIVerificationNotification;
 use App\Role;
 use App\User;
 use Illuminate\Support\Facades\Auth;
@@ -362,5 +363,16 @@ class UserDataController extends Controller
         $user->sendEmailVerificationNotification();
         return redirect('/editUser/'.$id);
     }
+
+    public function sendVerificationAPIUrl($id, $hash, $notifiable){
+        $user = User::find($id);
+        $em = new SendEmailAPIVerificationNotification();
+        return $em->toMailInformation($user, $notifiable);
+//        $em->notify(new SendEmailAPIVerificationNotification());
+
+    }
+
+
+
 
 }
