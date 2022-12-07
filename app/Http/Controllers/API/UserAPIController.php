@@ -29,7 +29,7 @@ class UserAPIController extends Controller{
     public function userLogin(Request $request):JsonResponse {
         $response = ["status"=>0, "msg"=>""];
         $data = (object) $request->all();
-        $user = User::where("username",strtoupper(trim($data->username)))->first();
+        $user = User::where("username",trim($data->username))->first();
         if ($user){
             if (Hash::check($data->password, $user->password)){
                 $token = $user->createToken("ejemplo");
