@@ -47,9 +47,9 @@ class UserAPIRegistryRequest extends FormRequest
         $Username = strtoupper(trim($this->curp));
         $Email =  $this->email == "" ? strtolower($Username) . '@example.com' : $this->email;
         $user =  User::create([
-            'username'   => $Username,
+            'username'   => strtoupper(trim($Username)),
             'email'      => $Email ,
-            'password'   => Hash::make($Username),
+            'password'   => Hash::make(strtoupper(trim($Username))),
             'curp'       => strtoupper(trim( $this->curp )),
             'ap_paterno' => strtoupper(trim( $this->ap_paterno )),
             'ap_materno' => strtoupper(trim( $this->ap_materno )),

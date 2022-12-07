@@ -352,7 +352,15 @@ class UserDataController extends Controller
 
     }
 
+    public function verificarEmailAhora(){
+        $user = Auth::user()->sendEmailVerificationNotification();
+        return redirect('edit');
+    }
 
-
+    public function verificarEmailAhoraForAdmin($id){
+        $user = User::find($id);
+        $user->sendEmailVerificationNotification();
+        return redirect('/editUser/'.$id);
+    }
 
 }

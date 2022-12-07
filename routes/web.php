@@ -50,6 +50,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('editUser/{Id}', 'Catalogos\User\UserDataController@editItem')->name('editUser');
     Route::put('EditUser', 'Catalogos\User\UserDataController@updateUser')->name('EditUser');
     Route::put('updateUserV2', 'Catalogos\User\UserDataController@updateUserV2')->name('updateUserV2');
+    Route::get('verificarEmailAhora', 'Catalogos\User\UserDataController@verificarEmailAhora')->name('verificarEmailAhora');
+    Route::get('verificarEmailAhoraForAdmin/{id}', 'Catalogos\User\UserDataController@verificarEmailAhoraForAdmin')->name('verificarEmailAhoraForAdmin');
 });
 
 Route::group(['middleware' => 'role:auth|Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN|ENLACE|USER_ARCHIVO_CAP|USER_ARCHIVO_ADMIN'], function () {
@@ -174,6 +176,8 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp|USER_OPERATOR_SIAC|
     Route::post('createServicioV2', 'Denuncia\ServicioController@createItemV2')->name('createServicioV2');
     Route::get('editServicioV2/{Id}', 'Denuncia\ServicioController@editItemV2')->name('editServicioV2');
     Route::put('updateServicioV2', 'Denuncia\ServicioController@updateItemV2')->name('updateServicioV2');
+
+    Route::get('quitarArchivoMobileServicio/{Id}', 'Storage\Mobile\StorageMobileServicioController@quitarArchivoMobileServicio')->name('quitarArchivoMobileServicio');
 
     // Catálogo de Afiliaciones
     Route::get('listAfiliaciones/', 'Denuncia\AfiliacionController@index')->name('listAfiliaciones');

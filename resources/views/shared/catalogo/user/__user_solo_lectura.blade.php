@@ -4,8 +4,17 @@
         <input type="text" name="username" id="username" value="{{ old('username',$items->username) }}" class="form-control" readonly />
     </div>
     <label for = "email" class="col-md-3 col-form-label">Email</label>
-    <div class="col-md-9">
+    <div class="col-md-6">
         <input type="email" name="email" id="email" value="{{ old('email',$items->email) }}" class="form-control" readonly />
+    </div>
+    <div class="col-md-3">
+        @if ($items->isVerifyMail())
+            <small class="float-right "><i class="fas fa-check text-success"></i> Verificado<br>{{$items->email_verified_at}}</small>
+        @else
+            <a  class="float-right pt-2 pl-3" href="{{ route('verificarEmailAhora') }}">Verificar ahora</a>
+            <strong class="float-right pt-2"><i class="mdi mdi-cancel text-danger"></i>  No Verificado</strong>
+            <small>Si decide Verifricar su correo ahora, checque su bandeja de entrada y correo no deseado. Siga las instrucciones.</small>
+        @endif
     </div>
     <label for = "curp" class="col-md-3 col-form-label">CURP</label>
     <div class="col-md-9">

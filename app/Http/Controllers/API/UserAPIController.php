@@ -22,14 +22,14 @@ class UserAPIController extends Controller{
     }
 
     public function userCURP($curp):JsonResponse {
-        $Users = User::where('curp',$curp)->get();
+        $Users = User::where('curp',strtoupper(trim($curp)))->get();
         return response()->json($Users);
     }
 
     public function userLogin(Request $request):JsonResponse {
         $response = ["status"=>0, "msg"=>""];
         $data = (object) $request->all();
-        $user = User::where("username",$data->username)->first();
+        $user = User::where("username",strtoupper(trim($data->username)))->first();
         if ($user){
             if (Hash::check($data->password, $user->password)){
                 $token = $user->createToken("ejemplo");
@@ -55,7 +55,7 @@ class UserAPIController extends Controller{
             "device_name" => "required",
         ];
         $data = $request->validate($data);
-        $user = User::where('username', $request->username)->first();
+        $user = User::where('username', strtoupper(trim($request->username)))->first();
         if ($user) {
             if (Hash::check($request->password, $user->password)) {
                 $token = $user->createToken($request->device_name);
@@ -78,17 +78,17 @@ class UserAPIController extends Controller{
         if ($user){
             $Token = $user->createToken($request->device_name);
             $token = $Token->plainTextToken;
-
-//            $user->sendPasswordResetNotification($token);
-
             $user->sendEmailVerificationNotification();
 
             $response["status"] = 1;
             $response["access_token"] = $token;
             $response["token_type"] = 'Bearer';
-            $response["username"] = $user->username;
+            $response["username"] = strtoupper(trim($user->username));
             $response["password"] = $user->password;
             $response["email"] = $user->email;
+            $response["ap_paterno"] = strtoupper(trim($user->ap_paterno));
+            $response["ap_materno"] = strtoupper(trim($user->ap_materno));
+            $response["nombre"] = strtoupper(trim($user->nombre));
             $response["msg"] = $token;
         }
         return response()->json($response);

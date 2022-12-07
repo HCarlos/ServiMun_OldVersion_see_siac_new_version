@@ -41,7 +41,7 @@ class ServicioController extends Controller
 
 //        ->filterBy($filters)
 
-        return view('catalogos.catalogo.servicio.servicio_list',
+        return view('SIAC.estructura.servicio.servicio_list',
             [
                 'items'           => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
@@ -50,10 +50,10 @@ class ServicioController extends Controller
                 'searchInList'    => 'listServicios',
                 'newWindow'       => true,
                 'tableName'       => $this->tableName,
-                'showEdit'        => 'editServicioV2',
-                'newItem'         => 'newServicioV2',
+                'showEdit'        => 'editServicio',
+                'newItem'         => 'newServicio',
                 'removeItem'      => 'removeServicio',
-                'IsModal'         => true,
+                'IsModal'         => false,
                 'exportModel'     => 2,
             ]
         );
@@ -65,7 +65,7 @@ class ServicioController extends Controller
     {
         $medidas = Medida::all(['id','medida'])->sortBy('medida');
         $subareas = Subarea::all()->sortBy('subarea');
-        return view('catalogos.catalogo.servicio.servicio_new',
+        return view('SIAC.estructura.servicio.servicio_new',
             [
                 'editItemTitle' => 'Nuevo',
                 'postNew' => 'createServicio',
@@ -93,7 +93,7 @@ class ServicioController extends Controller
         $medidas = Medida::all(['id','medida'])->sortBy('medida');
         $subareas = Subarea::all()->sortBy('subarea');
         $user = Auth::user();
-        return view('SIAC.estructura.servicio.servicio_modal',
+        return view('SIAC.estructura.servicio.servicio_new',
             [
                 'Titulo'      => 'Nuevo',
                 'Route'       => 'createServicioV2',
@@ -130,7 +130,7 @@ class ServicioController extends Controller
         $medidas = Medida::all(['id','medida'])->sortBy('medida');
         $subareas = Subarea::all()->sortBy('subarea');
         //dd($item);
-        return view('catalogos.catalogo.servicio.servicio_edit',
+        return view('SIAC.estructura.servicio.servicio_edit',
             [
                 'user' => Auth::user(),
                 'items' => $item,
@@ -139,7 +139,7 @@ class ServicioController extends Controller
                 'editItemTitle' => isset($item->categoria) ? $item->categoria : 'Nuevo',
                 'putEdit' => 'updateServicio',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
-                'titulo_header'   => 'Editando el Folio '.$Id,
+                'titulo_header'   => 'Editando el Folio : '.$Id,
             ]
         );
     }

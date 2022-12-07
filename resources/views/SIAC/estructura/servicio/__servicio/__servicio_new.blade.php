@@ -9,10 +9,40 @@
 </div>
 <div class="form-group row mb-1">
     <label for = "habilitado" class="col-md-3 col-form-label">Habilitado</label>
-    <div class="col-md-9">
+    <div class="col-md-3">
         {{ Form::select('habilitado', array('1'=>'Si', '0'=>'No'), old('habilitado'), ['id' => 'habilitado','class' => 'form-control']) }}
     </div>
+    <label for = "is_visible_mobile" class="col-md-3 col-form-label">Activo en App Mobile</label>
+    <div class="col-md-3">
+        {{ Form::select('is_visible_mobile', array('0'=>'No','1'=>'Si'), old('is_visible_mobile'), ['id' => 'is_visible_mobile','class' => 'form-control']) }}
+    </div>
 </div>
+<div class="form-group row mb-1">
+    <label for = "nombre_mobile" class="col-md-3 col-form-label has-nombre_mobile">Nombre Mobile</label>
+    <div class="col-md-5">
+        <input type="text" name="nombre_mobile" id="nombre_mobile" value="{{ old('nombre_mobile') }}" class="form-control" />
+        <span class="has-nombre_mobile">
+            <strong class="text-danger"></strong>
+        </span>
+    </div>
+    <label for = "orden_image_mobile" class="col-md-2 col-form-label has-orden_image_mobile">Orden Mobile</label>
+    <div class="col-md-2">
+        <input type="text" name="orden_image_mobile" id="orden_image_mobile" value="{{ old('orden_image_mobile') }}" class="form-control" />
+        <span class="has-orden_image_mobile">
+            <strong class="text-danger"></strong>
+        </span>
+    </div>
+</div>
+<div class="form-group row mb-1">
+    <label for = "url_image_mobile" class="col-md-3 col-form-label has-url_image_mobile">Imagen Mobile</label>
+    <div class="col-md-9">
+        <input type="file" name="url_image_mobile" id="url_image_mobile" value="{{ old('url_image_mobile') }}" class="form-control" />
+        <span class="has-url_image_mobile">
+            <strong class="text-danger"></strong>
+        </span>
+    </div>
+</div>
+
 <div class="form-group row mb-1">
     <label for = "medida_id" class="col-md-3 col-form-label">Medida</label>
     <div class="col-md-9">

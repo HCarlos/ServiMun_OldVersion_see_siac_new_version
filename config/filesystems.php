@@ -85,6 +85,27 @@ return [
             'visibility' => env('DENUNCIA_VISIBILITY'),
         ],
 
+        'mobile_profile' => [
+            'driver' => env('MOBILE_PROFILE_DRIVER'),
+            'root' => public_path().env('MOBILE_PROFILE_ROOT'),
+            'url' => env('APP_URL').env('MOBILE_PROFILE_URL'),
+            'visibility' => env('MOBILE_PROFILE_VISIBILITY'),
+        ],
+
+        'mobile_servicio' => [
+            'driver' => env('MOBILE_SERVICIO_DRIVER'),
+            'root' => public_path().env('MOBILE_SERVICIO_ROOT'),
+            'url' => env('APP_URL').env('MOBILE_SERVICIO_URL'),
+            'visibility' => env('MOBILE_SERVICIO_VISIBILITY'),
+        ],
+
+        'mobile_denuncia' => [
+            'driver' => env('MOBILE_DENUNCIA_DRIVER'),
+            'root' => public_path().env('MOBILE_DENUNCIA_ROOT'),
+            'url' => env('APP_URL').env('MOBILE_DENUNCIA_URL'),
+            'visibility' => env('MOBILE_DENUNCIA_VISIBILITY'),
+        ],
+
 
     ],
 

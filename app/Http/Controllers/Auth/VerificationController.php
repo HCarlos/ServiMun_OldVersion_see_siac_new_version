@@ -8,6 +8,7 @@ use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Auth\VerifiesEmails;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class VerificationController extends Controller
 {
@@ -22,7 +23,7 @@ class VerificationController extends Controller
     |
     */
 
-    use VerifiesEmails;
+//    use VerifiesEmails;
 
     /**
      * Where to redirect users after verification.
@@ -62,8 +63,10 @@ class VerificationController extends Controller
         if ($request->user()->hasVerifiedEmail()) {
             return $request->wantsJson()
                 ? new JsonResponse([], 204)
-                : redirect($this->redirectPath());
+                : redirect($this->getRedirect($request));
         }
+
+//        dd(" 4 ");
 
         if ($request->user()->markEmailAsVerified()) {
             event(new Verified($request->user()));
@@ -72,7 +75,6 @@ class VerificationController extends Controller
         if ($response = $this->verified($request)) {
             return $response;
         }
-
         return $request->wantsJson()
             ? new JsonResponse([], 204)
             : redirect($this->redirectPath())->with('verified', true);
@@ -84,11 +86,26 @@ class VerificationController extends Controller
             return $this->redirectTo();
         }
 
-        return property_exists($this, 'redirectTo') ? $this->redirectTo : '/login';
+        return property_exists($this, 'redirectTo') ? $this->redirectTo : '/home-ciudadano';
     }
 
+    private function getRedirect(Request $request){
+        $role1 = $request->user()->hasRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN|ENLACE|USER_ARCHIVO_CAP|USER_ARCHIVO_ADMIN');
+        $role2 = $request->user()->hasRole('CIUDADANO|DELEGADO');
+        if ($role1) {
+            return 'home';
+        } elseif($role2) {
+            return 'home-ciudadano';
+        } else {
+            return 'home';
+        }
 
+    }
 
+    protected function verified(Request $request)
+    {
+        //
+    }
 
 
 

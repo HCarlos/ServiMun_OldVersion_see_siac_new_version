@@ -5,21 +5,25 @@ namespace App\Models\Catalogos;
 use App\Filters\Catalogo\ServicioFilter;
 use App\Http\Controllers\Funciones\FuncionesController;
 use App\Models\Denuncias\Denuncia;
+use App\Traits\Catalogos\Estructura\Servicio\ServicioTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Servicio extends Model
 {
     use SoftDeletes;
+    use ServicioTrait;
 
     protected $guard_name = 'web';
     protected $table = 'servicios';
 
     protected $fillable = [
         'id', 'servicio','habilitado', 'medida_id', 'subarea_id','orden_impresion',
+        'root','filename','filename_png','filename_thumb',
+        'is_visible_mobile', 'nombre_mobile', 'url_image_mobile', 'orden_image_mobile',
     ];
     protected $hidden = ['deleted_at','created_at','updated_at'];
-    protected $casts = ['habilitado'=>'boolean',];
+    protected $casts = ['habilitado'=>'boolean','is_visible_mobile'=>'boolean',];
 
     public function scopeSearch($query, $search){
         if ( !$search || $search == "" || is_null($search) ) return $query;
@@ -37,6 +41,10 @@ class Servicio extends Model
 
     public function isEnabled(){
         return $this->habilitado;
+    }
+
+    public function isVisibleMobile(){
+        return $this->is_visible_mobile;
     }
 
     public function medida() {

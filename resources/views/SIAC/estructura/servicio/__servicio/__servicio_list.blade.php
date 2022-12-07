@@ -6,8 +6,9 @@
                 <thead>
                     <tr role="row">
                         <th class="sorting_asc" aria-sort="ascending" aria-label="Name: activate to sort column descending">ID</th>
-                        <th class="sorting" >Servicio</th>
-                        <th class="sorting" >Subarea</th>
+                        <th class="sorting">Servicio</th>
+                        <th class="sorting">Mobile</th>
+                        <th class="sorting">Subarea</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -16,7 +17,8 @@
                     <tr>
                         <td style="width: 5% !important;">{{$item->id}}</td>
                         <td style="width: 45% !important;">{{$item->servicio}}</td>
-                        <td style="width: 35% !important;"><div class="w-50">{{ $item->subarea->subarea.' - '.$item->subarea->area->area.' - '.$item->subarea->area->dependencia->dependencia }}</div></td>
+                        <td style="width: 1% !important;">{{$item->is_visible_mobile}}</td>
+                        <td style="width: 34% !important;"><div class="w-50">{{ $item->subarea->subarea.' - '.$item->subarea->area->area.' - '.$item->subarea->area->dependencia->dependencia }}</div></td>
                         <td class="table-action" style="width: 15% !important;">
                             <div class="button-list ">
                                 @include('shared.ui_kit.__edit_item')

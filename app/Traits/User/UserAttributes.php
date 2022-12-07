@@ -18,6 +18,11 @@ trait UserAttributes
 
     protected $disk1 = 'profile';
 
+    public function isVerifyMail(): bool{
+        return $this->hasVerifiedEmail();
+    }
+
+
     public function isRole($role): bool{
         return $this->hasRole($role);
     }
