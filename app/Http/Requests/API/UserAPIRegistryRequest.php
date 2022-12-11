@@ -29,7 +29,7 @@ class UserAPIRegistryRequest extends FormRequest
      */
     public function rules(){
         return [
-                'curp'       => ['unique:users', new IsCURPRule() ],
+                'curp'       => ['required', 'unique:users', new IsCURPRule() ],
                 'email'      => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'ap_paterno' => ['required', 'string'],
                 'ap_materno' => ['required', 'string'],
@@ -49,12 +49,14 @@ class UserAPIRegistryRequest extends FormRequest
         $user =  User::create([
             'username'   => strtoupper(trim($Username)),
             'email'      => $Email ,
-            'password'   => Hash::make(strtoupper(trim($Username))),
+            'password'   => Hash::make(trim($Username)),
             'curp'       => strtoupper(trim( $this->curp )),
             'ap_paterno' => strtoupper(trim( $this->ap_paterno )),
             'ap_materno' => strtoupper(trim( $this->ap_materno )),
             'nombre'     => strtoupper(trim( $this->nombre )),
+            'genero'     => $this->genero ?? 0,
         ]);
+
         $role_invitado = Role::findByName('Invitado');
         $user->roles()->attach($role_invitado);
         $role_ciudadano = Role::findByName('CIUDADANO');
