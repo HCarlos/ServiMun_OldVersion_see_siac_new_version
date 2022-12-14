@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\API\UserAPIImageRequest;
 use App\Http\Requests\API\UserAPIRegistryRequest;
 use App\User;
 use Illuminate\Http\JsonResponse;
@@ -76,6 +77,7 @@ class UserAPIController extends Controller{
         $response = ["status"=>0, "msg"=>""];
         $user = $request->manage();
         if ($user){
+
             $Token = $user->createToken($request->device_name);
             $token = $Token->plainTextToken;
             $user->sendEmailVerificationNotification();
@@ -94,6 +96,18 @@ class UserAPIController extends Controller{
         return response()->json($response);
     }
 
+    public function userImage(UserAPIImageRequest $request):JsonResponse {
+        $response = ["status"=>0, "msg"=>""];
+
+//        dd( $request->all() );
+
+        $user = $request->manage();
+        if ($user){
+            $response["status"] = 1;
+            $response["msg"] = "Image Actualizada";
+        }
+        return response()->json($response);
+    }
 
 
 }

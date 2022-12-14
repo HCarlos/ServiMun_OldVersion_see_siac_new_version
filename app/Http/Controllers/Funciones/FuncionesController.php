@@ -174,6 +174,9 @@ class FuncionesController extends Controller
         return $image;
     }
 
+
+
+
     public function deleteImageDropZone($image,$storage){
         $e1 = Storage::disk($storage)->exists($image);
         if ($e1) {
@@ -225,6 +228,13 @@ class FuncionesController extends Controller
             return 'home';
         }
     }
+
+
+
+
+
+
+
 
 
 }

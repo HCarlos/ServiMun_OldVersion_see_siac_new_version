@@ -31,6 +31,7 @@ Route::group(['prefix' => 'v1'], function () {
     Route::post('/login', [UserAPIController::class, 'userLogin']);
     Route::post('/mobile/token', [UserAPIController::class, 'userMobileToken']);
     Route::post('/register', [UserAPIController::class, 'register']);
+    Route::post('/user/image', [UserAPIController::class, 'userImage']);
 
     Route::middleware('auth:sanctum')->get('/user', function(Request $request){
         return $request->user();
@@ -39,6 +40,7 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('/users', [UserAPIController::class, 'users'])->name('users');
         Route::get('/user/{user}', [UserAPIController::class, 'userId']);
         Route::get('/user/curp/{curp}', [UserAPIController::class, 'userCURP']);
+
     });
 
 
