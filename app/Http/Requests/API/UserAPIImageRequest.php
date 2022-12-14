@@ -51,15 +51,13 @@ class UserAPIImageRequest extends FormRequest{
             $user = User::find($this->user_id);
 
             $image = $this->photo;
-            dd ( $image );
-//            $image = base64_encode($this->photo);
             $imageContent = $this->imageBase64Content($image);
 
             $file = $imageContent;
             $fileName = $user->id.'.png';
             $fileName2 = '_'.$user->id.'.png';
             $thumbnail = '_thumb_'.$user->id.'.png';
-            Storage::disk($this->disk)->put($fileName, File::get($file) );
+            Storage::disk($this->disk)->put($fileName, $file );
             $this->F->fitImage( $file, $fileName2, 300, 300, true, "profile","PROFILE_ROOT" );
             $this->F->fitImage( $file, $thumbnail, 128, 128, true, "profile","PROFILE_ROOT", "png" );
 

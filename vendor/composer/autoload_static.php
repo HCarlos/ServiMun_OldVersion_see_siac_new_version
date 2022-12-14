@@ -843,6 +843,7 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Http\\Requests\\API\\UserAPIImageRequest' => __DIR__ . '/../..' . '/app/Http/Requests/API/UserAPIImageRequest.php',
         'App\\Http\\Requests\\API\\UserAPIRegistryRequest' => __DIR__ . '/../..' . '/app/Http/Requests/API/UserAPIRegistryRequest.php',
         'App\\Http\\Requests\\DenunciaCiudadana\\DenunciaCiudadanaRequest' => __DIR__ . '/../..' . '/app/Http/Requests/DenunciaCiudadana/DenunciaCiudadanaRequest.php',
         'App\\Http\\Requests\\Denuncia\\AfiliacionRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Denuncia/AfiliacionRequest.php',

@@ -113,6 +113,7 @@ return array(
     'App\\Http\\Middleware\\TrimStrings' => $baseDir . '/app/Http/Middleware/TrimStrings.php',
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
+    'App\\Http\\Requests\\API\\UserAPIImageRequest' => $baseDir . '/app/Http/Requests/API/UserAPIImageRequest.php',
     'App\\Http\\Requests\\API\\UserAPIRegistryRequest' => $baseDir . '/app/Http/Requests/API/UserAPIRegistryRequest.php',
     'App\\Http\\Requests\\DenunciaCiudadana\\DenunciaCiudadanaRequest' => $baseDir . '/app/Http/Requests/DenunciaCiudadana/DenunciaCiudadanaRequest.php',
     'App\\Http\\Requests\\Denuncia\\AfiliacionRequest' => $baseDir . '/app/Http/Requests/Denuncia/AfiliacionRequest.php',
