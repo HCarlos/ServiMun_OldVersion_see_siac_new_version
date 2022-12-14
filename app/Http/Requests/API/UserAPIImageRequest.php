@@ -50,8 +50,8 @@ class UserAPIImageRequest extends FormRequest{
 
             $user = User::find($this->user_id);
 
-//            $image = $this->photo;
-            $image = base64_encode($this->photo);
+            $image = $this->photo;
+//            $image = base64_encode($this->photo);
             $imageContent = $this->imageBase64Content($image);
 
             $file = $imageContent;
