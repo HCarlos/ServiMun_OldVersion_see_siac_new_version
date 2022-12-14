@@ -73,7 +73,7 @@ class UserAPIImageRequest extends FormRequest{
             return $user;
 
         }catch (Exception $e){
-            return null;
+            return ["status"=>0, "msg"=>$e->getMessage()];
         }
         return redirect($this->redirectTo);
 
