@@ -51,6 +51,7 @@ class UserAPIImageRequest extends FormRequest{
             $user = User::find($this->user_id);
 
             $image = $this->photo;
+            dd ( $image );
 //            $image = base64_encode($this->photo);
             $imageContent = $this->imageBase64Content($image);
 
@@ -75,7 +76,7 @@ class UserAPIImageRequest extends FormRequest{
         }catch (Exception $e){
             return ["status"=>0, "msg"=>$e->getMessage()];
         }
-        return redirect($this->redirectTo);
+        return $user;
 
 
     }
