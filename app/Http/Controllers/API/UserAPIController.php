@@ -104,7 +104,7 @@ class UserAPIController extends Controller{
         $user = $request->manage();
         if ($user){
             $response["status"] = 1;
-            $response["msg"] = "Image Actualizada";
+            $response["msg"] = "Imagen actualizada con éxito";
         }
         return response()->json($response);
     }
