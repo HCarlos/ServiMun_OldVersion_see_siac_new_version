@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\API\UserAPIChangePasswordRequest;
 use App\Http\Requests\API\UserAPIImageRequest;
 use App\Http\Requests\API\UserAPIRegistryRequest;
 use App\User;
@@ -98,9 +99,6 @@ class UserAPIController extends Controller{
 
     public function userImage(UserAPIImageRequest $request):JsonResponse {
         $response = ["status"=>0, "msg"=>""];
-
-//        dd( $request->all() );
-
         $user = $request->manage();
         if ($user){
             $response["status"] = 1;
@@ -108,6 +106,19 @@ class UserAPIController extends Controller{
         }
         return response()->json($response);
     }
+
+    public function userChangePassword(UserAPIChangePasswordRequest $request):JsonResponse {
+        $response = ["status"=>0, "msg"=>""];
+
+
+        $user = $request->manage();
+        if ($user){
+            $response["status"] = 1;
+            $response["msg"] = "Password actualizado con éxito";
+        }
+        return response()->json($response);
+    }
+
 
 
 }

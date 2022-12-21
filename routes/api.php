@@ -40,7 +40,7 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('/user/{user}', [UserAPIController::class, 'userId']);
         Route::get('/user/curp/{curp}', [UserAPIController::class, 'userCURP']);
         Route::post('/user/image', [UserAPIController::class, 'userImage']);
-
+        Route::post('/user/change/password', [UserAPIController::class, 'userChangePassword']);
     });
 
 

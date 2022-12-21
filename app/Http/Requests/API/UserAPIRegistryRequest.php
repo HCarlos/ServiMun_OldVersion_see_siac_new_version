@@ -82,9 +82,13 @@ class UserAPIRegistryRequest extends FormRequest
 
 
     public function failedValidation(Validator $validator){
+        $err = "";
+        foreach ($validator->errors()->getMessages() as $ss){
+            $err .= $err == "" ?  $ss[0] : " :: ". $ss[0];
+        }
         throw new HttpResponseException(response()->json([
             'status' => 0,
-            'msg'    => 'Error en los datos: '.$validator->errors(),
+            'msg'    => $err,
         ]));
     }
 
