@@ -35,6 +35,6 @@ class CurrentPassword implements Rule{
      */
     public function message()
     {
-        return 'El Password actual es incorrecto...';
+        return 'El Password Actual es incorrecto, puede cerrar e iniciar sesión y volver a intentarlo.';
     }
 }
