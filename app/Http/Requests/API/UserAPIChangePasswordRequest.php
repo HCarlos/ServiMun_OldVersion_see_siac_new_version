@@ -66,12 +66,11 @@ class UserAPIChangePasswordRequest extends FormRequest
     {
         try {
             app()['cache']->forget('spatie.permission.cache');
-            $user = Auth::user();
+//            $user = Auth::user();
             $user = User::find($this->user_id);
-
             $user->password = bcrypt($this->password);
             $user->save();
-//            auth()->login($user);
+            Auth::guard("web")->login($user,TRUE);
         } catch (QueryException $e) {
             return ["status"=>0, "msg"=>$e->getMessage()];
         }

@@ -109,8 +109,6 @@ class UserAPIController extends Controller{
 
     public function userChangePassword(UserAPIChangePasswordRequest $request):JsonResponse {
         $response = ["status"=>0, "msg"=>""];
-
-
         $user = $request->manage();
         if ($user){
             $response["status"] = 1;
