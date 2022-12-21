@@ -35,6 +35,6 @@ class CurrentPassword implements Rule{
      */
     public function message()
     {
-        return 'El Password actual es incorrecto';
+        return 'El Password actual es incorrecto...';
     }
 }
