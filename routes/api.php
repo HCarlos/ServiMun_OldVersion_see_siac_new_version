@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\DenunciaAPIController;
 use App\Http\Controllers\API\UserAPIController;
 use App\User;
 use Illuminate\Support\Facades\Auth;
@@ -36,11 +37,18 @@ Route::group(['prefix' => 'v1'], function () {
         return $request->user();
     });
     Route::group(['middleware' => 'auth:sanctum'], function () {
+
+        // Useers should
         Route::get('/users', [UserAPIController::class, 'users'])->name('users');
         Route::get('/user/{user}', [UserAPIController::class, 'userId']);
         Route::get('/user/curp/{curp}', [UserAPIController::class, 'userCURP']);
         Route::post('/user/image', [UserAPIController::class, 'userImage']);
         Route::post('/user/change/password', [UserAPIController::class, 'userChangePassword']);
+
+        // Denunciases should
+        Route::post('/denuncia/add', [DenunciaAPIController::class, 'addDenunciaMobile']);
+
+
     });
 
 

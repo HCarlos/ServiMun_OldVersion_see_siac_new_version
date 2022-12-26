@@ -151,6 +151,21 @@ return [
             'colonia_tipocomunidad'  => 'colonia_tipocomunidad',
 
         ],
+        'mobiles' => [
+            'users'                      => 'users',
+            'ubicaciones'                => 'ubicaciones',
+            'subareas'                   => 'subareas',
+            'areas'                      => 'areas',
+            'dependencias'               => 'dependencias',
+            'servicios'                  => 'servicios',
+            'denunciamobile'             => 'denunciamobile',
+            'denunciamobile_imagemobile' => 'denunciamobile_imagemobile',
+            'serviciomobile'             => 'serviciomobile',
+            'imagemobile'                => 'imagemobile',
+            'imagemobile_parent'         => 'imagemobile_parent',
+            'imagemobile_user'           => 'imagemobile_user',
+        ]
+
     ],
 
     'style' => [
