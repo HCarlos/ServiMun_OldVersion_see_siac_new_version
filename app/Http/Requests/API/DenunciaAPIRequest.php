@@ -7,6 +7,7 @@ use App\Http\Controllers\Funciones\FuncionesController;
 use App\Models\Denuncias\Imagene;
 use App\Models\Mobiles\Denunciamobile;
 use App\Models\Mobiles\Imagemobile;
+use App\Models\Mobiles\Serviciomobile;
 use App\Rules\CurrentPassword;
 use App\User;
 use Carbon\Carbon;
@@ -46,7 +47,7 @@ class DenunciaAPIRequest extends FormRequest{
             'imagen' => ['required'],
             'denuncia' => ['required','min:5'],
             'latitud' => ['required','numeric','gt:0'],
-            'longitud' => ['required','numeric','gt:0'],
+            'longitud' => ['required','numeric','lt:0'],
         ];
     }
 
@@ -61,7 +62,7 @@ class DenunciaAPIRequest extends FormRequest{
             'latitud.gt' => 'La :attribute debe ser mayor que cero.',
             'longitud.required' => 'Se requiere la :attribute.',
             'longitud.numeric' => 'La :attribute debe ser un valor numérico.',
-            'longitud.gt' => 'La :attribute debe ser mayor que cero.',
+            'longitud.lt' => 'La :attribute debe ser menor que cero.',
         ];
     }
 
@@ -80,12 +81,15 @@ class DenunciaAPIRequest extends FormRequest{
             app()['cache']->forget('spatie.permission.cache');
             $fechaActual = Carbon::now()->format('Y-m-d h:m:s');
 
+            $Ser = Serviciomobile::all()->where(servicio,trim($this->servicio))->first();
+
+
             $DenMob = Denunciamobile::create([
                 'fecha'             => $fechaActual,
                 'denuncia'          => strtoupper(trim($this->denuncia)),
                 'tipo_mobile'       => strtoupper(trim($this->tipo_mobile)),
                 'marca_mobile'      => strtoupper(trim($this->marca_mobile)),
-                'serviciomobile_id' => $this->servicio_id,
+                'serviciomobile_id' => $Ser ? $Ser->id : 1,
                 'ubicacion_id'      => $this->ubicacion_id,
                 'ubicacion'         => strtoupper(trim($this->ubicacion)),
                 'ubicacion_google'  => strtoupper(trim($this->ubicacion_google)),
