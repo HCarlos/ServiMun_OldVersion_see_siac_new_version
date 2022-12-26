@@ -26,10 +26,13 @@ class DenunciaAPIController extends Controller{
         return response()->json($response);
     }
 
-    public function getDenuncias(int $user_id): JsonResponse{
+    public function getDenuncias(Request $request): JsonResponse{
         $response = ["status"=>0, "msg"=>""];
+        $data = (object) $request->all();
+        $user_id = $data->user_id;
+
         $dens = Denunciamobile::select(['id','denuncia','fecha','latitud','longitud','ubicacion','ubicacion_google','user_id','serviciomobile_id'])
-            ->where("user_id",trim($user_id))
+            ->where("user_id",$user_id)
             ->get();
         if ($dens){
             $response["status"] = 1;
