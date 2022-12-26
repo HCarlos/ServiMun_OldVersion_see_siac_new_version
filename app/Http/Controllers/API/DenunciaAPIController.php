@@ -9,6 +9,7 @@ use App\Models\Mobiles\Denunciamobile;
 use App\Models\Mobiles\Imagemobile;
 use App\Models\Mobiles\Serviciomobile;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -40,21 +41,30 @@ class DenunciaAPIController extends Controller{
             $response["msg"] = "OK";
 
             $denucias = array();
+
             foreach ($dens as $den){
+
+
                 $Ser = Serviciomobile::find($den->serviciomobile_id);
+
                 $imagenes = Imagemobile::select(['id','fecha','filename','filename_png','filename_thumb','user_id','denunciamobile_id','latitud','longitud']
                 )->where("denunciamobile_id",$den->id)
                     ->OrderByDesc("id")
                     ->get();
+
                 foreach ($imagenes as $imagen){
+                    $fecha = (new Carbon($imagen->fecha))->format('d-m-Y H:i:s');
+                    $imagen['fecha'] = $fecha;
                     $imagen["url"] =config("atemun.public_url")."/storage/mobile/denuncia/".$imagen->filename;
                     $imagen["url_png"] =config("atemun.public_url")."/storage/mobile/denuncia/".$imagen->filename_png;
                     $imagen["url_thumb"] =config("atemun.public_url")."/storage/mobile/denuncia/".$imagen->filename_thumb;
                 }
+
+                $fecha = (new Carbon($den->fecha))->format('d-m-Y H:i:s');
                 $d = [
                     'id' => $den->id,
                     'denuncia' => $den->denuncia,
-                    'fecha' => $den->fecha,
+                    'fecha' => $fecha,
                     'latitud' => $den->latitud,
                     'longitud' => $den->longitud,
                     'ubicacion' => $den->ubicacion,

@@ -85,7 +85,7 @@ class DenunciaAPIRequest extends FormRequest{
 
             $Ser = Serviciomobile::all()->where("servicio",trim($this->servicio))->first();
 
-            $filters =$this->ubicacion;
+            $filters =$this->ubicacion_google;
             $F           = new FuncionesController();
             $tsString    = $F->string_to_tsQuery( strtoupper($filters),' & ');
             $Ubi = Ubicacion::query()
@@ -100,7 +100,7 @@ class DenunciaAPIRequest extends FormRequest{
                 'marca_mobile'      => strtoupper(trim($this->marca_mobile)),
                 'serviciomobile_id' => $Ser ? $Ser->id : 1,
                 'ubicacion_id'      => $Ubi ? $Ubi->id : $this->ubicacion_id,
-                'ubicacion'         => strtoupper(trim($this->ubicacion)),
+                'ubicacion'         => strtoupper(trim($Ubi->Ubicacion ?? '')),
                 'ubicacion_google'  => strtoupper(trim($this->ubicacion_google)),
                 'latitud'           => $this->latitud,
                 'longitud'           => $this->longitud,

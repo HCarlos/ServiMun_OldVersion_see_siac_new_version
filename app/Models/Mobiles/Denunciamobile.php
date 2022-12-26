@@ -20,7 +20,6 @@ class Denunciamobile extends Model{
     protected $fillable = [
         'id',
         'denuncia',
-        'fecha',
         'tipo_mobile',
         'marca_mobile',
         'serviciomobile_id',
@@ -35,7 +34,7 @@ class Denunciamobile extends Model{
         'searchtextubicacion',
     ];
 
-    protected $dates = ['fecha' => 'datetime:d-m-Y'];
+    protected $dates = ['fecha' => 'datetime:d-m-Y H:m:s'];
 
     public function scopeSearch($query, $search){
         if (!$search || $search == "" || $search == null) return $query;
