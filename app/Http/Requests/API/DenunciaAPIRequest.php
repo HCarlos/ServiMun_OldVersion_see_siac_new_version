@@ -4,6 +4,7 @@ namespace App\Http\Requests\API;
 
 use App\Classes\MessageAlertClass;
 use App\Http\Controllers\Funciones\FuncionesController;
+use App\Models\Catalogos\Domicilios\Ubicacion;
 use App\Models\Denuncias\Imagene;
 use App\Models\Mobiles\Denunciamobile;
 use App\Models\Mobiles\Imagemobile;
@@ -78,11 +79,19 @@ class DenunciaAPIRequest extends FormRequest{
     public function manage()
     {
         try {
+            ini_set('max_execution_time', 300000);
             app()['cache']->forget('spatie.permission.cache');
             $fechaActual = Carbon::now()->format('Y-m-d h:m:s');
 
             $Ser = Serviciomobile::all()->where("servicio",trim($this->servicio))->first();
 
+            $filters =$this->ubicacion;
+            $F           = new FuncionesController();
+            $tsString    = $F->string_to_tsQuery( strtoupper($filters),' & ');
+            $Ubi = Ubicacion::query()
+                ->search($tsString)
+                ->orderBy('id')
+                ->first();
 
             $DenMob = Denunciamobile::create([
                 'fecha'             => $fechaActual,
@@ -90,13 +99,14 @@ class DenunciaAPIRequest extends FormRequest{
                 'tipo_mobile'       => strtoupper(trim($this->tipo_mobile)),
                 'marca_mobile'      => strtoupper(trim($this->marca_mobile)),
                 'serviciomobile_id' => $Ser ? $Ser->id : 1,
-                'ubicacion_id'      => $this->ubicacion_id,
+                'ubicacion_id'      => $Ubi ? $Ubi->id : $this->ubicacion_id,
                 'ubicacion'         => strtoupper(trim($this->ubicacion)),
                 'ubicacion_google'  => strtoupper(trim($this->ubicacion_google)),
                 'latitud'           => $this->latitud,
                 'longitud'           => $this->longitud,
                 'user_id'           => $this->user_id,
             ]);
+
             if ( $DenMob ){
                 $this->manageImage($DenMob);
             }else{
@@ -121,9 +131,10 @@ class DenunciaAPIRequest extends FormRequest{
             $imageContent = $this->imageBase64Content($image);
 
             $file = $imageContent;
-            $fileName = $denunciamobile->id.'.png';
-            $fileName2 = '_'.$denunciamobile->id.'.png';
-            $thumbnail = '_thumb_'.$denunciamobile->id.'.png';
+            $randomImageNameSingular = $this->randomImageNameSingular();
+            $fileName = $randomImageNameSingular.'_'.$denunciamobile->id.'.png';
+            $fileName2 = '_'.$randomImageNameSingular.'_'.$denunciamobile->id.'.png';
+            $thumbnail = '_thumb_'.$randomImageNameSingular.'_'.$denunciamobile->id.'.png';
 //            Storage::disk($this->disk)->put($fileName, File::get($file) );
             Storage::disk($this->disk)->put($fileName, $file );
             $this->F->fitImage( $file, $fileName2, 300, 300, true, $this->disk,"MOBILE_DENUNCIA_ROOT" );
@@ -142,10 +153,11 @@ class DenunciaAPIRequest extends FormRequest{
                 'longitud'          => $denunciamobile->longitud,
             ];
             $imm = Imagemobile::create($Item);
-            if ($imm && $denunciamobile){
+            if ($imm){
                 $imm->denuncias()->attach($denunciamobile);
                 $imm->users()->attach($denunciamobile->user_id);
                 $denunciamobile->Imagemobiles()->attach($imm);
+                $denunciamobile->ciudadanos()->attach($denunciamobile->user_id);
                 return $imm;
             }
             return ["status"=>0, "msg"=>"Error de imagen desconocido..."];
@@ -170,6 +182,9 @@ class DenunciaAPIRequest extends FormRequest{
         return Str::random(10) . '.' . 'png';
     }
 
+    private function randomImageNameSingular() {
+        return Str::random(25) ;
+    }
 
 
 

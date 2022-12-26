@@ -11,8 +11,8 @@ class CreateDenunciamobileTable extends Migration
      *
      * @return void
      */
-    public function up()
-    {
+    public function up(){
+
         $tableNames = config('atemun.table_names.mobiles');
 
         if (! Schema::hasTable($tableNames['serviciomobile'])) {

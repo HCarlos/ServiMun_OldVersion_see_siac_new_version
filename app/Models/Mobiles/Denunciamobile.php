@@ -2,6 +2,7 @@
 
 namespace App\Models\Mobiles;
 
+use App\Http\Controllers\Funciones\FuncionesController;
 use App\Models\Catalogos\Domicilios\Ubicacion;
 use App\Models\Catalogos\Origen;
 use App\Traits\Denuncia\DenunciaTrait;
@@ -11,11 +12,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Denunciamobile extends Model{
 
-    use SoftDeletes;
+//    use SoftDeletes;
 
     protected $guard_name = 'web';
     protected $table = 'denunciamobile';
-
 
     protected $fillable = [
         'id',
@@ -30,12 +30,23 @@ class Denunciamobile extends Model{
         'latitud',
         'longitud',
         'altitud',
+        'megusta',
         'user_id',
+        'searchtextubicacion',
     ];
 
-    //    protected $hidden = ['deleted_at','created_at','updated_at'];
     protected $dates = ['fecha' => 'datetime:d-m-Y'];
-//    protected $casts = ['cerrado'=>'boolean','firmado'=>'boolean','favorable'=>'boolean',];
+
+    public function scopeSearch($query, $search){
+        if (!$search || $search == "" || $search == null) return $query;
+        $search = strtoupper($search);
+        $filters  = $search;
+        $F        = new FuncionesController();
+        $tsString = $F->string_to_tsQuery( strtoupper($filters),' & ');
+        return $query->whereRaw("searchtextubicacion @@ to_tsquery('spanish', ?)", [$tsString])
+            ->orderByRaw("ubicacion ASC");
+    }
+
 
     public function Servicio(){
         return $this->hasOne(Serviciomobile::class,'id','serviciomobile_id');
@@ -47,6 +58,10 @@ class Denunciamobile extends Model{
 
     public function User(){
         return $this->hasOne(User::class,'id','user_id');
+    }
+
+    public function ciudadanos(){
+        return $this->belongsToMany(User::class,'ciudadanomobile_denunciamobile','denunciamobile_id','ciudadanomobile_id');
     }
 
     public function Imagemobiles(){
