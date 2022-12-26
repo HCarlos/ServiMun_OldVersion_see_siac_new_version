@@ -81,7 +81,7 @@ class DenunciaAPIRequest extends FormRequest{
             app()['cache']->forget('spatie.permission.cache');
             $fechaActual = Carbon::now()->format('Y-m-d h:m:s');
 
-            $Ser = Serviciomobile::all()->where(servicio,trim($this->servicio))->first();
+            $Ser = Serviciomobile::all()->where("servicio",trim($this->servicio))->first();
 
 
             $DenMob = Denunciamobile::create([
