@@ -81,7 +81,6 @@ class DenunciaAPIRequest extends FormRequest{
         try {
             ini_set('max_execution_time', 300000);
             app()['cache']->forget('spatie.permission.cache');
-            $fechaActual = Carbon::now()->format('Y-m-d h:m:s');
 
             $Ser = Serviciomobile::all()->where("servicio",trim($this->servicio))->first();
 
@@ -94,13 +93,13 @@ class DenunciaAPIRequest extends FormRequest{
                 ->first();
 
             $DenMob = Denunciamobile::create([
-                'fecha'             => $fechaActual,
+                'fecha'             => now(),
                 'denuncia'          => strtoupper(trim($this->denuncia)),
                 'tipo_mobile'       => strtoupper(trim($this->tipo_mobile)),
                 'marca_mobile'      => strtoupper(trim($this->marca_mobile)),
                 'serviciomobile_id' => $Ser ? $Ser->id : 1,
                 'ubicacion_id'      => $Ubi ? $Ubi->id : $this->ubicacion_id,
-                'ubicacion'         => strtoupper(trim($Ubi->Ubicacion ?? '')),
+                'ubicacion'         => strtoupper(trim($Ubi->Ubicacion ?? $this->ubicacion_google)),
                 'ubicacion_google'  => strtoupper(trim($this->ubicacion_google)),
                 'latitud'           => $this->latitud,
                 'longitud'           => $this->longitud,
