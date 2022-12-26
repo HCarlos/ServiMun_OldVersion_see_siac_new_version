@@ -33,6 +33,7 @@ class DenunciaAPIController extends Controller{
 
         $dens = Denunciamobile::select(['id','denuncia','fecha','latitud','longitud','ubicacion','ubicacion_google','user_id','serviciomobile_id'])
             ->where("user_id",$user_id)
+            ->OrderByDesc("id")
             ->get();
         if ($dens){
             $response["status"] = 1;
@@ -43,6 +44,7 @@ class DenunciaAPIController extends Controller{
                 $Ser = Serviciomobile::find($den->serviciomobile_id);
                 $imagenes = Imagemobile::select(['id','fecha','filename','filename_png','filename_thumb','user_id','denunciamobile_id','latitud','longitud']
                 )->where("denunciamobile_id",$den->id)
+                    ->OrderByDesc("id")
                     ->get();
                 foreach ($imagenes as $imagen){
                     $imagen["url"] =config("atemun.public_url")."/storage/mobile/denuncia/".$imagen->filename;
