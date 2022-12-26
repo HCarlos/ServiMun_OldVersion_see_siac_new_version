@@ -47,7 +47,7 @@ Route::group(['prefix' => 'v1'], function () {
 
         // Denunciases should
         Route::post('/denuncia/add', [DenunciaAPIController::class, 'addDenunciaMobile']);
-        Route::get('/denuncia/{user_id}', [DenunciaAPIController::class, 'getDenuncias']);
+        Route::post('/denuncia/getlist', [DenunciaAPIController::class, 'getDenuncias']);
 
 
     });
