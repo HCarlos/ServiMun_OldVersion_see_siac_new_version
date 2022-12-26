@@ -20,6 +20,7 @@ class Denunciamobile extends Model{
     protected $fillable = [
         'id',
         'denuncia',
+        'fecha',
         'tipo_mobile',
         'marca_mobile',
         'serviciomobile_id',
