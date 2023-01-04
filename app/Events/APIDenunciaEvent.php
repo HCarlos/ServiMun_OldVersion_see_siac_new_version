@@ -34,7 +34,7 @@ class APIDenunciaEvent
     }
 
     public function broadcastOn(){
-        return ['api-channel'];
+        return ['test-channel'];
     }
 
     public function broadcastAs()
@@ -62,7 +62,7 @@ class APIDenunciaEvent
         }
 
         $Obj = DB::table('logs')->insert([
-            'model_name'     => 'denuncias',
+            'model_name'     => 'denuncias_mobile',
             'model_id'       => $this->denuncia_id,
             'trigger_status' => $triger_status,
             'trigger_type'   => $this->trigger_type,

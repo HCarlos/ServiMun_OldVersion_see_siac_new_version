@@ -160,7 +160,6 @@ class DenunciaAPIRequest extends FormRequest{
                 $denunciamobile->Imagemobiles()->attach($imm);
                 $denunciamobile->ciudadanos()->attach($denunciamobile->user_id);
                 event(new APIDenunciaEvent($denunciamobile->id, $denunciamobile->user_id,0));
-
                 return $imm;
             }
             return ["status"=>0, "msg"=>"Error de imagen desconocido..."];

@@ -40,9 +40,7 @@ jQuery(function($) {
                     }
                     console.log(data.denuncia_id+" :: "+data.user_id);
                 }
-            });
-
-        window.Echo.channel('api-channel')
+            })
             .listen('.APIDenunciaEvent', (data) => {
                 if ( parseInt(data.status) === 200 ){
                     if ( $("#alertNotificationImageMobile") ) {
@@ -52,6 +50,7 @@ jQuery(function($) {
                     console.log(data.denuncia_id+" :: "+data.user_id);
                 }
             });
+
 
 
 
