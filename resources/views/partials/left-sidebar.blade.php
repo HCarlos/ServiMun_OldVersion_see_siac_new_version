@@ -337,9 +337,30 @@
                 </ul>
 
             </li>
+{{--            @if (Auth::user()->hasRole('Administrator|SysOp'))--}}
+{{--                <li class="side-nav-item">--}}
+{{--                    <a href="{{route('listDenunciasMobile')}}">--}}
+{{--                        <i class="fas fa-money-check-alt"></i>--}}
+{{--                        <span class="badge badge-light float-right">{{ \App\Models\Mobiles\Denunciamobile::count() }}</span>--}}
+{{--                        <span>Asentamientos</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--            @endif--}}
+
+            @if (Auth::user()->hasRole('Administrator|SysOp') )
+                <li class="side-nav-item">
+                    <a href="{{ url('listDenunciasMobile') }}" class="side-nav-link">
+                        <i class="mdi dripicons-device-mobile"></i>
+                        <span class="badge badge-light float-right">{{ \App\Models\Mobiles\Denunciamobile::count() }}</span>
+                        <span>Mobile</span>
+                    </a>
+                </li>
+            @endif
+
+
 
         </ul>
-        @include('partials.aviso-privacidad-panel')
+{{--        @include('partials.aviso-privacidad-panel')--}}
         <div class="clearfix"></div>
     @endguest
     </div>

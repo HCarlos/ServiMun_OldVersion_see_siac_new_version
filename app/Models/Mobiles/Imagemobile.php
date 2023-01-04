@@ -3,6 +3,7 @@
 namespace App\Models\Mobiles;
 
 use App\Traits\Denuncia\ImageneTrait;
+use App\Traits\Denuncia\ImagenMobileTrait;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Imagemobile extends Model{
 
     use SoftDeletes;
-    use ImageneTrait;
+    use ImagenMobileTrait;
 
     protected $guard_name = 'web';
     protected $table = 'imagemobile';

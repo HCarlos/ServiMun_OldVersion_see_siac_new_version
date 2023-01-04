@@ -30,6 +30,23 @@ jQuery(function($) {
                 }
             }
         );
+
+        window.Echo.channel('api-channel')
+            .listen('.APIDenunciaEvent', (data) => {
+                    if ( parseInt(data.status) === 200 ){
+                        if ( $("#alertNotificationImageMobile").hide() ) {
+                            $("#alertNotificationImageMobile").show();
+                            $("#labelTextMobile").html("Acaba de llegar uno nuevo...");
+                        }
+                        console.log(data.denuncia_id+" :: "+data.user_id);
+                    }
+                }
+            );
+
+
+
+
+
     });
 });
 

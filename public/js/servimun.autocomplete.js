@@ -138,21 +138,6 @@ jQuery(function($) {
             }
         }
 
-        // function clearObjAll(){
-        //     if ( $("#ubicacion_id") )               $("#ubicacion_id").val(0);
-        //     if ( $("#ubicacion_id_span") )          $("#ubicacion_id_span").val("");
-        //     if ( $("#ubicacion_nueva_id") )         $("#ubicacion_nueva_id").val(0);
-        //     if ( $("#ubicacion") )                  $("#ubicacion").val("");
-        //     if ( $("#usuario_domicilio") )          $("#usuario_domicilio").val("");
-        //     if ( $("#usuario_telefonos") )          $("#usuario_telefonos").val("");
-        //     if ( $("#usuario_id") )                 $("#usuario_id").val(0);
-        //     if ( $("#usuario_id") )                 $("#lstAsigns").empty();
-        //     if ( $("#listTarget") )                 $("#listTarget").val(0);
-        //     if ( $("#calle_id") )                   $("#calle_id").val(0);
-        //     if ( $("#colonia_id") )                 $("#colonia_id").val(0);
-        //     //if ( $("#search_autocomplete_calle") )  $("#search_autocomplete_calle").val("");
-        // }
-
         function getRolesFromUser(Obj, Item, data){
             var d = data.data;
             $.get(  $("#getItems").val()+d.id, function( dato ) {

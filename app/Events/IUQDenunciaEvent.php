@@ -43,7 +43,6 @@ class IUQDenunciaEvent implements ShouldBroadcast{
         return ['test-channel'];
     }
 
-
     public function broadcastAs()
     {
         return 'IUQDenunciaEvent';

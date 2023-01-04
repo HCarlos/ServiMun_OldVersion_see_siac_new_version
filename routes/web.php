@@ -466,6 +466,8 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp|DELEGADO|CIUDADANO|
 
     Route::post('searchIdentical', 'Denuncia\DenunciaController@searchIdentical')->name('searchIdentical');
 
+    Route::get('listDenunciasMobile', 'Denuncia\DenunciaMobileController@index')->name('listDenunciasMobile');
+
 });
 
 

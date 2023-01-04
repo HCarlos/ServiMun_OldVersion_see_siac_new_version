@@ -42,7 +42,7 @@ class Serviciomobile extends Model{
     public function area() {
         return $this->hasOne(Area::class,'id','area_id');
     }
-    public function Depdendencia() {
+    public function Dependencia() {
         return $this->hasOne(Dependencia::class,'id','dependencia_id');
     }
 

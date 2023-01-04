@@ -147,6 +147,7 @@ class DenunciaController extends Controller{
         $this->msg = "Registro Guardado con éxito!";
         session(['msg' => $this->msg]);
         return Redirect::to('editDenuncia/'.$item->id);
+
     }
 
 
