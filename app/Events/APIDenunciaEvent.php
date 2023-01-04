@@ -16,25 +16,25 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class APIDenunciaEvent
-{
+class APIDenunciaEvent  implements ShouldBroadcast {
+
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    public $denuncia_id, $user_id, $trigger_type, $msg, $icon, $status;
+
+    public $denuncia_id, $user_id, $msg, $icon, $status;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($denuncia_id, $user_id, $trigger_type){
+    public function __construct($denuncia_id, $user_id){
         $this->denuncia_id  = $denuncia_id;
         $this->user_id      = $user_id;
-        $this->trigger_type = $trigger_type;
         $this->status       = 200;
     }
 
     public function broadcastOn(){
-        return ['test-channel'];
+        return ['api-channel'];
     }
 
     public function broadcastAs()
@@ -45,32 +45,23 @@ class APIDenunciaEvent
     public function broadcastWith(){
         $this->status = 200;
         $fecha = Carbon::now()->format('d-m-Y H:i:s');
-        if ($this->trigger_type==0){
-            $this->msg    =  strtoupper(Auth::user()->FullName)." ha CREADO una nueva denuncia mobile: ".$this->denuncia_id."  ".$fecha;
-            $this->icon   = "success";
-            $triger_status = "CREAR";
-        }
+        $user = User::find($this->user_id);
+        $this->msg    =  strtoupper($user->FullName)." ha CREADO una nueva denuncia mobile: ".$this->denuncia_id."  ".$fecha;
+        $this->icon   = "success";
+        $triger_status = "CREAR";
 
-        Log::alert("Evento: ".$this->msg);
-
-        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-            $ip = $_SERVER['HTTP_CLIENT_IP'];
-        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-        } else {
-            $ip = $_SERVER['REMOTE_ADDR'];
-        }
+        Log::alert("Evento Mobile: ".$this->msg);
 
         $Obj = DB::table('logs')->insert([
             'model_name'     => 'denuncias_mobile',
             'model_id'       => $this->denuncia_id,
             'trigger_status' => $triger_status,
-            'trigger_type'   => $this->trigger_type,
+            'trigger_type'   => 0,
             'message'        => $this->msg,
             'icon'           => $this->icon,
             'status'         => $this->status,
-            'ip'             => FuncionesController::getIp(),
-            'host'           => $ip,
+            'ip'             => 'Mobile',
+            'host'           => 'Mobile',
             'fecha'          => now(),
             'user_id'        => $this->user_id,
         ]);
@@ -78,14 +69,20 @@ class APIDenunciaEvent
         return [
             'denuncia_id'  => $this->denuncia_id,
             'user_id'      => $this->user_id,
-            'trigger_type' => $this->trigger_type,
             'msg'          => $this->msg,
             'icon'         => $this->icon,
             'status'       => $this->status,
         ];
 
 
-
+//        return [
+//            'denuncia_id'  => 1,
+//            'user_id'      => 2,
+//            'msg'          => "msg",
+//            'icon'         => "icon",
+//            'status'       => 200,
+//        ];
+//
 
 
     }

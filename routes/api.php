@@ -50,6 +50,14 @@ Route::group(['prefix' => 'v1'], function () {
         Route::post('/denuncia/getlist', [DenunciaAPIController::class, 'getDenuncias']);
 
 
+        Route::get('fire', function () {
+            // this fires the event
+            event(new App\Events\APIDenunciaEvent(1,1));
+            return "event fired";
+        });
+
+
+
     });
 
 

@@ -490,7 +490,7 @@ Route::get('/imprimir_denuncia_archivo/{uuid}', 'External\Denuncia\HojaDenunciaA
 Route::group(['middleware' => 'cors'], function(){
     Route::get('fire', function () {
         // this fires the event
-        event(new App\Events\InserUpdateDeleteEvent());
+        event(new App\Events\APIDenunciaEvent(1,1));
         return "event fired";
     });
 

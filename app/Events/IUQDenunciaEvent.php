@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Auth;
 class IUQDenunciaEvent implements ShouldBroadcast{
 
     use Dispatchable, InteractsWithSockets, SerializesModels;
+
     public $denuncia_id, $user_id, $trigger_type, $msg, $icon, $status;
     /**
      * Create a new event instance.

@@ -108,6 +108,7 @@ class DenunciaAPIRequest extends FormRequest{
                 'user_id'           => $this->user_id,
             ]);
 
+
             if ( $DenMob ){
                 $this->manageImage($DenMob);
             }else{
@@ -155,11 +156,11 @@ class DenunciaAPIRequest extends FormRequest{
             ];
             $imm = Imagemobile::create($Item);
             if ($imm){
+                event(new APIDenunciaEvent($denunciamobile->id, $denunciamobile->user_id));
                 $imm->denuncias()->attach($denunciamobile);
                 $imm->users()->attach($denunciamobile->user_id);
                 $denunciamobile->Imagemobiles()->attach($imm);
                 $denunciamobile->ciudadanos()->attach($denunciamobile->user_id);
-                event(new APIDenunciaEvent($denunciamobile->id, $denunciamobile->user_id,0));
                 return $imm;
             }
             return ["status"=>0, "msg"=>"Error de imagen desconocido..."];

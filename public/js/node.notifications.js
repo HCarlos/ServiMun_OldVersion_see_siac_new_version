@@ -34,32 +34,24 @@ jQuery(function($) {
             })
             .listen('.APIDenunciaEvent', (data) => {
                 if ( parseInt(data.status) === 200 ){
-                    if ( $("#alertNotificationImageMobile") ) {
+                    // if ( $("#alertNotificationImageMobile") ) {
                         $("#alertNotificationImageMobile").show();
                         $("#labelTextMobile").html("Acaba de llegar uno nuevo...");
-                    }
-                    console.log(data.denuncia_id+" :: "+data.user_id);
-                }
-            })
-            .listen('.APIDenunciaEvent', (data) => {
-                if ( parseInt(data.status) === 200 ){
-                    if ( $("#alertNotificationImageMobile") ) {
-                        $("#alertNotificationImageMobile").show();
-                        $("#labelTextMobile").html("Acaba de llegar uno nuevo...");
-                    }
-                    console.log(data.denuncia_id+" :: "+data.user_id);
+                    // }
+                    console.log(data.denuncia_id+" : Mobile : "+data.user_id);
                 }
             });
 
-
-
-
-
-        // if ( $("#alertNotificationImageMobile") ) {
-        //     $("#alertNotificationImageMobile").show();
-        //     $("#labelTextMobile").html("Acaba de llegar uno nuevo...");
-        // }
-
+        window.Echo.channel('api-channel')
+            .listen('.APIDenunciaEvent', (data) => {
+                if ( parseInt(data.status) === 200 ){
+                    // if ( $("#alertNotificationImageMobile") ) {
+                    $("#alertNotificationImageMobile").show();
+                    $("#labelTextMobile").html("Acaba de llegar uno nuevo...");
+                    // }
+                    console.log(data.denuncia_id+" : Mobile : "+data.user_id);
+                }
+            });
 
         // alert("Hola Mun-2");
 

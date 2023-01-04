@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Events\APIDenunciaEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\DenunciaAPIRequest;
 use App\Http\Requests\API\UserAPIChangePasswordRequest;
@@ -19,10 +20,11 @@ class DenunciaAPIController extends Controller{
 
     public function addDenunciaMobile(DenunciaAPIRequest $request):JsonResponse {
         $response = ["status"=>0, "msg"=>""];
-        $den = $request->manage();
+        $den = (object)  $request->manage();
         if ($den){
             $response["status"] = 1;
             $response["msg"] = "Solicitud de servicio enviada con éxito!";
+//            event(new APIDenunciaEvent(1, 2));
         }
         return response()->json($response);
     }
