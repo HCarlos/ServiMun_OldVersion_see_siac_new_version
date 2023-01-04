@@ -51,7 +51,7 @@ class DenunciaMobileController extends Controller{
         return view('SIAC.denuncia.denuncia.denuncia_mobile_list',
             [
                 'items'                   => $items,
-                'titulo_catalogo'         => "Catálogo de " . ucwords($this->tableName),
+                'titulo_catalogo'         => "Solicitudes de Servicios vía Mobile",
                 'titulo_header'           => '',
                 'user'                    => $user,
                 'searchInListDenuncia'    => 'listDenunciasMobile',

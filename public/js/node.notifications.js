@@ -42,13 +42,15 @@ jQuery(function($) {
                 }
             });
 
+        localStorage.setItems = 0;
         window.Echo.channel('api-channel')
             .listen('.APIDenunciaEvent', (data) => {
                 if ( parseInt(data.status) === 200 ){
-                    // if ( $("#alertNotificationImageMobile") ) {
+                    if ( $("#alertNotificationImageMobile") ) {
+                        localStorage.setItems++;
                     $("#alertNotificationImageMobile").show();
-                    $("#labelTextMobile").html("Acaba de llegar uno nuevo...");
-                    // }
+                    $("#labelTextMobile").html("Hay "+localStorage.setItems+" nuevo(s)");
+                    }
                     console.log(data.denuncia_id+" : Mobile : "+data.user_id);
                 }
             });
