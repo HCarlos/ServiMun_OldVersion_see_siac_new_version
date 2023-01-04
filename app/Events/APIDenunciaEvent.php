@@ -34,7 +34,7 @@ class APIDenunciaEvent
     }
 
     public function broadcastOn(){
-        return ['test-channel'];
+        return ['api-channel'];
     }
 
     public function broadcastAs()

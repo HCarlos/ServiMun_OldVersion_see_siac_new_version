@@ -8,6 +8,9 @@ jQuery(function($) {
             }
         });
 
+
+
+
         var i = 0;
         window.Echo.channel('test-channel')
             .listen('.InserUpdateDeleteEvent', (data) => {
@@ -31,7 +34,18 @@ jQuery(function($) {
             })
             .listen('.APIDenunciaEvent', (data) => {
                 if ( parseInt(data.status) === 200 ){
-                    if ( $("#alertNotificationImageMobile").hide() ) {
+                    if ( $("#alertNotificationImageMobile") ) {
+                        $("#alertNotificationImageMobile").show();
+                        $("#labelTextMobile").html("Acaba de llegar uno nuevo...");
+                    }
+                    console.log(data.denuncia_id+" :: "+data.user_id);
+                }
+            });
+
+        window.Echo.channel('api-channel')
+            .listen('.APIDenunciaEvent', (data) => {
+                if ( parseInt(data.status) === 200 ){
+                    if ( $("#alertNotificationImageMobile") ) {
                         $("#alertNotificationImageMobile").show();
                         $("#labelTextMobile").html("Acaba de llegar uno nuevo...");
                     }
@@ -40,6 +54,15 @@ jQuery(function($) {
             });
 
 
+
+
+        // if ( $("#alertNotificationImageMobile") ) {
+        //     $("#alertNotificationImageMobile").show();
+        //     $("#labelTextMobile").html("Acaba de llegar uno nuevo...");
+        // }
+
+
+        alert("Hola Mun-2");
 
 
 
