@@ -62,7 +62,7 @@ jQuery(function($) {
         // }
 
 
-        alert("Hola Mun-2");
+        // alert("Hola Mun-2");
 
 
 
