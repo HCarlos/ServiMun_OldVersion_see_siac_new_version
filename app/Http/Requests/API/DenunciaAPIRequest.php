@@ -159,7 +159,6 @@ class DenunciaAPIRequest extends FormRequest{
                 event(new APIDenunciaEvent($denunciamobile->id, $denunciamobile->user_id));
                 $imm->denuncias()->attach($denunciamobile);
                 $imm->users()->attach($denunciamobile->user_id);
-                $denunciamobile->Imagemobiles()->attach($imm);
                 $denunciamobile->ciudadanos()->attach($denunciamobile->user_id);
                 return $imm;
             }

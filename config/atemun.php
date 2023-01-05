@@ -165,6 +165,11 @@ return [
             'imagemobile_parent'             => 'imagemobile_parent',
             'imagemobile_user'               => 'imagemobile_user',
             'ciudadanomobile_denunciamobile' => 'ciudadanomobile_denunciamobile',
+            'respuestamobile'                => 'respuestamobile',
+            'denunciamobile_respuestamobile' => 'denunciamobile_respuestamobile',
+            'parent_respuestamobile'         => 'parent_respuestamobile',
+            'respuestamobile_user'           => 'respuestamobile_user',
+
         ]
 
     ],

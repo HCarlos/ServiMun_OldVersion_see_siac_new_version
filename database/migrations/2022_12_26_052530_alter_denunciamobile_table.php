@@ -29,7 +29,7 @@ class AlterDenunciamobileTable extends Migration
                 $table->unsignedInteger('ciudadanomobile_id')->default(0)->index();
                 $table->softDeletes();
                 $table->timestamps();
-                $table->unique(['denunciamobile_id', 'ciudadanomobile_id']);
+//                $table->unique(['denunciamobile_id', 'ciudadanomobile_id']);
 
                 $table->foreign('denunciamobile_id')
                     ->references('id')
