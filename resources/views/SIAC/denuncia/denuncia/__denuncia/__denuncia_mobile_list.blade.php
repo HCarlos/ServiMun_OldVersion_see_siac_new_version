@@ -1,64 +1,44 @@
+            <div class="col-lg-12 ">
+                <div class="row">
 @foreach($items as $item)
 
-    <div class="col-12 col-sm-6 col-lg-4 col-xl-3 px-2 mt-2 mt-sm-0">
-        <div class="dh-zoom-1">
-            <!-- Professional -->
-            <div class="d-style active btn btn-light btn-h-outline-blue btn-a-outline-blue bgc-white mt-lg-n2 w-100 border-t-3 my-2 pb-3 shadow-sm">
+                    <div class="card col-lg-3 m-2">
+                        <div class="card-body pb-1">
 
-                <div class="d-flex flex-column align-items-center">
-                    <h4 class="w-90 pb-3 text-150 my-25">
-                        <i>{{ $item->Servicio->servicio }}</i><br>
-                        <small class="w-90 pb-3 text-110 my-25 overlay-item">
-                            <i>{{ $item->Servicio->Dependencia->abreviatura }}</i>
-                        </small>
-                    </h4>
+                            <div class="d-flex">
+                                <img class="me-2 rounded" src="{{ $item->User->PathImageProfile }}" height="32" width="32" alt="">
+                                <div class="w-100 ml-1">
+                                    <h5 class="m-0">{{$item->User->FullName}}</h5>
+                                    <p class="text-muted"><small>{{ \Carbon\Carbon::parse($item->fecha)->format('d-m-Y H:i:s') }}<span class="mx-1">⚬</span> <span>{{$item->User->Role()->name}}</span></small></p>
+                                </div> <!-- end w-100-->
+                            </div> <!-- end d-flex -->
 
-                    <span class="position-tr mt-n25 mr-2px">
-                        <span class="badge badge-lg bgc-orange-d2 brc-orange-d2 text-white arrowed-in arrowed-in-right">
-                            {{ $item->fecha }}
-                        </span>
-                        </span>
+                            <hr class="m-0"/>
 
-                    <div class="mt-2 mb-4">
-                        <a href="{{ url($item->Imagemobiles()->first()->PathImage)}}" target="_blank" title="{{$item->denuncia}}">
-                            <img src="{{$item->Imagemobiles()->first()->PathImage}}?timestamp={{now()}}" class="img-circle border border-white"  alt="{{$item->denuncia}}" width="300" height="250"/>
-                        </a>
-                    </div>
-
-                    <div class="text-120">
-                        <div class="text-orange-d2 mt-n2">
-                            <span class="pos-abs ml-n25 mt-3"></span>
-                            <span class="text-200">{{$item->denuncia}}</span>
-                        </div>
-                    </div>
-
-                    <hr class="w-90 my-4 brc-secondary-l3">
-
-                    <div class="flex-grow-1 text-dark-l1 text-90 w-90">
-                        <ul class="list-unstyled text-left mx-auto mb-1">
-
-                            <li class="mb-3">
-                                    <span class="text-110 text-1">
-                                        <a href="http://www.openstreetmap.org/?mlat={{$item->latitud}}&mlon={{$item->longitud}}&map=23" class="btn btn-link">
-                                <i class="fa fa-globe-americas text-success-m2 text-110 mr-1 mt-1"></i>
-                                            Ver Ubicación
+                            <div class="my-3">
+                                <p>{{$item->denuncia}}!</p>
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <a href="{{ $item->Imagemobiles()->first()->PathImage }}" target="_blank"  width="400" height="300">
+                                            <img src="{{ $item->Imagemobiles()->first()->PathImage }}" alt="post-img" class="rounded me-1 mb-3 mb-sm-0 img-fluid"/>
                                         </a>
-                              </span>
-                            </li>
+                                    </div>
+                                    <div class="col">
+{{--                                        <img src="assets/images/small/small-2.jpg" alt="post-img" class="rounded me-1 img-fluid mb-3" />--}}
+{{--                                        <img src="assets/images/small/small-3.jpg" alt="post-img" class="rounded me-1 img-fluid" />--}}
+                                    </div>
+                                </div>
+                                <p class="mt-3">{{$item->ubicacion}}</p>
+                            </div>
 
-                            <li class="mt-3 text-center">
-                                <hr class="my-4 brc-secondary-l3">
-                                <a href="#" class="pos-abs v-n-active btn btn-outline-default px-4 text-600">Responder</a>
-                                <a href="#" class="v-active btn btn-blue px-4  text-600 btn-raised">Ver otras imágenes</a>
-                            </li>
-                        </ul>
-                    </div>
+                            <div class="mt-1 mb-1">
+                                <a href="http://www.openstreetmap.org/?mlat={{$item->latitud}}&mlon={{$item->longitud}}&map=23" class="btn btn-sm btn-link text-muted ps-0" target="_blank"><i class='mdi mdi-map-marker text-danger'></i> Ver Ubicación</a>
+                                <a href="#" class="btn btn-sm btn-link text-muted"><i class='uil uil-comments-alt'></i> 0 Respuesta(s)</a>
+{{--                                <a href="javascript: void(0);" class="btn btn-sm btn-link text-muted"><i class='uil uil-share-alt'></i> Share</a>--}}
+                            </div>
 
-                </div>
-
+                        </div> <!-- end card-body -->
+                    </div> <!-- end card -->
+@endforeach
             </div>
         </div>
-    </div>
-
-
-@endforeach

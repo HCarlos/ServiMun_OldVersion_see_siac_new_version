@@ -9,6 +9,10 @@
     </div>
 <div class="row">
 
-@section('scripts')
+@section('styles')
+
+@endsection
+
+@section('script')
 
 @endsection
