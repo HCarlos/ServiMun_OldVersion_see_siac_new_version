@@ -1,6 +1,7 @@
             <div class="col-lg-12 ">
                 <div class="row">
-@foreach($items as $item)
+
+                @foreach($items as $item)
 
                     <div class="card col-lg-3 m-2">
                         <div class="card-body pb-1">
@@ -37,12 +38,14 @@
 
                             <div class="mt-1 mb-1">
                                 <a href="http://www.openstreetmap.org/?mlat={{$item->latitud}}&mlon={{$item->longitud}}&map=23" class="btn btn-sm btn-link text-muted ps-0" target="_blank"><i class='mdi mdi-map-marker text-danger'></i> Ver Ubicación</a>
-                                <a href="javascript: void(0);" class="btn btn-sm btn-link text-muted"><i class='uil uil-comments-alt'></i> 0 Respuesta(s)</a>
+{{--                                <a href="javascript: void(0);" class="btn btn-sm btn-link text-muted"><i class='uil uil-comments-alt'></i> 0 Respuesta(s)</a>--}}
 {{--                                <a href="javascript: void(0);" class="btn btn-sm btn-link text-muted"><i class='uil uil-share-alt'></i> Share</a>--}}
                             </div>
 
                         </div> <!-- end card-body -->
                     </div> <!-- end card -->
-@endforeach
+
+                @endforeach
+
             </div>
         </div>

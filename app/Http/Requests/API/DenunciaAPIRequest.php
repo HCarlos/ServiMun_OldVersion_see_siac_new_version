@@ -154,7 +154,9 @@ class DenunciaAPIRequest extends FormRequest{
                 'latitud'           => $denunciamobile->latitud,
                 'longitud'          => $denunciamobile->longitud,
             ];
+
             $imm = Imagemobile::create($Item);
+
             if ($imm){
                 event(new APIDenunciaEvent($denunciamobile->id, $denunciamobile->user_id));
                 $imm->denuncias()->attach($denunciamobile);
