@@ -21,15 +21,25 @@
                                     <small class="text-muted">{{ $item->Servicio->Dependencia->abreviatura }}</small>
                                 </p>
                                 <div class="row">
-                                    <div class="col-sm-12">
-                                        <a href="{{ $item->Imagemobiles()->first()->PathImage }}" target="_blank" title="{{ $item->Servicio->Dependencia->dependencia }}">
-                                            <img src="{{ $item->Imagemobiles()->first()->PathImage }}" alt="" class="rounded img-fluid"/>
-                                        </a>
-                                    </div>
-                                    <div class="col">
-{{--                                        <img src="assets/images/small/small-2.jpg" alt="post-img" class="rounded me-1 img-fluid mb-3" />--}}
-{{--                                        <img src="assets/images/small/small-3.jpg" alt="post-img" class="rounded me-1 img-fluid" />--}}
-                                    </div>
+                                    @php $i = 0; $j = count($item->Imagemobiles)-1; @endphp
+                                    @foreach($item->Imagemobiles as $image)
+                                        @if($i==0)
+                                        <div class="col-sm-12">
+                                            <a href="{{ $image->PathImage }}" target="_blank" title="{{ $item->Servicio->Dependencia->dependencia }}">
+                                                <img src="{{ $image->PathImage }}" alt="" class="rounded img-fluid"/>
+                                            </a>
+                                        </div>
+                                        <div class="col m-1">
+                                        @endif
+                                        @if($i>0)
+                                                <a href="{{ $image->PathImage }}" target="_blank" title="{{ $item->Servicio->Dependencia->dependencia }}" >
+                                                   <img src="{{ $image->PathImageThumb }}" alt="" class="rounded img-fluid " width="60" height="60" />
+                                                </a>
+                                        @endif
+                                        @php $i++; @endphp
+                                    @endforeach
+                                    </div>  <!-- end images thumb -->
+
                                 </div>
                                 <div class="w-100 mt-3">
                                     <p>{{$item->ubicacion}}</p>

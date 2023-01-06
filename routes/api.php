@@ -46,8 +46,12 @@ Route::group(['prefix' => 'v1'], function () {
         Route::post('/user/change/password', [UserAPIController::class, 'userChangePassword']);
 
         // Denunciases should
-        Route::post('/denuncia/add', [DenunciaAPIController::class, 'addDenunciaMobile']);
+        Route::post('/denuncia/insert', [DenunciaAPIController::class, 'insertDenunciaMobile']);
         Route::post('/denuncia/getlist', [DenunciaAPIController::class, 'getDenuncias']);
+
+        // Ads Images Denucnas should
+        Route::post('/denuncia/add/image', [DenunciaAPIController::class, 'addImageDenunciaMobile']);
+        Route::post('/denuncia/getimagesdenuncialist', [DenunciaAPIController::class, 'getImagesDenunciaList']);
 
 
         Route::get('fire', function () {
