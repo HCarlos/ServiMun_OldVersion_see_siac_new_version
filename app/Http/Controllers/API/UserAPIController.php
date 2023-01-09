@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Events\APIDenunciaEvent;
+use App\Events\InserUpdateDeleteEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\UserAPIChangePasswordRequest;
 use App\Http\Requests\API\UserAPIImageRequest;
@@ -46,6 +48,7 @@ class UserAPIController extends Controller{
         }else{
             $response["msg"] = "Usuario no encontrado";
         }
+        event(new InserUpdateDeleteEvent());
         return response()->json($response);
     }
 
