@@ -18,16 +18,20 @@ class InserUpdateDeleteEvent implements ShouldBroadcast{
 
     public $data;
 
+    private $status = 0;
+    private $msg = "";
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct($status = 0, $msg = "" ){
         $this->data = array(
             'power'=> '10'
         );
+        $this->status = $status;
+        $this->msg = $msg;
     }
 
     /**
@@ -48,8 +52,10 @@ class InserUpdateDeleteEvent implements ShouldBroadcast{
 
     public function broadcastWith(){
         return [
-            'title' => 'This notification from www.codecheef.org',
-            'power'=> '10'
+            'title'  => 'This notification from www.codecheef.org',
+            'power'  => '10',
+            'status' => $this->status,
+            'msg'    => $this->msg,
         ];
     }
 
