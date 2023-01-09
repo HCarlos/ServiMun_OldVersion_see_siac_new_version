@@ -48,7 +48,7 @@ class UserAPIController extends Controller{
         }else{
             $response["msg"] = "Usuario no encontrado";
         }
-        event(new InserUpdateDeleteEvent());
+        event(new InserUpdateDeleteEvent(1,$response));
         return response()->json($response);
     }
 
