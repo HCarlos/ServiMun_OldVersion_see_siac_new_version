@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Events\APIDenunciaEvent;
+use App\Events\InserUpdateDeleteEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\DenunciaAddImageAPIRequest;
 use App\Http\Requests\API\DenunciaAPIRequest;
@@ -72,6 +73,7 @@ class DenunciaAPIController extends Controller{
             }
             $response["denuncias"] = $denucias;
         }
+        event(new InserUpdateDeleteEvent(1,$response));
         return response()->json($response);
 
     }

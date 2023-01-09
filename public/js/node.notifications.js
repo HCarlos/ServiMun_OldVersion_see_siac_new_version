@@ -9,6 +9,7 @@ jQuery(function($) {
         });
 
 
+        $dens = Denunciamobile::select(['id','denuncia','fecha','latitud','longitud','ubicacion','ubicacion_google','user_id','serviciomobile_id'])
 
 
         var i = 0;
@@ -16,7 +17,17 @@ jQuery(function($) {
             .listen('.InserUpdateDeleteEvent', (data) => {
                 i++;
                 $('#power').html(parseInt(data.power) * i);
-                alert(data.msg.status+'\n'+data.msg.msg+'\n'+data.msg.access_token+'\n'+data.msg.user.id);
+
+                alert(data.status+'\n'+
+                    data.msg+'\n'+
+                    data.denuncias[0].denuncia+'\n'+
+                    data.denuncias[0].fecha+'\n'+
+                    data.denuncias[0].latitud+'\n'+
+                    data.denuncias[0].longitud+'\n'+
+                    data.denuncias[0].ubicacion+'\n'+
+                    data.denuncias[0].ubicacion_google+'\n'+
+                    data.denuncias[0].user_id);
+
                 console.log(data.power)
             })
             .listen('.IUQDenunciaEvent', (data) => {
