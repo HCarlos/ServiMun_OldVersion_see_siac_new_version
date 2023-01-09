@@ -16,7 +16,7 @@ jQuery(function($) {
             .listen('.InserUpdateDeleteEvent', (data) => {
                 i++;
                 $('#power').html(parseInt(data.power) * i);
-                alert(data.msg);
+                alert(data.msg.status+'\n'+data.msg.msg+'\n'+data.msg.access_token+'\n'+data.msg.user.id);
                 console.log(data.power)
             })
             .listen('.IUQDenunciaEvent', (data) => {
