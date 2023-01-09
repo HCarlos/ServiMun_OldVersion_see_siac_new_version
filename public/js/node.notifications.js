@@ -19,14 +19,19 @@ jQuery(function($) {
                 $('#power').html(parseInt(data.power) * i);
 
                 alert(data.status+'\n'+
-                    data.msg+'\n'+
-                    data.denuncias[0].denuncia+'\n'+
-                    data.denuncias[0].fecha+'\n'+
-                    data.denuncias[0].latitud+'\n'+
-                    data.denuncias[0].longitud+'\n'+
-                    data.denuncias[0].ubicacion+'\n'+
-                    data.denuncias[0].ubicacion_google+'\n'+
-                    data.denuncias[0].user_id);
+                    data.msg.msg+'\n'+
+                    data.msg.access_token+'\n'+
+                    data.msg.token_type);
+
+                // alert(data.status+'\n'+
+                //     data.msg+'\n'+
+                //     data.denuncias[0].denuncia+'\n'+
+                //     data.denuncias[0].fecha+'\n'+
+                //     data.denuncias[0].latitud+'\n'+
+                //     data.denuncias[0].longitud+'\n'+
+                //     data.denuncias[0].ubicacion+'\n'+
+                //     data.denuncias[0].ubicacion_google+'\n'+
+                //     data.denuncias[0].user_id);
 
                 console.log(data.power)
             })
