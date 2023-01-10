@@ -19,6 +19,7 @@ jQuery(function($) {
                 $('#power').html(parseInt(data.power) * i);
 
                 alert(data.status+'\n'+
+                    data.msg.status+'\n'+
                     data.msg.msg+'\n'+
                     data.msg.access_token+'\n'+
                     data.msg.token_type);
