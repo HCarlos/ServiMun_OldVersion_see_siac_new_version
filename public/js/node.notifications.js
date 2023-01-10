@@ -17,7 +17,7 @@ jQuery(function($) {
             .listen('.InserUpdateDeleteEvent', (data) => {
                 i++;
                 $('#power').html(parseInt(data.power) * i);
-                if ( $("#pantallaMobileMaster") ) {
+                if ( $("#pantallaMobileMaster") != null  ) {
                     alert(data.status + '\n' +
                         data.msg.status + '\n' +
                         data.msg.msg + '\n' +
@@ -55,7 +55,7 @@ jQuery(function($) {
         window.Echo.channel('api-channel')
             .listen('.APIDenunciaEvent', (data) => {
                 if ( parseInt(data.status) === 200 ){
-                    if ( $("#pantallaMobileMaster") ) {
+                    if ( $("#pantallaMobileMaster") != null ) {
                         localStorage.setItems++;
                         $("#alertNotificationImageMobile").show();
                         $("#labelTextMobile").html("Hay "+localStorage.setItems+" nuevo(s)");
