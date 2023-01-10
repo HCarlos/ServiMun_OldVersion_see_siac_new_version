@@ -7,7 +7,7 @@
     <i class="ri-information-line me-2"></i> <span id="labelTextMobile"></span>
 </div>
 
-<div class="col-lg-12 mt-2">
+<div class="col-lg-12 mt-2" id="pantallaMobileMaster">
     <div class="row">
         {{$body_catalogo}}
     </div>

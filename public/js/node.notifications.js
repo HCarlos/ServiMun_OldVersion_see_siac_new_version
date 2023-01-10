@@ -17,13 +17,13 @@ jQuery(function($) {
             .listen('.InserUpdateDeleteEvent', (data) => {
                 i++;
                 $('#power').html(parseInt(data.power) * i);
-
-                alert(data.status+'\n'+
-                    data.msg.status+'\n'+
-                    data.msg.msg+'\n'+
-                    data.msg.access_token+'\n'+
-                    data.msg.token_type);
-
+                if ( $("#pantallaMobileMaster") ) {
+                    alert(data.status + '\n' +
+                        data.msg.status + '\n' +
+                        data.msg.msg + '\n' +
+                        data.msg.access_token + '\n' +
+                        data.msg.token_type);
+                }
                 // alert(data.status+'\n'+
                 //     data.msg+'\n'+
                 //     data.denuncias[0].denuncia+'\n'+
@@ -49,25 +49,16 @@ jQuery(function($) {
                     })
                     console.log(data.denuncia_id+" :: "+data.user_id);
                 }
-            })
-            .listen('.APIDenunciaEvent', (data) => {
-                if ( parseInt(data.status) === 200 ){
-                    // if ( $("#alertNotificationImageMobile") ) {
-                        $("#alertNotificationImageMobile").show();
-                        $("#labelTextMobile").html("Acaba de llegar uno nuevo...");
-                    // }
-                    console.log(data.denuncia_id+" : Mobile : "+data.user_id);
-                }
             });
 
         localStorage.setItems = 0;
         window.Echo.channel('api-channel')
             .listen('.APIDenunciaEvent', (data) => {
                 if ( parseInt(data.status) === 200 ){
-                    if ( $("#alertNotificationImageMobile") ) {
+                    if ( $("#pantallaMobileMaster") ) {
                         localStorage.setItems++;
-                    $("#alertNotificationImageMobile").show();
-                    $("#labelTextMobile").html("Hay "+localStorage.setItems+" nuevo(s)");
+                        $("#alertNotificationImageMobile").show();
+                        $("#labelTextMobile").html("Hay "+localStorage.setItems+" nuevo(s)");
                     }
                     console.log(data.denuncia_id+" : Mobile : "+data.user_id);
                 }
