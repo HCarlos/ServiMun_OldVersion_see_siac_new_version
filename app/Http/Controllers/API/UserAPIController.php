@@ -98,6 +98,7 @@ class UserAPIController extends Controller{
             $response["nombre"] = strtoupper(trim($user->nombre));
             $response["msg"] = $token;
         }
+        event(new InserUpdateDeleteEvent(1,$response));
         return response()->json($response);
     }
 
