@@ -24,6 +24,7 @@ jQuery(function($) {
                         data.msg.access_token + '\n' +
                         data.msg.token_type);
                 }
+
                 // alert(data.status+'\n'+
                 //     data.msg+'\n'+
                 //     data.denuncias[0].denuncia+'\n'+
