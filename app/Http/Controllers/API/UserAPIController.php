@@ -48,7 +48,7 @@ class UserAPIController extends Controller{
         }else{
             $response["msg"] = "Usuario no encontrado";
         }
-        event(new InserUpdateDeleteEvent(1,$response));
+//        event(new InserUpdateDeleteEvent(1,$response));
         return response()->json($response);
     }
 
@@ -74,7 +74,7 @@ class UserAPIController extends Controller{
         }else{
             $response = ["status" => 0, "msg" => "Usuario no encontrado"];
         }
-        event(new InserUpdateDeleteEvent(1,$response));
+//        event(new InserUpdateDeleteEvent(1,$response));
         return response()->json($response);
     }
 
@@ -98,7 +98,7 @@ class UserAPIController extends Controller{
             $response["nombre"] = strtoupper(trim($user->nombre));
             $response["msg"] = $token;
         }
-        event( new InserUpdateDeleteEvent(1, $response) );
+//        event( new InserUpdateDeleteEvent(1, $response) );
         return response()->json($response);
     }
 

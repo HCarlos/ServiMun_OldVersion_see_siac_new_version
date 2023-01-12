@@ -73,7 +73,7 @@ class DenunciaAPIController extends Controller{
             }
             $response["denuncias"] = $denucias;
         }
-        event(new InserUpdateDeleteEvent(1,$response));
+//        event(new InserUpdateDeleteEvent(1,$response));
         return response()->json($response);
 
     }
