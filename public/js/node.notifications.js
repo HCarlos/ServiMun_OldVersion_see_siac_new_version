@@ -39,6 +39,8 @@ jQuery(function($) {
             })
             .listen('.IUQDenunciaEvent', (data) => {
                 if ( parseInt(data.status) === 200 ){
+                    i++;
+                    $('#power').html(parseInt(data.power) * i);
                     $.toast({
                         heading: 'SIAC',
                         text: data.msg,
@@ -56,6 +58,8 @@ jQuery(function($) {
         window.Echo.channel('api-channel')
             .listen('.APIDenunciaEvent', (data) => {
                 if ( parseInt(data.status) === 200 ){
+                    i++;
+                    $('#power').html(parseInt(data.power) * i);
                     if ( $("#pantallaMobileMaster") != null ) {
                         localStorage.setItems++;
                         $("#alertNotificationImageMobile").show();

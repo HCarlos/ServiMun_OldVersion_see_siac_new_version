@@ -59,3 +59,31 @@
 
             </div>
         </div>
+
+
+
+{{--            <table class="table table-condensed table-responsive-sm">--}}
+{{--                <tr style="background-color: #f44336;">--}}
+{{--                    <td>Fila 1, Celda 1</td>--}}
+{{--                    <td>Fila 1, Celda 2</td>--}}
+{{--                </tr>--}}
+{{--                <tr style="background-color: #9c27b0;">--}}
+{{--                    <td>Fila 2, Celda 1</td>--}}
+{{--                    <td>Fila 2, Celda 2</td>--}}
+{{--                </tr>--}}
+{{--                <tr style="background-color: #2196f3;">--}}
+{{--                    <td>Fila 3, Celda 1</td>--}}
+{{--                    <td>Fila 3, Celda 2</td>--}}
+{{--                </tr>--}}
+{{--            </table>--}}
+
+
+
+
+
+
+
+
+
+
+

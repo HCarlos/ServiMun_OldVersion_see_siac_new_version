@@ -36,7 +36,7 @@ class UserAPIController extends Controller{
         $user = User::where("username",trim($data->username))->first();
         if ($user){
             if (Hash::check($data->password, $user->password)){
-                $token = $user->createToken("ejemplo");
+                $token = $user->createToken("devch50");
                 $response["status"] = 1;
                 $response["access_token"] = $token->plainTextToken;
                 $response["token_type"] = 'Bearer';
