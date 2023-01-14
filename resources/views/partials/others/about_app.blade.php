@@ -57,7 +57,7 @@
 
 <div class="headerlogo" style="">
     <div class="social-nav">
-        <img class="getapp-nav-img" src='https://firebasestorage.googleapis.com/v0/b/dashboardtu.appspot.com/o/logo_gob_uipe.png?alt=media&token=ae771506-a3cd-4d6d-bda7-87514565b396'/>
+        <img class="getapp-nav-img" src='/images/logo-0.png'/>
     </div>
 </div>
 
@@ -67,24 +67,24 @@
 
     <hr>
 
-    <div><img src="https://firebasestorage.googleapis.com/v0/b/dashboardtu.appspot.com/o/logo-uipe-1024-1024sinfondo.png?alt=media&token=678db50c-3b57-4438-b420-a2faa32232a1" width="30%" height="30%"></div>
+    <div><img src="/images/logo-1.png" ></div>
 
 
     <hr>
 
-    <p>Ver. 1.2</p>
+    <p>Ver. 1.0</p>
 
     <p>Desarrollado por la <strong>Coordinación de Modernización e Innovación </strong></p>
 
     <hr>
 
-    <a href="https://transparencia.villahermosa.gob.mx/AvisoPrivacidadSimplificado.php"><strong>Aviso de Privacidad</strong></a>
+<!--    <a href="https://transparencia.villahermosa.gob.mx/AvisoPrivacidadSimplificado.php"><strong>Aviso de Privacidad</strong></a>-->
 
-    <p><a href="mailto://apps@centro.gob.mx" target="_blank">apps@centro.gob.mx</a></p>
+    <p><a href="mailto:apps@centro.gob.mx" target="_blank">apps@centro.gob.mx</a></p>
 
     <hr>
 
-    <p>Villahermosa, Tabasco, México.</p>
+    <p> {{ now()->year }} © {{ config("atemun.nombre_empresa") }}, Villahermosa, Tabasco, México.</p>
 
 </div>
 

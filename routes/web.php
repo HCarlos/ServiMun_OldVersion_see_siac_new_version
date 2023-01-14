@@ -17,8 +17,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {return view('welcome');});
 Route::get('/privacidad', function () {return view('privacidad');});
-Route::get('/about_app', function () {return redirect("/html/about_app.html");});
-Route::get('/aviso_app', function () {return redirect("https://transparencia.villahermosa.gob.mx/AvisoPrivacidadSimplificado.php");});
+Route::get('/about_app', function () {return view("partials.others.about_app");});
+Route::get('/aviso_app', function () {return view("partials.others.aviso_app");});
 
 Route::get('newUbicacionV2', 'Catalogos\Domicilio\UbicacionController@newItemV2')->name('newUbicacionV2');
 Route::post('createUbicacionV2', 'Catalogos\Domicilio\UbicacionController@createItemV2')->name('createUbicacionV2');
