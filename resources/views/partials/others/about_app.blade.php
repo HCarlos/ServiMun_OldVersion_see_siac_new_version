@@ -57,18 +57,13 @@
 
 <div class="headerlogo" style="">
     <div class="social-nav">
-        <img class="getapp-nav-img" src='/images/logo-0.png'/>
+        <img class="getapp-nav-img" src='/images/logo-1.png'/>
     </div>
 </div>
 
 <div style="margin-left:10%; margin-right: 10%; font-family: 'Cabin', sans-serif; text-align: center;">
 
     <h2><strong>Acerca de</strong></h2>
-
-    <hr>
-
-    <div><img src="/images/logo-1.png" ></div>
-
 
     <hr>
 
