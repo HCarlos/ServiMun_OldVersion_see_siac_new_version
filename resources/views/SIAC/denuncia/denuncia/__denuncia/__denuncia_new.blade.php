@@ -59,7 +59,7 @@
                 <div class="col-lg-4">
                     {{ Form::date('fecha_ingreso', \Carbon\Carbon::now(), ['id'=>'fecha_ingreso', 'class'=>'form-control fecha_ingreso', 'readonly'=>'readonly']) }}
                 </div>
-                <label for = "fecha_oficio_dependencia" class="col-lg-2 col-form-label">F. Oficio </label>
+                <label for = "fecha_oficio_dependencia" class="col-lg-2 col-form-label">F. Docto. </label>
                 <div class="col-lg-4">
                     {{ Form::date('fecha_oficio_dependencia', \Carbon\Carbon::now(), ['id'=>'fecha_oficio_dependencia','class'=>'form-control']) }}
                 </div>
@@ -75,6 +75,16 @@
                 </div>
             </div>
             <hr>
+            <div class="form-row mb-1 ">
+                <label for = "latitud" class="col-lg-2 col-form-label">Latitud: </label>
+                <div class="col-lg-4">
+                    {{ Form::text('latitud', "", ['id'=>'latitud', 'class'=>'form-control latitud', 'placeholder'=>'17.9983821']) }}
+                </div>
+                <label for = "longitud" class="col-lg-2 col-form-label">Longitud: </label>
+                <div class="col-lg-4">
+                    {{ Form::text('longitud', "", ['id'=>'longitud','class'=>'form-control longitud', 'placeholder'=>'-92.944787']) }}
+                </div>
+            </div>
 
         </div>
     </div>
@@ -94,7 +104,7 @@
                 </div>
             </div>
             <div class="form-group row mb-1">
-                <label for = "descripcion" class="col-lg-3 col-form-label has-descripcion labelDenuncia">Denuncia </label>
+                <label for = "descripcion" class="col-lg-3 col-form-label has-descripcion labelDenuncia">Solicita </label>
                 <div class="col-lg-9">
                     <textarea name="descripcion" id="descripcion" class="form-control">{{ old('descripcion') }}</textarea>
                     <span class="has-descripcion">

@@ -19,7 +19,7 @@
 
     .parallax {
         /* The image used */
-        background-image: url("https://firebasestorage.googleapis.com/v0/b/dashboardtu.appspot.com/o/back_aviso_acerca.png?alt=media&token=059cf3ad-1835-4b80-8e18-f632fd7c4fec");
+        background-image: url("/images/background.png");
 
         /* Full height */
         height: 100%;

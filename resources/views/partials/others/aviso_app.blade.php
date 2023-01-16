@@ -19,7 +19,7 @@
 
     .parallax {
         /* The image used */
-        background-image: url("https://firebasestorage.googleapis.com/v0/b/dashboardtu.appspot.com/o/back_aviso_acerca.png?alt=media&token=059cf3ad-1835-4b80-8e18-f632fd7c4fec");
+        background-image: url("/images/background.png");
 
         /* Full height */
         height: 100%;
@@ -67,7 +67,6 @@
 
     <hr>
 
-    <br>
     <div class="uk-container">
         <div uk-grid="" class="uk-grid uk-grid-stack">
             <h4 class="uk-first-column">Responsable:
@@ -97,7 +96,7 @@
                 <br><br>
                 No se realizarán transferencias adicionales, salvo aquéllas que sean necesarias para atender requerimientos por mandato judicial de alguna Autoridad competente, que estén debidamente fundadas y motivadas.
                 <br><br>
-                Usted podrá ejercitar sus derechos de Acceso, Rectificación, Cancelación, Oposición y de Portabilidad de sus datos personales, directamente a la Unidad de Transparencia de este H. Ayuntamiento de Centro, ubicado en Calle Retorno Vía 5, Edifico 105, 2do. Piso, Tabasco 2000, de la ciudad de Villahermosa Tabasco, C.P. 86035, con horario de 8:00 a 16:00 horas en días hábiles, bajo la responsabilidad de la Lic. Beatriz Adriana Roja Ysquierdo o a través de la <u><a href="https://www.plataformadetransparencia.org.mx/" target="_blank">Plataforma Nacional de Transparencia (PNT).</a></u>
+                Usted podrá ejercitar sus derechos de Acceso, Rectificación, Cancelación, Oposición y de Portabilidad de sus datos personales, directamente a la Unidad de Transparencia de este H. Ayuntamiento de Centro, ubicado en Calle Retorno Vía 5, Edifico 105, 2do. Piso, Tabasco 2000, de la ciudad de Villahermosa Tabasco, C.P. 86035, con horario de 8:00 a 16:00 horas en días hábiles ó a través de la <u><a href="https://www.plataformadetransparencia.org.mx/" target="_blank">Plataforma Nacional de Transparencia (PNT).</a></u>
                 <br><br>
             </div>
         </div>

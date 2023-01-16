@@ -54,7 +54,7 @@
                 <div class="col-lg-4">
                     {{ Form::date('fecha_ingreso', old('fecha_ingreso',$items->fecha_ingreso), ['id'=>'fecha_ingreso','class'=>'form-control fecha_ingreso','readonly'=>'readonly']) }}
                 </div>
-                <label for = "fecha_oficio_dependencia" class="col-lg-2 col-form-label">F. Oficio </label>
+                <label for = "fecha_oficio_dependencia" class="col-lg-2 col-form-label">F. Docto. </label>
                 <div class="col-lg-4">
                     {{ Form::date('fecha_oficio_dependencia', old('fecha_oficio_dependencia',$items->fecha_oficio_dependencia), ['id'=>'fecha_oficio_dependencia','class'=>'form-control']) }}
                 </div>
@@ -67,6 +67,18 @@
                 <label for = "fecha_limite" class="col-lg-2 col-form-label">F. Límite </label>
                 <div class="col-lg-4">
                     {{ Form::date('fecha_limite', old('fecha_limite',$items->fecha_limite), ['id'=>'fecha_limite','class'=>'form-control']) }}
+                </div>
+            </div>
+            <hr>
+
+            <div class="form-row mb-1 ">
+                <label for = "latitud" class="col-lg-2 col-form-label">Latitud: </label>
+                <div class="col-lg-4">
+                    {{ Form::text('latitud', old('latitud',$items->latitud), ['id'=>'latitud','class'=>'form-control latitud', 'placeholder'=>'17.9983821']) }}
+                </div>
+                <label for = "longitud" class="col-lg-2 col-form-label">Longitud: </label>
+                <div class="col-lg-4">
+                    {{ Form::text('longitud', old('longitud',$items->longitud), ['id'=>'longitud','class'=>'form-control longitud', 'placeholder'=>'-92.944787']) }}
                 </div>
             </div>
             <hr>
@@ -89,7 +101,7 @@
                 </div>
             </div>
             <div class="form-group row mb-1">
-                <label for = "descripcion" class="col-lg-3 col-form-label has-descripcion labelDenuncia">Denuncia </label>
+                <label for = "descripcion" class="col-lg-3 col-form-label has-descripcion labelDenuncia">Solicita </label>
                 <div class="col-lg-9">
                     <textarea name="descripcion" id="descripcion" class="form-control">{{ old('descripcion',$items->descripcion) }}</textarea>
                     <span class="has-descripcion">
