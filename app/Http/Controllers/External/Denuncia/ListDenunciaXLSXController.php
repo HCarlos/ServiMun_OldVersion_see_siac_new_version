@@ -68,11 +68,13 @@ class ListDenunciaXLSXController extends Controller
 
                 $resp = Denuncia_Dependencia_Servicio::query()->where('denuncia_id',$item->id)->orderByDesc('id')->get();
                 $respuesta = "";
+                $favorable = false;
                 foreach ($resp as $r){
                     $res = trim($r->observaciones);
                     if ( $res != ""){
                         $dep = Dependencia::find($r->dependencia_id);
                         $respuesta.=$dep->abreviatura.' - '.$res.'. ';
+                        $favorable = $r->favorable;
                     }
                 }
 
@@ -105,7 +107,8 @@ class ListDenunciaXLSXController extends Controller
                     ->setCellValue('X'.$C, $respuesta )
                     ->setCellValue('Y'.$C, $item->observaciones )
                     ->setCellValue('Z'.$C, $item->creadopor->username )
-                    ->setCellValue('AA'.$C, $item->uuid );
+                    ->setCellValue('AA'.$C, $item->uuid )
+                    ->setCellValue('AB'.$C, $favorable ? "SI" : "NO" );
 
                 $C++;
             }

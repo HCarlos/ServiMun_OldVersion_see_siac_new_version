@@ -27,9 +27,6 @@
                     </td>
                     <td  class="w-15">{{($item->fecha_ingreso)}}</td>
                     <td><a title="{{($item->dependencia->dependencia)}}">{{($item->dependencia->abreviatura)}}</a></td>
-{{--                    <td>{{($item->TotalRespuestas)}}</td>--}}
-{{--                    <td>{{( $item->ultimo_estatus )}}</td>--}}
-{{--                    <td>{{($item->ciudadano->curp)}}</td>--}}
 
                     <td class="w-25">
                         {{($item->servicio->servicio)}}<br>

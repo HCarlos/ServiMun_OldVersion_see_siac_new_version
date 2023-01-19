@@ -67,8 +67,6 @@
 
     <hr>
 
-    <p>Ver. 1.0</p>
-
     <p>Desarrollado por la <strong>Coordinación de Modernización e Innovación </strong></p>
 
     <hr>

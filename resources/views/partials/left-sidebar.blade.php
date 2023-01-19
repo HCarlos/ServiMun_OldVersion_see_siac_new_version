@@ -16,10 +16,13 @@
     @else()
         <!--- Sidemenu -->
         <ul class="metismenu side-nav">
-{{--            |USER_OPERATOR_ADMIN--}}
-            @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_ADMIN|USER_SAS_CAP|USER_SAS_ADMIN|USER_DIF_CAP|USER_DIF_ADMIN') )
+            @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_ADMIN|USER_SAS_CAP|USER_SAS_ADMIN|USER_DIF_CAP|USER_DIF_ADMIN|ENLACE') )
                 <li class="side-nav-item">
-                    <a href="{{ url('dashboard') }}" class="side-nav-link">
+                    @if (Auth::user()->hasRole('ENLACE') )
+                        <a href="{{ url('dashboard_enlace') }}" class="side-nav-link">
+                    @else
+                        <a href="{{ url('dashboard_enlace') }}" class="side-nav-link">
+                    @endif
                         <i class="mdi dripicons-meter"></i>
                         <span class="badge badge-light float-right"></span>
                         <span>Dashboard</span>
