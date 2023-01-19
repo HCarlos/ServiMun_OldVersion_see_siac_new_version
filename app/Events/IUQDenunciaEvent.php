@@ -101,9 +101,10 @@ class IUQDenunciaEvent implements ShouldBroadcast{
 //            $this->status = 204;
 //        }
 
-        if ( !Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_ADMIN') ){
-            $this->status = 204;
-        }
+//        if ( !Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_ADMIN') ){
+//            $this->status = 204;
+//        }
+        $this->status = 204;
 
         return [
             'denuncia_id'  => $this->denuncia_id,

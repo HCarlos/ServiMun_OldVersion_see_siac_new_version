@@ -41,6 +41,7 @@ jQuery(function($) {
                 i++;
                 $('#power').html(parseInt(data.power) * i);
                 console.log(data.denuncia_id+" :: "+data.user_id);
+
                 if ( parseInt(data.status) == 200 ){
                     $.toast({
                         heading: 'SIAC',
