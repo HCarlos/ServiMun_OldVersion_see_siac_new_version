@@ -38,9 +38,10 @@ jQuery(function($) {
                 console.log(data.power)
             })
             .listen('.IUQDenunciaEvent', (data) => {
-                if ( parseInt(data.status) === 200 ){
-                    i++;
-                    $('#power').html(parseInt(data.power) * i);
+                i++;
+                $('#power').html(parseInt(data.power) * i);
+                console.log(data.denuncia_id+" :: "+data.user_id);
+                if ( parseInt(data.status) == 200 ){
                     $.toast({
                         heading: 'SIAC',
                         text: data.msg,
@@ -50,7 +51,6 @@ jQuery(function($) {
                         loaderBg: '#9EC600',
                         position: 'top-right',
                     })
-                    console.log(data.denuncia_id+" :: "+data.user_id);
                 }
             });
 
