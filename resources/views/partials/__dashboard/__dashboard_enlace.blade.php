@@ -6,7 +6,7 @@
                     <h4 class="header-title">Parámetros de Consulta</h4>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('dashboard') }}">
+                    <form method="POST" action="{{ route('dashboard_enlace') }}">
                         @csrf
                         <div class="form-row mb-1">
                             <label for="desde" class="col-md-2 col-form-label text-right">Desde</label>

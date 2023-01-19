@@ -32,7 +32,7 @@ class IUQDenunciaEvent implements ShouldBroadcast{
         $this->denuncia_id  = $denuncia_id;
         $this->user_id      = $user_id;
         $this->trigger_type = $trigger_type;
-        $this->status       = 200;
+        $this->status       = 204;
     }
 
     /**
@@ -94,10 +94,14 @@ class IUQDenunciaEvent implements ShouldBroadcast{
             'user_id'        => $this->user_id,
         ]);
 
-        $filtrar_estas_curps = array('SAGA841106MTCLRL03', 'HERI791215MTCRZS05', 'SAAD761205MCSNLN06', 'DIHC990213HTCZRR02', 'VAOB880906MTCLPN04', 'JITM700108HTCMRN02', 'CAHC711129MTCRR08', 'CUOS740301HTCRLR04', 'MARN781030MTCRMT01', 'ROLD790608MTCDNY07', 'LOHE841013HTCP0003', 'HEMG881219HTCRRR09', 'CAHA730610MDFLRN06');
-        $User = User::find($this->user_id);
-//        if (in_array(trim(strtoupper(Auth::user()->curp)), $filtrar_estas_curps)){
-        if (in_array(trim(strtoupper($User->curp)), $filtrar_estas_curps)){
+//        $filtrar_estas_curps = array('SAGA841106MTCLRL03', 'HERI791215MTCRZS05', 'SAAD761205MCSNLN06', 'DIHC990213HTCZRR02', 'VAOB880906MTCLPN04', 'JITM700108HTCMRN02', 'CAHC711129MTCRR08', 'CUOS740301HTCRLR04', 'MARN781030MTCRMT01', 'ROLD790608MTCDNY07', 'LOHE841013HTCP0003', 'HEMG881219HTCRRR09', 'CAHA730610MDFLRN06');
+//        $User = User::find($this->user_id);
+////        if (in_array(trim(strtoupper(Auth::user()->curp)), $filtrar_estas_curps)){
+//        if (in_array(trim(strtoupper($User->curp)), $filtrar_estas_curps)){
+//            $this->status = 204;
+//        }
+
+        if ( !Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_ADMIN') ){
             $this->status = 204;
         }
 
