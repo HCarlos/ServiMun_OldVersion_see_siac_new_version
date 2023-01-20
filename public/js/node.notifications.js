@@ -41,10 +41,7 @@ jQuery(function($) {
                 console.log(data.power)
             })
             .listen('.IUQDenunciaEvent', (data) => {
-                i++;
-                $('#power').html(parseInt(data.power) * i);
-                console.log(data.denuncia_id+" :: "+data.user_id);
-                if (localStorage.isToast === true) {
+                if (localStorage.isToast == true) {
                     $.toast({
                         heading: 'SIAC',
                         text: data.msg,
@@ -55,6 +52,9 @@ jQuery(function($) {
                         position: 'top-right',
                     })
                 }
+                i++;
+                $('#power').html(parseInt(data.power) * i);
+                console.log(data.denuncia_id+" :: "+data.user_id);
             });
 
         localStorage.setItems = 0;
