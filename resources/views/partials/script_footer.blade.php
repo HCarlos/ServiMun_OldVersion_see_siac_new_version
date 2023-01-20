@@ -21,6 +21,12 @@
 
 <script>
     window.laravel_echo_port='{{env("LARAVEL_ECHO_PORT")}}';
+    @if(\Illuminate\Support\Facades\Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_ADMIN'))
+        localStorage.isToast = true;
+    @else
+        localStorage.isToast = false;
+    @endif
+
 </script>
 
 <script src="http{{env('HTTP_SUFIX')}}://{{ Request::getHost() }}:{{env('LARAVEL_ECHO_PORT')}}/socket.io/socket.io.js"  ></script>

@@ -8,6 +8,9 @@ jQuery(function($) {
             }
         });
 
+        // var jobs = {{ Auth::user()->hasRoles('Administrator|SysOp|USER_OPERATOR_ADMIN') }};
+
+    // alert(jobs);
 
         // $dens = Denunciamobile::select(['id','denuncia','fecha','latitud','longitud','ubicacion','ubicacion_google','user_id','serviciomobile_id'])
 
@@ -41,8 +44,7 @@ jQuery(function($) {
                 i++;
                 $('#power').html(parseInt(data.power) * i);
                 console.log(data.denuncia_id+" :: "+data.user_id);
-
-                if ( parseInt(data.status) == 200 ){
+                if (localStorage.isToast){
                     $.toast({
                         heading: 'SIAC',
                         text: data.msg,
