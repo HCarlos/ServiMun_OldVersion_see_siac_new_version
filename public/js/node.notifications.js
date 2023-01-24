@@ -8,18 +8,9 @@ jQuery(function($) {
             }
         });
 
-        // var jobs = {{ Auth::user()->hasRoles('Administrator|SysOp|USER_OPERATOR_ADMIN') }};
-
-    // alert(jobs);
-
-        // $dens = Denunciamobile::select(['id','denuncia','fecha','latitud','longitud','ubicacion','ubicacion_google','user_id','serviciomobile_id'])
-
-
-        var i = 0;
+        i = 0;
         window.Echo.channel('test-channel')
             .listen('.InserUpdateDeleteEvent', (data) => {
-                i++;
-                $('#power').html(parseInt(data.power) * i);
                 if ( $("#pantallaMobileMaster") != null  ) {
                     alert(data.status + '\n' +
                         data.msg.status + '\n' +
@@ -27,21 +18,12 @@ jQuery(function($) {
                         data.msg.access_token + '\n' +
                         data.msg.token_type);
                 }
-
-                // alert(data.status+'\n'+
-                //     data.msg+'\n'+
-                //     data.denuncias[0].denuncia+'\n'+
-                //     data.denuncias[0].fecha+'\n'+
-                //     data.denuncias[0].latitud+'\n'+
-                //     data.denuncias[0].longitud+'\n'+
-                //     data.denuncias[0].ubicacion+'\n'+
-                //     data.denuncias[0].ubicacion_google+'\n'+
-                //     data.denuncias[0].user_id);
-
+                i++;
+                $('#power').html(parseInt(data.power) * i);
                 console.log(data.power)
             })
             .listen('.IUQDenunciaEvent', (data) => {
-                if (localStorage.isToast == true) {
+                if (localStorage.isToast === true) {
                     $.toast({
                         heading: 'SIAC',
                         text: data.msg,
@@ -53,7 +35,7 @@ jQuery(function($) {
                     })
                 }
                 i++;
-                $('#power').html(parseInt(data.power) * i);
+                $("#power").html(parseInt(data.power) * i);
                 console.log(data.denuncia_id+" :: "+data.user_id);
             });
 
@@ -71,11 +53,6 @@ jQuery(function($) {
                     console.log(data.denuncia_id+" : Mobile : "+data.user_id);
                 }
             });
-
-        // alert("Hola Mun-2");
-
-
-
 
     });
 });

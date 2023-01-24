@@ -35,33 +35,27 @@ class IUQDenunciaEvent implements ShouldBroadcast{
         $this->status       = 204;
     }
 
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return \Illuminate\Broadcasting\Channel|array
-     */
-    public function broadcastOn(){
+    public function broadcastOn(): array{
         return ['test-channel'];
     }
 
-    public function broadcastAs()
-    {
+    public function broadcastAs(): string{
         return 'IUQDenunciaEvent';
     }
 
-    public function broadcastWith(){
+    public function broadcastWith(): array{
         $this->status = 200;
         $fecha = Carbon::now()->format('d-m-Y H:i:s');
-        if ($this->trigger_type==0){
+        $triger_status = "CREAR";
+        if ($this->trigger_type===0){
             $this->msg    =  strtoupper(Auth::user()->FullName)." ha CREADO una nueva denuncia: ".$this->denuncia_id."  ".$fecha;
             $this->icon   = "success";
-            $triger_status = "CREAR";
-        }else if ($this->trigger_type==1){
-            $this->msg    = strtoupper(Auth::user()->fullname)." ha MODIFICADO la denuncia: ".$this->denuncia_id."  ".$fecha;
+        }else if ($this->trigger_type===1){
+            $this->msg    = strtoupper(Auth::user()->FullName)." ha MODIFICADO la denuncia: ".$this->denuncia_id."  ".$fecha;
             $this->icon   = "info";
             $triger_status = "MODIFICAR";
-        }else if ($this->trigger_type==2){
-            $this->msg    = strtoupper(Auth::user()->fullname)." ha ELIMINADO la denuncia: ".$this->denuncia_id."  ".$fecha;
+        }else if ($this->trigger_type===2){
+            $this->msg    = strtoupper(Auth::user()->FullName)." ha ELIMINADO la denuncia: ".$this->denuncia_id."  ".$fecha;
             $this->icon   = "warning";
             $triger_status = "ELIMINAR";
         }else{
@@ -80,7 +74,7 @@ class IUQDenunciaEvent implements ShouldBroadcast{
             $ip = $_SERVER['REMOTE_ADDR'];
         }
 
-        $Obj = DB::table('logs')->insert([
+        DB::table('logs')->insert([
             'model_name'     => 'denuncias',
             'model_id'       => $this->denuncia_id,
             'trigger_status' => $triger_status,

@@ -52,6 +52,7 @@ Route::group(['prefix' => 'v1'], function () {
         // Ads Images Denucnas should
         Route::post('/denuncia/add/image', [DenunciaAPIController::class, 'addImageDenunciaMobile']);
         Route::post('/denuncia/getimagesdenuncialist', [DenunciaAPIController::class, 'getImagesDenunciaList']);
+        Route::post('/denuncia/add/respuesta', [DenunciaAPIController::class, 'addRespuestaDenunciaMobile']);
 
 
         Route::get('fire', function () {

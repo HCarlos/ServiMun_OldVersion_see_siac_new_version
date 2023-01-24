@@ -6,10 +6,12 @@ use App\Events\APIDenunciaEvent;
 use App\Events\InserUpdateDeleteEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\DenunciaAddImageAPIRequest;
+use App\Http\Requests\API\DenunciaAddRespuestaAPIRequest;
 use App\Http\Requests\API\DenunciaAPIRequest;
 use App\Http\Requests\API\UserAPIChangePasswordRequest;
 use App\Models\Mobiles\Denunciamobile;
 use App\Models\Mobiles\Imagemobile;
+use App\Models\Mobiles\Respuestamobile;
 use App\Models\Mobiles\Serviciomobile;
 use App\User;
 use Carbon\Carbon;
@@ -45,29 +47,45 @@ class DenunciaAPIController extends Controller{
             $response["msg"] = "OK";
             $denucias = array();
             foreach ($dens as $den){
+
                 $Ser = Serviciomobile::find($den->serviciomobile_id);
+
+                // Obtenemos sus imágenes
                 $imagenes = Imagemobile::select(['id','fecha','filename','filename_png','filename_thumb','user_id','denunciamobile_id','latitud','longitud']
                 )->where("denunciamobile_id",$den->id)
                     ->OrderByDesc("id")
                     ->get();
                 foreach ($imagenes as $imagen){
-                    $fecha = (new Carbon($imagen->fecha))->format('d-m-Y H:i:s');
-                    $imagen['fecha'] = $fecha;
-                    $imagen["url"] =config("atemun.public_url")."/storage/mobile/denuncia/".$imagen->filename;
-                    $imagen["url_png"] =config("atemun.public_url")."/storage/mobile/denuncia/".$imagen->filename_png;
-                    $imagen["url_thumb"] =config("atemun.public_url")."/storage/mobile/denuncia/".$imagen->filename_thumb;
+                    $fecha               = (new Carbon($imagen->fecha))->format('d-m-Y H:i:s');
+                    $path = "/storage/mobile/denuncia/";
+                    $imagen['fecha']     = $fecha;
+                    $imagen["url"]       = config("atemun.public_url").$path.$imagen->filename;
+                    $imagen["url_png"]   = config("atemun.public_url").$path.$imagen->filename_png;
+                    $imagen["url_thumb"] = config("atemun.public_url").$path.$imagen->filename_thumb;
                 }
+
+                // Obtenemos sus respuestas
+                $respuestas = Respuestamobile::select(['id','fecha','respuesta','observaciones'])
+                    ->where("denunciamobile_id",$den->id)
+                    ->OrderByDesc("id")
+                    ->get();
+                foreach ($respuestas as $resp){
+                    $fecha                 = (new Carbon($resp->fecha))->format('d-m-Y H:i:s');
+                    $resp['fecha']         = $fecha;
+                }
+
                 $fecha = (new Carbon($den->fecha))->format('d-m-Y H:i:s');
                 $d = [
-                    'id' => $den->id,
-                    'denuncia' => $den->denuncia,
-                    'fecha' => $fecha,
-                    'latitud' => $den->latitud,
-                    'longitud' => $den->longitud,
-                    'ubicacion' => $den->ubicacion,
+                    'id'               => $den->id,
+                    'denuncia'         => $den->denuncia,
+                    'fecha'            => $fecha,
+                    'latitud'          => $den->latitud,
+                    'longitud'         => $den->longitud,
+                    'ubicacion'        => $den->ubicacion,
                     'ubicacion_google' => $den->ubicacion_google,
-                    'servicio' => $Ser->servicio,
-                    'imagenes' => $imagenes,
+                    'servicio'         => $Ser->servicio,
+                    'imagenes'         => $imagenes,
+                    'respuestas'       => $respuestas,
                 ];
                 $denucias[] = $d;
             }
@@ -78,12 +96,12 @@ class DenunciaAPIController extends Controller{
 
     }
 
-    public function addImageDenunciaMobile(DenunciaAddImageAPIRequest $request):JsonResponse {
+    public function addRespuestaDenunciaMobile(DenunciaAddRespuestaAPIRequest $request):JsonResponse {
         $response = ["status"=>0, "msg"=>"Ha ocurrido un error al subir la imagen"];
         $den = (object)  $request->manage();
         if ($den){
             $response["status"] = 1;
-            $response["msg"] = "Su imagen se ha agregado correctamente!";
+            $response["msg"] = "Su respuesta fue agregada correctamente!";
         }
         return response()->json($response);
     }

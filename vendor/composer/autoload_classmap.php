@@ -83,6 +83,7 @@ return array(
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\Denuncia\\AfiliacionController' => $baseDir . '/app/Http/Controllers/Denuncia/AfiliacionController.php',
     'App\\Http\\Controllers\\Denuncia\\DashboardController' => $baseDir . '/app/Http/Controllers/Denuncia/DashboardController.php',
+    'App\\Http\\Controllers\\Denuncia\\DashboardEnlaceController' => $baseDir . '/app/Http/Controllers/Denuncia/DashboardEnlaceController.php',
     'App\\Http\\Controllers\\Denuncia\\DenunciaCiudadanaController' => $baseDir . '/app/Http/Controllers/Denuncia/DenunciaCiudadanaController.php',
     'App\\Http\\Controllers\\Denuncia\\DenunciaController' => $baseDir . '/app/Http/Controllers/Denuncia/DenunciaController.php',
     'App\\Http\\Controllers\\Denuncia\\DenunciaDependenciaServicioController' => $baseDir . '/app/Http/Controllers/Denuncia/DenunciaDependenciaServicioController.php',
