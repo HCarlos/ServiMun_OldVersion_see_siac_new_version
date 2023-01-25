@@ -23,7 +23,7 @@ jQuery(function($) {
                 console.log(data.power)
             })
             .listen('.IUQDenunciaEvent', (data) => {
-                if (localStorage.isToast === true) {
+                if ( Boolean(localStorage.isToast) === true) {
                     $.toast({
                         heading: 'SIAC',
                         text: data.msg,
