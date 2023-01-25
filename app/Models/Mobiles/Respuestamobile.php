@@ -29,7 +29,7 @@ class Respuestamobile extends Model{
     }
 
     public function users(){
-        return $this->belongsToMany(User::class,'respuestamobile_user','respuesta_id','user_id');
+        return $this->belongsToMany(User::class,'respuestamobile_user','respuestamobile_id','user_id');
     }
 
     public function Denuncia(){
