@@ -453,6 +453,11 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp|DELEGADO|CIUDADANO|
     Route::get('/showModalRespuestaCiudadanaNew/{denuncia_id}', 'Denuncia\Respuesta\RespuestaCiudadanaController@showModalRespuestaCiudadanaNew')->name('/showModalRespuestaCiudadanaNew');
     Route::get('showModalRespuestaCiudadanaEdit/{Id}', 'Denuncia\Respuesta\RespuestaCiudadanaController@showModalRespuestaCiudadanaEdit')->name('/showModalRespuestaCiudadanaEdit');
 
+    // Catálogo de Respuestas Mobile
+    Route::get('listRespuestasMobile/{Id}', 'Denuncia\Respuesta\RespuestaMobileController@index')->name('listRespuestasMobile');
+    Route::post('saveRespuestaMobileDen/', 'Denuncia\Respuesta\RespuestaMobileController@saveRespuestaMobileDen')->name('saveRespuestaMobileDen');
+
+
     // Catálogo de Imagenes
     Route::get('listImagenes/{Id}', 'Denuncia\Imagene\ImageneController@index')->name('listImagenes');
     Route::get('removeImagene/{id}', 'Denuncia\Imagene\ImageneController@removeItem')->name('removeImagene');
@@ -470,6 +475,9 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp|DELEGADO|CIUDADANO|
     Route::post('searchIdentical', 'Denuncia\DenunciaController@searchIdentical')->name('searchIdentical');
 
     Route::get('listDenunciasMobile', 'Denuncia\DenunciaMobileController@index')->name('listDenunciasMobile');
+
+
+
 
 });
 

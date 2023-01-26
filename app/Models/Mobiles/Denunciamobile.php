@@ -68,6 +68,9 @@ class Denunciamobile extends Model{
         return $this->belongsToMany(Imagemobile::class,'denunciamobile_imagemobile','denunciamobile_id','imagemobile_id');
     }
 
+    public function respuestas(){
+        return $this->belongsToMany(Respuestamobile::class,'denunciamobile_respuestamobile','denunciamobile_id','respuestamobile_id');
+    }
 
 
 }

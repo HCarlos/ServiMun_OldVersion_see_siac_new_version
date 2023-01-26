@@ -67,7 +67,7 @@ class DenunciaAPIController extends Controller{
                 // Obtenemos sus respuestas
                 $respuestas = Respuestamobile::select(['id','fecha','respuesta','observaciones'])
                     ->where("denunciamobile_id",$den->id)
-                    ->OrderByDesc("id")
+                    ->OrderBy("id")
                     ->get();
                 foreach ($respuestas as $resp){
                     $fecha                 = (new Carbon($resp->fecha))->format('d-m-Y H:i:s');

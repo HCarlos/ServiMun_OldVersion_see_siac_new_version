@@ -48,7 +48,15 @@
 
                             <div class="mt-1 mb-1">
                                 <a href="http://www.openstreetmap.org/?mlat={{$item->latitud}}&mlon={{$item->longitud}}&map=23" class="btn btn-sm btn-link text-muted ps-0" target="_blank"><i class='mdi mdi-map-marker text-danger'></i> Ver Ubicación</a>
-{{--                                <a href="javascript: void(0);" class="btn btn-sm btn-link text-muted"><i class='uil uil-comments-alt'></i> 0 Respuesta(s)</a>--}}
+                                <a href="{{ route("listRespuestasMobile",['Id'=>$item->id]) }}" class="btn btn-sm btn-link text-muted btnFullModal"
+                                   data-toggle="modal"
+                                   data-target="#modalFull"
+                                   data-placement="top"
+                                   title="Respuestas"
+                                   data-original-title="Respuestas" >
+                                    <i class='uil uil-comments-alt'></i>
+                                    {{ $item->respuestas()->count()  }} Respuesta(s)
+                                </a>
 {{--                                <a href="javascript: void(0);" class="btn btn-sm btn-link text-muted"><i class='uil uil-share-alt'></i> Share</a>--}}
                             </div>
 
@@ -61,26 +69,22 @@
         </div>
 
 
+@section('scripts')
 
-{{--            <table class="table table-condensed table-responsive-sm">--}}
-{{--                <tr style="background-color: #f44336;">--}}
-{{--                    <td>Fila 1, Celda 1</td>--}}
-{{--                    <td>Fila 1, Celda 2</td>--}}
-{{--                </tr>--}}
-{{--                <tr style="background-color: #9c27b0;">--}}
-{{--                    <td>Fila 2, Celda 1</td>--}}
-{{--                    <td>Fila 2, Celda 2</td>--}}
-{{--                </tr>--}}
-{{--                <tr style="background-color: #2196f3;">--}}
-{{--                    <td>Fila 3, Celda 1</td>--}}
-{{--                    <td>Fila 3, Celda 2</td>--}}
-{{--                </tr>--}}
-{{--            </table>--}}
+<script type="text/javascript">
 
+    var updateScrollAreaHeight = function() {
+    var _scroller = document.querySelector('#conversations [class*="ace-scroll"]')
+    _scroller.style.display = 'none'
+    if (_scroller) _scroller.style.maxHeight = (Math.max(320, _scroller.parentNode.clientHeight)) + 'px'
+    _scroller.style.display = ''
+    }
+    window.addEventListener('load', updateScrollAreaHeight)
+    window.addEventListener('resize', updateScrollAreaHeight)
 
+</script>
 
-
-
+@endsection
 
 
 
