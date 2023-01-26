@@ -23,16 +23,16 @@
     window.laravel_echo_port='{{env("LARAVEL_ECHO_PORT")}}';
 @auth()
     @if(\Illuminate\Support\Facades\Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_ADMIN'))
-    localStorage.isToast = true
+    localStorage.isToast = 1
     @else
-    localStorage.isToast = false;
+    localStorage.isToast = 0;
     @endif
 @elseauth
-    localStorage.isToast = false;
+    localStorage.isToast = 0;
 @endauth
 
 @guest()
-    localStorage.isToast = false;
+    localStorage.isToast = 0;
 @endguest
 
 </script>

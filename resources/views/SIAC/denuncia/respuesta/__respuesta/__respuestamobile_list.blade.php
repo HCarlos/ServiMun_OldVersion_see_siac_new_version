@@ -58,13 +58,13 @@
 
                 @endif
             @endforeach
-{{--        </ul>--}}
+                    <input type="text" name="respuesta" class="form-control" placeholder="Escribe un comentario...">
+                    <input type="hidden" name="user_id" id="user_id" value="{{ $item->user_id }}">
+                    <input type="hidden" name="denunciamobile_id" id="denunciamobile_id" value="{{ $item->id }}">
+
             </div>
         </div>
     </div>
     </div>
-    <input type="text" name="respuesta" class="form-control" placeholder="Escribe un comentario...">
-    <input type="hidden" name="user_id" id="user_id" value="{{ $item->user_id }}">
-    <input type="hidden" name="denunciamobile_id" id="denunciamobile_id" value="{{ $item->id }}">
 </div>
 
