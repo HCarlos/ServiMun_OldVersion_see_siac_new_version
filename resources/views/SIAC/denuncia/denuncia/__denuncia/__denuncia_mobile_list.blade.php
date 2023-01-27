@@ -67,27 +67,3 @@
 
             </div>
         </div>
-
-
-@section('scripts')
-
-<script type="text/javascript">
-
-    var updateScrollAreaHeight = function() {
-    var _scroller = document.querySelector('#conversations [class*="ace-scroll"]')
-    _scroller.style.display = 'none'
-    if (_scroller) _scroller.style.maxHeight = (Math.max(320, _scroller.parentNode.clientHeight)) + 'px'
-    _scroller.style.display = ''
-    }
-    window.addEventListener('load', updateScrollAreaHeight)
-    window.addEventListener('resize', updateScrollAreaHeight)
-
-</script>
-
-@endsection
-
-
-
-
-
-

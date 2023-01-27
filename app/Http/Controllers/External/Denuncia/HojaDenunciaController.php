@@ -149,6 +149,7 @@ class HojaDenunciaController extends Controller
         $pdf->SetFont(FONT_FREEMONO,'B',10);
         $pdf->Cell(160,$pdf->alto,$den->denuncia_estatus->first()->estatus,"",1,"L");
 
+        // DATOS DEL USUARIO PARTE 1
         $y = $pdf->GetY();
         $pdf->setY( $pdf->getY() + 0 );
         $y = $pdf->GetY();
@@ -172,6 +173,20 @@ class HojaDenunciaController extends Controller
         $pdf->Cell(8,$pdf->alto,"ID : ","L",0,"R");
         $pdf->SetFont(FONT_FREEMONO,'B',10);
         $pdf->Cell(20,$pdf->alto,$den->ciudadano->id,"",1,"L");
+
+        // DATOS DEL USUARIO PARTE 2
+        $y = $pdf->GetY();
+        $pdf->setY( $pdf->getY() + 0 );
+        $y = $pdf->GetY();
+        $pdf->SetFillColor(192);
+        $pdf->RoundedRect(5,$y,205,6.5,2,'1111','');
+
+        // USUARIO
+        $pdf->SetFont(FONT_ARIALN,'B',9);
+        $pdf->Cell(20,$pdf->alto,"TELÉFONOS : ","",0,"R");
+        $pdf->SetFont(FONT_FREEMONO,'B',10);
+        $pdf->Cell(101,$pdf->alto,$den->ciudadano->celulares.' :: '.$den->ciudadano->telefonos,"",1,"L");
+
 
         $y = $pdf->GetY();
         $pdf->setY( $pdf->getY() + 0 );
@@ -199,7 +214,7 @@ class HojaDenunciaController extends Controller
         //        $pdf->RoundedRect(5, $y, 287, 4, 2, '12', 'FD');
 
         $y = $pdf->GetY();
-        $pdf->setY( $pdf->getY() + 5 );
+        $pdf->setY( $pdf->getY() + 3 );
         $y = $pdf->GetY();
         $pdf->SetFillColor(192);
         $pdf->RoundedRect(5,$y,205,6.5,2,'1111','');
@@ -211,7 +226,7 @@ class HojaDenunciaController extends Controller
         $pdf->Cell(160,$pdf->alto,$den->dependencia->dependencia.' ('.$den->dependencia->abreviatura.')',"L",1,"L");
 
         $y = $pdf->GetY();
-        $pdf->setY( $pdf->getY() + 2 );
+        $pdf->setY( $pdf->getY() +0.5 );
         $y = $pdf->GetY();
         $pdf->SetFillColor(192);
         $pdf->RoundedRect(5,$y,205,6.5,2,'1111','');
@@ -221,6 +236,18 @@ class HojaDenunciaController extends Controller
         $pdf->Cell(20,$pdf->alto,"SERVICIO : ","",0,"R");
         $pdf->SetFont(FONT_FREEMONO,'B',8);
         $pdf->Cell(185,$pdf->alto,$den->servicio->servicio,"L",1,"L");
+
+        $y = $pdf->GetY();
+        $pdf->setY( $pdf->getY() +0.5 );
+        $y = $pdf->GetY();
+        $pdf->SetFillColor(192);
+        $pdf->RoundedRect(5,$y,205,6.5,2,'1111','');
+
+        // D   UBICACIÓN
+        $pdf->SetFont(FONT_ARIALN,'B',10);
+        $pdf->Cell(20,$pdf->alto,"UBICACIÓN : ","",0,"R");
+        $pdf->SetFont(FONT_FREEMONO,'B',8);
+        $pdf->Cell(185,$pdf->alto,$den->FullUbication,"L",1,"L");
 
         // DENUNCIA
         $y = $pdf->GetY();

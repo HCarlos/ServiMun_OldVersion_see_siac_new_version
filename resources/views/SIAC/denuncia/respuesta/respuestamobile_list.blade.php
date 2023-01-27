@@ -1,23 +1,6 @@
-{{--@extends(Auth::user()->Home)--}}
-
-{{--@section('container')--}}
-
-{{--    @component('components.catalogo')--}}
-
-{{--        @slot('buttons')--}}
-{{--            @include('shared.ui_kit.__menu_respuesta')--}}
-{{--        @endslot--}}
-{{--        @slot('body_catalogo')--}}
-{{--            @include('SIAC.denuncia.respuesta.__respuesta.__respuestamobile_list')--}}
-{{--        @endslot--}}
-
-{{--    @endcomponent--}}
-
-{{--@endsection--}}
-
 @component('components.form.form-modal')
     @slot('Method', "POST" ?? 'GET')
-    @slot('Titulo', $Titulo ?? '')
+    @slot('Titulo', "Comentarios del folio: ".$id ?? '')
     @slot('Route', "saveRespuestaMobileDen" ?? '#')
     @slot('IsUpload', $IsUpload ?? false)
     @slot('IsNew', true ?? false)

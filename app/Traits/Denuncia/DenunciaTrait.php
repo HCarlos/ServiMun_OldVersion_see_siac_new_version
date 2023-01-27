@@ -27,15 +27,22 @@ trait DenunciaTrait
 {
 
     public function getFullUbicationAttribute(){
+//        return $this->calle.' '.
+//            $this->num_ext.' '.
+//            $this->num_int.' '.
+//            $this->colonia.' '.
+//            $this->comunidad.' '.
+//            $this->ciudad.' '.
+//            $this->municipio.' '.
+//            $this->estado.' '.
+//            $this->cp;
+
+        $miLoc = trim($this->colonia) == trim($this->comunidad) ? trim($this->colonia) : trim($this->colonia).' '.trim($this->comunidad);
         return $this->calle.' '.
             $this->num_ext.' '.
             $this->num_int.' '.
-            $this->colonia.' '.
-            $this->comunidad.' '.
-            $this->ciudad.' '.
-            $this->municipio.' '.
-            $this->estado.' '.
-            $this->cp;
+            $miLoc.' '.
+            $this->ciudad;
     }
 
     public function getFechaIngresoSolicitudAttribute(){
