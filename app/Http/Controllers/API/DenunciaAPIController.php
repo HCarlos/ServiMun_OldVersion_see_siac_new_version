@@ -65,13 +65,19 @@ class DenunciaAPIController extends Controller{
                 }
 
                 // Obtenemos sus respuestas
-                $respuestas = Respuestamobile::select(['id','fecha','respuesta','observaciones'])
+                $respuestas = Respuestamobile::select(['id','fecha','respuesta','observaciones', 'user_id'])
                     ->where("denunciamobile_id",$den->id)
                     ->OrderBy("id")
                     ->get();
                 foreach ($respuestas as $resp){
                     $fecha                 = (new Carbon($resp->fecha))->format('d-m-Y H:i:s');
                     $resp['fecha']         = $fecha;
+                    $user = User::find($resp->user_id);
+                    if( $user->isRole('Administrator') )
+                        $resp['roleuser'] = "Administrator";
+                    else
+                        $resp['roleuser'] = $user->roles->first()->name;
+                    $resp['username'] = $user->ap_paterno.' '.$user->nombre;
                 }
 
                 $fecha = (new Carbon($den->fecha))->format('d-m-Y H:i:s');
