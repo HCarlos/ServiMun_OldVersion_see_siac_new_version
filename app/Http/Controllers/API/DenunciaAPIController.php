@@ -51,19 +51,6 @@ class DenunciaAPIController extends Controller{
 
                 $Ser = Serviciomobile::find($den->serviciomobile_id);
 
-                // Obtenemos sus imágenes
-                $imagenes = Imagemobile::select(['id','fecha','filename','filename_png','filename_thumb','user_id','denunciamobile_id','latitud','longitud']
-                )->where("denunciamobile_id",$den->id)
-                    ->OrderByDesc("id")
-                    ->get();
-                foreach ($imagenes as $imagen){
-                    $fecha               = (new Carbon($imagen->fecha))->format('d-m-Y H:i:s');
-                    $path = "/storage/mobile/denuncia/";
-                    $imagen['fecha']     = $fecha;
-                    $imagen["url"]       = config("atemun.public_url").$path.$imagen->filename;
-                    $imagen["url_png"]   = config("atemun.public_url").$path.$imagen->filename_png;
-                    $imagen["url_thumb"] = config("atemun.public_url").$path.$imagen->filename_thumb;
-                }
 
 
                 $fecha = (new Carbon($den->fecha))->format('d-m-Y H:i:s');
@@ -76,8 +63,8 @@ class DenunciaAPIController extends Controller{
                     'ubicacion'        => $den->ubicacion,
                     'ubicacion_google' => $den->ubicacion_google,
                     'servicio'         => $Ser->servicio,
-                    'imagenes'         => $imagenes,
-                    'respuestas'       => $this->getRespuesta($den->id),
+                    'imagenes'         => $this->getImagenes($den->id),
+                    'respuestas'       => $this->getRespuestas($den->id),
                 ];
                 $denucias[] = $d;
             }
@@ -109,12 +96,34 @@ class DenunciaAPIController extends Controller{
         return response()->json($response);
     }
 
-    public function getRespuestaFromDenunciaMobile(Integer $denunciamobile_id):JsonResponse {
-        return response()->json($this->getRespuesta($denunciamobile_id));
+    public function getImagenesFromDenunciaMobile(int $denunciamobile_id):JsonResponse {
+        return response()->json($this->getImagenes($denunciamobile_id));
     }
 
+    public function getRespuestasFromDenunciaMobile(int $denunciamobile_id):JsonResponse {
+        return response()->json($this->getRespuestas($denunciamobile_id));
+    }
+
+    // Obtenemos sus imágenes
+    protected function getImagenes(int $denunciamobile_id) {
+        $imagenes = Imagemobile::select(['id','fecha','filename','filename_png','filename_thumb','user_id','denunciamobile_id','latitud','longitud']
+        )->where("denunciamobile_id",$denunciamobile_id)
+            ->OrderByDesc("id")
+            ->get();
+        foreach ($imagenes as $imagen){
+            $fecha               = (new Carbon($imagen->fecha))->format('d-m-Y H:i:s');
+            $path = "/storage/mobile/denuncia/";
+            $imagen['fecha']     = $fecha;
+            $imagen["url"]       = config("atemun.public_url").$path.$imagen->filename;
+            $imagen["url_png"]   = config("atemun.public_url").$path.$imagen->filename_png;
+            $imagen["url_thumb"] = config("atemun.public_url").$path.$imagen->filename_thumb;
+        }
+        return $imagenes;
+    }
+
+
     // Obtenemos sus respuestas
-    protected function getRespuesta(Integer $denunciamobile_id):JsonResponse {
+    protected function getRespuestas(int $denunciamobile_id) {
         $respuestas = Respuestamobile::select(['id','fecha','respuesta','observaciones', 'user_id'])
             ->where("denunciamobile_id",$denunciamobile_id)
             ->OrderBy("id")
@@ -130,7 +139,6 @@ class DenunciaAPIController extends Controller{
             $resp['username'] = $user->ap_paterno.' '.$user->nombre;
         }
         return $respuestas;
-
     }
 
 
