@@ -53,6 +53,7 @@ Route::group(['prefix' => 'v1'], function () {
         Route::post('/denuncia/add/image', [DenunciaAPIController::class, 'addImageDenunciaMobile']);
         Route::post('/denuncia/getimagesdenuncialist', [DenunciaAPIController::class, 'getImagesDenunciaList']);
         Route::post('/denuncia/add/respuesta', [DenunciaAPIController::class, 'addRespuestaDenunciaMobile']);
+        Route::post('/denuncia/list/respuestas', [DenunciaAPIController::class, 'getRespuestaFromDenunciaMobile']);
 
 
         Route::get('fire', function () {

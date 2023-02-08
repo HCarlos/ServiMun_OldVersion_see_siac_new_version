@@ -19,6 +19,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Ramsey\Uuid\Type\Integer;
 
 class DenunciaAPIController extends Controller{
 
@@ -64,21 +65,6 @@ class DenunciaAPIController extends Controller{
                     $imagen["url_thumb"] = config("atemun.public_url").$path.$imagen->filename_thumb;
                 }
 
-                // Obtenemos sus respuestas
-                $respuestas = Respuestamobile::select(['id','fecha','respuesta','observaciones', 'user_id'])
-                    ->where("denunciamobile_id",$den->id)
-                    ->OrderBy("id")
-                    ->get();
-                foreach ($respuestas as $resp){
-                    $fecha                 = (new Carbon($resp->fecha))->format('d-m-Y H:i:s');
-                    $resp['fecha']         = $fecha;
-                    $user = User::find($resp->user_id);
-                    if( $user->isRole('Administrator') )
-                        $resp['roleuser'] = "Administrator";
-                    else
-                        $resp['roleuser'] = $user->roles->first()->name;
-                    $resp['username'] = $user->ap_paterno.' '.$user->nombre;
-                }
 
                 $fecha = (new Carbon($den->fecha))->format('d-m-Y H:i:s');
                 $d = [
@@ -91,7 +77,7 @@ class DenunciaAPIController extends Controller{
                     'ubicacion_google' => $den->ubicacion_google,
                     'servicio'         => $Ser->servicio,
                     'imagenes'         => $imagenes,
-                    'respuestas'       => $respuestas,
+                    'respuestas'       => $this->getRespuesta($den->id),
                 ];
                 $denucias[] = $d;
             }
@@ -121,6 +107,30 @@ class DenunciaAPIController extends Controller{
             $response["msg"] = "Su respuesta fue agregada correctamente!";
         }
         return response()->json($response);
+    }
+
+    public function getRespuestaFromDenunciaMobile(Integer $denunciamobile_id):JsonResponse {
+        return response()->json($this->getRespuesta($denunciamobile_id));
+    }
+
+    // Obtenemos sus respuestas
+    protected function getRespuesta(Integer $denunciamobile_id):JsonResponse {
+        $respuestas = Respuestamobile::select(['id','fecha','respuesta','observaciones', 'user_id'])
+            ->where("denunciamobile_id",$denunciamobile_id)
+            ->OrderBy("id")
+            ->get();
+        foreach ($respuestas as $resp){
+            $fecha                 = (new Carbon($resp->fecha))->format('d-m-Y H:i:s');
+            $resp['fecha']         = $fecha;
+            $user = User::find($resp->user_id);
+            if( $user->isRole('Administrator') )
+                $resp['roleuser'] = "Administrator";
+            else
+                $resp['roleuser'] = $user->roles->first()->name;
+            $resp['username'] = $user->ap_paterno.' '.$user->nombre;
+        }
+        return $respuestas;
+
     }
 
 
