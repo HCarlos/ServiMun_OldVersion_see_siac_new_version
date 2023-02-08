@@ -350,7 +350,7 @@
 {{--                </li>--}}
 {{--            @endif--}}
 
-            @if (Auth::user()->hasRole('Administrator|SysOp') )
+            @if (Auth::user()->hasRole('Administrator|SysOp|USER_MOBILE_BASIC|USER_MOBILE_ADMIN') )
                 <li class="side-nav-item">
                     <a href="{{ url('listDenunciasMobile') }}" class="side-nav-link">
                         <i class="mdi dripicons-device-mobile"></i>

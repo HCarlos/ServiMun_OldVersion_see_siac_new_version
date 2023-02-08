@@ -3781,6 +3781,7 @@ return array(
     'Llenado_de_Catalogo_10_Seeder' => $baseDir . '/database/seeds/Llenado_de_Catalogo_10_Seeder.php',
     'Llenado_de_Catalogo_11_Seeder' => $baseDir . '/database/seeds/Llenado_de_Catalogo_11_Seeder.php',
     'Llenado_de_Servicios_Mobile_01_Seeder' => $baseDir . '/database/seeds/Llenado_de_Servicios_Mobile_01_Seeder.php',
+    'Llenado_de_Servicios_Mobile_02_Seeder' => $baseDir . '/database/seeds/Llenado_de_Servicios_Mobile_02_Seeder.php',
     'Maatwebsite\\Excel\\Cache\\BatchCache' => $vendorDir . '/maatwebsite/excel/src/Cache/BatchCache.php',
     'Maatwebsite\\Excel\\Cache\\BatchCacheDeprecated' => $vendorDir . '/maatwebsite/excel/src/Cache/BatchCacheDeprecated.php',
     'Maatwebsite\\Excel\\Cache\\CacheManager' => $vendorDir . '/maatwebsite/excel/src/Cache/CacheManager.php',

@@ -25,14 +25,22 @@
                                     @foreach($item->Imagemobiles as $image)
                                         @if($i==0)
                                         <div class="col-sm-12">
-                                            <a href="{{ $image->PathImage }}" target="_blank" title="{{ $item->Servicio->Dependencia->dependencia }}">
+                                            <a
+                                                @if ( Auth::user()->hasAnyPermission(['all','sysop','mobile_consulta']) )
+                                                href="{{ $image->PathImage }}"
+                                                @endif
+                                                target="_blank" title="{{ $item->Servicio->Dependencia->dependencia }}">
                                                 <img src="{{ $image->PathImage }}" alt="" class="rounded img-fluid"/>
                                             </a>
                                         </div>
                                         <div class="col m-1">
                                         @endif
                                         @if($i>0)
-                                                <a href="{{ $image->PathImage }}" target="_blank" title="{{ $item->Servicio->Dependencia->dependencia }}" >
+                                                <a
+                                                    @if ( Auth::user()->hasAnyPermission(['all','sysop','mobile_consulta']) )
+                                                    href="{{ $image->PathImage }}"
+                                                    @endif
+                                                    target="_blank" title="{{ $item->Servicio->Dependencia->dependencia }}" >
                                                    <img src="{{ $image->PathImageThumb }}" alt="" class="rounded img-fluid " width="60" height="60" />
                                                 </a>
                                         @endif
@@ -47,8 +55,18 @@
                             </div>
 
                             <div class="mt-1 mb-1">
-                                <a href="http://www.openstreetmap.org/?mlat={{$item->latitud}}&mlon={{$item->longitud}}&map=23" class="btn btn-sm btn-link text-muted ps-0" target="_blank"><i class='mdi mdi-map-marker text-danger'></i> Ver Ubicación</a>
-                                <a href="{{ route("listRespuestasMobile",['Id'=>$item->id]) }}" class="btn btn-sm btn-link text-muted btnFullModal"
+
+                                <a
+                                    @if ( Auth::user()->hasAnyPermission(['all','sysop','mobile_consulta']) )
+                                    href="http://www.openstreetmap.org/?mlat={{$item->latitud}}&mlon={{$item->longitud}}&map=23"
+                                    @endif
+                                    class="btn btn-sm btn-link text-muted ps-0" target="_blank"><i class='mdi mdi-map-marker text-danger'></i> Ver Ubicación</a>
+
+                                <a
+                                    @if ( Auth::user()->hasAnyPermission(['all','sysop','mobile_consulta','mobile_responder']) )
+                                    href="{{ route("listRespuestasMobile",['Id'=>$item->id]) }}"
+                                    @endif
+                                    class="btn btn-sm btn-link text-muted btnFullModal"
                                    data-toggle="modal"
                                    data-target="#modalFull"
                                    data-placement="top"
