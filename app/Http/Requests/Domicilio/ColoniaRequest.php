@@ -34,9 +34,6 @@ class ColoniaRequest extends FormRequest
     {
         return [
             'colonia'         => ['required','min:2',new Uppercase,'unique:colonias,colonia,'.$this->id],
-            'latitud'         => ['present'],
-            'longitud'        => ['present'],
-            'altitud'         => ['present'],
             'codigopostal_id' => ['required','numeric','min:1'],
             'comunidad_id'    => ['required','numeric','min:1'],
         ];
@@ -52,25 +49,25 @@ class ColoniaRequest extends FormRequest
             $Item = [
                 'colonia'          => strtoupper(trim($this->colonia)),
                 'nomenclatura'     => strtoupper(trim($this->nomenclatura)),
-                'altitud'          => $this->altitud ?? null,
-                'latitud'          => $this->latitud ?? null,
-                'longitud'         => $this->longitud ?? null,
+                'altitud'          => $this->altitud ?? 0.00,
+                'latitud'          => $this->latitud ?? 0.00,
+                'longitud'         => $this->longitud ?? 0.00,
                 'codigopostal_id'  => $this->codigopostal_id,
                 'cp'               => $CPs->cp,
                 'comunidad_id'     => $this->comunidad_id,
                 'tipocomunidad_id' => $Comunidad->tipocomunidad_id,
             ];
 
-            //dd($Item);
+//            dd($Item);
 
 
             if ($this->id == 0) {
                 $item = Colonia::create($Item);
             } else {
                 $item = Colonia::find($this->id);
+                $item->update($Item);
                 Ubicacion::detachesColonia($this->id);
                 $this->detaches($item);
-                $item->update($Item);
             }
             $this->attaches($item);
             Ubicacion::attachesColonia($this->id);

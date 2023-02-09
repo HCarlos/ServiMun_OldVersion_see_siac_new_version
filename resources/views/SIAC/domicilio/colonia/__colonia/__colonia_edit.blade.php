@@ -19,15 +19,18 @@
 <div class="form-group row mb-1">
     <label for = "latitud" class="col-md-3 col-form-label">Latitud</label>
     <div class="col-md-7">
-        <input type="text" name="latitud" id="latitud" value="{{ old('latitud',$items->latitud) }}" class="form-control" pattern="^-?\d{1,3}\.\d+"/>
+{{--        <input type="text" name="latitud" id="latitud" value="{{ old('latitud',$items->latitud) }}" class="form-control" pattern="^-?\d{1,3}\.\d+"/>--}}
+        <input type="text" name="latitud" id="latitud" value="{{ old('latitud',$items->latitud) }}" class="form-control" />
     </div>
     <label for = "longitud" class="col-md-3 col-form-label">Longitud</label>
     <div class="col-md-7">
-        <input type="text" name="longitud" id="longitud" value="{{ old('longitud',$items->longitud) }}" class="form-control" pattern="^-?\d{1,3}\.\d+$"/>
+{{--        <input type="text" name="longitud" id="longitud" value="{{ old('longitud',$items->longitud) }}" class="form-control" pattern="^-?\d{1,3}\.\d+$"/>--}}
+        <input type="text" name="longitud" id="longitud" value="{{ old('longitud',$items->longitud) }}" class="form-control" />
     </div>
     <label for = "altitud" class="col-md-3 col-form-label">Altitud</label>
     <div class="col-md-7">
-        <input type="text" name="altitud" id="altitud" value="{{ old('altitud',$items->altitud) }}" class="form-control" pattern="^[-+]?[0-9]*[.,]?[0-9]+$"/>
+{{--        <input type="text" name="altitud" id="altitud" value="{{ old('altitud',$items->altitud) }}" class="form-control" pattern="^[-+]?[0-9]*[.,]?[0-9]+$"/>--}}
+        <input type="text" name="altitud" id="altitud" value="{{ old('altitud',$items->altitud) }}" class="form-control" />
     </div>
 </div>
 
@@ -38,17 +41,12 @@
     </div>
     <label for = "search_autocomplete_cp" class="col-md-3 col-form-label">CP</label>
     <div class="col-md-7">
-        {{--        <select class="codigopostal_id form-control select2" data-toggle="select2"  name="codigopostal_id" id="codigopostal_id" size="1">--}}
-        {{--            @foreach($codigospostales as $t)--}}
-        {{--                <option value="{{$t->id}}" @if($t->id == $items->codigopostal_id) selected @endif>{{ $t->cp }}</option>--}}
-        {{--            @endforeach--}}
-        {{--        </select>--}}
         <div class="input-group">
             {!! Form::text('search_autocomplete_cp', $items->codigoPostal->cp, array('placeholder' => 'Buscar código postal...','class' => 'form-control search_autocomplete_cp','id'=>'search_autocomplete_cp')) !!}
         </div>
     </div>
     <div class="col-md-2">
-        <a href="{{route("newCodigopostalV2")}}" id="{{route("newCodigopostalV2")}}" class="btn btn-icon btn-info btnFullModal" data-toggle="modal" data-target="#modalFull"> <i class="mdi mdi-plus"></i></a>
+        <a href="{{ route("newCodigopostalV2") }}" id="{{route("newCodigopostalV2")}}" class="btn btn-icon btn-info btnFullModal" data-toggle="modal" data-target="#modalFull"> <i class="mdi mdi-plus"></i></a>
     </div>
 
 </div>
@@ -58,15 +56,10 @@
     <div class="col-md-7">
         <input type="text" name="tipocomunidad" id="tipocomunidad" value="{{ old('tipocomunidad',$items->comunidad->tipoComunidad->tipocomunidad) }}" class="form-control" disabled/>
     </div>
-    <label for = "search_autocomplete_colonia" class="col-md-3 col-form-label">Comunidad</label>
+    <label for = "search_autocomplete_comunidad" class="col-md-3 col-form-label">Comunidad</label>
     <div class="col-md-7">
-        {{--        <select class="comunidad_id form-control select2" data-toggle="select2"  name="comunidad_id" id="comunidad_id" size="1">--}}
-        {{--            @foreach($comunidades as $t)--}}
-        {{--                <option value="{{$t->id}}" @if($t->id == $items->comunidad_id) selected @endif>{{ $t->comunidad }}</option>--}}
-        {{--            @endforeach--}}
-        {{--        </select>--}}
         <div class="input-group">
-            {!! Form::text('search_autocomplete_colonia', old('search_autocomplete_colonia',$items->comunidad->comunidad), array('placeholder' => 'Buscar colonia...','class' => 'form-control','id'=>'search_autocomplete_colonia')) !!}
+            {!! Form::text('search_autocomplete_comunidad', old('search_autocomplete_comunidad',$items->comunidad->comunidad), array('placeholder' => 'Buscar colonia...','class' => 'form-control','id'=>'search_autocomplete_comunidad')) !!}
         </div>
     </div>
     <div class="col-md-2">
@@ -78,7 +71,7 @@
     </div>
 </div>
 
-<input type="hidden" name="id" value="{{$items->id}}" >
-<input type="hidden" name="codigopostal_id" id="codigopostal_id" value="{{$items->codigopostal_id}}" >
-<input type="hidden" name="comunidad_id" id="comunidad_id" value="{{$items->comunidad_id}}" >
+<input type="hidden" name="id" id="id" value="{{ $items->id }}" >
+<input type="hidden" name="codigopostal_id" id="codigopostal_id" value="{{ $items->codigopostal_id }}" >
+<input type="hidden" name="comunidad_id" id="comunidad_id" value="{{ $items->comunidad_id }}" >
 
