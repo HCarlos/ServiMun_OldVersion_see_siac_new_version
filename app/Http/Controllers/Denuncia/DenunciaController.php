@@ -120,6 +120,8 @@ class DenunciaController extends Controller{
             $Estatus      = Estatu::all()->where('estatus_cve',1)->sortBy('estatus');
         }
 
+        $hashtag = Denuncia::select('clave_identificadora')->distinct('clave_identificadora')->orderBy('clave_identificadora')->pluck('clave_identificadora','clave_identificadora');
+
         $this->msg = "";
         return view('SIAC.denuncia.denuncia.denuncia_new',
             [
@@ -129,6 +131,7 @@ class DenunciaController extends Controller{
                 'origenes'        => $Origenes,
                 'dependencias'    => $Dependencias,
                 'estatus'         => $Estatus,
+                'hashtag'        => $hashtag,
                 'postNew'         => 'createDenuncia',
                 'titulo_catalogo' => ucwords($this->tableName),
                 'titulo_header'   => 'Folio Nuevo',
@@ -185,6 +188,8 @@ class DenunciaController extends Controller{
             $Estatus      = Estatu::all()->where('estatus_cve',1)->sortBy('estatus');
         }
 
+        $hashtag = Denuncia::select('clave_identificadora')->distinct('clave_identificadora')->orderBy('clave_identificadora')->pluck('clave_identificadora','clave_identificadora');
+
         $this->msg = "";
         return view('SIAC.denuncia.denuncia.denuncia_edit',
             [
@@ -194,6 +199,7 @@ class DenunciaController extends Controller{
                 'dependencias'    => $Dependencias,
                 'servicios'       => $Servicios,
                 'estatus'         => $Estatus,
+                'hashtag'         => $hashtag,
                 'items'           => $item,
                 'editItemTitle'   => isset($item->denuncia) ? $item->denuncia : 'Nuevo',
                 'putEdit'         => 'updateDenuncia',
@@ -319,6 +325,12 @@ class DenunciaController extends Controller{
             ->sortBy('full_name_with_username_dependencia')
             ->pluck('full_name_with_username_dependencia','id');
 
+        // $hashtag = Denuncia::query()->select('clave_identificadora')->distinct()->get();
+        $hashtag = Denuncia::select('clave_identificadora')->distinct('clave_identificadora')->orderBy('clave_identificadora')->pluck('clave_identificadora','clave_identificadora');
+
+//        dd($hashtag);
+
+
         $user = Auth::user();
         return view ('SIAC.denuncia.search.denuncia_search_panel',
             [
@@ -328,6 +340,7 @@ class DenunciaController extends Controller{
                 'servicios'          => $Servicios,
                 'estatus'            => $Estatus,
                 'origenes'           => $Origenes,
+                'hashtag'            => $hashtag,
                 'items'              => $user,
             ]
         );

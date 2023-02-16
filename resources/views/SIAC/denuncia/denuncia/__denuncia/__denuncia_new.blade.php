@@ -123,7 +123,17 @@
             <div class="form-group row mb-1">
                 <label for = "clave_identificadora" class="col-lg-3 col-form-label labelDenuncia">Cve Identific</label>
                 <div class="col-lg-9">
-                    <input type="text" name="clave_identificadora" id="clave_identificadora" value="{{ old('clave_identificadora') }}"  class="form-control" />
+                    @can('seleccionar_hashtag')
+                        <select id="clave_identificadora" name="clave_identificadora" class="form-control" size="1">
+                            <option value="" selected >Seleccione una Clave</option>
+                            @foreach($hashtag as $id => $valor)
+                                <option value="{{ $id }}" >{{ $valor }}</option>
+                            @endforeach
+                        </select>
+                    @elsecan
+                        <input type="text" name="clave_identificadora" id="clave_identificadora" value="{{ old('clave_identificadora') }}"  class="form-control" />
+                    @endcan
+
                 </div>
             </div>
 
