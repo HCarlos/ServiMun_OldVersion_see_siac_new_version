@@ -29,6 +29,7 @@ use Illuminate\Support\Facades\Session;
 
 Route::group(['prefix' => 'v1'], function () {
 
+    Route::post('/login_test', [UserAPIController::class, 'userLogin2']);
     Route::post('/login', [UserAPIController::class, 'userLogin']);
     Route::post('/mobile/token', [UserAPIController::class, 'userMobileToken']);
     Route::post('/register', [UserAPIController::class, 'register']);

@@ -122,6 +122,28 @@ class UserAPIController extends Controller{
         return response()->json($response);
     }
 
+// Login Temporal
+    public function userLogin2(Request $request):JsonResponse {
+        $response = ["status"=>0, "msg"=>""];
+        $data = (object) $request->all();
+        $user = User::where("username",trim($data->username))->first();
+        if ($user){
+            if (Hash::check($data->password, $user->password)){
+                $token = $user->createToken("devch50");
+                $response["status"] = 1;
+                $response["access_ok"] = $token->plainTextToken;
+                $response["token_type"] = 'Bearer';
+                $response["msg"] = "Logueado correctamente...";
+//                $response["user"] = $user;
+            }else{
+                $response["msg"] = "Password incorrecto";
+            }
+        }else{
+            $response["msg"] = "Usuario no encontrado";
+        }
+//        event(new InserUpdateDeleteEvent(1,$response));
+        return response()->json($response);
+    }
 
 
 }
