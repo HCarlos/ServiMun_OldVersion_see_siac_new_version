@@ -57,6 +57,7 @@ return [
     'sas_id'                     => env("SAS_ID"),
     'modificar_fecha_ingreso'    => env('MODIFICAR_FECHA_INGRESO','NO'),
     'public_url'                 => env('PUBLIC_URL','http://localhost'),
+    'pagina_web_id'              => 4,
 
     // -----------------------------------------------------------
     // La mayor parte de los Tablas estan configuradas aquí,

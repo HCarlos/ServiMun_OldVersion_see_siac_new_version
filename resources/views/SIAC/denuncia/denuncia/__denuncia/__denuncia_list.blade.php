@@ -17,7 +17,7 @@
 
             @foreach($items as $item)
                 <tr class="@if($item->cerrado) bg-coral-denuncia-cerrada @endif">
-                    <td class="table-user @if($item->origen_id == 8) text-danger @endif">{{$item->id}}</td>
+                    <td class="table-user @if($item->origen_id == config('atemun.pagina_web_id')) text-danger @endif">{{$item->id}}</td>
                     <td class="w-25">
                         {{$item->ciudadano->FullName}} <br>
                         <small>{{$item->ciudadano->curp}}</small>
