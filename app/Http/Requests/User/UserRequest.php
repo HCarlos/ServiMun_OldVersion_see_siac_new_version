@@ -119,7 +119,7 @@ class UserRequest extends FormRequest
 
             $CURP     = strtoupper(trim($this->curp));
 
-            if ( $CURP  != "" ){
+            if ( $CURP  !== "" ){
                 $Username = $CURP;
             }else{
                 $UN       =  User::getUsernameNext('CIU');

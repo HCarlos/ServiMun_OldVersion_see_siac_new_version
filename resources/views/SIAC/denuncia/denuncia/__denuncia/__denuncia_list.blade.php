@@ -8,9 +8,6 @@
                     <th class="sorting">Ciudadano</th>
                     <th class="sorting">Fecha</th>
                     <th class="sorting">Área</th>
-{{--                    <th class="sorting">Resp.</th>--}}
-{{--                    <th class="sorting">Estatus</th>--}}
-{{--                    <th class="sorting">CURP Ciudadano</th>--}}
                     <th class="sorting">Servicio</th>
                     <th class="sorting ">Ubicación</th>
                     <th></th>
@@ -20,7 +17,7 @@
 
             @foreach($items as $item)
                 <tr class="@if($item->cerrado) bg-coral-denuncia-cerrada @endif">
-                    <td class="table-user">{{$item->id}}</td>
+                    <td class="table-user @if($item->origen_id == 8) text-danger @endif">{{$item->id}}</td>
                     <td class="w-25">
                         {{$item->ciudadano->FullName}} <br>
                         <small>{{$item->ciudadano->curp}}</small>
