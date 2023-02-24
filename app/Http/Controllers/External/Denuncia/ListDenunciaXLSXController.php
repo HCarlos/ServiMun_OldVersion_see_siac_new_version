@@ -109,8 +109,8 @@ class ListDenunciaXLSXController extends Controller
                     ->setCellValue('Z'.$C, $item->creadopor->username )
                     ->setCellValue('AA'.$C, $item->uuid )
                     ->setCellValue('AB'.$C, $favorable ? "SI" : "NO" )
-                    ->setCellValue('AC'.$C, $item->clave_identificadora );
-
+                    ->setCellValue('AC'.$C, $item->clave_identificadora )
+                    ->setCellValue('AD'.$C, trim($ciudadano->StrGenero ?? ''));
                 $C++;
             }
             $Cx = $C  - 1;

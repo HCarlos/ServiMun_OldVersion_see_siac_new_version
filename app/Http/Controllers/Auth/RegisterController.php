@@ -76,27 +76,27 @@ class RegisterController extends Controller
 
         app()['cache']->forget('spatie.permission.cache');
         $F = new FuncionesController();
-            // dd ( $F->getCURPFromRENAPO( strtoupper(trim( $data["curp"] )) ) );
-        $F = new FuncionesController();
         $ip   = 'root_init';//$_SERVER['REMOTE_ADDR'];
         $host = 'root_init';//gethostbyaddr($_SERVER['REMOTE_ADDR']);
         $idemp = config('atemun.empresa_id');
 
+        $curp = strtoupper(trim( $data["curp"] ));
+
         $UN =  User::getUsernameNext('CIUINT');
-        $Username = $UN['username'];
+        $Username = $curp; // $UN['username'];
         $Email =  $data["email"] == "" ? strtolower($Username) . '@example.com' : $data["email"];
         $user =  User::create([
             'username'     => $Username,
             'email'        => $Email ,
             'password'     => Hash::make($Username),
-            'curp'         => strtoupper(trim( $data["curp"] )),
+            'curp'         => $curp,
             'ap_paterno'   => strtoupper(trim( $data["ap_paterno"] )),
             'ap_materno'   => strtoupper(trim( $data["ap_materno"] )),
             'nombre'       => strtoupper(trim( $data["nombre"] )),
             'ubicacion_id' => 1,
         ]);
-        $role_invitado = Role::findByName('Invitado');
-        $user->roles()->attach($role_invitado);
+//        $role_invitado = Role::findByName('Invitado');
+//        $user->roles()->attach($role_invitado);
         $role_ciudadano = Role::findByName('CIUDADANO');
         $user->roles()->attach($role_ciudadano);
         $role_ciudadano_internet = Role::findByName('CIUDADANO_INTERNET');

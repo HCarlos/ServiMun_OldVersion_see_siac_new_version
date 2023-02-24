@@ -94,7 +94,7 @@ trait UserAttributes
 
 
     public function getStrGeneroAttribute() {
-        $Gen = "Desconocido";
+        $Gen = "NO BINARIO";
         switch ($this->genero){
             case 0:
                 $Gen = "FEMENINO";
