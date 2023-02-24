@@ -88,14 +88,18 @@ class DenunciaCiudadanaRequest extends FormRequest
 //            dd($this->ubicacion_id);
 
 
+            $fecha_i = date('Y-m-d',strtotime($this->fecha_ingreso));
+            $fecha_f = date('H:i:s');
+
+            $fi = $fecha_i.' '.$fecha_f;
 
 
             $Ubicacion = Ubicacion::findOrFail( $this->ubicacion_id );
 
             $items = [
-                'fecha_ingreso'                => $this->fecha_ingreso,
-                'fecha_limite'                 => $this->fecha_ingreso,
-                'fecha_ejecucion'              => $this->fecha_ingreso,
+                'fecha_ingreso'                => $fi,
+                'fecha_limite'                 => $fi,
+                'fecha_ejecucion'              => $fi,
 
                 'descripcion'                  => strtoupper(trim($this->descripcion)),
                 'referencia'                   => strtoupper(trim($this->referencia)),
