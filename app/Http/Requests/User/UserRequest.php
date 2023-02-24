@@ -119,12 +119,12 @@ class UserRequest extends FormRequest
 
             $CURP     = strtoupper(trim($this->curp));
 
-            if ( $CURP  !== "" ){
-                $Username = $CURP;
-            }else{
+            if ( $CURP  === "" ){
                 $UN       =  User::getUsernameNext('CIU');
-                $Username = $UN['username'];
+                $CURP = $UN['username'];
             }
+
+            $Username = $CURP;
 
             if ( trim($this->email)  != "" ){
                 $Email    = strtolower(trim($this->email));
@@ -204,7 +204,7 @@ class UserRequest extends FormRequest
                 $user->user_adress()->update($User_Adress);
                 $user->user_data_extend()->update($User_Data_Extend);
             }
-            If ( $this->ubicacion_actual_id != $this->ubicacion_nueva_id ){
+            If ( $this->ubicacion_actual_id !== $this->ubicacion_nueva_id ){
                 $user->ubicaciones()->detach($this->ubicacion_nueva_id );
                 $user->ubicaciones()->attach($this->ubicacion_nueva_id );
             }
