@@ -31,12 +31,13 @@ class StorageDenunciaController extends Controller{
         $host   = gethostbyaddr($_SERVER['REMOTE_ADDR']);
         $idemp  = 1;
         $data    = $request->all();
-        //dd($request);
+//        dd($request);
         $user = Auth::User();
         $arrFiles =$request->files->keys();
+//        dd($arrFiles);
         try {
             foreach ($arrFiles as $fileDataName){
-                //dd($fileDataName);
+//                dd($fileDataName);
                 if ( $fileDataName !== null ){
                     $fechaActual = Carbon::now()->format('Y-m-d h:m:s');
                     $Item = [

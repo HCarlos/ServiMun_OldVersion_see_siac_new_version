@@ -86,7 +86,7 @@
 
 <div class="form-row mb-1">
     <label for = "creadopor_id" class="col-md-2 col-form-label">Creado Por:</label>
-    <div class="col-md-10">
+    <div class="col-md-6">
         <select id="creadopor_id" name="creadopor_id" class="form-control" size="1">
             <option value="0" selected >Seleccione un Usuario</option>
             @foreach($capturistas as $id => $valor)
@@ -94,6 +94,11 @@
             @endforeach
         </select>
     </div>
+    <label for = "id" class="col-md-2 col-form-label text-right">ID </label>
+    <div class="col-md-2">
+        <input type="text" name="id" id="id" value="{{ old('id') }}" class="form-control" />
+    </div>
+
 </div>
  <hr>
 <div class="form-row mb-1">

@@ -7,7 +7,7 @@
 {{--    <link href="{{ asset('css/servimun.css') }}" rel="stylesheet"  type="text/css">--}}
     <style rel="stylesheet"  type="text/css">
         .bg-registry {
-            background: url("{{ asset('/images/web/bg-registry.png') }}") no-repeat center !important;
+            background: url("{{ asset('/images/web/aviso'.rand(1,2).'.png') }}") no-repeat center !important;
         }
     </style>
 
@@ -17,18 +17,19 @@
 
 <div class="container  ">
     <div class="row justify-content-center" >
-        <div class="col-md-8">
+        <div class="col-md-7">
+
             <div class="m-2 text-center " >
                 <a href="/login"  >
-                    <span><img src=" {{ asset('/images/web/bg-logo-registry.png') }} " alt=""></span>
+                    <span><img src="{{ asset('/images/web/logo-0.png') }} " alt=""></span>
                 </a>
             </div>
 
             <div class="card bg-form">
-                <div class="card-header text-darkred">{{ __('REGISTER') }} | Ingrese los datos que se piden</div>
+                <div class="card-header text-darkred">{{ __('REGISTER') }} </div>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                <div class="card-body mb-lg-10" >
+                    <form method="POST" action="{{ route('register') }}" >
                         @csrf
 
                         <div class="form-group row">
@@ -117,22 +118,23 @@
 {{--                            </div>--}}
 {{--                        </div>--}}
 
-                        <div class="form-group row mb-0">
+                        <div class="form-group row mb-10">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-danger-primary btn-block text-white">
                                     REGISTRAR
-                                </button><br><br>
+                                </button> <br><span class="text-white">Si la CURP ya fue registrada, puede ingresar con ella.</span><br><br>
                                 <a href="login"  class="btn btn-info btn-block">
                                     INICIAR SESIÓN
                                 </a>
                             </div>
-
                         </div>
                     </form>
                 </div>
+                <div class="mb-lg-10">
+                    <p><br><br></p>
+                </div>
             </div>
         </div>
-    </div>
 </div>
 </div>
 

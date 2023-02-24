@@ -58,51 +58,7 @@ class DenunciaFilter extends QueryFilter
         return $query->whereRaw("searchtextdenuncia @@ to_tsquery('spanish', ?)", [$tsString])
             ->orderByRaw("calle, num_ext, num_int, colonia, descripcion, referencia ASC");
 
-
-//        return $query->where(function ($query) use ($search, $tsString) {
-//                $query->orWhereHas('ciudadanos', function ($q) use ($search) {
-//                    return $q->whereRaw("CONCAT( UPPER(TRIM(ap_paterno)),' ',UPPER(TRIM(ap_materno)),' ',UPPER(TRIM(nombre)) ) like ?", "%{$search}%")
-//                        ->orWhereRaw("UPPER(curp) like ?", "%{$search}%");
-//                })
-//                ->orWhereHas('estatus', function ($q) use ($search) {
-//                    return $q->whereRaw("UPPER(estatus) like ?", "%{$search}%")
-//                        ->where('ultimo',true);
-//                })
-//                ->orWhereRaw("searchtextdenuncia @@ to_tsquery('spanish', ?)", [$tsString])
-//                ->orWhere('id', intval($search));
-//        });
-
     }
-
-//->orWhereHas('dependencias', function ($q) use ($search) {
-//                    if ($this->IsEnlace()){
-//                        return $q->whereIn('dependencia_id',$this->getDependenciaId(),true);
-//                    }else{
-//    return $q->whereRaw("UPPER(dependencia) like ?", "%{$search}%");
-//}
-//})
-
-//->orWhere('cerrado', settype($search, 'boolean'))
-
-//->orWhereRaw("UPPER(descripcion) like ?", "%{$search}%")
-//->orWhereRaw("UPPER(referencia) like ?", "%{$search}%")
-//    ->orWhereRaw("UPPER(calle) like ?", "%{$search}%")
-//    ->orWhereRaw("UPPER(colonia) like ?", "%{$search}%")
-//    ->orWhereRaw("UPPER(comunidad) like ?", "%{$search}%")
-//    ->orWhereRaw("UPPER(ciudad) like ?", "%{$search}%")
-//    ->orWhereRaw("UPPER(municipio) like ?", "%{$search}%")
-//    ->orWhereRaw("UPPER(estado) like ?", "%{$search}%")
-
-
-//    public function searchToo($query, $search){
-//        if (is_null($search) || empty ($search) || trim($search) == "") {return $query;}
-//        $search = strtoupper($search);
-//
-//        $items = $query
-//            ->search($tsString);
-//
-//    }
-
 
     public function curp($query, $search){
         if (is_null($search) || empty ($search) || trim($search) == "") {return $query;}
@@ -117,11 +73,6 @@ class DenunciaFilter extends QueryFilter
         if (is_null($search) || empty ($search) || trim($search) == "") {return $query;}
         $search = strtoupper($search);
         return $query->orWhereHas('ciudadanos', function ($q) use ($search) {
-//            dd($q->whereRaw("CONCAT(ap_paterno,' ',ap_materno,' ',nombre) like ?", "%{$search}%"));
-//            dd($search);
-
-//            return $q->whereRaw("CONCAT(ap_paterno,' ',ap_materno,' ',nombre) like ?", "%{$search}%");
-
             $filters  = $search;
             $F        = new FuncionesController();
             $tsString = $F->string_to_tsQuery( strtoupper($filters),' & ');
@@ -140,9 +91,6 @@ class DenunciaFilter extends QueryFilter
         $date = Carbon::createFromFormat('Y-m-d', $search)->toDateString();
         $date = $date.' 00:00:00';
         return $query->whereDate('fecha_ingreso', '>=', $date);
-//        return $query->whereHas('ultimo_estatu_denuncia_dependencia_servicio', function ($q) use ($date) {
-//            return $q->whereDate('fecha_movimiento', '>=', $date);
-//        });
     }
 
     public function hasta($query, $search){
@@ -150,9 +98,6 @@ class DenunciaFilter extends QueryFilter
         $date = Carbon::createFromFormat('Y-m-d', $search)->toDateString();
         $date = $date.' 23:59:59';
         return $query->whereDate('fecha_ingreso', '<=', $date);
-//        return $query->whereHas('ultimo_estatu_denuncia_dependencia_servicio', function ($q) use ($date) {
-//            return $q->whereDate('fecha_movimiento', '<=', $date);
-//        });
     }
 
     public function dependencia_id($query, $search){
@@ -162,7 +107,7 @@ class DenunciaFilter extends QueryFilter
             }
         }
         if ( !is_array($search) ){
-            if (intval($search) == 0){
+            if ((int)$search === 0){
                 $search = Auth::user()->DependenciaIdArray;
 //                return $query;
             }
@@ -172,7 +117,7 @@ class DenunciaFilter extends QueryFilter
 //                    dd($search);
                     return $q->whereIn('dependencia_id', $search);
                 }else{
-                    return $q->where('dependencia_id', intval($search) );
+                    return $q->where('dependencia_id', (int)$search);
                 }
         });
     }
@@ -180,7 +125,7 @@ class DenunciaFilter extends QueryFilter
     public function servicio_id($query, $search){
         if (is_null($search) || empty ($search) || trim($search) == "0" || trim($search) == "") {return $query;}
         return $query->whereHas('denuncia_servicios', function ($q) use ($query, $search) {
-            return $q->where('servicio_id', intval($search));
+            return $q->where('servicio_id', (int)$search);
         });
     }
 
@@ -188,23 +133,22 @@ class DenunciaFilter extends QueryFilter
         if (is_null($search) || empty ($search) || trim($search) == "0") {return $query;}
 
         return $query->whereHas('denuncia_estatus', function ($q) use ($query, $search) {
-            return $q->where('estatu_id', intval($search));
+            return $q->where('estatu_id', (int)$search);
         });
 
     }
 
     public function fecha_movimiento($query, $search){
         if (is_null($search) || empty ($search) || trim($search) == "0") {return $query;}
-//        return $query->whereHas('denuncia_servicios', function ($q) use ($search) {
             $cad = explode('|',$search);
             $fdesde = $cad[0];
             $fhasta = $cad[1];
-            $estatu = intval($cad[2]);
-            $depend = intval($cad[3]);
+            $estatu = (int)$cad[2];
+            $depend = (int)$cad[3];
             $date1 = Carbon::createFromFormat('Y-m-d', $fdesde)->toDateString();
-            $date1 = $date1.' 00:00:00';
+            $date1 .= ' 00:00:00';
             $date2 = Carbon::createFromFormat('Y-m-d', $fhasta)->toDateString();
-            $date2 = $date2.' 23:59:59';
+            $date2 .= ' 23:59:59';
 
             return $query->whereHas('ultimo_estatu_denuncia_dependencia_servicio', function ($q) use ($search, $date1, $date2, $estatu, $depend) {
                 $arr = Auth::user()->DependenciaIdArray;

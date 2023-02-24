@@ -39,6 +39,15 @@ class FuncionesController extends Controller
         abort(404);
     }
 
+    public function str_sanitizer($filters){
+        $arr = array(' las ',' los ',' de ',' fracc ',' col ',' col. ',' r/a ',' ria ',' ria. ',' conj ',' priv ',' av ',' av. ',' carr ',' carr. ',' colonia ',' pob ',' pob. ');
+        foreach($arr as $fil){
+            $filters = str_replace($fil, ' ', $filters);
+        }
+        return $filters;
+    }
+
+
     public function string_to_tsQuery(String $string, String $type){
         $string = str_replace(', ',' ', $string);
         $string = str_replace(',',' ', $string);
@@ -115,7 +124,8 @@ class FuncionesController extends Controller
 
     public function validImage($model, $storage, $root, $type=1){
         $ext = config('atemun.images_type_extension');
-        for ($i=0;$i<count($ext);$i++){
+//        for ($i=0;$i < count($ext);$i++){
+        for ($i=0, $iMax = count($ext); $i < $iMax; $i++){
             $p1 = $model->id.'.'.$ext[$i];
             $p2 = '_'.$model->id.'.png';
             $p3 = '_thumb_'.$model->id.'.png';

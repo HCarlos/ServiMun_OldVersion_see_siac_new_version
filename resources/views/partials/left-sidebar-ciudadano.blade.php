@@ -21,7 +21,7 @@
                 <a href="{{route('listDenunciasCiudadanas')}}" class="side-nav-link">
                     <i class="mdi dripicons-archive"></i>
                     <span class="badge badge-light float-right">{{\App\Models\Denuncias\Denuncia::where('ciudadano_id',Auth::user()->id)->count()}}</span>
-                    <span>Mis Denuncias</span>
+                    <span>Mis Solicitudes</span>
                 </a>
             </li>
         </ul>

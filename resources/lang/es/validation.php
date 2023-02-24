@@ -11,7 +11,7 @@ return [
     | as the size rules. Feel free to tweak each of these messages.
     |
     */
-    'longitud'             => 'El campo :attribute ya existe ó esta Ubicación ya fue dada de alta.',
+    'longitud'             => 'La :attribute ya existe ó esta Ubicación ya fue dada de alta.',
     'uppercase'            => 'El campo :attribute requiere valores en mayúscula.',
     'accepted'             => ':attribute debe ser aceptado.',
     'active_url'           => ':attribute no es una URL válida.',
@@ -23,7 +23,7 @@ return [
     'array'                => ':attribute debe ser un conjunto.',
     'before'               => ':attribute debe ser una fecha anterior a :date.',
     'before_or_equal'      => ':attribute debe ser una fecha anterior o igual a :date.',
-    'iscurp'               => 'El campo :attribute no es correcto.',
+    'iscurp'               => 'La :attribute no es correcta.',
     'between'              => [
         'numeric' => ':attribute tiene que estar entre :min - :max.',
         'file'    => ':attribute debe pesar entre :min - :max kilobytes.',

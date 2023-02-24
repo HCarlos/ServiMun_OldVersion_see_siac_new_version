@@ -14,9 +14,13 @@
     <div class="col-md-4">
         <input type="text" name="ciudadano" id="ciudadano" value="{{ old('ciudadano') }}" class="form-control" />
     </div>
-    <label for = "uuid" class="col-md-1 col-form-label text-right">F Único</label>
+{{--    <label for = "uuid" class="col-md-1 col-form-label text-right">UUID</label>--}}
+{{--    <div class="col-md-5">--}}
+{{--        <input type="text" name="uuid" id="uuid" value="{{ old('uuid') }}" class="form-control" />--}}
+{{--    </div>--}}
+    <label for = "ciudadano_id" class="col-md-1 col-form-label text-right">Usuario ID</label>
     <div class="col-md-5">
-        <input type="text" name="uuid" id="uuid" value="{{ old('uuid') }}" class="form-control" />
+        <input type="text" name="ciudadano_id" id="ciudadano_id" value="{{ old('ciudadano_id') }}" class="form-control" />
     </div>
 </div>
 
@@ -72,7 +76,7 @@
 <div class="form-row mb-1">
     <label for = "origen_id" class="col-md-2 col-form-label">Origen</label>
     <div class="col-md-4">
-        <select id="origen_id" name="estatus_id" class="form-control" size="1">
+        <select id="origen_id" name="origen_id" class="form-control" size="1">
             <option value="0" selected >Seleccione un Origen</option>
             @foreach($origenes as $t)
                 <option value="{{ $t->id }}">{{ $t->origen }} </option>
@@ -100,6 +104,10 @@
             @endforeach
         </select>
     </div>
+{{--    <label for = "id" class="col-md-2 col-form-label text-right">ID </label>--}}
+{{--    <div class="col-md-2">--}}
+{{--        <input type="text" name="id" id="id" value="{{ old('id') }}" class="form-control" />--}}
+{{--    </div>--}}
 </div>
 
 <div class="form-row mb-1">

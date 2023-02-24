@@ -46,12 +46,13 @@
                                 <label class="custom-control-label  text-danger" for="checkbox-signin">Recordar</label>
                             </div>
                         </div>
-                        <div class="form-group mb-0 text-center">
+                        <div class="form-group mb-4 text-center">
                             <button class="btn btn-danger btn-danger-primary btn-block" type="submit"><i class="mdi mdi-login"></i> INICIAR SESIÓN </button>
                         </div>
                         <div class="clearfix"></div>
                         <div class="form-group  mt-2">
-{{--                            <a href="{{ route('register') }}" class="text-danger-light float-right  text-danger"><strong>Me quiero registrar</strong></a>--}}
+                            <p class="text-white float-left">Bo tienes cuenta?</p>
+                            <a href="{{ route('register') }}" class="text-danger-light float-right  text-danger"><strong>Regístrate aquí</strong></a>
                         </div>
 
                     </form>

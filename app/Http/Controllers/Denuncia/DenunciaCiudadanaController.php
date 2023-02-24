@@ -13,6 +13,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
 class DenunciaCiudadanaController extends Controller{
@@ -34,8 +35,6 @@ class DenunciaCiudadanaController extends Controller{
             ->paginate();
         $items->appends($filters)->fragment('table');
 
-        //dd($items);
-
         $request->session()->put('items', $items);
 
         $user = Auth::User();
@@ -43,7 +42,7 @@ class DenunciaCiudadanaController extends Controller{
         return view('SIAC.denuncia.denuncia_ciudadana.denuncia_ciudadana_list',
             [
                 'items'                           => $items,
-                'titulo_catalogo'                 => "Mis " . ucwords($this->tableName),
+                'titulo_catalogo'                 => "Mis Solicitudes",
                 'titulo_header'                   => '',
                 'user'                            => $user,
                 'searchInListDenuncia'            => 'listDenunciasCiudadanas',
@@ -66,27 +65,16 @@ class DenunciaCiudadanaController extends Controller{
 
     protected function newItem()
     {
-        $Prioridades  = Prioridad::all()->sortBy('prioridad');
-        $Origenes     = Origen::all()->sortBy('origen');
-        $Dependencias = Dependencia::all()->sortBy('dependencia');
-        if (Auth::user()->isRole('Administrator|SysOp|USER_OPERATOR_ADMIN|USER_ARCHIVO_ADMIN') ) {
-            $Estatus      = Estatu::all()->sortBy('estatus');
-        }else{
-            $Estatus      = Estatu::all()->where('estatus_cve',1)->sortBy('estatus');
-        }
+        $Servicios = DB::table("_viservicios")->select('*')->where('is_visible_mobile',true)->orderBy('orden_image_mobile')->get();
         $this->msg    = "";
-
 
         return view('SIAC.denuncia.denuncia_ciudadana.denuncia_ciudadana_new',
             [
                 'user'            => Auth::user(),
                 'editItemTitle'   => 'Nuevo',
-                'prioridades'     => $Prioridades,
-                'origenes'        => $Origenes,
-                'dependencias'    => $Dependencias,
-                'estatus'         => $Estatus,
+                'Servicios'       => $Servicios,
                 'postNew'         => 'createDenunciaCiudadana',
-                'titulo_catalogo' => "Mis " . ucwords($this->tableName),
+                'titulo_catalogo' => "Mis Solicitudes",
                 'titulo_header'   => 'Folio Nuevo',
                 'exportModel'     => 23,
                 'msg'             => $this->msg,

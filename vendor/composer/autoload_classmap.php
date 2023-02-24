@@ -109,6 +109,7 @@ return array(
     'App\\Http\\Controllers\\Storage\\Mobile\\StorageMobileServicioController' => $baseDir . '/app/Http/Controllers/Storage/Mobile/StorageMobileServicioController.php',
     'App\\Http\\Controllers\\Storage\\StorageDenunciaController' => $baseDir . '/app/Http/Controllers/Storage/StorageDenunciaController.php',
     'App\\Http\\Controllers\\Storage\\StorageExternalFilesController' => $baseDir . '/app/Http/Controllers/Storage/StorageExternalFilesController.php',
+    'App\\Http\\Controllers\\Storage\\StorageMobileProfileController' => $baseDir . '/app/Http/Controllers/Storage/StorageMobileProfileController.php',
     'App\\Http\\Controllers\\Storage\\StorageProfileController' => $baseDir . '/app/Http/Controllers/Storage/StorageProfileController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
