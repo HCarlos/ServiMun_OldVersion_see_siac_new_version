@@ -180,10 +180,10 @@ class DenunciaCiudadanaRequest extends FormRequest
 
             $Obj = DB::table('denuncia_ubicacion')
                 ->where('denuncia_id','=',$Item->id)
-                ->where('ubicacion_id','=',$this->ubicacion_id)
+                ->where('ubicacion_id','=',$Item->ubicacion_id)
                 ->get();
             if ($Obj->count() <= 0 )
-                $Obj = $Item->ubicaciones()->attach($this->ubicacion_id);
+                $Obj = $Item->ubicaciones()->attach($Item->ubicacion_id);
 
             $Obj = DB::table('denuncia_servicio')
                 ->where('denuncia_id','=',$Item->id)
@@ -203,24 +203,24 @@ class DenunciaCiudadanaRequest extends FormRequest
 
             $Obj = DB::table('ciudadano_denuncia')
                 ->where('denuncia_id','=',$Item->id)
-                ->where('ciudadano_id','=',$this->usuario_id)
+                ->where('ciudadano_id','=',$Item->ciudadano_id)
                 ->get();
             if ($Obj->count() <= 0 )
-                $Obj = $Item->ciudadanos()->attach($this->usuario_id);
+                $Obj = $Item->ciudadanos()->attach($Item->ciudadano_id);
 
             $Obj = DB::table('creadopor_denuncia')
                 ->where('denuncia_id','=',$Item->id)
-                ->where('creadopor_id','=',$this->creadopor_id)
+                ->where('creadopor_id','=',$Item->creadopor_id)
                 ->get();
             if ($Obj->count() <= 0 )
-                $Obj = $Item->creadospor()->attach($this->creadopor_id);
+                $Obj = $Item->creadospor()->attach($Item->creadopor_id);
 
             $Obj = DB::table('denuncia_modificadopor')
                 ->where('denuncia_id','=',$Item->id)
-                ->where('modificadopor_id','=',$this->modificadopor_id)
+                ->where('modificadopor_id','=',$Item->modificadopor_id)
                 ->get();
             if ($Obj->count() <= 0 )
-                $Obj = $Item->modificadospor()->attach($this->modificadopor_id);
+                $Obj = $Item->modificadospor()->attach($Item->modificadopor_id);
 
         }catch (Exception $e){
 
