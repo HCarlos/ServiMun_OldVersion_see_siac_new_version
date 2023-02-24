@@ -51,7 +51,7 @@
                         </div>
                         <div class="clearfix"></div>
                         <div class="form-group  mt-2">
-                            <p class="text-white float-left">Bo tienes cuenta?</p>
+                            <p class="text-white float-left">No tienes cuenta?</p>
                             <a href="{{ route('register') }}" class="text-danger-light float-right  text-danger"><strong>Regístrate aquí</strong></a>
                         </div>
 
