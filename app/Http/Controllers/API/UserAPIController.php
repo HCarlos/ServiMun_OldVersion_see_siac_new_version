@@ -33,6 +33,11 @@ class UserAPIController extends Controller{
     public function userLogin(Request $request):JsonResponse {
         $response = ["status"=>0, "msg"=>""];
         $data = (object) $request->all();
+
+        if (trim($data->username) !== "Admin" && trim($data->username) !== "SysOp") {
+            $data->username = strtoupper(trim($data->username));
+        }
+
         $user = User::where("username",trim($data->username))->first();
         if ($user){
             if (Hash::check($data->password, $user->password)){

@@ -2,7 +2,7 @@
     @isset($newItem)
 {{--        @php dd(\Illuminate\Support\Facades\Auth::user()->isPermission('csd_sas|consultar|all')) @endphp--}}
         @if( \Illuminate\Support\Facades\Auth::user()->isPermission('csd_sas|consultar|all') )
-            <a href="{{route($newItem)}}" class="btn btn-outline-warning btn-rounded btn-sm ml-1" data-toggle="tooltip" data-placement="top" data-original-title="Nueva Denuncia">
+            <a href="{{route($newItem)}}" class="btn btn-outline-warning btn-rounded btn-sm ml-1" data-toggle="tooltip" data-placement="top" data-original-title="Nueva Solicitud">
                 <i class="fas fa-plus"></i>
             </a>
         @endif

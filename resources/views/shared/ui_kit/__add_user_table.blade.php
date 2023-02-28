@@ -3,7 +3,7 @@
     <div class="card  p-0 m-0">
         <div class="card-header  bg-dark-lighten border-0 m-0">
             <h5 class="text-white mb-0">
-                Usuarios agregados a esta misma Denuncia Ciudadana
+                Usuarios agregados a esta misma Solicitud
             </h5>
         </div>
 

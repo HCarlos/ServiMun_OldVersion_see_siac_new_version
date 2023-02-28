@@ -5,7 +5,7 @@
         @csrf
         {{method_field('PUT')}}
     @endslot
-    @slot('titulo_full_modal',"Busqueda de denuncia")
+    @slot('titulo_full_modal',"Búsqueda de solicitud")
     @slot('body_full_modal')
         @include('SIAC.denuncia.search.__search.__search_denuncia_in_list')
     @endslot

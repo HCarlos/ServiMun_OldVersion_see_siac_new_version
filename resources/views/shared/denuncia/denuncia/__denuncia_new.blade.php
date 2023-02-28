@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="form-row mb-1">
-                <label for = "descripcion" class="col-md-2 col-form-label">Denuncia </label>
+                <label for = "descripcion" class="col-md-2 col-form-label">Solicitud </label>
                 <div class="col-md-10">
                     <textarea name="descripcion" id="descripcion" class="form-control">{{ old('descripcion') }}</textarea>
                 </div>

@@ -102,10 +102,10 @@ class DenunciaDependenciaServicioController extends Controller
                 'dependencias'    => $Dependencias,
                 'servicios'       => $Servicios,
                 'estatus'         => $Estatus,
-                'editItemTitle'   => "Agregando servicio a la denuncia ".$Id,
+                'editItemTitle'   => "Agregando servicio a la solicitud ".$Id,
                 'postNew'         => 'putAddDenunciaDependenciaServicio',
                 'titulo_catalogo' => "Editando el Id: " . $Id,
-                'titulo_header'   => 'de la Denuncia '.$Denuncia->id,
+                'titulo_header'   => 'de la Solicitud '.$Denuncia->id,
             ]
         );
     }

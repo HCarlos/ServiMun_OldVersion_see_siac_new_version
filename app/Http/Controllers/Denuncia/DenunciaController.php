@@ -30,7 +30,7 @@ use function React\Promise\all;
 
 class DenunciaController extends Controller{
 
-    protected $tableName = "denuncias";
+    protected $tableName = "solicitudes";
     protected $paginationTheme = 'bootstrap';
     protected $msg = "";
     protected $max_item_for_query = 250;

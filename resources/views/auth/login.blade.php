@@ -22,8 +22,8 @@
                     <form method="POST" action="{{ route('login') }}" class="mt-0">
                         @csrf
                         <div class="form-group">
-                            <label for="username" class="{{$errors->has('username')?'text-danger':'text-white'}}">Nombre de Usuario ó Correo Electrónico</label>
-                            <input class="form-control {{$errors->has('username')?'has-error form-error':''}}" type="text" id="username" name="username" value="{{ old('username') }}" required placeholder="Username">
+                            <label for="username" class="{{$errors->has('username')?'text-danger':'text-white'}}">CURP, Username ó Correo Electrónico</label>
+                            <input class="form-control {{$errors->has('username')?'has-error form-error':''}}" type="text" id="username" name="username" value="{{ old('username') }}" required placeholder="CURP, Username or email">
                             @if ($errors->has('username'))
                                 <span class="has-error">
                                         <strong class="text-danger">{{ $errors->first('username') }}</strong>

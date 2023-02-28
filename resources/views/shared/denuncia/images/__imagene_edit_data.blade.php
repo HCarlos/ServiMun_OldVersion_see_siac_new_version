@@ -43,7 +43,7 @@
     <div class="col-md-10">
         <select name="aplicaa" id="aplicaa" size="1" class="form-control">
             <option value="0" selected>Solo a esta imágen</option>
-            <option value="1">Todas las imágenes de esta denuncia ({{$item->denuncia__id}})</option>
+            <option value="1">Todas las imágenes de esta Solicitud ({{$item->denuncia__id}})</option>
             <option value="2">Imágenes seleccionadas</option>
         </select>
     </div>

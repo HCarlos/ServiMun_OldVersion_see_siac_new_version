@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Redirect;
 
 class DenunciaCiudadanaController extends Controller{
 
-    protected $tableName = "denuncias";
+    protected $tableName = "solicitudes";
     protected $msg = "";
 
 // ***************** MUESTRA EL LISTADO DE USUARIOS ++++++++++++++++++++ //

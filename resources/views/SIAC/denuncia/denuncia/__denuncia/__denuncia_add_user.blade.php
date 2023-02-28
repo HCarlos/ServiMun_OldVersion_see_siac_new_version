@@ -1,7 +1,7 @@
 <div class="col-lg-12">
     <div class="row">
         <div class="form-row mb-1">
-            <p><strong class="text-cafe">DENUNCIA: </strong>
+            <p><strong class="text-cafe">SOLICITUD: </strong>
             {{$items->descripcion}} <br><br>
             <strong class="text-cafe">REFERENCIA:</strong>
             {{$items->referencia.'  '.$items->observaciones}}</p>
