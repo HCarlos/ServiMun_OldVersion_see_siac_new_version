@@ -19,7 +19,7 @@
                     <h4 class="text-white-50 text-center mt-4 font-weight-bold">Por favor, revisa tu email</h4>
                     <p class="text-white-50 mb-4">
                         Se ha enviado un email a: <br><b>{{$email}}</b>.<br>
-                        Ingrese a su cuenta de correo y <br>haga click en el enlace que aparece <br>en la parte de abajo para cambiar <br>su password.<br><br>
+                        Ingrese a su cuenta de correo y <br>haga click en el enlace que aparece <br>en la parte de abajo para cambiar <br>su contraseña.<br><br>
                         <a href="{{ route('login') }}" class="btn btn-danger-primary btn-block text-white ml-1"><b>INICIAR SESIÓN</b></a>
                     </p>
                 </div>

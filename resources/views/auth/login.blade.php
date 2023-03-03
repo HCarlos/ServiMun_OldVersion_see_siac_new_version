@@ -23,7 +23,7 @@
                         @csrf
                         <div class="form-group">
                             <label for="username" class="{{$errors->has('username')?'text-danger':'text-white'}}">CURP, Username ó Correo Electrónico</label>
-                            <input class="form-control {{$errors->has('username')?'has-error form-error':''}}" type="text" id="username" name="username" value="{{ old('username') }}" required placeholder="CURP, Username or email">
+                            <input class="form-control {{$errors->has('username')?'has-error form-error':''}}" type="text" id="username" name="username" value="{{ old('username') }}" required placeholder="CURP, Username o Correo Electrónico">
                             @if ($errors->has('username'))
                                 <span class="has-error">
                                         <strong class="text-danger">{{ $errors->first('username') }}</strong>
@@ -31,9 +31,9 @@
                             @endif
                         </div>
                         <div class="form-group">
-                            <a href="{{ route('password.request') }}" class=" float-right text-danger"><strong>Olvidaste tu password</strong></a>
-                            <label for="password" class="{{$errors->has('password')?'text-danger':'text-white'}}">Password</label>
-                            <input class="form-control {{$errors->has('password')?'has-error form-error':''}}" type="password" required="" id="password" name="password" placeholder="Password">
+                            <a href="{{ route('password.request') }}" class=" float-right text-danger"><strong>¿Olvidaste tu contraseña?</strong></a>
+                            <label for="password" class="{{$errors->has('password')?'text-danger':'text-white'}}">Contraseña</label>
+                            <input class="form-control {{$errors->has('password')?'has-error form-error':''}}" type="password" required="" id="password" name="password" placeholder="Contraseña">
                             @if ($errors->has('password'))
                                 <span class="has-error">
                                         <strong class="text-danger">{{ $errors->first('password') }}</strong>
@@ -51,7 +51,7 @@
                         </div>
                         <div class="clearfix"></div>
                         <div class="form-group  mt-2">
-                            <p class="text-white float-left">No tienes cuenta?</p>
+                            <p class="text-white float-left">¿No tienes cuenta?</p>
                             <a href="{{ route('register') }}" class="text-danger-light float-right  text-danger"><strong>Regístrate aquí</strong></a>
                         </div>
 

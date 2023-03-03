@@ -40,7 +40,12 @@ class UserAPIController extends Controller{
 
         $user = User::where("username",trim($data->username))->first();
         if ($user){
-            if (Hash::check($data->password, $user->password)){
+            $pwd = $data->password;
+            $pwd2 = strtoupper(trim($pwd));
+            if ( strtoupper(trim($data->username)) === $pwd2  ){
+                $pwd = $pwd2;
+            }
+            if (Hash::check($pwd, $user->password)){
                 $token = $user->createToken("devch50");
                 $response["status"] = 1;
                 $response["access_token"] = $token->plainTextToken;
@@ -48,7 +53,7 @@ class UserAPIController extends Controller{
                 $response["msg"] = $token->plainTextToken;
                 $response["user"] = $user;
             }else{
-                $response["msg"] = "Password incorrecto";
+                $response["msg"] = "Contraseña incorrecta";
             }
         }else{
             $response["msg"] = "Usuario no encontrado";
@@ -65,16 +70,24 @@ class UserAPIController extends Controller{
             "device_name" => "required",
         ];
         $data = $request->validate($data);
-        $user = User::where('username', strtoupper(trim($request->username)))->first();
-        if ($user) {
-            if (Hash::check($request->password, $user->password)) {
+        if (trim($data->username) !== "Admin" && trim($data->username) !== "SysOp") {
+            $data->username = strtoupper(trim($data->username));
+        }
+        $user = User::where("username",trim($data->username))->first();
+        if ($user){
+            $pwd = $data->password;
+            $pwd2 = strtoupper(trim($pwd));
+            if ( strtoupper(trim($data->username)) === $pwd2  ){
+                $pwd = $pwd2;
+            }
+            if (Hash::check($pwd, $user->password)) {
                 $token = $user->createToken($request->device_name);
                 $response["status"] = 1;
                 $response["access_token"] = $token->plainTextToken;
                 $response["token_type"] = 'Bearer';
                 $response["msg"] = $token->plainTextToken;
             } else {
-                $response = ["status" => 0, "msg" => "Password incorrecto"];
+                $response = ["status" => 0, "msg" => "Contraseña incorrecta"];
             }
         }else{
             $response = ["status" => 0, "msg" => "Usuario no encontrado"];
@@ -122,7 +135,7 @@ class UserAPIController extends Controller{
         $user = $request->manage();
         if ($user){
             $response["status"] = 1;
-            $response["msg"] = "Password actualizado con éxito";
+            $response["msg"] = "Contraseña actualizada con éxito";
         }
         return response()->json($response);
     }
@@ -131,9 +144,17 @@ class UserAPIController extends Controller{
     public function userLogin2(Request $request):JsonResponse {
         $response = ["status"=>0, "msg"=>""];
         $data = (object) $request->all();
+        if (trim($data->username) !== "Admin" && trim($data->username) !== "SysOp") {
+            $data->username = strtoupper(trim($data->username));
+        }
         $user = User::where("username",trim($data->username))->first();
         if ($user){
-            if (Hash::check($data->password, $user->password)){
+            $pwd = $data->password;
+            $pwd2 = strtoupper(trim($pwd));
+            if ( strtoupper(trim($data->username)) === $pwd2  ){
+                $pwd = $pwd2;
+            }
+            if (Hash::check($pwd, $user->password)){
                 $token = $user->createToken("devch50");
                 $response["status"] = 1;
                 $response["access_ok"] = $token->plainTextToken;
@@ -141,7 +162,7 @@ class UserAPIController extends Controller{
                 $response["msg"] = "Logueado correctamente...";
 //                $response["user"] = $user;
             }else{
-                $response["msg"] = "Password incorrecto";
+                $response["msg"] = "Contraseña incorrecta";
             }
         }else{
             $response["msg"] = "Usuario no encontrado";

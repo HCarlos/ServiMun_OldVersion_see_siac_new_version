@@ -22,8 +22,8 @@
         </div>
         <div class="align-items-center " >
             <div class="card-body">
-                <h4 class="mt-0 text-white">Restablecer Password</h4>
-                <p class="text-muted mb-4">Ingresa tu email y tu nuevo password.</p>
+                <h4 class="mt-0 text-white">Restablecer Contraseña</h4>
+                <p class="text-muted mb-4">Ingresa tu email y tu nueva contraseña.</p>
                 <!-- form -->
                 <form method="POST" action="{{ route('password.update') }}">
                     @csrf
@@ -38,8 +38,8 @@
                         @endif
                     </div>
                     <div class="form-group">
-                        <label for="password">Password</label>
-                        <input class="form-control {{$errors->has('password')?'has-error form-error':''}}" required name="password" id="password" placeholder="Enter your password" type="password">
+                        <label for="password">Contraseña</label>
+                        <input class="form-control {{$errors->has('password')?'has-error form-error':''}}" required name="password" id="password" placeholder="Ingresa tu Contraseña" type="password">
                         @if ($errors->has('password'))
                             <span class="has-error">
                                         <strong class="text-danger">{{ $errors->first('password') }}</strong>
@@ -47,8 +47,8 @@
                         @endif
                     </div>
                     <div class="form-group">
-                        <label for="password_confirmation">Re-Password</label>
-                        <input class="form-control {{$errors->has('password_confirmation')?'has-error form-error':''}}" required name="password_confirmation" id="password_confirmation" placeholder="Enter your password" type="password">
+                        <label for="password_confirmation">Re-Contraseña</label>
+                        <input class="form-control {{$errors->has('password_confirmation')?'has-error form-error':''}}" required name="password_confirmation" id="password_confirmation" placeholder="Ingresa de nuevo tu Contraseña" type="password">
                         @if ($errors->has('password_confirmation'))
                             <span class="has-error">
                                         <strong class="text-danger">{{ $errors->first('password_confirmation') }}</strong>
@@ -56,7 +56,7 @@
                         @endif
                     </div>
                     <div class="form-group mb-0 text-center">
-                        <button class="btn btn-danger-primary btn-block text-white" type="submit"><i class="mdi mdi-lock-reset"></i> Restablecer Password </button><br>
+                        <button class="btn btn-danger-primary btn-block text-white" type="submit"><i class="mdi mdi-lock-reset"></i> Restablecer Contraseña </button><br>
                         <a href="{{ route('login') }}" class="btn btn-info btn-block text-white "><b>INICIAR SESIÓN</b></a>
                     </div>
 

@@ -37,7 +37,7 @@
                             <div class="col-md-6">
                                 <input id="curp" type="text" class="form-control {{ $errors->has('curp') ? ' is-invalid' : '' }}" name="curp" value="{{ old('curp') }}" onchange="validaInputCURP(this)" autofocus>
                                 <pre class="text-white" id="resultadoCURP"></pre>
-                                <span><span class="text-white">Si no conoces tu CURP,</span> <span><a href="https://www.gob.mx/curp/" target="_blank" class="text-info"><strong>Descargala aquí</strong></a></span></span>
+                                <span><span class="text-white">Si no conoces tu CURP,</span> <span><a href="https://www.gob.mx/curp/" target="_blank" class="text-info"><strong>Descárgala aquí</strong></a></span></span>
                                 @if ($errors->has('curp'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('curp') }}</strong>

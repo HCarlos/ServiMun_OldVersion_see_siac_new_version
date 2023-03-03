@@ -50,7 +50,7 @@
                 <!-- item-->
                 <a href="{{url('showEditProfilePassword')}}" class="dropdown-item notify-item">
                     <i class="mdi mdi-account-key"></i>
-                    <span>Mi Password</span>
+                    <span>Mi Contraseña</span>
                 </a>
 
                 <a class="dropdown-item" href="{{ route('logout') }}"

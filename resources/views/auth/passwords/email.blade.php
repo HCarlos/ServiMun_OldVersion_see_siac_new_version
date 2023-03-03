@@ -14,8 +14,8 @@
             <div class="card-body">
 
                 <!-- title-->
-                <h4 class="mt-0 text-white">Restablecer Password</h4>
-                <p class="text-muted mb-4">Ingresa tu cuenta de correo electrónico <br>y te enviaremos un email con las <br>indicaciones para resetear tu password.</p>
+                <h4 class="mt-0 text-white">Restablecer Contraseña</h4>
+                <p class="text-muted mb-4">Ingresa tu cuenta de correo electrónico <br>y te enviaremos un email con las <br>indicaciones para resetear tu contraseña.</p>
 
                 <!-- form -->
                 <form method="POST" action="{{ route('password.email') }}">
@@ -30,7 +30,7 @@
                         @endif
                     </div>
                     <div class="form-group mb-0 text-center">
-                        <button class="btn btn-danger-primary btn-block text-white" type="submit"><i class="mdi mdi-lock-reset"></i> Restablecer Password </button><br><br>
+                        <button class="btn btn-danger-primary btn-block text-white" type="submit"><i class="mdi mdi-lock-reset"></i> Restablecer Contraseña </button><br><br>
                         <a href="{{ route('login') }}" class="btn btn-info btn-block text-white "><b>INICIAR SESIÓN</b></a>
                     </div>
 

@@ -31,7 +31,7 @@
                         Se ha creado tu cuenta satisfactoriamente, estos son tus datos:<br><br>
                         - Email: <b>{{$email}}</b>.<br>
                         - Username: <b>{{$username}}</b>.<br>
-                        - Password: <b>{{$username}}</b>.<br><br>
+                        - Contraseña: <b>{{$username}}</b>.<br><br>
                         Resguarda bien estos datos.<br><br><br><br>
                         <a href="{{ route('login') }}" class="btn btn-danger-primary btn-block text-white ml-1"><b>INGRESAR</b></a>
                     </p>
