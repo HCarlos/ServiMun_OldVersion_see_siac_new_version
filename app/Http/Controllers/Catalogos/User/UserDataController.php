@@ -113,7 +113,7 @@ class UserDataController extends Controller
                 'items'             => $user,
                 'user_address_list' => $Ubicaciones_Usuario,
                 'titulo_catalogo'   => "Catálogo de Usuarios",
-                'titulo_header'     => 'Editando el Folio '.$Id,
+                'titulo_header'     => 'Editando el Folio: '.$Id,
                 'msg'               => $this->msg,
             ]
         );
@@ -269,7 +269,7 @@ class UserDataController extends Controller
             "items"           => Auth::user(),
             "msg"             => 'Password cambiado con éxito!',
             "titulo_catalogo" =>"Catálogo de Usuarios",
-            'titulo_header'   => 'Editando password',
+            'titulo_header'   => 'Editando contraseña',
             'msg'             => $this->msg,
         ]);
     }

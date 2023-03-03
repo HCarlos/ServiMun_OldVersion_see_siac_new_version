@@ -5,7 +5,7 @@
 @component('components.denuncia')
     @slot('contenido')
             @component('components.card')
-                @slot('title_card','')
+                @slot('title_card',$titulo_header ?? "")
                 @slot('body_card')
                     @include('shared.code.__errors')
                     <form method="POST" action="{{ route('updateAddUserDenuncia') }}" accept-charset="UTF-8" enctype="multipart/form-data" class="formData" id="formData" >

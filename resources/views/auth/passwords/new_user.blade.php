@@ -26,7 +26,7 @@
 
                 <!-- email send icon with text-->
                 <div class="text-left m-auto">
-                    <h4 class="text-white-50 text-center mt-4 font-weight-bold">Felicidades!</h4>
+                    <h4 class="text-white-50 text-center mt-4 font-weight-bold">¡Felicidades!</h4>
                     <p class="text-white-50 mb-4">
                         Se ha creado tu cuenta satisfactoriamente, estos son tus datos:<br><br>
                         - Email: <b>{{$email}}</b>.<br>

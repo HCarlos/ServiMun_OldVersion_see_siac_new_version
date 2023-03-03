@@ -75,7 +75,7 @@ class DenunciaController extends Controller{
             [
                 'items'                               => $items,
                 'titulo_catalogo'                     => "Catálogo de " . ucwords($this->tableName),
-                'titulo_header'                       => '',
+                'titulo_header'                       => "Catálogo de " . ucwords($this->tableName),
                 'user'                                => $user,
                 'searchInListDenuncia'                => 'listDenuncias',
                 'newWindow'                           => true,
@@ -206,7 +206,7 @@ class DenunciaController extends Controller{
                 'putEdit'         => 'updateDenuncia',
                 'removeItem'      => 'removeImagene',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
-                'titulo_header'   => 'Editando el Folio '.$Id,
+                'titulo_header'   => 'Editando el Folio: '.$Id,
                 'msg'             => $this->msg,
                 'pregunta1'       => $pregunta1,
             ]
@@ -505,7 +505,7 @@ class DenunciaController extends Controller{
                 'putAddUserEdit'  => 'updateAddUserDenuncia',
                 'removeItem'      => 'removeAddUserDenuncia',
                 'titulo_catalogo' => "Agregando usuario al folio " .$Id,
-                'titulo_header'   => '',
+                'titulo_header'   => "Agregando usuario al folio " .$Id,
                 'msg'             => $this->msg,
             ]
         );
