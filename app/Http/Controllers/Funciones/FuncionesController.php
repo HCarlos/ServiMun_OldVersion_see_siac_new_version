@@ -40,7 +40,7 @@ class FuncionesController extends Controller
     }
 
     public function str_sanitizer($filters){
-        $arr = array(' la ',' las ',' lo ',' los ',' de ',' del ',' fracc ',' col ',' col. ',' r/a ',' ria ',' ria. ',' conj ',' conj. ',' priv ',' priv. ',' av ',' av. ',' ave ',' ave. ',' carr ',' carr. ',' colonia ',' pob ',' pob. ',' cda ',' cda. ', 'méxico', 'tab', ',', '. ', '.');
+        $arr = array(' la ',' las ',' lo ',' los ',' de ',' del ',' fracc ',' col ',' col. ',' r/a ',' ria ',' ria. ',' conj ',' conj. ',' priv ',' priv. ',' av ',' av. ',' ave ',' ave. ',' carr ',' carr. ',' colonia ',' pob ',' pob. ',' cda ',' cda. ', 'méxico', 'tab.', 'tab,');
         foreach($arr as $fil){
             $filters = str_replace($fil, ' ', $filters);
         }
