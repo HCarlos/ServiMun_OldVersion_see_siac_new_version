@@ -264,7 +264,12 @@ class DenunciaController extends Controller{
         ini_set('max_execution_time', 300000);
         $filters =$request->input('search');
         $F           = new FuncionesController();
-        $tsString    = $F->string_to_tsQuery( strtoupper($filters),' & ');
+
+//        $tsString    = $F->string_to_tsQuery( strtoupper($filters),' & ');
+        $filters      = strtolower($filters);
+        $filters      = $F->str_sanitizer($filters);
+        $tsString     = $F->string_to_tsQuery( strtoupper($filters),' & ');
+
         $items = Ubicacion::query()
             ->search($tsString)
             ->orderBy('id')
