@@ -302,7 +302,7 @@
                         </a>
                     </li>
                     @endif
-                    @if (Auth::user()->hasRole('Administrator|SysOp'))
+                    @if (Auth::user()->hasRole('Administrator|SysOp') || Auth::user()->can('asignar_roles'))
                     <li>
                         <a href="{{route('asignaRoleList',['Id'=>0])}}">
                             <i class="fas fa-users-cog"></i>
@@ -311,7 +311,7 @@
                         </a>
                     </li>
                     @endif
-                    @if (Auth::user()->hasRole('Administrator|SysOp'))
+                    @if (Auth::user()->hasRole('Administrator|SysOp') || Auth::user()->can('asignar_permisos'))
                     <li>
                         <a href="{{route('asignaPermissionList',['Id'=>0])}}">
                             <i class="fas fa-user-cog"></i>
@@ -320,7 +320,7 @@
                         </a>
                     </li>
                     @endif
-                    @if (Auth::user()->hasRole('Administrator|SysOp'))
+                    @if (Auth::user()->hasRole('Administrator|SysOp') || Auth::user()->can('asignar_dependencias'))
                         <li>
                             <a href="{{route('asignaDependenciaList',['Id'=>0])}}">
                                 <i class="fas fa-user-cog"></i>
