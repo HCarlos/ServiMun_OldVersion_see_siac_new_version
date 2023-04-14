@@ -25,11 +25,17 @@ return [
     // -----------------------------------------------------------
 
     'archivos'=>[
-        'fmt_lista_catalogos'  => 'fmt_lista_catalogos.xlsx',
-        'fmt_lista_usuarios'   => 'fmt_lista_usuarios.xlsx',
-        'fmt_lista_denuncias'  => 'fmt_lista_denuncias.xlsx',
-        'fmt_lista_respuestas' => 'fmt_lista_respuestas.xlsx',
-        'icono_video'          => 'icon-video.png',
+        'fmt_lista_catalogos'      => 'fmt_lista_catalogos.xlsx',
+        'fmt_lista_usuarios'       => 'fmt_lista_usuarios.xlsx',
+        'fmt_lista_denuncias'      => 'fmt_lista_denuncias.xlsx',
+        'fmt_lista_denuncias_sas'  => 'fmt_lista_denuncias_sas.xlsx',
+        'fmt_lista_respuestas'     => 'fmt_lista_respuestas.xlsx',
+        'icono_video'              => 'icon-video.png',
+    ],
+
+    'menu_archivos'=>[
+        'Solicitudes'      => 'fmt_lista_denuncias.xlsx',
+        'Solicitudes SAS'  => 'fmt_lista_denuncias_sas.xlsx',
     ],
 
     // ARCHIVOS DE IMAGENES DEL SISTEMA
