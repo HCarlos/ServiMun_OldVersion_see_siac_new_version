@@ -335,7 +335,8 @@ jQuery(function($) {
             $(".btnGetItems").on('click', function(event) {
                 event.preventDefault();
                 if ( $(".btnGetItems").length > 0  ){
-                    var hRef = event.currentTarget.href;
+                    var str0 = event.currentTarget.href.split("-");
+                    var hRef = str0[0];
                     // alert("hRef")
                     var token = $("meta[name='csrf-token']").attr('content');
                     var oSearch    = $("input[name='search']").length > 0 ? $("input[name='search']").val() : "";
@@ -343,6 +344,8 @@ jQuery(function($) {
                     var PARAMS = {
                         search : oSearch,
                         items : oItems,
+                        fileoutput : str0[1],
+                        indice : str0[2],
                         _token : token
                     };
                     var temp=document.createElement("form");

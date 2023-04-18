@@ -37,8 +37,14 @@ class ListDenunciaXLSXController extends Controller
         $C = $C0;
 
         try {
-            $file_external = trim(config("atemun.archivos.fmt_lista_denuncias"));
-            //dd($file_external);
+
+//            $file_external = trim(config("atemun.archivos.fmt_lista_denuncias"));
+            $data =  $request->only(['fileoutput','indice']);
+            $file_external =  $data["fileoutput"];
+            $indice = (int) $data["indice"];
+
+//            dd($file_external);
+
             $arrFE = explode('.',$file_external);
             $extension = Str::ucfirst($arrFE[1]);
 
@@ -47,102 +53,197 @@ class ListDenunciaXLSXController extends Controller
             $spreadsheet = $reader->load($archivo);
             $sh = $spreadsheet->setActiveSheetIndex(0);
 
-            $sh->setCellValue('S1', Carbon::now()->format('d-m-Y h:m:s'));
-            foreach ($Items as $item){
-
-                //dd($item);
-
-                $ciudadano   = User::find($item->ciudadano_id);
-                $prioridad   = Prioridad::find($item->prioridad_id);
-                $origen      = Origen::find($item->origen_id);
-                $dependencia = Dependencia::find($item->dependencia_id);
-                $servicio    = Servicio::find($item->servicio_id);
-                $ubicacion   = Ubicacion::find($item->ubicacion_id);
-                $estatus     = Estatu::find($item->estatus_id);
-                $creadopor   = User::find($item->creadopor_id);
-
-//                $fechaIngreso   = Carbon::parse($item->fecha_ingreso)->format('d-m-Y');
-                $fechaIngreso   = date_format($item->fecha_ingreso,'d-m-Y');
-                $fechaLimite    = Carbon::parse($item->fecha_limite)->format('d-m-Y'); //Carbon::createFromFormat('d-m-Y', $item->fecha_nacimiento);
-                $fechaEjecucion = Carbon::parse($item->fecha_ejecucion)->format('d-m-Y'); //Carbon::createFromFormat('d-m-Y', $item->fecha_nacimiento);
-
-                $resp = Denuncia_Dependencia_Servicio::query()->where('denuncia_id',$item->id)->orderByDesc('id')->get();
-                $respuesta = "";
-                $favorable = false;
-                foreach ($resp as $r){
-                    $res = trim($r->observaciones);
-                    if ( $res != ""){
-                        $dep = Dependencia::find($r->dependencia_id);
-                        $respuesta.=$dep->abreviatura.' - '.$res.'. ';
-                        $favorable = $r->favorable;
-                    }
-                }
-
-                $sh
-                    ->setCellValue('A'.$C, $item->id ?? 0)
-                    ->setCellValue('B'.$C, trim($ciudadano->curp ?? ''))
-                    ->setCellValue('C'.$C, trim($ciudadano->ap_paterno ?? ''))
-                    ->setCellValue('D'.$C, trim($ciudadano->ap_materno ?? ''))
-                    ->setCellValue('E'.$C, trim($ciudadano->nombre ?? ''))
-
-                    ->setCellValue('F'.$C, trim($ubicacion->calle ?? ''))
-                    ->setCellValue('G'.$C, trim($ubicacion->num_ext ?? ''))
-                    ->setCellValue('H'.$C, trim($ubicacion->num_int ?? ''))
-                    ->setCellValue('I'.$C, trim($ubicacion->colonia ?? ''))
-                    ->setCellValue('J'.$C, trim($ubicacion->cp ?? ''))
-
-                    ->setCellValue('K'.$C, $ubicacion->Ubicacion ?? '')
-                    ->setCellValue('L'.$C, $ciudadano->TelefonosCelularesEmails ?? '')
-                    ->setCellValue('M'.$C, $fechaIngreso ?? '')
-                    ->setCellValue('N'.$C, $servicio->subarea->area->dependencia->dependencia ?? '')
-                    ->setCellValue('O'.$C, $servicio->subarea->area->area ?? '')
-                    ->setCellValue('P'.$C, $servicio->subarea->subarea ?? '')
-                    ->setCellValue('Q'.$C, $servicio->servicio ?? '')
-                    ->setCellValue('R'.$C, $item->descripcion ?? '')
-                    ->setCellValue('S'.$C, $item->referencia ?? '')
-                    ->setCellValue('T'.$C, $prioridad->prioridad ?? '')
-                    ->setCellValue('U'.$C, $origen->origen ?? '')
-                    ->setCellValue('V'.$C, $item->ultimo_estatus ?? '')
-                    ->setCellValue('W'.$C, $item->ultima_fecha_estatus ?? '')
-                    ->setCellValue('X'.$C, $respuesta )
-                    ->setCellValue('Y'.$C, $item->observaciones )
-                    ->setCellValue('Z'.$C, $item->creadopor->username )
-                    ->setCellValue('AA'.$C, $item->uuid )
-                    ->setCellValue('AB'.$C, $favorable ? "SI" : "NO" )
-                    ->setCellValue('AC'.$C, $item->clave_identificadora )
-                    ->setCellValue('AD'.$C, trim($ciudadano->StrGenero ?? ''))
-                    ->setCellValue('AE'.$C, trim($creadopor->FullName ?? ''));
-                $C++;
+            switch ($indice){
+                case 0:
+                    $this->denunciaGeneral01($C, $C0, $sh, $Items, $arrFE, $spreadsheet, $archivo, $extension);
+                    break;
+                case 1:
+                    $this->denunciaSASGeneral01($C, $C0, $sh, $Items, $arrFE, $spreadsheet, $archivo, $extension);
+                    break;
             }
-            $Cx = $C  - 1;
-            $oVal = $sh->getCell('G1')->getValue();
-            $sh->setCellValue('B'.$C, 'TOTAL DE REGISTROS')
-                ->setCellValue('C'.$C, '=COUNT(A'.$C0.':A'.$Cx.')')
-                ->setCellValue('G'.$C, $oVal);
-
-            $sh->getStyle('A'.$C0.':G'.$C)->getFont()
-                ->setName('Arial')
-                ->setSize(8);
-
-            $sh->getStyle('A'.$C.':G'.$C)->getFont()->setBold(true);
-
-            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-            header('Content-Disposition: attachment;filename="_'.$arrFE[0].'.'.$arrFE[1].'"');
-            header('Cache-Control: max-age=0');
-            header('Cache-Control: max-age=1');
-            header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-            header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
-            header('Cache-Control: cache, must-revalidate');
-            header('Pragma: public');
-            $writer = IOFactory::createWriter($spreadsheet, $extension);
-            $writer->save('php://output');
-            exit;
 
         } catch (Exception $e) {
             echo 'Ocurrio un error al intentar abrir el archivo ' . $e;
         }
 
     }
+
+    // Denuncia General Formato 01
+    public function denunciaGeneral01($C, $C0, $sh, $Items, $arrFE, $spreadsheet, $archivo, $extension){
+
+        $sh->setCellValue('S1', Carbon::now()->format('d-m-Y h:m:s'));
+        foreach ($Items as $item){
+
+            //dd($item);
+
+            $ciudadano   = User::find($item->ciudadano_id);
+            $prioridad   = Prioridad::find($item->prioridad_id);
+            $origen      = Origen::find($item->origen_id);
+            $dependencia = Dependencia::find($item->dependencia_id);
+            $servicio    = Servicio::find($item->servicio_id);
+            $ubicacion   = Ubicacion::find($item->ubicacion_id);
+            $estatus     = Estatu::find($item->estatus_id);
+            $creadopor   = User::find($item->creadopor_id);
+
+//                $fechaIngreso   = Carbon::parse($item->fecha_ingreso)->format('d-m-Y');
+            $fechaIngreso   = date_format($item->fecha_ingreso,'d-m-Y');
+            $fechaLimite    = Carbon::parse($item->fecha_limite)->format('d-m-Y'); //Carbon::createFromFormat('d-m-Y', $item->fecha_nacimiento);
+            $fechaEjecucion = Carbon::parse($item->fecha_ejecucion)->format('d-m-Y'); //Carbon::createFromFormat('d-m-Y', $item->fecha_nacimiento);
+
+            $resp = Denuncia_Dependencia_Servicio::query()->where('denuncia_id',$item->id)->orderByDesc('id')->get();
+            $respuesta = "";
+            $favorable = false;
+            foreach ($resp as $r){
+                $res = trim($r->observaciones);
+                if ( $res != ""){
+                    $dep = Dependencia::find($r->dependencia_id);
+                    $respuesta.=$dep->abreviatura.' - '.$res.'. ';
+                    $favorable = $r->favorable;
+                }
+            }
+
+            $sh
+                ->setCellValue('A'.$C, $item->id ?? 0)
+                ->setCellValue('B'.$C, trim($ciudadano->curp ?? ''))
+                ->setCellValue('C'.$C, trim($ciudadano->ap_paterno ?? ''))
+                ->setCellValue('D'.$C, trim($ciudadano->ap_materno ?? ''))
+                ->setCellValue('E'.$C, trim($ciudadano->nombre ?? ''))
+
+                ->setCellValue('F'.$C, trim($ubicacion->calle ?? ''))
+                ->setCellValue('G'.$C, trim($ubicacion->num_ext ?? ''))
+                ->setCellValue('H'.$C, trim($ubicacion->num_int ?? ''))
+                ->setCellValue('I'.$C, trim($ubicacion->colonia ?? ''))
+                ->setCellValue('J'.$C, trim($ubicacion->cp ?? ''))
+
+                ->setCellValue('K'.$C, $ubicacion->Ubicacion ?? '')
+                ->setCellValue('L'.$C, $ciudadano->TelefonosCelularesEmails ?? '')
+                ->setCellValue('M'.$C, $fechaIngreso ?? '')
+                ->setCellValue('N'.$C, $servicio->subarea->area->dependencia->dependencia ?? '')
+                ->setCellValue('O'.$C, $servicio->subarea->area->area ?? '')
+                ->setCellValue('P'.$C, $servicio->subarea->subarea ?? '')
+                ->setCellValue('Q'.$C, $servicio->servicio ?? '')
+                ->setCellValue('R'.$C, $item->descripcion ?? '')
+                ->setCellValue('S'.$C, $item->referencia ?? '')
+                ->setCellValue('T'.$C, $prioridad->prioridad ?? '')
+                ->setCellValue('U'.$C, $origen->origen ?? '')
+                ->setCellValue('V'.$C, $item->ultimo_estatus ?? '')
+                ->setCellValue('W'.$C, $item->ultima_fecha_estatus ?? '')
+                ->setCellValue('X'.$C, $respuesta )
+                ->setCellValue('Y'.$C, $item->observaciones )
+                ->setCellValue('Z'.$C, $item->creadopor->username )
+                ->setCellValue('AA'.$C, $item->uuid )
+                ->setCellValue('AB'.$C, $favorable ? "SI" : "NO" )
+                ->setCellValue('AC'.$C, $item->clave_identificadora )
+                ->setCellValue('AD'.$C, trim($ciudadano->StrGenero ?? ''))
+                ->setCellValue('AE'.$C, trim($creadopor->FullName ?? ''));
+            $C++;
+        }
+        $Cx = $C  - 1;
+        $oVal = $sh->getCell('G1')->getValue();
+        $sh->setCellValue('B'.$C, 'TOTAL DE REGISTROS')
+            ->setCellValue('C'.$C, '=COUNT(A'.$C0.':A'.$Cx.')')
+            ->setCellValue('G'.$C, $oVal);
+
+        $sh->getStyle('A'.$C0.':G'.$C)->getFont()
+            ->setName('Arial')
+            ->setSize(8);
+
+        $sh->getStyle('A'.$C.':G'.$C)->getFont()->setBold(true);
+
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="_'.$arrFE[0].'.'.$arrFE[1].'"');
+        header('Cache-Control: max-age=0');
+        header('Cache-Control: max-age=1');
+        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+        header('Cache-Control: cache, must-revalidate');
+        header('Pragma: public');
+        $writer = IOFactory::createWriter($spreadsheet, $extension);
+        $writer->save('php://output');
+        exit;
+    }
+
+
+
+
+
+    // Denuncia General Formato 01
+    public function denunciaSASGeneral01($C, $C0, $sh, $Items, $arrFE, $spreadsheet, $archivo, $extension){
+
+        $sh->setCellValue('S1', Carbon::now()->format('d-m-Y h:m:s'));
+        foreach ($Items as $item){
+
+            //dd($item);
+
+            $ciudadano   = User::find($item->ciudadano_id);
+            $prioridad   = Prioridad::find($item->prioridad_id);
+            $origen      = Origen::find($item->origen_id);
+            $dependencia = Dependencia::find($item->dependencia_id);
+            $servicio    = Servicio::find($item->servicio_id);
+            $ubicacion   = Ubicacion::find($item->ubicacion_id);
+            $estatus     = Estatu::find($item->estatus_id);
+            $creadopor   = User::find($item->creadopor_id);
+
+//                $fechaIngreso   = Carbon::parse($item->fecha_ingreso)->format('d-m-Y');
+            $fechaIngreso   = date_format($item->fecha_ingreso,'d-m-Y');
+            $fechaLimite    = Carbon::parse($item->fecha_limite)->format('d-m-Y'); //Carbon::createFromFormat('d-m-Y', $item->fecha_nacimiento);
+            $fechaEjecucion = Carbon::parse($item->fecha_ejecucion)->format('d-m-Y'); //Carbon::createFromFormat('d-m-Y', $item->fecha_nacimiento);
+
+            $resp = Denuncia_Dependencia_Servicio::query()->where('denuncia_id',$item->id)->orderByDesc('id')->get();
+            $respuesta = "";
+            $favorable = false;
+            foreach ($resp as $r){
+                $res = trim($r->observaciones);
+                if ( $res != ""){
+                    $dep = Dependencia::find($r->dependencia_id);
+                    $respuesta.=$dep->abreviatura.' - '.$res.'. ';
+                    $favorable = $r->favorable;
+                }
+            }
+
+            $sh
+                ->setCellValue('A'.$C, $item->id ?? 0)
+                ->setCellValue('B'.$C, $fechaIngreso ?? '')
+                ->setCellValue('C'.$C, trim($ciudadano->FullName ?? ''))
+                ->setCellValue('D'.$C, trim($ciudadano->telefonos ?? ''))
+                ->setCellValue('E'.$C, $ubicacion->Ubicacion ?? '')
+                ->setCellValue('F'.$C, trim($ubicacion->colonia ?? ''))
+                ->setCellValue('G'.$C, $item->referencia ?? '');
+
+            $C++;
+        }
+        $Cx = $C  - 1;
+        $oVal = $sh->getCell('G1')->getValue();
+        $sh->setCellValue('B'.$C, 'TOTAL DE REGISTROS')
+            ->setCellValue('C'.$C, '=COUNT(A'.$C0.':A'.$Cx.')')
+            ->setCellValue('G'.$C, $oVal);
+
+        $sh->getStyle('A'.$C0.':G'.$C)->getFont()
+            ->setName('Arial')
+            ->setSize(8);
+
+        $sh->getStyle('A'.$C.':G'.$C)->getFont()->setBold(true);
+
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="_'.$arrFE[0].'.'.$arrFE[1].'"');
+        header('Cache-Control: max-age=0');
+        header('Cache-Control: max-age=1');
+        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+        header('Cache-Control: cache, must-revalidate');
+        header('Pragma: public');
+        $writer = IOFactory::createWriter($spreadsheet, $extension);
+        $writer->save('php://output');
+        exit;
+    }
+
+
+
+
+
+
+
+
 
     public function showDataListDenunciaRespuestaExcel1A(Request $request){
         ini_set('max_execution_time', 72000);

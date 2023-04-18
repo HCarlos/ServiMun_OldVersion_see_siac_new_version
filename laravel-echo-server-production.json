@@ -1,5 +1,5 @@
 {
-    "authHost": "https://servimun.mx",
+    "authHost": "https://siac.villahermosa.gob.mx",
     "authEndpoint": "/broadcasting/auth",
     "clients": [
         {

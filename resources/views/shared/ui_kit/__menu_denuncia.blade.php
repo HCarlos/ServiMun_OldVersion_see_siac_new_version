@@ -14,3 +14,7 @@
         </div>
     @endif
 </div>
+
+@section('scripts')
+    $("#topnav-layouts").dropdown();
+@endsection

@@ -112,7 +112,7 @@
 
 <div class="form-row mb-1">
     <label for = "clave_identificadora" class="col-md-2 col-form-label text-left">Cve Identificadora</label>
-    <div class="col-md-10">
+    <div class="col-md-4">
         @if ( Auth::user()->hasAnyPermission(['seleccionar_hashtag']) )
         <select id="clave_identificadora" name="clave_identificadora" class="form-control" size="1">
             <option value="" selected >Seleccione una Clave</option>
@@ -123,8 +123,14 @@
         @else
             <input type="text" name="clave_identificadora" id="clave_identificadora" value="{{ old('clave_identificadora') }}" class="form-control" />
         @endif
-
     </div>
+    <div class="col-md-6 ">
+        <div class="custom-control custom-checkbox mt-1 float-left">
+            <input type="checkbox" class="custom-control-input" id="incluirFechaMovto" name="incluirFechaMovto">
+            <label class="custom-control-label" for="incluirFechaMovto">Buscar en Fecha Movto</label>
+        </div>
+    </div>
+
 </div>
 
 
@@ -132,7 +138,7 @@
 <hr>
 <div class="form-row mb-1">
     <label for = "items_for_query" class="col-md-2 col-form-label">Regs. consulta</label>
-    <div class="col-md-4">
+    <div class="col-md-10">
         <select id="items_for_query" name="items_for_query" class="form-control" size="1">
             <option value="250" selected >250</option>
             <option value="500" >500</option>
@@ -151,13 +157,14 @@
         </select>
         <small class="text-muted">La cantidad de registros, es directamente proporcional al tiempo que tarda la consulta.</small>
     </div>
-    <div class="col-md-6 ">
-        <div class="custom-control custom-checkbox mt-1 float-left">
-            <input type="checkbox" class="custom-control-input" id="incluirFechaMovto" name="incluirFechaMovto">
-            <label class="custom-control-label" for="incluirFechaMovto">Buscar en Fecha Movto</label>
-        </div>
-    </div>
-
+{{--    <label for = "formato" class="col-md-2 col-form-label">Formato de Salida</label>--}}
+{{--    <div class="col-md-4">--}}
+{{--        <select id="formato" name="formato" class="form-control " size="1">--}}
+{{--            @foreach(config("atemun.menu_archivos") as $id => $valor)--}}
+{{--                <option value="{{ $valor }}">{{ $id }}</option>--}}
+{{--            @endforeach--}}
+{{--        </select>--}}
+{{--    </div>--}}
 </div>
 
 @section("script_extra")
