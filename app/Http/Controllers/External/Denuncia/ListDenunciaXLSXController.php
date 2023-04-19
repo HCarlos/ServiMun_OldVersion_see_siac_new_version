@@ -170,7 +170,7 @@ class ListDenunciaXLSXController extends Controller
     // Denuncia General Formato 01
     public function denunciaSASGeneral01($C, $C0, $sh, $Items, $arrFE, $spreadsheet, $archivo, $extension){
 
-        $sh->setCellValue('S1', Carbon::now()->format('d-m-Y h:m:s'));
+        $sh->setCellValue('I1', Carbon::now()->format('d-m-Y h:m:s'));
         foreach ($Items as $item){
 
             //dd($item);
