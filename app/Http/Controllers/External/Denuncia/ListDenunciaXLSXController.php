@@ -204,11 +204,12 @@ class ListDenunciaXLSXController extends Controller
             $sh
                 ->setCellValue('A'.$C, $item->id ?? 0)
                 ->setCellValue('B'.$C, $fechaIngreso ?? '')
-                ->setCellValue('C'.$C, trim($ciudadano->FullName ?? ''))
-                ->setCellValue('D'.$C, trim($ciudadano->telefonos ?? ''))
-                ->setCellValue('E'.$C, $ubicacion->Ubicacion ?? '')
-                ->setCellValue('F'.$C, trim($ubicacion->colonia ?? ''))
-                ->setCellValue('G'.$C, $item->referencia ?? '');
+                ->setCellValue('C'.$C, trim($item->servicio->servicio ?? ''))
+                ->setCellValue('D'.$C, trim($ciudadano->FullName ?? ''))
+                ->setCellValue('E'.$C, trim($ciudadano->telefonos ?? ''))
+                ->setCellValue('F'.$C, $ubicacion->Ubicacion ?? '')
+                ->setCellValue('G'.$C, trim($ubicacion->colonia ?? ''))
+                ->setCellValue('H'.$C, $item->referencia ?? '');
 
             $C++;
         }
