@@ -15,7 +15,7 @@
     @guest()
     @else()
         <!--- Sidemenu -->
-        <ul class="metismenu side-nav">
+        <ul class="metismenu side-nav mb-0">
             @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_ADMIN|USER_SAS_CAP|USER_SAS_ADMIN|USER_DIF_CAP|USER_DIF_ADMIN|ENLACE') )
                 <li class="side-nav-item">
                     @if (Auth::user()->hasRole('ENLACE') )
@@ -34,7 +34,7 @@
                     <i class="mdi dripicons-archive"></i>
                     @php $filters['filterdata']=""; @endphp
                     <span class="badge badge-light float-right">{{\App\Models\Denuncias\Denuncia::query()->GetDenunciasFilterCount($filters)->count()}}</span>
-                    <span>Denuncias</span>
+                    <span>Solicitudes</span>
                 </a>
             </li>
             @if (Auth::user()->hasRole('Administrator|SysOp|USER_OPERATOR_ADMIN|USER_SAS_ADMIN|USER_DIF_ADMIN'))
@@ -363,7 +363,8 @@
 
 
         </ul>
-{{--        @include('partials.aviso-privacidad-panel')--}}
+        <div class="clearfix"></div>
+        @include('partials.aviso-privacidad-panel')
         <div class="clearfix"></div>
     @endguest
     </div>

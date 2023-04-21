@@ -29,7 +29,7 @@ class DenunciaAPIController extends Controller{
         if ($den){
             $response["status"] = 1;
             $response["msg"] = "Solicitud de servicio enviada con éxito!";
-//            event(new APIDenunciaEvent(1, 2));
+            event(new APIDenunciaEvent($den->id, $den->user_id));
         }
         return response()->json($response);
     }
@@ -51,8 +51,6 @@ class DenunciaAPIController extends Controller{
 
                 $Ser = Serviciomobile::find($den->serviciomobile_id);
 
-
-
                 $fecha = (new Carbon($den->fecha))->format('d-m-Y H:i:s');
                 $d = [
                     'id'               => $den->id,
@@ -70,7 +68,6 @@ class DenunciaAPIController extends Controller{
             }
             $response["denuncias"] = $denucias;
         }
-//        event(new InserUpdateDeleteEvent(1,$response));
         return response()->json($response);
 
     }

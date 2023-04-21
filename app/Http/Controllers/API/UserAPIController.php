@@ -171,5 +171,26 @@ class UserAPIController extends Controller{
         return response()->json($response);
     }
 
+    public function recoveryPassword(Request $request):JsonResponse {
+        $response = ["status"=>0, "msg"=>""];
+        $data = (object) $request->all();
+        $user_id = $data->user_id;
+
+        $user = User::find($user_id);
+        if ($user){
+
+            $Token = $user->createToken($request->device_name);
+            $token = $Token->plainTextToken;
+            $user->sendPasswordResetNotification($token);
+
+            $response["status"] = 1;
+            $response["msg"] = $token;
+        }
+        return response()->json($response);
+    }
+
+
+
+
 
 }
