@@ -8,6 +8,12 @@
     </div>
 </div>
 <div class="form-group row mb-1">
+    <label for = "ambito_servicio" class="col-md-3 col-form-label">Tipo Servicio</label>
+    <div class="col-md-9">
+        {{ Form::select('ambito_servicio', array(''=>'', 'RURAL'=>'RURAL', 'URBANO'=>'URBANO', 'NO APLICA'=>'NO APLICA'), $items->ambito_servicio , ['id' => 'ambito_servicio','class' => 'form-control']) }}
+    </div>
+</div>
+<div class="form-group row mb-1">
     <label for = "habilitado" class="col-md-3 col-form-label">Habilitado</label>
     <div class="col-md-3">
         {{ Form::select('habilitado', array('1'=>'SI', '0'=>'NO'), $items->isEnabled()==true ? 1 : 0 , ['id' => 'habilitado','class' => 'form-control']) }}

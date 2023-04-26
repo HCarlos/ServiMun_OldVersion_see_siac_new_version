@@ -21,7 +21,7 @@
 
 <div class="form-group row mb-3">
     <label for = "tipocomunidad_id" class="col-md-3 col-form-label has-tipocomunidad_id">Tipo Comunidad</label>
-    <div class="col-md-9">
+    <div class="col-md-3">
         <select class="tipocomunidad_id form-control select2" data-toggle="select2"  name="tipocomunidad_id" id="tipocomunidad_id" size="1">
             @foreach($tipocomunidades as $t)
                 <option value="{{$t->id}}" @if($t->id == $items->tipocomunidad_id) selected @endif>{{ $t->tipocomunidad }}</option>
@@ -30,6 +30,10 @@
         <span class="has-tipocomunidad_id">
             <strong class="text-danger"></strong>
         </span>
+    </div>
+    <label for = "ambito_comunidad" class="col-md-3 col-form-label text-right">Ámbito Comunidad</label>
+    <div class="col-md-3">
+        {{ Form::select('ambito_comunidad', array(''=>'', 'RURAL'=>'RURAL', 'URBANO'=>'URBANO', 'NO APLICA'=>'NO APLICA'), $items->ambito_comunidad , ['id' => 'ambito_comunidad','class' => 'form-control']) }}
     </div>
 </div>
 

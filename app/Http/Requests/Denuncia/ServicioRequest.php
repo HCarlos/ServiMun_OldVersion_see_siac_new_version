@@ -65,6 +65,7 @@ class ServicioRequest extends FormRequest
             'nombre_mobile'      => $this->nombre_mobile,
             'url_image_mobile'   => $this->url_image_mobile??'',
             'orden_image_mobile' => $this->orden_image_mobile,
+            'ambito_servicio'    => trim($this->ambito_servicio),
         ];
 
 //        dd($Item);

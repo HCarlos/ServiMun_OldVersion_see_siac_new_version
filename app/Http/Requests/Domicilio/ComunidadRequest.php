@@ -52,6 +52,7 @@ class ComunidadRequest extends FormRequest
                 'ciudad_id'        => $this->ciudad_id,
                 'municipio_id'     => $this->municipio_id,
                 'estado_id'        => $this->estado_id,
+                'ambito_comunidad' => trim($this->ambito_comunidad),
             ];
 
             if ($this->id == 0) {

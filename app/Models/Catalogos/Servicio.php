@@ -19,7 +19,7 @@ class Servicio extends Model
 
     protected $fillable = [
         'id', 'servicio','habilitado', 'medida_id', 'subarea_id','orden_impresion',
-        'root','filename','filename_png','filename_thumb',
+        'root','filename','filename_png','filename_thumb', 'ambito_servicio',
         'is_visible_mobile', 'nombre_mobile', 'url_image_mobile', 'orden_image_mobile',
     ];
     protected $hidden = ['deleted_at','created_at','updated_at'];

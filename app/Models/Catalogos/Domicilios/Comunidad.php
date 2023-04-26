@@ -20,7 +20,7 @@ class Comunidad extends Model
 
     protected $fillable = [
         'id', 'comunidad','delegado_id','tipocomunidad_id','ciudad_id','municipio_id','estado_id','nomenclatura',
-        'comunidad_mig_id', 'is_unificadora',
+        'comunidad_mig_id', 'is_unificadora', 'ambito_comunidad',
     ];
 
     protected $hidden = ['deleted_at','created_at','updated_at'];
