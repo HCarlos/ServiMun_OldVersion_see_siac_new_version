@@ -67,9 +67,8 @@ class DependenciaController extends Controller
         );
     }
 
-    protected function createItem(Request $request)
-    {
-        dd( $request->all() );
+    protected function createItem(Request $request){
+//        dd( $request->all() );
 
         $item = $request->manage();
         if (!isset($item)) {

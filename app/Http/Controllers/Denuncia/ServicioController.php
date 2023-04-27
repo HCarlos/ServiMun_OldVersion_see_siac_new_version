@@ -8,9 +8,11 @@ use App\Http\Requests\Denuncia\ServicioRequest;
 use App\Models\Catalogos\Medida;
 use App\Models\Catalogos\Servicio;
 use App\Models\Catalogos\Subarea;
+use App\Models\Denuncias\_Servicios;
 use App\Models\Denuncias\Denuncia;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Auth;
@@ -25,21 +27,33 @@ class ServicioController extends Controller
     {
         ini_set('max_execution_time', 300);
 
-//        $filters = $request->all(['search']);
+        $filters = $request->all(['search']);
 //        $search = $filters['search'];
 
-        $filters =$request->input('search');
-        $F           = new FuncionesController();
-        $tsString    = $F->string_to_tsQuery( strtoupper($filters),' & ');
+//        $filters =$request->input('search');
+//        $F           = new FuncionesController();
+//        $tsString    = $F->string_to_tsQuery( strtoupper($filters),' & ');
+//        dd($filters);
 
-        $items = Servicio::query()
-            ->search($tsString)
+
+        $items = _Servicios::query()
+            ->filterBy($filters)
             ->orderByDesc('id')
             ->paginate(10000);
         $items->appends($filters)->fragment('table');
+
+//          $items = DB::table('_viservicios')
+//            ->filterBy($filters)
+//            ->orderByDesc('id')
+//            ->paginate(10000);
+//        $items->appends($filters)->fragment('table');
+
         $user = Auth::User();
 
 //        ->filterBy($filters)
+//        ->search($tsString)
+
+//        dd($items);
 
         return view('SIAC.estructura.servicio.servicio_list',
             [

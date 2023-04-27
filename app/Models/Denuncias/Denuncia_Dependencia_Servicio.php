@@ -10,8 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use phpDocumentor\Reflection\Types\Boolean;
 
-class Denuncia_Dependencia_Servicio extends Model
-{
+class Denuncia_Dependencia_Servicio extends Model{
     use SoftDeletes;
 
     protected $guard_name = 'web';
