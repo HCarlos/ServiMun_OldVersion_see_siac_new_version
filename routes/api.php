@@ -33,6 +33,7 @@ Route::group(['prefix' => 'v1'], function () {
     Route::post('/login', [UserAPIController::class, 'userLogin']);
     Route::post('/mobile/token', [UserAPIController::class, 'userMobileToken']);
     Route::post('/register', [UserAPIController::class, 'register']);
+    Route::post('/user/recovery/password', [UserAPIController::class, 'recoveryPassword']);
 
     Route::middleware('auth:sanctum')->get('/user', function(Request $request){
         return $request->user();
@@ -45,7 +46,6 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('/user/curp/{curp}', [UserAPIController::class, 'userCURP']);
         Route::post('/user/image', [UserAPIController::class, 'userImage']);
         Route::post('/user/change/password', [UserAPIController::class, 'userChangePassword']);
-        Route::post('/user/recovery/password', [UserAPIController::class, 'recoveryPassword']);
 
         // Denunciases should
         Route::post('/denuncia/insert', [DenunciaAPIController::class, 'insertDenunciaMobile']);
