@@ -113,8 +113,6 @@ class DenunciaAPIRequest extends FormRequest{
                 'longitud'           => $this->longitud,
                 'user_id'           => $this->user_id,
             ]);
-            $SerId = $Ser ? $Ser->id : 1;
-            $Servicio = Serviciomobile::find($SerId);
 
             $Item = [
                 'fecha_ingreso'                => now(), // Carbon::now(), //Carbon::now($this->fecha_ingreso)->format('Y-m-d hh:mm:ss'),
@@ -139,17 +137,17 @@ class DenunciaAPIRequest extends FormRequest{
                 'longitud'                     => $this->longitud ?? 0.0000,
                 'prioridad_id'                 => 2,
                 'origen_id'                    => 24,
-                'dependencia_id'               => $Servicio->dependencia_id,
+                'dependencia_id'               => $Ser->dependencia_id,
                 'ubicacion_id'                 => $this->ubicacion_id,
-                'servicio_id'                  => $Servicio->servicio_id,
+                'servicio_id'                  => $Ser->servicio_id,
                 'estatus_id'                   => 8,
                 'ciudadano_id'                 => $this->user_id,
                 'creadopor_id'                 => $this->user_id,
                 'modificadopor_id'             => $this->user_id,
                 'domicilio_ciudadano_internet' => strtoupper(trim($this->ubicacion_google))  ?? '' ,
-                'observaciones'                => strtoupper(trim($this->tipo_mobile)).' '.strtoupper(trim($this->marca_mobile)),
-                'ip'                           => FuncionesController::getIp(),
-                'host'                         => config('atemun.public_url'),
+                'observaciones'                => strtoupper(trim($this->tipo_mobile)),
+                'ip'                           => "",
+                'host'                         => "",
             ];
 
             $obj = $this->guardarDenunciaMobileADenuncia($Item);
@@ -269,12 +267,8 @@ class DenunciaAPIRequest extends FormRequest{
     }
 
     protected function guardarDenunciaMobileADenuncia($Item, $Obj){
-        $trigger_type = 0;
         $item = Denuncia::create($Item);
         $this->attachesDenunciaMobileADenuncia($item);
-//        $Storage = new StorageDenunciaController();
-//        $Storage->subirArchivoDenuncia($this, $item);
-
         return $item;
     }
 
