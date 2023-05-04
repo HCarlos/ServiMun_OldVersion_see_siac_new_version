@@ -113,7 +113,7 @@ class DenunciaAPIRequest extends FormRequest{
                 'longitud'           => $this->longitud,
                 'user_id'           => $this->user_id,
             ]);
-
+/*
             $Item = [
                 'fecha_ingreso'                => now(), // Carbon::now(), //Carbon::now($this->fecha_ingreso)->format('Y-m-d hh:mm:ss'),
                 'oficio_envio'                 => now(),
@@ -151,9 +151,9 @@ class DenunciaAPIRequest extends FormRequest{
             ];
 
             $obj = $this->guardarDenunciaMobileADenuncia($Item);
-
+*/
             if ( $DenMob ){
-                $img = $this->manageImage($DenMob, $obj);
+                $img = $this->manageImage($DenMob, null);
             }else{
                 return ["status"=>0, "msg"=>"Ocurrió un error desconocido."];
             }
@@ -196,7 +196,7 @@ class DenunciaAPIRequest extends FormRequest{
             ];
 
             $imm = Imagemobile::create($Item);
-
+/*
             $__Item = [
                 'fecha'             => $Item->fecha,
                 'user__id'          => $ITEM->usuario_id,
@@ -214,7 +214,7 @@ class DenunciaAPIRequest extends FormRequest{
             $den = Denuncia::find($ITEM->id);
             $den->imagenes()->attach($_item);
 
-
+*/
             if ($imm){
                 event(new APIDenunciaEvent($denunciamobile->id, $denunciamobile->user_id));
                 $imm->denuncias()->attach($denunciamobile);
