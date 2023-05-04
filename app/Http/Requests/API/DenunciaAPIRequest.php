@@ -6,7 +6,10 @@ use App\Classes\MessageAlertClass;
 use App\Events\APIDenunciaEvent;
 use App\Events\IUQDenunciaEvent;
 use App\Http\Controllers\Funciones\FuncionesController;
+use App\Http\Controllers\Storage\StorageDenunciaController;
 use App\Models\Catalogos\Domicilios\Ubicacion;
+use App\Models\Denuncias\_Servicios;
+use App\Models\Denuncias\Denuncia;
 use App\Models\Denuncias\Imagene;
 use App\Models\Mobiles\Denunciamobile;
 use App\Models\Mobiles\Imagemobile;
@@ -20,6 +23,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -86,11 +90,7 @@ class DenunciaAPIRequest extends FormRequest{
 
             $Ser = Serviciomobile::all()->where("servicio",trim($this->servicio))->first();
 
-//            $filters =$this->ubicacion_google;
             $F           = new FuncionesController();
-
-//            $tsString    = $F->string_to_tsQuery( strtoupper($filters),' & ');
-
             $filters      = strtolower($this->ubicacion_google);
             $filters      = $F->str_sanitizer($filters);
             $tsString     = $F->string_to_tsQuery( strtoupper($filters),' & ');
@@ -113,10 +113,49 @@ class DenunciaAPIRequest extends FormRequest{
                 'longitud'           => $this->longitud,
                 'user_id'           => $this->user_id,
             ]);
+            $SerId = $Ser ? $Ser->id : 1;
+            $Servicio = _Servicios::query()->where('id',$SerId)->first();
 
+            $Item = [
+                'fecha_ingreso'                => now(), // Carbon::now(), //Carbon::now($this->fecha_ingreso)->format('Y-m-d hh:mm:ss'),
+                'oficio_envio'                 => now(),
+                'folio_sas'                    => "",
+                'fecha_oficio_dependencia'     => now(),
+                'fecha_limite'                 => now(),
+                'fecha_ejecucion'              => now(),
+                'descripcion'                  => strtoupper($this->denuncia),
+                'referencia'                   => "",
+                'clave_identificadora'         => "",
+                'calle'                        => strtoupper($Ubi->calle),
+                'num_ext'                      => strtoupper($Ubi->num_ext),
+                'num_int'                      => strtoupper($Ubi->num_int),
+                'colonia'                      => strtoupper($Ubi->colonia),
+                'comunidad'                    => strtoupper($Ubi->comunidad),
+                'ciudad'                       => strtoupper($Ubi->ciudad),
+                'municipio'                    => strtoupper($Ubi->municipio),
+                'estado'                       => strtoupper($Ubi->estado),
+                'cp'                           => strtoupper($Ubi->cp),
+                'latitud'                      => $this->latitud ?? 0.0000,
+                'longitud'                     => $this->longitud ?? 0.0000,
+                'prioridad_id'                 => 2,
+                'origen_id'                    => 24,
+                'dependencia_id'               => $Servicio->dependencia_id,
+                'ubicacion_id'                 => $this->ubicacion_id,
+                'servicio_id'                  => $Servicio->id,
+                'estatus_id'                   => 8,
+                'ciudadano_id'                 => $this->user_id,
+                'creadopor_id'                 => $this->user_id,
+                'modificadopor_id'             => $this->user_id,
+                'domicilio_ciudadano_internet' => strtoupper(trim($this->ubicacion_google))  ?? '' ,
+                'observaciones'                => strtoupper(trim($this->tipo_mobile)).' '.strtoupper(trim($this->marca_mobile)),
+                'ip'                           => FuncionesController::getIp(),
+                'host'                         => config('atemun.public_url'),
+            ];
+
+            $obj = $this->guardarDenunciaMobileADenuncia($Item);
 
             if ( $DenMob ){
-                $this->manageImage($DenMob);
+                $img = $this->manageImage($DenMob, $obj);
             }else{
                 return ["status"=>0, "msg"=>"Ocurrió un error desconocido."];
             }
@@ -128,22 +167,19 @@ class DenunciaAPIRequest extends FormRequest{
     }
 
 
-    public function manageImage(Denunciamobile $denunciamobile){
+    public function manageImage(Denunciamobile $denunciamobile, $ITEM){
 
         $this->F = new FuncionesController();
+        $user = User::find($denunciamobile->user_id);
 
         try {
-
-
             $image = $this->imagen;
             $imageContent = $this->imageBase64Content($image);
-
             $file = $imageContent;
             $randomImageNameSingular = $this->randomImageNameSingular();
             $fileName = $randomImageNameSingular.'_'.$denunciamobile->id.'.png';
             $fileName2 = '_'.$randomImageNameSingular.'_'.$denunciamobile->id.'.png';
             $thumbnail = '_thumb_'.$randomImageNameSingular.'_'.$denunciamobile->id.'.png';
-//            Storage::disk($this->disk)->put($fileName, File::get($file) );
             Storage::disk($this->disk)->put($fileName, $file );
             $this->F->fitImage( $file, $fileName2, 300, 300, true, $this->disk,"MOBILE_DENUNCIA_ROOT" );
             $this->F->fitImage( $file, $thumbnail, 128, 128, true, $this->disk,"MOBILE_DENUNCIA_ROOT", "png" );
@@ -163,6 +199,24 @@ class DenunciaAPIRequest extends FormRequest{
 
             $imm = Imagemobile::create($Item);
 
+            $__Item = [
+                'fecha'             => $Item->fecha,
+                'user__id'          => $ITEM->usuario_id,
+                'denuncia__id'      => $ITEM->id,
+                'root'              => 'mobile_denuncia/',
+                'filename'          => $Item->fileName,
+                'filename_png'      => $Item->fileName2,
+                'filename_thumb'    => $Item->thumbnail,
+                'latitud'           => $Item->latitud,
+                'longitud'          => $Item->longitud,
+            ];
+
+            $_item = Imagene::create($__Item);
+            $_item->users()->attach($ITEM->usuario_id);
+            $den = Denuncia::find($ITEM->id);
+            $den->imagenes()->attach($_item);
+
+
             if ($imm){
                 event(new APIDenunciaEvent($denunciamobile->id, $denunciamobile->user_id));
                 $imm->denuncias()->attach($denunciamobile);
@@ -170,12 +224,16 @@ class DenunciaAPIRequest extends FormRequest{
                 $denunciamobile->ciudadanos()->attach($denunciamobile->user_id);
                 return $imm;
             }
+
             return ["status"=>0, "msg"=>"Error de imagen desconocido..."];
 
         }catch (Exception $e){
             return ["status"=>0, "msg"=>$e->getMessage()];
         }
-        return $user;
+
+        if (!empty($user)) {
+            return $user;
+        }
 
 
     }
@@ -209,6 +267,35 @@ class DenunciaAPIRequest extends FormRequest{
             'msg'    => $err,
         ]));
     }
+
+    protected function guardarDenunciaMobileADenuncia($Item, $Obj){
+        $trigger_type = 0;
+        $item = Denuncia::create($Item);
+        $this->attachesDenunciaMobileADenuncia($item);
+//        $Storage = new StorageDenunciaController();
+//        $Storage->subirArchivoDenuncia($this, $item);
+
+        return $item;
+    }
+
+    public function attachesDenunciaMobileADenuncia($Item){
+        try {
+            $Obj = $Item->prioridades()->attach($Item->prioridad_id);
+            $Obj = $Item->origenes()->attach($Item->origen_id);
+            $Obj = $Item->dependencias()->attach($Item->dependencia_id,['servicio_id'=>$Item->servicio_id,'estatu_id'=>$Item->estatus_id,'fecha_movimiento' => now() ]);
+            $Obj = $Item->ubicaciones()->attach($Item->ubicacion_id);
+            $Obj = $Item->servicios()->attach($Item->servicio_id);
+            $Obj = $Item->estatus()->attach($Item->estatus_id,['ultimo'=>true]);
+            $Obj = $Item->ciudadanos()->attach($Item->usuario_id);
+            $Obj = $Item->creadospor()->attach($Item->creadopor_id);
+            $Obj = $Item->modificadospor()->attach($Item->modificadopor_id);
+        }catch (\Doctrine\DBAL\Driver\Exception $e){
+
+        }
+        return $Item;
+    }
+
+
 
 
 

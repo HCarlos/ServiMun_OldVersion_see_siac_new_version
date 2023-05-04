@@ -185,6 +185,9 @@ class UserAPIController extends Controller{
 
             $response["status"] = 1;
             $response["msg"] = $token;
+        }else{
+            $response["status"] = 1;
+            $response["msg"] = "Email no encontrado!";
         }
         return response()->json($response);
     }

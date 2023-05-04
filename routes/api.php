@@ -65,6 +65,9 @@ Route::group(['prefix' => 'v1'], function () {
             return "event fired";
         });
 
+        Route::middleware('avaluateUbicación')->get('/ubi', function(Request $request){
+            //return $request->user();
+        });
 
 
     });
