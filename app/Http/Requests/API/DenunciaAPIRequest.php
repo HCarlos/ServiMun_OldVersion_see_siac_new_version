@@ -114,7 +114,7 @@ class DenunciaAPIRequest extends FormRequest{
                 'user_id'           => $this->user_id,
             ]);
             $SerId = $Ser ? $Ser->id : 1;
-            $Servicio = _Servicios::query()->where('id',$SerId)->first();
+            $Servicio = Serviciomobile::find($SerId);
 
             $Item = [
                 'fecha_ingreso'                => now(), // Carbon::now(), //Carbon::now($this->fecha_ingreso)->format('Y-m-d hh:mm:ss'),
@@ -141,7 +141,7 @@ class DenunciaAPIRequest extends FormRequest{
                 'origen_id'                    => 24,
                 'dependencia_id'               => $Servicio->dependencia_id,
                 'ubicacion_id'                 => $this->ubicacion_id,
-                'servicio_id'                  => $Servicio->id,
+                'servicio_id'                  => $Servicio->servicio_id,
                 'estatus_id'                   => 8,
                 'ciudadano_id'                 => $this->user_id,
                 'creadopor_id'                 => $this->user_id,
