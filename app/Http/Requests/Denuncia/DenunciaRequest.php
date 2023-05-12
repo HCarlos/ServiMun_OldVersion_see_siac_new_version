@@ -257,12 +257,9 @@ class DenunciaRequest extends FormRequest
     public function detaches($Item){
         $Item->prioridades()->detach($this->prioridad_id);
         $Item->origenes()->detach($this->origen_id);
-//        $Item->dependencias()->detach($this->dependencia_id);
 
         $Item->ubicaciones()->detach($this->ubicacion_id);
-//        $Item->servicios()->detach($this->servicio_id);
 
-//        $Item->estatus()->detach($this->estatus_id);
         DenunciaEstatu::where('denuncia_id',$this->id)->orderByDesc('id')->update(['ultimo'=>true]);
         $Item->ciudadanos()->detach($this->usuario_id);
         $Item->creadospor()->detach($this->creadopor_id);

@@ -122,6 +122,7 @@ return array(
     'App\\Http\\Requests\\API\\DenunciaAPIRequest' => $baseDir . '/app/Http/Requests/API/DenunciaAPIRequest.php',
     'App\\Http\\Requests\\API\\DenunciaAddImageAPIRequest' => $baseDir . '/app/Http/Requests/API/DenunciaAddImageAPIRequest.php',
     'App\\Http\\Requests\\API\\DenunciaAddRespuestaAPIRequest' => $baseDir . '/app/Http/Requests/API/DenunciaAddRespuestaAPIRequest.php',
+    'App\\Http\\Requests\\API\\UserAPIChangeEmailRequest' => $baseDir . '/app/Http/Requests/API/UserAPIChangeEmailRequest.php',
     'App\\Http\\Requests\\API\\UserAPIChangePasswordRequest' => $baseDir . '/app/Http/Requests/API/UserAPIChangePasswordRequest.php',
     'App\\Http\\Requests\\API\\UserAPIImageRequest' => $baseDir . '/app/Http/Requests/API/UserAPIImageRequest.php',
     'App\\Http\\Requests\\API\\UserAPIRegistryRequest' => $baseDir . '/app/Http/Requests/API/UserAPIRegistryRequest.php',

@@ -26,10 +26,12 @@ class DenunciaAPIController extends Controller{
     public function insertDenunciaMobile(DenunciaAPIRequest $request):JsonResponse {
         $response = ["status"=>0, "msg"=>""];
         $den = (object)  $request->manage();
-        if ($den){
+        if ( isset($den->id) ){
             $response["status"] = 1;
             $response["msg"] = "Solicitud de servicio enviada con éxito!";
             event(new APIDenunciaEvent($den->id, $den->user_id));
+        }else{
+            $response = $den;
         }
         return response()->json($response);
     }

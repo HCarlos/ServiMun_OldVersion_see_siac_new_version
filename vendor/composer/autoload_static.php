@@ -857,6 +857,7 @@ class ComposerStaticInitbc22812bef43aaecbfc0faae11c3f329
         'App\\Http\\Requests\\API\\DenunciaAPIRequest' => __DIR__ . '/../..' . '/app/Http/Requests/API/DenunciaAPIRequest.php',
         'App\\Http\\Requests\\API\\DenunciaAddImageAPIRequest' => __DIR__ . '/../..' . '/app/Http/Requests/API/DenunciaAddImageAPIRequest.php',
         'App\\Http\\Requests\\API\\DenunciaAddRespuestaAPIRequest' => __DIR__ . '/../..' . '/app/Http/Requests/API/DenunciaAddRespuestaAPIRequest.php',
+        'App\\Http\\Requests\\API\\UserAPIChangeEmailRequest' => __DIR__ . '/../..' . '/app/Http/Requests/API/UserAPIChangeEmailRequest.php',
         'App\\Http\\Requests\\API\\UserAPIChangePasswordRequest' => __DIR__ . '/../..' . '/app/Http/Requests/API/UserAPIChangePasswordRequest.php',
         'App\\Http\\Requests\\API\\UserAPIImageRequest' => __DIR__ . '/../..' . '/app/Http/Requests/API/UserAPIImageRequest.php',
         'App\\Http\\Requests\\API\\UserAPIRegistryRequest' => __DIR__ . '/../..' . '/app/Http/Requests/API/UserAPIRegistryRequest.php',
