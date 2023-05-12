@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Events\APIDenunciaEvent;
 use App\Events\InserUpdateDeleteEvent;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\API\UserAPIChangeEmailRequest;
 use App\Http\Requests\API\UserAPIChangePasswordRequest;
 use App\Http\Requests\API\UserAPIImageRequest;
 use App\Http\Requests\API\UserAPIRegistryRequest;
@@ -140,7 +141,17 @@ class UserAPIController extends Controller{
         return response()->json($response);
     }
 
-// Login Temporal
+    public function userChangeEmail(UserAPIChangeEmailRequest $request):JsonResponse {
+        $response = ["status"=>0, "msg"=>""];
+        $user = $request->manage();
+        if ($user){
+            $response["status"] = 1;
+            $response["msg"] = "Correo actualizado con éxito";
+        }
+        return response()->json($response);
+    }
+
+    // Login Temporal
     public function userLogin2(Request $request):JsonResponse {
         $response = ["status"=>0, "msg"=>""];
         $data = (object) $request->all();
