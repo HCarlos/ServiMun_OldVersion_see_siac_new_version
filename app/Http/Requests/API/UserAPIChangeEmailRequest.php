@@ -28,10 +28,10 @@ class UserAPIChangeEmailRequest extends FormRequest{
     public function rules()
     {
         return [
-            'correo_actual' => ['required','min:5',new CurrentPassword()],
             'nuevo_correo' => ['required','confirmed','min:5'],
         ];
     }
+//'correo_actual' => ['required','min:5',new CurrentPassword()],
 
     public function messages()
     {
