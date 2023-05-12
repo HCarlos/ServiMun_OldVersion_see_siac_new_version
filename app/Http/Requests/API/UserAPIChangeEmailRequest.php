@@ -28,7 +28,7 @@ class UserAPIChangeEmailRequest extends FormRequest{
     public function rules()
     {
         return [
-            'nuevo_correo' => ['required','confirmed','min:5'],
+            'correo' => ['required','confirmed','min:5'],
         ];
     }
 //'correo_actual' => ['required','min:5',new CurrentPassword()],
@@ -39,9 +39,9 @@ class UserAPIChangeEmailRequest extends FormRequest{
             'correo_actual.required' => 'Se requiere el :attribute.',
             'correo_actual.min' => 'El :attribute debe ser por lo menos de 5 caracteres.',
             'correo_actual.current_password' => 'El :attribute no es correcto.',
-            'nuevo_correo.required' => 'Se requiere el :attribute.',
-            'nuevo_correo.min' => ':attribute debe ser por lo menos de 5 caracteres.',
-            'nuevo_correo.confirmed' => 'La confirmación del password no coincide con el nuevo password.',
+            'correo.required' => 'Se requiere el :attribute.',
+            'correo.min' => ':attribute debe ser por lo menos de 5 caracteres.',
+            'correo.confirmed' => 'La confirmación del password no coincide con el nuevo password.',
         ];
     }
 
@@ -49,7 +49,7 @@ class UserAPIChangeEmailRequest extends FormRequest{
     {
         return [
             'correo_actual' => 'Correo Actual',
-            'nuevo_correo' => 'Correo',
+            'correo' => 'Correo',
             'correo_confirmation' => 'Confirmar Correo',
         ];
     }
@@ -65,7 +65,7 @@ class UserAPIChangeEmailRequest extends FormRequest{
         try {
             app()['cache']->forget('spatie.permission.cache');
             $user = User::find($this->user_id);
-            $user->email = $this->nuevo_correo;
+            $user->email = $this->correo;
             $user->save();
             $user->sendEmailVerificationNotification();
         } catch (QueryException $e) {
