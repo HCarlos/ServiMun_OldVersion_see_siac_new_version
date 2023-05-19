@@ -65,9 +65,14 @@ class UserAPIChangeEmailRequest extends FormRequest{
         try {
             app()['cache']->forget('spatie.permission.cache');
             $user = User::find($this->user_id);
-            $user->email = $this->correo;
-            $user->save();
-            $user->sendEmailVerificationNotification();
+            if ($user){
+//                $user->email = $this->correo;
+//                $user->save();
+//                dd($this->correo);
+                $user = User::where('id', (int)$this->user_id)->update(['email'=>$this->correo]);
+//                dd($user);
+                $user->sendEmailVerificationNotification();
+            }
         } catch (QueryException $e) {
             return ["status"=>0, "msg"=>$e->getMessage()];
         }

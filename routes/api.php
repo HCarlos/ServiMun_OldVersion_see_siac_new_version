@@ -47,6 +47,7 @@ Route::group(['prefix' => 'v1'], function () {
         Route::post('/user/image', [UserAPIController::class, 'userImage']);
         Route::post('/user/change/password', [UserAPIController::class, 'userChangePassword']);
         Route::post('/user/change/email', [UserAPIController::class, 'userChangeEmail']);
+        Route::post('/user/delete', [UserAPIController::class, 'userDelete']);
 
         // Denunciases should
         Route::post('/denuncia/insert', [DenunciaAPIController::class, 'insertDenunciaMobile']);
