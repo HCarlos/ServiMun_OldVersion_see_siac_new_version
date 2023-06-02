@@ -51,6 +51,9 @@
                             @include('shared.ui_kit.__edit_item')
                             @include('shared.ui_kit.__print_denuncia_item')
                             @include('shared.ui_kit.__respuestas_ciudadana_list_item')
+                            @if( $item->latitud != 0 && $item->longitud != 0 )
+                                @include('shared.ui_kit.__geolocalization_item')
+                            @endif
                         </div>
                     </td>
                 </tr>
