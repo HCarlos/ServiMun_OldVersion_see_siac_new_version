@@ -217,12 +217,21 @@
                             <tbody>
                             @foreach($items->imagenes as $item)
                             <tr>
+                                @if( $item->descripcion == "mobile" )
                                 <td>
-                                    <a class="pull-left pl-2"  href="{{asset($item->PathImage)}}" target="_blank" >
-                                        <img class="media-object" src="{{asset($item->PathImageThumb)}}" width="64" height="64" >
+                                    <a class="pull-left pl-2"  href="{{asset($item->PathImageMobile)}}" target="_blank" >
+                                        <img class="media-object" src="{{asset($item->PathImageMobileThumb)}}" width="64" height="64" >
                                     </a>
                                 </td>
-                                <td>{{ asset("/storage/denuncia/".$item->image) }}</td>
+                                <td>{{ asset("/storage/mobile/denuncia/".$item->image) }}</td>
+                                @else
+                                    <td>
+                                        <a class="pull-left pl-2"  href="{{asset($item->PathImage)}}" target="_blank" >
+                                            <img class="media-object" src="{{asset($item->PathImageThumb)}}" width="64" height="64" >
+                                        </a>
+                                    </td>
+                                    <td>{{ asset("/storage/denuncia/".$item->image) }}</td>
+                                @endif
                                 <td>
                                     @include('shared.ui_kit.__remove_item')
                                 </td>
