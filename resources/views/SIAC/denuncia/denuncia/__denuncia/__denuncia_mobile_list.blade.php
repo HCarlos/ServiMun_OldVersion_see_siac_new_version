@@ -58,7 +58,8 @@
 
                                 <a
                                     @if ( Auth::user()->hasAnyPermission(['all','sysop','mobile_consulta']) )
-                                    href="http://www.openstreetmap.org/?mlat={{$item->latitud}}&mlon={{$item->longitud}}&map=23"
+{{--                                    href="http://www.openstreetmap.org/?mlat={{$item->latitud}}&mlon={{$item->longitud}}&map=23"--}}
+                                    href="https://www.google.com/maps/place/{{$item->latitud}},{{$item->longitud}}/{{$item->latitud}},{{$item->longitud}},15z"
                                     @endif
                                     class="btn btn-sm btn-link text-muted ps-0" target="_blank"><i class='mdi mdi-map-marker text-danger'></i> Ver Ubicación</a>
 
