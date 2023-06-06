@@ -3,7 +3,7 @@
     @foreach($items as $item)
         <li class="media row mb-2 mt-2 p-2  bg-item-treview-inside " >
 
-            @if( $item->descripcion == "mobile" )
+            @if( $item->descripcion === "mobile" )
             <a class="pull-left pl-2"  href="{{asset($item->PathImageMobile)}}" target="_blank" >
                 <img class="media-object" src="{{asset($item->PathImageMobileThumb)}}" width="64" height="64" >
             </a>

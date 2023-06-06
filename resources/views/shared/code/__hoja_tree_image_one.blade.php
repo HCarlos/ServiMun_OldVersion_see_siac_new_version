@@ -1,12 +1,12 @@
 <li class="media row p-2 @isset($isborder)  bg-item-treview-inside @else mb-2 mt-2 bg-item-treview-outside @endisset " >
 
-    @if( $item->descripcion == "mobile" )
+    @if( $item->descripcion === "mobile" )
         <a class="pull-left pl-2"  href="{{asset($item->PathImageMobile)}}" target="_blank" >
             <img class="media-object" src="{{asset($item->PathImageMobileThumb)}}" width="64" height="64" >
         </a>
     @else
-        <a class="pull-left pl-2"  href="{{asset($item->PathImageMobile)}}" target="_blank" >
-            <img class="media-object" src="{{asset($item->PathImageMobileThumb)}}" width="64" height="64" >
+        <a class="pull-left pl-2"  href="{{asset($item->PathImage)}}" target="_blank" >
+            <img class="media-object" src="{{asset($item->PathImageThumb)}}" width="64" height="64" >
         </a>
     @endif
 
