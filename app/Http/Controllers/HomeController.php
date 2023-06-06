@@ -51,7 +51,7 @@ class HomeController extends Controller
         $DenunciasAyer = Denuncia::query()->whereBetween('fecha_ingreso',[$fy1,$fy2])->count();
         $DenunciasUltimaHora = Denuncia::query()->whereBetween('fecha_ingreso',[$fh1,$fh2])->count();
         $DenunciasMesActual = Denuncia::query()->whereBetween('fecha_ingreso',[$f1,$f2])->count();
-        $DenunciasUltima = Denuncia::all()->last();
+        $DenunciasUltima = Denuncia::all()->sortByDesc('id')->first();
 
         $porc = ((($DenunciasHoy / $DenunciasAyer) * 100) - 100);
 
