@@ -78,6 +78,12 @@
                                             <span class="text-dark-tp3 text-180">
                                                 {{ $DenunciasUltimaHora }}
                                             </span>
+                                            <span class="text-green-m1 text-600 text-90 ml-15 text-nowrap">
+                                                 {{ $DenunciasUltima->dependencia->abreviatura }}
+                                            </span>
+                                            <small class="text-gray-dark text-600 text-90 ml-15 text-nowrap">
+                                                ({{ $DenunciasUltima->creadopor->nombre }})
+                                            </small>
                                         </div>
                                         <div class="text-dark-tp4 text-110">
                                             En la última hora

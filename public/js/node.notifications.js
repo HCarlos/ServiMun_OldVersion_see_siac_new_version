@@ -38,9 +38,13 @@ jQuery(function($) {
                 i++;
                 $("#power").html(parseInt(data.power) * i);
                 console.log(data.denuncia_id+" :: "+data.user_id);
-                if ( $("#dashboard-home") ){
+
+                if ( $("#dashboard-home") != null ){
+                    localStorage.last_denuncia_id = data.denuncia_id
+                    localStorage.last_user_id = data.user_id
                     window.location.reload();
                 }
+
             });
 
         localStorage.setItems = 0;
