@@ -715,3 +715,10 @@ input[readonly] {
 .rtl .conversation:nth-child(2n + 1) .avatar {
     margin-left: 0.5rem;
 }
+
+.bgc-coral-d1 {
+    background-color: coral !important;
+}
+.brc-coral-l2 {
+    border-color: rgba(239, 185, 165, 0.85) !important;
+}

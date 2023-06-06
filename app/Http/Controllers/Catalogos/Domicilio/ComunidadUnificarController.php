@@ -65,7 +65,7 @@ class ComunidadUnificarController extends Controller{
         try {
         $data     = $request->all(['origins_id','destino_id']);
 
-        $destino_id = intval($data['destino_id']);
+        $destino_id = (int)$data['destino_id'];
         $origins_id = $data['origins_id'];
 
         $Comunidad_Destino = Comunidad::findOrFail($destino_id);
@@ -75,14 +75,13 @@ class ComunidadUnificarController extends Controller{
         $items_arrays = explode('|',$origins_id);
 
         foreach($items_arrays AS $i=>$valor) {
-            $comunidad_origin_id = intval($items_arrays[$i]); //intval($items_arrays[$i]);
+            $comunidad_origin_id = (int)$valor;
 
             if ($comunidad_origin_id > 0) {
                 if ($comunidad_origin_id !== $destino_id) {
 
                     $UbiOrigins = Ubicacion::where('comunidad_id', $comunidad_origin_id)->first();
                     $UbiDestino = Ubicacion::where('comunidad_id', $destino_id)->first();
-
 
                     //Buscamos en las tablas involucradas y hacemos los cambios
                     $Colonia = Colonia::where('comunidad_id', $comunidad_origin_id)
@@ -115,5 +114,12 @@ class ComunidadUnificarController extends Controller{
         }
 
     }
+
+
+
+
+
+
+
 
 }

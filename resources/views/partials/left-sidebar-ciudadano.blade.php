@@ -4,7 +4,7 @@
     <div class="slimscroll-menu ">
 
         <!-- LOGO -->
-        <a href="/" class="logo text-left  pr-2 pl-2 pt-1 pb-1" style="background: #FFF">
+        <a href="/home-ciudadano" class="logo text-left  pr-2 pl-2 pt-1 pb-1" style="background: #FFF">
             <span class="logo-lg">
                 <img src="{{asset('images/web/logo-0.png')}}" >
             </span>

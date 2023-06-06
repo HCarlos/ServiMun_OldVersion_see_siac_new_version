@@ -122,6 +122,13 @@ class FuncionesController extends Controller
         return !$type ? $f.' 00:00:00' : $f.' 23:59:59';
     }
 
+    public function getDatesFromMonthNow(){
+        $f1 = Carbon::now()->format('Y-m').'-'.'01';
+        $f2 = Carbon::now()->endOfMonth()->toDateString();
+        return ["fecha_inicial" => $f1." 00:00:00", "fecha_final" => $f2." 23:59:59"];
+    }
+
+
     public function validImage($model, $storage, $root, $type=1){
         $ext = config('atemun.images_type_extension');
 //        for ($i=0;$i < count($ext);$i++){

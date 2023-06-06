@@ -38,6 +38,9 @@ jQuery(function($) {
                 i++;
                 $("#power").html(parseInt(data.power) * i);
                 console.log(data.denuncia_id+" :: "+data.user_id);
+                if ( $("#dashboard-home") ){
+                    window.location.reload();
+                }
             });
 
         localStorage.setItems = 0;
