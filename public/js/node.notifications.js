@@ -39,10 +39,12 @@ jQuery(function($) {
                 $("#power").html(parseInt(data.power) * i);
                 console.log(data.denuncia_id+" :: "+data.user_id);
 
-                if ( $("#dashboard-home") != null ){
-                    localStorage.last_denuncia_id = data.denuncia_id
-                    localStorage.last_user_id = data.user_id
-                    window.location.reload();
+                if ( $('#dashboard-home').length > 0 ){
+                    if ( data.trigger_type === 0){
+                        localStorage.last_denuncia_id = data.denuncia_id
+                        localStorage.last_user_id = data.user_id
+                        window.location.reload();
+                    }
                 }
 
             });
