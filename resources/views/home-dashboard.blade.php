@@ -44,6 +44,7 @@
                                                  {{ $porc }} %
                                                 @if($porc > 0)
                                                      <i class="fa fa-arrow-up"></i>
+                                                @elseif($porc === 0)
                                                 @else
                                                     <i class="fa fa-arrow-down"></i>
                                                 @endif
@@ -124,7 +125,7 @@
                                             </div>
                                             <div class="pl-1">
                                                 <div>
-                                                    Resueltos {{$DenunciasResueltasMesActual}}
+                                                    Resueltos: {{$DenunciasResueltasMesActual}}
                                                 </div>
                                             </div>
                                         </div>
@@ -134,7 +135,7 @@
                                             </div>
                                             <div class="pl-1">
                                                 <div>
-                                                    Sin Resolver {{$DenunciasNoResueltasMesActual}}
+                                                    Sin Resolver: {{$DenunciasNoResueltasMesActual}}
                                                 </div>
                                             </div>
                                         </div>

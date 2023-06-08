@@ -78,7 +78,7 @@ class HomeController extends Controller
         return view('home-dashboard',
             [
                 'DenunciasHoy' => $DenunciasHoy,
-                'porc' => number_format($porc, 0, '.', ','),
+                'porc' => number_format($porc, 2, '.', ','),
                 'DenunciasAyer' => $DenunciasAyer,
                 'DenunciasUltimaHora' => $DenunciasUltimaHora,
                 'DenunciasMesActual' => $DenunciasMesActual,
