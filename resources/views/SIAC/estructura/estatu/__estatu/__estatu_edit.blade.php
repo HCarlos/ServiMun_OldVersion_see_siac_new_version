@@ -67,6 +67,16 @@
 </div>
 
 <div class="form-group row mb-1">
+    <label for = "resuelto" class="col-md-3 col-form-label">Evalua Resuelto</label>
+    <div class="col-md-9">
+        <select class="resuelto form-control select2" name="resuelto" id="resuelto" size="1">
+            <option value="0">No</option>
+            <option value="1" @if($items->isResuelto()) selected @endif >Si</option>
+        </select>
+    </div>
+</div>
+
+<div class="form-group row mb-1">
     <label for = "estatus_cve" class="col-md-3 col-form-label">Clave Estatus</label>
     <div class="col-md-9">
         <select class="estatus_cve form-control select2" name="estatus_cve" id="estatus_cve" size="1">

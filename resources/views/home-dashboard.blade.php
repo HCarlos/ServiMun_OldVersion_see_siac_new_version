@@ -8,16 +8,24 @@
         <link href="{{ asset('css/ace-themes.css') }}" rel="stylesheet">
     @endsection
 
-    <body id="dashboard-home">
+    <body >
         <div class="wrapper">
             @include('partials/left-sidebar')
             <div class="content-page">
                 <div class="content">
                     @include('partials/topbar')
-                    <div class="container-fluid home">
+                    <div class="container-fluid home" >
 
-                        <div class="row px-2 mt-3">
-                            <div class="col-12 col-sm-6 col-lg-3 px-2 mb-2 mb-lg-0">
+                        <div class="row px-2 mt-3" id="dashboard-home" >
+
+
+
+
+
+
+
+
+                            <div class="col-12 col-sm-6 col-lg-3 px-2 mb-2 mb-lg-0" >
 
                                 <div class="bcard h-100 d-flex align-items-center p-3">
 
@@ -47,6 +55,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-12 col-sm-6 col-lg-3 px-2 mb-2 mb-lg-0">
                                 <div class="bcard h-100 d-flex align-items-center p-3">
                                     <div>
@@ -66,6 +75,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-12 col-sm-6 col-lg-3 px-2 mb-2 mb-lg-0">
                                 <div class="bcard h-100 d-flex align-items-center p-3">
                                     <div>
@@ -91,6 +101,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-12 col-sm-6 col-lg-3 px-2 mb-2 mb-lg-0">
                                 <div class="bcard h-100 d-flex align-items-center p-3">
                                     <div>
@@ -107,9 +118,37 @@
                                         <div class="text-dark-tp4 text-110">
                                             En el mes
                                         </div>
+                                        <div class="task-item mb-25 radius-3px bgc-secondary-l4 mt-1 pt-2 pb-2 pos-rel">
+                                            <div class="progress position-bl w-100 h-auto">
+                                                <div class="progress-bar bgc-success progress-bar-striped progress-bar-animated" role="progressbar" style="height: 6px; width: {{ $PorcResuelto }}%;" aria-valuenow="{{ $PorcResuelto }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                            <div class="pl-1">
+                                                <div>
+                                                    Resueltos {{$DenunciasResueltasMesActual}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="task-item mb-25 radius-3px bgc-secondary-l4 mt-1 pt-2 pb-2 pos-rel">
+                                            <div class="progress position-bl w-100 h-auto">
+                                                <div class="progress-bar bgc-danger progress-bar-striped progress-bar-animated" role="progressbar" style="height: 6px; width: {{ $PorcNoResuelto }}%;" aria-valuenow="{{ $PorcNoResuelto }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                            <div class="pl-1">
+                                                <div>
+                                                    Sin Resolver {{$DenunciasNoResueltasMesActual}}
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+
+
+
+
+
+
+
+
 
                         </div>
                     </div>

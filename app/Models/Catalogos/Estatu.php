@@ -15,15 +15,19 @@ class Estatu extends Model
     protected $table = 'estatus';
 
     protected $fillable = [
-        'id', 'estatus','predeterminado','abreviatura','orden_impresion','estatus_cve'
+        'id', 'estatus','predeterminado','abreviatura','orden_impresion','estatus_cve','resuelto',
     ];
 
-    protected $casts = ['predeterminado'=>'boolean',];
+    protected $casts = ['predeterminado'=>'boolean','resuelto'=>'boolean',];
     protected $hidden = ['deleted_at','created_at','updated_at'];
 
     public function isDefault(){
         return $this->predeterminado;
     }
+    public function isResuelto(){
+        return $this->resuelto;
+    }
+
 
     public function scopeFilterBy($query, $filters){
         return (new EstatuFilter())->applyTo($query, $filters);

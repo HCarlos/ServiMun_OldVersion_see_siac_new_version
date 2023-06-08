@@ -39,10 +39,21 @@
         </span>
     </div>
 </div>
+
 <div class="form-group row mb-1">
     <label for = "predeterminado" class="col-md-3 col-form-label">Predeterminado</label>
     <div class="col-md-9">
         <select class="predeterminado form-control select2" name="predeterminado" id="predeterminado" size="1">
+            <option value="0" selected>No</option>
+            <option value="1">Si</option>
+        </select>
+    </div>
+</div>
+
+<div class="form-group row mb-1">
+    <label for = "resuelto" class="col-md-3 col-form-label">Evalua Resuelto</label>
+    <div class="col-md-9">
+        <select class="resuelto form-control select2" name="resuelto" id="resuelto" size="1">
             <option value="0" selected>No</option>
             <option value="1">Si</option>
         </select>

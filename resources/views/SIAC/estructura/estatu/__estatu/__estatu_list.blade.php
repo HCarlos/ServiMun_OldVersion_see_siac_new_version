@@ -10,6 +10,7 @@
                         <th class="sorting" >Orden de Impresión</th>
                         <th class="sorting" >Dependencia</th>
                         <th class="sorting" >Predeterminado</th>
+                        <th class="sorting" >Eval Resuelto</th>
                         <th style="width: 100vw"></th>
                     </tr>
                 </thead>
@@ -27,6 +28,9 @@
                         </td>
                         <td class="text-center">
                             @if ($item->isDefault()) <i class="fas fa-check-circle text-primary fa-2x"></i> @endif
+                        </td>
+                        <td class="text-center">
+                            @if ($item->isResuelto()) <i class="fas fa-check-circle text-primary fa-2x"></i> @endif
                         </td>
                         <td class="table-action w-100">
                             <div class="button-list">

@@ -55,6 +55,26 @@ class HomeController extends Controller
 
         $porc = ((($DenunciasHoy / $DenunciasAyer) * 100) - 100);
 
+        $DMAs = Denuncia::query()
+            ->whereBetween('fecha_ingreso',[$f1,$f2])
+            ->get();
+
+        $DenunciasMesActual=0;
+        $DenunciasResueltasMesActual=0;
+        $DenunciasNoResueltasMesActual=0;
+        foreach ($DMAs as $DM){
+            $DenunciasMesActual++;
+            if($DM->ultimo_estatu_denuncia_dependencia_servicio()->orderByDesc('id')->first()->estatu->isResuelto()){
+                $DenunciasResueltasMesActual++;
+            }else{
+                $DenunciasNoResueltasMesActual++;
+            }
+        }
+
+
+        $PorcResuelto = (($DenunciasResueltasMesActual/$DenunciasMesActual)*100);
+        $PorcNoResuelto = (($DenunciasNoResueltasMesActual/$DenunciasMesActual)*100);
+
         return view('home-dashboard',
             [
                 'DenunciasHoy' => $DenunciasHoy,
@@ -63,6 +83,10 @@ class HomeController extends Controller
                 'DenunciasUltimaHora' => $DenunciasUltimaHora,
                 'DenunciasMesActual' => $DenunciasMesActual,
                 'DenunciasUltima' => $DenunciasUltima,
+                'DenunciasResueltasMesActual' => $DenunciasResueltasMesActual,
+                'DenunciasNoResueltasMesActual' => $DenunciasNoResueltasMesActual,
+                'PorcResuelto' => $PorcResuelto,
+                'PorcNoResuelto' => $PorcNoResuelto,
             ]
         );
     }

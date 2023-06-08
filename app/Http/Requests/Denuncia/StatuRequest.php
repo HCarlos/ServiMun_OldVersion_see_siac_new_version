@@ -67,6 +67,7 @@ class StatuRequest extends FormRequest
             $Item = [
                 'estatus' => strtoupper($this->estatus),
                 'predeterminado' => $this->predeterminado==1 ? true : false,
+                'resuelto' => $this->resuelto==1 ? true : false,
                 'abreviatura' => strtoupper($this->abreviatura),
                 'orden_impresion' => strtoupper($this->orden_impresion),
                 'estatus_cve' => (int) ($this->estatus_cve),
