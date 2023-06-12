@@ -60,13 +60,13 @@ class HomeController extends Controller
             ->whereBetween('fecha_ingreso',[$fa1,$fa2])
             ->groupByRaw('dependencia_id')
             ->orderByDesc('cantidad_dependencia' )
-            ->get()->take(7);
+            ->get()->take(5);
 
         $Top10MesDeps = Denuncia::query()->select('dependencia_id',DB::raw('count(dependencia_id) as cantidad_dependencia'))
             ->whereBetween('fecha_ingreso',[$f1,$f2])
             ->groupByRaw('dependencia_id')
             ->orderByDesc('cantidad_dependencia' )
-            ->get()->take(7);
+            ->get()->take(5);
 
 
         $DenunciasMesActual=0;
