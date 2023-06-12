@@ -27,7 +27,7 @@ class Denuncia_Dependencia_Servicio extends Model{
 //    public function scopeFilterBy($query, $filters){
 //        return (new DenunciaFilter())->applyTo($query, $filters);
 //    }
-//
+
     public function denuncia(){
         return $this->hasOne(Denuncia::class,'id','denuncia_id');
     }

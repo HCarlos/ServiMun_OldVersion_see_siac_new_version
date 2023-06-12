@@ -33,7 +33,7 @@ class DenunciaController extends Controller{
     protected $tableName = "solicitudes";
     protected $paginationTheme = 'bootstrap';
     protected $msg = "";
-    protected $max_item_for_query = 250;
+    protected $max_item_for_query = 150;
 
     // ***************** MUESTRA EL LISTADO DE USUARIOS ++++++++++++++++++++ //
 

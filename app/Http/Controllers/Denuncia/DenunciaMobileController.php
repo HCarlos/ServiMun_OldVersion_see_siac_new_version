@@ -13,7 +13,7 @@ class DenunciaMobileController extends Controller{
     protected $tableName = "denunciamobile";
     protected $paginationTheme = 'bootstrap';
     protected $msg = "";
-    protected $max_item_for_query = 250;
+    protected $max_item_for_query = 100;
 
     // ***************** MUESTRA EL LISTADO DE USUARIOS ++++++++++++++++++++ //
 

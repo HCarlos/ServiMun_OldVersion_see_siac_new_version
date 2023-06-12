@@ -6,6 +6,7 @@ use App\Http\Controllers\Funciones\FuncionesController;
 use App\Models\Denuncias\Denuncia;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -14,8 +15,7 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct(){
         $this->middleware('auth');
     }
 
@@ -52,12 +52,22 @@ class HomeController extends Controller
         $DenunciasUltimaHora = Denuncia::query()->whereBetween('fecha_ingreso',[$fh1,$fh2])->count();
         $DenunciasMesActual = Denuncia::query()->whereBetween('fecha_ingreso',[$f1,$f2])->count();
         $DenunciasUltima = Denuncia::all()->sortByDesc('id')->first();
-
         $porc = ((($DenunciasHoy / $DenunciasAyer) * 100) - 100);
 
-        $DMAs = Denuncia::query()
+        $DMAs = Denuncia::select()->whereBetween('fecha_ingreso',[$f1,$f2])->get();
+
+        $Top10Deps = Denuncia::query()->select('dependencia_id',DB::raw('count(dependencia_id) as cantidad_dependencia'))
+            ->whereBetween('fecha_ingreso',[$fa1,$fa2])
+            ->groupByRaw('dependencia_id')
+            ->orderByDesc('cantidad_dependencia' )
+            ->get()->take(7);
+
+        $Top10MesDeps = Denuncia::query()->select('dependencia_id',DB::raw('count(dependencia_id) as cantidad_dependencia'))
             ->whereBetween('fecha_ingreso',[$f1,$f2])
-            ->get();
+            ->groupByRaw('dependencia_id')
+            ->orderByDesc('cantidad_dependencia' )
+            ->get()->take(7);
+
 
         $DenunciasMesActual=0;
         $DenunciasResueltasMesActual=0;
@@ -71,6 +81,7 @@ class HomeController extends Controller
             }
         }
 
+        $colors = ['info','success','warning','danger','purple','cafe','coral','info','success','warning'];
 
         $PorcResuelto = (($DenunciasResueltasMesActual/$DenunciasMesActual)*100);
         $PorcNoResuelto = (($DenunciasNoResueltasMesActual/$DenunciasMesActual)*100);
@@ -87,6 +98,9 @@ class HomeController extends Controller
                 'DenunciasNoResueltasMesActual' => $DenunciasNoResueltasMesActual,
                 'PorcResuelto' => $PorcResuelto,
                 'PorcNoResuelto' => $PorcNoResuelto,
+                'Top10Deps' => $Top10Deps,
+                'Top10MesDeps' => $Top10MesDeps,
+                'colors' => $colors,
             ]
         );
     }

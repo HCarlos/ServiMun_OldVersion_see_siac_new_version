@@ -143,6 +143,82 @@
                                 </div>
                             </div>
 
+                            <div class="col-12 col-sm-6 col-lg-3 px-2 mb-2 mb-lg-0 mt-1" >
+
+                                <div class="card-header border-0">
+                                    <div class="col-12 card-body p-3">
+                                        @php $i = 0; @endphp
+                                    @foreach($Top10Deps as $Dep)
+                                            @php $valorPorc = number_format((($Dep->cantidad_dependencia/$DenunciasHoy) * 100), 0)  @endphp
+                                            <div class="task-item mb-25 radius-3px bgc-secondary-l4 mt-1 pt-2 pb-2 pos-rel">
+                                                <div class="progress position-bl w-100 h-auto">
+                                                    <div class="progress-bar bgc-{{$colors[$i++]}} progress-bar-striped progress-bar-animated" role="progressbar" style="height: 6px; width: {{ $valorPorc }}%;" aria-valuenow="{{ $valorPorc }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                                <div class="pl-1">
+                                                    <div>
+                                                        {{ $Dep->dependencia->abreviatura }}: {{ $Dep->cantidad_dependencia }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    @endforeach
+                                    </div><!-- .card-body -->
+                                </div>
+
+                            </div>
+
+                            <div class="col-12 col-sm-6 col-lg-3 px-2 mb-2 mb-lg-0">
+                            </div>
+
+                            <div class="col-12 col-sm-6 col-lg-3 px-2 mb-2 mb-lg-0">
+                            </div>
+
+                            <div class="col-12 col-sm-6 col-lg-3 px-2 mb-2 mb-lg-0  mt-1">
+                                <div class="card-header border-0">
+                                    <div class="col-12 card-body p-3">
+                                        @php $i = 0; @endphp
+                                        @foreach($Top10MesDeps as $Dep)
+                                            @php $valorPorc = number_format((($Dep->cantidad_dependencia/$DenunciasMesActual) * 100), 0)  @endphp
+                                            <div class="task-item mb-25 radius-3px bgc-secondary-l4 mt-1 pt-2 pb-2 pos-rel">
+                                                <div class="progress position-bl w-100 h-auto">
+                                                    <div class="progress-bar bgc-{{$colors[$i++]}} progress-bar-striped progress-bar-animated" role="progressbar" style="height: 6px; width: {{ $valorPorc }}%;" aria-valuenow="{{ $valorPorc }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                                <div class="pl-1">
+                                                    <div>
+                                                        {{ $Dep->dependencia->abreviatura }}: {{ $valorPorc }}%
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div><!-- .card-body -->
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -165,6 +241,7 @@
     @endsection
 
     @include('partials/script_footer')
+
 
     </body>
 
