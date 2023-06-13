@@ -31,6 +31,7 @@ class DenunciaAPIRequest extends FormRequest{
 
     protected $disk = 'mobile_denuncia';
     protected $F;
+    protected $DenMobGen = null;
 
 
     /**
@@ -118,6 +119,8 @@ class DenunciaAPIRequest extends FormRequest{
                 'user_id'           => $this->user_id,
             ]);
 
+            $this->DenMobGen = $DenMob;
+
             $Item = [
                 'fecha_ingreso'                => now(), // Carbon::now(), //Carbon::now($this->fecha_ingreso)->format('Y-m-d hh:mm:ss'),
                 'oficio_envio'                 => now(),
@@ -149,9 +152,10 @@ class DenunciaAPIRequest extends FormRequest{
                 'creadopor_id'                 => $this->user_id,
                 'modificadopor_id'             => $this->user_id,
                 'domicilio_ciudadano_internet' => strtoupper(trim($this->ubicacion_google))  ?? '' ,
-                'observaciones'                => strtoupper(trim($this->tipo_mobile)),
+                'observaciones'                => strtoupper(trim($this->marca_mobile))." - ".$this->DenMobGen->id,
                 'ip'                           => "",
                 'host'                         => "",
+                'denunciamobile_id'            => $this->DenMobGen->id,
             ];
 
             $obj = $this->guardarDenunciaMobileADenuncia($Item);
@@ -161,7 +165,6 @@ class DenunciaAPIRequest extends FormRequest{
             }else{
                 return ["status"=>0, "msg"=>"Ocurrió un error desconocido."];
             }
-//            dd($DenMob);
             return $DenMob;
         } catch (QueryException $e) {
 //            dd($e->getMessage());
@@ -276,6 +279,8 @@ class DenunciaAPIRequest extends FormRequest{
     protected function guardarDenunciaMobileADenuncia($Item){
         $item = Denuncia::create($Item);
         $this->attachesDenunciaMobileADenuncia($item);
+        $this->DenMobGen->denuncia_id = $item->id;
+        $this->DenMobGen->save();
         return $item;
     }
 

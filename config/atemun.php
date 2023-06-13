@@ -165,6 +165,7 @@ return [
             'areas'                          => 'areas',
             'dependencias'                   => 'dependencias',
             'servicios'                      => 'servicios',
+            'denuncias'                      => 'denuncias',
             'denunciamobile'                 => 'denunciamobile',
             'denunciamobile_imagemobile'     => 'denunciamobile_imagemobile',
             'serviciomobile'                 => 'serviciomobile',

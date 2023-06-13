@@ -12,13 +12,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Denunciamobile extends Model{
 
-//    use SoftDeletes;
+    use SoftDeletes;
 
     protected $guard_name = 'web';
     protected $table = 'denunciamobile';
 
     protected $fillable = [
         'id',
+        'denuncia_id',
         'denuncia',
         'fecha',
         'tipo_mobile',

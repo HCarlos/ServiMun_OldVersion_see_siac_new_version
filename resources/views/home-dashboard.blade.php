@@ -147,6 +147,7 @@
 
                                 <div class="card-header border-0">
                                     <div class="col-12 card-body p-3">
+                                        <h5>Top <strong>5</strong> hoy</h5>
                                         @php $i = 0; @endphp
                                     @foreach($Top10Deps as $Dep)
                                             @php $valorPorc = number_format((($Dep->cantidad_dependencia/$DenunciasHoy) * 100), 0)  @endphp
@@ -156,7 +157,7 @@
                                                 </div>
                                                 <div class="pl-1">
                                                     <div>
-                                                        {{ $Dep->dependencia->abreviatura }}: {{ $Dep->cantidad_dependencia }}
+                                                        {{ $Dep->dependencia->abreviatura }}: <strong>{{ $Dep->cantidad_dependencia }}</strong>
                                                     </div>
                                                 </div>
                                             </div>
@@ -172,9 +173,10 @@
                             <div class="col-12 col-sm-6 col-lg-3 px-2 mb-2 mb-lg-0">
                             </div>
 
-                            <div class="col-12 col-sm-6 col-lg-3 px-2 mb-2 mb-lg-0  mt-1">
+                            <div class="col-12 col-sm-6 col-lg-3 px-0 mb-2 mb-lg-0  mt-1">
                                 <div class="card-header border-0">
-                                    <div class="col-12 card-body p-3">
+                                    <div class="col-12 card-body ">
+                                        <h5>Top <strong>5</strong> en el mes actual</h5>
                                         @php $i = 0; @endphp
                                         @foreach($Top10MesDeps as $Dep)
                                             @php $valorPorc = number_format((($Dep->cantidad_dependencia/$DenunciasMesActual) * 100), 0)  @endphp
@@ -184,7 +186,7 @@
                                                 </div>
                                                 <div class="pl-1">
                                                     <div>
-                                                        {{ $Dep->dependencia->abreviatura }}: {{ $valorPorc }}%
+                                                        {{ $Dep->dependencia->abreviatura }}: <strong>{{ $valorPorc }}</strong>%
                                                     </div>
                                                 </div>
                                             </div>
