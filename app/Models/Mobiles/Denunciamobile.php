@@ -2,6 +2,9 @@
 
 namespace App\Models\Mobiles;
 
+use App\Filters\Denuncia\DenunciaFilter;
+use App\Filters\Denuncia\GetDenunciasFilterCount;
+use App\Filters\Denuncia\GetDenunciasItemCustomFilter;
 use App\Http\Controllers\Funciones\FuncionesController;
 use App\Models\Catalogos\Domicilios\Ubicacion;
 use App\Models\Catalogos\Origen;
@@ -48,6 +51,18 @@ class Denunciamobile extends Model{
             ->orderByRaw("ubicacion ASC");
     }
 
+
+    public function scopeFilterBy($query, $filters){
+        return (new DenunciaFilter())->applyTo($query, $filters);
+    }
+
+    public function scopeGetDenunciasItemCustomFilter($query, $filters){
+        return (new GetDenunciasItemCustomFilter())->applyTo($query, $filters);
+    }
+
+    public function scopeGetDenunciasFilterCount($query, $filters){
+        return (new GetDenunciasFilterCount())->applyTo($query, $filters);
+    }
 
     public function Servicio(){
         return $this->hasOne(Serviciomobile::class,'id','serviciomobile_id');

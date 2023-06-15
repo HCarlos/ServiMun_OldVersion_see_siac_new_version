@@ -52,7 +52,10 @@ class HomeController extends Controller
         $DenunciasUltimaHora = Denuncia::query()->whereBetween('fecha_ingreso',[$fh1,$fh2])->count();
         $DenunciasMesActual = Denuncia::query()->whereBetween('fecha_ingreso',[$f1,$f2])->count();
         $DenunciasUltima = Denuncia::all()->sortByDesc('id')->first();
-        $porc = ((($DenunciasHoy / $DenunciasAyer) * 100) - 100);
+        $porc = 0;
+        if ( $DenunciasAyer > 0){
+            $porc = ((($DenunciasHoy / $DenunciasAyer) * 100) - 100);
+        }
 
         $DMAs = Denuncia::select()->whereBetween('fecha_ingreso',[$f1,$f2])->get();
 
@@ -83,8 +86,12 @@ class HomeController extends Controller
 
         $colors = ['info','success','warning','danger','purple','cafe','coral','info','success','warning'];
 
-        $PorcResuelto = (($DenunciasResueltasMesActual/$DenunciasMesActual)*100);
-        $PorcNoResuelto = (($DenunciasNoResueltasMesActual/$DenunciasMesActual)*100);
+        $PorcResuelto = 0;
+        $PorcNoResuelto = 0;
+        if ( $DenunciasMesActual > 0) {
+            $PorcResuelto = (($DenunciasResueltasMesActual / $DenunciasMesActual) * 100);
+            $PorcNoResuelto = (($DenunciasNoResueltasMesActual / $DenunciasMesActual) * 100);
+        }
 
         return view('home-dashboard',
             [

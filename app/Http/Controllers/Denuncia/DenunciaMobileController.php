@@ -39,6 +39,7 @@ class DenunciaMobileController extends Controller{
         $filters['filterdata'] = $request->only(['search']);
         //dd( $filter );
         $items = Denunciamobile::query()
+            ->getDenunciasItemCustomFilter($filters)
             ->orderByDesc('id')
             ->paginate(1000);
         $items->appends($filters)->fragment('table');
